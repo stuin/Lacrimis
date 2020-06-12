@@ -2,6 +2,7 @@ package modfest.soulflame.block;
 
 import modfest.soulflame.block.entity.CrucibleEntity;
 import modfest.soulflame.init.ModItems;
+import modfest.soulflame.item.BottleOfTearsItem;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -62,9 +63,8 @@ public class CrucibleBlock extends LiquidTankBlock {
         CrucibleEntity entity = (CrucibleEntity) world.getBlockEntity(pos);
         int level = entity.getLevel();
         Item item = stack.getItem();
-
         if (item == ModItems.BOTTLE_OF_TEARS) {
-            if (level >= 250 && !world.isClient) {
+            if (level <= 750 && !world.isClient) {
                 if (!player.abilities.creativeMode) {
                     ItemStack bottle = new ItemStack(Items.GLASS_BOTTLE);
                     stack.decrement(1);
@@ -72,7 +72,7 @@ public class CrucibleBlock extends LiquidTankBlock {
                 }
 
                 world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                entity.setLevel(level + 250);
+                entity.setLevel(level + BottleOfTearsItem.capacity);
             }
 
             return ActionResult.success(world.isClient);
@@ -82,19 +82,16 @@ public class CrucibleBlock extends LiquidTankBlock {
                 if (level > 0 && !world.isClient) {
                     if (!player.abilities.creativeMode) {
                         itemStack4 = new ItemStack(ModItems.BOTTLE_OF_TEARS);
-                        player.incrementStat(Stats.USE_CAULDRON);
                         stack.decrement(1);
                         if (stack.isEmpty()) {
                             player.setStackInHand(hand, itemStack4);
                         } else if (!player.inventory.insertStack(itemStack4)) {
                             player.dropItem(itemStack4, false);
-                        } else if (player instanceof ServerPlayerEntity) {
-                            ((ServerPlayerEntity) player).openHandledScreen(player.playerScreenHandler);
                         }
                     }
 
                     world.playSound((PlayerEntity) null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                    entity.setLevel(level - 250);
+                    entity.setLevel(level - BottleOfTearsItem.capacity);
                 }
 
                 return ActionResult.success(world.isClient);
