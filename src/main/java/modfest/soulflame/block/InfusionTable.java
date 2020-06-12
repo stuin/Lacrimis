@@ -2,12 +2,12 @@ package modfest.soulflame.block;
 
 import javax.annotation.Nullable;
 
+import grondag.fluidity.api.storage.Store;
 import modfest.soulflame.SoulFlame;
 import modfest.soulflame.block.entity.InfusionTableEntity;
 import modfest.soulflame.infusion.InfusionScreenHandler;
+import modfest.soulflame.infusion.ModInfusion;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,7 +23,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class InfusionTable extends Block implements BlockEntityProvider {
+public class InfusionTable extends LiquidTank {
 	private static final Text TITLE = new TranslatableText("container.infusion");
 
 	public InfusionTable(Settings settings) {
@@ -37,16 +37,25 @@ public class InfusionTable extends Block implements BlockEntityProvider {
 	}
 
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-		if (world.isClient) {
-			return ActionResult.SUCCESS;
-		} else {
-			ContainerProviderRegistry.INSTANCE.openContainer(SoulFlame.INFUSION_SCREEN_ID, player, buf -> buf.writeBlockPos(pos));
-			
-			return ActionResult.CONSUME;
+		ActionResult parentResult = super.onUse(state, world, pos, player, hand, hit);
+		if(parentResult == ActionResult.PASS) {
+			if(world.isClient) {
+				return ActionResult.SUCCESS;
+			} else {
+				ContainerProviderRegistry.INSTANCE.openContainer(ModInfusion.INFUSION_SCREEN_ID, player, buf -> buf.writeBlockPos(pos));
+
+				return ActionResult.CONSUME;
+			}
 		}
+		return parentResult;
 	}
 
 	public NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {
-		return new SimpleNamedScreenHandlerFactory((i, playerInventory, playerEntity) -> new InfusionScreenHandler(i, playerInventory, ScreenHandlerContext.create(world, pos)), TITLE);
+		Store tank = null;
+		if(world.getBlockEntity(pos) != null)
+			tank = ((InfusionTableEntity)world.getBlockEntity(pos)).getEffectiveStorage();
+		Store finalTank = tank;
+		return new SimpleNamedScreenHandlerFactory((i, playerInventory, playerEntity) ->
+				new InfusionScreenHandler(i, playerInventory, finalTank, ScreenHandlerContext.create(world, pos)), TITLE);
 	}
 }

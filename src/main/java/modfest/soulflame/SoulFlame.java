@@ -3,17 +3,12 @@ package modfest.soulflame;
 import net.minecraft.item.ItemStack;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import modfest.soulflame.block.ModBlocks;
-import modfest.soulflame.infusion.InfusionScreenHandler;
-import modfest.soulflame.infusion.RequiredTypes;
+import modfest.soulflame.infusion.ModInfusion;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
 
 public class SoulFlame implements ModInitializer {
 	public static final String MODID = "soulflame";
@@ -24,16 +19,9 @@ public class SoulFlame implements ModInitializer {
 			.icon(() -> new ItemStack(ModBlocks.infusionTable))
 			.build();
 
-	public static final Identifier INFUSION_SCREEN_ID = new Identifier(MODID, "infusion");
-
 	@Override
 	public void onInitialize() {
 		ModBlocks.register();
-		RequiredTypes.register();
-
-		ContainerProviderRegistry.INSTANCE.registerFactory(INFUSION_SCREEN_ID, (syncId, identifier, player, buf) -> {
-			BlockPos pos = buf.readBlockPos();
-			return new InfusionScreenHandler(syncId, player.inventory, ScreenHandlerContext.create(player.world, pos));
-		});
+		ModInfusion.register();
 	}
 }

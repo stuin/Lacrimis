@@ -1,5 +1,6 @@
 package modfest.soulflame.infusion;
 
+import grondag.fluidity.api.storage.Store;
 import modfest.soulflame.block.ModBlocks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -25,17 +26,19 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<CraftingI
 	private final CraftingResultInventory result;
 	private final ScreenHandlerContext context;
 	private final PlayerEntity player;
+	public final Store tank;
 
 	public InfusionScreenHandler(int syncId, PlayerInventory playerInventory) {
-		this(syncId, playerInventory, ScreenHandlerContext.EMPTY);
+		this(syncId, playerInventory, null, ScreenHandlerContext.EMPTY);
 	}
 
-	public InfusionScreenHandler(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
+	public InfusionScreenHandler(int syncId, PlayerInventory playerInventory, Store tank, ScreenHandlerContext context) {
 		super(null, syncId);
 		this.input = new CraftingInventory(this, 3, 3);
 		this.result = new CraftingResultInventory();
 		this.context = context;
 		this.player = playerInventory.player;
+		this.tank = tank;
 		this.addSlot(new CraftingResultSlot(playerInventory.player, this.input, this.result, 0, 124, 35));
 
 		int m;

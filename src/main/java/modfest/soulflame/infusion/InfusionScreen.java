@@ -24,7 +24,7 @@ public class InfusionScreen extends HandledScreen<InfusionScreenHandler> {
     protected void init() {
         super.init();
         this.isNarrow = this.width < 379;
-        this.titleX = 29;
+        this.titleX = 24;
     }
 
     public void tick() {
@@ -33,8 +33,10 @@ public class InfusionScreen extends HandledScreen<InfusionScreenHandler> {
 
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         this.renderBackground(matrices);
-
+        super.render(matrices, mouseX, mouseY, delta);
         this.drawMouseoverTooltip(matrices, mouseX, mouseY);
+        if(handler.tank != null)
+            this.textRenderer.draw(matrices,"" + handler.tank.usage(), x + 10, titleY + 20 + y, 4210752);
     }
 
     protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {

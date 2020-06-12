@@ -3,6 +3,7 @@ package modfest.soulflame;
 import modfest.soulflame.block.ModBlocks;
 import modfest.soulflame.infusion.InfusionScreen;
 import modfest.soulflame.infusion.InfusionScreenHandler;
+import modfest.soulflame.infusion.ModInfusion;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -19,6 +20,6 @@ public class ClientSoulFlame implements ClientModInitializer {
 	public void onInitializeClient() {
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.infusionTable, RenderLayer.getCutout());
 
-		ScreenProviderRegistry.INSTANCE.registerFactory(SoulFlame.INFUSION_SCREEN_ID, (ContainerScreenFactory<InfusionScreenHandler>) container -> new InfusionScreen(container, MinecraftClient.getInstance().player.inventory, new TranslatableText("gui.soulflame.infusion")));
+		ScreenProviderRegistry.INSTANCE.registerFactory(ModInfusion.INFUSION_SCREEN_ID, (ContainerScreenFactory<InfusionScreenHandler>) container -> new InfusionScreen(container, MinecraftClient.getInstance().player.inventory, new TranslatableText("gui.soulflame.infusion")));
 	}
 }
