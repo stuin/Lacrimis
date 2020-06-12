@@ -11,6 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.function.BooleanBiFunction;
@@ -76,6 +78,12 @@ public class CrucibleBlock extends LiquidTankBlock implements BlockConduitConnec
             }
 
             return ActionResult.success(world.isClient);
+        } else if (item == ModItems.diviningRod) {
+            if(world.isClient) {
+                Text text = new LiteralText(level + " Tears");
+                player.sendMessage(text, false);
+            }
+            return ActionResult.PASS;
         } else {
             ItemStack itemStack4;
             if (item == Items.GLASS_BOTTLE) {
