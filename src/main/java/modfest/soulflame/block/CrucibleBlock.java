@@ -61,7 +61,7 @@ public class CrucibleBlock extends LiquidTankBlock {
         CrucibleEntity entity = (CrucibleEntity) world.getBlockEntity(pos);
         int level = entity.getLevel();
         Item item = stack.getItem();
-        if (item == ModItems.BOTTLE_OF_TEARS) {
+        if (item == ModItems.bottleOfTears) {
             if (level <= 750 && !world.isClient) {
                 if (!player.abilities.creativeMode) {
                     ItemStack bottle = new ItemStack(Items.GLASS_BOTTLE);
@@ -79,7 +79,7 @@ public class CrucibleBlock extends LiquidTankBlock {
             if (item == Items.GLASS_BOTTLE) {
                 if (level > 0 && !world.isClient) {
                     if (!player.abilities.creativeMode) {
-                        itemStack4 = new ItemStack(ModItems.BOTTLE_OF_TEARS);
+                        itemStack4 = new ItemStack(ModItems.bottleOfTears);
                         stack.decrement(1);
                         if (stack.isEmpty()) {
                             player.setStackInHand(hand, itemStack4);
