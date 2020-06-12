@@ -73,10 +73,13 @@ public class RuneBlock extends Block implements Activatable {
 
     @Override
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
-        if(!state.get(POWERED) && shouldActivate(world, pos, fromPos)) {
+        boolean a = state.get(POWERED);
+        boolean b = shouldActivate(world, pos, fromPos);
+        getCenter(world, pos, state);
+        if(!a && b) {
             world.setBlockState(pos, state.with(POWERED, true));
             activate(world, pos);
-        } else if(state.get(POWERED) && !shouldActivate(world, pos, fromPos))
+        } else if(a && !b)
             world.setBlockState(pos, state.with(POWERED, false));
     }
 
