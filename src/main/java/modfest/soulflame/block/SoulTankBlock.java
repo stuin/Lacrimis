@@ -1,9 +1,5 @@
 package modfest.soulflame.block;
 
-import modfest.soulflame.block.entity.SoulTankEntity;
-import modfest.soulflame.init.ModItems;
-import modfest.soulflame.item.BottleOfTearsItem;
-import modfest.soulflame.util.SoulTank;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -25,6 +21,13 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
+import modfest.soulflame.block.entity.SoulTankEntity;
+import modfest.soulflame.init.ModItems;
+import modfest.soulflame.item.BottleOfTearsItem;
+import modfest.soulflame.util.SoulTank;
+
+import static java.lang.Math.min;
+
 public abstract class SoulTankBlock extends BlockWithEntity implements BlockConduitConnect {
     protected SoulTankBlock(AbstractBlock.Settings settings) {
         super(settings);
@@ -40,7 +43,7 @@ public abstract class SoulTankBlock extends BlockWithEntity implements BlockCond
         final BlockEntity blockEntity = world.getBlockEntity(blockPos);
 
         if (blockEntity instanceof SoulTankEntity)
-            return (int)(Math.floor(14.0 * ((SoulTankEntity)blockEntity).getRelativeLevel())) + 1;
+            return (int) (Math.floor(14.0 * ((SoulTankEntity) blockEntity).getRelativeLevel())) + 1;
 
         return 0;
     }
@@ -68,7 +71,7 @@ public abstract class SoulTankBlock extends BlockWithEntity implements BlockCond
 
             return ActionResult.success(world.isClient);
         } else if (item == ModItems.diviningRod) {
-            if(world.isClient) {
+            if (world.isClient) {
                 Text text = new LiteralText(level + " Tears");
                 player.sendMessage(text, false);
             }
@@ -101,7 +104,7 @@ public abstract class SoulTankBlock extends BlockWithEntity implements BlockCond
 
     public SoulTank getTank(BlockView world, BlockPos pos) {
         BlockEntity entity = world.getBlockEntity(pos);
-        if(entity instanceof SoulTankEntity)
+        if (entity instanceof SoulTankEntity)
             return ((SoulTankEntity) entity).getTank();
         return null;
     }
@@ -119,15 +122,20 @@ public abstract class SoulTankBlock extends BlockWithEntity implements BlockCond
     @Override
     public int extract(BlockState state, BlockPos pos, World world, int amount, boolean simulate) {
         BlockEntity entity = world.getBlockEntity(pos);
-        if(entity instanceof SoulTankEntity)
-            return ((SoulTankEntity) entity).removeTears(amount);
+        if (entity instanceof SoulTankEntity) {
+            if (simulate) {
+                return min(((SoulTankEntity) entity).getLevel(), amount);
+            } else {
+                return ((SoulTankEntity) entity).removeTears(amount);
+            }
+        }
         return 0;
     }
 
     @Override
     public int insert(BlockState state, BlockPos pos, World world, int amount, boolean simulate) {
         BlockEntity entity = world.getBlockEntity(pos);
-        if(entity instanceof SoulTankEntity)
+        if (entity instanceof SoulTankEntity)
             return ((SoulTankEntity) entity).addTears(amount);
         return 0;
     }
@@ -135,7 +143,7 @@ public abstract class SoulTankBlock extends BlockWithEntity implements BlockCond
     @Override
     public int getMaxTearsAmount(BlockState state, BlockPos pos, BlockView world) {
         SoulTank tank = getTank(world, pos);
-        if(tank != null)
+        if (tank != null)
             return tank.getCapacity();
         return 0;
     }
@@ -143,7 +151,7 @@ public abstract class SoulTankBlock extends BlockWithEntity implements BlockCond
     @Override
     public int getCurrentTearsAmount(BlockState state, BlockPos pos, BlockView world) {
         SoulTank tank = getTank(world, pos);
-        if(tank != null)
+        if (tank != null)
             return tank.getTears();
         return 0;
     }
