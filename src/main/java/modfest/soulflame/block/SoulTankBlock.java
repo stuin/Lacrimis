@@ -87,7 +87,7 @@ public abstract class SoulTankBlock extends BlockWithEntity implements BlockCond
                         }
                     }
 
-                    world.playSound((PlayerEntity) null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     entity.removeTears(level - BottleOfTearsItem.capacity);
                 }
 
