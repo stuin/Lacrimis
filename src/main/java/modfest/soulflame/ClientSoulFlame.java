@@ -1,12 +1,15 @@
 package modfest.soulflame;
 
+import modfest.soulflame.block.ModBlocks;
 import modfest.soulflame.infusion.InfusionScreen;
 import modfest.soulflame.infusion.InfusionScreenHandler;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.screen.ContainerScreenFactory;
 import net.fabricmc.fabric.api.client.screen.ScreenProviderRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.text.TranslatableText;
 
 public class ClientSoulFlame implements ClientModInitializer {
