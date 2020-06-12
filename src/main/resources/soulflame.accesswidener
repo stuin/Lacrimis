@@ -1,0 +1,3 @@
+accessWidener	v1	named
+accessible class net/minecraft/screen/ScreenHandlerType$Factory
+accessible method net/minecraft/screen/ScreenHandlerType <init> (Lnet/minecraft/screen/ScreenHandlerType$Factory;)V
