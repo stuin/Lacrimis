@@ -28,7 +28,7 @@ import modfest.soulflame.block.entity.CrucibleEntity;
 import modfest.soulflame.init.ModItems;
 import modfest.soulflame.item.BottleOfTearsItem;
 
-public class CrucibleBlock extends LiquidTankBlock implements BlockConduitConnect {
+public class CrucibleBlock extends SoulTankBlock implements BlockConduitConnect {
     private static final VoxelShape RAY_TRACE_SHAPE = createCuboidShape(2.0D, 4.0D, 2.0D, 14.0D, 16.0D, 14.0D);
     protected static final VoxelShape OUTLINE_SHAPE = VoxelShapes.combineAndSimplify(VoxelShapes.fullCube(), VoxelShapes.union(createCuboidShape(0.0D, 0.0D, 4.0D, 16.0D, 3.0D, 12.0D), createCuboidShape(4.0D, 0.0D, 0.0D, 12.0D, 3.0D, 16.0D), createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 3.0D, 14.0D), RAY_TRACE_SHAPE), BooleanBiFunction.ONLY_FIRST);
 
@@ -55,84 +55,4 @@ public class CrucibleBlock extends LiquidTankBlock implements BlockConduitConnec
     public VoxelShape getRayTraceShape(BlockState state, BlockView world, BlockPos pos) {
         return RAY_TRACE_SHAPE;
     }
-
-    @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        ItemStack stack = player.getStackInHand(hand);
-        if (stack.isEmpty()) {
-            return ActionResult.PASS;
-        }
-        CrucibleEntity entity = (CrucibleEntity) world.getBlockEntity(pos);
-        int level = entity.getLevel();
-        Item item = stack.getItem();
-        if (item == ModItems.bottleOfTears) {
-            if (level <= 750 && !world.isClient) {
-                if (!player.abilities.creativeMode) {
-                    ItemStack bottle = new ItemStack(Items.GLASS_BOTTLE);
-                    stack.decrement(1);
-                    player.inventory.offerOrDrop(world, bottle);
-                }
-
-                world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                entity.setLevel(level + BottleOfTearsItem.capacity);
-            }
-
-            return ActionResult.success(world.isClient);
-        } else if (item == ModItems.diviningRod) {
-            if(world.isClient) {
-                Text text = new LiteralText(level + " Tears");
-                player.sendMessage(text, false);
-            }
-            return ActionResult.PASS;
-        } else {
-            ItemStack itemStack4;
-            if (item == Items.GLASS_BOTTLE) {
-                if (level >= 250 && !world.isClient) {
-                    if (!player.abilities.creativeMode) {
-                        itemStack4 = new ItemStack(ModItems.bottleOfTears);
-                        stack.decrement(1);
-                        if (stack.isEmpty()) {
-                            player.setStackInHand(hand, itemStack4);
-                        } else if (!player.inventory.insertStack(itemStack4)) {
-                            player.dropItem(itemStack4, false);
-                        }
-                    }
-
-                    world.playSound((PlayerEntity) null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                    entity.setLevel(level - BottleOfTearsItem.capacity);
-                }
-
-                return ActionResult.success(world.isClient);
-            }
-
-            return ActionResult.PASS;
-        }
-
-    }
-
-    @Override
-    public boolean canConnectConduitTo(BlockState state, BlockPos pos, BlockView world, Direction side) {
-        return side.getAxis() != Direction.Axis.Y;
-    }
-
-    @Override
-    public int extract(BlockState state, BlockPos pos, World world, int amount, boolean simulate) {
-        throw new IllegalStateException("not implemented"); // TODO
-    }
-
-    @Override
-    public int insert(BlockState state, BlockPos pos, World world, int amount, boolean simulate) {
-        throw new IllegalStateException("not implemented"); // TODO
-    }
-
-    @Override
-    public int getMaxTearsAmount(BlockState state, BlockPos pos, BlockView world) {
-        throw new IllegalStateException("not implemented"); // TODO
-    }
-
-    @Override
-    public int getCurrentTearsAmount(BlockState state, BlockPos pos, BlockView world) {
-        throw new IllegalStateException("not implemented"); // TODO
-    }
-
 }

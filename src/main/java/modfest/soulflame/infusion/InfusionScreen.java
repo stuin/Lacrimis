@@ -28,7 +28,7 @@ public class InfusionScreen extends HandledScreen<InfusionScreenHandler> {
         this.renderBackground(matrices);
         super.render(matrices, mouseX, mouseY, delta);
         this.drawMouseoverTooltip(matrices, mouseX, mouseY);
-            this.textRenderer.draw(matrices,"" + handler.getTearsLevel(), x + 10, titleY + 20 + y, 4210752);
+        this.textRenderer.draw(matrices,"" + handler.getTearsLevel(), x + 10, titleY + 20 + y, 4210752);
     }
 
     protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {

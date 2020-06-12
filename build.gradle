@@ -32,13 +32,6 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-
-	compileOnly "org.apiguardian:apiguardian-api:1.0.0"
-	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
-
-    //Fluidity
-	modImplementation ("grondag:fluidity-mc116:${project.fluidity_version}.+") { transitive = false }
-	include "grondag:fluidity-mc116:${project.fluidity_version}.+"
 }
 
 processResources {
