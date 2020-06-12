@@ -19,7 +19,7 @@ public class SoulFlame implements ModInitializer {
 
 	public static final ItemGroup ITEM_GROUP = FabricItemGroupBuilder.create(
 			new Identifier(MODID, "group"))
-			.icon(() -> new ItemStack(ModBlocks.infusionTable))
+			.icon(() -> new ItemStack(ModBlocks.infusionTableBlock))
 			.build();
 
 	@Override

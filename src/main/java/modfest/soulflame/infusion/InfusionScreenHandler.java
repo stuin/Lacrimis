@@ -108,7 +108,7 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<CraftingI
 	}
 
 	public boolean canUse(PlayerEntity player) {
-		return canUse(this.context, player, ModBlocks.infusionTable);
+		return canUse(this.context, player, ModBlocks.infusionTableBlock);
 	}
 
 	public ItemStack transferSlot(PlayerEntity player, int index) {

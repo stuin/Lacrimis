@@ -3,6 +3,7 @@ package modfest.soulflame.block;
 import grondag.fluidity.api.storage.Store;
 import modfest.soulflame.SoulFlame;
 import modfest.soulflame.block.entity.LiquidTankEntity;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -17,9 +18,8 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public abstract class LiquidTank extends BlockWithEntity {
-
-    protected LiquidTank(Settings settings) {
+public abstract class LiquidTankBlock extends BlockWithEntity {
+    protected LiquidTankBlock(AbstractBlock.Settings settings) {
         super(settings);
     }
 
@@ -42,7 +42,7 @@ public abstract class LiquidTank extends BlockWithEntity {
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         final ItemStack stack = player.getStackInHand(hand);
 
-        if(Block.getBlockFromItem(stack.getItem()) instanceof LiquidTank)
+        if(Block.getBlockFromItem(stack.getItem()) instanceof LiquidTankBlock)
             return ActionResult.PASS;
 
         if (!world.isClient) {

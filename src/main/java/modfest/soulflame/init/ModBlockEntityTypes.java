@@ -18,8 +18,8 @@ public class ModBlockEntityTypes {
     public static BlockEntityType<CrucibleEntity> crucible;
 
     public static void register() {
-        infusionTable = register("infusion_table_entity", InfusionTableEntity::new, ModBlocks.infusionTable);
-        crucible = register("crucible_entity", CrucibleEntity::new, ModBlocks.crucible);
+        infusionTable = register("infusion_table_entity", InfusionTableEntity::new, ModBlocks.infusionTableBlock);
+        crucible = register("crucible_entity", CrucibleEntity::new, ModBlocks.crucibleBlock);
     }
 
     private static <T extends BlockEntity> BlockEntityType<T> register(String name, Supplier<T> f, Block... blocks) {

@@ -7,6 +7,7 @@ import modfest.soulflame.block.entity.InfusionTableEntity;
 import modfest.soulflame.infusion.InfusionScreenHandler;
 import modfest.soulflame.init.ModInfusion;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -23,10 +24,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class InfusionTable extends LiquidTank {
+public class InfusionTableBlock extends LiquidTankBlock {
 	private static final Text TITLE = new TranslatableText("container.infusion");
 
-	public InfusionTable(Settings settings) {
+	public InfusionTableBlock(AbstractBlock.Settings settings) {
 		super(settings);
 	}
 

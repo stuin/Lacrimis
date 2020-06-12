@@ -17,8 +17,8 @@ public class ModItems {
     public static BlockItem channel;
 
     public static void register() {
-        infusionTable = register("infusion_table", ModBlocks.infusionTable);
-        crucible = register("crucible", ModBlocks.crucible);
+        infusionTable = register("infusion_table", ModBlocks.infusionTableBlock);
+        crucible = register("crucibleBlock", ModBlocks.crucibleBlock);
         channel = register("channel", ModBlocks.channel);
     }
 
