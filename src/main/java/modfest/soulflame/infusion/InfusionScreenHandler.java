@@ -3,7 +3,6 @@ package modfest.soulflame.infusion;
 import java.util.Optional;
 
 import modfest.soulflame.block.entity.InfusionTableEntity;
-import modfest.soulflame.init.ModBlocks;
 import modfest.soulflame.init.ModInfusion;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -23,7 +22,6 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 	private final InfusionInventory input;
 	private final CraftingResultInventory result;
 	private final InfusionTableEntity entity;
-	private final ScreenHandlerContext context;
 	private final PlayerEntity player;
 
 	public InfusionScreenHandler(int syncId, PlayerEntity player, InfusionTableEntity entity) {
@@ -70,39 +68,42 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 		}
 	}
 
+	@Override
 	public void onContentChanged(Inventory inventory) {
-		this.context.run((world, blockPos) -> {
-			updateResult(this.syncId, world, this.player, this.input, this.result);
-		});
+		updateResult(this.syncId, this.entity.getWorld(), this.player, this.input, this.result);
 	}
 
+	@Override
 	public void populateRecipeFinder(RecipeFinder finder) {
 		this.input.provideRecipeInputs(finder);
 	}
 
+	@Override
 	public void clearCraftingSlots() {
 		this.input.clear();
 		this.result.clear();
 	}
 
+	@Override
 	public boolean matches(Recipe<? super InfusionInventory> recipe) {
 		return recipe.matches(this.input, this.player.world);
 	}
 
+	@Override
 	public void close(PlayerEntity player) {
 		super.close(player);
-		this.context.run((world, blockPos) -> {
-			this.dropInventory(player, world, this.input);
-		});
+		this.dropInventory(player, this.entity.getWorld(), this.input);
 	}
 
+	@Override
 	public boolean canUse(PlayerEntity player) {
-		return canUse(this.context, player, ModBlocks.infusionTable);
+		return this.entity.inventory.canPlayerUse(player);
 	}
 
+	@Override
 	public ItemStack transferSlot(PlayerEntity player, int index) {
 		ItemStack leftInHand = ItemStack.EMPTY;
-		Slot slot = (Slot) this.slots.get(index);
+		Slot slot = this.slots.get(index);
 		if (slot != null && slot.hasStack()) {
 			ItemStack transfered = slot.getStack();
 			leftInHand = transfered.copy();
@@ -147,22 +148,27 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 		return leftInHand;
 	}
 
+	@Override
 	public boolean canInsertIntoSlot(ItemStack stack, Slot slot) {
 		return slot.inventory != this.result && super.canInsertIntoSlot(stack, slot);
 	}
 
+	@Override
 	public int getCraftingResultSlotIndex() {
 		return 0;
 	}
 
+	@Override
 	public int getCraftingWidth() {
 		return this.input.getWidth();
 	}
 
+	@Override
 	public int getCraftingHeight() {
 		return this.input.getHeight();
 	}
 
+	@Override
 	@Environment(EnvType.CLIENT)
 	public int getCraftingSlotCount() {
 		return 10;

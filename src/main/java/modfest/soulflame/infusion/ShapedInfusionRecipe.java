@@ -14,7 +14,6 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 
 import modfest.soulflame.init.ModInfusion;
-import modfest.soulflame.util.SoulTank;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.item.Item;
