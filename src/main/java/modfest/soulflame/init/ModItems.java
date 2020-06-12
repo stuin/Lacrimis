@@ -1,5 +1,6 @@
 package modfest.soulflame.init;
 
+import modfest.soulflame.item.DiviningRodItem;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -16,12 +17,14 @@ public class ModItems {
     public static BlockItem crucible;
     public static BlockItem conduit;
     public static BottleOfTearsItem bottleOfTears;
+    public static DiviningRodItem diviningRod;
 
     public static void register() {
         infusionTable = register("infusion_table", ModBlocks.infusionTable);
         crucible = register("crucible", ModBlocks.crucible);
         conduit = register("conduit", ModBlocks.conduit);
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
+        diviningRod = register("divining_rod", new DiviningRodItem(SETTINGS));
     }
 
     private static <T extends Item> T register(String name, T item) {
