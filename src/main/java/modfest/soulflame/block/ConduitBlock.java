@@ -16,8 +16,10 @@ import net.minecraft.world.WorldAccess;
 
 import java.util.Arrays;
 
-public class ChannelBlock extends Block {
+public class ConduitBlock extends Block {
 
+    public static final BooleanProperty DOWN = Properties.DOWN;
+    public static final BooleanProperty UP = Properties.UP;
     public static final BooleanProperty NORTH = Properties.NORTH;
     public static final BooleanProperty SOUTH = Properties.SOUTH;
     public static final BooleanProperty EAST = Properties.EAST;
@@ -25,20 +27,22 @@ public class ChannelBlock extends Block {
 
     private static final VoxelShape[] SHAPES = generateShapes();
 
-    public ChannelBlock(Settings settings) {
+    public ConduitBlock(Settings settings) {
         super(settings);
-        this.setDefaultState(this.getDefaultState().with(NORTH, false).with(SOUTH, false).with(EAST, false).with(WEST, false));
+        this.setDefaultState(this.getDefaultState().with(DOWN, false).with(UP, false).with(NORTH, false).with(SOUTH, false).with(EAST, false).with(WEST, false));
     }
 
     @Override
     protected void appendProperties(Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
-        builder.add(NORTH, SOUTH, EAST, WEST);
+        builder.add(DOWN,UP, NORTH, SOUTH, EAST, WEST);
     }
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
         return state
+                .with(DOWN, this.connectsTo(world, pos.down()))
+                .with(UP, this.connectsTo(world, pos.up()))
                 .with(NORTH, this.connectsTo(world, pos.north()))
                 .with(SOUTH, this.connectsTo(world, pos.south()))
                 .with(EAST, this.connectsTo(world, pos.east()))
@@ -47,7 +51,12 @@ public class ChannelBlock extends Block {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        int idx = (state.get(NORTH) ? 1 : 0) | (state.get(SOUTH) ? 2 : 0) | (state.get(WEST) ? 4 : 0) | (state.get(EAST) ? 8 : 0);
+        int idx = (state.get(DOWN) ? 1 : 0) |
+                (state.get(UP) ? 2 : 0) |
+                (state.get(NORTH) ? 4 : 0) |
+                (state.get(SOUTH) ? 8 : 0) |
+                (state.get(WEST) ? 16 : 0) |
+                (state.get(EAST) ? 32 : 0);
         return SHAPES[idx];
     }
 
@@ -56,18 +65,25 @@ public class ChannelBlock extends Block {
     }
 
     private static VoxelShape[] generateShapes() {
-        VoxelShape center = VoxelShapes.cuboid(3 / 16f, 5 / 16f, 3 / 16f, 13 / 16f, 7 / 16f, 13 / 16f);
-        VoxelShape north = VoxelShapes.cuboid(3 / 16f, 5 / 16f, 0 / 16f, 13 / 16f, 7 / 16f, 3 / 16f);
-        VoxelShape south = VoxelShapes.cuboid(3 / 16f, 5 / 16f, 13 / 16f, 13 / 16f, 7 / 16f, 16 / 16f);
-        VoxelShape west = VoxelShapes.cuboid(0 / 16f, 5 / 16f, 3 / 16f, 3 / 16f, 7 / 16f, 13 / 16f);
-        VoxelShape east = VoxelShapes.cuboid(13 / 16f, 5 / 16f, 3 / 16f, 16 / 16f, 7 / 16f, 13 / 16f);
-        VoxelShape[] shapes = new VoxelShape[16];
+        float r = 2 / 16f;
+        VoxelShape[] shapes = new VoxelShape[1 << 6];
+        VoxelShape center = VoxelShapes.cuboid(8 / 16f - r, 8 / 16f - r, 8 / 16f - r, 8 / 16f + r, 8 / 16f + r, 8 / 16f + r);
+        VoxelShape down = VoxelShapes.cuboid(8 / 16f - r, 0f, 8 / 16f - r, 8 / 16f + r, 8 / 16f + r, 8 / 16f + r);
+        VoxelShape up = VoxelShapes.cuboid(8 / 16f - r, 8 / 16f - r, 8 / 16f - r, 8 / 16f + r, 1f, 8 / 16f + r);
+        VoxelShape north = VoxelShapes.cuboid(8 / 16f - r, 8 / 16f - r, 0f, 8 / 16f + r, 8 / 16f + r, 8 / 16f + r);
+        VoxelShape south = VoxelShapes.cuboid(8 / 16f - r, 8 / 16f - r, 8 / 16f - r, 8 / 16f + r, 8 / 16f + r, 1f);
+        VoxelShape west = VoxelShapes.cuboid(0f, 8 / 16f - r, 8 / 16f - r, 8 / 16f + r, 8 / 16f + r, 8 / 16f + r);
+        VoxelShape east = VoxelShapes.cuboid(8 / 16f - r, 8 / 16f - r, 8 / 16f - r, 1f, 8 / 16f + r, 8 / 16f + r);
         Arrays.fill(shapes, center);
-        for (int i = 0; i < 8; i++) {
-            int n = i << 1 | 0b0001;
-            int s = i << 1 & 0b1100 | i & 0b0001 | 0b0010;
-            int w = i << 1 & 0b1000 | i & 0b0011 | 0b0100;
-            int e = i | 0b1000;
+        for (int i = 0; i < 1 << 5; i++) {
+            int d = i << 1 | 0b000001;
+            int u = i << 1 & 0b111100 | i & 0b000001 | 0b000010;
+            int n = i << 1 & 0b111000 | i & 0b000011 | 0b000100;
+            int s = i << 1 & 0b110000 | i & 0b000111 | 0b001000;
+            int w = i << 1 & 0b100000 | i & 0b001111 | 0b010000;
+            int e = i | 0b100000;
+            shapes[d] = VoxelShapes.combineAndSimplify(shapes[d], down, BooleanBiFunction.OR);
+            shapes[u] = VoxelShapes.combineAndSimplify(shapes[u], up, BooleanBiFunction.OR);
             shapes[n] = VoxelShapes.combineAndSimplify(shapes[n], north, BooleanBiFunction.OR);
             shapes[s] = VoxelShapes.combineAndSimplify(shapes[s], south, BooleanBiFunction.OR);
             shapes[w] = VoxelShapes.combineAndSimplify(shapes[w], west, BooleanBiFunction.OR);

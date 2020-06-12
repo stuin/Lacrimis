@@ -9,7 +9,7 @@ import net.minecraft.util.registry.Registry;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import modfest.soulflame.SoulFlame;
-import modfest.soulflame.block.ChannelBlock;
+import modfest.soulflame.block.ConduitBlock;
 import modfest.soulflame.block.CrucibleBlock;
 import modfest.soulflame.block.InfusionTableBlock;
 
@@ -17,12 +17,12 @@ public class ModBlocks {
 
     public static InfusionTableBlock infusionTable;
     public static CrucibleBlock crucible;
-    public static ChannelBlock channel;
+    public static ConduitBlock conduit;
 
     public static void register() {
         infusionTable = register("infusion_table", new InfusionTableBlock(FabricBlockSettings.copy(Blocks.CRAFTING_TABLE).nonOpaque()));
         crucible = register("crucible", new CrucibleBlock(FabricBlockSettings.copy(Blocks.CAULDRON).nonOpaque()));
-        channel = register("channel", new ChannelBlock(AbstractBlock.Settings.of(Material.STONE).strength(0.25f)));
+        conduit = register("conduit", new ConduitBlock(AbstractBlock.Settings.of(Material.STONE).strength(0.25f)));
     }
 
     private static <T extends Block> T register(String name, T block) {

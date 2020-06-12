@@ -14,12 +14,12 @@ public class ModItems {
 
     public static BlockItem infusionTable;
     public static BlockItem crucible;
-    public static BlockItem channel;
+    public static BlockItem conduit;
 
     public static void register() {
         infusionTable = register("infusion_table", ModBlocks.infusionTable);
         crucible = register("crucible", ModBlocks.crucible);
-        channel = register("channel", ModBlocks.channel);
+        conduit = register("conduit", ModBlocks.conduit);
     }
 
     private static <T extends Item> T register(String name, T item) {
