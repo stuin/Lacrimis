@@ -54,6 +54,7 @@ public class InfusionTableEntity extends SoulTankEntity implements Tickable {
 	@Override
 	public void fromTag(BlockState state, CompoundTag tag) {
 		super.fromTag(state, tag);
+		this.inventory.clear();
 		this.inventory.readTags(tag.getList("Inventory", NbtType.COMPOUND));
 	}
 

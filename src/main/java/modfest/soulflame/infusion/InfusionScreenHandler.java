@@ -32,6 +32,7 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 		this.entity = entity;
 		this.player = player;
 		this.addProperties(input.properties);
+		
 		this.addSlot(new InfusionResultSlot(player, this.input, this.result, 0, 124, 35));
 		if (!entity.getWorld().isClient) {
 			this.input.addListener(this);
@@ -96,7 +97,6 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 
 	@Override
 	public boolean matches(Recipe<? super InfusionInventory> recipe) {
-		System.out.println("matches?");
 		return recipe.matches(this.input, this.player.world);
 	}
 

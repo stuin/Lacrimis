@@ -114,7 +114,7 @@ public class ShapedInfusionRecipe implements Recipe<InfusionInventory> {
 			}
 		}
 
-		return inv.getTears() > tears;
+		return inv.getTears() >= tears;
 	}
 
 	@Override
