@@ -3,6 +3,7 @@ package modfest.soulflame.infusion;
 import java.util.Optional;
 
 import modfest.soulflame.block.entity.InfusionTableEntity;
+import modfest.soulflame.init.ModBlocks;
 import modfest.soulflame.init.ModInfusion;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -22,6 +23,7 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 	private final InfusionInventory input;
 	private final CraftingResultInventory result;
 	private final InfusionTableEntity entity;
+	private final ScreenHandlerContext context;
 	private final PlayerEntity player;
 
 	public InfusionScreenHandler(int syncId, PlayerEntity player, InfusionTableEntity entity) {
@@ -69,7 +71,9 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 	}
 
 	public void onContentChanged(Inventory inventory) {
-		updateResult(this.syncId, this.entity.getWorld(), this.player, this.input, this.result);
+		this.context.run((world, blockPos) -> {
+			updateResult(this.syncId, world, this.player, this.input, this.result);
+		});
 	}
 
 	public void populateRecipeFinder(RecipeFinder finder) {
@@ -87,12 +91,13 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 
 	public void close(PlayerEntity player) {
 		super.close(player);
-		this.dropInventory(player, this.entity.getWorld(), this.input);
-
+		this.context.run((world, blockPos) -> {
+			this.dropInventory(player, world, this.input);
+		});
 	}
 
 	public boolean canUse(PlayerEntity player) {
-		return this.input.canPlayerUse(player);
+		return canUse(this.context, player, ModBlocks.infusionTable);
 	}
 
 	public ItemStack transferSlot(PlayerEntity player, int index) {
@@ -104,6 +109,7 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 			if (index == 0) {
 				transfered.getItem().onCraft(transfered, this.entity.getWorld(), player);
 				if (!this.insertItem(transfered, 10, 46, true)) {
+
 					return ItemStack.EMPTY;
 				}
 
