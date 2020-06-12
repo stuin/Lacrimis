@@ -2,6 +2,7 @@ package modfest.soulflame.util;
 
 
 public class SoulTank {
+	public static final int TRANSFER = 10;
 	private final int capacity;
 	private int tears = 0;
 	private Runnable listener = null;

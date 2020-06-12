@@ -11,8 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -26,9 +24,11 @@ import modfest.soulflame.init.ModItems;
 import modfest.soulflame.item.BottleOfTearsItem;
 import modfest.soulflame.util.SoulTank;
 
+import java.util.Optional;
+
 import static java.lang.Math.min;
 
-public abstract class SoulTankBlock extends BlockWithEntity implements BlockConduitConnect {
+public abstract class SoulTankBlock extends BlockWithEntity implements BlockConduitConnect<SoulTank> {
     protected SoulTankBlock(AbstractBlock.Settings settings) {
         super(settings);
     }
@@ -70,12 +70,6 @@ public abstract class SoulTankBlock extends BlockWithEntity implements BlockCond
             }
 
             return ActionResult.success(world.isClient);
-        } else if (item == ModItems.diviningRod) {
-            if (world.isClient) {
-                Text text = new LiteralText(level + " Tears");
-                player.sendMessage(text, false);
-            }
-            return ActionResult.PASS;
         } else {
             ItemStack itemStack4;
             if (item == Items.GLASS_BOTTLE) {
@@ -115,45 +109,25 @@ public abstract class SoulTankBlock extends BlockWithEntity implements BlockCond
     }
 
     @Override
-    public boolean canConnectConduitTo(BlockState state, BlockPos pos, BlockView world, Direction side) {
+    public boolean canConnectConduitTo(BlockPos pos, BlockView world, Direction side) {
         return side.getAxis() != Direction.Axis.Y;
     }
 
     @Override
-    public int extract(BlockState state, BlockPos pos, World world, int amount, boolean simulate) {
+    public Optional<SoulTank> extract(BlockPos pos, World world, boolean simulate) {
         BlockEntity entity = world.getBlockEntity(pos);
         if (entity instanceof SoulTankEntity) {
-            if (simulate) {
-                return min(((SoulTankEntity) entity).getLevel(), amount);
-            } else {
-                return ((SoulTankEntity) entity).removeTears(amount);
-            }
+            ((SoulTankEntity) entity).mark();
+            return Optional.of(((SoulTankEntity) entity).getTank());
         }
-        return 0;
+        return Optional.empty();
     }
 
     @Override
-    public int insert(BlockState state, BlockPos pos, World world, int amount, boolean simulate) {
+    public boolean insert(BlockPos pos, World world, SoulTank value, boolean simulate) {
         BlockEntity entity = world.getBlockEntity(pos);
         if (entity instanceof SoulTankEntity)
-            return ((SoulTankEntity) entity).addTears(amount);
-        return 0;
+            return ((SoulTankEntity) entity).transfer(value);
+        return false;
     }
-
-    @Override
-    public int getMaxTearsAmount(BlockState state, BlockPos pos, BlockView world) {
-        SoulTank tank = getTank(world, pos);
-        if (tank != null)
-            return tank.getCapacity();
-        return 0;
-    }
-
-    @Override
-    public int getCurrentTearsAmount(BlockState state, BlockPos pos, BlockView world) {
-        SoulTank tank = getTank(world, pos);
-        if (tank != null)
-            return tank.getTears();
-        return 0;
-    }
-
 }

@@ -73,7 +73,7 @@ public class ConduitBlock extends Block {
     private boolean connectsTo(WorldAccess world, BlockPos pos, Direction side) {
         BlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
-        return block == this || (block instanceof BlockConduitConnect && ((BlockConduitConnect) block).canConnectConduitTo(state, pos, world, side));
+        return block == this || (block instanceof BlockConduitConnect && ((BlockConduitConnect) block).canConnectConduitTo(pos, world, side));
     }
 
     private static VoxelShape[] generateShapes() {
