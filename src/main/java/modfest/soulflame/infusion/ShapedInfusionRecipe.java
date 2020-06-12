@@ -33,14 +33,16 @@ public class ShapedInfusionRecipe implements Recipe<InfusionInventory> {
 	private final int width;
 	private final int height;
 	private final DefaultedList<Ingredient> inputs;
+	private final int tears;
 	private final ItemStack output;
 	private final Identifier id;
 
-	public ShapedInfusionRecipe(Identifier id, int width, int height, DefaultedList<Ingredient> ingredients, ItemStack output) {
+	public ShapedInfusionRecipe(Identifier id, int width, int height, DefaultedList<Ingredient> ingredients, int tears, ItemStack output) {
 		this.id = id;
 		this.width = width;
 		this.height = height;
 		this.inputs = ingredients;
+		this.tears = tears;
 		this.output = output;
 	}
 
@@ -112,12 +114,16 @@ public class ShapedInfusionRecipe implements Recipe<InfusionInventory> {
 			}
 		}
 
-		return true;
+		return inv.getTears() > tears;
 	}
 
 	@Override
 	public ItemStack craft(InfusionInventory craftingInventory) {
 		return this.getOutput().copy();
+	}
+
+	public int getTears() {
+		return tears;
 	}
 
 	public int getWidth() {
@@ -266,15 +272,17 @@ public class ShapedInfusionRecipe implements Recipe<InfusionInventory> {
 			String[] pattern = ShapedInfusionRecipe.combinePattern(ShapedInfusionRecipe.getPattern(JsonHelper.getArray(json, "pattern")));
 			int width = pattern[0].length();
 			int height = pattern.length;
+			int tears = JsonHelper.getInt(json, "tears");
 			DefaultedList<Ingredient> ingredients = ShapedInfusionRecipe.getIngredients(pattern, key, width, height);
 			ItemStack result = ShapedInfusionRecipe.getItemStack(JsonHelper.getObject(json, "result"));
-			return new ShapedInfusionRecipe(identifier, width, height, ingredients, result);
+			return new ShapedInfusionRecipe(identifier, width, height, ingredients, tears, result);
 		}
 
 		@Override
 		public ShapedInfusionRecipe read(Identifier identifier, PacketByteBuf buf) {
 			int width = buf.readVarInt();
 			int height = buf.readVarInt();
+			int tears = buf.readVarInt();
 			DefaultedList<Ingredient> ingredients = DefaultedList.ofSize(width * height, Ingredient.EMPTY);
 
 			for (int k = 0; k < ingredients.size(); ++k) {
@@ -282,13 +290,14 @@ public class ShapedInfusionRecipe implements Recipe<InfusionInventory> {
 			}
 
 			ItemStack result = buf.readItemStack();
-			return new ShapedInfusionRecipe(identifier, width, height, ingredients, result);
+			return new ShapedInfusionRecipe(identifier, width, height, ingredients, tears, result);
 		}
 
 		@Override
 		public void write(PacketByteBuf buf, ShapedInfusionRecipe recipe) {
 			buf.writeVarInt(recipe.width);
 			buf.writeVarInt(recipe.height);
+			buf.writeVarInt(recipe.tears);
 
 			for (Ingredient ingredient : recipe.inputs) {
 				ingredient.write(buf);

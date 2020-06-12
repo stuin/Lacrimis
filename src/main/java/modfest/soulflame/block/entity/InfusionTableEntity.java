@@ -9,7 +9,7 @@ import net.minecraft.screen.PropertyDelegate;
 
 public class InfusionTableEntity extends SoulTankEntity {
 	private static final int TEAR_CAPACITY = 500;
-
+	
 	public final PropertyDelegate properties;
 	public final InfusionInventory inventory;
 

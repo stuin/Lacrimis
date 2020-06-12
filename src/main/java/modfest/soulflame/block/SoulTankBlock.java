@@ -99,7 +99,7 @@ public abstract class SoulTankBlock extends BlockWithEntity implements BlockCond
 
     }
 
-    public SoulTank getTank(BlockView world, BlockState state, BlockPos pos) {
+    public SoulTank getTank(BlockView world, BlockPos pos) {
         BlockEntity entity = world.getBlockEntity(pos);
         if(entity instanceof SoulTankEntity)
             return ((SoulTankEntity) entity).getTank();
@@ -134,7 +134,7 @@ public abstract class SoulTankBlock extends BlockWithEntity implements BlockCond
 
     @Override
     public int getMaxTearsAmount(BlockState state, BlockPos pos, BlockView world) {
-        SoulTank tank = getTank(world, state, pos);
+        SoulTank tank = getTank(world, pos);
         if(tank != null)
             return tank.getCapacity();
         return 0;
@@ -142,7 +142,7 @@ public abstract class SoulTankBlock extends BlockWithEntity implements BlockCond
 
     @Override
     public int getCurrentTearsAmount(BlockState state, BlockPos pos, BlockView world) {
-        SoulTank tank = getTank(world, state, pos);
+        SoulTank tank = getTank(world, pos);
         if(tank != null)
             return tank.getTears();
         return 0;

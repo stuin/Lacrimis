@@ -20,9 +20,9 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
 
 public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionInventory> implements InventoryChangedListener {
+	private final InfusionInventory input;
 	private final CraftingResultInventory result;
 	private final InfusionTableEntity entity;
-	private final InfusionInventory input;
 	private final PlayerEntity player;
 
 	public InfusionScreenHandler(int syncId, PlayerEntity player, InfusionTableEntity entity) {
@@ -31,7 +31,7 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 		this.result = new CraftingResultInventory();
 		this.entity = entity;
 		this.player = player;
-		this.addProperties(entity.properties);
+		this.addProperties(input.properties);
 		this.addSlot(new InfusionResultSlot(player, this.input, this.result, 0, 124, 35));
 		if (!entity.getWorld().isClient) {
 			this.input.addListener(this);
@@ -55,6 +55,7 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 		if (!world.isClient) {
 			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
 			ItemStack itemStack = ItemStack.EMPTY;
+
 
 			Optional<ShapedInfusionRecipe> optional = world.getServer()
 					.getRecipeManager()
@@ -95,15 +96,15 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 
 	@Override
 	public boolean matches(Recipe<? super InfusionInventory> recipe) {
+		System.out.println("matches?");
 		return recipe.matches(this.input, this.player.world);
 	}
 
 	@Override
 	public void close(PlayerEntity player) {
 		super.close(player);
-		if (!player.world.isClient) {
+		if(entity.getWorld() != null && !entity.getWorld().isClient)
 			this.input.removeListener(this);
-		}
 	}
 
 	@Override

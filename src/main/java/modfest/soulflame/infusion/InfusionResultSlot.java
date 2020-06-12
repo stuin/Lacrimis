@@ -8,9 +8,11 @@ import net.minecraft.recipe.RecipeUnlocker;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.collection.DefaultedList;
 
+import java.util.Optional;
+
 public class InfusionResultSlot extends Slot {
-	private PlayerEntity player;
-	private InfusionInventory input;
+	private final PlayerEntity player;
+	private final InfusionInventory input;
 	private int amount;
 
 	public InfusionResultSlot(PlayerEntity player, InfusionInventory input, Inventory inventory, int index, int x, int y) {
@@ -61,6 +63,10 @@ public class InfusionResultSlot extends Slot {
 	public ItemStack onTakeItem(PlayerEntity player, ItemStack stack) {
 		this.onCrafted(stack);
 		DefaultedList<ItemStack> defaultedList = player.world.getRecipeManager().getRemainingStacks(ModInfusion.INFUSION_RECIPE, this.input, player.world);
+		Optional<ShapedInfusionRecipe> optional = player.world.getRecipeManager().getFirstMatch(ModInfusion.INFUSION_RECIPE, this.input, player.world);
+		int tears = 0;
+		if(optional.isPresent())
+			tears = optional.get().getTears();
 
 		for (int i = 0; i < defaultedList.size(); ++i) {
 			ItemStack itemStack = this.input.getStack(i);
@@ -84,6 +90,7 @@ public class InfusionResultSlot extends Slot {
 			}
 		}
 
+		input.removeTears(tears);
 		return stack;
 	}
 }
