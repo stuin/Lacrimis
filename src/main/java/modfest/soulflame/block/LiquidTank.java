@@ -4,6 +4,7 @@ import grondag.fluidity.api.storage.Store;
 import modfest.soulflame.SoulFlame;
 import modfest.soulflame.block.entity.LiquidTankEntity;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
@@ -56,6 +57,11 @@ public abstract class LiquidTank extends BlockWithEntity {
         }
 
         return ActionResult.PASS;
+    }
+
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
     }
 
 }

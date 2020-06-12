@@ -8,6 +8,7 @@ import modfest.soulflame.block.entity.InfusionTableEntity;
 import modfest.soulflame.infusion.InfusionScreenHandler;
 import modfest.soulflame.infusion.ModInfusion;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -57,5 +58,10 @@ public class InfusionTable extends LiquidTank {
 		Store finalTank = tank;
 		return new SimpleNamedScreenHandlerFactory((i, playerInventory, playerEntity) ->
 				new InfusionScreenHandler(i, playerInventory, finalTank, ScreenHandlerContext.create(world, pos)), TITLE);
+	}
+
+	@Override
+	public BlockRenderType getRenderType(BlockState state) {
+		return BlockRenderType.MODEL;
 	}
 }
