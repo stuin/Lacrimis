@@ -1,6 +1,5 @@
 package modfest.soulflame.block.runic;
 
-import jdk.internal.jline.internal.Nullable;
 import modfest.soulflame.block.Activatable;
 import modfest.soulflame.util.NeighborList;
 import net.minecraft.block.Block;
@@ -40,12 +39,10 @@ public class RuneBlock extends Block implements Activatable {
         return world.isReceivingRedstonePower(pos) && !(world.getBlockState(fromPos).getBlock() instanceof RuneBlock);
     }
 
-    @Nullable
     private BlockPos getCenter(World world, BlockPos pos) {
         return getCenter(world, pos, world.getBlockState(pos));
     }
 
-    @Nullable
     private BlockPos getCenter(World world, BlockPos pos, BlockState state) {
         int i = state.get(CENTER);
         BlockPos next;
