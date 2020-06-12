@@ -3,10 +3,9 @@ package modfest.soulflame.block;
 import javax.annotation.Nullable;
 
 import grondag.fluidity.api.storage.Store;
-import modfest.soulflame.SoulFlame;
 import modfest.soulflame.block.entity.InfusionTableEntity;
 import modfest.soulflame.infusion.InfusionScreenHandler;
-import modfest.soulflame.infusion.ModInfusion;
+import modfest.soulflame.init.ModInfusion;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;

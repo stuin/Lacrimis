@@ -7,7 +7,7 @@ import modfest.soulflame.init.ModItems;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import modfest.soulflame.init.ModBlocks;
-import modfest.soulflame.infusion.ModInfusion;
+import modfest.soulflame.init.ModInfusion;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
