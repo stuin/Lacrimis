@@ -72,15 +72,20 @@ public class ConduitUtil {
         return new ArrayList<>(result);
     }
 
-    public static int pull(World world, BlockPos pos, int amount, boolean simulate) {
-        List<Entry> candidates = scanConduits(world, pos);
+    public static int totalAmount(List<Entry> candidates, World world) {
+        if (candidates.isEmpty()) return 0;
+
+        return candidates.stream().mapToInt(e -> e.extract(world, e.getCurrentTearsAmount(world), true)).sum();
+    }
+
+    public static int pull(List<Entry> candidates, World world, int amount, boolean simulate) {
         if (candidates.isEmpty()) return 0;
 
         float[] pcts = new float[candidates.size()];
-        float total = 0;
+        int total = 0;
         for (int i = 0; i < candidates.size(); i++) {
             Entry entry = candidates.get(i);
-            int a = entry.getCurrentTearsAmount(world);
+            int a = entry.extract(world, entry.getCurrentTearsAmount(world), true);
             pcts[i] = a;
             total += a;
         }

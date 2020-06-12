@@ -13,7 +13,7 @@ import net.minecraft.world.BlockView;
 
 import modfest.soulflame.block.entity.CrucibleEntity;
 
-public class CrucibleBlock extends SoulTankBlock implements BlockConduitConnect {
+public class CrucibleBlock extends SoulTankBlock {
     private static final VoxelShape RAY_TRACE_SHAPE = createCuboidShape(2.0D, 4.0D, 2.0D, 14.0D, 16.0D, 14.0D);
     protected static final VoxelShape OUTLINE_SHAPE = VoxelShapes.combineAndSimplify(VoxelShapes.fullCube(), VoxelShapes.union(createCuboidShape(0.0D, 0.0D, 4.0D, 16.0D, 3.0D, 12.0D), createCuboidShape(4.0D, 0.0D, 0.0D, 12.0D, 3.0D, 16.0D), createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 3.0D, 14.0D), RAY_TRACE_SHAPE), BooleanBiFunction.ONLY_FIRST);
 
@@ -40,4 +40,5 @@ public class CrucibleBlock extends SoulTankBlock implements BlockConduitConnect 
     public VoxelShape getRayTraceShape(BlockState state, BlockView world, BlockPos pos) {
         return RAY_TRACE_SHAPE;
     }
+
 }

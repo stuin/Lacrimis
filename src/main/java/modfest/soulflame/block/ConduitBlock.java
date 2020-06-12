@@ -3,6 +3,7 @@ package modfest.soulflame.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager.Builder;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
@@ -35,11 +36,20 @@ public class ConduitBlock extends Block {
     @Override
     protected void appendProperties(Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
-        builder.add(DOWN,UP, NORTH, SOUTH, EAST, WEST);
+        builder.add(DOWN, UP, NORTH, SOUTH, EAST, WEST);
     }
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
+        return this.connectToBlocks(state, world, pos);
+    }
+
+    @Override
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        return this.connectToBlocks(this.getDefaultState(), ctx.getWorld(), ctx.getBlockPos());
+    }
+
+    private BlockState connectToBlocks(BlockState state, WorldAccess world, BlockPos pos) {
         return state
                 .with(DOWN, this.connectsTo(world, pos.down(), Direction.UP))
                 .with(UP, this.connectsTo(world, pos.up(), Direction.DOWN))
