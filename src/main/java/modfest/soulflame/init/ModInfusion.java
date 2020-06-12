@@ -5,6 +5,7 @@ import modfest.soulflame.SoulFlame;
 import modfest.soulflame.block.entity.InfusionTableEntity;
 import modfest.soulflame.infusion.InfusionScreen;
 import modfest.soulflame.infusion.InfusionScreenHandler;
+import modfest.soulflame.infusion.ShapedInfusionRecipe;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.screen.ContainerScreenFactory;
@@ -15,14 +16,26 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.RecipeType;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.Registry;
 
 public class ModInfusion {
 	public static final Identifier INFUSION_SCREEN_ID = new Identifier(SoulFlame.MODID, "infusion");
+
+	public static final RecipeType<ShapedInfusionRecipe> INFUSION_RECIPE = new RecipeType<ShapedInfusionRecipe>() {
+		@Override
+		public String toString() {
+			return "infusion";
+		}
+	};
+
+	public static final RecipeSerializer<ShapedInfusionRecipe> SHAPED_INFUSION_SERIALIZER = new ShapedInfusionRecipe.Serializer();
 
 	public static void register() {
 		ContainerProviderRegistry.INSTANCE.registerFactory(INFUSION_SCREEN_ID, new ContainerFactory<ScreenHandler>() {
@@ -36,6 +49,10 @@ public class ModInfusion {
 				return new InfusionScreenHandler(syncId, player.inventory, tank, ScreenHandlerContext.create(player.world, pos));
 			}
 		});
+
+		Registry.register(Registry.RECIPE_TYPE, SoulFlame.MODID + ":infusion", INFUSION_RECIPE);
+
+		Registry.register(Registry.RECIPE_SERIALIZER, SoulFlame.MODID + ":infusion_shaped", SHAPED_INFUSION_SERIALIZER);
 	}
 
 	@Environment(EnvType.CLIENT)

@@ -1,12 +1,14 @@
 package modfest.soulflame.infusion;
 
+import java.util.Optional;
+
 import grondag.fluidity.api.storage.Store;
 import modfest.soulflame.init.ModBlocks;
+import modfest.soulflame.init.ModInfusion;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.inventory.CraftingResultInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
@@ -21,8 +23,8 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
 
 //Mostly copied from CraftingScreenHandler
-public class InfusionScreenHandler extends AbstractRecipeScreenHandler<CraftingInventory> {
-	private final CraftingInventory input;
+public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionInventory> {
+	private final InfusionInventory input;
 	private final CraftingResultInventory result;
 	private final ScreenHandlerContext context;
 	private final PlayerEntity player;
@@ -34,50 +36,46 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<CraftingI
 
 	public InfusionScreenHandler(int syncId, PlayerInventory playerInventory, Store tank, ScreenHandlerContext context) {
 		super(null, syncId);
-		this.input = new CraftingInventory(this, 3, 3);
+		this.input = new InfusionInventory(this, 3, 3);
 		this.result = new CraftingResultInventory();
 		this.context = context;
 		this.player = playerInventory.player;
 		this.tank = tank;
 		this.addSlot(new CraftingResultSlot(playerInventory.player, this.input, this.result, 0, 124, 35));
 
-		int m;
-		int l;
-		for (m = 0; m < 3; ++m) {
-			for (l = 0; l < 3; ++l) {
+		for (int m = 0; m < 3; ++m) {
+			for (int l = 0; l < 3; ++l) {
 				this.addSlot(new Slot(this.input, l + m * 3, 30 + l * 18, 17 + m * 18));
 			}
 		}
 
-		for (m = 0; m < 3; ++m) {
-			for (l = 0; l < 9; ++l) {
+		for (int m = 0; m < 3; ++m) {
+			for (int l = 0; l < 9; ++l) {
 				this.addSlot(new Slot(playerInventory, l + m * 9 + 9, 8 + l * 18, 84 + m * 18));
 			}
 		}
 
-		for (m = 0; m < 9; ++m) {
+		for (int m = 0; m < 9; ++m) {
 			this.addSlot(new Slot(playerInventory, m, 8 + m * 18, 142));
 		}
-
 	}
 
-	protected static void updateResult(int syncId, World world, PlayerEntity player, CraftingInventory craftingInventory, CraftingResultInventory resultInventory) {
+	protected static void updateResult(int syncId, World world, PlayerEntity player, InfusionInventory inventory, CraftingResultInventory resultInventory) {
 		if (!world.isClient) {
-			ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) player;
+			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
 			ItemStack itemStack = ItemStack.EMPTY;
-			/*
-			 * Optional<CraftingRecipe> optional = world.getServer().getRecipeManager()
-			 * .getFirstMatch(RecipeType.CRAFTING, craftingInventory, world);
-			 * if (optional.isPresent()) {
-			 * CraftingRecipe craftingRecipe = (CraftingRecipe)optional.get();
-			 * if (resultInventory.shouldCraftRecipe(world, serverPlayerEntity, craftingRecipe)) {
-			 * itemStack = craftingRecipe.craft(craftingInventory);
-			 * }
-			 * }
-			 */
+
+			Optional<ShapedInfusionRecipe> optional = world.getServer().getRecipeManager()
+					.getFirstMatch(ModInfusion.INFUSION_RECIPE, inventory, world);
+			if (optional.isPresent()) {
+				ShapedInfusionRecipe craftingRecipe = optional.get();
+				if (resultInventory.shouldCraftRecipe(world, serverPlayer, craftingRecipe)) {
+					itemStack = craftingRecipe.craft(inventory);
+				}
+			}
 
 			resultInventory.setStack(0, itemStack);
-			serverPlayerEntity.networkHandler.sendPacket(new ScreenHandlerSlotUpdateS2CPacket(syncId, 0, itemStack));
+			serverPlayer.networkHandler.sendPacket(new ScreenHandlerSlotUpdateS2CPacket(syncId, 0, itemStack));
 		}
 	}
 
@@ -96,7 +94,7 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<CraftingI
 		this.result.clear();
 	}
 
-	public boolean matches(Recipe<? super CraftingInventory> recipe) {
+	public boolean matches(Recipe<? super InfusionInventory> recipe) {
 		return recipe.matches(this.input, this.player.world);
 	}
 
