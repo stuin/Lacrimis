@@ -20,6 +20,8 @@ public class SoulTank {
 	public void setTears(int tears) {
 		if(tears >= 0 && tears <= capacity)
 			this.tears = tears;
+		else if(tears > capacity)
+			this.tears = capacity;
 	}
 	
 	public int removeTears(int goal) {

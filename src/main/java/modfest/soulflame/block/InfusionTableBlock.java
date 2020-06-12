@@ -1,7 +1,6 @@
 package modfest.soulflame.block;
 
 import modfest.soulflame.block.entity.InfusionTableEntity;
-import modfest.soulflame.infusion.InfusionScreenHandler;
 import modfest.soulflame.init.ModInfusion;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.minecraft.block.AbstractBlock;
@@ -9,9 +8,6 @@ import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.screen.NamedScreenHandlerFactory;
-import net.minecraft.screen.ScreenHandlerContext;
-import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
