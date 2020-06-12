@@ -9,6 +9,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.CraftingResultInventory;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.InventoryChangedListener;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.s2c.play.ScreenHandlerSlotUpdateS2CPacket;
 import net.minecraft.recipe.Recipe;
@@ -18,21 +19,23 @@ import net.minecraft.screen.slot.Slot;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
 
-public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionInventory> {
-	private final InfusionInventory input;
+public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionInventory> implements InventoryChangedListener {
 	private final CraftingResultInventory result;
 	private final InfusionTableEntity entity;
+	private final InfusionInventory input;
 	private final PlayerEntity player;
 
 	public InfusionScreenHandler(int syncId, PlayerEntity player, InfusionTableEntity entity) {
 		super(null, syncId);
-		this.input = new InfusionInventory(this, entity.properties);
+		this.input = entity.inventory;
 		this.result = new CraftingResultInventory();
 		this.entity = entity;
 		this.player = player;
 		this.addProperties(entity.properties);
 		this.addSlot(new InfusionResultSlot(player, this.input, this.result, 0, 124, 35));
-
+		if (!entity.getWorld().isClient) {
+			this.input.addListener(this);
+		}
 		for (int y = 0; y < 3; ++y) {
 			for (int x = 0; x < 3; ++x) {
 				this.addSlot(new Slot(this.input, x + y * 3, 30 + x * 18, 17 + y * 18));
@@ -69,7 +72,13 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 	}
 
 	@Override
+	public void onInventoryChanged(Inventory sender) {
+		onContentChanged(sender);
+	}
+
+	@Override
 	public void onContentChanged(Inventory inventory) {
+		super.onContentChanged(inventory);
 		updateResult(this.syncId, this.entity.getWorld(), this.player, this.input, this.result);
 	}
 
@@ -92,7 +101,9 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 	@Override
 	public void close(PlayerEntity player) {
 		super.close(player);
-		this.dropInventory(player, this.entity.getWorld(), this.input);
+		if (!player.world.isClient) {
+			this.input.removeListener(this);
+		}
 	}
 
 	@Override
@@ -160,12 +171,12 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 
 	@Override
 	public int getCraftingWidth() {
-		return this.input.getWidth();
+		return 3;
 	}
 
 	@Override
 	public int getCraftingHeight() {
-		return this.input.getHeight();
+		return 3;
 	}
 
 	@Override

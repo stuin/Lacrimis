@@ -77,8 +77,8 @@ public class ShapedInfusionRecipe implements Recipe<InfusionInventory> {
 
 	@Override
 	public boolean matches(InfusionInventory inventory, World world) {
-		for (int i = 0; i <= inventory.getWidth() - this.width; ++i) {
-			for (int j = 0; j <= inventory.getHeight() - this.height; ++j) {
+		for (int i = 0; i <= 3 - this.width; ++i) {
+			for (int j = 0; j <= 3 - this.height; ++j) {
 				if (this.matchesSmall(inventory, i, j, true)) {
 					return true;
 				}
@@ -93,8 +93,8 @@ public class ShapedInfusionRecipe implements Recipe<InfusionInventory> {
 	}
 
 	private boolean matchesSmall(InfusionInventory inv, int offsetX, int offsetY, boolean bl) {
-		for (int i = 0; i < inv.getWidth(); ++i) {
-			for (int j = 0; j < inv.getHeight(); ++j) {
+		for (int i = 0; i < 3; ++i) {
+			for (int j = 0; j < 3; ++j) {
 				int k = i - offsetX;
 				int l = j - offsetY;
 				Ingredient ingredient = Ingredient.EMPTY;
@@ -106,7 +106,7 @@ public class ShapedInfusionRecipe implements Recipe<InfusionInventory> {
 					}
 				}
 
-				if (!ingredient.test(inv.getStack(i + j * inv.getWidth()))) {
+				if (!ingredient.test(inv.getStack(i + j * 3))) {
 					return false;
 				}
 			}

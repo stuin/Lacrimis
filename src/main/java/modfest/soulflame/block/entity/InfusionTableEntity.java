@@ -5,6 +5,9 @@ import modfest.soulflame.init.ModBlockEntityTypes;
 import modfest.soulflame.util.ConduitUtil;
 import modfest.soulflame.util.ConduitUtil.Entry;
 
+import net.fabricmc.fabric.api.util.NbtType;
+import net.minecraft.block.BlockState;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.util.Tickable;
 import net.minecraft.world.World;
@@ -15,7 +18,7 @@ import static java.lang.Math.min;
 
 public class InfusionTableEntity extends SoulTankEntity implements Tickable {
 	private static final int TEAR_CAPACITY = 500;
-	
+
 	public final PropertyDelegate properties;
 	public final InfusionInventory inventory;
 
@@ -45,7 +48,20 @@ public class InfusionTableEntity extends SoulTankEntity implements Tickable {
 				}
 			}
 		};
-		this.inventory = new InfusionInventory(null, this.properties);
+		this.inventory = new InfusionInventory(this);
+	}
+
+	@Override
+	public void fromTag(BlockState state, CompoundTag tag) {
+		super.fromTag(state, tag);
+		this.inventory.readTags(tag.getList("Inventory", NbtType.COMPOUND));
+	}
+
+	@Override
+	public CompoundTag toTag(CompoundTag tag) {
+		super.toTag(tag);
+		tag.put("Inventory", this.inventory.getTags());
+		return tag;
 	}
 
 	@Override
