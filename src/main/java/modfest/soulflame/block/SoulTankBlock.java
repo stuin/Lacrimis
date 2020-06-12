@@ -1,12 +1,10 @@
 package modfest.soulflame.block;
 
-import modfest.soulflame.block.entity.CrucibleEntity;
 import modfest.soulflame.block.entity.SoulTankEntity;
 import modfest.soulflame.init.ModItems;
 import modfest.soulflame.item.BottleOfTearsItem;
 import modfest.soulflame.util.SoulTank;
 import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
