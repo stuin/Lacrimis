@@ -64,7 +64,7 @@ public class CrucibleBlock extends LiquidTankBlock {
         Item item = stack.getItem();
 
         if (item == ModItems.BOTTLE_OF_TEARS) {
-            if (level <= 750 && !world.isClient) {
+            if (level >= 250 && !world.isClient) {
                 if (!player.abilities.creativeMode) {
                     ItemStack bottle = new ItemStack(Items.GLASS_BOTTLE);
                     stack.decrement(1);
