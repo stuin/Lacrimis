@@ -1,10 +1,8 @@
 package modfest.soulflame.infusion;
 
-import modfest.soulflame.SoulFlame;
 import modfest.soulflame.block.ModBlocks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.CraftingInventory;
