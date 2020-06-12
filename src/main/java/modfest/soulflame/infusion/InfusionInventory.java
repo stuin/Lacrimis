@@ -1,14 +1,19 @@
 package modfest.soulflame.infusion;
 
-import net.minecraft.inventory.CraftingInventory;
-import net.minecraft.screen.PropertyDelegate;
-import net.minecraft.screen.ScreenHandler;
+import modfest.soulflame.block.entity.InfusionTableEntity;
+import net.minecraft.inventory.SimpleInventory;
 
-public class InfusionInventory extends CraftingInventory {
-	public final PropertyDelegate properties;
+public class InfusionInventory extends SimpleInventory {
+	public final InfusionTableEntity entity;
 
-	public InfusionInventory(ScreenHandler handler, PropertyDelegate properties) {
-		super(handler, 3, 3);
-		this.properties = properties;
+	public InfusionInventory(InfusionTableEntity entity) {
+		super(9);
+		this.entity = entity;
+	}
+
+	@Override
+	public void markDirty() {
+		super.markDirty();
+		this.entity.markDirty();
 	}
 }

@@ -38,6 +38,6 @@ public class InfusionTableEntity extends SoulTankEntity {
 				}
 			}
 		};
-		this.inventory = new InfusionInventory(null, this.properties);
+		this.inventory = new InfusionInventory(this);
 	}
 }
