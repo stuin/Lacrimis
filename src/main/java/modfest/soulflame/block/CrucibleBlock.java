@@ -87,7 +87,7 @@ public class CrucibleBlock extends LiquidTankBlock implements BlockConduitConnec
         } else {
             ItemStack itemStack4;
             if (item == Items.GLASS_BOTTLE) {
-                if (level > 0 && !world.isClient) {
+                if (level >= 250 && !world.isClient) {
                     if (!player.abilities.creativeMode) {
                         itemStack4 = new ItemStack(ModItems.bottleOfTears);
                         stack.decrement(1);
