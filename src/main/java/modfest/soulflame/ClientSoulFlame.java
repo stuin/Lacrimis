@@ -1,17 +1,16 @@
 package modfest.soulflame;
 
-import modfest.soulflame.infusion.InfusionScreen;
-import modfest.soulflame.infusion.RequiredTypes;
+import modfest.soulflame.block.ModBlocks;
 import net.fabricmc.api.ClientModInitializer;
-import net.minecraft.client.gui.screen.ingame.HandledScreens;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.minecraft.client.render.RenderLayer;
 
 public class ClientSoulFlame implements ClientModInitializer {
+    @Environment(EnvType.CLIENT)
     @Override
     public void onInitializeClient() {
-
-    }
-
-    static {
-        HandledScreens.register(RequiredTypes.infusionScreen, InfusionScreen::new);
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.infusionTable, RenderLayer.getCutout());
     }
 }
