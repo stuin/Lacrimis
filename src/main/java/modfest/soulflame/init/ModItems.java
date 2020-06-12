@@ -16,6 +16,7 @@ public class ModItems {
     public static BlockItem infusionTable;
     public static BlockItem crucible;
     public static BlockItem conduit;
+    public static BlockItem tearLantern;
     public static BlockItem creativeTearsBlock;
     public static BottleOfTearsItem bottleOfTears;
     public static DiviningRodItem diviningRod;
@@ -24,6 +25,7 @@ public class ModItems {
         infusionTable = register("infusion_table", ModBlocks.infusionTable);
         crucible = register("crucible", ModBlocks.crucible);
         conduit = register("conduit", ModBlocks.conduit);
+        tearLantern = register("tear_lantern", ModBlocks.tearLantern);
         creativeTearsBlock = register("creative_tears_block", ModBlocks.creativeTearsBlock);
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
         diviningRod = register("divining_rod", new DiviningRodItem(SETTINGS));
