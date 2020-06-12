@@ -1,5 +1,6 @@
 package modfest.soulflame.block.entity;
 
+import modfest.soulflame.infusion.InfusionInventory;
 import modfest.soulflame.init.ModBlockEntityTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -8,13 +9,14 @@ import net.minecraft.screen.PropertyDelegate;
 
 public class InfusionTableEntity extends BlockEntity {
 	private static final int TEAR_CAPACITY = 500;
+	
+	public final PropertyDelegate properties;
+	public final InfusionInventory inventory;
 
 	protected int tears = 0;
-	public final PropertyDelegate properties;
 
 	public InfusionTableEntity() {
 		super(ModBlockEntityTypes.infusionTable);
-
 		this.properties = new PropertyDelegate() {
 			@Override
 			public int size() {
@@ -37,8 +39,8 @@ public class InfusionTableEntity extends BlockEntity {
 					break;
 				}
 			}
-
 		};
+		this.inventory = new InfusionInventory(null, this.properties);
 	}
 
 	@Override

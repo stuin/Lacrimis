@@ -17,7 +17,6 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -41,7 +40,7 @@ public class ModInfusion {
 			public ScreenHandler create(int syncId, Identifier identifier, PlayerEntity player, PacketByteBuf buf) {
 				BlockPos pos = buf.readBlockPos();
 				InfusionTableEntity entity = (InfusionTableEntity) player.getEntityWorld().getBlockEntity(pos);
-				return new InfusionScreenHandler(syncId, player.inventory, ScreenHandlerContext.create(player.world, pos), entity);
+				return new InfusionScreenHandler(syncId, player, entity);
 			}
 		});
 
