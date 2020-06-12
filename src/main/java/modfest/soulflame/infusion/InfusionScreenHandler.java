@@ -1,5 +1,6 @@
 package modfest.soulflame.infusion;
 
+import modfest.soulflame.SoulFlame;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
@@ -10,18 +11,14 @@ import net.minecraft.inventory.CraftingResultInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.s2c.play.ScreenHandlerSlotUpdateS2CPacket;
-import net.minecraft.recipe.CraftingRecipe;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeFinder;
-import net.minecraft.recipe.RecipeType;
 import net.minecraft.screen.AbstractRecipeScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.slot.CraftingResultSlot;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
-
-import java.util.Optional;
 
 //Mostly copied from CraftingScreenHandler
 public class InfusionScreenHandler extends AbstractRecipeScreenHandler<CraftingInventory> {
@@ -66,9 +63,9 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<CraftingI
         if (!world.isClient) {
             ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity)player;
             ItemStack itemStack = ItemStack.EMPTY;
-            Optional<CraftingRecipe> optional = world.getServer().getRecipeManager()
+            /*Optional<CraftingRecipe> optional = world.getServer().getRecipeManager()
                     .getFirstMatch(RecipeType.CRAFTING, craftingInventory, world);
-            /*if (optional.isPresent()) {
+            if (optional.isPresent()) {
                 CraftingRecipe craftingRecipe = (CraftingRecipe)optional.get();
                 if (resultInventory.shouldCraftRecipe(world, serverPlayerEntity, craftingRecipe)) {
                     itemStack = craftingRecipe.craft(craftingInventory);

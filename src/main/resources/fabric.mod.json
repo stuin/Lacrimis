@@ -19,6 +19,9 @@
   "entrypoints": {
     "main": [
       "modfest.soulflame.SoulFlame"
+    ],
+    "client": [
+      "modfest.soulflame.ClientSoulFlame"
     ]
   },
 
