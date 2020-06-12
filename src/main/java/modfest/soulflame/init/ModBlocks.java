@@ -15,13 +15,13 @@ import modfest.soulflame.block.InfusionTableBlock;
 
 public class ModBlocks {
 
-    public static InfusionTableBlock infusionTableBlock;
-    public static CrucibleBlock crucibleBlock;
+    public static InfusionTableBlock infusionTable;
+    public static CrucibleBlock crucible;
     public static ChannelBlock channel;
 
     public static void register() {
-        infusionTableBlock = register("infusion_table", new InfusionTableBlock(FabricBlockSettings.copy(Blocks.CRAFTING_TABLE).nonOpaque()));
-        crucibleBlock = register("crucibleBlock", new CrucibleBlock(FabricBlockSettings.copy(Blocks.CAULDRON).nonOpaque()));
+        infusionTable = register("infusion_table", new InfusionTableBlock(FabricBlockSettings.copy(Blocks.CRAFTING_TABLE).nonOpaque()));
+        crucible = register("crucible", new CrucibleBlock(FabricBlockSettings.copy(Blocks.CAULDRON).nonOpaque()));
         channel = register("channel", new ChannelBlock(AbstractBlock.Settings.of(Material.STONE).strength(0.25f)));
     }
 
