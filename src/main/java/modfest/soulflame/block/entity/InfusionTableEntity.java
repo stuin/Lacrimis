@@ -2,11 +2,14 @@ package modfest.soulflame.block.entity;
 
 import modfest.soulflame.infusion.InfusionInventory;
 import modfest.soulflame.init.ModBlockEntityTypes;
+import net.fabricmc.fabric.api.util.NbtType;
+import net.minecraft.block.BlockState;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.screen.PropertyDelegate;
 
 public class InfusionTableEntity extends SoulTankEntity {
 	private static final int TEAR_CAPACITY = 500;
-	
+
 	public final PropertyDelegate properties;
 	public final InfusionInventory inventory;
 
@@ -39,5 +42,18 @@ public class InfusionTableEntity extends SoulTankEntity {
 			}
 		};
 		this.inventory = new InfusionInventory(this);
+	}
+
+	@Override
+	public void fromTag(BlockState state, CompoundTag tag) {
+		super.fromTag(state, tag);
+		this.inventory.readTags(tag.getList("Inventory", NbtType.COMPOUND));
+	}
+
+	@Override
+	public CompoundTag toTag(CompoundTag tag) {
+		super.toTag(tag);
+		tag.put("Inventory", this.inventory.getTags());
+		return tag;
 	}
 }
