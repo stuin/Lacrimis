@@ -2,8 +2,7 @@ package modfest.soulflame.infusion;
 
 import java.util.Optional;
 
-import grondag.fluidity.api.storage.Store;
-import modfest.soulflame.init.ModBlocks;
+import modfest.soulflame.block.entity.InfusionTableEntity;
 import modfest.soulflame.init.ModInfusion;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -17,7 +16,6 @@ import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeFinder;
 import net.minecraft.screen.AbstractRecipeScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
-import net.minecraft.screen.slot.CraftingResultSlot;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
@@ -26,22 +24,17 @@ import net.minecraft.world.World;
 public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionInventory> {
 	private final InfusionInventory input;
 	private final CraftingResultInventory result;
-	private final ScreenHandlerContext context;
+	private final InfusionTableEntity entity;
 	private final PlayerEntity player;
-	public final Store tank;
 
-	public InfusionScreenHandler(int syncId, PlayerInventory playerInventory) {
-		this(syncId, playerInventory, null, ScreenHandlerContext.EMPTY);
-	}
-
-	public InfusionScreenHandler(int syncId, PlayerInventory playerInventory, Store tank, ScreenHandlerContext context) {
+	public InfusionScreenHandler(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context, InfusionTableEntity entity) {
 		super(null, syncId);
-		this.input = new InfusionInventory(this, 3, 3);
+		this.input = new InfusionInventory(this, entity.properties);
 		this.result = new CraftingResultInventory();
-		this.context = context;
+		this.entity = entity;
 		this.player = playerInventory.player;
-		this.tank = tank;
-		this.addSlot(new CraftingResultSlot(playerInventory.player, this.input, this.result, 0, 124, 35));
+		this.addProperties(entity.properties);
+		this.addSlot(new InfusionResultSlot(playerInventory.player, this.input, this.result, 0, 124, 35));
 
 		for (int m = 0; m < 3; ++m) {
 			for (int l = 0; l < 3; ++l) {
@@ -80,9 +73,7 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 	}
 
 	public void onContentChanged(Inventory inventory) {
-		this.context.run((world, blockPos) -> {
-			updateResult(this.syncId, world, this.player, this.input, this.result);
-		});
+		updateResult(this.syncId, this.entity.getWorld(), this.player, this.input, this.result);
 	}
 
 	public void populateRecipeFinder(RecipeFinder finder) {
@@ -100,13 +91,12 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 
 	public void close(PlayerEntity player) {
 		super.close(player);
-		this.context.run((world, blockPos) -> {
-			this.dropInventory(player, world, this.input);
-		});
+		this.dropInventory(player, this.entity.getWorld(), this.input);
+
 	}
 
 	public boolean canUse(PlayerEntity player) {
-		return canUse(this.context, player, ModBlocks.infusionTable);
+		return this.input.canPlayerUse(player);
 	}
 
 	public ItemStack transferSlot(PlayerEntity player, int index) {
@@ -116,9 +106,7 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 			ItemStack itemStack2 = slot.getStack();
 			itemStack = itemStack2.copy();
 			if (index == 0) {
-				this.context.run((world, blockPos) -> {
-					itemStack2.getItem().onCraft(itemStack2, world, player);
-				});
+				itemStack2.getItem().onCraft(itemStack2, this.entity.getWorld(), player);
 				if (!this.insertItem(itemStack2, 10, 46, true)) {
 					return ItemStack.EMPTY;
 				}
@@ -176,5 +164,9 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 	@Environment(EnvType.CLIENT)
 	public int getCraftingSlotCount() {
 		return 10;
+	}
+
+	public int getTearsLevel() {
+		return this.entity.getLevel();
 	}
 }

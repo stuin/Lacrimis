@@ -1,6 +1,5 @@
 package modfest.soulflame.init;
 
-import grondag.fluidity.api.storage.Store;
 import modfest.soulflame.SoulFlame;
 import modfest.soulflame.block.entity.InfusionTableEntity;
 import modfest.soulflame.infusion.InfusionScreen;
@@ -12,7 +11,6 @@ import net.fabricmc.fabric.api.client.screen.ContainerScreenFactory;
 import net.fabricmc.fabric.api.client.screen.ScreenProviderRegistry;
 import net.fabricmc.fabric.api.container.ContainerFactory;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
@@ -42,11 +40,8 @@ public class ModInfusion {
 			@Override
 			public ScreenHandler create(int syncId, Identifier identifier, PlayerEntity player, PacketByteBuf buf) {
 				BlockPos pos = buf.readBlockPos();
-				Store tank = null;
-				BlockEntity entity = player.getEntityWorld().getBlockEntity(pos);
-				if (entity instanceof InfusionTableEntity)
-					tank = ((InfusionTableEntity) entity).getEffectiveStorage();
-				return new InfusionScreenHandler(syncId, player.inventory, tank, ScreenHandlerContext.create(player.world, pos));
+				InfusionTableEntity entity = (InfusionTableEntity) player.getEntityWorld().getBlockEntity(pos);
+				return new InfusionScreenHandler(syncId, player.inventory, ScreenHandlerContext.create(player.world, pos), entity);
 			}
 		});
 

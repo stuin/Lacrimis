@@ -2,9 +2,7 @@ package modfest.soulflame.block;
 
 import javax.annotation.Nullable;
 
-import grondag.fluidity.api.storage.Store;
 import modfest.soulflame.block.entity.InfusionTableEntity;
-import modfest.soulflame.infusion.InfusionScreenHandler;
 import modfest.soulflame.init.ModInfusion;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.minecraft.block.AbstractBlock;
@@ -12,11 +10,6 @@ import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.screen.NamedScreenHandlerFactory;
-import net.minecraft.screen.ScreenHandlerContext;
-import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -25,8 +18,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public class InfusionTableBlock extends LiquidTankBlock {
-	private static final Text TITLE = new TranslatableText("container.infusion");
-
 	public InfusionTableBlock(AbstractBlock.Settings settings) {
 		super(settings);
 	}
@@ -49,15 +40,6 @@ public class InfusionTableBlock extends LiquidTankBlock {
 			}
 		}
 		return parentResult;
-	}
-
-	public NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {
-		Store tank = null;
-		if(world.getBlockEntity(pos) != null)
-			tank = ((InfusionTableEntity)world.getBlockEntity(pos)).getEffectiveStorage();
-		Store finalTank = tank;
-		return new SimpleNamedScreenHandlerFactory((i, playerInventory, playerEntity) ->
-				new InfusionScreenHandler(i, playerInventory, finalTank, ScreenHandlerContext.create(world, pos)), TITLE);
 	}
 
 	@Override
