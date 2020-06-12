@@ -9,12 +9,8 @@ import modfest.soulflame.infusion.InfusionScreenHandler;
 import modfest.soulflame.infusion.RequiredTypes;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-import net.fabricmc.fabric.api.container.ContainerFactory;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -35,12 +31,9 @@ public class SoulFlame implements ModInitializer {
 		ModBlocks.register();
 		RequiredTypes.register();
 
-		ContainerProviderRegistry.INSTANCE.registerFactory(INFUSION_SCREEN_ID, new ContainerFactory<ScreenHandler>() {
-			@Override
-			public ScreenHandler create(int syncId, Identifier identifier, PlayerEntity player, PacketByteBuf buf) {
-				BlockPos pos = buf.readBlockPos();
-				return new InfusionScreenHandler(syncId, player.inventory, ScreenHandlerContext.create(player.world, pos));
-			}
+		ContainerProviderRegistry.INSTANCE.registerFactory(INFUSION_SCREEN_ID, (syncId, identifier, player, buf) -> {
+			BlockPos pos = buf.readBlockPos();
+			return new InfusionScreenHandler(syncId, player.inventory, ScreenHandlerContext.create(player.world, pos));
 		});
 	}
 }
