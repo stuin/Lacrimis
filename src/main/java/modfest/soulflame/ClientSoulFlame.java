@@ -1,6 +1,6 @@
 package modfest.soulflame;
 
-import modfest.soulflame.block.ModBlocks;
+import modfest.soulflame.init.ModBlocks;
 import modfest.soulflame.infusion.InfusionScreen;
 import modfest.soulflame.infusion.InfusionScreenHandler;
 import modfest.soulflame.infusion.ModInfusion;

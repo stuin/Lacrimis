@@ -4,7 +4,7 @@ import grondag.fluidity.api.fraction.Fraction;
 import grondag.fluidity.api.storage.Store;
 import grondag.fluidity.base.storage.ForwardingStore;
 import grondag.fluidity.base.storage.bulk.SimpleTank;
-import modfest.soulflame.block.ModBlocks;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;

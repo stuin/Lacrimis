@@ -1,10 +1,10 @@
 package modfest.soulflame.block.entity;
 
-import modfest.soulflame.block.ModBlocks;
+import modfest.soulflame.init.ModBlockEntityTypes;
 
 public class CrucibleEntity extends LiquidTankEntity {
     public CrucibleEntity() {
-        super(ModBlocks.crucibleEntity, 10);
+        super(ModBlockEntityTypes.crucible, 10);
     }
 
 

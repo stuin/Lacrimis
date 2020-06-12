@@ -1,7 +1,7 @@
 package modfest.soulflame.infusion;
 
 import grondag.fluidity.api.storage.Store;
-import modfest.soulflame.block.ModBlocks;
+import modfest.soulflame.init.ModBlocks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerEntity;
