@@ -12,6 +12,8 @@ import net.minecraft.text.TranslatableText;
 public class ClientSoulFlame implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
+		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.infusionTable, RenderLayer.getCutout());
+
 		ScreenProviderRegistry.INSTANCE.registerFactory(SoulFlame.INFUSION_SCREEN_ID, new ContainerScreenFactory<InfusionScreenHandler>() {
 			@Override
 			public HandledScreen create(InfusionScreenHandler container) {
@@ -19,5 +21,4 @@ public class ClientSoulFlame implements ClientModInitializer {
 			}
 		});
 	}
-
 }

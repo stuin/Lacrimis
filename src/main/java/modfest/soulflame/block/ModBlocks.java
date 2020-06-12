@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class ModBlocks {
-    public static Block infusionTable = new InfusionTable(FabricBlockSettings.copy(Blocks.CRAFTING_TABLE));
+    public static Block infusionTable = new InfusionTable(FabricBlockSettings.copy(Blocks.CRAFTING_TABLE).nonOpaque());
     
     public static BlockEntityType<InfusionTableEntity> infusionTableEntity;
 
