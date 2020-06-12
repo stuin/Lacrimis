@@ -1,5 +1,7 @@
 {
   "block.soulflame.infusion_table": "Infusion Table",
+  "block.soulflame.crucible": "Crucible",
+  "item.soulflame.bottle_of_tears": "Bottle of Tears",
   "gui.soulflame.infusion": "Infusion Table",
   "itemGroup.soulflame.group": "Soulflame"
 }

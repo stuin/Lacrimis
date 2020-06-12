@@ -25,18 +25,21 @@ public class CrucibleEntityRenderer extends BlockEntityRenderer<CrucibleEntity> 
 
 	@Override
 	public void render(CrucibleEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-		MinecraftClient mc = MinecraftClient.getInstance();
-		BakedModel model = mc.getBakedModelManager().getModel(CrucibleEntityRenderer.CRUCIBLE_TEARS_MODEL_ID);
-		BlockPos pos = entity.getPos();
-
-		float level = 4 / 16F + entity.getRelativeLevel() * 11 / 16F;
-
-		matrices.push();
-		matrices.translate(0, level, 0);
-		mc.getBlockRenderManager()
-				.getModelRenderer()
-				.render(entity.getWorld(), model, entity.getCachedState(), pos, matrices, vertexConsumers.getBuffer(RenderLayer.getCutout()), false, entity.getWorld().getRandom(), 1, 0xFFFFFF);
-		matrices.pop();
+		float level = entity.getRelativeLevel();
+		if (level > 0) {
+			float displayLevel = 4F / 16F + level * 11 / 16F;
+			
+			MinecraftClient mc = MinecraftClient.getInstance();
+			BakedModel model = mc.getBakedModelManager().getModel(CrucibleEntityRenderer.CRUCIBLE_TEARS_MODEL_ID);
+			BlockPos pos = entity.getPos();
+			
+			matrices.push();
+			matrices.translate(0, displayLevel, 0);
+			mc.getBlockRenderManager()
+					.getModelRenderer()
+					.render(entity.getWorld(), model, entity.getCachedState(), pos, matrices, vertexConsumers.getBuffer(RenderLayer.getCutout()), false, entity.getWorld().getRandom(), 1, 0xFFFFFF);
+			matrices.pop();
+		}
 	}
 
 	public static void onInit() {
