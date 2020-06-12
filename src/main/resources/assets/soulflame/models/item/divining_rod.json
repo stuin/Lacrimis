@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "soulflame:item/divining_rod"
+    "layer0": "minecraft:item/stick"
   }
 }
