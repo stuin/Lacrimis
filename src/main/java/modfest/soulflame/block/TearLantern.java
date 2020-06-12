@@ -18,12 +18,15 @@ public class TearLantern extends LanternBlock implements Tickable {
     @Override
     public void tick() {
         int range = 6;
-        for (int x = -range; x < range; x++)
-                for (int z = -range; z < range; z++) {
-                    Block table = world.getBlockState(new BlockPos(x + this.pos.getX(), this.pos.getY() - 1, z + this.pos.getZ())).getBlock();
-                    if (table instanceof InfusionTableBlock){
-                        InfusionTableBlock tableEntity = new InfusionTableBlock(settings);
-                        tableEntity.insert(state, pos, world, 5, true);
+        System.out.println(pos);
+        for (int x = -range; x <= range; x++)
+            for (int y = -range; y <= range; y++)
+                for (int z = -range; z <= range; z++) {
+                    Block table = world.getBlockState(pos.add(x, y-1, z)).getBlock();
+                    if (table instanceof InfusionTableBlock) {
+                        InfusionTableBlock casted = (InfusionTableBlock) table;
+                        casted.insert(state, pos.add(x, y-1, z), world, 5, false);
+                        System.out.println("Added 5 to " + pos);
                         break;
                     }
                 }
