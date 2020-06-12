@@ -9,7 +9,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.nbt.CompoundTag;
 
-public class SoulTankEntity extends BlockEntity implements BlockEntityClientSerializable {
+public abstract class SoulTankEntity extends BlockEntity implements BlockEntityClientSerializable {
     private final SoulTank tank;
 
     public SoulTankEntity(BlockEntityType<?> type, int capacity) {
