@@ -1,8 +1,5 @@
 package modfest.soulflame.block;
 
-import modfest.soulflame.block.entity.CrucibleEntity;
-import modfest.soulflame.init.ModItems;
-import modfest.soulflame.item.BottleOfTearsItem;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -19,12 +16,17 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class CrucibleBlock extends LiquidTankBlock {
+import modfest.soulflame.block.entity.CrucibleEntity;
+import modfest.soulflame.init.ModItems;
+import modfest.soulflame.item.BottleOfTearsItem;
+
+public class CrucibleBlock extends LiquidTankBlock implements BlockConduitConnect {
     private static final VoxelShape RAY_TRACE_SHAPE = createCuboidShape(2.0D, 4.0D, 2.0D, 14.0D, 16.0D, 14.0D);
     protected static final VoxelShape OUTLINE_SHAPE = VoxelShapes.combineAndSimplify(VoxelShapes.fullCube(), VoxelShapes.union(createCuboidShape(0.0D, 0.0D, 4.0D, 16.0D, 3.0D, 12.0D), createCuboidShape(4.0D, 0.0D, 0.0D, 12.0D, 3.0D, 16.0D), createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 3.0D, 14.0D), RAY_TRACE_SHAPE), BooleanBiFunction.ONLY_FIRST);
 
@@ -99,4 +101,30 @@ public class CrucibleBlock extends LiquidTankBlock {
         }
 
     }
+
+    @Override
+    public boolean canConnectConduitTo(BlockState state, BlockPos pos, BlockView world, Direction side) {
+        return side.getAxis() != Direction.Axis.Y;
+    }
+
+    @Override
+    public int extract(BlockState state, BlockPos pos, World world, int amount, boolean simulate) {
+        throw new IllegalStateException("not implemented"); // TODO
+    }
+
+    @Override
+    public int insert(BlockState state, BlockPos pos, World world, int amount, boolean simulate) {
+        throw new IllegalStateException("not implemented"); // TODO
+    }
+
+    @Override
+    public int getMaxTearsAmount(BlockState state, BlockPos pos, BlockView world) {
+        throw new IllegalStateException("not implemented"); // TODO
+    }
+
+    @Override
+    public int getCurrentTearsAmount(BlockState state, BlockPos pos, BlockView world) {
+        throw new IllegalStateException("not implemented"); // TODO
+    }
+
 }

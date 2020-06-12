@@ -41,12 +41,12 @@ public class ConduitBlock extends Block {
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
         return state
-                .with(DOWN, this.connectsTo(world, pos.down()))
-                .with(UP, this.connectsTo(world, pos.up()))
-                .with(NORTH, this.connectsTo(world, pos.north()))
-                .with(SOUTH, this.connectsTo(world, pos.south()))
-                .with(EAST, this.connectsTo(world, pos.east()))
-                .with(WEST, this.connectsTo(world, pos.west()));
+                .with(DOWN, this.connectsTo(world, pos.down(), Direction.UP))
+                .with(UP, this.connectsTo(world, pos.up(), Direction.DOWN))
+                .with(NORTH, this.connectsTo(world, pos.north(), Direction.SOUTH))
+                .with(SOUTH, this.connectsTo(world, pos.south(), Direction.NORTH))
+                .with(EAST, this.connectsTo(world, pos.east(), Direction.WEST))
+                .with(WEST, this.connectsTo(world, pos.west(), Direction.EAST));
     }
 
     @Override
@@ -60,8 +60,10 @@ public class ConduitBlock extends Block {
         return SHAPES[idx];
     }
 
-    private boolean connectsTo(WorldAccess world, BlockPos pos) {
-        return world.getBlockState(pos).getBlock() == this;
+    private boolean connectsTo(WorldAccess world, BlockPos pos, Direction side) {
+        BlockState state = world.getBlockState(pos);
+        Block block = state.getBlock();
+        return block == this || (block instanceof BlockConduitConnect && ((BlockConduitConnect) block).canConnectConduitTo(state, pos, world, side));
     }
 
     private static VoxelShape[] generateShapes() {
