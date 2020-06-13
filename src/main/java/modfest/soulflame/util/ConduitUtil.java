@@ -1,5 +1,7 @@
 package modfest.soulflame.util;
 
+import modfest.soulflame.block.ConduitBlock;
+import modfest.soulflame.block.GatedConduitBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -33,11 +35,12 @@ public class ConduitUtil {
                     outputs.add(direction);
                 }
             }
-        } else if (source.getBlock() == ModBlocks.conduit) {
+        } else if (source.getBlock() == ModBlocks.conduit)
             outputs = EnumSet.allOf(Direction.class);
-        } else {
+        else if (source.getBlock() == ModBlocks.gatedConduit && source.get(GatedConduitBlock.POWERED))
+            outputs = EnumSet.allOf(Direction.class);
+        else
             outputs = EnumSet.noneOf(Direction.class);
-        }
 
         stack.push(pos);
         scanned.add(pos);
@@ -50,6 +53,8 @@ public class ConduitUtil {
 
                 BlockState nextState = world.getBlockState(next);
                 if (nextState.getBlock() == ModBlocks.conduit)
+                    stack.push(next);
+                else if (nextState.getBlock() == ModBlocks.gatedConduit && nextState.get(GatedConduitBlock.POWERED))
                     stack.push(next);
                 else if (nextState.getBlock() instanceof BlockConduitConnect) {
                     BlockConduitConnect b = (BlockConduitConnect) nextState.getBlock();

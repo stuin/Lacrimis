@@ -5,7 +5,6 @@ import modfest.soulflame.init.ModBlocks;
 import modfest.soulflame.util.NeighborList;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -34,7 +33,7 @@ public class RuneBlock extends Block implements Activatable {
         if(tier == 1) {
             for(int y = 0; y < 2; y++) {
                 pos = pos.up();
-                if(world.getBlockState(pos).getBlock() != Blocks.IRON_BARS)
+                if(!world.getBlockState(pos).getBlock().isIn(ModBlocks.conductive))
                     return false;
             }
         }

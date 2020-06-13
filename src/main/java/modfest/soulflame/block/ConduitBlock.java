@@ -49,7 +49,7 @@ public class ConduitBlock extends Block {
         return this.connectToBlocks(this.getDefaultState(), ctx.getWorld(), ctx.getBlockPos());
     }
 
-    private BlockState connectToBlocks(BlockState state, WorldAccess world, BlockPos pos) {
+    protected BlockState connectToBlocks(BlockState state, WorldAccess world, BlockPos pos) {
         return state
                 .with(DOWN, this.connectsTo(world, pos.down(), Direction.UP))
                 .with(UP, this.connectsTo(world, pos.up(), Direction.DOWN))
@@ -73,7 +73,7 @@ public class ConduitBlock extends Block {
     private boolean connectsTo(WorldAccess world, BlockPos pos, Direction side) {
         BlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
-        return block == this || (block instanceof BlockConduitConnect && ((BlockConduitConnect) block).canConnectConduitTo(pos, world, side));
+        return block instanceof ConduitBlock || (block instanceof BlockConduitConnect && ((BlockConduitConnect) block).canConnectConduitTo(pos, world, side));
     }
 
     private static VoxelShape[] generateShapes() {

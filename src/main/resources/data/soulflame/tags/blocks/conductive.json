@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "minecraft:iron_bars",
-    "minecraft:chain"
+    "minecraft:chain",
+    "minecraft:nether_brick_fence",
+    "minecraft:end_rod"
   ]
 }

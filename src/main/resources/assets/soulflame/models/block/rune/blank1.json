@@ -1,7 +1,7 @@
 {
   "parent": "soulflame:block/edge_block",
   "textures": {
-    "top": "soulflame:block/rune_pipe_side",
-    "side": "soulflame:block/rune_corner_side"
+    "top": "soulflame:block/rune_pipe_side1",
+    "side": "soulflame:block/rune_edge_side"
   }
 }

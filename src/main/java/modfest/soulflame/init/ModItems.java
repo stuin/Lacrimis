@@ -17,6 +17,7 @@ public class ModItems {
     public static BlockItem infusionTable;
     public static BlockItem crucible;
     public static BlockItem conduit;
+    public static BlockItem gatedConduit;
     public static BlockItem tearLantern;
     public static BlockItem creativeTearsBlock;
 
@@ -38,6 +39,7 @@ public class ModItems {
         infusionTable = register("infusion_table", ModBlocks.infusionTable);
         crucible = register("crucible", ModBlocks.crucible);
         conduit = register("conduit", ModBlocks.conduit);
+        gatedConduit = register("gated_conduit", ModBlocks.gatedConduit);
         tearLantern = register("tear_lantern", ModBlocks.tearLantern);
         creativeTearsBlock = register("creative_tears_block", ModBlocks.creativeTearsBlock);
         
