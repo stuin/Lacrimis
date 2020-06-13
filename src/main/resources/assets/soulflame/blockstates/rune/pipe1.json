@@ -1,7 +1,7 @@
 {
   "variants": {
     "level=8": {
-      "model": "soulflame:block/rune/blank1"
+      "model": "soulflame:block/rune/pipe_blank1"
     },
     "level=0": {
       "model": "soulflame:block/rune/pipe_corner1",
