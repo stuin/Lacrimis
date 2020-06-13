@@ -1,4 +1,4 @@
-package modfest.soulflame.block.runic;
+package modfest.soulflame.block.rune;
 
 import modfest.soulflame.block.BlockConduitConnect;
 import net.minecraft.block.Block;
@@ -8,11 +8,9 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-import java.util.Optional;
-
-public class PipeRuneBlock extends RuneBlock implements BlockConduitConnect {
-    public PipeRuneBlock(Settings settings) {
-        super(settings, 3);
+public class PipeConnectorBlock extends RuneBlock implements BlockConduitConnect {
+    public PipeConnectorBlock(int tier) {
+        super( tier);
     }
 
     @Override
@@ -22,8 +20,8 @@ public class PipeRuneBlock extends RuneBlock implements BlockConduitConnect {
             //Update pipe location
             int i = (state.get(CENTER) + 4) % 8;
             BlockState state2 = world.getBlockState(center);
-            if(world instanceof World && state2.get(RuneCenterBlock.PIPE) != i)
-                ((World)world).setBlockState(center, state2.with(RuneCenterBlock.PIPE, i));
+            if(world instanceof World && state2.get(CenterRuneBlock.PIPE) != i)
+                ((World)world).setBlockState(center, state2.with(CenterRuneBlock.PIPE, i));
         }
         return center;
     }

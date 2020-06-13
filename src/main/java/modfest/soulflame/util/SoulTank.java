@@ -1,6 +1,7 @@
 package modfest.soulflame.util;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 public class SoulTank {
 	private final ArrayList<Runnable> listeners = new ArrayList<>();
@@ -78,5 +79,9 @@ public class SoulTank {
 			return tank.canExtract && tank.getTears() > 0;
 		}
 		return false;
+	}
+
+	public static Predicate<Object> source(int min_power) {
+		return (Object value) -> SoulTank.SOURCE(value) && ((SoulTank) value).getTears() >= min_power;
 	}
 }

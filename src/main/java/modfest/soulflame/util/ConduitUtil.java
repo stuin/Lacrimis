@@ -74,6 +74,17 @@ public class ConduitUtil {
         return null;
     }
 
+    public static BlockPos locateSink(BlockView world, BlockPos pos, Object value) {
+        List<Entry> list = listScanConduits(world, pos);
+        if(list != null && list.size() > 0) {
+            for(Entry e : list) {
+                if(e.insert(world, value))
+                    return e.pos;
+            }
+        }
+        return null;
+    }
+
     public static final class Entry {
         public final BlockConduitConnect b;
         public final BlockPos pos;

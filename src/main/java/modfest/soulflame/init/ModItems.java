@@ -25,6 +25,8 @@ public class ModItems {
     public static BlockItem rune2;
     public static BlockItem pipeRune;
     public static BlockItem healRune;
+    public static BlockItem extractionRune;
+    public static BlockItem destinationRune;
 
     //Main items
     public static BottleOfTearsItem bottleOfTears;
@@ -36,10 +38,14 @@ public class ModItems {
         conduit = register("conduit", ModBlocks.conduit);
         tearLantern = register("tear_lantern", ModBlocks.tearLantern);
         creativeTearsBlock = register("creative_tears_block", ModBlocks.creativeTearsBlock);
+        
         rune1 = register("rune/tier1", ModBlocks.rune1);
         rune2 = register("rune/tier2", ModBlocks.rune2);
         pipeRune = register("rune/pipe1", ModBlocks.pipeRune);
         healRune = register("rune/heal", ModBlocks.healRune);
+        extractionRune = register("rune/extraction", ModBlocks.extractionRune);
+        destinationRune = register("rune/destination", ModBlocks.destinationRune);
+        
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
         diviningRod = register("divining_rod", new DiviningRodItem(SETTINGS));
     }

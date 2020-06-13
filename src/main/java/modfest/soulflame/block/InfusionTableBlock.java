@@ -2,6 +2,7 @@ package modfest.soulflame.block;
 
 import modfest.soulflame.block.entity.InfusionTableEntity;
 import modfest.soulflame.init.ModInfusion;
+import modfest.soulflame.init.ModItems;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockRenderType;
@@ -29,7 +30,7 @@ public class InfusionTableBlock extends SoulTankBlock {
 
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		ActionResult parentResult = super.onUse(state, world, pos, player, hand, hit);
-		if(parentResult == ActionResult.PASS) {
+		if(parentResult == ActionResult.PASS && player.getStackInHand(hand).getItem() != ModItems.diviningRod) {
 			if(world.isClient) {
 				return ActionResult.SUCCESS;
 			} else {
