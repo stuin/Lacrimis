@@ -11,11 +11,13 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public class RuneBlock extends Block implements Activatable {
-    private static final BooleanProperty POWERED;
-    private static final IntProperty CENTER;
+    public static final BooleanProperty POWERED;
+    public static final IntProperty CENTER;
+
     private final int tier;
 
     public RuneBlock(Settings settings, int tier) {
@@ -35,34 +37,38 @@ public class RuneBlock extends Block implements Activatable {
         return true;
     }
     
-    private boolean shouldActivate(World world, BlockPos pos, BlockPos fromPos) {
+    protected boolean shouldActivate(World world, BlockPos pos, BlockPos fromPos) {
+        if(world.getBlockState(fromPos).getBlock() instanceof RuneCenterBlock)
+            return fromPos.north() == pos;
         return world.isReceivingRedstonePower(pos) && !(world.getBlockState(fromPos).getBlock() instanceof RuneBlock);
     }
 
-    private BlockPos getCenter(World world, BlockPos pos) {
+    protected BlockPos getCenter(BlockView world, BlockPos pos) {
         return getCenter(world, pos, world.getBlockState(pos));
     }
 
-    private BlockPos getCenter(World world, BlockPos pos, BlockState state) {
+    protected BlockPos getCenter(BlockView world, BlockPos pos, BlockState state) {
+        //Check for valid rotation
         int i = state.get(CENTER);
         BlockPos next;
         if(i != 8) {
             next = pos.add(NeighborList.platform[i]);
-            if(world.getBlockState(next).getBlock() instanceof RunicCenterBlock)
+            if(world.getBlockState(next).getBlock() instanceof RuneCenterBlock)
                 return next;
         }
 
-        
+        //Find correct rotation
         for(i = 0; i < 8; i++) {
             next = pos.add(NeighborList.platform[i]);
             Block block = world.getBlockState(next).getBlock();
-            if(block instanceof RunicCenterBlock) {
-                world.setBlockState(pos, state.with(CENTER, i));
+            if(world instanceof World && block instanceof RuneCenterBlock) {
+                ((World)world).setBlockState(pos, state.with(CENTER, i));
                 return next;
             }
         }
         
-        world.setBlockState(pos, state.with(CENTER, i));
+        if(world instanceof World)
+            ((World)world).setBlockState(pos, state.with(CENTER, 8));
         return null;
     }
 
@@ -73,10 +79,12 @@ public class RuneBlock extends Block implements Activatable {
 
     @Override
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
-        if(!state.get(POWERED) && shouldActivate(world, pos, fromPos)) {
+        boolean a = state.get(POWERED);
+        boolean b = shouldActivate(world, pos, fromPos);
+        if(!a && b) {
             world.setBlockState(pos, state.with(POWERED, true));
             activate(world, pos);
-        } else if(state.get(POWERED) && !shouldActivate(world, pos, fromPos))
+        } else if(a && !b)
             world.setBlockState(pos, state.with(POWERED, false));
     }
 
@@ -84,7 +92,7 @@ public class RuneBlock extends Block implements Activatable {
     public boolean activate(World world, BlockPos pos) {
         BlockPos center = getCenter(world, pos);
         if(center != null)
-            return ((RunicCenterBlock) world.getBlockState(center).getBlock()).activate(world, center);
+            return ((RuneCenterBlock) world.getBlockState(center).getBlock()).activate(world, center);
         return false;
     }
 

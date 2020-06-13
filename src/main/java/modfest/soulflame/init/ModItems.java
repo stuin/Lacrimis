@@ -20,6 +20,7 @@ public class ModItems {
     public static BlockItem creativeTearsBlock;
     public static BlockItem rune1;
     public static BlockItem rune2;
+    public static BlockItem pipeRune;
     public static BlockItem healRune;
     public static BottleOfTearsItem bottleOfTears;
     public static DiviningRodItem diviningRod;
@@ -32,6 +33,7 @@ public class ModItems {
         creativeTearsBlock = register("creative_tears_block", ModBlocks.creativeTearsBlock);
         rune1 = register("rune1", ModBlocks.rune1);
         rune2 = register("rune2", ModBlocks.rune2);
+        pipeRune = register("pipe_rune", ModBlocks.pipeRune);
         healRune = register("heal_rune", ModBlocks.healRune);
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
         diviningRod = register("divining_rod", new DiviningRodItem(SETTINGS));
