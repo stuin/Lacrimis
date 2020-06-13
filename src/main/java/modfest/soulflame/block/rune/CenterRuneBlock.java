@@ -52,8 +52,10 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
     }
 
     public boolean activate(World world, BlockPos pos, PlayerEntity player) {
-        if(!testCage(world, pos))
+        if(!testCage(world, pos)) {
+            error(player, "platform");
             return false;
+        }
         //For all entities on platform
         for(Entity entity : world.getEntities(null, box.offset(pos))) {
             if(entity instanceof LivingEntity)

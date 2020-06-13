@@ -6,10 +6,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class SoulTeleportBlock extends CenterRuneBlock {
+public class SoulTeleportBlock extends SoulExtractionBlock {
+    private final boolean canSend;
+
+    public SoulTeleportBlock(boolean canSend) {
+        this.canSend = canSend;
+    }
 
     @Override
     public boolean activate(World world, BlockPos pos, LivingEntity entity, PlayerEntity player) {
+        if(canSend)
+            return super.activate(world, pos, entity, player);
         return false;
     }
 

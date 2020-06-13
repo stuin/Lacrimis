@@ -11,6 +11,7 @@
   "block.soulflame.rune.heal": "Healing Rune",
   "block.soulflame.rune.extraction": "Soul Extraction Rune",
   "block.soulflame.rune.destination": "Soul Destination Rune",
+  "block.soulflame.rune.transport": "Two Way Transport Rune",
   
   "item.soulflame.bottle_of_tears": "Bottle of Tears",
   "item.soulflame.divining_rod": "Divining Rod",
@@ -19,5 +20,6 @@
   "itemGroup.soulflame.group": "Soulflame",
 
   "soulflame.error.tears": "Not enough Soul Tears",
+  "soulflame.error.platform": "Incomplete Soul Cage",
   "soulflame.error.destination": "No destination found"
 }

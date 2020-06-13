@@ -28,6 +28,7 @@ public class ModBlocks {
     public static HealBlock healRune;
     public static SoulExtractionBlock extractionRune;
     public static SoulTeleportBlock destinationRune;
+    public static SoulTeleportBlock transportRune;
 
     public static void register() {
         infusionTable = register("infusion_table", new InfusionTableBlock(FabricBlockSettings.copy(Blocks.CRAFTING_TABLE).nonOpaque()));
@@ -41,7 +42,8 @@ public class ModBlocks {
         pipeRune = register("rune/pipe1", new PipeConnectorBlock(2));
         healRune = register("rune/heal", new HealBlock());
         extractionRune = register("rune/extraction", new SoulExtractionBlock());
-        destinationRune = register("rune/destination", new SoulTeleportBlock());
+        destinationRune = register("rune/destination", new SoulTeleportBlock(false));
+        transportRune = register("rune/transport", new SoulTeleportBlock(true));
     }
 
     private static <T extends Block> T register(String name, T block) {
