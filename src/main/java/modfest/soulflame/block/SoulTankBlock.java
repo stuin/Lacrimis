@@ -1,5 +1,6 @@
 package modfest.soulflame.block;
 
+import modfest.soulflame.block.entity.SoulUserEntity;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -23,10 +24,6 @@ import modfest.soulflame.block.entity.SoulTankEntity;
 import modfest.soulflame.init.ModItems;
 import modfest.soulflame.item.BottleOfTearsItem;
 import modfest.soulflame.util.SoulTank;
-
-import java.util.Optional;
-
-import static java.lang.Math.min;
 
 public abstract class SoulTankBlock extends BlockWithEntity implements BlockConduitConnect {
     protected SoulTankBlock(AbstractBlock.Settings settings) {
@@ -114,17 +111,14 @@ public abstract class SoulTankBlock extends BlockWithEntity implements BlockCond
     }
 
     @Override
-    public SoulTank extract(BlockPos pos, World world, boolean simulate) {
-        BlockEntity entity = world.getBlockEntity(pos);
-        if (entity instanceof SoulTankEntity) {
-            ((SoulTankEntity) entity).mark();
-            return ((SoulTankEntity) entity).getTank();
-        }
-        return null;
+    public SoulTank extract(BlockPos pos, BlockView world) {
+        if(getTank(world, pos).getTears() == 0)
+            return null;
+        return getTank(world, pos);
     }
 
     @Override
-    public boolean insert(BlockPos pos, World world, Object value, boolean simulate) {
+    public boolean insert(BlockPos pos, BlockView world, Object value) {
         BlockEntity entity = world.getBlockEntity(pos);
         if (entity instanceof SoulTankEntity && value instanceof SoulTank)
             return ((SoulTankEntity) entity).transfer((SoulTank) value);

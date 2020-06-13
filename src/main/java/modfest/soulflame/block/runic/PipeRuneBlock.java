@@ -30,29 +30,29 @@ public class PipeRuneBlock extends RuneBlock implements BlockConduitConnect {
 
     @Override
     public boolean canConnectConduitTo(BlockPos pos, BlockView world, Direction side) {
-        return pos.offset(side) != getCenter(world, pos);
+        return pos.offset(side) != getCenter(world, pos) && side != Direction.UP;
     }
 
     @Override
-    public Object extract(BlockPos pos, World world, boolean simulate) {
+    public Object extract(BlockPos pos, BlockView world) {
         //Extract from center
         BlockPos center = super.getCenter(world, pos);
         if(center != null) {
             Block block = world.getBlockState(center).getBlock();
             if(block instanceof BlockConduitConnect)
-                return ((BlockConduitConnect) block).extract(center, world, simulate);
+                return ((BlockConduitConnect) block).extract(center, world);
         }
         return null;
     }
 
     @Override
-    public boolean insert(BlockPos pos, World world, Object value, boolean simulate) {
+    public boolean insert(BlockPos pos, BlockView world, Object value) {
         //Insert to center
         BlockPos center = super.getCenter(world, pos);
         if(center != null) {
             Block block = world.getBlockState(center).getBlock();
             if(block instanceof BlockConduitConnect)
-                return ((BlockConduitConnect) block).insert(center, world, value, simulate);
+                return ((BlockConduitConnect) block).insert(center, world, value);
         }
         return false;
     }

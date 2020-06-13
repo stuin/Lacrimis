@@ -4,29 +4,24 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.Predicate;
 
 import modfest.soulflame.block.BlockConduitConnect;
 import modfest.soulflame.init.ModBlocks;
 
 public class ConduitUtil {
 
-    public static Entry scanConduits(BlockView world, BlockPos pos) {
+    public static List<Entry> listScanConduits(BlockView world, BlockPos pos) {
+        if(world == null) return null;
+
         Set<BlockPos> scanned = new HashSet<>();
         Deque<BlockPos> stack = new ArrayDeque<>();
 
         List<Direction> all = Arrays.asList(Direction.values());
+        List<Entry> out = new ArrayList<>();
 
         EnumSet<Direction> outputs;
         BlockState source = world.getBlockState(pos);
@@ -54,25 +49,28 @@ public class ConduitUtil {
                 scanned.add(cur);
 
                 BlockState nextState = world.getBlockState(next);
-                if (nextState.getBlock() == ModBlocks.conduit) {
+                if (nextState.getBlock() == ModBlocks.conduit)
                     stack.push(next);
-                } else if (nextState.getBlock() instanceof BlockConduitConnect) {
+                else if (nextState.getBlock() instanceof BlockConduitConnect) {
                     BlockConduitConnect b = (BlockConduitConnect) nextState.getBlock();
-                    if (b.canConnectConduitTo(next, world, d.getOpposite())) {
-                        return new Entry(b, next, nextState);
-                    }
+                    if (b.canConnectConduitTo(next, world, d.getOpposite()))
+                        out.add(new Entry(b, next, nextState));
                 }
             }
         }
 
-        return null;
+        return out;
     }
 
-    public static Object locateSource(World world, BlockPos pos) {
-        if(world == null || world.isClient()) return null;
-        ConduitUtil.Entry entry = ConduitUtil.scanConduits(world, pos);
-        if(entry != null)
-            return entry.extract(world, false);
+    public static Object locateSource(BlockView world, BlockPos pos, Predicate<Object> filter) {
+        List<Entry> list = listScanConduits(world, pos);
+        if(list != null && list.size() > 0) {
+            for(Entry e : list) {
+                Object value = e.extract(world);
+                if(value != null && filter.test(value))
+                    return value;
+            }
+        }
         return null;
     }
 
@@ -87,12 +85,16 @@ public class ConduitUtil {
             this.state = state;
         }
 
-        public Object extract(World world, boolean simulate) {
-            Object r = this.b.extract(this.pos, world, simulate);
-            if (r != null && simulate) {
-                this.updateState(world);
+        public Object extract(BlockView world) {
+            Object r = this.b.extract(this.pos, world);
+            if (r != null && world instanceof WorldView) {
+                this.updateState((WorldView) world);
             }
             return r;
+        }
+
+        public boolean insert(BlockView world, Object value) {
+            return this.b.insert(this.pos, world, value);
         }
 
         public void updateState(WorldView world) {

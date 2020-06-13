@@ -4,10 +4,6 @@ import modfest.soulflame.util.ConduitUtil;
 import modfest.soulflame.util.SoulTank;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.Tickable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-
-import java.util.Optional;
 
 public abstract class SoulUserEntity extends SoulTankEntity implements Tickable {
     private static final int CHECK_INTERVAL = 10;
@@ -16,15 +12,18 @@ public abstract class SoulUserEntity extends SoulTankEntity implements Tickable 
 
     public SoulUserEntity(BlockEntityType<?> type, int capacity) {
         super(type, capacity);
+        getTank().disableExtract();
     }
 
     public void tick() {
-        if(world == null || world.isClient()) return;
-        if(source != null && check != CHECK_INTERVAL) {
+        if(world == null || world.isClient() || getRelativeLevel() == 1) return;
+
+        //Locate source tank
+        if(source != null && check < CHECK_INTERVAL) {
             transfer(source);
             check++;
         } else {
-            Object tank = ConduitUtil.locateSource(world, pos);
+            Object tank = ConduitUtil.locateSource(world, pos, SoulTank::SOURCE);
             if(tank instanceof SoulTank) {
                 source = (SoulTank) tank;
                 transfer(source);

@@ -20,7 +20,7 @@ public class CrucibleEntity extends SoulTankEntity implements Tickable {
 				BlockPos obsidianPos = this.pos.up(dy);
 				BlockState obsidianState = this.world.getBlockState(obsidianPos);
 				if (obsidianState.getBlock() == Blocks.CRYING_OBSIDIAN) {
-					getTank().addTears(1);
+					addTears(1);
 					break;
 				}
 			}

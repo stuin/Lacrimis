@@ -72,5 +72,6 @@ public class InfusionTableEntity extends SoulUserEntity implements Inventory {
 	@Override
 	public void clear() {
 		inventory.clear();
+		getTank().setTears(0);
 	}
 }

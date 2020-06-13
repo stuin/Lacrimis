@@ -16,6 +16,7 @@ public abstract class SoulTankEntity extends BlockEntity implements BlockEntityC
     public SoulTankEntity(BlockEntityType<?> type, int capacity) {
         super(type);
         tank = new SoulTank(capacity);
+        tank.addListener(this::mark);
     }
 
     @Environment(EnvType.CLIENT)
@@ -32,28 +33,25 @@ public abstract class SoulTankEntity extends BlockEntity implements BlockEntityC
     }
 
     public boolean transfer(SoulTank value) {
-        if(this.world != null && !this.world.isClient)
-            this.mark();
         return tank.transfer(value, MAX_TRANSFER);
     }
 
     public int addTears(int value) {
         value = tank.addTears(value);
-        if (this.world != null && !this.world.isClient)
-            this.mark();
         return value;
     }
 
     public int removeTears(int value) {
         value = tank.removeTears(value);
-        if (this.world != null && !this.world.isClient)
-            this.mark();
         return value;
     }
     
     public void mark() {
-        this.markDirty();
-        this.sync();
+        if (this.world != null) {
+            this.markDirty();
+            if(!this.world.isClient)
+                this.sync();
+        }
     }
 
     @Override

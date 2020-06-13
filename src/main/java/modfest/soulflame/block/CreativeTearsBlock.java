@@ -16,7 +16,7 @@ public class CreativeTearsBlock extends Block implements BlockConduitConnect {
     public CreativeTearsBlock(Settings settings) {
         super(settings);
         tank.setTears(Integer.MAX_VALUE);
-        tank.setListener(() -> {
+        tank.addListener(() -> {
             if(tank.getTears() < MAX)
                 tank.setTears(MAX);
         });
@@ -28,12 +28,12 @@ public class CreativeTearsBlock extends Block implements BlockConduitConnect {
     }
 
     @Override
-    public Optional<SoulTank> extract(BlockPos pos, World world, boolean simulate) {
-        return Optional.of(tank);
+    public Object extract(BlockPos pos, BlockView world) {
+        return tank;
     }
 
     @Override
-    public boolean insert(BlockPos pos, World world, Object value, boolean simulate) {
+    public boolean insert(BlockPos pos, BlockView world, Object value) {
         if(value instanceof SoulTank) {
             ((SoulTank) value).removeTears(10);
             return true;

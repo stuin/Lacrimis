@@ -47,6 +47,7 @@ public class InfusionTableBlock extends SoulTankBlock {
 			if (blockEntity instanceof Inventory) {
 				ItemScatterer.spawn(world, pos, (Inventory)blockEntity);
 				world.updateComparators(pos, this);
+				((Inventory) blockEntity).clear();
 			}
 		}
 	}

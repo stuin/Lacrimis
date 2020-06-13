@@ -15,7 +15,7 @@ public class InfusionInventory extends SimpleInventory {
 		super(9);
 		this.entity = entity;
 
-		entity.getTank().setListener(this::markDirty);
+		entity.getTank().addListener(this::markDirty);
 
 		this.properties = new PropertyDelegate() {
 			@Override
@@ -54,7 +54,7 @@ public class InfusionInventory extends SimpleInventory {
 	}
 
 	public void removeTears(int tears) {
-		entity.getTank().removeTears(tears);
+		entity.removeTears(tears);
 	}
 
 	public void readTags(ListTag tags) {
@@ -88,5 +88,4 @@ public class InfusionInventory extends SimpleInventory {
 
 		return listTag;
 	}
-
 }

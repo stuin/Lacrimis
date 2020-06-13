@@ -50,6 +50,8 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 		for (int x = 0; x < 9; ++x) {
 			this.addSlot(new Slot(player.inventory, x, 8 + x * 18, 142));
 		}
+
+		onContentChanged(input);
 	}
 
 	protected static void updateResult(int syncId, World world, PlayerEntity player, InfusionInventory inventory, CraftingResultInventory resultInventory) {

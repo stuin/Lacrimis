@@ -25,13 +25,18 @@ public class HealCenterBlock extends RuneCenterBlock implements BlockConduitConn
             return false;
 
         //Collect required tears
-        Object tank = ConduitUtil.locateSource(world, pos.add(NeighborList.platform[i]));
-        if(tank instanceof SoulTank && ((SoulTank) tank).getTears() > REQUIRED_TEARS) {
+        Object tank = ConduitUtil.locateSource(world, pos.add(NeighborList.platform[i]), HealCenterBlock::source);
+        if(tank instanceof SoulTank) {
             ((SoulTank) tank).removeTears(REQUIRED_TEARS);
             entity.heal(2);
-            SoulFlame.LOGGER.info("Used heal rune");
+            if(!world.isClient)
+                SoulFlame.LOGGER.info("Healing ritual activated");
         }
         return true;
+    }
+
+    private static boolean source(Object value) {
+        return SoulTank.SOURCE(value) && ((SoulTank) value).getTears() >= REQUIRED_TEARS;
     }
 
     @Override
@@ -40,14 +45,12 @@ public class HealCenterBlock extends RuneCenterBlock implements BlockConduitConn
     }
 
     @Override
-    public Object extract(BlockPos pos, World world, boolean simulate) {
+    public Object extract(BlockPos pos, BlockView world) {
         return null;
     }
 
     @Override
-    public boolean insert(BlockPos pos, World world, Object value, boolean simulate) {
-        if(value instanceof SoulTank)
-            return ((SoulTank) value).getTears() > REQUIRED_TEARS;
+    public boolean insert(BlockPos pos, BlockView world, Object value) {
         return false;
     }
 }
