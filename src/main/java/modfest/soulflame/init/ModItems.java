@@ -51,7 +51,7 @@ public class ModItems {
         extractionRune = register("rune/extraction", ModBlocks.extractionRune);
         destinationRune = register("rune/destination", ModBlocks.destinationRune);
         transportRune = register("rune/transport", ModBlocks.transportRune);
-        
+
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
         diviningRod = register("divining_rod", new DiviningRodItem(SETTINGS));
     }

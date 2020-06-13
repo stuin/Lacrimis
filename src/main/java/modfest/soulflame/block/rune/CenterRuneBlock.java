@@ -67,7 +67,7 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
     public abstract boolean activate(World world, BlockPos pos, LivingEntity entity, PlayerEntity player);
 
     public void error(PlayerEntity player, String code) {
-        if(player != null) {
+        if(player != null && !player.world.isClient) {
             MutableText text = new TranslatableText(SoulFlame.MODID + ".error." + code);
             Style style = text.getStyle();
             player.sendMessage(text.setStyle(style.withColor(Formatting.RED)), false);

@@ -26,17 +26,16 @@ public class DiviningRodItem extends Item {
         PlayerEntity player = context.getPlayer();
 
         //Read tears
-        if(block instanceof SoulTankBlock && world.isClient &&
-                player != null && !player.isSneaking()) {
-            int level = ((SoulTankBlock)block).getTank(world, pos).getTears();
-            Text text = new LiteralText(level + " Tears");
-            context.getPlayer().sendMessage(text, false);
+        if(block instanceof SoulTankBlock && player != null && !player.isSneaking()) {
+            if(!world.isClient) {
+                int level = ((SoulTankBlock) block).getTank(world, pos).getTears();
+                Text text = new LiteralText(level + " Tears");
+                player.sendMessage(text, false);
+            }
             return ActionResult.SUCCESS;
         }
 
         //Activate block
-        if(!world.isClient)
-            player = null;
         if(block instanceof Activatable && ((Activatable) block).activate(world, pos, player))
             return ActionResult.SUCCESS;
         return super.useOnBlock(context);
