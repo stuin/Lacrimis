@@ -4,6 +4,7 @@ import modfest.soulflame.block.Activatable;
 import modfest.soulflame.util.NeighborList;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
@@ -27,13 +28,14 @@ public class RuneBlock extends Block implements Activatable {
     }
 
     public boolean testCage(World world, BlockPos pos) {
-        /*if(tier == 1) {
+        getCenter(world, pos);
+        if(tier == 1) {
             for(int y = 0; y < 2; y++) {
                 pos = pos.up();
                 if(world.getBlockState(pos).getBlock() != Blocks.IRON_BARS)
                     return false;
             }
-        }*/
+        }
         return true;
     }
     

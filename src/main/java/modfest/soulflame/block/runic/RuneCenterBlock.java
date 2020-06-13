@@ -27,16 +27,13 @@ public abstract class RuneCenterBlock extends Block implements Activatable {
         boolean pipe = false;
         for(BlockPos next : NeighborList.platform) {
             Block block = world.getBlockState(pos.add(next)).getBlock();
-            if(!(block instanceof RuneBlock && ((RuneBlock) block).testCage(world, pos)))
+            if(!(block instanceof RuneBlock && ((RuneBlock) block).testCage(world, pos.add(next))))
                 return false;
 
             //Only one pipe allowed
             if(block instanceof PipeRuneBlock) {
-                if(pipe) {
-                    world.setBlockState(next,
-                            world.getBlockState(next).with(RuneBlock.CENTER, 8));
+                if(pipe)
                     return false;
-                }
                 pipe = true;
             }
         }

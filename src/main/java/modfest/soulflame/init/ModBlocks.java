@@ -7,6 +7,7 @@ import modfest.soulflame.block.runic.PipeRuneBlock;
 import modfest.soulflame.block.runic.RuneBlock;
 import net.minecraft.block.*;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
