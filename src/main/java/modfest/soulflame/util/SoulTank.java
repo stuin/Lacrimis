@@ -2,7 +2,6 @@ package modfest.soulflame.util;
 
 
 public class SoulTank {
-	public static final int TRANSFER = 10;
 	private final int capacity;
 	private int tears = 0;
 	private Runnable listener = null;
@@ -28,7 +27,15 @@ public class SoulTank {
 		if(listener != null)
 			listener.run();
 	}
-	
+
+	public boolean transfer(SoulTank value, int amount) {
+		int in = value.removeTears(amount);
+		int out = addTears(in);
+		if(out < in)
+			value.addTears(in - out);
+		return out > 0;
+	}
+
 	public int removeTears(int goal) {
 		if(tears >= goal) {
 			tears -= goal;

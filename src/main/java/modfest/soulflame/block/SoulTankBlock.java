@@ -28,7 +28,7 @@ import java.util.Optional;
 
 import static java.lang.Math.min;
 
-public abstract class SoulTankBlock extends BlockWithEntity implements BlockConduitConnect<SoulTank> {
+public abstract class SoulTankBlock extends BlockWithEntity implements BlockConduitConnect {
     protected SoulTankBlock(AbstractBlock.Settings settings) {
         super(settings);
     }
@@ -114,20 +114,20 @@ public abstract class SoulTankBlock extends BlockWithEntity implements BlockCond
     }
 
     @Override
-    public Optional<SoulTank> extract(BlockPos pos, World world, boolean simulate) {
+    public SoulTank extract(BlockPos pos, World world, boolean simulate) {
         BlockEntity entity = world.getBlockEntity(pos);
         if (entity instanceof SoulTankEntity) {
             ((SoulTankEntity) entity).mark();
-            return Optional.of(((SoulTankEntity) entity).getTank());
+            return ((SoulTankEntity) entity).getTank();
         }
-        return Optional.empty();
+        return null;
     }
 
     @Override
-    public boolean insert(BlockPos pos, World world, SoulTank value, boolean simulate) {
+    public boolean insert(BlockPos pos, World world, Object value, boolean simulate) {
         BlockEntity entity = world.getBlockEntity(pos);
-        if (entity instanceof SoulTankEntity)
-            return ((SoulTankEntity) entity).transfer(value);
+        if (entity instanceof SoulTankEntity && value instanceof SoulTank)
+            return ((SoulTankEntity) entity).transfer((SoulTank) value);
         return false;
     }
 }

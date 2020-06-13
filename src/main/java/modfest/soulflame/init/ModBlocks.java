@@ -3,6 +3,7 @@ package modfest.soulflame.init;
 import modfest.soulflame.block.*;
 import modfest.soulflame.block.ConduitBlock;
 import modfest.soulflame.block.runic.HealCenterBlock;
+import modfest.soulflame.block.runic.PipeRuneBlock;
 import modfest.soulflame.block.runic.RuneBlock;
 import net.minecraft.block.*;
 import net.minecraft.util.Identifier;
@@ -22,6 +23,7 @@ public class ModBlocks {
     //Rune cage blocks
     public static RuneBlock rune1;
     public static RuneBlock rune2;
+    public static PipeRuneBlock pipeRune;
     public static HealCenterBlock healRune;
 
     public static void register() {
@@ -32,6 +34,7 @@ public class ModBlocks {
         creativeTearsBlock = register("creative_tears_block", new CreativeTearsBlock(FabricBlockSettings.copy(Blocks.STONE)));
         rune1 = register("rune_tier1", new RuneBlock(FabricBlockSettings.copy(Blocks.STONE).nonOpaque(), 1));
         rune2 = register("rune_tier2", new RuneBlock(FabricBlockSettings.copy(Blocks.STONE).nonOpaque(), 2));
+        pipeRune = register("pipe_rune", new PipeRuneBlock(FabricBlockSettings.copy(Blocks.STONE).nonOpaque()));
         healRune = register("heal_rune", new HealCenterBlock(FabricBlockSettings.copy(Blocks.STONE).nonOpaque()));
 
     }

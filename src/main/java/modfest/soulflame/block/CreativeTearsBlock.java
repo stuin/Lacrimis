@@ -9,8 +9,8 @@ import net.minecraft.world.World;
 
 import java.util.Optional;
 
-public class CreativeTearsBlock extends Block implements BlockConduitConnect<SoulTank> {
-    private static int MAX = SoulTank.TRANSFER * 100;
+public class CreativeTearsBlock extends Block implements BlockConduitConnect {
+    private static final int MAX = 1000;
     private static final SoulTank tank = new SoulTank(MAX);
 
     public CreativeTearsBlock(Settings settings) {
@@ -33,8 +33,11 @@ public class CreativeTearsBlock extends Block implements BlockConduitConnect<Sou
     }
 
     @Override
-    public boolean insert(BlockPos pos, World world, SoulTank value, boolean simulate) {
-        value.removeTears(SoulTank.TRANSFER);
-        return true;
+    public boolean insert(BlockPos pos, World world, Object value, boolean simulate) {
+        if(value instanceof SoulTank) {
+            ((SoulTank) value).removeTears(10);
+            return true;
+        }
+        return false;
     }
 }
