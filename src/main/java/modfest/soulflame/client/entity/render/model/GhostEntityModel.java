@@ -7,7 +7,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 import modfest.soulflame.entity.GhostEntity;
 
@@ -25,43 +24,45 @@ public class GhostEntityModel extends CompositeEntityModel<GhostEntity> {
     private final LinkedModelPart lowerLegRight;
 
     public GhostEntityModel() {
+        this.textureWidth = 64;
+        this.textureHeight = 64;
         this.head = createPart(this, 0, 0,
                 0.0f, 28.0f, 0.0f,
                 8.0f, 8.0f, 8.0f,
                 0.0f, 24.0f, 0.0f);
-        this.body = createPart(this, 0, 0,
+        this.body = createPart(this, 16, 16,
                 0.0f, 18.0f, 0.0f,
                 8.0f, 12.0f, 4.0f,
                 0.0f, 24.0f, 0.0f);
-        this.upperArmLeft = createPart(this, this.body, 0, 0,
+        this.upperArmLeft = createPart(this, this.body, 32, 44,
                 6.0f, 21.0f, 0.0f,
                 4.0f, 6.0f, 4.0f,
                 4.0f, 22.0f, 0.0f);
-        this.upperArmRight = createPart(this, this.body, 0, 0,
+        this.upperArmRight = createPart(this, this.body, 40, 16,
                 -6.0f, 21.0f, 0.0f,
                 4.0f, 6.0f, 4.0f,
                 -4.0f, 22.0f, 0.0f);
-        this.lowerArmLeft = createPart(this, this.upperArmLeft, 0, 0,
+        this.lowerArmLeft = createPart(this, this.upperArmLeft, 32, 54,
                 6.0f, 15.0f, 0.0f,
                 4.0f, 6.0f, 4.0f,
                 6.0f, 18.0f, 0.0f);
-        this.lowerArmRight = createPart(this, this.upperArmRight, 0, 0,
+        this.lowerArmRight = createPart(this, this.upperArmRight, 40, 26,
                 -6.0f, 15.0f, 0.0f,
                 4.0f, 6.0f, 4.0f,
                 -6.0f, 18.0f, 0.0f);
-        this.upperLegLeft = createPart(this, this.body, 0, 0,
+        this.upperLegLeft = createPart(this, this.body, 16, 44,
                 2.0f, 9.0f, 0.0f,
                 4.0f, 6.0f, 4.0f,
                 2.0f, 12.0f, 0.0f);
-        this.upperLegRight = createPart(this, this.body, 0, 0,
+        this.upperLegRight = createPart(this, this.body, 0, 16,
                 -2.0f, 9.0f, 0.0f,
                 4.0f, 6.0f, 4.0f,
                 -2.0f, 12.0f, 0.0f);
-        this.lowerLegLeft = createPart(this, this.upperLegLeft, 0, 0,
+        this.lowerLegLeft = createPart(this, this.upperLegLeft, 16, 54,
                 2.0f, 3.0f, 0.0f,
                 4.0f, 6.0f, 4.0f,
                 2.0f, 6.0f, 0.0f);
-        this.lowerLegRight = createPart(this, this.upperLegRight, 0, 0,
+        this.lowerLegRight = createPart(this, this.upperLegRight, 0, 26,
                 -2.0f, 3.0f, 0.0f,
                 4.0f, 6.0f, 4.0f,
                 -2.0f, 6.0f, 0.0f);
@@ -100,8 +101,7 @@ public class GhostEntityModel extends CompositeEntityModel<GhostEntity> {
         float pitch = (float) velocity.dotProduct(bodyRot);
         float roll = (float) velocity.dotProduct(bodyRotSide);
 
-        this.head.yaw = (float) (-headYaw * Math.PI / 180);
-        System.out.println(this.head.yaw);
+        this.head.yaw = (float) (-(headYaw + 180) * Math.PI / 180);
         this.head.pitch = (float) (headPitch * Math.PI / 180);
         this.body.yaw = (float) (-yaw * Math.PI / 180);
         this.body.pitch = pitch;
