@@ -13,15 +13,20 @@ import modfest.soulflame.item.BottleOfTearsItem;
 public class ModItems {
     private static final Item.Settings SETTINGS = new Item.Settings().group(SoulFlame.ITEM_GROUP);
 
+    //Main blocks
     public static BlockItem infusionTable;
     public static BlockItem crucible;
     public static BlockItem conduit;
     public static BlockItem tearLantern;
     public static BlockItem creativeTearsBlock;
+
+    //Rune cage blocks
     public static BlockItem rune1;
     public static BlockItem rune2;
     public static BlockItem pipeRune;
     public static BlockItem healRune;
+
+    //Main items
     public static BottleOfTearsItem bottleOfTears;
     public static DiviningRodItem diviningRod;
 
@@ -31,10 +36,10 @@ public class ModItems {
         conduit = register("conduit", ModBlocks.conduit);
         tearLantern = register("tear_lantern", ModBlocks.tearLantern);
         creativeTearsBlock = register("creative_tears_block", ModBlocks.creativeTearsBlock);
-        rune1 = register("rune1", ModBlocks.rune1);
-        rune2 = register("rune2", ModBlocks.rune2);
-        pipeRune = register("pipe_rune", ModBlocks.pipeRune);
-        healRune = register("heal_rune", ModBlocks.healRune);
+        rune1 = register("rune/tier1", ModBlocks.rune1);
+        rune2 = register("rune/tier2", ModBlocks.rune2);
+        pipeRune = register("rune/pipe1", ModBlocks.pipeRune);
+        healRune = register("rune/heal", ModBlocks.healRune);
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
         diviningRod = register("divining_rod", new DiviningRodItem(SETTINGS));
     }

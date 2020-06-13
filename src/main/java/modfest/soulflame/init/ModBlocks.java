@@ -7,7 +7,6 @@ import modfest.soulflame.block.runic.PipeRuneBlock;
 import modfest.soulflame.block.runic.RuneBlock;
 import net.minecraft.block.*;
 import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -15,7 +14,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import modfest.soulflame.SoulFlame;
 
 public class ModBlocks {
-    //Soul power blocks
+    //Main blocks
     public static InfusionTableBlock infusionTable;
     public static CrucibleBlock crucible;
     public static ConduitBlock conduit;
@@ -34,11 +33,10 @@ public class ModBlocks {
         conduit = register("conduit", new ConduitBlock(AbstractBlock.Settings.of(Material.STONE).strength(0.25f)));
         tearLantern = register("tear_lantern", new TearLantern(AbstractBlock.Settings.of(Material.METAL).requiresTool().strength(3.5F).sounds(BlockSoundGroup.LANTERN).lightLevel((state) -> 5).nonOpaque()));
         creativeTearsBlock = register("creative_tears_block", new CreativeTearsBlock(FabricBlockSettings.copy(Blocks.STONE)));
-        rune1 = register("rune_tier1", new RuneBlock(FabricBlockSettings.copy(Blocks.STONE).nonOpaque(), 1));
-        rune2 = register("rune_tier2", new RuneBlock(FabricBlockSettings.copy(Blocks.STONE).nonOpaque(), 2));
-        pipeRune = register("pipe_rune", new PipeRuneBlock(FabricBlockSettings.copy(Blocks.STONE).nonOpaque()));
-        healRune = register("heal_rune", new HealCenterBlock(FabricBlockSettings.copy(Blocks.STONE).nonOpaque()));
-
+        rune1 = register("rune/tier1", new RuneBlock(FabricBlockSettings.copy(Blocks.STONE).nonOpaque(), 1));
+        rune2 = register("rune/tier2", new RuneBlock(FabricBlockSettings.copy(Blocks.STONE).nonOpaque(), 2));
+        pipeRune = register("rune/pipe1", new PipeRuneBlock(FabricBlockSettings.copy(Blocks.STONE).nonOpaque()));
+        healRune = register("rune/heal", new HealCenterBlock(FabricBlockSettings.copy(Blocks.STONE).nonOpaque()));
     }
 
     private static <T extends Block> T register(String name, T block) {
