@@ -17,7 +17,7 @@ public class InfusionTableEntity extends SoulUserEntity implements Inventory {
 
 	public InfusionTableEntity() {
 		super(ModBlockEntityTypes.infusionTable, TEAR_CAPACITY);
-		this.inventory = new InfusionInventory(this);
+		this.inventory = new InfusionInventory(this, 9);
 	}
 
 	@Override

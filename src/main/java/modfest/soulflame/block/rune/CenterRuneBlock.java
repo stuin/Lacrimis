@@ -25,7 +25,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public abstract class CenterRuneBlock extends Block implements Activatable, BlockConduitConnect {
-    private static final Box box = new Box(-0.5, 1, -0.5, 1.5, 3, 1.5);
+    private static final Box TARGET_BOX = new Box(-0.5, 1, -0.5, 1.5, 3, 1.5);
 
     public static final IntProperty PIPE;
 
@@ -57,7 +57,7 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
             return false;
         }
         //For all entities on platform
-        for(Entity entity : world.getEntities(null, box.offset(pos))) {
+        for(Entity entity : world.getEntities(null, TARGET_BOX.offset(pos))) {
             if(entity instanceof LivingEntity)
                 return activate(world, pos, (LivingEntity) entity, player);
         }

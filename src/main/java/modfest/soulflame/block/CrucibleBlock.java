@@ -1,6 +1,5 @@
 package modfest.soulflame.block;
 
-import modfest.soulflame.init.ModBlocks;
 import modfest.soulflame.init.ModItems;
 import modfest.soulflame.util.SoulTank;
 import net.minecraft.block.*;
@@ -8,12 +7,9 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
@@ -23,7 +19,6 @@ import net.minecraft.world.BlockView;
 import modfest.soulflame.block.entity.CrucibleEntity;
 import net.minecraft.world.World;
 
-import java.util.Collections;
 import java.util.List;
 
 public class CrucibleBlock extends SoulTankBlock implements Activatable {

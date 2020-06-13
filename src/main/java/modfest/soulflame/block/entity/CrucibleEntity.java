@@ -1,16 +1,35 @@
 package modfest.soulflame.block.entity;
 
+import modfest.soulflame.infusion.CrucibleRecipe;
+import modfest.soulflame.infusion.InfusionInventory;
 import modfest.soulflame.init.ModBlockEntityTypes;
+import modfest.soulflame.init.ModInfusion;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.ItemEntity;
+import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
+
+import java.util.Optional;
 
 public class CrucibleEntity extends SoulTankEntity implements Tickable {
+	private static final Box ITEM_BOX = new Box(0, 0.4, 0, 1, 1, 1);
 	private static final int TEAR_CAPACITY = 1000;
+	private static final int CRAFT_COOLDOWN = 15;
+
+	public final InfusionInventory inventory;
+	private int craftTime = 0;
 
 	public CrucibleEntity() {
 		super(ModBlockEntityTypes.crucible, TEAR_CAPACITY);
+		this.inventory = new InfusionInventory(this, 1);
 	}
 
 	@Override
@@ -22,6 +41,34 @@ public class CrucibleEntity extends SoulTankEntity implements Tickable {
 				if (obsidianState.getBlock() == Blocks.CRYING_OBSIDIAN) {
 					addTears(1);
 					break;
+				}
+			}
+		}
+		
+		if(craftTime < CRAFT_COOLDOWN)
+			craftTime++;
+
+		if(craftTime >= CRAFT_COOLDOWN && world != null && !world.isClient) {
+			for(Entity entity : world.getEntities(null, ITEM_BOX.offset(pos))) {
+				if(entity instanceof ItemEntity) {
+					inventory.setStack(0, ((ItemEntity) entity).getStack());
+
+					Optional<CrucibleRecipe> optional = world.getServer()
+							.getRecipeManager()
+							.getFirstMatch(ModInfusion.CRUCIBLE_RECIPE, inventory, world);
+					if (optional.isPresent()) {
+						CrucibleRecipe recipe = optional.get();
+						if(recipe.matches(inventory, world)) {
+							//Craft item
+							ItemStack remainder = inventory.getStack(0);
+							remainder.decrement(1);
+							((ItemEntity) entity).setStack(remainder);
+							ItemScatterer.spawn(world, pos.up(), new SimpleInventory(recipe.getOutput().copy()));
+							removeTears(recipe.getTears());
+							craftTime = 0;
+							break;
+						}
+					}
 				}
 			}
 		}
