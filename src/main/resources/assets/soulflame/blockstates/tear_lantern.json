@@ -1,5 +1,10 @@
 {
   "variants": {
-    "": { "model": "block/lantern" }
+    "hanging=false": {
+      "model": "soulflame:block/tear_lantern"
+    },
+    "hanging=true": {
+      "model": "soulflame:block/tear_lantern_hanging"
+    }
   }
 }

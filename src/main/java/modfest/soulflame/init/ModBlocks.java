@@ -6,6 +6,7 @@ import modfest.soulflame.block.runic.HealCenterBlock;
 import modfest.soulflame.block.runic.PipeRuneBlock;
 import modfest.soulflame.block.runic.RuneBlock;
 import net.minecraft.block.*;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -30,7 +31,7 @@ public class ModBlocks {
         infusionTable = register("infusion_table", new InfusionTableBlock(FabricBlockSettings.copy(Blocks.CRAFTING_TABLE).nonOpaque()));
         crucible = register("crucible", new CrucibleBlock(FabricBlockSettings.copy(Blocks.CAULDRON).nonOpaque()));
         conduit = register("conduit", new ConduitBlock(AbstractBlock.Settings.of(Material.STONE).strength(0.25f)));
-        tearLantern = register("tear_lantern", new TearLantern(FabricBlockSettings.of(Material.METAL)));
+        tearLantern = register("tear_lantern", new TearLantern(AbstractBlock.Settings.of(Material.METAL).requiresTool().strength(3.5F).sounds(BlockSoundGroup.LANTERN).lightLevel((state) -> 5).nonOpaque()));
         creativeTearsBlock = register("creative_tears_block", new CreativeTearsBlock(FabricBlockSettings.copy(Blocks.STONE)));
         rune1 = register("rune_tier1", new RuneBlock(FabricBlockSettings.copy(Blocks.STONE).nonOpaque(), 1));
         rune2 = register("rune_tier2", new RuneBlock(FabricBlockSettings.copy(Blocks.STONE).nonOpaque(), 2));
