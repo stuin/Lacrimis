@@ -1,0 +1,37 @@
+{
+  "variants": {
+    "level=8": {
+      "model": "soulflame:block/rune/blank1"
+    },
+    "level=0": {
+      "model": "soulflame:block/rune/pipe_corner2",
+      "y": 180
+    },
+    "level=1": {
+      "model": "soulflame:block/rune/pipe_edge2",
+      "y": 180
+    },
+    "level=2": {
+      "model": "soulflame:block/rune/pipe_corner2",
+      "y": 90
+    },
+    "level=3": {
+      "model": "soulflame:block/rune/pipe_edge2",
+      "y": 270
+    },
+    "level=4": {
+      "model": "soulflame:block/rune/pipe_corner2"
+    },
+    "level=5": {
+      "model": "soulflame:block/rune/pipe_edge2"
+    },
+    "level=6": {
+      "model": "soulflame:block/rune/pipe_corner2",
+      "y": 270
+    },
+    "level=7": {
+      "model": "soulflame:block/rune/pipe_edge2",
+      "y": 90
+    }
+  }
+}
