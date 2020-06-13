@@ -28,7 +28,7 @@ public class GhostEntityModel extends CompositeEntityModel<GhostEntity> {
         this.head = createPart(this, 0, 0,
                 0.0f, 28.0f, 0.0f,
                 8.0f, 8.0f, 8.0f,
-                0.0f, 0.0f, 0.0f);
+                0.0f, 24.0f, 0.0f);
         this.body = createPart(this, 0, 0,
                 0.0f, 18.0f, 0.0f,
                 8.0f, 12.0f, 4.0f,
@@ -91,44 +91,43 @@ public class GhostEntityModel extends CompositeEntityModel<GhostEntity> {
 
     @Override
     public void setAngles(GhostEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
-        float yaw = entity.bodyYaw;
+        float yaw = limbDistance;
 
-        float targetYaw = (System.currentTimeMillis() % 3600) / 10f;
-
-        Vec3d velocity = getRotationVector(0.0f, targetYaw).multiply(0.4);
+        Vec3d velocity = entity.getVelocity().multiply(2);
         Vec3d bodyRot = getRotationVector(0.0f, yaw);
         Vec3d bodyRotSide = getRotationVector(0.0f, yaw + 90.0f);
 
         float pitch = (float) velocity.dotProduct(bodyRot);
         float roll = (float) velocity.dotProduct(bodyRotSide);
 
-        this.head.yaw = (float) -(targetYaw * Math.PI / 180);
-        this.head.pitch = headPitch;
-        this.body.yaw = yaw;
+        this.head.yaw = (float) (-headYaw * Math.PI / 180);
+        System.out.println(this.head.yaw);
+        this.head.pitch = (float) (headPitch * Math.PI / 180);
+        this.body.yaw = (float) (-yaw * Math.PI / 180);
         this.body.pitch = pitch;
         this.body.roll = roll;
-        this.upperArmLeft.yaw = yaw;
+        this.upperArmLeft.yaw = 0.0f;
         this.upperArmLeft.pitch = pitch;
         this.upperArmLeft.roll = roll;
-        this.upperArmRight.yaw = yaw;
+        this.upperArmRight.yaw = 0.0f;
         this.upperArmRight.pitch = pitch;
         this.upperArmRight.roll = roll;
-        this.lowerArmLeft.yaw = yaw;
+        this.lowerArmLeft.yaw = 0.0f;
         this.lowerArmLeft.pitch = pitch;
         this.lowerArmLeft.roll = roll;
-        this.lowerArmRight.yaw = yaw;
+        this.lowerArmRight.yaw = 0.0f;
         this.lowerArmRight.pitch = pitch;
         this.lowerArmRight.roll = roll;
-        this.upperLegLeft.yaw = yaw;
+        this.upperLegLeft.yaw = 0.0f;
         this.upperLegLeft.pitch = pitch;
         this.upperLegLeft.roll = roll;
-        this.upperLegRight.yaw = yaw;
+        this.upperLegRight.yaw = 0.0f;
         this.upperLegRight.pitch = pitch;
         this.upperLegRight.roll = roll;
-        this.lowerLegLeft.yaw = yaw;
+        this.lowerLegLeft.yaw = 0.0f;
         this.lowerLegLeft.pitch = pitch;
         this.lowerLegLeft.roll = roll;
-        this.lowerLegRight.yaw = yaw;
+        this.lowerLegRight.yaw = 0.0f;
         this.lowerLegRight.pitch = pitch;
         this.lowerLegRight.roll = roll;
     }

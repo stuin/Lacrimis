@@ -28,7 +28,7 @@ public class GhostEntityRenderer extends EntityRenderer<GhostEntity> {
     public void render(GhostEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
 
-        this.model.setAngles(entity, 0.0f, 0.0f, 0.0f, yaw, entity.getPitch(tickDelta));
+        this.model.setAngles(entity, 0.0f, yaw, tickDelta, entity.getYaw(tickDelta), entity.getPitch(tickDelta));
         this.model.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(this.getTexture(entity))), light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f);
     }
 
