@@ -3,9 +3,15 @@
   "block.soulflame.crucible": "Crucible",
   "block.soulflame.conduit": "Tear Conduit",
   "block.soulflame.creative_tears_block": "Block of Eternal Sadness",
+  "block.soulflame.rune_tier1": "Tier 1 Rune",
+  "block.soulflame.rune_tier2": "Tier 2 Rune",
+  "block.soulflame.heal_rune": "Healing Rune",
+  "block.soulflame.pipe_rune": "Piping Rune",
   "block.soulflame.tear_lantern": "Tear Lantern",
+  
   "item.soulflame.bottle_of_tears": "Bottle of Tears",
   "item.soulflame.divining_rod": "Divining Rod",
+
   "gui.soulflame.infusion": "Infusion Table",
   "itemGroup.soulflame.group": "Soulflame"
 }

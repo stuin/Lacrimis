@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "top": "soulflame:block/rune_edge_top",
+    "bottom": "soulflame:block/rune_edge_top",
+    "side": "soulflame:block/rune_pipe_side",
+    "front": "soulflame:block/rune_pipe_side"
+  }
+}
