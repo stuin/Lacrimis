@@ -15,7 +15,7 @@
   "block.soulflame.rune.healing": "Healing Rune",
   "block.soulflame.rune.extraction": "Soul Extraction Rune",
   "block.soulflame.rune.destination": "Soul Destination Rune",
-  "block.soulflame.rune.transport": "Two Way Transport Rune",
+  "block.soulflame.rune.entity_transport": "Two Way Transport Rune",
   "block.soulflame.rune.block_transport": "Block Transport Rune",
   
   "item.soulflame.bottle_of_tears": "Bottle of Tears",

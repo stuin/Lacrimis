@@ -68,7 +68,7 @@ public class ModBlocks {
         healRune = register("rune/healing", new HealBlock());
         extractionRune = register("rune/extraction", new SoulExtractionBlock());
         destinationRune = register("rune/destination", new SoulTeleportBlock(false));
-        transportRune = register("rune/transport", new SoulTeleportBlock(true));
+        transportRune = register("rune/entity_transport", new SoulTeleportBlock(true));
         blockTransportRune = register("rune/block_transport", new BlockTeleportBlock());
 
         conductive = TagRegistry.block(new Identifier(SoulFlame.MODID, "conductive"));

@@ -55,7 +55,7 @@ public class ModItems {
         healRune = register("rune/healing", ModBlocks.healRune);
         extractionRune = register("rune/extraction", ModBlocks.extractionRune);
         destinationRune = register("rune/destination", ModBlocks.destinationRune);
-        transportRune = register("rune/transport", ModBlocks.transportRune);
+        transportRune = register("rune/entity_transport", ModBlocks.transportRune);
         blockTransportRune = register("rune/block_transport", ModBlocks.blockTransportRune);
 
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
