@@ -14,6 +14,7 @@
   "block.soulflame.rune.extraction": "Soul Extraction Rune",
   "block.soulflame.rune.destination": "Soul Destination Rune",
   "block.soulflame.rune.transport": "Two Way Transport Rune",
+  "block.soulflame.rune.block_transport": "Block Transport Rune",
   
   "item.soulflame.bottle_of_tears": "Bottle of Tears",
   "item.soulflame.divining_rod": "Divining Rod",
@@ -23,5 +24,6 @@
 
   "soulflame.error.tears": "Not enough Soul Tears",
   "soulflame.error.platform": "Incomplete Soul Cage",
+  "soulflame.error.target": "No valid ritual target",
   "soulflame.error.destination": "No destination found"
 }

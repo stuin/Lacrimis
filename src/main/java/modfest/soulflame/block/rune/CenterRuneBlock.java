@@ -61,7 +61,7 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
             if(entity instanceof LivingEntity)
                 return activate(world, pos, (LivingEntity) entity, player);
         }
-        return false;
+        return activate(world, pos, null, player);
     }
 
     public abstract boolean activate(World world, BlockPos pos, LivingEntity entity, PlayerEntity player);

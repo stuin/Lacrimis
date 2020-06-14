@@ -30,6 +30,7 @@ public class ModItems {
     public static BlockItem extractionRune;
     public static BlockItem destinationRune;
     public static BlockItem transportRune;
+    public static BlockItem blockTransportRune;
 
     //Main items
     public static BottleOfTearsItem bottleOfTears;
@@ -51,6 +52,7 @@ public class ModItems {
         extractionRune = register("rune/extraction", ModBlocks.extractionRune);
         destinationRune = register("rune/destination", ModBlocks.destinationRune);
         transportRune = register("rune/transport", ModBlocks.transportRune);
+        blockTransportRune = register("rune/block_transport", ModBlocks.blockTransportRune);
 
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
         diviningRod = register("divining_rod", new DiviningRodItem(SETTINGS));

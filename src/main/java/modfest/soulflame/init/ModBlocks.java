@@ -34,6 +34,7 @@ public class ModBlocks {
     public static SoulExtractionBlock extractionRune;
     public static SoulTeleportBlock destinationRune;
     public static SoulTeleportBlock transportRune;
+    public static BlockTeleportBlock blockTransportRune;
 
     public static void register() {
         infusionTable = register("infusion_table", new InfusionTableBlock(FabricBlockSettings.copy(Blocks.CRAFTING_TABLE).nonOpaque()));
@@ -51,6 +52,7 @@ public class ModBlocks {
         extractionRune = register("rune/extraction", new SoulExtractionBlock());
         destinationRune = register("rune/destination", new SoulTeleportBlock(false));
         transportRune = register("rune/transport", new SoulTeleportBlock(true));
+        blockTransportRune = register("rune/block_transport", new BlockTeleportBlock());
 
         conductive = TagRegistry.block(new Identifier(SoulFlame.MODID, "conductive"));
     }
