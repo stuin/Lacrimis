@@ -15,8 +15,9 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
@@ -35,14 +36,14 @@ public class CrucibleBlock extends SoulTankBlock implements Activatable {
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack item) {
         SoulTank tank = getTank(world, pos);
-        if(tank != null)
+        if (tank != null)
             tank.setTears(item.getOrCreateTag().getInt("TearLevel"));
     }
 
     @Override
     public boolean activate(World world, BlockPos pos, PlayerEntity player) {
         SoulTank tank = getTank(world, pos);
-        if(tank != null) {
+        if (tank != null) {
             ItemStack item = new ItemStack(ModItems.crucible);
             item.getOrCreateTag().putInt("TearLevel", tank.getTears());
             world.setBlockState(pos, Blocks.AIR.getDefaultState());
@@ -60,7 +61,7 @@ public class CrucibleBlock extends SoulTankBlock implements Activatable {
     @Override
     public void buildTooltip(ItemStack stack, BlockView world, List<Text> tooltip, TooltipContext options) {
         super.buildTooltip(stack, world, tooltip, options);
-        tooltip.add(new LiteralText(stack.getOrCreateTag().getInt("TearLevel") + " Tears"));
+        tooltip.add(new TranslatableText("block.soulflame.crucible.level", stack.getOrCreateTag().getInt("TearLevel")).formatted(Formatting.GRAY));
     }
 
     @Override
