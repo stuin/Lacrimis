@@ -23,7 +23,7 @@
   "gui.soulflame.infusion": "Infusion Table",
   "itemGroup.soulflame.group": "Soulflame",
 
-  "soulflame.error.tears": "Not enough Soul Tears",
+  "soulflame.error.tears": "Not enough Tears",
   "soulflame.error.platform": "Incomplete Soul Cage",
   "soulflame.error.entity": "No valid target entity",
   "soulflame.error.block": "No valid target block",
