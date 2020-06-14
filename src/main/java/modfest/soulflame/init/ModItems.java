@@ -35,6 +35,7 @@ public class ModItems {
     //Main items
     public static BottleOfTearsItem bottleOfTears;
     public static DiviningRodItem diviningRod;
+    public static Item tearIngot;
 
     public static void register() {
         infusionTable = register("infusion_table", ModBlocks.infusionTable);
@@ -57,6 +58,7 @@ public class ModItems {
 
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
         diviningRod = register("divining_rod", new DiviningRodItem(SETTINGS));
+        tearIngot = register("tear_ingot", new Item((new Item.Settings()).group(SoulFlame.ITEM_GROUP)));
     }
 
     private static <T extends Item> T register(String name, T item) {

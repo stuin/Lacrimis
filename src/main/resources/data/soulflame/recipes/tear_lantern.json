@@ -1,0 +1,10 @@
+{
+  "type": "soulflame:crucible",
+  "base": {
+    "item": "minecraft:soul_lantern"
+  },
+  "result": {
+    "item": "soulflame:tear_lantern"
+  },
+  "tears": 150
+}
