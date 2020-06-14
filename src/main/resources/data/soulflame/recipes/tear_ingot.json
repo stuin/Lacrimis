@@ -1,0 +1,10 @@
+{
+  "type": "soulflame:crucible",
+  "base": {
+    "item": "minecraft:iron_ingot"
+  },
+  "result": {
+    "item": "soulflame:tear_ingot"
+  },
+  "tears": 150
+}
