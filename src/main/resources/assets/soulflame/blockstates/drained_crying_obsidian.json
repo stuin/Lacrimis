@@ -1,7 +1,44 @@
 {
   "multipart": [
     {
-      "apply": { "model": "soulflame:block/drained_crying_obsidian" }
+      "when": { "tears_most_sig": 0 },
+      "apply": { "model": "minecraft:block/obsidian" }
+    },
+    {
+      "when": { "tears_most_sig": 1 },
+      "apply": { "model": "soulflame:block/drained_crying_obsidian0" }
+    },
+    {
+      "when": { "tears_most_sig": 2 },
+      "apply": { "model": "soulflame:block/drained_crying_obsidian1" }
+    },
+    {
+      "when": { "tears_most_sig": 3 },
+      "apply": { "model": "soulflame:block/drained_crying_obsidian2" }
+    },
+    {
+      "when": { "tears_most_sig": 4 },
+      "apply": { "model": "soulflame:block/drained_crying_obsidian3" }
+    },
+    {
+      "when": { "tears_most_sig": 5 },
+      "apply": { "model": "soulflame:block/drained_crying_obsidian4" }
+    },
+    {
+      "when": { "tears_most_sig": 6 },
+      "apply": { "model": "soulflame:block/drained_crying_obsidian5" }
+    },
+    {
+      "when": { "tears_most_sig": 7 },
+      "apply": { "model": "soulflame:block/drained_crying_obsidian6" }
+    },
+    {
+      "when": { "tears_most_sig": 8 },
+      "apply": { "model": "soulflame:block/drained_crying_obsidian7" }
+    },
+    {
+      "when": { "tears_most_sig": 9 },
+      "apply": { "model": "minecraft:block/crying_obsidian" }
     }
   ]
 }
