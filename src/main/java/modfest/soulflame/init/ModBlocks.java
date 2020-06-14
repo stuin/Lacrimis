@@ -4,6 +4,7 @@ import modfest.soulflame.SoulFlame;
 import modfest.soulflame.block.ConduitBlock;
 import modfest.soulflame.block.CreativeTearsBlock;
 import modfest.soulflame.block.CrucibleBlock;
+import modfest.soulflame.block.DrainedCryingObsidianBlock;
 import modfest.soulflame.block.GatedConduitBlock;
 import modfest.soulflame.block.InfusionTableBlock;
 import modfest.soulflame.block.TearLantern;
@@ -18,6 +19,7 @@ import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.CryingObsidianBlock;
 import net.minecraft.block.Material;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.tag.Tag;
@@ -35,6 +37,7 @@ public class ModBlocks {
     public static GatedConduitBlock gatedConduit;
     public static TearLantern tearLantern;
     public static CreativeTearsBlock creativeTearsBlock;
+    public static DrainedCryingObsidianBlock drainedCryingObsidian;
 
     //Rune cage blocks
     public static RuneBlock rune1;
@@ -54,6 +57,7 @@ public class ModBlocks {
         gatedConduit = register("gated_conduit", new GatedConduitBlock(AbstractBlock.Settings.of(Material.STONE).strength(0.25f)));
         tearLantern = register("tear_lantern", new TearLantern(AbstractBlock.Settings.of(Material.METAL).requiresTool().strength(3.5F).sounds(BlockSoundGroup.LANTERN).lightLevel((state) -> 5).nonOpaque()));
         creativeTearsBlock = register("creative_tears_block", new CreativeTearsBlock(FabricBlockSettings.copy(Blocks.STONE)));
+        drainedCryingObsidian = register("drained_crying_obsidian", new DrainedCryingObsidianBlock(FabricBlockSettings.copy(Blocks.CRYING_OBSIDIAN)));
 
         rune1 = register("rune/tier1", new RuneBlock(1));
         rune2 = register("rune/tier2", new RuneBlock(2));

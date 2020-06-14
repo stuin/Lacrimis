@@ -19,6 +19,7 @@ public class ModItems {
     public static BlockItem gatedConduit;
     public static BlockItem tearLantern;
     public static BlockItem creativeTearsBlock;
+    public static BlockItem drainedCryingObsidian;
 
     //Rune cage blocks
     public static BlockItem rune1;
@@ -34,6 +35,7 @@ public class ModItems {
     //Main items
     public static BottleOfTearsItem bottleOfTears;
     public static DiviningRodItem diviningRod;
+    public static Item tearIngot;
 
     public static void register() {
         infusionTable = register("infusion_table", ModBlocks.infusionTable);
@@ -42,7 +44,8 @@ public class ModItems {
         gatedConduit = register("gated_conduit", ModBlocks.gatedConduit);
         tearLantern = register("tear_lantern", ModBlocks.tearLantern);
         creativeTearsBlock = register("creative_tears_block", ModBlocks.creativeTearsBlock);
-        
+        drainedCryingObsidian = register("drained_crying_obsidian", ModBlocks.drainedCryingObsidian);
+
         rune1 = register("rune/tier1", ModBlocks.rune1);
         rune2 = register("rune/tier2", ModBlocks.rune2);
         pipeRune1 = register("rune/pipe1", ModBlocks.pipeRune1);
@@ -55,6 +58,7 @@ public class ModItems {
 
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
         diviningRod = register("divining_rod", new DiviningRodItem(SETTINGS));
+        tearIngot = register("tear_ingot", new Item((new Item.Settings()).group(SoulFlame.ITEM_GROUP)));
     }
 
     private static <T extends Item> T register(String name, T item) {

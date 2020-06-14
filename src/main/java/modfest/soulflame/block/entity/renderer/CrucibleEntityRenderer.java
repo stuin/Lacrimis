@@ -5,6 +5,8 @@ import modfest.soulflame.block.entity.CrucibleEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -35,9 +37,11 @@ public class CrucibleEntityRenderer extends BlockEntityRenderer<CrucibleEntity> 
 			
 			matrices.push();
 			matrices.translate(0, displayLevel, 0);
-			mc.getBlockRenderManager()
+			
+			BlockState visualProperties = Blocks.GLOWSTONE.getDefaultState();
+            mc.getBlockRenderManager()
 					.getModelRenderer()
-					.render(entity.getWorld(), model, entity.getCachedState(), pos, matrices, vertexConsumers.getBuffer(RenderLayer.getCutout()), false, entity.getWorld().getRandom(), 1, 0xFFFFFF);
+					.render(entity.getWorld(), model, visualProperties, pos, matrices, vertexConsumers.getBuffer(RenderLayer.getCutout()), false, entity.getWorld().getRandom(), 1, 0xFFFFFF);
 			matrices.pop();
 		}
 	}
