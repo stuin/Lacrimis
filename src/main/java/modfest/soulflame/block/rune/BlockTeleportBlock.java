@@ -1,8 +1,8 @@
 package modfest.soulflame.block.rune;
 
 import modfest.soulflame.SoulFlame;
+import modfest.soulflame.util.ConduitEntry;
 import modfest.soulflame.util.ConduitUtil;
-import modfest.soulflame.util.SoulTank;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
@@ -10,19 +10,22 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 public class BlockTeleportBlock extends CenterRuneBlock {
     public BlockTeleportBlock() {
-        super(300);
+        super(300, 2);
     }
 
     @Override
-    public boolean activate(World world, BlockPos pos, LivingEntity entity, PlayerEntity player) {
-        BlockState source = world.getBlockState(pos.up());
+    protected boolean activate(World world, BlockPos pos, List<ConduitEntry> list, LivingEntity entity, PlayerEntity player) {
+        BlockState source = world.getBlockState(pos);
         if(!source.isAir()) {
-            BlockPos destination = ConduitUtil.locateSink(world, pipePos(world, pos), pos.up());
+            BlockPos destination = ConduitUtil.locateSink(world, list, pos);
             if(destination != null) {
                 if(!world.isClient)
                     SoulFlame.LOGGER.info("Block Moved");
@@ -36,9 +39,10 @@ public class BlockTeleportBlock extends CenterRuneBlock {
 
     @Override
     public boolean insert(BlockPos pos, BlockView world, Object value) {
-        if(world instanceof World && value instanceof BlockPos && testCage(world, pos)) {
+        Direction flipped = flipside(world, pos);
+        if(world instanceof World && value instanceof BlockPos && testCage(world, pos, flipped)) {
             BlockState source = world.getBlockState((BlockPos) value);
-            pos = pos.up();
+            pos = pos.offset(flipped);
 
             //Set destination block
             if(world.getBlockState(pos).isAir()) {

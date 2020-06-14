@@ -26,6 +26,7 @@ public class ModItems {
     public static BlockItem rune2;
     public static BlockItem pipeRune1;
     public static BlockItem pipeRune2;
+    public static BlockItem flipRune;
     public static BlockItem healRune;
     public static BlockItem extractionRune;
     public static BlockItem destinationRune;
@@ -50,6 +51,7 @@ public class ModItems {
         rune2 = register("rune/tier2", ModBlocks.rune2);
         pipeRune1 = register("rune/pipe1", ModBlocks.pipeRune1);
         pipeRune2 = register("rune/pipe2", ModBlocks.pipeRune2);
+        flipRune = register("rune/flip", ModBlocks.flipRune);
         healRune = register("rune/healing", ModBlocks.healRune);
         extractionRune = register("rune/extraction", ModBlocks.extractionRune);
         destinationRune = register("rune/destination", ModBlocks.destinationRune);

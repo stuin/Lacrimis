@@ -4,6 +4,7 @@ import modfest.soulflame.SoulFlame;
 import modfest.soulflame.block.Activatable;
 import modfest.soulflame.block.BlockConduitConnect;
 import modfest.soulflame.init.ModBlocks;
+import modfest.soulflame.util.ConduitEntry;
 import modfest.soulflame.util.ConduitUtil;
 import modfest.soulflame.util.NeighborList;
 import net.minecraft.block.Block;
@@ -24,23 +25,27 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 public abstract class CenterRuneBlock extends Block implements Activatable, BlockConduitConnect {
-    private static final Box TARGET_BOX = new Box(-0.5, 1, -0.5, 1.5, 3, 1.5);
+    private static final Box TARGET_BOX = new Box(-0.5, -1, -0.5, 1.5, 1, 1.5);
 
     public static final IntProperty PIPE;
     public final int requiredTears;
+    public final int requiredTier;
 
-    public CenterRuneBlock(int required) {
+    public CenterRuneBlock(int requiredTears, int requiredTier) {
         super(ModBlocks.runeSettings);
-        this.requiredTears = required;
+        this.requiredTears = requiredTears;
+        this.requiredTier = requiredTier;
         setDefaultState(getStateManager().getDefaultState().with(PIPE, 8));
     }
 
-    public boolean testCage(BlockView world, BlockPos pos) {
+    protected boolean testCage(BlockView world, BlockPos pos, Direction flipped) {
         boolean pipe = false;
         for(BlockPos next : NeighborList.platform) {
             Block block = world.getBlockState(pos.add(next)).getBlock();
-            if(!(block instanceof RuneBlock && ((RuneBlock) block).testCage(world, pos.add(next))))
+            if(!(block instanceof RuneBlock && ((RuneBlock) block).testCage(world, pos.add(next), flipped) >= requiredTier))
                 return false;
 
             //Only one pipe allowed
@@ -50,26 +55,54 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
                 pipe = true;
             }
         }
-        return true;
+        return pipe;
     }
-    
-    private boolean runOnce(World world, BlockPos pos, PlayerEntity player) {
-        //For all entities on platform
-        for(Entity entity : world.getEntities(null, TARGET_BOX.offset(pos))) {
-            if(entity instanceof LivingEntity)
-                return activate(world, pos, (LivingEntity) entity, player);
+
+    protected Direction flipside(BlockView world, BlockPos pos) {
+        Direction dir = Direction.UP;
+        if(world.getBlockState(pos.up()).getBlock() == ModBlocks.flipRune)
+            dir = Direction.DOWN;
+        return dir;
+    }
+
+    protected void error(PlayerEntity player, String code) {
+        if(player != null && !player.world.isClient) {
+            MutableText text = new TranslatableText(SoulFlame.MODID + ".error." + code);
+            Style style = text.getStyle();
+            player.sendMessage(text.setStyle(style.withColor(Formatting.RED)), false);
         }
-        return activate(world, pos, null, player);
+    }
+
+    private boolean runOnce(World world, BlockPos pos, List<ConduitEntry> list, PlayerEntity player, Direction flipped) {
+        //For all entities on platform
+        pos = pos.offset(flipped);
+        for(Entity entity : world.getEntities(null, TARGET_BOX.offset(pos.offset(flipped)))) {
+            if(entity instanceof LivingEntity
+                    && activate(world, pos, list, (LivingEntity) entity, player))
+                return true;
+        }
+        return activate(world, pos, list, null, player);
     }
 
     public boolean activate(World world, BlockPos pos, PlayerEntity player) {
-        if(!testCage(world, pos)) {
+        //Check soul cage setup
+        Direction flipped = flipside(world, pos);
+        if(!testCage(world, pos, flipped)) {
             error(player, "platform");
             return false;
         }
-        if(ConduitUtil.locateTearsStrong(world, pipePos(world, pos), requiredTears, true)) {
-            if(runOnce(world, pos, player)) {
-                ConduitUtil.locateTearsStrong(world, pipePos(world, pos), requiredTears, false);
+
+        //Locate pipe connection
+        int i = world.getBlockState(pos).get(PIPE);
+        if(i == 8)
+            return false;
+        BlockPos pipe = pos.add(NeighborList.platform[i]);
+
+        //Grab required tears
+        List<ConduitEntry> list = ConduitUtil.listScanConduits(world, pipe);
+        if(ConduitUtil.locateTearsStrong(world, list, requiredTears, true)) {
+            if(runOnce(world, pos, list, player, flipped)) {
+                ConduitUtil.locateTearsStrong(world, list, requiredTears, false);
                 return true;
             }
         } else
@@ -77,22 +110,7 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
         return false;
     }
 
-    public abstract boolean activate(World world, BlockPos pos, LivingEntity entity, PlayerEntity player);
-
-    public void error(PlayerEntity player, String code) {
-        if(player != null && !player.world.isClient) {
-            MutableText text = new TranslatableText(SoulFlame.MODID + ".error." + code);
-            Style style = text.getStyle();
-            player.sendMessage(text.setStyle(style.withColor(Formatting.RED)), false);
-        }
-    }
-    
-    public BlockPos pipePos(World world, BlockPos pos) {
-        int i = world.getBlockState(pos).get(PIPE);
-        if(i == 8)
-            return null;
-        return pos.add(NeighborList.platform[i]);
-    }
+    protected abstract boolean activate(World world, BlockPos pos, List<ConduitEntry> list, LivingEntity entity, PlayerEntity player);
 
     @Override
     public boolean canConnectConduitTo(BlockPos pos, BlockView world, Direction side) {

@@ -13,6 +13,7 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
@@ -28,16 +29,16 @@ public class RuneBlock extends Block implements Activatable {
         setDefaultState(getStateManager().getDefaultState().with(POWERED, false).with(CENTER, 8));
     }
 
-    public boolean testCage(BlockView world, BlockPos pos) {
+    public int testCage(BlockView world, BlockPos pos, Direction flipped) {
         getCenter(world, pos);
         if(tier == 1) {
             for(int y = 0; y < 2; y++) {
-                pos = pos.up();
+                pos = pos.offset(flipped);
                 if(!world.getBlockState(pos).getBlock().isIn(ModBlocks.conductive))
-                    return false;
+                    return 0;
             }
         }
-        return true;
+        return tier;
     }
     
     protected boolean shouldActivate(World world, BlockPos pos, BlockPos fromPos) {

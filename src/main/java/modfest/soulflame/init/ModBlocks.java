@@ -44,6 +44,7 @@ public class ModBlocks {
     public static RuneBlock rune2;
     public static PipeConnectorBlock pipeRune1;
     public static PipeConnectorBlock pipeRune2;
+    public static Block flipRune;
     public static HealBlock healRune;
     public static SoulExtractionBlock extractionRune;
     public static SoulTeleportBlock destinationRune;
@@ -63,6 +64,7 @@ public class ModBlocks {
         rune2 = register("rune/tier2", new RuneBlock(2));
         pipeRune1 = register("rune/pipe1", new PipeConnectorBlock(1));
         pipeRune2 = register("rune/pipe2", new PipeConnectorBlock(2));
+        flipRune = register("rune/flip", new Block(runeSettings));
         healRune = register("rune/healing", new HealBlock());
         extractionRune = register("rune/extraction", new SoulExtractionBlock());
         destinationRune = register("rune/destination", new SoulTeleportBlock(false));

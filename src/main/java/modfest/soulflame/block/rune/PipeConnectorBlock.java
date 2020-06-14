@@ -34,7 +34,7 @@ public class PipeConnectorBlock extends RuneBlock implements BlockConduitConnect
     @Override
     public Object extract(BlockPos pos, BlockView world) {
         //Extract from center
-        BlockPos center = super.getCenter(world, pos);
+        BlockPos center = getCenter(world, pos);
         if(center != null) {
             Block block = world.getBlockState(center).getBlock();
             if(block instanceof BlockConduitConnect)
@@ -51,7 +51,7 @@ public class PipeConnectorBlock extends RuneBlock implements BlockConduitConnect
     @Override
     public boolean insert(BlockPos pos, BlockView world, Object value) {
         //Insert to center
-        BlockPos center = super.getCenter(world, pos);
+        BlockPos center = getCenter(world, pos);
         if(center != null) {
             Block block = world.getBlockState(center).getBlock();
             if(block instanceof BlockConduitConnect)
