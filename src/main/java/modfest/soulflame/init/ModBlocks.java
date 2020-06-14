@@ -48,7 +48,7 @@ public class ModBlocks {
         rune2 = register("rune/tier2", new RuneBlock(2));
         pipeRune1 = register("rune/pipe1", new PipeConnectorBlock(1));
         pipeRune2 = register("rune/pipe2", new PipeConnectorBlock(2));
-        healRune = register("rune/heal", new HealBlock());
+        healRune = register("rune/healing", new HealBlock());
         extractionRune = register("rune/extraction", new SoulExtractionBlock());
         destinationRune = register("rune/destination", new SoulTeleportBlock(false));
         transportRune = register("rune/transport", new SoulTeleportBlock(true));

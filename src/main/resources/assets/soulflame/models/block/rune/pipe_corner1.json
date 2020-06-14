@@ -2,6 +2,6 @@
   "parent": "soulflame:block/rune/corner_block",
   "textures": {
     "top": "soulflame:block/rune_corner_top1",
-    "side": "soulflame:block/rune_pipe_side"
+    "side": "soulflame:block/rune_pipe_corner"
   }
 }

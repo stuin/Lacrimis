@@ -10,7 +10,7 @@
   "block.soulflame.rune.tier2": "Tier 2 Rune",
   "block.soulflame.rune.pipe1": "Tier 1 Pipe Connector",
   "block.soulflame.rune.pipe2": "Tier 2 Pipe Connector",
-  "block.soulflame.rune.heal": "Healing Rune",
+  "block.soulflame.rune.healing": "Healing Rune",
   "block.soulflame.rune.extraction": "Soul Extraction Rune",
   "block.soulflame.rune.destination": "Soul Destination Rune",
   "block.soulflame.rune.transport": "Two Way Transport Rune",
@@ -24,6 +24,7 @@
 
   "soulflame.error.tears": "Not enough Soul Tears",
   "soulflame.error.platform": "Incomplete Soul Cage",
-  "soulflame.error.target": "No valid ritual target",
+  "soulflame.error.entity": "No valid target entity",
+  "soulflame.error.block": "No valid target block",
   "soulflame.error.destination": "No destination found"
 }

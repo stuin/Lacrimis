@@ -33,7 +33,7 @@ public class BlockTeleportBlock extends CenterRuneBlock {
                 } else
                     error(player, "destination");
             } else
-                error(player, "target");
+                error(player, "block");
         } else
             error(player, "tears");
         return true;

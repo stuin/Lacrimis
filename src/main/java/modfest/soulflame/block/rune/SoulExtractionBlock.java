@@ -26,7 +26,7 @@ public class SoulExtractionBlock extends CenterRuneBlock {
                 } else
                     error(player, "destination");
             } else
-                error(player, "target");
+                error(player, "entity");
         } else
             error(player, "tears");
         return true;

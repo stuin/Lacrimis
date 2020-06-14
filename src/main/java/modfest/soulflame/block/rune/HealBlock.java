@@ -1,5 +1,6 @@
 package modfest.soulflame.block.rune;
 
+import modfest.soulflame.SoulFlame;
 import modfest.soulflame.util.ConduitUtil;
 import modfest.soulflame.util.SoulTank;
 import net.minecraft.entity.LivingEntity;
@@ -15,8 +16,13 @@ public class HealBlock extends CenterRuneBlock {
         //Collect required tears
         Object tank = ConduitUtil.locateSource(world, pipePos(world, pos), SoulTank.source(REQUIRED_TEARS));
         if(tank instanceof SoulTank) {
-            ((SoulTank) tank).removeTears(REQUIRED_TEARS);
-            entity.heal(2);
+            if(entity != null) {
+                ((SoulTank) tank).removeTears(REQUIRED_TEARS);
+                entity.heal(2);
+                if(!world.isClient)
+                    SoulFlame.LOGGER.info("Entity Healed");
+            } else
+                error(player, "entity");
         } else
             error(player, "tears");
         return true;
