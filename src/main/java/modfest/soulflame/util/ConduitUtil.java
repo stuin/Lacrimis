@@ -1,18 +1,24 @@
 package modfest.soulflame.util;
 
-import modfest.soulflame.block.ConduitBlock;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.function.Predicate;
+
+import modfest.soulflame.block.BlockConduitConnect;
 import modfest.soulflame.block.GatedConduitBlock;
+import modfest.soulflame.init.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
-
-import java.util.*;
-import java.util.function.Predicate;
-
-import modfest.soulflame.block.BlockConduitConnect;
-import modfest.soulflame.init.ModBlocks;
 
 public class ConduitUtil {
 

@@ -1,8 +1,15 @@
 package modfest.soulflame.block;
 
+import java.util.List;
+
+import modfest.soulflame.block.entity.CrucibleEntity;
 import modfest.soulflame.init.ModItems;
 import modfest.soulflame.util.SoulTank;
-import net.minecraft.block.*;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
@@ -15,11 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
-
-import modfest.soulflame.block.entity.CrucibleEntity;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 public class CrucibleBlock extends SoulTankBlock implements Activatable {
     private static final VoxelShape RAY_TRACE_SHAPE = createCuboidShape(2.0D, 4.0D, 2.0D, 14.0D, 16.0D, 14.0D);

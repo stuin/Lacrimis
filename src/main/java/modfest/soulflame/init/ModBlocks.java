@@ -1,17 +1,28 @@
 package modfest.soulflame.init;
 
-import modfest.soulflame.block.*;
+import modfest.soulflame.SoulFlame;
 import modfest.soulflame.block.ConduitBlock;
-import modfest.soulflame.block.rune.*;
+import modfest.soulflame.block.CreativeTearsBlock;
+import modfest.soulflame.block.CrucibleBlock;
+import modfest.soulflame.block.GatedConduitBlock;
+import modfest.soulflame.block.InfusionTableBlock;
+import modfest.soulflame.block.TearLantern;
+import modfest.soulflame.block.rune.BlockTeleportBlock;
+import modfest.soulflame.block.rune.HealBlock;
+import modfest.soulflame.block.rune.PipeConnectorBlock;
+import modfest.soulflame.block.rune.RuneBlock;
+import modfest.soulflame.block.rune.SoulExtractionBlock;
+import modfest.soulflame.block.rune.SoulTeleportBlock;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tag.TagRegistry;
-import net.minecraft.block.*;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.Material;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
-import modfest.soulflame.SoulFlame;
 
 public class ModBlocks {
     public static final Block.Settings runeSettings = FabricBlockSettings.copy(Blocks.STONE).nonOpaque();

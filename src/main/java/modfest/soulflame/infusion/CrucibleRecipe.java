@@ -1,6 +1,7 @@
 package modfest.soulflame.infusion;
 
 import com.google.gson.JsonObject;
+
 import modfest.soulflame.init.ModBlocks;
 import modfest.soulflame.init.ModInfusion;
 import net.fabricmc.api.EnvType;
@@ -8,7 +9,11 @@ import net.fabricmc.api.Environment;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.recipe.*;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.RecipeType;
+import net.minecraft.recipe.ShapedRecipe;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.world.World;

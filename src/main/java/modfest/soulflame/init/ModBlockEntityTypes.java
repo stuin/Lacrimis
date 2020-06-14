@@ -1,18 +1,16 @@
 package modfest.soulflame.init;
 
-import modfest.soulflame.block.entity.TearLanternEntity;
-import net.minecraft.block.Block;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-
 import java.util.function.Supplier;
 
 import modfest.soulflame.SoulFlame;
 import modfest.soulflame.block.entity.CrucibleEntity;
 import modfest.soulflame.block.entity.InfusionTableEntity;
 import modfest.soulflame.block.entity.TearLanternEntity;
+import net.minecraft.block.Block;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 public class ModBlockEntityTypes {
 

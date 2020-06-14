@@ -1,16 +1,16 @@
 package modfest.soulflame;
 
-import net.minecraft.item.ItemStack;
-
-import modfest.soulflame.init.ModBlockEntityTypes;
-import modfest.soulflame.init.ModItems;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import modfest.soulflame.init.ModBlockEntityTypes;
 import modfest.soulflame.init.ModBlocks;
 import modfest.soulflame.init.ModInfusion;
+import modfest.soulflame.init.ModItems;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
 public class SoulFlame implements ModInitializer {

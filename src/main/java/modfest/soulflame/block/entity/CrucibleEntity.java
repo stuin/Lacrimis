@@ -1,23 +1,21 @@
 package modfest.soulflame.block.entity;
 
+import java.util.Optional;
+
 import modfest.soulflame.infusion.CrucibleRecipe;
 import modfest.soulflame.infusion.InfusionInventory;
 import modfest.soulflame.init.ModBlockEntityTypes;
 import modfest.soulflame.init.ModInfusion;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
-
-import java.util.Optional;
 
 public class CrucibleEntity extends SoulTankEntity implements Tickable {
 	private static final Box ITEM_BOX = new Box(0, 0.4, 0, 1, 1, 1);

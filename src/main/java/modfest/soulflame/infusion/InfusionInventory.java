@@ -1,11 +1,11 @@
 package modfest.soulflame.infusion;
 
 import modfest.soulflame.block.entity.SoulTankEntity;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.screen.PropertyDelegate;
-import net.minecraft.inventory.SimpleInventory;
 
 public class InfusionInventory extends SimpleInventory {
 	public final PropertyDelegate properties;
