@@ -1,14 +1,13 @@
 package modfest.soulflame.init;
 
+import modfest.soulflame.SoulFlame;
+import modfest.soulflame.item.BottleOfTearsItem;
 import modfest.soulflame.item.DiviningRodItem;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-
-import modfest.soulflame.SoulFlame;
-import modfest.soulflame.item.BottleOfTearsItem;
 
 public class ModItems {
     private static final Item.Settings SETTINGS = new Item.Settings().group(SoulFlame.ITEM_GROUP);

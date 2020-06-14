@@ -2,7 +2,6 @@ package modfest.soulflame.block.entity;
 
 import modfest.soulflame.infusion.InfusionInventory;
 import modfest.soulflame.init.ModBlockEntityTypes;
-
 import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

@@ -1,5 +1,7 @@
 package modfest.soulflame.infusion;
 
+import java.util.Optional;
+
 import modfest.soulflame.init.ModInfusion;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
@@ -7,8 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.RecipeUnlocker;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.collection.DefaultedList;
-
-import java.util.Optional;
 
 public class InfusionResultSlot extends Slot {
 	private final PlayerEntity player;
