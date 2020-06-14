@@ -4,6 +4,7 @@ import modfest.soulflame.SoulFlame;
 import modfest.soulflame.block.Activatable;
 import modfest.soulflame.block.BlockConduitConnect;
 import modfest.soulflame.init.ModBlocks;
+import modfest.soulflame.util.ConduitUtil;
 import modfest.soulflame.util.NeighborList;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -27,9 +28,11 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
     private static final Box TARGET_BOX = new Box(-0.5, 1, -0.5, 1.5, 3, 1.5);
 
     public static final IntProperty PIPE;
+    public final int requiredTears;
 
-    public CenterRuneBlock() {
+    public CenterRuneBlock(int required) {
         super(ModBlocks.runeSettings);
+        this.requiredTears = required;
         setDefaultState(getStateManager().getDefaultState().with(PIPE, 8));
     }
 
@@ -49,18 +52,29 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
         }
         return true;
     }
-
-    public boolean activate(World world, BlockPos pos, PlayerEntity player) {
-        if(!testCage(world, pos)) {
-            error(player, "platform");
-            return false;
-        }
+    
+    private boolean runOnce(World world, BlockPos pos, PlayerEntity player) {
         //For all entities on platform
         for(Entity entity : world.getEntities(null, TARGET_BOX.offset(pos))) {
             if(entity instanceof LivingEntity)
                 return activate(world, pos, (LivingEntity) entity, player);
         }
         return activate(world, pos, null, player);
+    }
+
+    public boolean activate(World world, BlockPos pos, PlayerEntity player) {
+        if(!testCage(world, pos)) {
+            error(player, "platform");
+            return false;
+        }
+        if(ConduitUtil.locateTearsStrong(world, pipePos(world, pos), requiredTears, true)) {
+            if(runOnce(world, pos, player)) {
+                ConduitUtil.locateTearsStrong(world, pipePos(world, pos), requiredTears, false);
+                return true;
+            }
+        } else
+            error(player, "tears");
+        return false;
     }
 
     public abstract boolean activate(World world, BlockPos pos, LivingEntity entity, PlayerEntity player);
@@ -88,6 +102,11 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
     @Override
     public Object extract(BlockPos pos, BlockView world) {
         return null;
+    }
+
+    @Override
+    public int extractTears(BlockPos pos, BlockView world, int request, boolean simulate) {
+        return 0;
     }
 
     @Override

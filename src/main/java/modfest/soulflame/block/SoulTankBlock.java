@@ -24,8 +24,11 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public abstract class SoulTankBlock extends BlockWithEntity implements BlockConduitConnect {
-    protected SoulTankBlock(AbstractBlock.Settings settings) {
+    private final boolean canExtract;
+    
+    protected SoulTankBlock(AbstractBlock.Settings settings, boolean canExtract) {
         super(settings);
+        this.canExtract = canExtract;
     }
 
     @Override
@@ -50,45 +53,45 @@ public abstract class SoulTankBlock extends BlockWithEntity implements BlockCond
             return ActionResult.PASS;
         }
         SoulTankEntity entity = (SoulTankEntity) world.getBlockEntity(pos);
-        int level = entity.getLevel();
-        Item item = stack.getItem();
-        if (item == ModItems.bottleOfTears) {
-            if (level <= 750 && !world.isClient) {
-                if (!player.abilities.creativeMode) {
-                    ItemStack bottle = new ItemStack(Items.GLASS_BOTTLE);
-                    stack.decrement(1);
-                    player.inventory.offerOrDrop(world, bottle);
-                }
-
-                world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                entity.addTears(BottleOfTearsItem.capacity);
-            }
-
-            return ActionResult.success(world.isClient);
-        } else {
-            ItemStack itemStack4;
-            if (item == Items.GLASS_BOTTLE) {
-                if (level >= 250 && !world.isClient) {
-                    if (!player.abilities.creativeMode) {
-                        itemStack4 = new ItemStack(ModItems.bottleOfTears);
+        if(entity != null) {
+            SoulTank tank = entity.getTank();
+            Item item = stack.getItem();
+            if(item == ModItems.bottleOfTears) {
+                if(tank.getSpace() >= 750 && !world.isClient) {
+                    if(!player.abilities.creativeMode) {
+                        ItemStack bottle = new ItemStack(Items.GLASS_BOTTLE);
                         stack.decrement(1);
-                        if (stack.isEmpty()) {
-                            player.setStackInHand(hand, itemStack4);
-                        } else if (!player.inventory.insertStack(itemStack4)) {
-                            player.dropItem(itemStack4, false);
-                        }
+                        player.inventory.offerOrDrop(world, bottle);
                     }
 
-                    world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                    entity.removeTears(level - BottleOfTearsItem.capacity);
+                    world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    tank.addTears(BottleOfTearsItem.capacity);
                 }
 
                 return ActionResult.success(world.isClient);
+            } else {
+                ItemStack itemStack4;
+                if(item == Items.GLASS_BOTTLE) {
+                    if(tank.getTears() >= 250 && !world.isClient) {
+                        if(!player.abilities.creativeMode) {
+                            itemStack4 = new ItemStack(ModItems.bottleOfTears);
+                            stack.decrement(1);
+                            if(stack.isEmpty()) {
+                                player.setStackInHand(hand, itemStack4);
+                            } else if(!player.inventory.insertStack(itemStack4)) {
+                                player.dropItem(itemStack4, false);
+                            }
+                        }
+
+                        world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                        tank.removeTears(BottleOfTearsItem.capacity);
+                    }
+
+                    return ActionResult.success(world.isClient);
+                }
             }
-
-            return ActionResult.PASS;
         }
-
+        return ActionResult.PASS;
     }
 
     public SoulTank getTank(BlockView world, BlockPos pos) {
@@ -110,16 +113,22 @@ public abstract class SoulTankBlock extends BlockWithEntity implements BlockCond
 
     @Override
     public SoulTank extract(BlockPos pos, BlockView world) {
-        if(getTank(world, pos).getTears() == 0)
-            return null;
-        return getTank(world, pos);
+        return null;
+    }
+
+    @Override
+    public int extractTears(BlockPos pos, BlockView world, int request, boolean simulate) {
+        SoulTank tank = getTank(world, pos);
+        if(tank != null && tank.getTears() > 0 && canExtract) {
+            if(simulate)
+                return Math.min(tank.getTears(), request);
+            return tank.removeTears(request);
+        }
+        return 0;
     }
 
     @Override
     public boolean insert(BlockPos pos, BlockView world, Object value) {
-        BlockEntity entity = world.getBlockEntity(pos);
-        if (entity instanceof SoulTankEntity && value instanceof SoulTank)
-            return ((SoulTankEntity) entity).transfer((SoulTank) value);
         return false;
     }
 }

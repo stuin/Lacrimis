@@ -54,7 +54,7 @@ public class InfusionInventory extends SimpleInventory {
 	}
 
 	public void removeTears(int tears) {
-		entity.removeTears(tears);
+		entity.getTank().removeTears(tears);
 	}
 
 	public void readTags(ListTag tags) {

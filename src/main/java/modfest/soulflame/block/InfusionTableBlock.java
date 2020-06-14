@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 
 public class InfusionTableBlock extends SoulTankBlock {
 	public InfusionTableBlock(AbstractBlock.Settings settings) {
-		super(settings);
+		super(settings, false);
 	}
 
 	@Override

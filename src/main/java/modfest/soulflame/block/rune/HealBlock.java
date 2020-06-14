@@ -9,22 +9,19 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class HealBlock extends CenterRuneBlock {
-    private static final int REQUIRED_TEARS = 50;
+    public HealBlock() {
+        super(50);
+    }
 
     @Override
     public boolean activate(World world, BlockPos pos, LivingEntity entity, PlayerEntity player) {
-        //Collect required tears
-        Object tank = ConduitUtil.locateSource(world, pipePos(world, pos), SoulTank.source(REQUIRED_TEARS));
-        if(tank instanceof SoulTank) {
-            if(entity != null) {
-                ((SoulTank) tank).removeTears(REQUIRED_TEARS);
-                entity.heal(2);
-                if(!world.isClient)
-                    SoulFlame.LOGGER.info("Entity Healed");
-            } else
-                error(player, "entity");
+        if(entity != null) {
+            entity.heal(2);
+            if(!world.isClient)
+                SoulFlame.LOGGER.info("Entity Healed");
+            return true;
         } else
-            error(player, "tears");
+            error(player, "entity");
         return true;
     }
 }

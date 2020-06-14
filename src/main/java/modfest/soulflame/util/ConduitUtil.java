@@ -84,6 +84,32 @@ public class ConduitUtil {
         }
         return null;
     }
+    
+    public static boolean locateTearsStrong(BlockView world, BlockPos pos, int request, boolean simulate) {
+        List<Entry> list = listScanConduits(world, pos);
+        if(list != null && list.size() > 0) {
+            int found = 0;
+            
+            //Test for requested amount
+            for(int i = 0; i < list.size() && found < request; i++)
+                found += list.get(i).extractTears(world, request - found, simulate);
+            return found >= request;
+        }
+        return false;
+    }
+
+    public static int locateTears(BlockView world, BlockPos pos, int request) {
+        List<Entry> list = listScanConduits(world, pos);
+        if(list != null && list.size() > 0) {
+            int found = 0;
+
+            //Extract some amount
+            for(int i = 0; i < list.size() && found < request; i++)
+                found += list.get(i).extractTears(world, request - found, false);
+            return found;
+        }
+        return 0;
+    }
 
     public static BlockPos locateSink(BlockView world, BlockPos pos, Object value) {
         List<Entry> list = listScanConduits(world, pos);
@@ -109,10 +135,16 @@ public class ConduitUtil {
 
         public Object extract(BlockView world) {
             Object r = this.b.extract(this.pos, world);
-            if (r != null && world instanceof WorldView) {
+            if (r != null && world instanceof WorldView)
                 this.updateState((WorldView) world);
-            }
             return r;
+        }
+
+        public int extractTears(BlockView world, int request, boolean simulate) {
+            int found = this.b.extractTears(this.pos, world, request, simulate);
+            if(world instanceof WorldView)
+                this.updateState((WorldView) world);
+            return found;
         }
 
         public boolean insert(BlockView world, Object value) {

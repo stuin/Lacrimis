@@ -37,7 +37,7 @@ public class CrucibleEntity extends SoulTankEntity implements Tickable {
 				BlockPos obsidianPos = this.pos.up(dy);
 				BlockState obsidianState = this.world.getBlockState(obsidianPos);
 				if (obsidianState.getBlock() == Blocks.CRYING_OBSIDIAN) {
-					addTears(1);
+					getTank().addTears(1);
 					break;
 				}
 			}
@@ -62,7 +62,7 @@ public class CrucibleEntity extends SoulTankEntity implements Tickable {
 							remainder.decrement(1);
 							((ItemEntity) entity).setStack(remainder);
 							ItemScatterer.spawn(world, pos.up(), new SimpleInventory(recipe.getOutput().copy()));
-							removeTears(recipe.getTears());
+							getTank().removeTears(recipe.getTears());
 							craftTime = 0;
 							break;
 						}

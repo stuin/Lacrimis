@@ -14,28 +14,24 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public class BlockTeleportBlock extends CenterRuneBlock {
-    private static final int REQUIRED_TEARS = 300;
+    public BlockTeleportBlock() {
+        super(300);
+    }
 
     @Override
     public boolean activate(World world, BlockPos pos, LivingEntity entity, PlayerEntity player) {
-        //Collect required tears
-        Object tank = ConduitUtil.locateSource(world, pipePos(world, pos), SoulTank.source(REQUIRED_TEARS));
         BlockState source = world.getBlockState(pos.up());
-        if(tank instanceof SoulTank) {
-            if(!source.isAir()) {
-                BlockPos destination = ConduitUtil.locateSink(world, pipePos(world, pos), pos.up());
-                if(destination != null) {
-                    ((SoulTank) tank).removeTears(REQUIRED_TEARS);
-
-                    if(!world.isClient)
-                        SoulFlame.LOGGER.info("Block Moved");
-                } else
-                    error(player, "destination");
+        if(!source.isAir()) {
+            BlockPos destination = ConduitUtil.locateSink(world, pipePos(world, pos), pos.up());
+            if(destination != null) {
+                if(!world.isClient)
+                    SoulFlame.LOGGER.info("Block Moved");
+                return true;
             } else
-                error(player, "block");
+                error(player, "destination");
         } else
-            error(player, "tears");
-        return true;
+            error(player, "block");
+        return false;
     }
 
     @Override

@@ -44,6 +44,11 @@ public class PipeConnectorBlock extends RuneBlock implements BlockConduitConnect
     }
 
     @Override
+    public int extractTears(BlockPos pos, BlockView world, int request, boolean simulate) {
+        return 0;
+    }
+
+    @Override
     public boolean insert(BlockPos pos, BlockView world, Object value) {
         //Insert to center
         BlockPos center = super.getCenter(world, pos);
