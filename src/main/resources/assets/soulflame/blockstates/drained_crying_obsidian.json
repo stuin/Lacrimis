@@ -1,0 +1,7 @@
+{
+  "multipart": [
+    {
+      "apply": { "model": "soulflame:block/drained_crying_obsidian" }
+    }
+  ]
+}
