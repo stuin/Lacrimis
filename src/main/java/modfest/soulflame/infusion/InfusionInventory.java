@@ -26,7 +26,7 @@ public class InfusionInventory extends SimpleInventory {
 			public int get(int index) {
 				switch (index) {
 					case 0:
-						return entity.getLevel();
+						return entity.getTank().getTears();
 					default:
 						return 0;
 				}
