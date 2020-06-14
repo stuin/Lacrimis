@@ -1,6 +1,9 @@
 package modfest.soulflame.block;
 
-import modfest.soulflame.block.entity.SoulUserEntity;
+import modfest.soulflame.block.entity.SoulTankEntity;
+import modfest.soulflame.init.ModItems;
+import modfest.soulflame.item.BottleOfTearsItem;
+import modfest.soulflame.util.SoulTank;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -19,11 +22,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-
-import modfest.soulflame.block.entity.SoulTankEntity;
-import modfest.soulflame.init.ModItems;
-import modfest.soulflame.item.BottleOfTearsItem;
-import modfest.soulflame.util.SoulTank;
 
 public abstract class SoulTankBlock extends BlockWithEntity implements BlockConduitConnect {
     protected SoulTankBlock(AbstractBlock.Settings settings) {

@@ -1,0 +1,10 @@
+{
+  "type": "soulflame:crucible",
+  "base": {
+    "item": "minecraft:stick"
+  },
+  "result": {
+    "item": "soulflame:divining_rod"
+  },
+  "tears": 40
+}

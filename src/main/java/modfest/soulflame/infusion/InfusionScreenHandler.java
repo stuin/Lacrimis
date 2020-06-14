@@ -24,6 +24,7 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 	private final CraftingResultInventory result;
 	private final InfusionTableEntity entity;
 	private final PlayerEntity player;
+	private int requiredTears = 0;
 
 	public InfusionScreenHandler(int syncId, PlayerEntity player, InfusionTableEntity entity) {
 		super(null, syncId);
@@ -34,9 +35,9 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 		this.addProperties(input.properties);
 		
 		this.addSlot(new InfusionResultSlot(player, this.input, this.result, 0, 124, 35));
-		if (!entity.getWorld().isClient) {
+		if (!entity.getWorld().isClient)
 			this.input.addListener(this);
-		}
+		
 		for (int y = 0; y < 3; ++y) {
 			for (int x = 0; x < 3; ++x) {
 				this.addSlot(new Slot(this.input, x + y * 3, 30 + x * 18, 17 + y * 18));
@@ -58,7 +59,6 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 		if (!world.isClient) {
 			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
 			ItemStack itemStack = ItemStack.EMPTY;
-
 
 			Optional<ShapedInfusionRecipe> optional = world.getServer()
 					.getRecipeManager()
@@ -188,7 +188,11 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 		return 10;
 	}
 
-	public int getTearsLevel() {
+	public int getAvailableTears() {
 		return this.entity.getLevel();
+	}
+
+	public int getRequiredTears() {
+		return this.requiredTears;
 	}
 }

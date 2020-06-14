@@ -1,16 +1,24 @@
 package modfest.soulflame.util;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.function.Predicate;
+
+import modfest.soulflame.block.BlockConduitConnect;
+import modfest.soulflame.block.GatedConduitBlock;
+import modfest.soulflame.init.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
-
-import java.util.*;
-import java.util.function.Predicate;
-
-import modfest.soulflame.block.BlockConduitConnect;
-import modfest.soulflame.init.ModBlocks;
 
 public class ConduitUtil {
 
@@ -33,11 +41,12 @@ public class ConduitUtil {
                     outputs.add(direction);
                 }
             }
-        } else if (source.getBlock() == ModBlocks.conduit) {
+        } else if (source.getBlock() == ModBlocks.conduit)
             outputs = EnumSet.allOf(Direction.class);
-        } else {
+        else if (source.getBlock() == ModBlocks.gatedConduit && source.get(GatedConduitBlock.POWERED))
+            outputs = EnumSet.allOf(Direction.class);
+        else
             outputs = EnumSet.noneOf(Direction.class);
-        }
 
         stack.push(pos);
         scanned.add(pos);
@@ -50,6 +59,8 @@ public class ConduitUtil {
 
                 BlockState nextState = world.getBlockState(next);
                 if (nextState.getBlock() == ModBlocks.conduit)
+                    stack.push(next);
+                else if (nextState.getBlock() == ModBlocks.gatedConduit && nextState.get(GatedConduitBlock.POWERED))
                     stack.push(next);
                 else if (nextState.getBlock() instanceof BlockConduitConnect) {
                     BlockConduitConnect b = (BlockConduitConnect) nextState.getBlock();
@@ -69,6 +80,17 @@ public class ConduitUtil {
                 Object value = e.extract(world);
                 if(value != null && filter.test(value))
                     return value;
+            }
+        }
+        return null;
+    }
+
+    public static BlockPos locateSink(BlockView world, BlockPos pos, Object value) {
+        List<Entry> list = listScanConduits(world, pos);
+        if(list != null && list.size() > 0) {
+            for(Entry e : list) {
+                if(e.insert(world, value))
+                    return e.pos;
             }
         }
         return null;

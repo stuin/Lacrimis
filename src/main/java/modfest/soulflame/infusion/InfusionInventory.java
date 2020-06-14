@@ -1,18 +1,18 @@
 package modfest.soulflame.infusion;
 
+import modfest.soulflame.block.entity.SoulTankEntity;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.screen.PropertyDelegate;
-import modfest.soulflame.block.entity.InfusionTableEntity;
-import net.minecraft.inventory.SimpleInventory;
 
 public class InfusionInventory extends SimpleInventory {
 	public final PropertyDelegate properties;
-	public final InfusionTableEntity entity;
+	public final SoulTankEntity entity;
 
-	public InfusionInventory(InfusionTableEntity entity) {
-		super(9);
+	public InfusionInventory(SoulTankEntity entity, int size) {
+		super(size);
 		this.entity = entity;
 
 		entity.getTank().addListener(this::markDirty);

@@ -5,9 +5,6 @@ import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-
-import java.util.Optional;
 
 public class CreativeTearsBlock extends Block implements BlockConduitConnect {
     private static final int MAX = 1000;

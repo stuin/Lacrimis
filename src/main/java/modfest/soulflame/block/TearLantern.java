@@ -1,5 +1,7 @@
 package modfest.soulflame.block;
 
+import java.util.Random;
+
 import modfest.soulflame.block.entity.TearLanternEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -12,8 +14,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class TearLantern extends LanternBlock implements BlockEntityProvider {
     public TearLantern(Settings settings) {

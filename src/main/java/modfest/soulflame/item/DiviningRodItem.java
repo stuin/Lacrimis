@@ -3,6 +3,7 @@ package modfest.soulflame.item;
 import modfest.soulflame.block.Activatable;
 import modfest.soulflame.block.SoulTankBlock;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.text.LiteralText;
@@ -22,19 +23,20 @@ public class DiviningRodItem extends Item {
         World world = context.getWorld();
         BlockPos pos = context.getBlockPos();
         Block block = world.getBlockState(pos).getBlock();
-        boolean done = false;
+        PlayerEntity player = context.getPlayer();
 
-        if(block instanceof Activatable && ((Activatable) block).activate(world, pos))
-            done = true;
-
-        if(block instanceof SoulTankBlock && world.isClient && context.getPlayer() != null) {
-            int level = ((SoulTankBlock)block).getTank(world, pos).getTears();
-            Text text = new LiteralText(level + " Tears");
-            context.getPlayer().sendMessage(text, false);
-            done = true;
+        //Read tears
+        if(block instanceof SoulTankBlock && player != null && !player.isSneaking()) {
+            if(!world.isClient) {
+                int level = ((SoulTankBlock) block).getTank(world, pos).getTears();
+                Text text = new LiteralText(level + " Tears");
+                player.sendMessage(text, false);
+            }
+            return ActionResult.SUCCESS;
         }
-        
-        if(done)
+
+        //Activate block
+        if(block instanceof Activatable && ((Activatable) block).activate(world, pos, player))
             return ActionResult.SUCCESS;
         return super.useOnBlock(context);
     }

@@ -2,6 +2,7 @@ package modfest.soulflame.init;
 
 import modfest.soulflame.SoulFlame;
 import modfest.soulflame.block.entity.InfusionTableEntity;
+import modfest.soulflame.infusion.CrucibleRecipe;
 import modfest.soulflame.infusion.InfusionScreen;
 import modfest.soulflame.infusion.InfusionScreenHandler;
 import modfest.soulflame.infusion.ShapedInfusionRecipe;
@@ -31,8 +32,15 @@ public class ModInfusion {
 			return "infusion";
 		}
 	};
+	public static final RecipeType<CrucibleRecipe> CRUCIBLE_RECIPE = new RecipeType<CrucibleRecipe>() {
+		@Override
+		public String toString() {
+			return "crucible";
+		}
+	};
 
 	public static final RecipeSerializer<ShapedInfusionRecipe> SHAPED_INFUSION_SERIALIZER = new ShapedInfusionRecipe.Serializer();
+	public static final RecipeSerializer<CrucibleRecipe> CRUCIBLE_SERIALIZER = new CrucibleRecipe.Serializer();
 
 	public static void register() {
 		ContainerProviderRegistry.INSTANCE.registerFactory(INFUSION_SCREEN_ID, new ContainerFactory<ScreenHandler>() {
@@ -45,8 +53,10 @@ public class ModInfusion {
 		});
 
 		Registry.register(Registry.RECIPE_TYPE, SoulFlame.MODID + ":infusion", INFUSION_RECIPE);
+		Registry.register(Registry.RECIPE_TYPE, SoulFlame.MODID + ":crucible", CRUCIBLE_RECIPE);
 
 		Registry.register(Registry.RECIPE_SERIALIZER, SoulFlame.MODID + ":infusion_shaped", SHAPED_INFUSION_SERIALIZER);
+		Registry.register(Registry.RECIPE_SERIALIZER, SoulFlame.MODID + ":crucible", CRUCIBLE_SERIALIZER);
 	}
 
 	@Environment(EnvType.CLIENT)
