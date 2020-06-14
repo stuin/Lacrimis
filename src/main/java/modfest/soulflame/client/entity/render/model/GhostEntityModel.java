@@ -26,43 +26,43 @@ public class GhostEntityModel extends CompositeEntityModel<GhostEntity> {
     public GhostEntityModel() {
         this.textureWidth = 64;
         this.textureHeight = 64;
-        this.head = createPart(this, 0, 0,
+        this.head = createPartFlipped(this, 0, 0,
                 0.0f, 28.0f, 0.0f,
                 8.0f, 8.0f, 8.0f,
                 0.0f, 24.0f, 0.0f);
-        this.body = createPart(this, 16, 16,
+        this.body = createPartFlipped(this, 16, 16,
                 0.0f, 18.0f, 0.0f,
                 8.0f, 12.0f, 4.0f,
                 0.0f, 24.0f, 0.0f);
-        this.upperArmLeft = createPart(this, this.body, 32, 44,
+        this.upperArmLeft = createPartFlipped(this, this.body, 32, 44,
                 6.0f, 21.0f, 0.0f,
                 4.0f, 6.0f, 4.0f,
                 4.0f, 22.0f, 0.0f);
-        this.upperArmRight = createPart(this, this.body, 40, 16,
+        this.upperArmRight = createPartFlipped(this, this.body, 40, 16,
                 -6.0f, 21.0f, 0.0f,
                 4.0f, 6.0f, 4.0f,
                 -4.0f, 22.0f, 0.0f);
-        this.lowerArmLeft = createPart(this, this.upperArmLeft, 32, 54,
+        this.lowerArmLeft = createPartFlipped(this, this.upperArmLeft, 32, 54,
                 6.0f, 15.0f, 0.0f,
                 4.0f, 6.0f, 4.0f,
                 6.0f, 18.0f, 0.0f);
-        this.lowerArmRight = createPart(this, this.upperArmRight, 40, 26,
+        this.lowerArmRight = createPartFlipped(this, this.upperArmRight, 40, 26,
                 -6.0f, 15.0f, 0.0f,
                 4.0f, 6.0f, 4.0f,
                 -6.0f, 18.0f, 0.0f);
-        this.upperLegLeft = createPart(this, this.body, 16, 44,
+        this.upperLegLeft = createPartFlipped(this, this.body, 16, 44,
                 2.0f, 9.0f, 0.0f,
                 4.0f, 6.0f, 4.0f,
                 2.0f, 12.0f, 0.0f);
-        this.upperLegRight = createPart(this, this.body, 0, 16,
+        this.upperLegRight = createPartFlipped(this, this.body, 0, 16,
                 -2.0f, 9.0f, 0.0f,
                 4.0f, 6.0f, 4.0f,
                 -2.0f, 12.0f, 0.0f);
-        this.lowerLegLeft = createPart(this, this.upperLegLeft, 16, 54,
+        this.lowerLegLeft = createPartFlipped(this, this.upperLegLeft, 16, 54,
                 2.0f, 3.0f, 0.0f,
                 4.0f, 6.0f, 4.0f,
                 2.0f, 6.0f, 0.0f);
-        this.lowerLegRight = createPart(this, this.upperLegRight, 0, 26,
+        this.lowerLegRight = createPartFlipped(this, this.upperLegRight, 0, 26,
                 -2.0f, 3.0f, 0.0f,
                 4.0f, 6.0f, 4.0f,
                 -2.0f, 6.0f, 0.0f);
@@ -75,14 +75,33 @@ public class GhostEntityModel extends CompositeEntityModel<GhostEntity> {
         return part;
     }
 
-    private static LinkedModelPart createPart(Model model, LinkedModelPart parent, int u, int v, float x, float y, float z, float sx, float sy, float sz, float px, float py, float pz) {
-        LinkedModelPart part = createPart(model, u, v,
-                x - parent.getTotalPivotX(), y - parent.getTotalPivotY(), z - parent.getTotalPivotZ(),
+    private static LinkedModelPart createPartFlipped(Model model, int u, int v, float x, float y, float z, float sx, float sy, float sz, float px, float py, float pz) {
+        return createPart(model, u, v,
+                x, -y + 2 * py, z,
                 sx, sy, sz,
-                px - parent.getTotalPivotX(), py - parent.getTotalPivotY(), pz - parent.getTotalPivotZ());
+                px, py, pz);
+    }
+
+    private static LinkedModelPart createPart(Model model, LinkedModelPart parent, int u, int v, float x, float y, float z, float sx, float sy, float sz, float px, float py, float pz) {
+        float ppx = parent.getTotalPivotX();
+        float ppy = parent.getTotalPivotY();
+        float ppz = parent.getTotalPivotZ();
+
+        LinkedModelPart part = createPart(model, u, v,
+                x - ppx, -y + ppy, -z + ppz,
+                sx, sy, sz,
+                px - ppx, -py + ppy, -pz + ppz);
         parent.addChild(part);
         part.parent = parent;
         return part;
+    }
+
+    private static LinkedModelPart createPartFlipped(Model model, LinkedModelPart parent, int u, int v, float x, float y, float z, float sx, float sy, float sz, float px, float py, float pz) {
+
+        return createPart(model, parent, u, v,
+                x, -y + 2 * py, z,
+                sx, sy, sz,
+                px, py, pz);
     }
 
     @Override
@@ -101,7 +120,7 @@ public class GhostEntityModel extends CompositeEntityModel<GhostEntity> {
         float pitch = (float) velocity.dotProduct(bodyRot);
         float roll = (float) velocity.dotProduct(bodyRotSide);
 
-        this.head.yaw = (float) (-(headYaw + 180) * Math.PI / 180);
+        this.head.yaw = (float) (-headYaw * Math.PI / 180);
         this.head.pitch = (float) (headPitch * Math.PI / 180);
         this.body.yaw = (float) (-yaw * Math.PI / 180);
         this.body.pitch = pitch;
@@ -130,6 +149,18 @@ public class GhostEntityModel extends CompositeEntityModel<GhostEntity> {
         this.lowerLegRight.yaw = 0.0f;
         this.lowerLegRight.pitch = pitch;
         this.lowerLegRight.roll = roll;
+
+        // flip by 180°
+        this.head.pitch += Math.PI;
+        this.body.pitch += Math.PI;
+        this.upperArmLeft.pitch += Math.PI;
+        this.upperArmRight.pitch += Math.PI;
+        this.lowerArmLeft.pitch += Math.PI;
+        this.lowerArmRight.pitch += Math.PI;
+        this.upperLegLeft.pitch += Math.PI;
+        this.upperLegRight.pitch += Math.PI;
+        this.lowerLegLeft.pitch += Math.PI;
+        this.lowerLegRight.pitch += Math.PI;
     }
 
     private static Vec3d getRotationVector(float pitch, float yaw) {
