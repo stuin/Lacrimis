@@ -6,6 +6,7 @@ import net.minecraft.client.model.ModelPart;
 public class LinkedModelPart extends ModelPart {
 
     public LinkedModelPart parent;
+    public boolean flipped;
 
     public LinkedModelPart(Model model) {
         super(model);
@@ -24,11 +25,11 @@ public class LinkedModelPart extends ModelPart {
     }
 
     public float getTotalPivotY() {
-        return this.parent == null ? this.pivotY : this.parent.getTotalPivotY() + this.pivotY;
+        return this.parent == null ? this.pivotY : -this.parent.getTotalPivotY() + this.pivotY;
     }
 
     public float getTotalPivotZ() {
-        return this.parent == null ? this.pivotZ : this.parent.getTotalPivotZ() + this.pivotZ;
+        return this.parent == null ? this.pivotZ : -this.parent.getTotalPivotZ() + this.pivotZ;
     }
 
 }
