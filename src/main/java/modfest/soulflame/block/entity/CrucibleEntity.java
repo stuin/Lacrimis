@@ -9,7 +9,6 @@ import modfest.soulflame.init.ModInfusion;
 import modfest.soulflame.init.ModNetworking;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
@@ -38,7 +37,7 @@ public class CrucibleEntity extends SoulTankEntity implements Tickable {
                 BlockPos obsidianPos = this.pos.up(dy);
                 BlockState obsidianState = this.world.getBlockState(obsidianPos);
                 if (obsidianState.getBlock() == Blocks.CRYING_OBSIDIAN) {
-                    addTears(1);
+                    this.getTank().addTears(1);
                     break;
                 }
             }
