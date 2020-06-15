@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CryingObsidianBlock;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.state.StateManager.Builder;
 import net.minecraft.state.property.IntProperty;
@@ -31,6 +32,11 @@ public class DrainedCryingObsidianBlock extends CryingObsidianBlock {
     protected void appendProperties(Builder<Block, BlockState> builder) {
         builder.add(TEARS_LEAST);
         builder.add(TEARS_MOST);
+    }
+
+    @Override
+    public PistonBehavior getPistonBehavior(BlockState state) {
+        return PistonBehavior.BLOCK;
     }
 
     @Environment(EnvType.CLIENT)
@@ -75,5 +81,4 @@ public class DrainedCryingObsidianBlock extends CryingObsidianBlock {
         else if (self.getBlock() == Blocks.CRYING_OBSIDIAN) return 501;
         else return getTearsValue(self) + 1;
     }
-
 }

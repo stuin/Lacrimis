@@ -16,7 +16,8 @@ import net.minecraft.util.registry.Registry;
 
 public class ModBlocks {
     public static final Block.Settings conduitSettings = AbstractBlock.Settings.of(Material.STONE).strength(0.25f);
-    public static final Block.Settings wardedSettings = FabricBlockSettings.copy(Blocks.STONE).strength(-1.0F, 3600000.0F);
+    public static final Block.Settings wardedSettings = FabricBlockSettings.copy(Blocks.STONE)
+            .strength(-1.0F, 3600000.0F);
     public static final Block.Settings runeSettings = FabricBlockSettings.copy(Blocks.STONE);
     public static Tag<Block> cage_materials;
     public static Tag<Block> non_transportable;
@@ -57,7 +58,7 @@ public class ModBlocks {
         oneWayConduit = register("one_way_conduit", new OneWayConduitBlock(conduitSettings));
         tearLantern = register("tear_lantern", new TearLantern(AbstractBlock.Settings.of(Material.METAL).requiresTool().strength(3.5F).sounds(BlockSoundGroup.LANTERN).lightLevel((state) -> 5).nonOpaque()));
         drainedCryingObsidian = register("drained_crying_obsidian", new DrainedCryingObsidianBlock(FabricBlockSettings.copy(Blocks.CRYING_OBSIDIAN)));
-        creativeTearsBlock = register("creative_tears_block", new CreativeTearsBlock(FabricBlockSettings.copy(Blocks.STONE)));
+        creativeTearsBlock = register("creative_tears_block", new CreativeTearsBlock(wardedSettings));
         wardedStone = register("warded", new WardedBlock(wardedSettings));
 
         runeStone = register("rune/stone", new Block(runeSettings));
