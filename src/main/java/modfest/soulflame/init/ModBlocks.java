@@ -14,7 +14,6 @@ import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.CryingObsidianBlock;
 import net.minecraft.block.Material;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.tag.Tag;
@@ -23,7 +22,8 @@ import net.minecraft.util.registry.Registry;
 
 public class ModBlocks {
     public static final Block.Settings runeSettings = FabricBlockSettings.copy(Blocks.STONE).nonOpaque();
-    public static Tag<Block> conductive;
+    public static Tag<Block> cage_materials;
+    public static Tag<Block> non_transportable;
 
     //Main blocks
     public static InfusionTableBlock infusionTable;
@@ -68,7 +68,8 @@ public class ModBlocks {
         transportRune = register("rune/entity_transport", new SoulTeleportBlock(true));
         blockTransportRune = register("rune/block_transport", new BlockTeleportBlock());
 
-        conductive = TagRegistry.block(new Identifier(SoulFlame.MODID, "conductive"));
+        cage_materials = TagRegistry.block(new Identifier(SoulFlame.MODID, "cage_materials"));
+        non_transportable = TagRegistry.block(new Identifier(SoulFlame.MODID, "non_transportable"));
     }
 
     private static <T extends Block> T register(String name, T block) {

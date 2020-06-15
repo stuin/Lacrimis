@@ -14,6 +14,7 @@ import net.minecraft.util.registry.Registry;
 
 public class ModItems {
     private static final Item.Settings SETTINGS = new Item.Settings().group(SoulFlame.ITEM_GROUP);
+    private static final Item.Settings TOOLSETTINGS = new Item.Settings().group(SoulFlame.ITEM_GROUP).maxCount(1);
 
     //Main blocks
     public static BlockItem infusionTable;
@@ -41,6 +42,8 @@ public class ModItems {
     public static BlockItem flipRune;
     public static BlockItem pipeRune1;
     public static BlockItem pipeRune2;
+
+    //Rune center blocks
     public static BlockItem healRune;
     public static BlockItem extractionRune;
     public static BlockItem destinationRune;
@@ -57,13 +60,17 @@ public class ModItems {
         drainedCryingObsidian = register("drained_crying_obsidian", ModBlocks.drainedCryingObsidian);
 
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
-        diviningRod = register("divining_rod", new DiviningRodItem(SETTINGS));
-        tearIngot = register("tear_ingot", new Item((new Item.Settings()).group(SoulFlame.ITEM_GROUP)));
+        diviningRod = register("divining_rod", new DiviningRodItem(TOOLSETTINGS));
+        tearIngot = register("tear_ingot", new Item(SETTINGS));
 
-        tearSoakenHelmet = register("tear_soaked_helmet", new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.HEAD, new Item.Settings().group(SoulFlame.ITEM_GROUP)));
-        tearSoakenChestplate = register("tear_soaked_chestplate", new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.CHEST, new Item.Settings().group(SoulFlame.ITEM_GROUP)));
-        tearSoakenLeggings = register("tear_soaked_leggings", new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.LEGS, new Item.Settings().group(SoulFlame.ITEM_GROUP)));
-        tearSoakenBoots = register("tear_soaked_boots", new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.FEET, new Item.Settings().group(SoulFlame.ITEM_GROUP)));
+        tearSoakenHelmet = register("tear_soaked_helmet",
+                new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.HEAD, TOOLSETTINGS));
+        tearSoakenChestplate = register("tear_soaked_chestplate",
+                new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.CHEST, TOOLSETTINGS));
+        tearSoakenLeggings = register("tear_soaked_leggings",
+                new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.LEGS, TOOLSETTINGS));
+        tearSoakenBoots = register("tear_soaked_boots",
+                new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.FEET, TOOLSETTINGS));
 
         rune1 = register("rune/tier1", ModBlocks.rune1);
         rune2 = register("rune/tier2", ModBlocks.rune2);
@@ -77,7 +84,7 @@ public class ModItems {
         transportRune = register("rune/entity_transport", ModBlocks.transportRune);
         blockTransportRune = register("rune/block_transport", ModBlocks.blockTransportRune);
 
-        }
+    }
 
     private static <T extends Item> T register(String name, T item) {
         return Registry.register(Registry.ITEM, new Identifier(SoulFlame.MODID, name), item);

@@ -34,7 +34,7 @@ public class RuneBlock extends Block implements Activatable {
         if(tier == 1) {
             for(int y = 0; y < 2; y++) {
                 pos = pos.offset(flipped);
-                if(!world.getBlockState(pos).getBlock().isIn(ModBlocks.conductive))
+                if(!world.getBlockState(pos).getBlock().isIn(ModBlocks.cage_materials))
                     return -1;
             }
         }

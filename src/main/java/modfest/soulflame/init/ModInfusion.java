@@ -29,13 +29,13 @@ public class ModInfusion {
 	public static final RecipeType<ShapedInfusionRecipe> INFUSION_RECIPE = new RecipeType<ShapedInfusionRecipe>() {
 		@Override
 		public String toString() {
-			return "infusion";
+			return SoulFlame.MODID + ":infusion_shaped";
 		}
 	};
 	public static final RecipeType<CrucibleRecipe> CRUCIBLE_RECIPE = new RecipeType<CrucibleRecipe>() {
 		@Override
 		public String toString() {
-			return "crucible";
+			return SoulFlame.MODID + ":crucible";
 		}
 	};
 
@@ -52,7 +52,7 @@ public class ModInfusion {
 			}
 		});
 
-		Registry.register(Registry.RECIPE_TYPE, SoulFlame.MODID + ":infusion", INFUSION_RECIPE);
+		Registry.register(Registry.RECIPE_TYPE, SoulFlame.MODID + ":infusion_shaped", INFUSION_RECIPE);
 		Registry.register(Registry.RECIPE_TYPE, SoulFlame.MODID + ":crucible", CRUCIBLE_RECIPE);
 
 		Registry.register(Registry.RECIPE_SERIALIZER, SoulFlame.MODID + ":infusion_shaped", SHAPED_INFUSION_SERIALIZER);

@@ -1,6 +1,7 @@
 package modfest.soulflame.block.rune;
 
 import modfest.soulflame.SoulFlame;
+import modfest.soulflame.init.ModBlocks;
 import modfest.soulflame.util.ConduitEntry;
 import modfest.soulflame.util.ConduitUtil;
 import net.minecraft.block.BlockState;
@@ -42,6 +43,10 @@ public class BlockTeleportBlock extends CenterRuneBlock {
             BlockPos source = (BlockPos) value;
             BlockState sourceState = world.getBlockState(source);
             BlockState destState = world.getBlockState(dest);
+
+            if(sourceState.getBlock().isIn(ModBlocks.non_transportable) ||
+                    destState.getBlock().isIn(ModBlocks.non_transportable))
+                return false;
 
             //Set destination block
             BlockEntity sourceEntity = world.getBlockEntity(source);
