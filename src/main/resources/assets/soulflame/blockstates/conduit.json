@@ -1,31 +1,36 @@
 {
   "multipart": [
     {
-      "apply": { "model": "soulflame:block/conduit/center" }
+      "when": { "node": true },
+      "apply": { "model": "soulflame:block/conduit/node" }
+    },
+    {
+      "when": { "node": false },
+      "apply": { "model": "soulflame:block/conduit/no_node" }
     },
     {
       "when": { "down": true },
-      "apply": { "model": "soulflame:block/conduit/side" }
+      "apply": { "model": "soulflame:block/conduit/side", "uvlock": true }
     },
     {
       "when": { "up": true },
-      "apply": { "model": "soulflame:block/conduit/side", "x": 180 }
+      "apply": { "model": "soulflame:block/conduit/side", "uvlock": true, "x": 180 }
     },
     {
       "when": { "north": true },
-      "apply": { "model": "soulflame:block/conduit/side", "x": 90, "y": 180 }
+      "apply": { "model": "soulflame:block/conduit/side", "uvlock": true, "x": 90, "y": 180 }
     },
     {
       "when": { "south": true },
-      "apply": { "model": "soulflame:block/conduit/side", "x": 90 }
+      "apply": { "model": "soulflame:block/conduit/side", "uvlock": true, "x": 90 }
     },
     {
       "when": { "west": true },
-      "apply": { "model": "soulflame:block/conduit/side", "x": 90, "y": 90 }
+      "apply": { "model": "soulflame:block/conduit/side", "uvlock": true, "x": 90, "y": 90 }
     },
     {
       "when": { "east": true },
-      "apply": { "model": "soulflame:block/conduit/side", "x": 90, "y": 270 }
+      "apply": { "model": "soulflame:block/conduit/side", "uvlock": true, "x": 90, "y": 270 }
     }
   ]
 }
