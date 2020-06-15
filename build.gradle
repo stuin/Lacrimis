@@ -31,6 +31,9 @@ repositories {
 	maven {
 		url = 'https://maven.blamejared.com' 
 	}
+	maven {
+		url = 'https://maven.dblsaiko.net'
+	}
 }
 
 dependencies {
@@ -41,6 +44,9 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	modImplementation 'net.dblsaiko.qcommon.croco:croco:2.1.2'
+	include 'net.dblsaiko.qcommon.croco:croco:2.1.2'
 
 	//Wrenchable api
 	//def wrenchVersion = "com.github.Zundrel:Wrenchable:${project.wrenchable_version}"

@@ -1,10 +1,5 @@
 package modfest.soulflame.init;
 
-import modfest.soulflame.SoulFlame;
-import modfest.soulflame.item.BottleOfTearsItem;
-import modfest.soulflame.item.DiviningRodItem;
-import modfest.soulflame.item.TarotCardItem;
-import modfest.soulflame.item.armor.CustomArmorMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
@@ -12,6 +7,17 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+
+import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import modfest.soulflame.SoulFlame;
+import modfest.soulflame.item.BottleOfTearsItem;
+import modfest.soulflame.item.DiviningRodItem;
+import modfest.soulflame.item.TarotCardItem;
+import modfest.soulflame.item.armor.CustomArmorMaterials;
+import modfest.soulflame.util.TarotCardType;
 
 public class ModItems {
     private static final Item.Settings SETTINGS = new Item.Settings().group(SoulFlame.ITEM_GROUP);
@@ -40,7 +46,7 @@ public class ModItems {
     public static Item tearSoakenBoots;
 
     // Tarot cards
-    public static TarotCardItem baseTarot;
+    public static Map<TarotCardType, TarotCardItem> tarotCards;
 
     //Rune cage blocks
     public static BlockItem runeStone;
@@ -82,7 +88,10 @@ public class ModItems {
         tearSoakenBoots = register("tear_soaked_boots",
                 new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.FEET, TOOL_SETTINGS));
 
-        baseTarot = register("base_tarot", new TarotCardItem(TAROT_SETTINGS));
+        tarotCards = Arrays.stream(TarotCardType.values())
+                .collect(Collectors.toMap(
+                        k -> k,
+                        k -> register(String.format("tarot_card_%s", k.id), new TarotCardItem(k, TAROT_SETTINGS))));
 
         runeStone = register2("rune/stone", ModBlocks.runeStone);
         rune1 = register2("rune/tier1", ModBlocks.rune1);

@@ -26,7 +26,7 @@ public class SoulFlame implements ModInitializer {
             .build();
     public static final ItemGroup TAROT_ITEM_GROUP = FabricItemGroupBuilder.create(
             new Identifier(MODID, "tarot"))
-            .icon(() -> new ItemStack(ModItems.baseTarot))
+            .icon(() -> new ItemStack(ModItems.crucible))
             .build();
 
     @Override
