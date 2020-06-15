@@ -21,10 +21,10 @@ public class TaintPacket {
     
     public void spawn(World world, BlockPos pos) {
         AreaEffectCloudEntity entity = new AreaEffectCloudEntity(world, pos.getX(), pos.getY(), pos.getZ());
-        entity.setRadius(amount * 2);
-        entity.addEffect(new StatusEffectInstance(ModStatusEffects.WAVERING_SOUL, amount * 500));
-        entity.addEffect(new StatusEffectInstance(StatusEffects.POISON, amount * 200));
-        entity.setDuration(amount * 500);
+        entity.setRadius(amount / 150.0f);
+        entity.addEffect(new StatusEffectInstance(ModStatusEffects.WAVERING_SOUL, amount * 2));
+        entity.addEffect(new StatusEffectInstance(StatusEffects.POISON, amount));
+        entity.setDuration(amount * 2);
         world.spawnEntity(entity);
 
         if(!world.isClient)

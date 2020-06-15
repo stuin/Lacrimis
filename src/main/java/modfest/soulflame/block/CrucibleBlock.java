@@ -5,6 +5,7 @@ import java.util.List;
 import modfest.soulflame.block.entity.CrucibleEntity;
 import modfest.soulflame.init.ModItems;
 import modfest.soulflame.util.SoulTank;
+import modfest.soulflame.util.TaintPacket;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
