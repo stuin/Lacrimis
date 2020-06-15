@@ -22,6 +22,11 @@
   "item.soulflame.divining_rod": "Divining Rod",
   "item.soulflame.tear_ingot": "Tear Soaked Iron",
 
+  "item.soulflame.tear_soaked_helmet": "Tear Soaked Helmet",
+  "item.soulflame.tear_soaked_chestplate": "Tear Soaked Chestplate",
+  "item.soulflame.tear_soaked_leggings": "Tear Soaked Leggings",
+  "item.soulflame.tear_soaked_boots": "Tear Soaked Boots",
+
   "gui.soulflame.infusion": "Infusion Table",
   "itemGroup.soulflame.group": "Soulflame",
 

@@ -3,7 +3,10 @@ package modfest.soulflame.init;
 import modfest.soulflame.SoulFlame;
 import modfest.soulflame.item.BottleOfTearsItem;
 import modfest.soulflame.item.DiviningRodItem;
+import modfest.soulflame.item.armor.CustomArmorMaterials;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
@@ -38,6 +41,11 @@ public class ModItems {
     public static DiviningRodItem diviningRod;
     public static Item tearIngot;
 
+    public static Item tearSoakenHelmet;
+    public static Item tearSoakenChestplate;
+    public static Item tearSoakenLeggings;
+    public static Item tearSoakenBoots;
+
     public static void register() {
         infusionTable = register("infusion_table", ModBlocks.infusionTable);
         crucible = register("crucible", ModBlocks.crucible);
@@ -61,6 +69,11 @@ public class ModItems {
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
         diviningRod = register("divining_rod", new DiviningRodItem(SETTINGS));
         tearIngot = register("tear_ingot", new Item((new Item.Settings()).group(SoulFlame.ITEM_GROUP)));
+
+        tearSoakenHelmet = register("tear_soaked_helmet", new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.HEAD, new Item.Settings().group(SoulFlame.ITEM_GROUP)));
+        tearSoakenChestplate = register("tear_soaked_chestplate", new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.CHEST, new Item.Settings().group(SoulFlame.ITEM_GROUP)));
+        tearSoakenLeggings = register("tear_soaked_leggings", new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.LEGS, new Item.Settings().group(SoulFlame.ITEM_GROUP)));
+        tearSoakenBoots = register("tear_soaked_boots", new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.FEET, new Item.Settings().group(SoulFlame.ITEM_GROUP)));
     }
 
     private static <T extends Item> T register(String name, T item) {
