@@ -3,6 +3,7 @@ package modfest.soulflame.init;
 import modfest.soulflame.SoulFlame;
 import modfest.soulflame.item.BottleOfTearsItem;
 import modfest.soulflame.item.DiviningRodItem;
+import modfest.soulflame.item.TarotCardItem;
 import modfest.soulflame.item.armor.CustomArmorMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EquipmentSlot;
@@ -14,7 +15,8 @@ import net.minecraft.util.registry.Registry;
 
 public class ModItems {
     private static final Item.Settings SETTINGS = new Item.Settings().group(SoulFlame.ITEM_GROUP);
-    private static final Item.Settings TOOLSETTINGS = new Item.Settings().group(SoulFlame.ITEM_GROUP).maxCount(1);
+    private static final Item.Settings TOOL_SETTINGS = new Item.Settings().group(SoulFlame.ITEM_GROUP).maxCount(1);
+    private static final Item.Settings RUNE_SETTINGS = new Item.Settings().group(SoulFlame.RUNE_ITEM_GROUP);
     private static final Item.Settings TAROT_SETTINGS = new Item.Settings().group(SoulFlame.TAROT_ITEM_GROUP);
 
     //Main blocks
@@ -68,33 +70,33 @@ public class ModItems {
         creativeTearsBlock = register("creative_tears_block", ModBlocks.creativeTearsBlock);
 
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
-        diviningRod = register("divining_rod", new DiviningRodItem(TOOLSETTINGS));
+        diviningRod = register("divining_rod", new DiviningRodItem(TOOL_SETTINGS));
         tearIngot = register("tear_ingot", new Item(SETTINGS));
 
         tearSoakenHelmet = register("tear_soaked_helmet",
-                new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.HEAD, TOOLSETTINGS));
+                new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.HEAD, TOOL_SETTINGS));
         tearSoakenChestplate = register("tear_soaked_chestplate",
-                new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.CHEST, TOOLSETTINGS));
+                new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.CHEST, TOOL_SETTINGS));
         tearSoakenLeggings = register("tear_soaked_leggings",
-                new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.LEGS, TOOLSETTINGS));
+                new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.LEGS, TOOL_SETTINGS));
         tearSoakenBoots = register("tear_soaked_boots",
-                new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.FEET, TOOLSETTINGS));
+                new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.FEET, TOOL_SETTINGS));
 
         baseTarot = register("base_tarot", new TarotCardItem(TAROT_SETTINGS));
 
-        runeStone = register("rune/stone", ModBlocks.runeStone);
-        rune1 = register("rune/tier1", ModBlocks.rune1);
-        rune2 = register("rune/tier2", ModBlocks.rune2);
-        rune3 = register("rune/tier3", ModBlocks.rune3);
-        flipRune = register("rune/flip", ModBlocks.flipRune);
-        pipeRune1 = register("rune/pipe1", ModBlocks.pipeRune1);
-        pipeRune2 = register("rune/pipe2", ModBlocks.pipeRune2);
-        healRune = register("rune/healing", ModBlocks.healRune);
-        extractionRune = register("rune/extraction", ModBlocks.extractionRune);
-        destinationRune = register("rune/destination", ModBlocks.destinationRune);
-        transportRune = register("rune/entity_transport", ModBlocks.transportRune);
-        blockTransportRune = register("rune/block_transport", ModBlocks.blockTransportRune);
-        wardingRune = register("rune/warding", ModBlocks.wardingRune);
+        runeStone = register2("rune/stone", ModBlocks.runeStone);
+        rune1 = register2("rune/tier1", ModBlocks.rune1);
+        rune2 = register2("rune/tier2", ModBlocks.rune2);
+        rune3 = register2("rune/tier3", ModBlocks.rune3);
+        flipRune = register2("rune/flip", ModBlocks.flipRune);
+        pipeRune1 = register2("rune/pipe1", ModBlocks.pipeRune1);
+        pipeRune2 = register2("rune/pipe2", ModBlocks.pipeRune2);
+        healRune = register2("rune/healing", ModBlocks.healRune);
+        extractionRune = register2("rune/extraction", ModBlocks.extractionRune);
+        destinationRune = register2("rune/destination", ModBlocks.destinationRune);
+        transportRune = register2("rune/entity_transport", ModBlocks.transportRune);
+        blockTransportRune = register2("rune/block_transport", ModBlocks.blockTransportRune);
+        wardingRune = register2("rune/warding", ModBlocks.wardingRune);
 
     }
 
@@ -104,6 +106,10 @@ public class ModItems {
 
     private static BlockItem register(String name, Block block) {
         return register(name, new BlockItem(block, SETTINGS));
+    }
+
+    private static BlockItem register2(String name, Block block) {
+        return register(name, new BlockItem(block, RUNE_SETTINGS));
     }
 
 }
