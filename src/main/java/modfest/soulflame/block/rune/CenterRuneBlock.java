@@ -9,15 +9,18 @@ import modfest.soulflame.util.ConduitUtil;
 import modfest.soulflame.util.NeighborList;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
+import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
@@ -185,6 +188,15 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
             activate(world, pos, null);
         } else if(a && !b)
             world.setBlockState(pos, state.with(POWERED, false));
+    }
+
+    @Override
+    public void buildTooltip(ItemStack stack, BlockView world, List<Text> tooltip, TooltipContext options) {
+        super.buildTooltip(stack, world, tooltip, options);
+        tooltip.add(new TranslatableText("soulflame.tooltip.rune.tears",
+                requiredTears).formatted(Formatting.GRAY));
+        tooltip.add(new TranslatableText("soulflame.tooltip.rune.tier",
+                requiredTier).formatted(Formatting.GRAY));
     }
 
     @Override

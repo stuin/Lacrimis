@@ -14,7 +14,7 @@ public class SoulTeleportBlock extends SoulExtractionBlock {
     private final boolean canSend;
 
     public SoulTeleportBlock(boolean canSend) {
-        super(100, canSend ? 2 : 1);
+        super(canSend ? 100 : 200, canSend ? 2 : 1);
         this.canSend = canSend;
     }
 

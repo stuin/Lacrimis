@@ -1,7 +1,6 @@
 {
   "block.soulflame.infusion_table": "Infusion Table",
   "block.soulflame.crucible": "Crucible",
-  "block.soulflame.crucible.level": "%s Tears",
   "block.soulflame.conduit": "Tear Conduit",
   "block.soulflame.gated_conduit": "Gated Tear Conduit",
   "block.soulflame.creative_tears_block": "Block of Eternal Sadness",
@@ -10,9 +9,9 @@
   "block.soulflame.rune.tier1": "Tier 1 Rune",
   "block.soulflame.rune.tier2": "Tier 2 Rune",
   "block.soulflame.rune.tier3": "Tier 3 Rune",
+  "block.soulflame.rune.flip": "Flipped Center",
   "block.soulflame.rune.pipe1": "Tier 1 Pipe Connector",
   "block.soulflame.rune.pipe2": "Tier 2 Pipe Connector",
-  "block.soulflame.rune.flip": "Flipped Rune",
   "block.soulflame.rune.healing": "Healing Rune",
   "block.soulflame.rune.extraction": "Soul Extraction Rune",
   "block.soulflame.rune.destination": "Soul Destination Rune",
@@ -22,6 +21,10 @@
   "item.soulflame.bottle_of_tears": "Bottle of Tears",
   "item.soulflame.divining_rod": "Divining Rod",
   "item.soulflame.tear_ingot": "Tear Soaked Iron",
+
+  "soulflame.tooltip.crucible": "%s Tears",
+  "soulflame.tooltip.rune.tears": "Base cost: %s Tears",
+  "soulflame.tooltip.rune.tier": "Tier %s setup required",
 
   "gui.soulflame.infusion": "Infusion Table",
   "itemGroup.soulflame.group": "Soulflame",
