@@ -21,16 +21,15 @@ public class GhostEntityRenderer extends EntityRenderer<GhostEntity> {
     public GhostEntityRenderer(EntityRenderDispatcher dispatcher) {
         super(dispatcher);
         this.model = new GhostEntityModel();
-        this.shadowRadius = 0.5f;
+        this.shadowRadius = 0.0f;
     }
 
     @Override
     public void render(GhostEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
 
-        GhostEntityModel model = new GhostEntityModel();
-        model.setAngles(entity, 0.0f, yaw, tickDelta, entity.getYaw(tickDelta), entity.getPitch(tickDelta));
-        model.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(this.getTexture(entity))), light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f);
+        this.model.setAngles(entity, 0.0f, yaw, tickDelta, entity.getYaw(tickDelta), entity.getPitch(tickDelta));
+        this.model.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityTranslucentCull(this.getTexture(entity))), light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f);
     }
 
     @Override
