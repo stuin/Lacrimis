@@ -15,7 +15,7 @@ public class HealBlock extends CenterRuneBlock {
     }
 
     @Override
-    protected boolean activate(World world, BlockPos pos, List<ConduitEntry> list, LivingEntity entity, PlayerEntity player) {
+    protected boolean activate(World world, BlockPos pos, BlockPos pipe, LivingEntity entity, PlayerEntity player) {
         if(entity != null && entity.getHealth() < entity.getMaxHealth()) {
             entity.heal(2);
             if(!world.isClient)

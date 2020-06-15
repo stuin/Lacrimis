@@ -23,8 +23,8 @@ public class BlockTeleportBlock extends CenterRuneBlock {
     }
 
     @Override
-    protected boolean activate(World world, BlockPos pos, List<ConduitEntry> list, LivingEntity entity, PlayerEntity player) {
-        BlockPos destination = ConduitUtil.locateSink(world, list, pos);
+    protected boolean activate(World world, BlockPos pos, BlockPos pipe, LivingEntity entity, PlayerEntity player) {
+        BlockPos destination = ConduitUtil.locateSink(world, pipe, pos);
         if(destination != null) {
             if(!world.isClient)
                 SoulFlame.LOGGER.info("Block Moved");

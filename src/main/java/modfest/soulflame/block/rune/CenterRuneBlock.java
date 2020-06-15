@@ -113,15 +113,15 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
         return requiredTears;
     }
 
-    private boolean runOnce(World world, BlockPos pos, List<ConduitEntry> list, PlayerEntity player, Direction flipped) {
+    private boolean runOnce(World world, BlockPos pos, BlockPos pipe, PlayerEntity player, Direction flipped) {
         //For all entities on platform
         pos = pos.offset(flipped);
         for(Entity entity : world.getEntities(null, TARGET_BOX.offset(pos.offset(flipped)))) {
             if(entity instanceof LivingEntity
-                    && activate(world, pos, list, (LivingEntity) entity, player))
+                    && activate(world, pos, pipe, (LivingEntity) entity, player))
                 return true;
         }
-        return activate(world, pos, list, null, player);
+        return activate(world, pos, pipe, null, player);
     }
 
     public boolean activate(World world, BlockPos pos, PlayerEntity player) {
@@ -142,10 +142,10 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
             pipe = AdvancedRuneBlock.getPipe(world, pipe);
 
         //Grab required tears
-        List<ConduitEntry> list = ConduitUtil.listScanConduits(world, pipe);
-        if(ConduitUtil.locateTearsStrong(world, list, actualCost(tier), true)) {
-            if(runOnce(world, pos, list, player, flipped)) {
-                ConduitUtil.locateTearsStrong(world, list, actualCost(tier), false);
+        List<ConduitEntry> tearsList = ConduitUtil.listScanConduits(world, pipe, true);
+        if(ConduitUtil.locateTearsStrong(world, tearsList, actualCost(tier), true)) {
+            if(runOnce(world, pos, pipe, player, flipped)) {
+                ConduitUtil.locateTearsStrong(world, tearsList, actualCost(tier), false);
                 return true;
             }
         } else
@@ -153,7 +153,7 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
         return false;
     }
 
-    protected abstract boolean activate(World world, BlockPos pos, List<ConduitEntry> list, LivingEntity entity, PlayerEntity player);
+    protected abstract boolean activate(World world, BlockPos pos, BlockPos pipe, LivingEntity entity, PlayerEntity player);
 
     @Override
     public boolean canConnectConduitTo(BlockPos pos, BlockView world, Direction side) {

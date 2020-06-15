@@ -21,9 +21,9 @@ public class SoulExtractionBlock extends CenterRuneBlock {
     }
 
     @Override
-    protected boolean activate(World world, BlockPos pos, List<ConduitEntry> list, LivingEntity entity, PlayerEntity player) {
+    protected boolean activate(World world, BlockPos pos, BlockPos pipe, LivingEntity entity, PlayerEntity player) {
         if(entity != null) {
-            BlockPos destination = ConduitUtil.locateSink(world, list, entity);
+            BlockPos destination = ConduitUtil.locateSink(world, pipe, entity);
             if(destination != null) {
                 if(!world.isClient)
                     SoulFlame.LOGGER.info("Soul Extracted");

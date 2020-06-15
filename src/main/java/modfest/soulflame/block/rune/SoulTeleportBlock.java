@@ -19,9 +19,9 @@ public class SoulTeleportBlock extends SoulExtractionBlock {
     }
 
     @Override
-    protected boolean activate(World world, BlockPos pos, List<ConduitEntry> list, LivingEntity entity, PlayerEntity player) {
+    protected boolean activate(World world, BlockPos pos, BlockPos pipe, LivingEntity entity, PlayerEntity player) {
         if(canSend)
-            return super.activate(world, pos, list, entity, player);
+            return super.activate(world, pos, pipe, entity, player);
         else
             error(player, "send");
         return false;

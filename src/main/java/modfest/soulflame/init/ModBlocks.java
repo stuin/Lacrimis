@@ -15,8 +15,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class ModBlocks {
-    public static final Block.Settings runeSettings = FabricBlockSettings.copy(Blocks.STONE);
+    public static final Block.Settings conduitSettings = AbstractBlock.Settings.of(Material.STONE).strength(0.25f);
     public static final Block.Settings wardedSettings = FabricBlockSettings.copy(Blocks.STONE).strength(-1);
+    public static final Block.Settings runeSettings = FabricBlockSettings.copy(Blocks.STONE);
     public static Tag<Block> cage_materials;
     public static Tag<Block> non_transportable;
 
@@ -25,6 +26,7 @@ public class ModBlocks {
     public static CrucibleBlock crucible;
     public static ConduitBlock conduit;
     public static GatedConduitBlock gatedConduit;
+    public static OneWayConduitBlock oneWayConduit;
     public static TearLantern tearLantern;
     public static DrainedCryingObsidianBlock drainedCryingObsidian;
     public static CreativeTearsBlock creativeTearsBlock;
@@ -50,8 +52,9 @@ public class ModBlocks {
     public static void register() {
         infusionTable = register("infusion_table", new InfusionTableBlock(FabricBlockSettings.copy(Blocks.CRAFTING_TABLE).nonOpaque()));
         crucible = register("crucible", new CrucibleBlock(FabricBlockSettings.copy(Blocks.CAULDRON).nonOpaque()));
-        conduit = register("conduit", new ConduitBlock(AbstractBlock.Settings.of(Material.STONE).strength(0.25f)));
-        gatedConduit = register("gated_conduit", new GatedConduitBlock(AbstractBlock.Settings.of(Material.STONE).strength(0.25f)));
+        conduit = register("conduit", new ConduitBlock(conduitSettings));
+        gatedConduit = register("gated_conduit", new GatedConduitBlock(conduitSettings));
+        oneWayConduit = register("one_way_conduit", new OneWayConduitBlock(conduitSettings));
         tearLantern = register("tear_lantern", new TearLantern(AbstractBlock.Settings.of(Material.METAL).requiresTool().strength(3.5F).sounds(BlockSoundGroup.LANTERN).lightLevel((state) -> 5).nonOpaque()));
         drainedCryingObsidian = register("drained_crying_obsidian", new DrainedCryingObsidianBlock(FabricBlockSettings.copy(Blocks.CRYING_OBSIDIAN)));
         creativeTearsBlock = register("creative_tears_block", new CreativeTearsBlock(FabricBlockSettings.copy(Blocks.STONE)));

@@ -21,6 +21,7 @@ public class ModItems {
     public static BlockItem crucible;
     public static BlockItem conduit;
     public static BlockItem gatedConduit;
+    public static BlockItem oneWayConduit;
     public static BlockItem tearLantern;
     public static BlockItem drainedCryingObsidian;
     public static BlockItem creativeTearsBlock;
@@ -57,6 +58,7 @@ public class ModItems {
         crucible = register("crucible", ModBlocks.crucible);
         conduit = register("conduit", ModBlocks.conduit);
         gatedConduit = register("gated_conduit", ModBlocks.gatedConduit);
+        oneWayConduit = register("one_way_conduit", ModBlocks.oneWayConduit);
         tearLantern = register("tear_lantern", ModBlocks.tearLantern);
         drainedCryingObsidian = register("drained_crying_obsidian", ModBlocks.drainedCryingObsidian);
         creativeTearsBlock = register("creative_tears_block", ModBlocks.creativeTearsBlock);

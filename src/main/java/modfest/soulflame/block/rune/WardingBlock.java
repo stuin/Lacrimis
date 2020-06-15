@@ -1,13 +1,10 @@
 package modfest.soulflame.block.rune;
 
 import modfest.soulflame.init.ModBlocks;
-import modfest.soulflame.util.ConduitEntry;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 public class WardingBlock extends CenterRuneBlock {
     public WardingBlock() {
@@ -15,7 +12,7 @@ public class WardingBlock extends CenterRuneBlock {
     }
 
     @Override
-    protected boolean activate(World world, BlockPos pos, List<ConduitEntry> list, LivingEntity entity, PlayerEntity player) {
+    protected boolean activate(World world, BlockPos pos, BlockPos pipe, LivingEntity entity, PlayerEntity player) {
         if(world.getBlockState(pos).getBlock() == ModBlocks.runeStone) {
             world.setBlockState(pos, ModBlocks.wardedStone.getDefaultState());
             return true;
