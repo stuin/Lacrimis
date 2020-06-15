@@ -117,8 +117,7 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
         //For all entities on platform
         pos = pos.offset(flipped);
         for(Entity entity : world.getEntities(null, TARGET_BOX.offset(pos.offset(flipped)))) {
-            if(entity instanceof LivingEntity
-                    && activate(world, pos, pipe, (LivingEntity) entity, player))
+            if(activate(world, pos, pipe, entity, player))
                 return true;
         }
         return activate(world, pos, pipe, null, player);
@@ -157,7 +156,7 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
         return false;
     }
 
-    protected abstract boolean activate(World world, BlockPos pos, BlockPos pipe, LivingEntity entity, PlayerEntity player);
+    protected abstract boolean activate(World world, BlockPos pos, BlockPos pipe, Entity entity, PlayerEntity player);
 
     @Override
     public boolean canConnectConduitTo(BlockPos pos, BlockView world, Direction side) {

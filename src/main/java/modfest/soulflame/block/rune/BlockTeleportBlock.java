@@ -2,13 +2,10 @@ package modfest.soulflame.block.rune;
 
 import modfest.soulflame.SoulFlame;
 import modfest.soulflame.init.ModBlocks;
-import modfest.soulflame.util.ConduitEntry;
 import modfest.soulflame.util.ConduitUtil;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.BlockPos;
@@ -24,7 +21,7 @@ public class BlockTeleportBlock extends CenterRuneBlock {
     }
 
     @Override
-    protected boolean activate(World world, BlockPos pos, BlockPos pipe, LivingEntity entity, PlayerEntity player) {
+    protected boolean activate(World world, BlockPos pos, BlockPos pipe, Entity entity, PlayerEntity player) {
         BlockPos destination = ConduitUtil.locateSink(world, pipe, pos);
         if(destination != null) {
             if(!world.isClient)
