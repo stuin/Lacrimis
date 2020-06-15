@@ -91,7 +91,7 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
 
     protected Direction flipside(BlockView world, BlockPos pos) {
         Direction dir = Direction.UP;
-        if(world.getBlockState(pos.up()).getBlock() == ModBlocks.flipRune)
+        if(world.getBlockState(pos.up()).isOf(ModBlocks.flipRune))
             dir = Direction.DOWN;
         return dir;
     }
@@ -125,6 +125,10 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
     }
 
     public boolean activate(World world, BlockPos pos, PlayerEntity player) {
+        //Mark powered
+        if(player == null && world.isReceivingRedstonePower(pos))
+            world.setBlockState(pos, world.getBlockState(pos).with(POWERED, true));
+
         //Check soul cage setup
         Direction flipped = flipside(world, pos);
         int tier = testCage(world, pos, flipped, player);
@@ -175,18 +179,15 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
         return false;
     }
 
-    protected boolean shouldActivate(World world, BlockPos pos, BlockPos fromPos) {
-        return world.isReceivingRedstonePower(pos) && !(world.getBlockState(fromPos).getBlock() instanceof RuneBlock);
-    }
-
     @Override
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+        Block from = world.getBlockState(fromPos).getBlock();
         boolean a = state.get(POWERED);
-        boolean b = shouldActivate(world, pos, fromPos);
-        if(!a && b) {
-            world.setBlockState(pos, state.with(POWERED, true));
+        boolean b = world.isReceivingRedstonePower(pos);
+        boolean c = (from instanceof RuneBlock || from instanceof CenterRuneBlock);
+        if(!a && b && !c)
             activate(world, pos, null);
-        } else if(a && !b)
+        else if(a && !b)
             world.setBlockState(pos, state.with(POWERED, false));
     }
 

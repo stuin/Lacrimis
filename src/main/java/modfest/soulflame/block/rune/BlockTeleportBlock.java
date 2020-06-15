@@ -4,6 +4,7 @@ import modfest.soulflame.SoulFlame;
 import modfest.soulflame.init.ModBlocks;
 import modfest.soulflame.util.ConduitEntry;
 import modfest.soulflame.util.ConduitUtil;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;

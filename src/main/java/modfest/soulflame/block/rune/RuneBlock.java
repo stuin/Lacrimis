@@ -94,17 +94,13 @@ public class RuneBlock extends Block implements Activatable {
         getCenter(world, pos, state);
     }
 
-    protected boolean shouldActivate(World world, BlockPos pos, BlockPos fromPos) {
-        Block block = world.getBlockState(fromPos).getBlock();
-        return world.isReceivingRedstonePower(pos) &&
-                !(block instanceof RuneBlock || block instanceof CenterRuneBlock);
-    }
-
     @Override
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+        Block from = world.getBlockState(fromPos).getBlock();
         boolean a = state.get(POWERED);
-        boolean b = shouldActivate(world, pos, fromPos);
-        if(!a && b) {
+        boolean b = world.isReceivingRedstonePower(pos);
+        boolean c = (from instanceof RuneBlock || from instanceof CenterRuneBlock);
+        if(!a && b && !c) {
             world.setBlockState(pos, state.with(POWERED, true));
             activate(world, pos, null);
         } else if(a && !b)
