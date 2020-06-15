@@ -15,6 +15,7 @@ import net.minecraft.util.registry.Registry;
 public class ModItems {
     private static final Item.Settings SETTINGS = new Item.Settings().group(SoulFlame.ITEM_GROUP);
     private static final Item.Settings TOOLSETTINGS = new Item.Settings().group(SoulFlame.ITEM_GROUP).maxCount(1);
+    private static final Item.Settings TAROT_SETTINGS = new Item.Settings().group(SoulFlame.TAROT_ITEM_GROUP);
 
     //Main blocks
     public static BlockItem infusionTable;
@@ -35,6 +36,9 @@ public class ModItems {
     public static Item tearSoakenChestplate;
     public static Item tearSoakenLeggings;
     public static Item tearSoakenBoots;
+
+    // Tarot cards
+    public static TarotCardItem baseTarot;
 
     //Rune cage blocks
     public static BlockItem runeStone;
@@ -75,6 +79,8 @@ public class ModItems {
                 new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.LEGS, TOOLSETTINGS));
         tearSoakenBoots = register("tear_soaked_boots",
                 new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.FEET, TOOLSETTINGS));
+
+        baseTarot = register("base_tarot", new TarotCardItem(TAROT_SETTINGS));
 
         runeStone = register("rune/stone", ModBlocks.runeStone);
         rune1 = register("rune/tier1", ModBlocks.rune1);
