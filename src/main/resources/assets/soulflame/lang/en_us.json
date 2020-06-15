@@ -34,6 +34,8 @@
 
   "item.soulflame.base_tarot": "Empty Tarot Card",
 
+  "effect.soulflame.wavering_soul": "Wavering Soul",
+
   "soulflame.tooltip.crucible": "%s Tears",
   "soulflame.tooltip.rune.tears": "Base cost: %s Tears",
   "soulflame.tooltip.rune.tier": "Tier %s setup required",
