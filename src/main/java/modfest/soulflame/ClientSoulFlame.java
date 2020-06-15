@@ -8,6 +8,7 @@ import modfest.soulflame.init.ModBlocks;
 import modfest.soulflame.init.ModEntityTypes;
 import modfest.soulflame.init.ModInfusion;
 import modfest.soulflame.init.ModNetworking;
+import modfest.soulflame.init.ModParticles;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -33,5 +34,6 @@ public class ClientSoulFlame implements ClientModInitializer {
 
         ModInfusion.registerClient();
         ModNetworking.registerClient();
+        ModParticles.registerClient();
     }
 }
