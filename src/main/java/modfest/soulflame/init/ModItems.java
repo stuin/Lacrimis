@@ -46,6 +46,7 @@ public class ModItems {
     public static Item tearSoakenBoots;
 
     // Tarot cards
+    public static Item baseTarot;
     public static Map<TarotCardType, TarotCardItem> tarotCards;
 
     //Rune cage blocks
@@ -88,6 +89,7 @@ public class ModItems {
         tearSoakenBoots = register("tear_soaked_boots",
                 new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.FEET, TOOL_SETTINGS));
 
+        baseTarot = register("base_tarot", new Item(TAROT_SETTINGS));
         tarotCards = Arrays.stream(TarotCardType.values())
                 .collect(Collectors.toMap(
                         k -> k,
