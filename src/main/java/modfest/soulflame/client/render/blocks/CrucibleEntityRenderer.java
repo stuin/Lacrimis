@@ -1,4 +1,4 @@
-package modfest.soulflame.block.entity.renderer;
+package modfest.soulflame.client.render.blocks;
 
 import modfest.soulflame.SoulFlame;
 import modfest.soulflame.block.entity.CrucibleEntity;

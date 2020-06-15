@@ -1,5 +1,6 @@
 {
 	"credit": "Made with Blockbench",
+	"parent": "block/block",
 	"textures": {
 		"0": "soulflame:block/crucible_top",
 		"1": "soulflame:block/crucible_inner",
