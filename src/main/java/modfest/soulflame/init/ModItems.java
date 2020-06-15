@@ -22,8 +22,8 @@ public class ModItems {
     public static BlockItem conduit;
     public static BlockItem gatedConduit;
     public static BlockItem tearLantern;
-    public static BlockItem creativeTearsBlock;
     public static BlockItem drainedCryingObsidian;
+    public static BlockItem creativeTearsBlock;
 
     //Main items
     public static BottleOfTearsItem bottleOfTears;
@@ -36,6 +36,7 @@ public class ModItems {
     public static Item tearSoakenBoots;
 
     //Rune cage blocks
+    public static BlockItem runeStone;
     public static BlockItem rune1;
     public static BlockItem rune2;
     public static BlockItem rune3;
@@ -49,6 +50,7 @@ public class ModItems {
     public static BlockItem destinationRune;
     public static BlockItem transportRune;
     public static BlockItem blockTransportRune;
+    public static BlockItem wardingRune;
 
     public static void register() {
         infusionTable = register("infusion_table", ModBlocks.infusionTable);
@@ -56,8 +58,8 @@ public class ModItems {
         conduit = register("conduit", ModBlocks.conduit);
         gatedConduit = register("gated_conduit", ModBlocks.gatedConduit);
         tearLantern = register("tear_lantern", ModBlocks.tearLantern);
-        creativeTearsBlock = register("creative_tears_block", ModBlocks.creativeTearsBlock);
         drainedCryingObsidian = register("drained_crying_obsidian", ModBlocks.drainedCryingObsidian);
+        creativeTearsBlock = register("creative_tears_block", ModBlocks.creativeTearsBlock);
 
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
         diviningRod = register("divining_rod", new DiviningRodItem(TOOLSETTINGS));
@@ -72,6 +74,7 @@ public class ModItems {
         tearSoakenBoots = register("tear_soaked_boots",
                 new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.FEET, TOOLSETTINGS));
 
+        runeStone = register("rune/stone", ModBlocks.runeStone);
         rune1 = register("rune/tier1", ModBlocks.rune1);
         rune2 = register("rune/tier2", ModBlocks.rune2);
         rune3 = register("rune/tier3", ModBlocks.rune3);
@@ -83,6 +86,7 @@ public class ModItems {
         destinationRune = register("rune/destination", ModBlocks.destinationRune);
         transportRune = register("rune/entity_transport", ModBlocks.transportRune);
         blockTransportRune = register("rune/block_transport", ModBlocks.blockTransportRune);
+        wardingRune = register("rune/warding", ModBlocks.wardingRune);
 
     }
 

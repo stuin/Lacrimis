@@ -3,9 +3,12 @@
   "block.soulflame.crucible": "Crucible",
   "block.soulflame.conduit": "Tear Conduit",
   "block.soulflame.gated_conduit": "Gated Tear Conduit",
-  "block.soulflame.creative_tears_block": "Block of Eternal Sadness",
   "block.soulflame.tear_lantern": "Tear Lantern",
+  "block.soulflame.drained_crying_obsidian": "Drained Crying Obsidian",
+  "block.soulflame.creative_tears_block": "Block of Eternal Sadness",
+  "block.soulflame.warded": "Warded Stone",
 
+  "block.soulflame.rune.stone": "Blank Rune Stone",
   "block.soulflame.rune.tier1": "Tier 1 Rune",
   "block.soulflame.rune.tier2": "Tier 2 Rune",
   "block.soulflame.rune.tier3": "Tier 3 Rune",
@@ -17,6 +20,7 @@
   "block.soulflame.rune.destination": "Soul Destination Rune",
   "block.soulflame.rune.entity_transport": "Two Way Transport Rune",
   "block.soulflame.rune.block_transport": "Block Transport Rune",
+  "block.soulflame.rune.warding": "Warding Rune",
   
   "item.soulflame.bottle_of_tears": "Bottle of Tears",
   "item.soulflame.divining_rod": "Divining Rod",

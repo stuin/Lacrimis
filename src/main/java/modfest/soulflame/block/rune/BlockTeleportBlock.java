@@ -19,7 +19,7 @@ import java.util.List;
 
 public class BlockTeleportBlock extends CenterRuneBlock {
     public BlockTeleportBlock() {
-        super(300, 2);
+        super(500, 2);
     }
 
     @Override
