@@ -21,7 +21,7 @@ public class RuneBlock extends Block implements Activatable {
     public static final BooleanProperty POWERED;
     public static final IntProperty CENTER;
 
-    private final int tier;
+    protected final int tier;
 
     public RuneBlock(int tier) {
         super(ModBlocks.runeSettings);
@@ -35,16 +35,10 @@ public class RuneBlock extends Block implements Activatable {
             for(int y = 0; y < 2; y++) {
                 pos = pos.offset(flipped);
                 if(!world.getBlockState(pos).getBlock().isIn(ModBlocks.conductive))
-                    return 0;
+                    return -1;
             }
         }
         return tier;
-    }
-    
-    protected boolean shouldActivate(World world, BlockPos pos, BlockPos fromPos) {
-        if(world.getBlockState(fromPos).getBlock() instanceof CenterRuneBlock)
-            return fromPos.north() == pos;
-        return world.isReceivingRedstonePower(pos) && !(world.getBlockState(fromPos).getBlock() instanceof RuneBlock);
     }
 
     protected BlockPos getCenter(BlockView world, BlockPos pos) {
@@ -55,17 +49,17 @@ public class RuneBlock extends Block implements Activatable {
         //Check for valid rotation
         int i = state.get(CENTER);
         BlockPos next;
+        Block block;
         if(i != 8) {
             next = pos.add(NeighborList.platform[i]);
-            if(world.getBlockState(next).getBlock() instanceof CenterRuneBlock)
+            if(validCenter(world.getBlockState(next)))
                 return next;
         }
 
         //Find correct rotation
         for(i = 0; i < 8; i++) {
             next = pos.add(NeighborList.platform[i]);
-            Block block = world.getBlockState(next).getBlock();
-            if(world instanceof World && block instanceof CenterRuneBlock) {
+            if(world instanceof World && validCenter(world.getBlockState(next))) {
                 ((World)world).setBlockState(pos, state.with(CENTER, i));
                 return next;
             }
@@ -75,10 +69,35 @@ public class RuneBlock extends Block implements Activatable {
             ((World)world).setBlockState(pos, state.with(CENTER, 8));
         return null;
     }
+    
+    protected BlockPos getTrueCenter(BlockView world, BlockPos pos) {
+        //Get actual center
+        BlockPos center = getCenter(world, pos);
+        if(center != null) {
+            Block block = world.getBlockState(center).getBlock();
+            if(block instanceof CenterRuneBlock)
+                return center;
+            if(block instanceof AdvancedRuneBlock)
+                return ((AdvancedRuneBlock) block).getCenter(world, center);
+        }
+        return null;
+    }
+
+    protected boolean validCenter(BlockState state) {
+        Block block = state.getBlock();
+        return block instanceof CenterRuneBlock ||
+                (block instanceof AdvancedRuneBlock && NeighborList.isEdge(state.get(CENTER)));
+    }
 
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
         getCenter(world, pos, state);
+    }
+
+    protected boolean shouldActivate(World world, BlockPos pos, BlockPos fromPos) {
+        Block block = world.getBlockState(fromPos).getBlock();
+        return world.isReceivingRedstonePower(pos) &&
+                !(block instanceof RuneBlock || block instanceof CenterRuneBlock);
     }
 
     @Override
@@ -94,7 +113,7 @@ public class RuneBlock extends Block implements Activatable {
 
     @Override
     public boolean activate(World world, BlockPos pos, PlayerEntity player) {
-        BlockPos center = getCenter(world, pos);
+        BlockPos center = getTrueCenter(world, pos);
         if(center != null)
             return ((CenterRuneBlock) world.getBlockState(center).getBlock()).activate(world, center, player);
         return false;
@@ -107,6 +126,6 @@ public class RuneBlock extends Block implements Activatable {
 
     static {
         POWERED = Properties.POWERED;
-        CENTER = Properties.LEVEL_8;
+        CENTER = IntProperty.of("center", 0, 8);
     }
 }

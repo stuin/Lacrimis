@@ -24,18 +24,6 @@ public class ModItems {
     public static BlockItem creativeTearsBlock;
     public static BlockItem drainedCryingObsidian;
 
-    //Rune cage blocks
-    public static BlockItem rune1;
-    public static BlockItem rune2;
-    public static BlockItem pipeRune1;
-    public static BlockItem pipeRune2;
-    public static BlockItem flipRune;
-    public static BlockItem healRune;
-    public static BlockItem extractionRune;
-    public static BlockItem destinationRune;
-    public static BlockItem transportRune;
-    public static BlockItem blockTransportRune;
-
     //Main items
     public static BottleOfTearsItem bottleOfTears;
     public static DiviningRodItem diviningRod;
@@ -46,6 +34,19 @@ public class ModItems {
     public static Item tearSoakenLeggings;
     public static Item tearSoakenBoots;
 
+    //Rune cage blocks
+    public static BlockItem rune1;
+    public static BlockItem rune2;
+    public static BlockItem rune3;
+    public static BlockItem flipRune;
+    public static BlockItem pipeRune1;
+    public static BlockItem pipeRune2;
+    public static BlockItem healRune;
+    public static BlockItem extractionRune;
+    public static BlockItem destinationRune;
+    public static BlockItem transportRune;
+    public static BlockItem blockTransportRune;
+
     public static void register() {
         infusionTable = register("infusion_table", ModBlocks.infusionTable);
         crucible = register("crucible", ModBlocks.crucible);
@@ -55,17 +56,6 @@ public class ModItems {
         creativeTearsBlock = register("creative_tears_block", ModBlocks.creativeTearsBlock);
         drainedCryingObsidian = register("drained_crying_obsidian", ModBlocks.drainedCryingObsidian);
 
-        rune1 = register("rune/tier1", ModBlocks.rune1);
-        rune2 = register("rune/tier2", ModBlocks.rune2);
-        pipeRune1 = register("rune/pipe1", ModBlocks.pipeRune1);
-        pipeRune2 = register("rune/pipe2", ModBlocks.pipeRune2);
-        flipRune = register("rune/flip", ModBlocks.flipRune);
-        healRune = register("rune/healing", ModBlocks.healRune);
-        extractionRune = register("rune/extraction", ModBlocks.extractionRune);
-        destinationRune = register("rune/destination", ModBlocks.destinationRune);
-        transportRune = register("rune/entity_transport", ModBlocks.transportRune);
-        blockTransportRune = register("rune/block_transport", ModBlocks.blockTransportRune);
-
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
         diviningRod = register("divining_rod", new DiviningRodItem(SETTINGS));
         tearIngot = register("tear_ingot", new Item((new Item.Settings()).group(SoulFlame.ITEM_GROUP)));
@@ -74,7 +64,20 @@ public class ModItems {
         tearSoakenChestplate = register("tear_soaked_chestplate", new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.CHEST, new Item.Settings().group(SoulFlame.ITEM_GROUP)));
         tearSoakenLeggings = register("tear_soaked_leggings", new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.LEGS, new Item.Settings().group(SoulFlame.ITEM_GROUP)));
         tearSoakenBoots = register("tear_soaked_boots", new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.FEET, new Item.Settings().group(SoulFlame.ITEM_GROUP)));
-    }
+
+        rune1 = register("rune/tier1", ModBlocks.rune1);
+        rune2 = register("rune/tier2", ModBlocks.rune2);
+        rune3 = register("rune/tier3", ModBlocks.rune3);
+        flipRune = register("rune/flip", ModBlocks.flipRune);
+        pipeRune1 = register("rune/pipe1", ModBlocks.pipeRune1);
+        pipeRune2 = register("rune/pipe2", ModBlocks.pipeRune2);
+        healRune = register("rune/healing", ModBlocks.healRune);
+        extractionRune = register("rune/extraction", ModBlocks.extractionRune);
+        destinationRune = register("rune/destination", ModBlocks.destinationRune);
+        transportRune = register("rune/entity_transport", ModBlocks.transportRune);
+        blockTransportRune = register("rune/block_transport", ModBlocks.blockTransportRune);
+
+        }
 
     private static <T extends Item> T register(String name, T item) {
         return Registry.register(Registry.ITEM, new Identifier(SoulFlame.MODID, name), item);

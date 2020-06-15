@@ -1,7 +1,6 @@
 {
   "block.soulflame.infusion_table": "Infusion Table",
   "block.soulflame.crucible": "Crucible",
-  "block.soulflame.crucible.level": "%s Tears",
   "block.soulflame.conduit": "Tear Conduit",
   "block.soulflame.gated_conduit": "Gated Tear Conduit",
   "block.soulflame.creative_tears_block": "Block of Eternal Sadness",
@@ -9,9 +8,10 @@
 
   "block.soulflame.rune.tier1": "Tier 1 Rune",
   "block.soulflame.rune.tier2": "Tier 2 Rune",
+  "block.soulflame.rune.tier3": "Tier 3 Rune",
+  "block.soulflame.rune.flip": "Flipped Center",
   "block.soulflame.rune.pipe1": "Tier 1 Pipe Connector",
   "block.soulflame.rune.pipe2": "Tier 2 Pipe Connector",
-  "block.soulflame.rune.flip": "Flipped Rune",
   "block.soulflame.rune.healing": "Healing Rune",
   "block.soulflame.rune.extraction": "Soul Extraction Rune",
   "block.soulflame.rune.destination": "Soul Destination Rune",
@@ -27,13 +27,21 @@
   "item.soulflame.tear_soaked_leggings": "Tear Soaked Leggings",
   "item.soulflame.tear_soaked_boots": "Tear Soaked Boots",
 
+  "soulflame.tooltip.crucible": "%s Tears",
+  "soulflame.tooltip.rune.tears": "Base cost: %s Tears",
+  "soulflame.tooltip.rune.tier": "Tier %s setup required",
+
   "gui.soulflame.infusion": "Infusion Table",
   "itemGroup.soulflame.group": "Soulflame",
 
   "soulflame.error.tears": "Not enough Tears",
-  "soulflame.error.platform": "Incomplete Soul Cage",
+  "soulflame.error.barrier": "Tier 1 runes require cage",
+  "soulflame.error.layer": "Tier 2 outer layer required",
+  "soulflame.error.tier": "Used lower tier runes",
+  "soulflame.error.missing": "Runes missing",
+  "soulflame.error.pipes": "Only 1 pipe connector is allowed",
+  "soulflame.error.pipe": "No pipe connector found",
   "soulflame.error.entity": "No valid target entity",
-  "soulflame.error.block": "No valid target block",
   "soulflame.error.destination": "No destination found",
   "soulflame.error.send": "Rune cannot send"
 }
