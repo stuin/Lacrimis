@@ -43,12 +43,12 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	//Wrenchable api
-	def wrenchVersion = "com.github.Zundrel:Wrenchable:${project.wrenchable_version}"
-	modImplementation (wrenchVersion) {
-		exclude group: "io.github.prospector"
-		exclude group: "net.fabricmc"
-	}
-	include wrenchVersion
+	//def wrenchVersion = "com.github.Zundrel:Wrenchable:${project.wrenchable_version}"
+	//modImplementation (wrenchVersion) {
+	//	exclude group: "io.github.prospector"
+	//	exclude group: "net.fabricmc"
+	//}
+	//include wrenchVersion
 
 	//Patchouli api (Official way)
 	//def patchouliVersion = "vazkii.patchouli:Patchouli:${project.patchouli_version}"
