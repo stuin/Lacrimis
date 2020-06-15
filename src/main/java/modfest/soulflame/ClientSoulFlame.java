@@ -1,6 +1,7 @@
 package modfest.soulflame;
 
 import modfest.soulflame.block.entity.renderer.CrucibleEntityRenderer;
+import modfest.soulflame.block.entity.renderer.InfusionTableEntityRenderer;
 import modfest.soulflame.client.entity.render.GhostEntityRenderer;
 import modfest.soulflame.init.ModBlockEntityTypes;
 import modfest.soulflame.init.ModBlocks;
@@ -25,9 +26,12 @@ public class ClientSoulFlame implements ClientModInitializer {
         BlockEntityRendererRegistry.INSTANCE.register(ModBlockEntityTypes.crucible, CrucibleEntityRenderer::new);
         CrucibleEntityRenderer.onInit();
 
-		EntityRendererRegistry.INSTANCE.register(ModEntityTypes.ghost, (dispatcher, ctx) -> new GhostEntityRenderer(dispatcher));
+        BlockEntityRendererRegistry.INSTANCE.register(ModBlockEntityTypes.infusionTable, InfusionTableEntityRenderer::new);
+        InfusionTableEntityRenderer.onInit();
 
-		ModInfusion.registerClient();
+        EntityRendererRegistry.INSTANCE.register(ModEntityTypes.ghost, (dispatcher, ctx) -> new GhostEntityRenderer(dispatcher));
+
+        ModInfusion.registerClient();
         ModNetworking.registerClient();
-	}
+    }
 }

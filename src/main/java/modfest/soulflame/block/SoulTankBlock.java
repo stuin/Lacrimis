@@ -57,7 +57,7 @@ public abstract class SoulTankBlock extends BlockWithEntity implements BlockCond
             SoulTank tank = entity.getTank();
             Item item = stack.getItem();
             if(item == ModItems.bottleOfTears) {
-                if(tank.getSpace() >= 750 && !world.isClient) {
+                if(tank.getSpace() >= 250 && !world.isClient) {
                     if(!player.abilities.creativeMode) {
                         ItemStack bottle = new ItemStack(Items.GLASS_BOTTLE);
                         stack.decrement(1);
