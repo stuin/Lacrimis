@@ -40,7 +40,7 @@ public class BlockTeleportBlock extends CenterRuneBlock {
     @Override
     public boolean insert(BlockPos pos, BlockView world, Object value) {
         Direction flipped = flipside(world, pos);
-        if(world instanceof World && value instanceof BlockPos && testCage(world, pos, flipped)) {
+        if(world instanceof World && value instanceof BlockPos && testCage(world, pos, flipped, null) > 0) {
             BlockState source = world.getBlockState((BlockPos) value);
             pos = pos.offset(flipped);
 

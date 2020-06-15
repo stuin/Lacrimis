@@ -13,6 +13,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.MutableText;
@@ -31,6 +32,8 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
     private static final Box TARGET_BOX = new Box(-0.5, -1, -0.5, 1.5, 1, 1.5);
 
     public static final IntProperty PIPE;
+    public static final BooleanProperty POWERED;
+
     public final int requiredTears;
     public final int requiredTier;
 
@@ -38,24 +41,49 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
         super(ModBlocks.runeSettings);
         this.requiredTears = requiredTears;
         this.requiredTier = requiredTier;
-        setDefaultState(getStateManager().getDefaultState().with(PIPE, 8));
+        setDefaultState(getDefaultState().with(PIPE, 8).with(POWERED, false));
     }
 
-    protected boolean testCage(BlockView world, BlockPos pos, Direction flipped) {
+    protected int testCage(BlockView world, BlockPos pos, Direction flipped, PlayerEntity player) {
         boolean pipe = false;
-        for(BlockPos next : NeighborList.platform) {
+        int actualTier = 10;
+        for(int i = 0; i < 8; i++) {
+            BlockPos next = NeighborList.platform[i];
             Block block = world.getBlockState(pos.add(next)).getBlock();
-            if(!(block instanceof RuneBlock && ((RuneBlock) block).testCage(world, pos.add(next), flipped) >= requiredTier))
-                return false;
+            if(block instanceof RuneBlock) {
+                int nextTier = ((RuneBlock) block).testCage(world, pos.add(next), flipped);
+                actualTier = Math.min(nextTier, actualTier);
 
-            //Only one pipe allowed
-            if(block instanceof PipeConnectorBlock) {
-                if(pipe)
-                    return false;
+                //Check error codes
+                if(nextTier < requiredTier) {
+                    if(nextTier == -1)
+                        return error(player, "barrier");
+                    if(nextTier == -2)
+                        return error(player, "layer");
+                    return error(player, "tier");
+                }
+            } else
+                return error(player, "missing");
+
+            //Check for single pipe
+            if(block instanceof PipeConnectorBlock ||
+                    (block instanceof AdvancedRuneBlock &&
+                            world.getBlockState(pos.add(next)).get(AdvancedRuneBlock.PIPE) != 3)) {
+                if(pipe) {
+                    if(world instanceof World)
+                        ((World) world).setBlockState(pos, world.getBlockState(pos).with(PIPE, 8));
+                    return error(player, "pipes");
+                }
                 pipe = true;
+
+                //Save pipe location
+                if(world instanceof World)
+                    ((World) world).setBlockState(pos, world.getBlockState(pos).with(PIPE, i));
             }
         }
-        return pipe;
+        if(!pipe)
+            return error(player, "pipe");
+        return actualTier;
     }
 
     protected Direction flipside(BlockView world, BlockPos pos) {
@@ -65,12 +93,21 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
         return dir;
     }
 
-    protected void error(PlayerEntity player, String code) {
+    protected int error(PlayerEntity player, String code) {
         if(player != null && !player.world.isClient) {
             MutableText text = new TranslatableText(SoulFlame.MODID + ".error." + code);
             Style style = text.getStyle();
             player.sendMessage(text.setStyle(style.withColor(Formatting.RED)), false);
         }
+        return 0;
+    }
+    
+    private int actualCost(int tier) {
+        if(tier == 3 && requiredTier < 3)
+            return requiredTears / 2;
+        if(tier > requiredTier)
+            return requiredTears - (requiredTears / 4);
+        return requiredTears;
     }
 
     private boolean runOnce(World world, BlockPos pos, List<ConduitEntry> list, PlayerEntity player, Direction flipped) {
@@ -87,10 +124,9 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
     public boolean activate(World world, BlockPos pos, PlayerEntity player) {
         //Check soul cage setup
         Direction flipped = flipside(world, pos);
-        if(!testCage(world, pos, flipped)) {
-            error(player, "platform");
+        int tier = testCage(world, pos, flipped, player);
+        if(tier < requiredTier)
             return false;
-        }
 
         //Locate pipe connection
         int i = world.getBlockState(pos).get(PIPE);
@@ -98,11 +134,15 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
             return false;
         BlockPos pipe = pos.add(NeighborList.platform[i]);
 
+        //Adjust pipe for tier 3
+        if(world.getBlockState(pipe).getBlock() instanceof AdvancedRuneBlock)
+            pipe = AdvancedRuneBlock.getPipe(world, pipe);
+
         //Grab required tears
         List<ConduitEntry> list = ConduitUtil.listScanConduits(world, pipe);
-        if(ConduitUtil.locateTearsStrong(world, list, requiredTears, true)) {
+        if(ConduitUtil.locateTearsStrong(world, list, actualCost(tier), true)) {
             if(runOnce(world, pos, list, player, flipped)) {
-                ConduitUtil.locateTearsStrong(world, list, requiredTears, false);
+                ConduitUtil.locateTearsStrong(world, list, actualCost(tier), false);
                 return true;
             }
         } else
@@ -132,12 +172,28 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
         return false;
     }
 
+    protected boolean shouldActivate(World world, BlockPos pos, BlockPos fromPos) {
+        return world.isReceivingRedstonePower(pos) && !(world.getBlockState(fromPos).getBlock() instanceof RuneBlock);
+    }
+
+    @Override
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+        boolean a = state.get(POWERED);
+        boolean b = shouldActivate(world, pos, fromPos);
+        if(!a && b) {
+            world.setBlockState(pos, state.with(POWERED, true));
+            activate(world, pos, null);
+        } else if(a && !b)
+            world.setBlockState(pos, state.with(POWERED, false));
+    }
+
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(PIPE);
+        builder.add(POWERED, PIPE);
     }
 
     static {
-        PIPE = Properties.LEVEL_8;
+        POWERED = Properties.POWERED;
+        PIPE = IntProperty.of("pipe", 0, 8);
     }
 }

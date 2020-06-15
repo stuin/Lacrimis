@@ -1,0 +1,7 @@
+{
+  "parent": "soulflame:block/rune/corner_block",
+  "textures": {
+    "top": "soulflame:block/rune_corner_top3",
+    "side": "soulflame:block/rune_corner_side"
+  }
+}
