@@ -37,7 +37,6 @@
   "soulflame.error.pipes": "Only 1 pipe connector is allowed",
   "soulflame.error.pipe": "No pipe connector found",
   "soulflame.error.entity": "No valid target entity",
-  "soulflame.error.block": "No valid target block",
   "soulflame.error.destination": "No destination found",
   "soulflame.error.send": "Rune cannot send"
 }
