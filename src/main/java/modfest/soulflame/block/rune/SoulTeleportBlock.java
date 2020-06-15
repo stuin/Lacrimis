@@ -1,7 +1,9 @@
 package modfest.soulflame.block.rune;
 
+import modfest.soulflame.init.ModStatusEffects;
 import modfest.soulflame.util.ConduitEntry;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -33,6 +35,7 @@ public class SoulTeleportBlock extends SoulExtractionBlock {
         if(value instanceof LivingEntity && testCage(world, pos, flipped, null) > 0) {
             int vertical = (flipped == Direction.UP) ? 1 : -(int)Math.ceil(((LivingEntity) value).getHeight());
             ((LivingEntity) value).teleport(pos.getX() + 0.5, pos.getY() + vertical, pos.getZ() + 0.5);
+            ((LivingEntity) value).addStatusEffect(new StatusEffectInstance(ModStatusEffects.WAVERING_SOUL, 50));
             return true;
         }
         return false;

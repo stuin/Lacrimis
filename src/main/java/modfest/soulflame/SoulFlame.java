@@ -38,6 +38,7 @@ public class SoulFlame implements ModInitializer {
         ModInfusion.register();
         ModSounds.register();
         ModParticles.register();
+        ModStatusEffects.register();
 
         FabricDefaultAttributeRegistry.register(ModEntityTypes.ghost, GhostEntity.createGhostAttributes());
     }
