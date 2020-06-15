@@ -3,6 +3,7 @@ package modfest.soulflame.client.entity.render.model;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.entity.model.CompositeEntityModel;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
@@ -26,6 +27,11 @@ public class GhostEntityModel extends CompositeEntityModel<GhostEntity> {
     public GhostEntityModel() {
         this.textureWidth = 64;
         this.textureHeight = 64;
+
+        // the coordinates for lower* are simply wrong but I'm too lazy to spend
+        // another couple days fixing createPart so oh well.
+        // Correct coordinates are commented out...
+
         this.head = createPartFlipped(this, 0, 0,
                 0.0f, 28.0f, 0.0f,
                 8.0f, 8.0f, 8.0f,
@@ -43,13 +49,13 @@ public class GhostEntityModel extends CompositeEntityModel<GhostEntity> {
                 4.0f, 6.0f, 4.0f,
                 -4.0f, 22.0f, 0.0f);
         this.lowerArmLeft = createPart(this, this.upperArmLeft, 32, 54,
-                6.0f, 15.0f, 0.0f,
+                6.0f, -15.0f, 0.0f, // 6.0f, 15.0f, 0.0f
                 4.0f, 6.0f, 4.0f,
-                6.0f, 18.0f, 0.0f);
+                6.0f, -18.0f, 0.0f); // 6.0f, 18.0f, 0.0f
         this.lowerArmRight = createPart(this, this.upperArmRight, 40, 26,
-                -6.0f, 15.0f, 0.0f,
+                -6.0f, -15.0f, 0.0f, // -6.0f, 15.0f, 0.0f
                 4.0f, 6.0f, 4.0f,
-                -6.0f, 18.0f, 0.0f);
+                -6.0f, -18.0f, 0.0f); // -6.0f, 18.0f, 0.0f
         this.upperLegLeft = createPart(this, this.body, 16, 44,
                 2.0f, 9.0f, 0.0f,
                 4.0f, 6.0f, 4.0f,
@@ -59,13 +65,14 @@ public class GhostEntityModel extends CompositeEntityModel<GhostEntity> {
                 4.0f, 6.0f, 4.0f,
                 -2.0f, 12.0f, 0.0f);
         this.lowerLegLeft = createPart(this, this.upperLegLeft, 16, 54,
-                2.0f, 3.0f, 0.0f,
+                2.0f, -3.0f, 0.0f, // 2.0f, 3.0f, 0.0f
                 4.0f, 6.0f, 4.0f,
-                2.0f, 6.0f, 0.0f);
+                2.0f, -6.0f, 0.0f); // 2.0f, 6.0f, 0.0f
         this.lowerLegRight = createPart(this, this.upperLegRight, 0, 26,
-                -2.0f, 3.0f, 0.0f,
+                -2.0f, -3.0f, 0.0f, // -2.0f, 3.0f, 0.0f
                 4.0f, 6.0f, 4.0f,
-                -2.0f, 6.0f, 0.0f);
+                -2.0f, -6.0f, 0.0f); // -2.0f, 6.0f, 0.0f
+        Direction.class.getEnumConstants();
     }
 
     private static LinkedModelPart createPart(Model model, int u, int v, float x, float y, float z, float sx, float sy, float sz, float px, float py, float pz) {
