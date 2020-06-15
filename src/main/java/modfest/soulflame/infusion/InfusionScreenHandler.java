@@ -189,7 +189,7 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 	}
 
 	public int getAvailableTears() {
-		return this.entity.getLevel();
+		return this.entity.getTank().getTears();
 	}
 
 	public int getRequiredTears() {

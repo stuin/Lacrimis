@@ -2,14 +2,17 @@ package modfest.soulflame.block.entity;
 
 import modfest.soulflame.infusion.InfusionInventory;
 import modfest.soulflame.init.ModBlockEntityTypes;
+import modfest.soulflame.util.ConduitUtil;
+import modfest.soulflame.util.SoulTank;
 import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Tickable;
 
-public class InfusionTableEntity extends SoulUserEntity implements Inventory {
+public class InfusionTableEntity extends SoulTankEntity implements Inventory, Tickable {
 	private static final int TEAR_CAPACITY = 500;
 
 	public final InfusionInventory inventory;
@@ -17,6 +20,15 @@ public class InfusionTableEntity extends SoulUserEntity implements Inventory {
 	public InfusionTableEntity() {
 		super(ModBlockEntityTypes.infusionTable, TEAR_CAPACITY);
 		this.inventory = new InfusionInventory(this, 9);
+	}
+
+	public void tick() {
+		if(world == null || world.isClient() || getRelativeLevel() == 1) return;
+
+		//Locate source
+		SoulTank tank = getTank();
+		if(tank.getSpace() > 0)
+			tank.addTears(ConduitUtil.locateTears(world, pos, tank.getSpace()));
 	}
 
 	@Override

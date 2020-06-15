@@ -6,15 +6,10 @@ import java.util.function.Predicate;
 public class SoulTank {
 	private final ArrayList<Runnable> listeners = new ArrayList<>();
 	private final int capacity;
-	private boolean canExtract = true;
 	private int tears = 0;
 
 	public SoulTank(int capacity) {
 		this.capacity = capacity;
-	}
-	
-	public void disableExtract() {
-		canExtract = false;
 	}
 
 	public int getCapacity() {
@@ -23,6 +18,10 @@ public class SoulTank {
 
 	public int getTears() {
 		return tears;
+	}
+	
+	public int getSpace() {
+		return capacity - tears;
 	}
 	
 	public void setTears(int tears) {
@@ -71,17 +70,5 @@ public class SoulTank {
 	
 	public void addListener(Runnable listener) {
 		listeners.add(listener);
-	}
-	
-	public static boolean SOURCE(Object value) {
-		if(value instanceof SoulTank) {
-			SoulTank tank = ((SoulTank) value);
-			return tank.canExtract && tank.getTears() > 0;
-		}
-		return false;
-	}
-
-	public static Predicate<Object> source(int min_power) {
-		return (Object value) -> SoulTank.SOURCE(value) && ((SoulTank) value).getTears() >= min_power;
 	}
 }

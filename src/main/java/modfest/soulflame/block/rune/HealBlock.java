@@ -1,30 +1,28 @@
 package modfest.soulflame.block.rune;
 
 import modfest.soulflame.SoulFlame;
-import modfest.soulflame.util.ConduitUtil;
-import modfest.soulflame.util.SoulTank;
+import modfest.soulflame.util.ConduitEntry;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 public class HealBlock extends CenterRuneBlock {
-    private static final int REQUIRED_TEARS = 50;
+    public HealBlock() {
+        super(50, 1);
+    }
 
     @Override
-    public boolean activate(World world, BlockPos pos, LivingEntity entity, PlayerEntity player) {
-        //Collect required tears
-        Object tank = ConduitUtil.locateSource(world, pipePos(world, pos), SoulTank.source(REQUIRED_TEARS));
-        if(tank instanceof SoulTank) {
-            if(entity != null) {
-                ((SoulTank) tank).removeTears(REQUIRED_TEARS);
-                entity.heal(2);
-                if(!world.isClient)
-                    SoulFlame.LOGGER.info("Entity Healed");
-            } else
-                error(player, "entity");
+    protected boolean activate(World world, BlockPos pos, List<ConduitEntry> list, LivingEntity entity, PlayerEntity player) {
+        if(entity != null && entity.getHealth() < entity.getMaxHealth()) {
+            entity.heal(2);
+            if(!world.isClient)
+                SoulFlame.LOGGER.info("Entity Healed");
+            return true;
         } else
-            error(player, "tears");
+            error(player, "entity");
         return true;
     }
 }

@@ -11,14 +11,16 @@
   "block.soulflame.rune.tier2": "Tier 2 Rune",
   "block.soulflame.rune.pipe1": "Tier 1 Pipe Connector",
   "block.soulflame.rune.pipe2": "Tier 2 Pipe Connector",
+  "block.soulflame.rune.flip": "Flipped Rune",
   "block.soulflame.rune.healing": "Healing Rune",
   "block.soulflame.rune.extraction": "Soul Extraction Rune",
   "block.soulflame.rune.destination": "Soul Destination Rune",
-  "block.soulflame.rune.transport": "Two Way Transport Rune",
+  "block.soulflame.rune.entity_transport": "Two Way Transport Rune",
   "block.soulflame.rune.block_transport": "Block Transport Rune",
   
   "item.soulflame.bottle_of_tears": "Bottle of Tears",
   "item.soulflame.divining_rod": "Divining Rod",
+  "item.soulflame.tear_ingot": "Tear Soaked Iron",
 
   "gui.soulflame.infusion": "Infusion Table",
   "itemGroup.soulflame.group": "Soulflame",
@@ -27,5 +29,6 @@
   "soulflame.error.platform": "Incomplete Soul Cage",
   "soulflame.error.entity": "No valid target entity",
   "soulflame.error.block": "No valid target block",
-  "soulflame.error.destination": "No destination found"
+  "soulflame.error.destination": "No destination found",
+  "soulflame.error.send": "Rune cannot send"
 }

@@ -30,7 +30,7 @@ public class CrucibleBlock extends SoulTankBlock implements Activatable {
     protected static final VoxelShape OUTLINE_SHAPE = VoxelShapes.combineAndSimplify(VoxelShapes.fullCube(), VoxelShapes.union(createCuboidShape(0.0D, 0.0D, 4.0D, 16.0D, 3.0D, 12.0D), createCuboidShape(4.0D, 0.0D, 0.0D, 12.0D, 3.0D, 16.0D), createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 3.0D, 14.0D), RAY_TRACE_SHAPE), BooleanBiFunction.ONLY_FIRST);
 
     public CrucibleBlock(AbstractBlock.Settings settings) {
-        super(settings);
+        super(settings, true);
     }
 
     @Override

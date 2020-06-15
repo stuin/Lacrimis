@@ -2,6 +2,6 @@
   "parent": "soulflame:block/rune/edge_block",
   "textures": {
     "top": "soulflame:block/rune_healing",
-    "side": "soulflame:block/rune_edge_side"
+    "side": "soulflame:block/rune_blank"
   }
 }

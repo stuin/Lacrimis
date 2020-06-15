@@ -44,6 +44,7 @@ public class CrucibleEntity extends SoulTankEntity implements Tickable {
             }
         }
 
+
         if (craftTime < CRAFT_COOLDOWN)
             craftTime++;
 
@@ -63,7 +64,7 @@ public class CrucibleEntity extends SoulTankEntity implements Tickable {
                         ((ItemEntity) entity).setStack(remainder);
                         ItemScatterer.spawn(world, pos.up(), new SimpleInventory(recipe.getOutput().copy()));
                         ModNetworking.sendCrucibleParticlesPacket(this, entity.getX(), entity.getY(), entity.getZ());
-                        removeTears(recipe.getTears());
+                        getTank().removeTears(recipe.getTears());
                         craftTime = 0;
                         break;
 //                    }

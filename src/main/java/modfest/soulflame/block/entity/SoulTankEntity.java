@@ -10,7 +10,6 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.nbt.CompoundTag;
 
 public abstract class SoulTankEntity extends BlockEntity implements BlockEntityClientSerializable {
-    private static final int MAX_TRANSFER = 10;
     private final SoulTank tank;
 
     public SoulTankEntity(BlockEntityType<?> type, int capacity) {
@@ -24,26 +23,8 @@ public abstract class SoulTankEntity extends BlockEntity implements BlockEntityC
         return tank.getTears() / (float) tank.getCapacity();
     }
     
-    public int getLevel() {
-        return tank.getTears();
-    }
-    
     public SoulTank getTank() {
         return tank;
-    }
-
-    public boolean transfer(SoulTank value) {
-        return tank.transfer(value, MAX_TRANSFER);
-    }
-
-    public int addTears(int value) {
-        value = tank.addTears(value);
-        return value;
-    }
-
-    public int removeTears(int value) {
-        value = tank.removeTears(value);
-        return value;
     }
     
     public void mark() {

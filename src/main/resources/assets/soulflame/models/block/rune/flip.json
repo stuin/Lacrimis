@@ -1,0 +1,7 @@
+{
+  "parent": "soulflame:block/rune/edge_block",
+  "textures": {
+    "top": "soulflame:block/rune_blank",
+    "side": "soulflame:block/rune_arrow"
+  }
+}
