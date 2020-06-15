@@ -20,6 +20,10 @@ public class SoulFlame implements ModInitializer {
             new Identifier(MODID, "group"))
             .icon(() -> new ItemStack(ModBlocks.infusionTable))
             .build();
+    public static final ItemGroup TAROT_ITEM_GROUP = FabricItemGroupBuilder.create(
+            new Identifier(MODID, "tarot"))
+            .icon(() -> new ItemStack(ModItems.baseTarot))
+            .build();
 
     @Override
     public void onInitialize() {

@@ -3,6 +3,7 @@ package modfest.soulflame.init;
 import modfest.soulflame.SoulFlame;
 import modfest.soulflame.item.BottleOfTearsItem;
 import modfest.soulflame.item.DiviningRodItem;
+import modfest.soulflame.item.TarotCardItem;
 import modfest.soulflame.item.armor.CustomArmorMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EquipmentSlot;
@@ -14,6 +15,7 @@ import net.minecraft.util.registry.Registry;
 
 public class ModItems {
     private static final Item.Settings SETTINGS = new Item.Settings().group(SoulFlame.ITEM_GROUP);
+    private static final Item.Settings TAROT_SETTINGS = new Item.Settings().group(SoulFlame.TAROT_ITEM_GROUP);
 
     //Main blocks
     public static BlockItem infusionTable;
@@ -33,6 +35,9 @@ public class ModItems {
     public static Item tearSoakenChestplate;
     public static Item tearSoakenLeggings;
     public static Item tearSoakenBoots;
+
+    // Tarot cards
+    public static TarotCardItem baseTarot;
 
     //Rune cage blocks
     public static BlockItem rune1;
@@ -64,6 +69,8 @@ public class ModItems {
         tearSoakenChestplate = register("tear_soaked_chestplate", new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.CHEST, new Item.Settings().group(SoulFlame.ITEM_GROUP)));
         tearSoakenLeggings = register("tear_soaked_leggings", new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.LEGS, new Item.Settings().group(SoulFlame.ITEM_GROUP)));
         tearSoakenBoots = register("tear_soaked_boots", new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.FEET, new Item.Settings().group(SoulFlame.ITEM_GROUP)));
+
+        baseTarot = register("base_tarot", new TarotCardItem(TAROT_SETTINGS));
 
         rune1 = register("rune/tier1", ModBlocks.rune1);
         rune2 = register("rune/tier2", ModBlocks.rune2);

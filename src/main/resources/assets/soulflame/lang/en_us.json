@@ -27,12 +27,15 @@
   "item.soulflame.tear_soaked_leggings": "Tear Soaked Leggings",
   "item.soulflame.tear_soaked_boots": "Tear Soaked Boots",
 
+  "item.soulflame.base_tarot": "Empty Tarot Card",
+
   "soulflame.tooltip.crucible": "%s Tears",
   "soulflame.tooltip.rune.tears": "Base cost: %s Tears",
   "soulflame.tooltip.rune.tier": "Tier %s setup required",
 
   "gui.soulflame.infusion": "Infusion Table",
   "itemGroup.soulflame.group": "Soulflame",
+  "itemGroup.soulflame.tarot": "Soulflame Tarot",
 
   "soulflame.error.tears": "Not enough Tears",
   "soulflame.error.barrier": "Tier 1 runes require cage",
