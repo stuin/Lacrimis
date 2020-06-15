@@ -1,8 +1,8 @@
 package modfest.soulflame;
 
-import modfest.soulflame.block.entity.renderer.CrucibleEntityRenderer;
-import modfest.soulflame.block.entity.renderer.InfusionTableEntityRenderer;
-import modfest.soulflame.client.entity.render.GhostEntityRenderer;
+import modfest.soulflame.client.render.blocks.CrucibleEntityRenderer;
+import modfest.soulflame.client.render.blocks.InfusionTableEntityRenderer;
+import modfest.soulflame.client.render.entity.GhostEntityRenderer;
 import modfest.soulflame.init.ModBlockEntityTypes;
 import modfest.soulflame.init.ModBlocks;
 import modfest.soulflame.init.ModEntityTypes;

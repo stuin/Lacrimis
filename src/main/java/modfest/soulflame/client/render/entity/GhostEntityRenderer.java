@@ -1,4 +1,4 @@
-package modfest.soulflame.client.entity.render;
+package modfest.soulflame.client.render.entity;
 
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
@@ -9,7 +9,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 import modfest.soulflame.SoulFlame;
-import modfest.soulflame.client.entity.render.model.GhostEntityModel;
+import modfest.soulflame.client.render.entity.model.GhostEntityModel;
 import modfest.soulflame.entity.GhostEntity;
 
 public class GhostEntityRenderer extends EntityRenderer<GhostEntity> {
