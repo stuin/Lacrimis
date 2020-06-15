@@ -122,6 +122,20 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
         }
         return activate(world, pos, pipe, null, player);
     }
+    
+    public BlockPos getPipe(BlockView world, BlockPos pos) {
+        //Locate pipe connection
+        int i = world.getBlockState(pos).get(PIPE);
+        if(i == 8)
+            return null;
+        BlockPos pipe = pos.add(NeighborList.platform[i]);
+
+        //Adjust pipe for tier 3
+        if(world.getBlockState(pipe).getBlock() instanceof AdvancedRuneBlock)
+            return AdvancedRuneBlock.getPipe(world, pipe);
+        else
+            return pipe;
+    }
 
     public boolean activate(World world, BlockPos pos, PlayerEntity player) {
         //Mark powered
@@ -134,15 +148,10 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
         if(tier < requiredTier)
             return false;
 
-        //Locate pipe connection
-        int i = world.getBlockState(pos).get(PIPE);
-        if(i == 8)
+        //Get pipe location
+        BlockPos pipe = getPipe(world, pos);
+        if(pipe == null)
             return false;
-        BlockPos pipe = pos.add(NeighborList.platform[i]);
-
-        //Adjust pipe for tier 3
-        if(world.getBlockState(pipe).getBlock() instanceof AdvancedRuneBlock)
-            pipe = AdvancedRuneBlock.getPipe(world, pipe);
 
         //Grab required tears
         List<ConduitEntry> tearsList = ConduitUtil.listScanConduits(world, pipe, true);

@@ -51,7 +51,7 @@ public class AdvancedRuneBlock extends RuneBlock {
                 }
             }
         }
-        return 3;
+        return tier;
     }
 
     @Override

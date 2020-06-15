@@ -21,9 +21,11 @@ public class ModStatusEffects {
 
             @Override
             public void onRemoved(LivingEntity entity, AttributeContainer attributes, int amplifier) {
-                // If an entity has this potion effect and dies, it should drop an item
-                // Not sure how to activate this on death
-                ItemScatterer.spawn(entity.getEntityWorld(), entity.getPos().getX(), entity.getPos().getY(), entity.getPos().getZ(), new ItemStack(ModItems.baseTarot));
+                if(entity.getHealth() < 1) {
+                    ItemScatterer.spawn(entity.getEntityWorld(), entity.getBlockPos(),
+                            new SimpleInventory(new ItemStack(ModItems.baseTarot)));
+                    entity.kill();
+                }
                 super.onRemoved(entity, attributes, amplifier);
             }
         });

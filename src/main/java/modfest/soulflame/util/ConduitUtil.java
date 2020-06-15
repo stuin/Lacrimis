@@ -70,7 +70,7 @@ public class ConduitUtil {
                     stack.push(next);
                 else if (nextState.getBlock() instanceof BlockConduitConnect) {
                     BlockConduitConnect b = (BlockConduitConnect) nextState.getBlock();
-                    if (b.canConnectConduitTo(next, world, d.getOpposite()))
+                    if (b.canConnectConduitTo(next, world, d))
                         out.add(new ConduitEntry(b, next, nextState));
                 }
             }
