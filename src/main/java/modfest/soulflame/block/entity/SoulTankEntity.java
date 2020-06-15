@@ -1,8 +1,6 @@
 package modfest.soulflame.block.entity;
 
 import modfest.soulflame.util.SoulTank;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -18,7 +16,6 @@ public abstract class SoulTankEntity extends BlockEntity implements BlockEntityC
         tank.addListener(this::mark);
     }
 
-    @Environment(EnvType.CLIENT)
     public float getRelativeLevel() {
         return tank.getTears() / (float) tank.getCapacity();
     }

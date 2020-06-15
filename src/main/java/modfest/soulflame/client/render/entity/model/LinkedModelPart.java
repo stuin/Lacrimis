@@ -1,4 +1,4 @@
-package modfest.soulflame.client.entity.render.model;
+package modfest.soulflame.client.render.entity.model;
 
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.ModelPart;

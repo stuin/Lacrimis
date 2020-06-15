@@ -14,7 +14,7 @@ public class SoulTeleportBlock extends SoulExtractionBlock {
     private final boolean canSend;
 
     public SoulTeleportBlock(boolean canSend) {
-        super(100, canSend ? 2 : 1);
+        super(canSend ? 100 : 200, canSend ? 2 : 1);
         this.canSend = canSend;
     }
 
@@ -30,7 +30,7 @@ public class SoulTeleportBlock extends SoulExtractionBlock {
     @Override
     public boolean insert(BlockPos pos, BlockView world, Object value) {
         Direction flipped = flipside(world, pos);
-        if(value instanceof LivingEntity && testCage(world, pos, flipped)) {
+        if(value instanceof LivingEntity && testCage(world, pos, flipped, null) > 0) {
             int vertical = (flipped == Direction.UP) ? 1 : -(int)Math.ceil(((LivingEntity) value).getHeight());
             ((LivingEntity) value).teleport(pos.getX() + 0.5, pos.getY() + vertical, pos.getZ() + 0.5);
             return true;

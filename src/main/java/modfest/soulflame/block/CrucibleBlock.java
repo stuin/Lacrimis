@@ -61,7 +61,8 @@ public class CrucibleBlock extends SoulTankBlock implements Activatable {
     @Override
     public void buildTooltip(ItemStack stack, BlockView world, List<Text> tooltip, TooltipContext options) {
         super.buildTooltip(stack, world, tooltip, options);
-        tooltip.add(new TranslatableText("block.soulflame.crucible.level", stack.getOrCreateTag().getInt("TearLevel")).formatted(Formatting.GRAY));
+        tooltip.add(new TranslatableText("soulflame.tooltip.crucible",
+                stack.getOrCreateTag().getInt("TearLevel")).formatted(Formatting.GRAY));
     }
 
     @Override

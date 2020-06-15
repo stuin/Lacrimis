@@ -4,9 +4,7 @@ import modfest.soulflame.block.entity.InfusionTableEntity;
 import modfest.soulflame.init.ModInfusion;
 import modfest.soulflame.init.ModItems;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
@@ -15,10 +13,16 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public class InfusionTableBlock extends SoulTankBlock {
+	protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
+
+	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+		return SHAPE;
+	}
 	public InfusionTableBlock(AbstractBlock.Settings settings) {
 		super(settings, false);
 	}
@@ -49,6 +53,7 @@ public class InfusionTableBlock extends SoulTankBlock {
 				ItemScatterer.spawn(world, pos, (Inventory)blockEntity);
 				world.updateComparators(pos, this);
 				((Inventory) blockEntity).clear();
+
 			}
 		}
 	}

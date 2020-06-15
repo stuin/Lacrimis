@@ -1,7 +1,7 @@
 {
   "multipart": [
     {
-      "apply": { "model": "soulflame:block/conduit/center" }
+      "apply": { "model": "soulflame:block/conduit/node" }
     },
     {
       "when": { "down": true },

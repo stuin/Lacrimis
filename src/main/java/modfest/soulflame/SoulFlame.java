@@ -1,5 +1,6 @@
 package modfest.soulflame;
 
+import modfest.soulflame.init.*;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -8,11 +9,6 @@ import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 
 import modfest.soulflame.entity.GhostEntity;
-import modfest.soulflame.init.ModBlockEntityTypes;
-import modfest.soulflame.init.ModBlocks;
-import modfest.soulflame.init.ModEntityTypes;
-import modfest.soulflame.init.ModInfusion;
-import modfest.soulflame.init.ModItems;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -32,6 +28,8 @@ public class SoulFlame implements ModInitializer {
         ModBlockEntityTypes.register();
         ModItems.register();
         ModInfusion.register();
+        ModSounds.register();
+        ModParticles.register();
 
         FabricDefaultAttributeRegistry.register(ModEntityTypes.ghost, GhostEntity.createGhostAttributes());
     }
