@@ -22,6 +22,15 @@ repositories {
 			password ""
 		}
 	}
+	maven {
+		url = 'https://jitpack.io'
+	}
+	maven {
+		url = 'http://server.bbkr.space:8081/artifactory/libs-release'
+	}
+	maven {
+		url = 'https://maven.blamejared.com' 
+	}
 }
 
 dependencies {
@@ -32,6 +41,24 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	//Wrenchable api
+	def wrenchVersion = "com.github.Zundrel:Wrenchable:${project.wrenchable_version}"
+	modImplementation (wrenchVersion) {
+		exclude group: "io.github.prospector"
+		exclude group: "net.fabricmc"
+	}
+	include wrenchVersion
+
+	//Patchouli api (Official way)
+	//def patchouliVersion = "vazkii.patchouli:Patchouli:${project.patchouli_version}"
+	//Patchouli api (Current Snapshot way)
+	//def patchouliVersion = "com.github.Vazkii:Patchouli:${project.patchouli_version}"
+	//compileOnly (patchouliVersion + ":api") {
+	//	exclude group: "net.fabricmc"
+	//}
+	//runtimeOnly patchouliVersion
+	//compile patchouliVersion
 }
 
 processResources {
