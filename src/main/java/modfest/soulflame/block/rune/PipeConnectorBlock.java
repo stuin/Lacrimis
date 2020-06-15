@@ -1,6 +1,7 @@
 package modfest.soulflame.block.rune;
 
 import modfest.soulflame.block.BlockConduitConnect;
+import modfest.soulflame.util.NeighborList;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -14,19 +15,6 @@ public class PipeConnectorBlock extends RuneBlock implements BlockConduitConnect
     }
 
     @Override
-    protected BlockPos getCenter(BlockView world, BlockPos pos, BlockState state) {
-        BlockPos center = super.getCenter(world, pos, state);
-        if(center != null) {
-            //Update pipe location
-            int i = (state.get(CENTER) + 4) % 8;
-            BlockState state2 = world.getBlockState(center);
-            if(world instanceof World && state2.get(CenterRuneBlock.PIPE) != i)
-                ((World)world).setBlockState(center, state2.with(CenterRuneBlock.PIPE, i));
-        }
-        return center;
-    }
-
-    @Override
     public boolean canConnectConduitTo(BlockPos pos, BlockView world, Direction side) {
         return pos.offset(side) != getCenter(world, pos) && side != Direction.UP;
     }
@@ -34,7 +22,7 @@ public class PipeConnectorBlock extends RuneBlock implements BlockConduitConnect
     @Override
     public Object extract(BlockPos pos, BlockView world) {
         //Extract from center
-        BlockPos center = getCenter(world, pos);
+        BlockPos center = getTrueCenter(world, pos);
         if(center != null) {
             Block block = world.getBlockState(center).getBlock();
             if(block instanceof BlockConduitConnect)
@@ -51,7 +39,7 @@ public class PipeConnectorBlock extends RuneBlock implements BlockConduitConnect
     @Override
     public boolean insert(BlockPos pos, BlockView world, Object value) {
         //Insert to center
-        BlockPos center = getCenter(world, pos);
+        BlockPos center = getTrueCenter(world, pos);
         if(center != null) {
             Block block = world.getBlockState(center).getBlock();
             if(block instanceof BlockConduitConnect)

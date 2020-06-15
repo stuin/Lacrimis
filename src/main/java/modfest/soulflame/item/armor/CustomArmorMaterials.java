@@ -1,20 +1,25 @@
 package modfest.soulflame.item.armor;
 
+import modfest.soulflame.init.ModItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Lazy;
 
 import java.util.function.Supplier;
 
-public class TearSoakenArmorMaterial implements ArmorMaterial {
+public enum CustomArmorMaterials implements ArmorMaterial {
+
+    TEAR_SOAKEN("tear_soaked", 16, new int[]{2,5,6,2}, 15, SoundEvents.BLOCK_CHAIN_BREAK, 0.0F, () -> {
+        return Ingredient.ofItems(ModItems.tearIngot);
+    }, 0.0F);
 
     private static final int[] baseDurability = {13, 15, 16, 11};
-    //Not sure what these should be
-    private static final int[] protectionAmounts = {13, 15, 16, 11};
     private final String name;
     private final int durabilityMultiplier;
     private final int[] armorValues;
@@ -24,7 +29,7 @@ public class TearSoakenArmorMaterial implements ArmorMaterial {
     private final Lazy<Ingredient> repairIngredient;
     private final float knockbackResistance;
 
-    TearSoakenArmorMaterial(String name, int durabilityMultiplier, int[] armorValueArr, int enchantability, SoundEvent soundEvent, float toughness, Supplier<Ingredient> repairIngredient, float knockbackResistance) {
+    CustomArmorMaterials(String name, int durabilityMultiplier, int[] armorValueArr, int enchantability, SoundEvent soundEvent, float toughness, Supplier<Ingredient> repairIngredient, float knockbackResistance) {
         this.name = name;
         this.durabilityMultiplier = durabilityMultiplier;
         this.armorValues = armorValueArr;
@@ -40,7 +45,7 @@ public class TearSoakenArmorMaterial implements ArmorMaterial {
     }
 
     public int getProtectionAmount(EquipmentSlot equipmentSlot_1) {
-        return this.protectionAmounts[equipmentSlot_1.getEntitySlotId()];
+        return armorValues[equipmentSlot_1.getEntitySlotId()];
     }
 
     public int getEnchantability() { return this.enchantability; }

@@ -1,0 +1,16 @@
+{
+  "type": "soulflame:infusion_shaped",
+  "pattern": [
+    "X X",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "soulflame:tear_ingot"
+    }
+  },
+  "result": {
+    "item": "soulflame:tear_soaked_boots"
+  },
+  "tears": 150
+}

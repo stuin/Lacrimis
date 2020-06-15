@@ -23,48 +23,60 @@ public class BlockTeleportBlock extends CenterRuneBlock {
 
     @Override
     protected boolean activate(World world, BlockPos pos, List<ConduitEntry> list, LivingEntity entity, PlayerEntity player) {
-        BlockState source = world.getBlockState(pos);
-        if(!source.isAir()) {
-            BlockPos destination = ConduitUtil.locateSink(world, list, pos);
-            if(destination != null) {
-                if(!world.isClient)
-                    SoulFlame.LOGGER.info("Block Moved");
-                return true;
-            } else
-                error(player, "destination");
+        BlockPos destination = ConduitUtil.locateSink(world, list, pos);
+        if(destination != null) {
+            if(!world.isClient)
+                SoulFlame.LOGGER.info("Block Moved");
+            return true;
         } else
-            error(player, "block");
+            error(player, "destination");
         return false;
     }
 
     @Override
-    public boolean insert(BlockPos pos, BlockView world, Object value) {
-        Direction flipped = flipside(world, pos);
-        if(world instanceof World && value instanceof BlockPos && testCage(world, pos, flipped)) {
-            BlockState source = world.getBlockState((BlockPos) value);
-            pos = pos.offset(flipped);
+    public boolean insert(BlockPos dest, BlockView blockView, Object value) {
+        Direction flipped = flipside(blockView, dest);
+        if(blockView instanceof World && value instanceof BlockPos && testCage(blockView, dest, flipped, null) > 0) {
+            World world = (World) blockView;
+            dest = dest.offset(flipped);
+            BlockPos source = (BlockPos) value;
+            BlockState sourceState = world.getBlockState(source);
+            BlockState destState = world.getBlockState(dest);
 
             //Set destination block
-            if(world.getBlockState(pos).isAir()) {
-                ((World) world).setBlockState(pos, source);
-                BlockEntity sourceEntity = world.getBlockEntity((BlockPos) value);
-                BlockEntity destEntity = world.getBlockEntity(pos);
+            BlockEntity sourceEntity = world.getBlockEntity(source);
+            BlockEntity destEntity = world.getBlockEntity(dest);
 
-                //Copy entity
-                if(sourceEntity != null && destEntity != null) {
-                    CompoundTag tag = sourceEntity.toTag(new CompoundTag());
-                    sourceEntity.fromTag(source, new CompoundTag());
-
-                    //Write entity
-                    tag.putInt("x", pos.getX());
-                    tag.putInt("y", pos.getY());
-                    tag.putInt("z", pos.getZ());
-                    destEntity.fromTag(source, tag);
-                }
-                ((World) world).setBlockState((BlockPos) value, Blocks.AIR.getDefaultState());
-                return true;
+            //Copy entity
+            if(sourceEntity != null && destEntity != null)
+                return false;
+            if(sourceEntity != null) {
+                swap(world, sourceEntity, sourceState, dest);
+                world.setBlockState(source, destState);
+            } else if(destEntity != null) {
+                swap(world, destEntity, destState, source);
+                world.setBlockState(dest, sourceState);
+            } else {
+                world.setBlockState(source, destState);
+                world.setBlockState(dest, sourceState);
             }
+            return true;
         }
         return false;
+    }
+    
+    private void swap(World world, BlockEntity sourceEntity, BlockState sourceState, BlockPos dest) {
+        CompoundTag sourceTag = sourceEntity.toTag(new CompoundTag());
+        sourceEntity.fromTag(sourceState, new CompoundTag());
+
+        world.setBlockState(dest, sourceState);
+        BlockEntity destEntity = world.getBlockEntity(dest);
+        if(destEntity != null) {
+            //Write destination entity
+            sourceTag.putInt("x", dest.getX());
+            sourceTag.putInt("y", dest.getY());
+            sourceTag.putInt("z", dest.getZ());
+            destEntity.fromTag(sourceState, sourceTag);
+        }
     }
 }
