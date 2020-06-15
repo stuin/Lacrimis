@@ -4,6 +4,7 @@ import modfest.soulflame.block.entity.renderer.CrucibleEntityRenderer;
 import modfest.soulflame.init.ModBlockEntityTypes;
 import modfest.soulflame.init.ModBlocks;
 import modfest.soulflame.init.ModInfusion;
+import modfest.soulflame.init.ModNetworking;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -13,14 +14,15 @@ import net.minecraft.client.render.RenderLayer;
 
 @Environment(EnvType.CLIENT)
 public class ClientSoulFlame implements ClientModInitializer {
-	@Override
-	public void onInitializeClient() {
-		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.infusionTable, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.tearLantern, RenderLayer.getCutout());
+    @Override
+    public void onInitializeClient() {
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.infusionTable, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.tearLantern, RenderLayer.getCutout());
 
-		BlockEntityRendererRegistry.INSTANCE.register(ModBlockEntityTypes.crucible, CrucibleEntityRenderer::new);
-		CrucibleEntityRenderer.onInit();
+        BlockEntityRendererRegistry.INSTANCE.register(ModBlockEntityTypes.crucible, CrucibleEntityRenderer::new);
+        CrucibleEntityRenderer.onInit();
 
-		ModInfusion.registerClient();
-	}
+        ModInfusion.registerClient();
+        ModNetworking.registerClient();
+    }
 }
