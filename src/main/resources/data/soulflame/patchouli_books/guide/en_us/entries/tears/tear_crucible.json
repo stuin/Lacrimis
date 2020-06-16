@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "A crucible is a block that can collect and hold tears.$(br2)Once filled with enough tears, a crucible can be used to convert certain items by dropping them into it."
+      "text": "A crucible is a device that can collect and hold tears.$(br2)The silver used in the creation of this seems to be able to contain the naturally corrosive substance...$(br2) $(#12b88e)$(t:Maybe I can create a new material by throwing mundane substances like iron into it?)Notes$(/t)"
     },
     {
       "type": "crafting",
@@ -19,7 +19,7 @@
     },
     {
       "type": "multiblock",
-      "name": "Tears Collection",
+      "name": "Tear Collection",
       "multiblock": {
         "pattern": [ 
           [ "___", "_C_", "___" ], 
@@ -31,7 +31,7 @@
           "0": "soulflame:crucible"
         }
       },
-      "text": "The gap can be stretched up to 4 blocks."
+      "text": "The gap between the crying obsidian and the crucible can be up to 4 blocks."
     }
   ]
 }
