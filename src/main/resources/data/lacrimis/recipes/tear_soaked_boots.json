@@ -1,0 +1,16 @@
+{
+  "type": "lacrimis:infusion_shaped",
+  "pattern": [
+    "X X",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "lacrimis:tear_ingot"
+    }
+  },
+  "result": {
+    "item": "lacrimis:tear_soaked_boots"
+  },
+  "tears": 150
+}

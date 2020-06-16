@@ -1,0 +1,10 @@
+{
+  "type": "lacrimis:crucible",
+  "base": {
+    "item": "minecraft:stick"
+  },
+  "result": {
+    "item": "lacrimis:divining_rod"
+  },
+  "tears": 40
+}

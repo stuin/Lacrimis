@@ -1,0 +1,10 @@
+{
+  "type": "lacrimis:crucible",
+  "base": {
+    "item": "minecraft:soul_lantern"
+  },
+  "result": {
+    "item": "lacrimis:tear_lantern"
+  },
+  "tears": 150
+}

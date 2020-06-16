@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/crying_obsidian",
-  "textures": {
-    "all": "soulflame:block/drained_crying_obsidian7"
-  }
-}

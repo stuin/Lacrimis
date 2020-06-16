@@ -1,0 +1,7 @@
+{
+  "parent": "lacrimis:block/rune/edge_block",
+  "textures": {
+    "top": "lacrimis:block/rune_outward_arrow",
+    "side": "lacrimis:block/rune_blank"
+  }
+}

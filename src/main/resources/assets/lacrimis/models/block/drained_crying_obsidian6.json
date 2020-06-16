@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crying_obsidian",
+  "textures": {
+    "all": "lacrimis:block/drained_crying_obsidian6"
+  }
+}

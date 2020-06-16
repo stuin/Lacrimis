@@ -1,0 +1,6 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "lacrimis:item/tear_soaked_boots"
+    }
+}

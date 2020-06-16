@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "soulflame",
+  "id": "lacrimis",
   "version": "${version}",
 
-  "name": "SoulFlame",
+  "name": "Lacrimis",
   "description": "Modfest 1.16 Team Fire",
   "authors": [
     "Me!"
@@ -13,28 +13,25 @@
     "sources": "https://github.com/2xsaiko/modfest-1.16.git"
   },
 
-  "icon": "assets/soulflame/icon.png",
+  "icon": "assets/lacrimis/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "modfest.soulflame.SoulFlame"
+      "modfest.lacrimis.Lacrimis"
     ],
     "client": [
-      "modfest.soulflame.ClientSoulFlame"
+      "modfest.lacrimis.ClientLacrimis"
     ]
   },
 
   "mixins": [
-    "soulflame.mixins.json"
+    "lacrimis.mixins.json"
   ],
 
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": "*",
     "minecraft": "~1.16-rc.5"
-  },
-  "suggests": {
-    "flamingo": "*"
   }
 }

@@ -1,0 +1,37 @@
+{
+  "name": "Tear Crucible",
+  "icon": "lacrimis:crucible",
+  "category": "basic",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "text",
+      "text": "A crucible is a device that can collect and hold tears.$(br2)The silver used in the creation of this seems to be able to contain the naturally corrosive substance...$(br2) $(#12b88e)$(t:Maybe I can create a new material by throwing mundane substances like iron into it?)Notes$(/t)"
+    },
+    {
+      "type": "crafting",
+      "recipe": "lacrimis:crucible",
+      "text": "(temp recipe)"
+    },
+    {
+      "type": "text",
+      "text": "Placing a crying obsidian over a crucible will fill it with tears.$(br2)Collecting tears from crying obsidian is rather slow, a more effective alternatives should exist."
+    },
+    {
+      "type": "multiblock",
+      "name": "Tear Collection",
+      "multiblock": {
+        "pattern": [ 
+          [ "___", "_C_", "___" ], 
+          [ "___", "_ _", "___" ],
+          [ "___", "_0_", "___" ]
+        ],
+        "mapping": {
+          "C": "minecraft:crying_obsidian",
+          "0": "lacrimis:crucible"
+        }
+      },
+      "text": "The gap between the crying obsidian and the crucible can be up to 4 blocks."
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+    "parent": "block/block",
+    "elements": [
+        {   "from": [ 6.99, 0, 6.99 ],
+            "to": [ 9.01, 0, 9.01 ],
+            "faces": {
+                "up": { "texture": "#tears"}
+            }
+        }
+    ],
+    "textures": {
+        "particle": "lacrimis:block/crucible_tears",
+        "tears": "lacrimis:block/crucible_tears"
+    }
+}

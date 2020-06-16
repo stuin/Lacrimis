@@ -1,6 +1,0 @@
-{
-    "_comment": "not a real block, it's only used for rendering",
-	"variants": {
-		"": { "model": "soulflame:block/infusion_table_overlay" }
-	}
-}

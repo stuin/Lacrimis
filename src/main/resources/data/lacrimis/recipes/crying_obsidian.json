@@ -1,0 +1,10 @@
+{
+  "type": "lacrimis:crucible",
+  "base": {
+    "item": "minecraft:obsidian"
+  },
+  "result": {
+    "item": "minecraft:crying_obsidian"
+  },
+  "tears": 500
+}

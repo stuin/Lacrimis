@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "lacrimis:block/tear_lantern"
+    },
+    "hanging=true": {
+      "model": "lacrimis:block/tear_lantern_hanging"
+    }
+  }
+}
