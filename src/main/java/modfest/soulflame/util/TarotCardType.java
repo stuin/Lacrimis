@@ -1,6 +1,10 @@
 package modfest.soulflame.util;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.world.World;
+
+import java.util.function.Consumer;
 
 public enum TarotCardType {
     THE_FOOL("the_fool", EntityType.PIGLIN),
@@ -23,15 +27,32 @@ public enum TarotCardType {
     THE_STAR("the_star", null),
     THE_MOON("the_moon", null),
     THE_SUN("the_sun", null),
-    JUDGEMENT("judgement", EntityType.PUFFERFISH),
+    JUDGEMENT("judgement", EntityType.PUFFERFISH, e -> e.setPuffState(2)),
     THE_WORLD("the_world", EntityType.ENDERMAN),
     ;
 
     public final String id;
     public final EntityType<?> cover;
+    private final Consumer<? extends Entity> init;
 
-    TarotCardType(String id, EntityType<?> cover) {
+    <T extends Entity> TarotCardType(String id, EntityType<T> cover, Consumer<T> init) {
         this.id = id;
         this.cover = cover;
+        this.init = init;
     }
+
+    TarotCardType(String id, EntityType<?> cover) {
+        this(id, cover, null);
+    }
+
+    @SuppressWarnings("unchecked")
+    public Entity create(World world) {
+        if (this.cover == null) return null;
+        Entity e = this.cover.create(world);
+        if (this.init != null) {
+            ((Consumer<Entity>) this.init).accept(e);
+        }
+        return e;
+    }
+
 }
