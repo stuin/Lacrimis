@@ -5,6 +5,7 @@ import modfest.lacrimis.init.ModParticles;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.math.BlockPos;
 
@@ -21,6 +22,8 @@ public class TearLanternEntity extends BlockEntity implements Tickable {
         int range = 6;
         BlockPos obsidianPos = this.pos.up(1);
         if (world != null) {
+            if (world.isClient && Math.random() > 0.9)
+                world.addParticle(ParticleTypes.DRIPPING_OBSIDIAN_TEAR, (double) pos.getX() + (0.4 + Math.random() * (0.6 - 0.4)), (double) pos.getY() - 0.1D, (double) pos.getZ() + (0.4 + Math.random() * (0.6 - 0.4)), 0.0D, 0.0D, 0.0D);
             BlockState obsidianState = this.world.getBlockState(obsidianPos);
             if (obsidianState.getBlock() == Blocks.CRYING_OBSIDIAN) {
                 for (int x = -range; x <= range; x++)
