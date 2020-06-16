@@ -1,0 +1,10 @@
+{
+  "type": "soulflame:crucible",
+  "base": {
+    "item": "minecraft:enderpearl"
+  },
+  "result": {
+    "item": "soulflame:warped_sigil"
+  },
+  "tears": 250
+}
