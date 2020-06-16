@@ -15,7 +15,7 @@ import net.minecraft.util.registry.Registry;
 public class ModItems {
     private static final Item.Settings SETTINGS = new Item.Settings().group(SoulFlame.ITEM_GROUP);
 
-    // Main blocks
+    //Main blocks
     public static BlockItem infusionTable;
     public static BlockItem crucible;
     public static BlockItem conduit;
@@ -24,18 +24,17 @@ public class ModItems {
     public static BlockItem creativeTearsBlock;
     public static BlockItem drainedCryingObsidian;
 
-    // Main items
+    //Main items
     public static BottleOfTearsItem bottleOfTears;
     public static DiviningRodItem diviningRod;
     public static Item tearIngot;
-    public static Item warpedSigil;
 
     public static Item tearSoakenHelmet;
     public static Item tearSoakenChestplate;
     public static Item tearSoakenLeggings;
     public static Item tearSoakenBoots;
 
-    // Rune cage blocks
+    //Rune cage blocks
     public static BlockItem rune1;
     public static BlockItem rune2;
     public static BlockItem rune3;
@@ -60,7 +59,6 @@ public class ModItems {
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
         diviningRod = register("divining_rod", new DiviningRodItem(SETTINGS));
         tearIngot = register("tear_ingot", new Item((new Item.Settings()).group(SoulFlame.ITEM_GROUP)));
-        warpedSigil = register("warped_sigil", new Item((new Item.Settings()).group(SoulFlame.ITEM_GROUP)));
 
         tearSoakenHelmet = register("tear_soaked_helmet", new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.HEAD, new Item.Settings().group(SoulFlame.ITEM_GROUP)));
         tearSoakenChestplate = register("tear_soaked_chestplate", new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.CHEST, new Item.Settings().group(SoulFlame.ITEM_GROUP)));
@@ -78,7 +76,8 @@ public class ModItems {
         destinationRune = register("rune/destination", ModBlocks.destinationRune);
         transportRune = register("rune/entity_transport", ModBlocks.transportRune);
         blockTransportRune = register("rune/block_transport", ModBlocks.blockTransportRune);
-    }
+
+        }
 
     private static <T extends Item> T register(String name, T item) {
         return Registry.register(Registry.ITEM, new Identifier(SoulFlame.MODID, name), item);
