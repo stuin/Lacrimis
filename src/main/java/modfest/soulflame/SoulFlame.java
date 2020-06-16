@@ -17,7 +17,7 @@ public class SoulFlame implements ModInitializer {
     public static final Logger LOGGER = LogManager.getLogger(MODID);
 
     public static final ItemGroup ITEM_GROUP = FabricItemGroupBuilder.create(
-            new Identifier(MODID, "group"))
+            new Identifier(MODID, "base"))
             .icon(() -> new ItemStack(ModBlocks.infusionTable))
             .build();
     public static final ItemGroup RUNE_ITEM_GROUP = FabricItemGroupBuilder.create(

@@ -204,8 +204,7 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
         super.buildTooltip(stack, world, tooltip, options);
         tooltip.add(new TranslatableText("soulflame.tooltip.rune.tears",
                 requiredTears).formatted(Formatting.GRAY));
-        tooltip.add(new TranslatableText("soulflame.tooltip.rune.tier",
-                requiredTier).formatted(Formatting.GRAY));
+        tooltip.add(new TranslatableText("soulflame.tooltip.rune.tier" + requiredTier).formatted(Formatting.GRAY));
     }
 
     @Override
