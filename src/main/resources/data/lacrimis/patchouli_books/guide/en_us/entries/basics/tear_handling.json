@@ -1,6 +1,6 @@
 {
   "name": "Tear Handling",
-  "icon": "lacrimis:infusion_altar",
+  "icon": "lacrimis:infusion_table",
   "category": "basics",
   "sortnum": 2,
   "pages": [
@@ -15,11 +15,11 @@
     },
     {
       "type": "text",
-      "text": "However, the way tears interacted with stone seem rather remarkable.$(br2)At first, the fluids soaks into cracks and crevices making them glow; a moment later, the whole stone starts to dimly glow and shortly after it just crumbles apart.$(br2)Another thing that experiment had shown is that touching the fluid is $(o)unimaginably painful$()."
+      "text": "However, the way tears interacted with stone seem rather remarkable.$(br2)At first, the fluids soaks into cracks and crevices making them glow; a moment later, the whole stone starts to dimly glow and shortly after it just crumbles apart."
     },
     {
       "type": "text",
-      "text": "The main outtake so far is that I need a more controllable way of studying tear interactions instead of just throwing stuff into a crucible.$(br2)todo: infusion table..."
+      "text": "Another thing that the experiment had shown is that touching the fluid is$(o)unimaginably painful$().$(br2)The main outtake so far is that I need a more controllable way of studying tear interactions instead of just throwing stuff into a crucible.$(br2)todo: infusion table..."
     }
   ]
 }
