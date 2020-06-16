@@ -1,0 +1,41 @@
+{
+  "name": "Tear Collection",
+  "icon": "lacrimis:crucible",
+  "category": "basics",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "text",
+      "text": "This \"crying obsidian\" material captures my imagination. So far, the \"tears\" it creates have soaked into other materials in a matter of seconds.$(br2)...if only enough of it can be collected for a detailed study."
+    },
+    {
+      "type": "crafting",
+      "recipe": "lacrimis:crucible",
+      "text": "Perhaps... trying to hold it in a noble metal?"
+    },
+    {
+      "type": "text",
+      "text": "Somehow this doesn't sound completely unreasonable. And it's not hard to check anyway.$(br2)All that's required is to find a few silver bars, forge a crucible and hang some obsidian over it."
+    },
+    {
+      "type": "multiblock",
+      "name": "Tear Collection",
+      "multiblock": {
+        "pattern": [ 
+          [ "___", "_C_", "___" ], 
+          [ "___", "_ _", "___" ],
+          [ "___", "_0_", "___" ]
+        ],
+        "mapping": {
+          "C": "minecraft:crying_obsidian",
+          "0": "lacrimis:crucible"
+        }
+      },
+      "text": "The gap between the crying obsidian and the crucible can be increased."
+    },
+    {
+      "type": "text",
+      "text": "If silver will actually be able to contain tears, it opens so many possibilities for experiments on this... \"material\"...$(br2)Random rocks were able to absorb separate tears without any noticeable change, but could they do the same if completely sumberged? Unlikely."
+    }
+  ]
+}
