@@ -1,0 +1,20 @@
+{
+  "name": "Discovering Tears",
+  "icon": "lacrimis:crucible",
+  "category": "basics",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "text",
+      "text": "This \"crying obsidian\" material piques my interest. So far, the \"tears\" it creates have soaked into other materials in a matter of seconds.$(br2)...if only enough of them can be contained for a detailed study."
+    },
+    {
+      "type": "text",
+      "text": "Perhaps... trying to hold it in a noble metal? Something like silver, that shouldn't be too hard to test.$(br2)This doesn't sound completely unreasonable. I should try making something like a \"cauldron\"..."
+    },
+    {
+      "type": "text",
+      "text": "If the silver will actually be able to contain the tears, it opens so many possibilities for experiments on this... \"substance\"...$(br2)Random rocks were able to absorb tears without any noticeable change, but could mundane metals do the same if completely submerged? Unlikely."
+    }
+  ]
+}
