@@ -1,13 +1,5 @@
 package modfest.soulflame.init;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -18,6 +10,13 @@ import modfest.soulflame.item.DiviningRodItem;
 import modfest.soulflame.item.TarotCardItem;
 import modfest.soulflame.item.armor.CustomArmorMaterials;
 import modfest.soulflame.util.TarotCardType;
+import net.minecraft.block.Block;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 public class ModItems {
     private static final Item.Settings SETTINGS = new Item.Settings().group(SoulFlame.ITEM_GROUP);
@@ -40,6 +39,7 @@ public class ModItems {
     public static BottleOfTearsItem bottleOfTears;
     public static DiviningRodItem diviningRod;
     public static Item tearIngot;
+    public static Item warpedSigil;
 
     public static Item tearSoakenHelmet;
     public static Item tearSoakenChestplate;
@@ -81,6 +81,7 @@ public class ModItems {
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
         diviningRod = register("divining_rod", new DiviningRodItem(TOOL_SETTINGS));
         tearIngot = register("tear_ingot", new Item(SETTINGS));
+        warpedSigil = register("warped_sigil", new Item(SETTINGS));
 
         tearSoakenHelmet = register("tear_soaked_helmet",
                 new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.HEAD, TOOL_SETTINGS));
