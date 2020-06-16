@@ -1,0 +1,9 @@
+{
+  "name": "Guide to Soul Flame",
+  "landing_text": "The magical powers of the soul.",
+  "creative_tab": "soulflame.base",
+  "show_progress": false,
+  "book_texture": "patchouli:textures/gui/book_gray.png",
+  "model": "patchouli:book_gray",
+  "version": 1
+}

@@ -1,12 +1,11 @@
 package modfest.soulflame.block.rune;
 
 import modfest.soulflame.SoulFlame;
-import modfest.soulflame.util.ConduitEntry;
+import modfest.soulflame.init.ModBlocks;
 import modfest.soulflame.util.ConduitUtil;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.BlockPos;
@@ -18,12 +17,12 @@ import java.util.List;
 
 public class BlockTeleportBlock extends CenterRuneBlock {
     public BlockTeleportBlock() {
-        super(300, 2);
+        super(500, 2);
     }
 
     @Override
-    protected boolean activate(World world, BlockPos pos, List<ConduitEntry> list, LivingEntity entity, PlayerEntity player) {
-        BlockPos destination = ConduitUtil.locateSink(world, list, pos);
+    protected boolean activate(World world, BlockPos pos, BlockPos pipe, Entity entity, PlayerEntity player) {
+        BlockPos destination = ConduitUtil.locateSink(world, pipe, pos);
         if(destination != null) {
             if(!world.isClient)
                 SoulFlame.LOGGER.info("Block Moved");
@@ -42,6 +41,10 @@ public class BlockTeleportBlock extends CenterRuneBlock {
             BlockPos source = (BlockPos) value;
             BlockState sourceState = world.getBlockState(source);
             BlockState destState = world.getBlockState(dest);
+
+            if(sourceState.getBlock().isIn(ModBlocks.non_transportable) ||
+                    destState.getBlock().isIn(ModBlocks.non_transportable))
+                return false;
 
             //Set destination block
             BlockEntity sourceEntity = world.getBlockEntity(source);

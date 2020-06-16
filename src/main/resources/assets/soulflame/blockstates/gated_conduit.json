@@ -1,7 +1,7 @@
 {
   "multipart": [
     {
-      "apply": { "model": "soulflame:block/conduit/node" }
+      "apply": { "model": "soulflame:block/conduit/gated_node" }
     },
     {
       "when": { "down": true },

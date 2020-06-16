@@ -4,6 +4,7 @@ import modfest.soulflame.block.entity.SoulTankEntity;
 import modfest.soulflame.init.ModItems;
 import modfest.soulflame.item.BottleOfTearsItem;
 import modfest.soulflame.util.SoulTank;
+import modfest.soulflame.util.TaintPacket;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -92,6 +93,11 @@ public abstract class SoulTankBlock extends BlockWithEntity implements BlockCond
             }
         }
         return ActionResult.PASS;
+    }
+
+    @Override
+    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        new TaintPacket(getTank(world, pos).getTears()).spawn(world, pos);
     }
 
     public SoulTank getTank(BlockView world, BlockPos pos) {

@@ -1,0 +1,12 @@
+{
+  "name": "Pipe Connectors",
+  "icon": "soulflame:rune/pipe1",
+  "category": "cages",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Pipe connectors are used to provide a Soul Cage with power and to connect it to other devices through conduits. Every Soul Cage must have exactly one, and at the minimum it should be connected to a source of Tears."
+    }
+  ]
+}

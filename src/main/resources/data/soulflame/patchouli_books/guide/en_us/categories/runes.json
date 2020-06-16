@@ -1,0 +1,6 @@
+{
+  "name": "Core Runes",
+  "description": "The different core runes",
+  "icon": "soulflame:rune/healing",
+  "sortnum": 3
+}

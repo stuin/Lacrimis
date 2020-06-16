@@ -1,0 +1,155 @@
+{
+  "name": "Tier I Soul Cage",
+  "icon": "soulflame:rune/tier1",
+  "category": "cages",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "text",
+      "text": "To start you will need seven Tier I runes, and a Tier I Pipe Connector. You will also need sixteen valid cage blocks, any combination of the following: $(li)Iron Bars$(li)Chains$(li)Nether Brick Fences$(li)End rods$(br)"
+    },
+    {
+      "type": "multiblock",
+      "name": "Just the base",
+      "text": "Replace the center with any Tier I core rune.",
+      "multiblock": {
+        "pattern": [
+          [
+            "456",
+            "307",
+            "2P8"
+          ]
+        ],
+        "mapping": {
+          "0": "soulflame:rune/stone",
+          "P": "soulflame:rune/pipe1[center=1]",
+          "2": "soulflame:rune/tier1[center=2]",
+          "3": "soulflame:rune/tier1[center=3]",
+          "4": "soulflame:rune/tier1[center=4]",
+          "5": "soulflame:rune/tier1[center=5]",
+          "6": "soulflame:rune/tier1[center=6]",
+          "7": "soulflame:rune/tier1[center=7]",
+          "8": "soulflame:rune/tier1[center=0]"
+        }
+      }
+    },
+    {
+      "type": "multiblock",
+      "name": "Using Iron Bars",
+      "text": "Feel free to mix and match",
+      "multiblock": {
+        "pattern": [
+          [
+            "RHL",
+            "V V",
+            "rHl"
+          ],
+          [
+            "RHL",
+            "V0V",
+            "rHl"
+          ],
+          [
+            "456",
+            "3S7",
+            "2P8"
+          ]
+        ],
+        "mapping": {
+          "R": "minecraft:iron_bars[south=true,east=true]",
+          "L": "minecraft:iron_bars[north=true,east=true]",
+          "H": "minecraft:iron_bars[south=true,north=true]",
+          "V": "minecraft:iron_bars[east=true,west=true]",
+          "r": "minecraft:iron_bars[south=true,west=true]",
+          "l": "minecraft:iron_bars[north=true,west=true]",
+          "S": "soulflame:rune/stone",
+          "P": "soulflame:rune/pipe1[center=1]",
+          "2": "soulflame:rune/tier1[center=2]",
+          "3": "soulflame:rune/tier1[center=3]",
+          "4": "soulflame:rune/tier1[center=4]",
+          "5": "soulflame:rune/tier1[center=5]",
+          "6": "soulflame:rune/tier1[center=6]",
+          "7": "soulflame:rune/tier1[center=7]",
+          "8": "soulflame:rune/tier1[center=0]"
+        }
+      }
+    },
+    {
+      "type": "multiblock",
+      "name": "Using Chains",
+      "multiblock": {
+        "pattern": [
+          [
+            "CCC",
+            "C C",
+            "CCC"
+          ],
+          [
+            "CCC",
+            "C0C",
+            "CCC"
+          ],
+          [
+            "456",
+            "3S7",
+            "2P8"
+          ]
+        ],
+        "mapping": {
+          "C": "minecraft:chain",
+          "S": "soulflame:rune/stone",
+          "P": "soulflame:rune/pipe1[center=1]",
+          "2": "soulflame:rune/tier1[center=2]",
+          "3": "soulflame:rune/tier1[center=3]",
+          "4": "soulflame:rune/tier1[center=4]",
+          "5": "soulflame:rune/tier1[center=5]",
+          "6": "soulflame:rune/tier1[center=6]",
+          "7": "soulflame:rune/tier1[center=7]",
+          "8": "soulflame:rune/tier1[center=0]"
+        }
+      }
+    },
+    {
+      "type": "text",
+      "text": "Using a mix of Tier I runes and Tier II runes is also valid, though it will only be as powerful as a normal Tier I. The advantage of this is that Tier II runes do not require cage blocks, allowing for some more interesting decorations."
+    },
+    {
+      "type": "multiblock",
+      "name": "Using Tier I and II",
+      "multiblock": {
+        "pattern": [
+          [
+            "RHL",
+            "V V",
+            "   "
+          ],
+          [
+            "RHL",
+            "V0V",
+            "   "
+          ],
+          [
+            "456",
+            "3S7",
+            "2P8"
+          ]
+        ],
+        "mapping": {
+          "R": "minecraft:iron_bars[south=true,east=true]",
+          "L": "minecraft:iron_bars[north=true,east=true]",
+          "H": "minecraft:iron_bars[south=true,north=true]",
+          "V": "minecraft:iron_bars[east=true,west=true]",
+          "S": "soulflame:rune/stone",
+          "P": "soulflame:rune/pipe2[center=1]",
+          "2": "soulflame:rune/tier2[center=2]",
+          "3": "soulflame:rune/tier1[center=3]",
+          "4": "soulflame:rune/tier1[center=4]",
+          "5": "soulflame:rune/tier1[center=5]",
+          "6": "soulflame:rune/tier1[center=6]",
+          "7": "soulflame:rune/tier1[center=7]",
+          "8": "soulflame:rune/tier2[center=0]"
+        }
+      }
+    }
+  ]
+}

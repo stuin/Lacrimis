@@ -49,24 +49,24 @@ public class CrucibleEntity extends SoulTankEntity implements Tickable {
 
         if (craftTime >= CRAFT_COOLDOWN && !world.isClient) {
             for (ItemEntity entity : world.getEntities(ItemEntity.class, ITEM_BOX.offset(pos), null)) {
-                inventory.setStack(0, ((ItemEntity) entity).getStack());
+                inventory.setStack(0, entity.getStack());
 
                 Optional<CrucibleRecipe> optional = world.getServer()
                         .getRecipeManager()
                         .getFirstMatch(ModInfusion.CRUCIBLE_RECIPE, inventory, world);
                 if (optional.isPresent()) {
                     CrucibleRecipe recipe = optional.get();
-//                    if (recipe.matches(inventory, world)) {
+                    if (recipe.matches(inventory, world)) {
                         // Craft item
                         ItemStack remainder = inventory.getStack(0);
                         remainder.decrement(1);
-                        ((ItemEntity) entity).setStack(remainder);
+                        entity.setStack(remainder);
                         ItemScatterer.spawn(world, pos.up(), new SimpleInventory(recipe.getOutput().copy()));
                         ModNetworking.sendCrucibleParticlesPacket(this, entity.getX(), entity.getY(), entity.getZ());
                         getTank().removeTears(recipe.getTears());
                         craftTime = 0;
                         break;
-//                    }
+                    }
                 }
             }
         }

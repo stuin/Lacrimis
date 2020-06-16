@@ -12,15 +12,17 @@ import java.util.function.Predicate;
 
 import modfest.soulflame.block.BlockConduitConnect;
 import modfest.soulflame.block.GatedConduitBlock;
+import modfest.soulflame.block.OneWayConduitBlock;
 import modfest.soulflame.init.ModBlocks;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.FacingBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 
 public class ConduitUtil {
 
-    public static List<ConduitEntry> listScanConduits(BlockView world, BlockPos pos) {
+    public static List<ConduitEntry> listScanConduits(BlockView world, BlockPos pos, boolean extracting) {
         if(world == null) return null;
 
         Set<BlockPos> scanned = new HashSet<>();
@@ -43,6 +45,8 @@ public class ConduitUtil {
             outputs = EnumSet.allOf(Direction.class);
         else if (source.getBlock() == ModBlocks.gatedConduit && source.get(GatedConduitBlock.POWERED))
             outputs = EnumSet.allOf(Direction.class);
+        else if(source.getBlock() == ModBlocks.oneWayConduit)
+            outputs = EnumSet.of(source.get(FacingBlock.FACING));
         else
             outputs = EnumSet.noneOf(Direction.class);
 
@@ -60,9 +64,13 @@ public class ConduitUtil {
                     stack.push(next);
                 else if (nextState.getBlock() == ModBlocks.gatedConduit && nextState.get(GatedConduitBlock.POWERED))
                     stack.push(next);
+                else if(nextState.getBlock() == ModBlocks.oneWayConduit &&
+                        (extracting && d == nextState.get(FacingBlock.FACING).getOpposite() ||
+                                !extracting && d == nextState.get(FacingBlock.FACING)))
+                    stack.push(next);
                 else if (nextState.getBlock() instanceof BlockConduitConnect) {
                     BlockConduitConnect b = (BlockConduitConnect) nextState.getBlock();
-                    if (b.canConnectConduitTo(next, world, d.getOpposite()))
+                    if (b.canConnectConduitTo(next, world, d))
                         out.add(new ConduitEntry(b, next, nextState));
                 }
             }
@@ -72,7 +80,7 @@ public class ConduitUtil {
     }
 
     public static Object locateSource(BlockView world, BlockPos pos, Predicate<Object> filter) {
-        List<ConduitEntry> list = listScanConduits(world, pos);
+        List<ConduitEntry> list = listScanConduits(world, pos, true);
         if(list != null && list.size() > 0) {
             for(ConduitEntry e : list) {
                 Object value = e.extract(world);
@@ -84,7 +92,7 @@ public class ConduitUtil {
     }
     
     public static boolean locateTearsStrong(BlockView world, BlockPos pos, int request, boolean simulate) {
-        return locateTearsStrong(world, listScanConduits(world, pos), request, simulate);
+        return locateTearsStrong(world, listScanConduits(world, pos, true), request, simulate);
     }
 
     public static boolean locateTearsStrong(BlockView world, List<ConduitEntry> list, int request, boolean simulate) {
@@ -100,7 +108,7 @@ public class ConduitUtil {
     }
 
     public static int locateTears(BlockView world, BlockPos pos, int request) {
-        List<ConduitEntry> list = listScanConduits(world, pos);
+        List<ConduitEntry> list = listScanConduits(world, pos, true);
         if(list != null && list.size() > 0) {
             int found = 0;
 
@@ -113,7 +121,7 @@ public class ConduitUtil {
     }
 
     public static BlockPos locateSink(BlockView world, BlockPos pos, Object value) {
-        return locateSink(world, listScanConduits(world, pos), value);
+        return locateSink(world, listScanConduits(world, pos, false), value);
     }
 
     public static BlockPos locateSink(BlockView world, List<ConduitEntry> list, Object value) {

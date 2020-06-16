@@ -1,0 +1,46 @@
+{
+  "name": "Tier III Soul Cage",
+  "icon": "soulflame:rune/tier2",
+  "category": "cages",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "text",
+      "text": "For a Tier III Soul Cage, you need eleven Tier II runes, a Tier II Pipe Connector, and seven Tier III runes. $(br)Tier I or Tier II core runes used in a Tier III setup will be 50% of their base cost in Tears"
+    },
+    {
+      "type": "multiblock",
+      "text": "Replace the center with any Core Rune.",
+      "multiblock": {
+        "pattern": [
+          [
+            " 456 ",
+            "4DEF6",
+            "3C0G7",
+            "2BAH8",
+            " 2P8 "
+          ]
+        ],
+        "mapping": {
+          "0": "soulflame:rune/stone",
+          "P": "soulflame:rune/pipe2[center=1]",
+          "2": "soulflame:rune/tier2[center=2]",
+          "3": "soulflame:rune/tier2[center=3]",
+          "4": "soulflame:rune/tier2[center=4]",
+          "5": "soulflame:rune/tier2[center=5]",
+          "6": "soulflame:rune/tier2[center=6]",
+          "7": "soulflame:rune/tier2[center=7]",
+          "8": "soulflame:rune/tier2[center=0]",
+          "A": "soulflame:rune/tier3[center=1]",
+          "B": "soulflame:rune/tier3[center=2]",
+          "C": "soulflame:rune/tier3[center=3]",
+          "D": "soulflame:rune/tier3[center=4]",
+          "E": "soulflame:rune/tier3[center=5]",
+          "F": "soulflame:rune/tier3[center=6]",
+          "G": "soulflame:rune/tier3[center=7]",
+          "H": "soulflame:rune/tier3[center=0]"
+        }
+      }
+    }
+  ]
+}
