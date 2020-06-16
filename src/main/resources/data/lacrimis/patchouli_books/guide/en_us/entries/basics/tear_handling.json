@@ -1,0 +1,25 @@
+{
+  "name": "Tear Handling",
+  "icon": "lacrimis:infusion_altar",
+  "category": "basics",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "text",
+      "text": "The noble metal hypothesis has proven to be true and I was able to get some new observations.$(br2)Most importantly, a rock thrown into an excess of the tear fluid have almost instantly turned into a handful of sludge."
+    },
+    {
+      "type": "spotlight",
+      "item": "lacrimis:tainted_sludge",
+      "text": "Unfortunately, this sludge seems rather mundane. I wonder if more exotic materials can yield more promising results?$(br2)"
+    },
+    {
+      "type": "text",
+      "text": "However, the way tears interacted with stone seem rather remarkable.$(br2)At first, the fluids soaks into cracks and crevices making them glow; a moment later, the whole stone starts to dimly glow and shortly after it just crumbles apart.$(br2)Another thing that experiment had shown is that touching the fluid is $(o)unimaginably painful$()."
+    },
+    {
+      "type": "text",
+      "text": "The main outtake so far is that I need a more controllable way of studying tear interactions instead of just throwing stuff into a crucible.$(br2)todo: infusion table..."
+    }
+  ]
+}
