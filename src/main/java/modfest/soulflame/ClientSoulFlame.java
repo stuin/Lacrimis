@@ -11,7 +11,7 @@ import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 
 import java.util.Map;
 
-import modfest.soulflame.client.CardTextureGen;
+import modfest.soulflame.client.cardgen.CardTextureGen;
 import modfest.soulflame.client.render.blocks.CrucibleEntityRenderer;
 import modfest.soulflame.client.render.blocks.InfusionTableEntityRenderer;
 import modfest.soulflame.client.render.entity.GhostEntityRenderer;
@@ -26,9 +26,6 @@ import modfest.soulflame.util.TarotCardType;
 
 @Environment(EnvType.CLIENT)
 public class ClientSoulFlame implements ClientModInitializer {
-
-    public static Map<TarotCardType, FramebufferBackedTexture> tarotCardTextures;
-    public static Map<TarotCardType, Identifier> tarotCardTextureIds;
 
     @Override
     public void onInitializeClient() {

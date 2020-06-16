@@ -10,15 +10,19 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Matrix3f;
 import net.minecraft.util.math.Matrix4f;
 
-import modfest.soulflame.ClientSoulFlame;
+import modfest.soulflame.client.cardgen.CardTextureGen;
 import modfest.soulflame.item.TarotCardItem;
 import modfest.soulflame.util.TarotCardType;
 
 public class TarotCardItemRenderer {
 
     public static void renderOverlay(ItemStack stack, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+        CardTextureGen.updateTexturesIfNeeded();
+
         TarotCardType type = ((TarotCardItem) stack.getItem()).getType();
-        Identifier tex = ClientSoulFlame.tarotCardTextureIds.get(type);
+        if (type.cover == null) return;
+
+        Identifier tex = CardTextureGen.tarotCardTextureIds.get(type);
         VertexConsumer buffer = vertexConsumers.getBuffer(RenderLayer.getEntityTranslucentCull(tex));
         Entry tos = matrices.peek();
         Matrix3f normal = tos.getNormal();
