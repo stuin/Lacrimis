@@ -15,7 +15,7 @@
     },
     {
       "type": "text",
-      "text": "Somehow this doesn't sound completely unreasonable. And it's not hard to check anyway.$(br2)All that's required is to find a few silver bars, forge a crucible and hang some obsidian over it."
+      "text": "Somehow this doesn't sound completely unreasonable. And it isn't hard to check anyway.$(br2)All that's required is to find a few silver bars, forge a crucible and hang some obsidian over it."
     },
     {
       "type": "multiblock",
@@ -35,7 +35,7 @@
     },
     {
       "type": "text",
-      "text": "If silver will actually be able to contain tears, it opens so many possibilities for experiments on this... \"material\"...$(br2)Random rocks were able to absorb separate tears without any noticeable change, but could they do the same if completely sumberged? Unlikely."
+      "text": "If silver will actually be able to contain tears, it opens so many possibilities for experiments on this... \"material\"...$(br2)Random rocks were able to absorb separate tears without any noticeable change, but could they do the same if completely sumberged in them? Unlikely."
     }
   ]
 }
