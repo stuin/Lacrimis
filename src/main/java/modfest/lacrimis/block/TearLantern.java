@@ -33,7 +33,7 @@ public class TearLantern extends LanternBlock implements BlockEntityProvider {
                 BlockPos blockPos = pos.offset(direction);
                 BlockState blockState = world.getBlockState(blockPos);
                 if (!state.isOpaque() || !blockState.isSideSolidFullSquare(world, blockPos, direction.getOpposite())) {
-                    world.addParticle(ParticleTypes.DRIPPING_OBSIDIAN_TEAR, (double)pos.getX() + (0.4 + Math.random() * (0.6 - 0.4)), (double)pos.getY() - 0.1D, (double)pos.getZ() + (0.4 + Math.random() * (0.6 - 0.4)), 0.0D, 0.0D, 0.0D);
+                    //world.addParticle(ParticleTypes.DRIPPING_OBSIDIAN_TEAR, (double)pos.getX() + (0.4 + Math.random() * (0.6 - 0.4)), (double)pos.getY() - 0.1D, (double)pos.getZ() + (0.4 + Math.random() * (0.6 - 0.4)), 0.0D, 0.0D, 0.0D);
                 }
             }
         }

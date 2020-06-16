@@ -1,6 +1,7 @@
 package modfest.lacrimis.block.entity;
 
 import modfest.lacrimis.init.ModBlockEntityTypes;
+import modfest.lacrimis.init.ModParticles;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
@@ -28,8 +29,17 @@ public class TearLanternEntity extends BlockEntity implements Tickable {
                             BlockEntity table = world.getBlockEntity(pos.add(x, y - 1, z));
                             if(table instanceof CrucibleEntity) {
                                 CrucibleEntity casted = (CrucibleEntity) table;
-                                casted.getTank().addTears(2);
-                                break;
+                                if(casted.getTank().getSpace() > 0) {
+                                    casted.getTank().addTears(2);
+                                    if (world.isClient) {
+                                        double xrand = Math.random() * 0.2 - 0.1;
+                                        double yrand = Math.random() * 0.2 - 0.1;
+                                        double zrand = Math.random() * 0.2 - 0.1;
+
+                                        world.addParticle(ModParticles.PURPLE_MIST, this.pos.getX() + 0.5 + xrand, this.pos.getY() + 0.2 + yrand, this.pos.getZ() + 0.5 + zrand, x * 0.02, y * 0.02, z * 0.02);
+                                    }
+                                    break;
+                                }
                             }
                         }
             }
