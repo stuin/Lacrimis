@@ -40,6 +40,7 @@ public class ModItems {
     public static DiviningRodItem diviningRod;
     public static Item tearIngot;
     public static Item warpedSigil;
+    public static Item taintedSludge;
 
     public static Item tearSoakenHelmet;
     public static Item tearSoakenChestplate;
@@ -82,6 +83,7 @@ public class ModItems {
         diviningRod = register("divining_rod", new DiviningRodItem(TOOL_SETTINGS));
         tearIngot = register("tear_ingot", new Item(SETTINGS));
         warpedSigil = register("warped_sigil", new Item(SETTINGS));
+        taintedSludge = register("tainted_sludge", new Item(SETTINGS));
 
         tearSoakenHelmet = register("tear_soaked_helmet",
                 new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.HEAD, TOOL_SETTINGS));
