@@ -1,7 +1,7 @@
 {
   "name": "Basic Rune Blocks",
   "icon": "lacrimis:rune/stone",
-  "category": "cages",
+  "category": "lacrimis:cages",
   "sortnum": 1,
   "pages": [
     {

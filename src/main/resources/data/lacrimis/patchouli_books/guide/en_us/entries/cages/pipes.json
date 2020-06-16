@@ -1,7 +1,7 @@
 {
   "name": "Pipe Connectors",
   "icon": "lacrimis:rune/pipe1",
-  "category": "cages",
+  "category": "lacrimis:cages",
   "sortnum": 2,
   "pages": [
     {

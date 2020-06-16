@@ -1,7 +1,7 @@
 {
   "name": "Tier II Soul Cage",
   "icon": "lacrimis:rune/tier2",
-  "category": "cages",
+  "category": "lacrimis:cages",
   "sortnum": 4,
   "pages": [
     {

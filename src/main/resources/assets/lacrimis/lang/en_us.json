@@ -40,9 +40,9 @@
 
   "lacrimis.tooltip.crucible": "%s Tears",
   "lacrimis.tooltip.rune.tears": "Base cost: %s Tears",
-  "lacrimis.tooltip.rune.tier1": "Tier I setup required",
-  "lacrimis.tooltip.rune.tier2": "Tier II setup required",
-  "lacrimis.tooltip.rune.tier3": "Tier III setup required",
+  "lacrimis.tooltip.rune.tier1": "Tier I Soul Cage required",
+  "lacrimis.tooltip.rune.tier2": "Tier II Soul Cage required",
+  "lacrimis.tooltip.rune.tier3": "Tier III Soul Cage required",
 
   "lacrimis.gui.infusion": "Infusion Table",
   "itemGroup.lacrimis.base": "Lacrimis",

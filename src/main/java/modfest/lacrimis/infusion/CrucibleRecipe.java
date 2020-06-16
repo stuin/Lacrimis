@@ -50,6 +50,10 @@ public class CrucibleRecipe implements Recipe<InfusionInventory> {
         return width * height >= 2;
     }
 
+    public Ingredient getBase() {
+        return base;
+    }
+
     public ItemStack getOutput() {
         return this.result;
     }

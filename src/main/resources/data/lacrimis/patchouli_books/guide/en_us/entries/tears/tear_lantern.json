@@ -1,0 +1,38 @@
+{
+  "name": "Tear Lantern",
+  "icon": "lacrimis:tear_lantern",
+  "category": "lacrimis:basic",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Throwing a lantern into the crucible creates an interesting infusion, a nice light source with some new properties."
+    },
+    {
+      "type": "lacrimis:crucible",
+      "recipe": "lacrimis:tear_lantern"
+    },
+    {
+      "type": "text",
+      "text": "Placing the lantern underneath the crying obsidian seems to much more effectively focus the drops, massively speeding up the process."
+    },
+    {
+      "type": "multiblock",
+      "name": "Tear Collection",
+      "multiblock": {
+        "pattern": [
+          [ "C" ],
+          [ "L" ],
+          [ " " ],
+          [ "0" ],
+          [ " " ]
+        ],
+        "mapping": {
+          "C": "minecraft:crying_obsidian",
+          "L": "lacrimis:tear_lantern",
+          "0": "lacrimis:crucible"
+        }
+      }
+    }
+  ]
+}

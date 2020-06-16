@@ -1,7 +1,7 @@
 {
   "name": "Tear Crucible",
   "icon": "lacrimis:crucible",
-  "category": "basic",
+  "category": "lacrimis:basic",
   "sortnum": 1,
   "pages": [
     {
@@ -22,9 +22,10 @@
       "name": "Tear Collection",
       "multiblock": {
         "pattern": [ 
-          [ "___", "_C_", "___" ], 
-          [ "___", "_ _", "___" ],
-          [ "___", "_0_", "___" ]
+          [ "C" ],
+          [ " " ],
+          [ "0" ],
+          [ " " ]
         ],
         "mapping": {
           "C": "minecraft:crying_obsidian",

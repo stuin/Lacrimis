@@ -1,7 +1,10 @@
 package modfest.lacrimis.init;
 
+import com.google.gson.annotations.SerializedName;
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.InfusionTableEntity;
+import modfest.lacrimis.client.patchiouli.PageCrucible;
+import modfest.lacrimis.client.patchiouli.PageInfusion;
 import modfest.lacrimis.infusion.CrucibleRecipe;
 import modfest.lacrimis.infusion.InfusionScreen;
 import modfest.lacrimis.infusion.InfusionScreenHandler;
@@ -22,6 +25,7 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
+import vazkii.patchouli.client.book.ClientBookRegistry;
 
 public class ModInfusion {
 	public static final Identifier INFUSION_SCREEN_ID = new Identifier(Lacrimis.MODID, "infusion");
@@ -42,6 +46,9 @@ public class ModInfusion {
 	public static final RecipeSerializer<ShapedInfusionRecipe> SHAPED_INFUSION_SERIALIZER = new ShapedInfusionRecipe.Serializer();
 	public static final RecipeSerializer<CrucibleRecipe> CRUCIBLE_SERIALIZER = new CrucibleRecipe.Serializer();
 
+	@SerializedName("crafting_texture")
+	public static final Identifier craftingTexture = new Identifier("lacrimis", "textures/gui/crafting.png");
+
 	public static void register() {
 		ContainerProviderRegistry.INSTANCE.registerFactory(INFUSION_SCREEN_ID, new ContainerFactory<ScreenHandler>() {
 			@Override
@@ -61,9 +68,14 @@ public class ModInfusion {
 
 	@Environment(EnvType.CLIENT)
 	public static void registerClient() {
+		//Infusion GUI
 		ScreenProviderRegistry.INSTANCE.registerFactory(INFUSION_SCREEN_ID,
 				(ContainerScreenFactory<InfusionScreenHandler>) container ->
 						new InfusionScreen(container, MinecraftClient.getInstance().player.inventory,
 								new TranslatableText(Lacrimis.MODID + ".gui.infusion")));
+
+		//Patchiouli pages
+		ClientBookRegistry.INSTANCE.pageTypes.put(Lacrimis.MODID + ":crucible", PageCrucible.class);
+		ClientBookRegistry.INSTANCE.pageTypes.put(Lacrimis.MODID + ":infusion", PageInfusion.class);
 	}
 }
