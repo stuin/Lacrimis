@@ -1,0 +1,37 @@
+{
+  "name": "Tear Crucible",
+  "icon": "soulflame:crucible",
+  "category": "basic",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "text",
+      "text": "A crucible is a block that can collect and hold tears.$(br2)Once filled with enough tears, a crucible can be used to convert certain items by dropping them into it."
+    },
+    {
+      "type": "crafting",
+      "recipe": "soulflame:crucible",
+      "text": "(temp recipe)"
+    },
+    {
+      "type": "text",
+      "text": "Placing a crying obsidian over a crucible will fill it with tears.$(br2)Collecting tears from crying obsidian is rather slow, a more effective alternatives should exist."
+    },
+    {
+      "type": "multiblock",
+      "name": "Tears Collection",
+      "multiblock": {
+        "pattern": [ 
+          [ "___", "_C_", "___" ], 
+          [ "___", "_ _", "___" ],
+          [ "___", "_0_", "___" ]
+        ],
+        "mapping": {
+          "C": "minecraft:crying_obsidian",
+          "0": "soulflame:crucible"
+        }
+      },
+      "text": "The gap can be stretched up to 4 blocks."
+    }
+  ]
+}

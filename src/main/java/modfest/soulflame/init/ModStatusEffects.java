@@ -6,10 +6,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectType;
-import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.registry.Registry;
 
 public class ModStatusEffects {
@@ -21,9 +19,8 @@ public class ModStatusEffects {
 
             @Override
             public void onRemoved(LivingEntity entity, AttributeContainer attributes, int amplifier) {
-                if(entity.getHealth() < 1) {
-                    ItemScatterer.spawn(entity.getEntityWorld(), entity.getBlockPos(),
-                            new SimpleInventory(new ItemStack(ModItems.baseTarot)));
+                if (entity.getHealth() < 1) {
+                    entity.dropStack(new ItemStack(ModItems.baseTarot), entity.getHeight() / 2);
                     entity.kill();
                 }
                 super.onRemoved(entity, attributes, amplifier);
