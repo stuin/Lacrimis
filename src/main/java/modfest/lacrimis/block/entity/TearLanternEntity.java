@@ -20,16 +20,16 @@ public class TearLanternEntity extends BlockEntity implements Tickable {
     public void tick() {
         int range = 6;
         BlockPos obsidianPos = this.pos.up(1);
-        if(world != null) {
+        if (world != null) {
             BlockState obsidianState = this.world.getBlockState(obsidianPos);
-            if(obsidianState.getBlock() == Blocks.CRYING_OBSIDIAN) {
-                for(int x = -range; x <= range; x++)
-                    for(int y = -range; y <= range; y++)
-                        for(int z = -range; z <= range; z++) {
+            if (obsidianState.getBlock() == Blocks.CRYING_OBSIDIAN) {
+                for (int x = -range; x <= range; x++)
+                    for (int y = -range; y <= range; y++)
+                        for (int z = -range; z <= range; z++) {
                             BlockEntity table = world.getBlockEntity(pos.add(x, y - 1, z));
-                            if(table instanceof CrucibleEntity) {
+                            if (table instanceof CrucibleEntity) {
                                 CrucibleEntity casted = (CrucibleEntity) table;
-                                if(casted.getTank().getSpace() > 0) {
+                                if (casted.getTank().getSpace() > 0) {
                                     casted.getTank().addTears(2);
                                     if (world.isClient) {
                                         double xrand = Math.random() * 0.2 - 0.1;
