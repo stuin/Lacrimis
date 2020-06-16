@@ -1,8 +1,8 @@
 {
   "name": "Tear Crucible",
   "icon": "lacrimis:crucible",
-  "category": "lacrimis:basic",
-  "sortnum": 1,
+  "category": "lacrimis:basics",
+  "sortnum": 2,
   "pages": [
     {
       "type": "text",
@@ -21,7 +21,7 @@
       "type": "multiblock",
       "name": "Tear Collection",
       "multiblock": {
-        "pattern": [ 
+        "pattern": [
           [ "C" ],
           [ " " ],
           [ "0" ],

@@ -1,7 +1,7 @@
 {
   "name": "Discovering Tears",
   "icon": "lacrimis:crucible",
-  "category": "basics",
+  "category": "lacrimis:basics",
   "sortnum": 1,
   "pages": [
     {

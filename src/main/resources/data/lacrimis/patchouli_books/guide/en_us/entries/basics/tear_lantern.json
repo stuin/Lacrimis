@@ -1,8 +1,8 @@
 {
   "name": "Tear Lantern",
   "icon": "lacrimis:tear_lantern",
-  "category": "lacrimis:basic",
-  "sortnum": 1,
+  "category": "lacrimis:basics",
+  "sortnum": 4,
   "pages": [
     {
       "type": "text",

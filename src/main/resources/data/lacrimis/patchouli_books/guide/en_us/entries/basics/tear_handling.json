@@ -1,8 +1,8 @@
 {
   "name": "Tear Handling",
   "icon": "lacrimis:infusion_table",
-  "category": "basics",
-  "sortnum": 2,
+  "category": "lacrimis:basics",
+  "sortnum": 3,
   "pages": [
     {
       "type": "text",
