@@ -4,6 +4,7 @@ import java.util.stream.Stream;
 
 import io.netty.buffer.Unpooled;
 import modfest.lacrimis.Lacrimis;
+import modfest.lacrimis.block.entity.InfusionTableEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
@@ -15,11 +16,17 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class ModNetworking {
     public static final Identifier CRUCIBLE_PARTICLES_ID = new Identifier(Lacrimis.MODID + ":crucible_particles");
+    public static final Identifier INFUSION_START_ID = new Identifier(Lacrimis.MODID + ":infusion_start");
+
+    public static void register() {
+        ServerSidePacketRegistry.INSTANCE.register(INFUSION_START_ID, ModNetworking::handleInfusionStartPacket);
+    }
 
     @Environment(EnvType.CLIENT)
     public static void registerClient() {
@@ -52,5 +59,25 @@ public class ModNetworking {
         players.forEach(player -> {
             ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, CRUCIBLE_PARTICLES_ID, buf);
         });
+    }
+
+    public static void handleInfusionStartPacket(PacketContext context, PacketByteBuf buffer) {
+        BlockPos pos = buffer.readBlockPos();
+        context.getTaskQueue().execute(() -> {
+            BlockEntity entity = context.getPlayer().world.getBlockEntity(pos);
+            if(entity instanceof InfusionTableEntity){
+                ((InfusionTableEntity) entity).startCrafting = true;
+                Lacrimis.LOGGER.info("Start received");
+            }
+
+        });
+    }
+    
+    public static void sendInfusionStartPacket(BlockPos pos) {
+        Lacrimis.LOGGER.info("Start pressed");
+        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+        buf.writeBlockPos(pos);
+
+        ClientSidePacketRegistry.INSTANCE.sendToServer(INFUSION_START_ID, buf);
     }
 }

@@ -36,6 +36,7 @@ public class Lacrimis implements ModInitializer {
         ModBlockEntityTypes.register();
         ModItems.register();
         ModInfusion.register();
+        ModNetworking.register();
         ModSounds.register();
         ModParticles.register();
         ModStatusEffects.register();

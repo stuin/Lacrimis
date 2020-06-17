@@ -15,7 +15,7 @@
     },
     {
       "type": "text",
-      "text": "Placing a crying obsidian over a crucible will fill it with tears.$(br2)Collecting tears from crying obsidian is rather slow, a more effective alternatives should exist. $(br)$(#f00)WARNING:$(br) DO NOT SPILL TEARS$()"
+      "text": "Placing a crying obsidian over a crucible will fill it with tears.$(br2)Collecting tears from crying obsidian is rather slow, a more effective alternatives should exist.$(br2)$(#f00)WARNING:$(br)DO NOT SPILL TEARS$()"
     },
     {
       "type": "multiblock",

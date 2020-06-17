@@ -14,7 +14,7 @@
       "item": "lacrimis:rune/destination",
       "cost": "300",
       "tier": "I",
-      "text": "A rune that cannot be activated, at least from this end.$(br)Try the $(br)$(l:runes/extraction)Extraction Rune.$(/l)"
+      "text": "A rune that cannot be activated, at least from this end.$(br)Try the $(l:runes/extraction)Extraction Rune.$(/l)"
     }
   ]
 }

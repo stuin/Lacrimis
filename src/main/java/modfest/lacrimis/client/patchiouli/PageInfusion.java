@@ -1,6 +1,7 @@
 package modfest.lacrimis.client.patchiouli;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import modfest.lacrimis.infusion.InfusionRecipe;
 import modfest.lacrimis.infusion.ShapedInfusionRecipe;
 import modfest.lacrimis.init.ModInfusion;
 import net.minecraft.client.gui.DrawableHelper;
@@ -11,12 +12,12 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import vazkii.patchouli.client.book.page.abstr.PageDoubleRecipeRegistry;
 
-public class PageInfusion extends PageDoubleRecipeRegistry<ShapedInfusionRecipe> {
+public class PageInfusion extends PageDoubleRecipeRegistry<InfusionRecipe> {
     public PageInfusion() {
         super(ModInfusion.INFUSION_RECIPE);
     }
 
-    protected void drawRecipe(MatrixStack ms, ShapedInfusionRecipe recipe, int recipeX, int recipeY, int mouseX, int mouseY, boolean second) {
+    protected void drawRecipe(MatrixStack ms, InfusionRecipe recipe, int recipeX, int recipeY, int mouseX, int mouseY, boolean second) {
         this.mc.getTextureManager().bindTexture(ModInfusion.craftingTexture);
         RenderSystem.enableBlend();
         DrawableHelper.drawTexture(ms, recipeX - 2, recipeY - 2, 0.0F, 0.0F, 100, 62, 128, 128);
@@ -36,7 +37,7 @@ public class PageInfusion extends PageDoubleRecipeRegistry<ShapedInfusionRecipe>
         DefaultedList<Ingredient> ingredients = recipe.getPreviewInputs();
         wrap = 3;
         if (shaped) {
-            wrap = recipe.getWidth();
+            wrap = ((ShapedInfusionRecipe)recipe).getWidth();
         }
 
         for(int i = 0; i < ingredients.size(); ++i) {
@@ -49,7 +50,7 @@ public class PageInfusion extends PageDoubleRecipeRegistry<ShapedInfusionRecipe>
         return 78;
     }
 
-    protected ItemStack getRecipeOutput(ShapedInfusionRecipe recipe) {
+    protected ItemStack getRecipeOutput(InfusionRecipe recipe) {
         return recipe == null ? ItemStack.EMPTY : recipe.getOutput();
     }
 }

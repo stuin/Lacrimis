@@ -2,7 +2,7 @@ package modfest.lacrimis.infusion;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import modfest.lacrimis.Lacrimis;
+import modfest.lacrimis.client.recipebook.CustomRecipeBookWidget;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
@@ -11,7 +11,6 @@ import net.minecraft.client.gui.screen.recipebook.RecipeBookWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.screen.AbstractRecipeScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.text.Text;
@@ -21,8 +20,8 @@ import net.minecraft.util.Identifier;
 @Environment(EnvType.CLIENT)
 public class InfusionScreen extends HandledScreen<InfusionScreenHandler> implements RecipeBookProvider {
     private static final Identifier TEXTURE = new Identifier("textures/gui/container/crafting_table.png");
-    private static final Identifier RECIPE_BUTTON_TEXTURE = new Identifier(Lacrimis.MODID, "textures/item/guide.png");
-    private final RecipeBookWidget recipeBook = new RecipeBookWidget();
+    private static final Identifier RECIPE_BUTTON_TEXTURE = new Identifier("textures/gui/recipe_button.png");
+    private final RecipeBookWidget recipeBook = new CustomRecipeBookWidget();
     private boolean isNarrow;
 
     public InfusionScreen(InfusionScreenHandler handler, PlayerInventory inventory, Text title) {
@@ -36,11 +35,14 @@ public class InfusionScreen extends HandledScreen<InfusionScreenHandler> impleme
         x = recipeBook.findLeftEdge(isNarrow, width, backgroundWidth);
         children.add(recipeBook);
         setInitialFocus(recipeBook);
-        addButton(new TexturedButtonWidget(x + 5, height / 2 - 49, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEXTURE, (buttonWidget) -> {
+        /*addButton(new TexturedButtonWidget(x + 5, height / 2 - 49, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEXTURE, (buttonWidget) -> {
             recipeBook.reset(isNarrow);
             recipeBook.toggleOpen();
             x = recipeBook.findLeftEdge(isNarrow, width, backgroundWidth);
             ((TexturedButtonWidget)buttonWidget).setPos(x + 5, height / 2 - 49);
+        }));*/
+        addButton(new TexturedButtonWidget(x + backgroundWidth - 54, y + titleY + 3, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEXTURE, (buttonWidget) -> {
+            handler.startCrafting();
         }));
         titleX = 24;
     }

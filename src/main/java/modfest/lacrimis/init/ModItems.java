@@ -34,6 +34,7 @@ public class ModItems {
     public static BlockItem tearLantern;
     public static BlockItem drainedCryingObsidian;
     public static BlockItem creativeTearsBlock;
+    public static BlockItem wardedStone;
 
     //Main items
     public static BottleOfTearsItem bottleOfTears;
@@ -78,6 +79,7 @@ public class ModItems {
         tearLantern = register("tear_lantern", ModBlocks.tearLantern);
         drainedCryingObsidian = register("drained_crying_obsidian", ModBlocks.drainedCryingObsidian);
         creativeTearsBlock = register("creative_tears_block", ModBlocks.creativeTearsBlock);
+        wardedStone = register("warded_stone", ModBlocks.wardedStone);
 
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
         diviningRod = register("divining_rod", new DiviningRodItem(TOOL_SETTINGS));

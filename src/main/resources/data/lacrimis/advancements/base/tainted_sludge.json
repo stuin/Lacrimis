@@ -17,7 +17,8 @@
   },
   "rewards": {
     "recipes": [
-      "lacrimis:tainted_sludge"
+      "lacrimis:crucible/tainted_sludge",
+      "lacrimis:crafting/rune_stone"
     ]
   },
   "criteria": {

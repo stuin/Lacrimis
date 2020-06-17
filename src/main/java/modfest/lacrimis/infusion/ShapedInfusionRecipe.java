@@ -20,7 +20,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
@@ -29,31 +28,16 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
-public class ShapedInfusionRecipe implements Recipe<InfusionInventory> {
+public class ShapedInfusionRecipe extends InfusionRecipe {
 	private final int width;
 	private final int height;
 	private final DefaultedList<Ingredient> inputs;
-	private final int tears;
-	private final ItemStack output;
-	private final Identifier id;
 
 	public ShapedInfusionRecipe(Identifier id, int width, int height, DefaultedList<Ingredient> ingredients, int tears, ItemStack output) {
-		this.id = id;
+		super(id, tears, output);
 		this.width = width;
 		this.height = height;
 		this.inputs = ingredients;
-		this.tears = tears;
-		this.output = output;
-	}
-
-	@Override
-	public Identifier getId() {
-		return this.id;
-	}
-
-	@Override
-	public RecipeType<?> getType() {
-		return ModInfusion.INFUSION_RECIPE;
 	}
 
 	@Override
@@ -62,19 +46,15 @@ public class ShapedInfusionRecipe implements Recipe<InfusionInventory> {
 	}
 
 	@Override
-	public ItemStack getOutput() {
-		return this.output;
+	@Environment(EnvType.CLIENT)
+	public boolean fits(int width, int height) {
+		return width >= this.width && height >= this.height;
 	}
+
 
 	@Override
 	public DefaultedList<Ingredient> getPreviewInputs() {
 		return this.inputs;
-	}
-
-	@Override
-	@Environment(EnvType.CLIENT)
-	public boolean fits(int width, int height) {
-		return width >= this.width && height >= this.height;
 	}
 
 	@Override
@@ -115,15 +95,6 @@ public class ShapedInfusionRecipe implements Recipe<InfusionInventory> {
 		}
 
 		return true;
-	}
-
-	@Override
-	public ItemStack craft(InfusionInventory craftingInventory) {
-		return this.getOutput().copy();
-	}
-
-	public int getTears() {
-		return tears;
 	}
 
 	public int getWidth() {
@@ -297,13 +268,13 @@ public class ShapedInfusionRecipe implements Recipe<InfusionInventory> {
 		public void write(PacketByteBuf buf, ShapedInfusionRecipe recipe) {
 			buf.writeVarInt(recipe.width);
 			buf.writeVarInt(recipe.height);
-			buf.writeVarInt(recipe.tears);
+			buf.writeVarInt(recipe.getTears());
 
 			for (Ingredient ingredient : recipe.inputs) {
 				ingredient.write(buf);
 			}
 
-			buf.writeItemStack(recipe.output);
+			buf.writeItemStack(recipe.getOutput());
 		}
 	}
 }

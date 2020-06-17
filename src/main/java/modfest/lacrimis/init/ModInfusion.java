@@ -5,10 +5,7 @@ import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.InfusionTableEntity;
 import modfest.lacrimis.client.patchiouli.PageCrucible;
 import modfest.lacrimis.client.patchiouli.PageInfusion;
-import modfest.lacrimis.infusion.CrucibleRecipe;
-import modfest.lacrimis.infusion.InfusionScreen;
-import modfest.lacrimis.infusion.InfusionScreenHandler;
-import modfest.lacrimis.infusion.ShapedInfusionRecipe;
+import modfest.lacrimis.infusion.*;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.screen.ContainerScreenFactory;
@@ -30,10 +27,10 @@ import vazkii.patchouli.client.book.ClientBookRegistry;
 public class ModInfusion {
 	public static final Identifier INFUSION_SCREEN_ID = new Identifier(Lacrimis.MODID, "infusion");
 
-	public static final RecipeType<ShapedInfusionRecipe> INFUSION_RECIPE = new RecipeType<ShapedInfusionRecipe>() {
+	public static final RecipeType<InfusionRecipe> INFUSION_RECIPE = new RecipeType<InfusionRecipe>() {
 		@Override
 		public String toString() {
-			return Lacrimis.MODID + ":infusion_shaped";
+			return Lacrimis.MODID + ":infusion";
 		}
 	};
 	public static final RecipeType<CrucibleRecipe> CRUCIBLE_RECIPE = new RecipeType<CrucibleRecipe>() {
@@ -44,6 +41,7 @@ public class ModInfusion {
 	};
 
 	public static final RecipeSerializer<ShapedInfusionRecipe> SHAPED_INFUSION_SERIALIZER = new ShapedInfusionRecipe.Serializer();
+	public static final RecipeSerializer<ShapelessInfusionRecipe> SHAPELESS_INFUSION_SERIALIZER = new ShapelessInfusionRecipe.Serializer();
 	public static final RecipeSerializer<CrucibleRecipe> CRUCIBLE_SERIALIZER = new CrucibleRecipe.Serializer();
 
 	@SerializedName("crafting_texture")
@@ -59,10 +57,11 @@ public class ModInfusion {
 			}
 		});
 
-		Registry.register(Registry.RECIPE_TYPE, Lacrimis.MODID + ":infusion_shaped", INFUSION_RECIPE);
+		Registry.register(Registry.RECIPE_TYPE, Lacrimis.MODID + ":infusion", INFUSION_RECIPE);
 		Registry.register(Registry.RECIPE_TYPE, Lacrimis.MODID + ":crucible", CRUCIBLE_RECIPE);
 
 		Registry.register(Registry.RECIPE_SERIALIZER, Lacrimis.MODID + ":infusion_shaped", SHAPED_INFUSION_SERIALIZER);
+		Registry.register(Registry.RECIPE_SERIALIZER, Lacrimis.MODID + ":infusion_shapeless", SHAPELESS_INFUSION_SERIALIZER);
 		Registry.register(Registry.RECIPE_SERIALIZER, Lacrimis.MODID + ":crucible", CRUCIBLE_SERIALIZER);
 	}
 

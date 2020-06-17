@@ -1,12 +1,15 @@
 package modfest.lacrimis.infusion;
 
+import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.InfusionTableEntity;
+import modfest.lacrimis.init.ModNetworking;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.InventoryChangedListener;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeFinder;
 import net.minecraft.screen.AbstractRecipeScreenHandler;
@@ -14,6 +17,7 @@ import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
 
 public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionInventory> implements InventoryChangedListener {
+	private static final int OUTPUT_SLOT = 9;
 	private final InfusionInventory input;
 	private final InfusionTableEntity entity;
 	private final PlayerEntity player;
@@ -27,13 +31,13 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 		
 		if (entity.getWorld() != null && !entity.getWorld().isClient)
 			this.input.addListener(this);
-
-		this.addSlot(new FurnaceOutputSlot(player, this.input, InfusionTableEntity.OUTPUT_STACK, 124, 35));
+		
 		for (int y = 0; y < 3; ++y) {
 			for (int x = 0; x < 3; ++x) {
 				this.addSlot(new Slot(this.input, x + y * 3, 30 + x * 18, 17 + y * 18));
 			}
 		}
+		this.addSlot(new FurnaceOutputSlot(player, this.input, InfusionTableEntity.OUTPUT_STACK, 124, 35));
 		for (int y = 0; y < 3; ++y) {
 			for (int x = 0; x < 9; ++x) {
 				this.addSlot(new Slot(player.inventory, x + y * 9 + 9, 8 + x * 18, 84 + y * 18));
@@ -45,6 +49,10 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 
 		onContentChanged(input);
 	}
+	
+	public void startCrafting() {
+		ModNetworking.sendInfusionStartPacket(entity.getPos());
+	}
 
 	@Override
 	public void populateRecipeFinder(RecipeFinder finder) {
@@ -53,7 +61,6 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 
 	@Override
 	public void clearCraftingSlots() {
-
 	}
 
 	@Override
@@ -80,7 +87,7 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 		if (slot != null && slot.hasStack()) {
 			ItemStack transfered = slot.getStack();
 			leftInHand = transfered.copy();
-			if (index == 0) {
+			if (index == OUTPUT_SLOT) {
 				transfered.getItem().onCraft(transfered, this.entity.getWorld(), player);
 				if (!this.insertItem(transfered, input.size(), 46, true)) {
 					return ItemStack.EMPTY;
@@ -112,7 +119,7 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 			}
 
 			ItemStack itemStack3 = slot.onTakeItem(player, transfered);
-			if (index == 0) {
+			if (index == OUTPUT_SLOT) {
 				player.dropItem(itemStack3, false);
 			}
 		}

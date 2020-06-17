@@ -2,6 +2,7 @@ package modfest.lacrimis.infusion;
 
 import com.google.gson.JsonObject;
 
+import modfest.lacrimis.block.entity.InfusionTableEntity;
 import modfest.lacrimis.init.ModBlocks;
 import modfest.lacrimis.init.ModInfusion;
 import net.fabricmc.api.EnvType;
@@ -10,33 +11,43 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.ShapedRecipe;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.world.World;
 
-public class CrucibleRecipe implements Recipe<InfusionInventory> {
+public class CrucibleRecipe extends InfusionRecipe {
     private final Ingredient base;
-    private final int tears;
-    private final ItemStack result;
-    private final Identifier id;
 
     public CrucibleRecipe(Identifier id, Ingredient base, int tears, ItemStack result) {
-        this.id = id;
+        super(id, tears, result);
         this.base = base;
-        this.tears = tears;
-        this.result = result;
+    }
+
+    public RecipeSerializer<?> getSerializer() {
+        return ModInfusion.CRUCIBLE_SERIALIZER;
+    }
+
+    @Environment(EnvType.CLIENT)
+    public boolean fits(int width, int height) {
+        return width * height >= 2;
     }
 
     public boolean matches(InfusionInventory inv, World world) {
-        return this.base.test(inv.getStack(0)) && inv.getTears() >= tears;
+        if(inv.size() > 1) {
+            for(int i = 0; i < inv.size() - 1; i++)
+                if(base.test(inv.getStack(i)))
+                    return true;
+                if(!inv.isEmpty())
+                    return false;
+        }
+        return this.base.test(inv.getStack(0)) && inv.getTears() >= getTears();
     }
 
+    @Override
     public ItemStack craft(InfusionInventory inv) {
-        ItemStack itemStack = this.result.copy();
+        ItemStack itemStack = super.craft(inv);
         CompoundTag compoundTag = inv.getStack(0).getTag();
         if (compoundTag != null) {
             itemStack.setTag(compoundTag.copy());
@@ -45,38 +56,13 @@ public class CrucibleRecipe implements Recipe<InfusionInventory> {
         return itemStack;
     }
 
-    @Environment(EnvType.CLIENT)
-    public boolean fits(int width, int height) {
-        return width * height >= 2;
-    }
-
     public Ingredient getBase() {
         return base;
-    }
-
-    public ItemStack getOutput() {
-        return this.result;
-    }
-
-    public int getTears() {
-        return tears;
     }
 
     @Environment(EnvType.CLIENT)
     public ItemStack getRecipeKindIcon() {
         return new ItemStack(ModBlocks.crucible);
-    }
-
-    public Identifier getId() {
-        return this.id;
-    }
-
-    public RecipeSerializer<?> getSerializer() {
-        return ModInfusion.CRUCIBLE_SERIALIZER;
-    }
-
-    public RecipeType<?> getType() {
-        return ModInfusion.CRUCIBLE_RECIPE;
     }
 
     public static class Serializer implements RecipeSerializer<CrucibleRecipe> {
@@ -96,8 +82,8 @@ public class CrucibleRecipe implements Recipe<InfusionInventory> {
 
         public void write(PacketByteBuf packetByteBuf, CrucibleRecipe recipe) {
             recipe.base.write(packetByteBuf);
-            packetByteBuf.writeVarInt(recipe.tears);
-            packetByteBuf.writeItemStack(recipe.result);
+            packetByteBuf.writeVarInt(recipe.getTears());
+            packetByteBuf.writeItemStack(recipe.getOutput());
         }
     }
 }

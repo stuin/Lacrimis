@@ -12,7 +12,7 @@ group = project.maven_group
 apply from: 'https://dblsaiko.net/pub/gradle/autoversion.gradle'
 
 minecraft {
-	//accessWidener = file("src/main/resources/lacrimis.accesswidener")
+	accessWidener = file("src/main/resources/lacrimis.accesswidener")
 }
 
 repositories {

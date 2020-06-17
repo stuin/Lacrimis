@@ -20,10 +20,8 @@ public abstract class ClientRecipeBookMixin extends RecipeBook {
 
     @Inject(at = @At("HEAD"), cancellable = true, method = "getGroupForRecipe(Lnet/minecraft/recipe/Recipe;)Lnet/minecraft/client/recipebook/RecipeBookGroup;")
     private static void getGroupForRecipe(Recipe<?> recipe, CallbackInfoReturnable<RecipeBookGroup> cir) {
-        if(recipe.getType() == ModInfusion.INFUSION_RECIPE)
+        if(recipe.getType() == ModInfusion.INFUSION_RECIPE || recipe.getType() == ModInfusion.CRUCIBLE_RECIPE)
             cir.setReturnValue(RecipeBookGroup.UNKNOWN);
-        else if(recipe.getType() == ModInfusion.CRUCIBLE_RECIPE)
-            cir.setReturnValue(RecipeBookGroup.SMITHING);
     }
 
     @Inject(at = @At("HEAD"), cancellable = true, method = "getGroups(Lnet/minecraft/screen/AbstractRecipeScreenHandler;)Ljava/util/List;")

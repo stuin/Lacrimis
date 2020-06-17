@@ -3,7 +3,7 @@ package modfest.lacrimis.block.entity;
 import java.util.Random;
 
 import modfest.lacrimis.infusion.InfusionInventory;
-import modfest.lacrimis.infusion.ShapedInfusionRecipe;
+import modfest.lacrimis.infusion.InfusionRecipe;
 import modfest.lacrimis.init.ModBlockEntityTypes;
 import modfest.lacrimis.init.ModInfusion;
 import modfest.lacrimis.init.ModParticles;
@@ -14,6 +14,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.collection.DefaultedList;
@@ -24,6 +25,7 @@ public class InfusionTableEntity extends SoulTankEntity implements Inventory, Ti
     
     public final InfusionInventory inventory;
     public ItemStack holding = ItemStack.EMPTY;
+    public boolean startCrafting = false;
 
     public InfusionTableEntity() {
         super(ModBlockEntityTypes.infusionTable, 500);
@@ -60,7 +62,7 @@ public class InfusionTableEntity extends SoulTankEntity implements Inventory, Ti
             if (output.isEmpty())
                 inventory.setStack(OUTPUT_STACK, holding.copy());
             else if (holding.getItem() == output.getItem())
-                output.increment(1);
+                output.increment(output.getCount());
 
             //Clear
             holding = ItemStack.EMPTY;
@@ -71,15 +73,25 @@ public class InfusionTableEntity extends SoulTankEntity implements Inventory, Ti
 
         //Check for new recipe
         if(holding.isEmpty()) {
-            ShapedInfusionRecipe recipe = this.world.getRecipeManager().getFirstMatch(ModInfusion.INFUSION_RECIPE, inventory, this.world).orElse(null);
-
+            InfusionRecipe recipe = this.world.getRecipeManager().getFirstMatch(ModInfusion.INFUSION_RECIPE, inventory, this.world).orElse(null);
+            if(recipe == null)
+                recipe = this.world.getRecipeManager().getFirstMatch(ModInfusion.CRUCIBLE_RECIPE, inventory, this.world).orElse(null);
+            
             //Start crafting progress
-            if(recipe != null && canAcceptRecipeOutput(recipe)) {
+            if(recipe != null && canAcceptRecipeOutput(recipe) &&
+                    (startCrafting || !inventory.getStack(OUTPUT_STACK).isEmpty())) {
                 takeIngredients();
                 tank.setLimit(recipe.getTears());
                 holding = recipe.getOutput().copy();
+                startCrafting = false;
+                
+                if(inventory.getStack(OUTPUT_STACK).getItem() == Items.BARRIER)
+                    inventory.setStack(OUTPUT_STACK, ItemStack.EMPTY);
             }
         }
+        
+        //if(startCrafting)
+        //    startCrafting = false;
         
         //Collect tears
         if(tank.getSpace() > 0)
@@ -111,12 +123,14 @@ public class InfusionTableEntity extends SoulTankEntity implements Inventory, Ti
         }
     }
 
-    protected boolean canAcceptRecipeOutput(ShapedInfusionRecipe recipe) {
+    protected boolean canAcceptRecipeOutput(InfusionRecipe recipe) {
         ItemStack itemStack = recipe.getOutput();
         if (itemStack.isEmpty())
             return false;
 
         ItemStack itemStack2 = this.inventory.getStack(OUTPUT_STACK);
+        if(itemStack2.getItem() == Items.BARRIER)
+            return true;
         if (itemStack2.isEmpty())
             return true;
         else if (!itemStack2.isItemEqualIgnoreDamage(itemStack))
