@@ -84,14 +84,11 @@ public class InfusionTableEntity extends SoulTankEntity implements Inventory, Ti
                 tank.setLimit(recipe.getTears());
                 holding = recipe.getOutput().copy();
                 startCrafting = false;
-                
-                if(inventory.getStack(OUTPUT_STACK).getItem() == Items.BARRIER)
-                    inventory.setStack(OUTPUT_STACK, ItemStack.EMPTY);
             }
         }
         
-        //if(startCrafting)
-        //    startCrafting = false;
+        if(startCrafting)
+            startCrafting = false;
         
         //Collect tears
         if(tank.getSpace() > 0)
@@ -129,8 +126,6 @@ public class InfusionTableEntity extends SoulTankEntity implements Inventory, Ti
             return false;
 
         ItemStack itemStack2 = this.inventory.getStack(OUTPUT_STACK);
-        if(itemStack2.getItem() == Items.BARRIER)
-            return true;
         if (itemStack2.isEmpty())
             return true;
         else if (!itemStack2.isItemEqualIgnoreDamage(itemStack))
