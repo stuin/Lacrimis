@@ -59,5 +59,18 @@
   "lacrimis.error.pipe": "No pipe connector found",
   "lacrimis.error.entity": "No valid target entity",
   "lacrimis.error.destination": "No destination found",
-  "lacrimis.error.send": "Rune cannot send"
+  "lacrimis.error.send": "Rune cannot send",
+
+  "lacrimis.advancements.root.title": "Lacrimus",
+  "lacrimis.advancements.root.description": "Tears of the Soul",
+  "lacrimis.advancements.guide.title": "What might this do?",
+  "lacrimis.advancements.guide.description": "Right click on Crying Obsidian with a book",
+  "lacrimis.advancements.crucible.title": "Starting your research",
+  "lacrimis.advancements.crucible.description": "Craft a Crucible out of Silver",
+  "lacrimis.advancements.tainted_sludge.title": "Just some junk",
+  "lacrimis.advancements.tainted_sludge.description": "Definitely...",
+  "lacrimis.advancements.infusion_table.title": "Serious progress",
+  "lacrimis.advancements.infusion_table.description": "Craft an Infusion Table",
+  "lacrimis.advancements.tear_lantern.title": "Faster and Brighter",
+  "lacrimis.advancements.tear_lantern.description": "Throw a Soul Lantern into the Crucible"
 }

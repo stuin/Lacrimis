@@ -2,6 +2,7 @@
   "name": "Tear Lantern",
   "icon": "lacrimis:tear_lantern",
   "category": "lacrimis:basics",
+  "advancement": "lacrimis:base/tear_lantern",
   "sortnum": 4,
   "pages": [
     {

@@ -1,0 +1,10 @@
+{
+  "type": "lacrimis:crucible",
+  "base": {
+    "item": "minecraft:cobblestone"
+  },
+  "result": {
+    "item": "lacrimis:tainted_sludge"
+  },
+  "tears": 40
+}

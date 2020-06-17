@@ -21,7 +21,7 @@
     },
     {
       "type": "text",
-      "text": "#desc",
+      "text": "#text",
       "y": 75
     }
   ]

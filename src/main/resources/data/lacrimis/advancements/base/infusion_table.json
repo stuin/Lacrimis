@@ -1,0 +1,35 @@
+{
+  "parent": "lacrimis:base/tainted_sludge",
+  "display": {
+    "icon": {
+      "item": "lacrimis:infusion_table"
+    },
+    "title": {
+      "translate": "lacrimis.advancements.infusion_table.title"
+    },
+    "description": {
+      "translate": "lacrimis.advancements.infusion_table.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "collect": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "lacrimis:infusion_table"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "collect"
+    ]
+  ]
+}

@@ -2,6 +2,7 @@
   "name": "Tear Crucible",
   "icon": "lacrimis:crucible",
   "category": "lacrimis:basics",
+  "advancement": "lacrimis:base/crucible",
   "sortnum": 2,
   "pages": [
     {

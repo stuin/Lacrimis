@@ -59,6 +59,7 @@ public class ConduitBlock extends Block {
 
     protected BlockState connectToBlocks(BlockState state, WorldAccess world, BlockPos pos) {
         EnumSet<Axis> axes = EnumSet.noneOf(Axis.class);
+        int connections = 0;
         for (Direction direction : Direction.values()) {
             BooleanProperty property = FACING_PROPERTIES.get(direction);
             boolean value = this.connectsTo(world, pos.offset(direction), direction);
@@ -66,12 +67,11 @@ public class ConduitBlock extends Block {
             state = state.with(property, value);
             if (value) {
                 axes.add(direction.getAxis());
+                connections++;
             }
         }
 
-        state = state.with(NODE, axes.size() != 1);
-
-        return state;
+        return state.with(NODE, axes.size() != 1 || connections == 1);
     }
 
     @Override
