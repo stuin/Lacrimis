@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "A crucible is a device that can collect and hold tears.$(br2)The silver used in the creation of this seems to be able to contain the naturally corrosive substance...$(br2) $(#12b88e)$(t:Maybe I can create a new material by throwing mundane substances like iron into it?)Notes$(/t)"
+      "text": "The crucible is a device that can collect and hold tears.$(br2)The silver used in the creation of this seems to be able to contain the naturally corrosive substance...$(br2) $(#12b88e)$(t:Maybe I can create a new material by throwing mundane substances like iron into it?)Notes$(/t)"
     },
     {
       "type": "crafting",
