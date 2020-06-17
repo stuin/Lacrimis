@@ -11,12 +11,11 @@
     },
     {
       "type": "crafting",
-      "recipe": "lacrimis:crucible",
-      "text": "(temp recipe)"
+      "recipe": "lacrimis:crafting/crucible"
     },
     {
       "type": "text",
-      "text": "Placing a crying obsidian over a crucible will fill it with tears.$(br2)Collecting tears from crying obsidian is rather slow, a more effective alternatives should exist."
+      "text": "Placing a crying obsidian over a crucible will fill it with tears.$(br2)Collecting tears from crying obsidian is rather slow, a more effective alternatives should exist. $(br)$(#f00)WARNING:$(br) DO NOT SPILL TEARS$()"
     },
     {
       "type": "multiblock",

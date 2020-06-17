@@ -12,6 +12,7 @@ group = project.maven_group
 apply from: 'https://dblsaiko.net/pub/gradle/autoversion.gradle'
 
 minecraft {
+	//accessWidener = file("src/main/resources/lacrimis.accesswidener")
 }
 
 repositories {
@@ -24,10 +25,11 @@ repositories {
 		}
 	}
 	maven {
-		url = 'https://jitpack.io'
+		name = "Cotton"
+		url = 'http://server.bbkr.space:8081/artifactory/libs-release'
 	}
 	maven {
-		url = 'http://server.bbkr.space:8081/artifactory/libs-release'
+		url = 'https://jitpack.io'
 	}
 	maven {
 		url = 'https://maven.blamejared.com' 
@@ -49,6 +51,15 @@ dependencies {
 	modImplementation 'net.dblsaiko.qcommon.croco:croco:2.1.2'
 	include 'net.dblsaiko.qcommon.croco:croco:2.1.2'
 
+	//Cotton Resources
+	modImplementation  "com.github.cottonmc:cotton-resources:${project.cotton_resources_version}"
+	include "com.github.cottonmc:cotton-resources:${project.cotton_resources_version}"
+
+	//Patchouli api (Official way)
+	//def patchouliVersion = "vazkii.patchouli:Patchouli:${project.patchouli_version}"
+	//Patchouli api (Current Snapshot way)
+	include modImplementation("com.github.Vazkii:Patchouli:${project.patchouli_version}")
+
 	//Jankson
 	//modApi "io.github.cottonmc:Jankson-Fabric:${project.jankson_version}"
 	//include "io.github.cottonmc:Jankson-Fabric:${project.jankson_version}"
@@ -61,11 +72,6 @@ dependencies {
 	//	exclude group: "net.fabricmc"
 	//}
 	//include wrenchVersion
-
-	//Patchouli api (Official way)
-	//def patchouliVersion = "vazkii.patchouli:Patchouli:${project.patchouli_version}"
-	//Patchouli api (Current Snapshot way)
-	include modImplementation("com.github.Vazkii:Patchouli:${project.patchouli_version}")
 }
 
 processResources {

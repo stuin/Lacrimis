@@ -11,7 +11,7 @@
     },
     {
       "type": "crafting",
-      "recipe": "lacrimis:rune_stone"
+      "recipe": "lacrimis:crafting/rune_stone"
     }
   ]
 }

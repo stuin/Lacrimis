@@ -11,7 +11,7 @@
     },
     {
       "type": "lacrimis:crucible",
-      "recipe": "lacrimis:tear_lantern"
+      "recipe": "lacrimis:crucible/tear_lantern"
     },
     {
       "type": "text",

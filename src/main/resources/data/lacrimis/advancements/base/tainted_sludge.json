@@ -11,9 +11,14 @@
       "translate": "lacrimis.advancements.tainted_sludge.description"
     },
     "frame": "task",
-    "show_toast": true,
+    "show_toast": false,
     "announce_to_chat": false,
     "hidden": false
+  },
+  "rewards": {
+    "recipes": [
+      "lacrimis:tainted_sludge"
+    ]
   },
   "criteria": {
     "collect": {

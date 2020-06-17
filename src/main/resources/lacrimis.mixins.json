@@ -4,6 +4,7 @@
   "package": "modfest.lacrimis.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "ClientRecipeBookMixin",
     "CryingObsidianMixin"
   ],
   "client": [

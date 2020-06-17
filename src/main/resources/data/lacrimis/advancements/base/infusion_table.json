@@ -15,6 +15,11 @@
     "announce_to_chat": true,
     "hidden": false
   },
+  "rewards": {
+    "recipes": [
+      "lacrimis:infusion/conduit"
+    ]
+  },
   "criteria": {
     "collect": {
       "trigger": "minecraft:inventory_changed",

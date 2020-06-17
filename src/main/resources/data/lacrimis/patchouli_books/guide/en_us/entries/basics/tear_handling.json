@@ -11,7 +11,7 @@
     },
     {
       "type": "lacrimis:crucible",
-      "recipe": "lacrimis:tainted_sludge",
+      "recipe": "lacrimis:crucible/tainted_sludge",
       "text": "Unfortunately, this sludge seems rather mundane. I wonder if more exotic materials can yield more promising results?$(br2)"
     },
     {

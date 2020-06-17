@@ -15,11 +15,6 @@
     "announce_to_chat": true,
     "hidden": false
   },
-  "rewards": {
-    "recipes": [
-      "lacrimis:crucible"
-    ]
-  },
   "criteria": {
     "collect": {
       "trigger": "minecraft:inventory_changed",

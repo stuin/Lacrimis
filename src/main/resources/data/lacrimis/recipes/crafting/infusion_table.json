@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "c:silver_ingot"
+    },
+    {
+      "item": "c:silver_ingot"
+    },
+    {
+      "item": "lacrimis:rune/stone"
+    },
+    {
+      "item": "lacrimis:rune/stone"
+    }
+  ],
+  "result": {
+    "item": "lacrimis:infusion_table"
+  }
+}

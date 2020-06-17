@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:infusion_shaped",
+  "pattern": [
+    "RRR",
+    "RSR",
+    "RRR"
+  ],
+  "key": {
+    "R": {
+      "item": "lacrimis:rune/stone"
+    },
+    "S": {
+      "item": "c:silver_block"
+    }
+  },
+  "result": {
+    "item": "lacrimis:rune/tier1",
+    "count": 8
+  },
+  "tears": 300
+}
