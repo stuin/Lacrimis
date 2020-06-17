@@ -40,7 +40,6 @@ public class InfusionInventory extends SimpleInventory {
 				}
 			}
 		};
-
 	}
 
 	@Override

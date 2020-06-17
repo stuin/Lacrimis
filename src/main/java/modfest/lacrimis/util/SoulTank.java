@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 public class SoulTank {
 	private final ArrayList<Runnable> listeners = new ArrayList<>();
-	private final int capacity;
+	private final int max_capacity;
+	private int capacity;
 	private int tears = 0;
 
 	public SoulTank(int capacity) {
+		this.max_capacity = capacity;
 		this.capacity = capacity;
 	}
 
@@ -21,6 +23,11 @@ public class SoulTank {
 	
 	public int getSpace() {
 		return capacity - tears;
+	}
+	
+	public void setLimit(int capacity) {
+		if(capacity < max_capacity && capacity >= 0)
+			this.capacity = Math.max(capacity, tears);
 	}
 	
 	public void setTears(int tears) {

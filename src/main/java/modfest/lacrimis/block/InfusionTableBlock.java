@@ -8,6 +8,9 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
@@ -19,7 +22,7 @@ import net.minecraft.world.World;
 
 public class InfusionTableBlock extends SoulTankBlock {
 	protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
-
+	
 	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
 		return SHAPE;
 	}
@@ -53,7 +56,6 @@ public class InfusionTableBlock extends SoulTankBlock {
 				ItemScatterer.spawn(world, pos, (Inventory)blockEntity);
 				world.updateComparators(pos, this);
 				((Inventory) blockEntity).clear();
-
 			}
 		}
 	}

@@ -23,7 +23,7 @@ public class PageCrucible extends PageDoubleRecipeRegistry<CrucibleRecipe> {
         this.parent.renderItemStack(ms, recipeX + 76, recipeY + 4, mouseX, mouseY, recipe.getOutput());
         ms.push();
         ms.scale(0.5F, 0.5F, 1.0F);
-        this.parent.drawCenteredStringNoShadow(ms, "" + recipe.getTears(), (recipeX + 47) * 2, (recipeY + 19) * 2, this.book.headerColor);
+        this.parent.drawCenteredStringNoShadow(ms, "" + recipe.getTears(), (recipeX + 48) * 2, (recipeY + 19) * 2, this.book.headerColor);
         ms.pop();
     }
 

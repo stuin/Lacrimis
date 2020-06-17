@@ -19,14 +19,13 @@ import net.minecraft.util.math.Box;
 
 public class CrucibleEntity extends SoulTankEntity implements Tickable {
     private static final Box ITEM_BOX = new Box(0, 0.4, 0, 1, 1, 1);
-    private static final int TEAR_CAPACITY = 1000;
     private static final int CRAFT_COOLDOWN = 15;
 
     public final InfusionInventory inventory;
     private int craftTime = 0;
 
     public CrucibleEntity() {
-        super(ModBlockEntityTypes.crucible, TEAR_CAPACITY);
+        super(ModBlockEntityTypes.crucible, 1000);
         this.inventory = new InfusionInventory(this, 1);
     }
 

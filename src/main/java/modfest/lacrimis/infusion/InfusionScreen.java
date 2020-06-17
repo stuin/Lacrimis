@@ -28,8 +28,8 @@ public class InfusionScreen extends HandledScreen<InfusionScreenHandler> {
         this.renderBackground(matrices);
         super.render(matrices, mouseX, mouseY, delta);
         this.drawMouseoverTooltip(matrices, mouseX, mouseY);
-        this.textRenderer.draw(matrices,"" + handler.getAvailableTears(), x + 10, titleY + 20 + y, 4210752);
-        //this.textRenderer.draw(matrices,"" + handler.getRequiredTears(), x + backgroundWidth - 20, titleY + 40 + y, 4210752);
+        String s = handler.getCurrentTears() + "/" + handler.getRequiredTears();
+        this.textRenderer.draw(matrices, s, x + backgroundWidth - 52, titleY + 52 + y, 4210752);
     }
 
     protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {

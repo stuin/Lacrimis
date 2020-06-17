@@ -47,8 +47,8 @@
 
   "lacrimis.gui.infusion": "Infusion Table",
   "itemGroup.lacrimis.base": "Lacrimis",
-  "itemGroup.lacrimis.runes": "lacrimis Runes",
-  "itemGroup.lacrimis.tarot": "lacrimis Tarot",
+  "itemGroup.lacrimis.runes": "Lacrimis Runes",
+  "itemGroup.lacrimis.tarot": "Lacrimis Tarot",
 
   "lacrimis.error.tears": "Not enough Tears",
   "lacrimis.error.barrier": "Tier I runes require cage",

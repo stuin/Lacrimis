@@ -37,12 +37,14 @@ public abstract class SoulTankEntity extends BlockEntity implements BlockEntityC
         super.fromTag(state, tag);
 
         tank.setTears(tag.getInt("TearLevel"));
+        tank.setLimit(tag.getInt("TearLimit"));
     }
 
     @Override
     public CompoundTag toTag(CompoundTag tag) {
         super.toTag(tag);
         tag.putInt("TearLevel", tank.getTears());
+        tag.putInt("TearLimit", tank.getCapacity());
         return tag;
     }
 

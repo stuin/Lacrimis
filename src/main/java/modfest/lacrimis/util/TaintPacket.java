@@ -20,14 +20,16 @@ public class TaintPacket {
     }
     
     public void spawn(World world, BlockPos pos) {
-        AreaEffectCloudEntity entity = new AreaEffectCloudEntity(world, pos.getX(), pos.getY(), pos.getZ());
-        entity.setRadius(amount / 150.0f);
-        entity.addEffect(new StatusEffectInstance(ModStatusEffects.WAVERING_SOUL, amount * 2));
-        entity.addEffect(new StatusEffectInstance(StatusEffects.POISON, amount));
-        entity.setDuration(amount * 2);
-        world.spawnEntity(entity);
+        if(amount > 0) {
+            AreaEffectCloudEntity entity = new AreaEffectCloudEntity(world, pos.getX(), pos.getY(), pos.getZ());
+            entity.setRadius(amount / 150.0f);
+            entity.addEffect(new StatusEffectInstance(ModStatusEffects.WAVERING_SOUL, amount * 2));
+            entity.addEffect(new StatusEffectInstance(StatusEffects.POISON, amount));
+            entity.setDuration(amount * 2);
+            world.spawnEntity(entity);
 
-        if(!world.isClient)
-            Lacrimis.LOGGER.info("Spawned taint at " + pos.toString());
+            if(!world.isClient)
+                Lacrimis.LOGGER.info("Spawned taint " + amount + " at " + pos.toString());
+        }
     }
 }
