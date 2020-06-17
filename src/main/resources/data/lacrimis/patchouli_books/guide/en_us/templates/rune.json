@@ -15,7 +15,7 @@
     },
     {
       "type": "text",
-      "text": "Base cost: #cost# Tears$(br)$(l:cages/tier_#tier->lower#)Tier #tier# Soul Cage$(/l)",
+      "text": "Run cost: #cost# Tears$(br)$(l:cages/tier_#tier->lower#)Tier #tier# Soul Cage$(/l)",
       "x": 20,
       "y": 50
     },

@@ -3,7 +3,7 @@
   "icon": "lacrimis:tear_lantern",
   "category": "lacrimis:basics",
   "advancement": "lacrimis:base/tear_lantern",
-  "sortnum": 4,
+  "sortnum": 3,
   "pages": [
     {
       "type": "text",

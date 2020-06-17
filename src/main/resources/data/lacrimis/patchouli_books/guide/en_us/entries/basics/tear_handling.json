@@ -3,7 +3,7 @@
   "icon": "lacrimis:tainted_sludge",
   "category": "lacrimis:basics",
   "advancement": "lacrimis:base/tainted_sludge",
-  "sortnum": 3,
+  "sortnum": 4,
   "pages": [
     {
       "type": "text",

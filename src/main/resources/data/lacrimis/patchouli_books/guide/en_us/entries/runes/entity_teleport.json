@@ -1,0 +1,20 @@
+{
+  "name": "Soul Transport (II)",
+  "icon": "lacrimis:rune/entity_transport",
+  "category": "lacrimis:runes",
+  "advancement": "lacrimis:base/rune_tier2",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "text",
+      "text": "The combination of the Extraction rune and the Destination rune works exactly as I hoped. A teleporter that can both send and receive, though it is no less dangerous than the originals."
+    },
+    {
+      "type": "rune",
+      "item": "lacrimis:rune/entity_transport",
+      "cost": "200",
+      "tier": "II",
+      "text": "Noticeably more efficient to use, which is nice."
+     }
+  ]
+}

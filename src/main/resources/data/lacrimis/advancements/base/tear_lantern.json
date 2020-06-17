@@ -30,22 +30,11 @@
           }
         ]
       }
-    },
-    "has_soul_lantern": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "item": "minecraft:soul_lantern"
-          }
-        ]
-      }
     }
   },
   "requirements": [
     [
-      "collect",
-      "has_soul_lantern"
+      "collect"
     ]
   ]
 }

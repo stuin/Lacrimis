@@ -1,0 +1,20 @@
+{
+  "name": "Block Transport (II)",
+  "icon": "lacrimis:rune/block_transport",
+  "category": "lacrimis:runes",
+  "advancement": "lacrimis:base/rune_tier2",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Now this one has some potential, scarily so if I might add. Connect two of these runes together and you can teleport blocks long distances. It even works on all my storage devices! (Not from both ends at once)."
+    },
+    {
+      "type": "rune",
+      "item": "lacrimis:rune/block_transport",
+      "cost": "500",
+      "tier": "II",
+      "text": "Swaps blocks at long distance, but at a steeper price."
+     }
+  ]
+}
