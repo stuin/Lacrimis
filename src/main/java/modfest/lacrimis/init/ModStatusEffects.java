@@ -20,7 +20,7 @@ public class ModStatusEffects {
             @Override
             public void onRemoved(LivingEntity entity, AttributeContainer attributes, int amplifier) {
                 if (entity.getHealth() < 1) {
-                    entity.dropStack(new ItemStack(ModItems.baseTarot), entity.getHeight() / 2);
+                    entity.dropStack(new ItemStack(ModItems.solidifiedTear), entity.getHeight() / 2);
                     entity.kill();
                 }
                 super.onRemoved(entity, attributes, amplifier);

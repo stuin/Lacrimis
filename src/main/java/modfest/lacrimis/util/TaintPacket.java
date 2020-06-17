@@ -25,7 +25,7 @@ public class TaintPacket {
             entity.setRadius(amount / 150.0f);
             entity.addEffect(new StatusEffectInstance(ModStatusEffects.WAVERING_SOUL, amount * 2));
             entity.addEffect(new StatusEffectInstance(StatusEffects.POISON, amount));
-            entity.setDuration(amount * 2);
+            entity.setDuration(300);
             world.spawnEntity(entity);
 
             if(!world.isClient)

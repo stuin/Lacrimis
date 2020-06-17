@@ -1,16 +1,16 @@
 {
   "type": "lacrimis:infusion_shaped",
   "pattern": [
-    "XXX",
-    "XOX",
-    "XXX"
+    "PPP",
+    "PSP",
+    "PPP"
   ],
   "key": {
-    "X": {
+    "P": {
       "item": "minecraft:paper"
     },
-    "O": {
-      "item": "lacrimis:tear_ingot"
+    "S": {
+      "item": "lacrimis:solidified_tear"
     }
   },
   "result": {
