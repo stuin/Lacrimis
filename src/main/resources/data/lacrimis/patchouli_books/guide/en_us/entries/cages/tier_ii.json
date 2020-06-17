@@ -2,15 +2,16 @@
   "name": "Tier II Soul Cage",
   "icon": "lacrimis:rune/tier2",
   "category": "lacrimis:cages",
+  "advancement": "lacrimis:base/rune_tier2",
   "sortnum": 4,
   "pages": [
     {
       "type": "text",
-      "text": "For a Tier II Soul Cage, you need seven Tier II runes, and a Tier II Pipe Connector. No cage blocks are necessary for this one.$(br)Tier I core runes used in a Tier II setup will cost 25% less in Tears."
+      "text": "For a tier II soul cage, you need seven tier II runes, and a tier II pipe Connector. No cage blocks are necessary for this one.$(br)Tier I core runes used in a tier II setup will require 25% less tears."
     },
     {
       "type": "multiblock",
-      "text": "Replace the center with any Tier I or II Core Rune.",
+      "text": "Replace the center with any tier I or II core rune.",
       "multiblock": {
         "pattern": [
           [

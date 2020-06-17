@@ -2,17 +2,19 @@
   "name": "Healing (Tier I)",
   "icon": "lacrimis:rune/healing",
   "category": "lacrimis:runes",
+  "advancement": "lacrimis:base/rune_tier1",
   "sortnum": 1,
   "pages": [
     {
       "type": "text",
-      "text": "Easily the simplest rune to use is the healing rune, a Tier I rune that can heal any living creature."
+      "text": "This goes against everything I have already written down, but I have found a method to safely come into contact with the tears. In fact, this structure allows for the complete opposite of the normal behavior, tears that can heal."
     },
     {
       "type": "rune",
       "item": "lacrimis:rune/healing",
       "cost": "50",
-      "tier": "I"
+      "tier": "I",
+      "text": "A small amount of tears pushed through this rune can instantly heal small wounds."
     }
   ]
 }

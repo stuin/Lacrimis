@@ -1,19 +1,24 @@
 {
-  "parent": "lacrimis:base/crucible",
+  "parent": "lacrimis:base/tainted_sludge",
   "display": {
     "icon": {
-      "item": "lacrimis:tainted_sludge"
+      "item": "lacrimis:rune/stone"
     },
     "title": {
-      "translate": "lacrimis.advancements.tainted_sludge.title"
+      "translate": "lacrimis.advancements.rune_stone.title"
     },
     "description": {
-      "translate": "lacrimis.advancements.tainted_sludge.description"
+      "translate": "lacrimis.advancements.rune_stone.description"
     },
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": false,
-    "hidden": false
+    "hidden": true
+  },
+  "rewards": {
+    "recipes": [
+      "lacrimis:rune/stone"
+    ]
   },
   "criteria": {
     "collect": {
@@ -21,7 +26,7 @@
       "conditions": {
         "items": [
           {
-            "item": "lacrimis:tainted_sludge"
+            "item": "lacrimis:rune/stone"
           }
         ]
       }

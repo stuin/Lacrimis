@@ -2,6 +2,7 @@
   "name": "Basic Rune Blocks",
   "icon": "lacrimis:rune/stone",
   "category": "lacrimis:cages",
+  "advancement": "lacrimis:base/rune_tier1",
   "sortnum": 1,
   "pages": [
     {

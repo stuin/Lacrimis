@@ -1,19 +1,24 @@
 {
-  "parent": "lacrimis:base/crucible",
+  "parent": "lacrimis:base/rune_tier1",
   "display": {
     "icon": {
-      "item": "lacrimis:tainted_sludge"
+      "item": "lacrimis:rune/tier2"
     },
     "title": {
-      "translate": "lacrimis.advancements.tainted_sludge.title"
+      "translate": "lacrimis.advancements.rune_tier2.title"
     },
     "description": {
-      "translate": "lacrimis.advancements.tainted_sludge.description"
+      "translate": "lacrimis.advancements.rune_tier2.description"
     },
     "frame": "task",
     "show_toast": true,
-    "announce_to_chat": false,
+    "announce_to_chat": true,
     "hidden": false
+  },
+  "rewards": {
+    "recipes": [
+      "lacrimis:rune/tier2"
+    ]
   },
   "criteria": {
     "collect": {
@@ -21,7 +26,7 @@
       "conditions": {
         "items": [
           {
-            "item": "lacrimis:tainted_sludge"
+            "item": "lacrimis:rune/tier2"
           }
         ]
       }

@@ -2,15 +2,16 @@
   "name": "Tier III Soul Cage",
   "icon": "lacrimis:rune/tier2",
   "category": "lacrimis:cages",
+  "advancement": "lacrimis:base/rune_tier3",
   "sortnum": 5,
   "pages": [
     {
       "type": "text",
-      "text": "For a Tier III Soul Cage, you need eleven Tier II runes, a Tier II Pipe Connector, and seven Tier III runes. $(br)Tier I or Tier II core runes used in a Tier III setup will be 50% of their base cost in Tears"
+      "text": "For a tier III soul cage, you need eleven tier II runes, a tier II pipe connector, and seven tier III runes. $(br)Tier I or tier II core runes used in a tier III soul cage will only need half the tears to run"
     },
     {
       "type": "multiblock",
-      "text": "Replace the center with any Core Rune.",
+      "text": "Replace the center with any core rune.",
       "multiblock": {
         "pattern": [
           [

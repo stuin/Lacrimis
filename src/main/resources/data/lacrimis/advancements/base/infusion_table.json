@@ -1,5 +1,5 @@
 {
-  "parent": "lacrimis:base/tainted_sludge",
+  "parent": "lacrimis:base/rune_stone",
   "display": {
     "icon": {
       "item": "lacrimis:infusion_table"
