@@ -1,0 +1,18 @@
+{
+  "type": "lacrimis:infusion_shaped",
+  "pattern": [
+    "RSR"
+  ],
+  "key": {
+    "R": {
+      "item": "lacrimis:rune/stone"
+    },
+    "S": {
+      "item": "c:silver_ingot"
+    }
+  },
+  "result": {
+    "item": "lacrimis:conduit"
+  },
+  "tears": 50
+}

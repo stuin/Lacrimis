@@ -49,8 +49,6 @@ public class InfusionTableEntity extends SoulTankEntity implements Inventory, Ti
 
             this.world.addParticle(ModParticles.PURPLE_MIST, x, y, z, dx, 0.005, dz);
         }
-        if(world.isClient())
-            return;
 
         //Manage infusion crafting
         SoulTank tank = getTank();
@@ -62,7 +60,7 @@ public class InfusionTableEntity extends SoulTankEntity implements Inventory, Ti
             if (output.isEmpty())
                 inventory.setStack(OUTPUT_STACK, holding.copy());
             else if (holding.getItem() == output.getItem())
-                output.increment(output.getCount());
+                output.increment(holding.getCount());
 
             //Clear
             holding = ItemStack.EMPTY;
@@ -103,8 +101,7 @@ public class InfusionTableEntity extends SoulTankEntity implements Inventory, Ti
                 ItemStack itemStack = inventory.getStack(i);
                 ItemStack itemStack2 = defaultedList.get(i);
                 if(!itemStack.isEmpty()) {
-                    inventory.removeStack(i, 1);
-                    itemStack = inventory.getStack(i);
+                    inventory.getStack(i).decrement(1);
                 }
 
                 if(!itemStack2.isEmpty()) {

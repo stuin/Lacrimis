@@ -1,0 +1,16 @@
+{
+  "type": "lacrimis:infusion_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "lacrimis:tainted_sludge"
+    }
+  },
+  "result": {
+    "item": "lacrimis:rune/stone"
+  },
+  "tears": 0
+}

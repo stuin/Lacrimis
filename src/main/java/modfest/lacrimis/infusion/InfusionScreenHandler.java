@@ -51,6 +51,7 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 	}
 	
 	public void startCrafting() {
+		entity.startCrafting = true;
 		ModNetworking.sendInfusionStartPacket(entity.getPos());
 	}
 

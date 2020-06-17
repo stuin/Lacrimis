@@ -12,6 +12,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.ShapedRecipe;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
@@ -23,6 +24,11 @@ public class CrucibleRecipe extends InfusionRecipe {
     public CrucibleRecipe(Identifier id, Ingredient base, int tears, ItemStack result) {
         super(id, tears, result);
         this.base = base;
+    }
+
+    @Override
+    public RecipeType<?> getType() {
+        return ModInfusion.CRUCIBLE_RECIPE;
     }
 
     public RecipeSerializer<?> getSerializer() {
