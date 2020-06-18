@@ -1,18 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "@@@",
-    "###"
+    "  #",
+    " # ",
+    "#  "
   ],
   "key": {
     "#": {
-      "item": "lacrimis:rune/stone"
-    },
-    "@": {
       "item": "c:silver_ingot"
     }
   },
   "result": {
-    "item": "lacrimis:infusion_table"
+    "item": "lacrimis:divining_rod"
   }
 }

@@ -1,0 +1,13 @@
+{
+  "name": "Infusion Basics",
+  "icon": "lacrimis:infusion_table",
+  "category": "lacrimis:infusion",
+  "advancement": "lacrimis:base/infusion_table",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "text",
+      "text": "This table should allow me to create things using materials enhanced with tears."
+    }
+  ]
+}

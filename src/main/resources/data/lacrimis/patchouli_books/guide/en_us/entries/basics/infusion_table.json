@@ -1,0 +1,17 @@
+{
+  "name": "Infusion Table",
+  "icon": "lacrimis:infusion_table",
+  "category": "lacrimis:basics",
+  "advancement": "lacrimis:base/rune_stone",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "text",
+      "text": "I can probably use some rune stone and silver to create a new workbench that holds tears and allows me to infuse it into new objects and devices."
+    },
+    {
+      "type": "crafting",
+      "recipe": "lacrimis:crafting/infusion_table"
+    }
+  ]
+}
