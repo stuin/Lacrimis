@@ -20,7 +20,6 @@ public class TarotCardItemRenderer {
         CardTextureGen.updateTexturesIfNeeded();
 
         TarotCardType type = ((TarotCardItem) stack.getItem()).getType();
-        if (type.cover == null) return;
 
         Identifier tex = CardTextureGen.tarotCardTextureIds.get(type);
         VertexConsumer buffer = vertexConsumers.getBuffer(RenderLayer.getEntityCutout(tex));

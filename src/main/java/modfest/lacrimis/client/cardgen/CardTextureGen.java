@@ -20,7 +20,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -79,7 +78,7 @@ public final class CardTextureGen {
         RenderSystem.matrixMode(GL11.GL_MODELVIEW);
 
         MatStack tr = new MatStack();
-        // texture size as rendered on the item has an aspect ratio of 3:5
+        // texture size is 13x23, including the label at the bottom
         tr.load(Mat4.ortho(0, 13, 0, 23, -50, 50));
         tr.rotate(1.0f, 0.0f, 0.0f, -22.5f);
         tr.rotate(0.0f, 1.0f, 0.0f, 45f);
@@ -96,20 +95,23 @@ public final class CardTextureGen {
             TarotCardType type = e.getKey();
             FramebufferBackedTexture tex = e.getValue();
 
-            tr.push();
-            textTr.push();
-
             Framebuffer fb = tex.getFramebuffer();
             fb.clear(MinecraftClient.IS_SYSTEM_MAC);
             fb.beginWrite(true);
 
-            Entity ent = Objects.requireNonNull(type.create(new DummyWorld()));
+            Entity ent = type.create(new DummyWorld());
+            if (ent != null) {
+                tr.push();
 
-            fitToBounds(tr, adjustBoundingBox(ent.getBoundingBox(), ent.getType()), 23, 20);
+                fitToBounds(tr, adjustBoundingBox(ent.getBoundingBox(), ent.getType()), 23, 20);
 
-            EntityRenderer<? super Entity> renderer = MinecraftClient.getInstance().getEntityRenderManager().getRenderer(ent);
+                EntityRenderer<? super Entity> renderer = MinecraftClient.getInstance().getEntityRenderManager().getRenderer(ent);
 
-            renderer.render(ent, 0.0f, 1.0f, tr.toMatrixStack(), vcp, 0x00F000F0);
+                renderer.render(ent, 0.0f, 1.0f, tr.toMatrixStack(), vcp, 0x00F000F0);
+                tr.pop();
+            }
+
+            textTr.push();
 
             String cardName = I18n.translate(String.format("item.lacrimis.tarot_card_%s", e.getKey().id));
             int width = mc.textRenderer.getWidth(cardName);
@@ -122,7 +124,6 @@ public final class CardTextureGen {
             mc.textRenderer.draw(cardName, 0, 1, -1, false, textTr.mat().toMatrix4f(), vcp, false, 0, 0x00F000F0);
 
             vcp.draw();
-            tr.pop();
             textTr.pop();
         }
 
@@ -196,8 +197,6 @@ public final class CardTextureGen {
         HashMap<TarotCardType, FramebufferBackedTexture> map = new HashMap<>();
         HashMap<TarotCardType, Identifier> idMap = new HashMap<>();
         for (TarotCardType t : ModItems.tarotCards.keySet()) {
-            if (t.cover == null) continue;
-
             Identifier id = new Identifier(Lacrimis.MODID, String.format("textures/special/card_%s.png", t.id));
             FramebufferBackedTexture tex = new FramebufferBackedTexture();
             MinecraftClient.getInstance().getTextureManager().registerTexture(id, tex);
