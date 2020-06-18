@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "The noble metal hypothesis has proven to be true and I was able to get some new results from my observations and experiments.$(br)Most importantly, a rock thrown into an excess of the tear fluid have almost instantly turned into a handful of sludge."
+      "text": "The noble metal hypothesis has proven to be true and I was able to get some results from my observations and experiments.$(br)Most importantly, a rock thrown into an excess of the tear fluid have almost instantly turned into a handful of sludge."
     },
     {
       "type": "lacrimis:crucible",
@@ -20,7 +20,7 @@
     },
     {
       "type": "text",
-      "text": "Another thing that the experiment had shown is that touching the fluid is$(o)unimaginably painful$().$(br2)The main outtake so far is that I need a more controllable way of studying tear interactions instead of just throwing stuff into a crucible.$(br2)todo: infusion table..."
+      "text": "Another thing that the experiment had shown is that touching the fluid is $(o)unimaginably painful$().$(br2)The main outtake so far is that I need a more controllable way of studying tear interactions instead of just throwing stuff into a crucible.$(br2)todo: infusion table..."
     }
   ]
 }

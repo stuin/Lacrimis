@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "For a tier II soul cage, you need seven tier II runes, and a tier II pipe Connector. No cage blocks are necessary for this one.$(br)Tier I core runes used in a tier II setup will require 25% less tears."
+      "text": "For a tier II soul cage, you need seven tier II runes, and a tier II conduit connector. No cage blocks are necessary for this one.$(br)Tier I core runes used in a tier II setup will require 25% less tears."
     },
     {
       "type": "multiblock",

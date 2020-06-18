@@ -15,6 +15,10 @@
       "cost": "800",
       "tier": "III",
       "text": "It is also the only way to get rid of the stone once enchanted."
-     }
+     },
+    {
+      "type": "text",
+      "text": "$(br2)I wonder... Can I use this method of enchantment $(m)$(t:wip)on armor$(/t)?"
+    }
   ]
 }
