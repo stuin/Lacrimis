@@ -1,0 +1,12 @@
+{
+  "type": "lacrimis:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lacrimis:rune/pipe1"
+    }
+  ],
+  "result": {
+    "item": "lacrimis:rune/tier1"
+  },
+  "tears": 0
+}

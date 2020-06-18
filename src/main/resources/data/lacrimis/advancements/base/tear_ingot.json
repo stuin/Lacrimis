@@ -1,5 +1,5 @@
 {
-  "parent": "lacrimis:base/tainted_sludge",
+  "parent": "lacrimis:base/crucible",
   "display": {
     "icon": {
       "item": "lacrimis:tear_ingot"

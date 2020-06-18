@@ -17,25 +17,27 @@
   },
   "rewards": {
     "recipes": [
-      "lacrimis:infusion/rune_pipe1",
       "lacrimis:infusion/rune_tier2"
     ]
   },
   "criteria": {
-    "collect": {
-      "trigger": "minecraft:inventory_changed",
+    "activate": {
+      "trigger": "minecraft:item_used_on_block",
       "conditions": {
-        "items": [
-          {
-            "item": "lacrimis:rune/tier1"
+        "location": {
+          "block": {
+            "tag": "lacrimis:tier1"
           }
-        ]
+        },
+        "item": {
+          "item": "lacrimis:divining_rod"
+        }
       }
     }
   },
   "requirements": [
     [
-      "collect"
+      "activate"
     ]
   ]
 }

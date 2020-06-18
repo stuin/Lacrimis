@@ -1,0 +1,24 @@
+{
+  "rewards": {
+    "recipes": [
+      "lacrimis:infusion/rune_warding"
+    ]
+  },
+  "criteria": {
+    "collect": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "lacrimis:rune/tier3"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "collect"
+    ]
+  ]
+}

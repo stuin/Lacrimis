@@ -7,14 +7,14 @@
   ],
   "key": {
     "R": {
-      "item": "lacrimis:rune/stone"
+      "item": "lacrimis:rune/tier2"
     },
     "S": {
-      "item": "c:silver_ingot"
+      "item": "minecraft:nether_star"
     }
   },
   "result": {
-    "item": "lacrimis:rune/tier1",
+    "item": "lacrimis:rune/tier3",
     "count": 8
   },
   "tears": 300

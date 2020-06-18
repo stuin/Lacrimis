@@ -1,0 +1,27 @@
+{
+  "rewards": {
+    "recipes": [
+      "lacrimis:infusion/rune_pipe2",
+      "lacrimis:infusion/rune_entity_transport",
+      "lacrimis:infusion/rune_block_transport",
+      "lacrimis:crafting/dismantle_pipe2"
+    ]
+  },
+  "criteria": {
+    "collect": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "lacrimis:rune/tier2"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "collect"
+    ]
+  ]
+}

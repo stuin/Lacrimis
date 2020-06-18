@@ -2,7 +2,7 @@
   "name": "Warding (Tier III)",
   "icon": "lacrimis:rune/warding",
   "category": "lacrimis:runes",
-  "advancement": "lacrimis:base/rune_tier3",
+  "advancement": "lacrimis:recipes/rune_tier3",
   "sortnum": 6,
   "pages": [
     {

@@ -7,15 +7,15 @@
   ],
   "key": {
     "R": {
-      "item": "lacrimis:rune/stone"
+      "item": "lacrimis:rune/tier1"
     },
     "S": {
-      "item": "c:silver_ingot"
+      "item": "lacrimis:solidified_tear"
     }
   },
   "result": {
-    "item": "lacrimis:rune/tier1",
-    "count": 8
+    "item": "lacrimis:rune/tier2",
+    "count": 4
   },
   "tears": 300
 }

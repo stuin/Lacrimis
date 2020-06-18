@@ -5,11 +5,11 @@
       "item": "lacrimis:conduit"
     },
     {
-      "item": "lacrimis:rune/tier1"
+      "item": "minecraft:redstone_torch"
     }
   ],
   "result": {
-    "item": "lacrimis:rune/pipe1"
+    "item": "lacrimis:gated_conduit"
   },
-  "tears": 100
+  "tears": 80
 }

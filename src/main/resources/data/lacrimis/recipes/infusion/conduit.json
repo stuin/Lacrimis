@@ -12,7 +12,8 @@
     }
   },
   "result": {
-    "item": "lacrimis:conduit"
+    "item": "lacrimis:conduit",
+    "count": 12
   },
-  "tears": 50
+  "tears": 100
 }

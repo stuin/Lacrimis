@@ -3,7 +3,7 @@
   "icon": "lacrimis:rune/stone",
   "category": "lacrimis:basics",
   "advancement": "lacrimis:base/rune_stone",
-  "sortnum": 5,
+  "sortnum": 6,
   "pages": [
     {
       "type": "text",
@@ -11,7 +11,8 @@
     },
     {
       "type": "crafting",
-      "recipe": "lacrimis:crafting/rune_stone"
+      "recipe": "lacrimis:crafting/rune_stone",
+      "text": "What can I make with rune stone and silver?"
     }
   ]
 }

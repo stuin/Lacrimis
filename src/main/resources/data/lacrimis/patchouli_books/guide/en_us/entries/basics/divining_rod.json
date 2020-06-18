@@ -3,7 +3,7 @@
   "icon": "lacrimis:divining_rod",
   "category": "lacrimis:basics",
   "advancement": "lacrimis:base/divining_rod",
-  "sortnum": 5,
+  "sortnum": 2,
   "pages": [
     {
       "type": "text",

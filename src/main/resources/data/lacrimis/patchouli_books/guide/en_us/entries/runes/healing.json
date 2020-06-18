@@ -2,7 +2,7 @@
   "name": "Healing (I)",
   "icon": "lacrimis:rune/healing",
   "category": "lacrimis:runes",
-  "advancement": "lacrimis:base/rune_tier1",
+  "advancement": "lacrimis:recipes/rune_tier1",
   "sortnum": 1,
   "pages": [
     {
@@ -10,15 +10,9 @@
       "text": "This goes against everything I have already written down, but I have found a method to safely come into contact with the tears. In fact, this structure allows for the complete opposite of the normal behavior, tears that can heal."
     },
     {
-      "type": "rune",
-      "item": "lacrimis:rune/healing",
-      "cost": "50",
-      "tier": "I",
-      "text": "A small amount of tears pushed through this rune can instantly heal small wounds."
-    },
-    {
-      "type": "text",
-      "text": "$(br2)Maybe I can use this newfound method of reversing the effects of tears to create some kind of $(m)$(t:wip)healing cloth$(/t)?"
+      "type": "lacrimis:infusion",
+      "recipe": "lacrimis:infusion/rune_healing",
+      "text": "Run cost: 50 Tears$(br)$(l:cages/tier_i)Tier I Soul Cage$(/l)$(br2)A small amount of tears pushed through this rune can instantly heal small wounds."
     }
   ]
 }

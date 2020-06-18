@@ -3,11 +3,15 @@
   "icon": "lacrimis:infusion_table",
   "category": "lacrimis:infusion",
   "advancement": "lacrimis:base/infusion_table",
-  "sortnum": 5,
+  "sortnum": 1,
   "pages": [
     {
       "type": "text",
-      "text": "This table should allow me to create things using materials enhanced with tears."
+      "text": "This table should allow me to create things using materials enhanced with tears. It will definitely be safer than just tossing items in."
+    },
+    {
+      "type": "crafting",
+      "recipe": "lacrimis:crafting/infusion_table"
     }
   ]
 }

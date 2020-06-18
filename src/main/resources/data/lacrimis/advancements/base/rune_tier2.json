@@ -21,20 +21,23 @@
     ]
   },
   "criteria": {
-    "collect": {
-      "trigger": "minecraft:inventory_changed",
+    "activate": {
+      "trigger": "minecraft:item_used_on_block",
       "conditions": {
-        "items": [
-          {
-            "item": "lacrimis:rune/tier2"
+        "location": {
+          "block": {
+            "tag": "lacrimis:tier2"
           }
-        ]
+        },
+        "item": {
+          "item": "lacrimis:divining_rod"
+        }
       }
     }
   },
   "requirements": [
     [
-      "collect"
+      "activate"
     ]
   ]
 }

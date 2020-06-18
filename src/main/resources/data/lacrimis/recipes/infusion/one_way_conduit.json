@@ -5,11 +5,14 @@
       "item": "lacrimis:conduit"
     },
     {
-      "item": "lacrimis:rune/tier1"
+      "item": "minecraft:repeater"
+    },
+    {
+      "item": "lacrimis:conduit"
     }
   ],
   "result": {
-    "item": "lacrimis:rune/pipe1"
+    "item": "lacrimis:one_way_conduit"
   },
-  "tears": 100
+  "tears": 80
 }
