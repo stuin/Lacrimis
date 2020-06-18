@@ -15,6 +15,7 @@ import net.minecraft.tag.RegistryTagManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.profiler.DummyProfiler;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.Difficulty;
@@ -29,18 +30,37 @@ import java.util.List;
 public class DummyWorld extends World {
 
     private final Scoreboard scoreboard = new Scoreboard();
+    private final ChunkManager chunkManager = new DummyChunkManager(this);
 
     protected DummyWorld() {
-        super(new ClientWorld.Properties(Difficulty.NORMAL, false, false), RegistryKey.of(Registry.DIMENSION, new Identifier("dummy")), DimensionType.OVERWORLD_REGISTRY_KEY, DimensionType.getOverworldDimensionType(), null, true, false, 0L);
+        super(
+                new ClientWorld.Properties(Difficulty.NORMAL, false, false),
+                RegistryKey.of(Registry.DIMENSION, new Identifier("dummy")),
+                DimensionType.OVERWORLD_REGISTRY_KEY,
+                DimensionType.getOverworldDimensionType(),
+                () -> DummyProfiler.INSTANCE,
+                true,
+                false,
+                0L
+        );
     }
 
     @Override
-    public void updateListeners(BlockPos pos, BlockState oldState, BlockState newState, int flags) {
-        throw new IllegalStateException("not implemented");
+    public Scoreboard getScoreboard() {
+        return this.scoreboard;
+    }
+
+    @Override
+    public ChunkManager getChunkManager() {
+        return this.chunkManager;
     }
 
     @Override
     public void playSound(PlayerEntity player, double x, double y, double z, SoundEvent sound, SoundCategory category, float volume, float pitch) {
+    }
+
+    @Override
+    public void updateListeners(BlockPos pos, BlockState oldState, BlockState newState, int flags) {
         throw new IllegalStateException("not implemented");
     }
 
@@ -75,11 +95,6 @@ public class DummyWorld extends World {
     }
 
     @Override
-    public Scoreboard getScoreboard() {
-        return this.scoreboard;
-    }
-
-    @Override
     public RecipeManager getRecipeManager() {
         throw new IllegalStateException("not implemented");
     }
@@ -96,11 +111,6 @@ public class DummyWorld extends World {
 
     @Override
     public TickScheduler<Fluid> getFluidTickScheduler() {
-        throw new IllegalStateException("not implemented");
-    }
-
-    @Override
-    public ChunkManager getChunkManager() {
         throw new IllegalStateException("not implemented");
     }
 

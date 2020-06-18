@@ -2,6 +2,8 @@ package modfest.lacrimis.util;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.mob.ShulkerEntity;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import java.util.function.Consumer;
@@ -16,7 +18,7 @@ public enum TarotCardType {
     THE_LOVERS("the_lovers", EntityType.SKELETON), // TODO: skeleton horseman
     THE_CHARIOT("the_chariot", EntityType.STRIDER),
     STRENGTH("strength", EntityType.IRON_GOLEM),
-    THE_HERMIT("the_hermit", EntityType.SHULKER),
+    THE_HERMIT("the_hermit", EntityType.SHULKER, TarotCardType::initShulker),
     WHEEL_OF_FORTUNE("wheel_of_fortune", EntityType.VILLAGER),
     JUSTICE("justice", EntityType.VINDICATOR),
     THE_HANGED_MAN("the_hanged_man", EntityType.PILLAGER),
@@ -53,6 +55,15 @@ public enum TarotCardType {
             ((Consumer<Entity>) this.init).accept(e);
         }
         return e;
+    }
+
+    private static void initShulker(ShulkerEntity e) {
+        e.setAiDisabled(true);
+        int peekTarget = 30;
+        e.setPeekAmount(peekTarget);
+        while (!MathHelper.approximatelyEquals(e.getOpenProgress(1.0f), peekTarget * 0.01f)) {
+            e.tick();
+        }
     }
 
 }
