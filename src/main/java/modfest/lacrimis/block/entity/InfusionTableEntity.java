@@ -2,10 +2,10 @@ package modfest.lacrimis.block.entity;
 
 import java.util.Random;
 
-import modfest.lacrimis.infusion.InfusionInventory;
-import modfest.lacrimis.infusion.InfusionRecipe;
+import modfest.lacrimis.crafting.InfusionInventory;
+import modfest.lacrimis.crafting.InfusionRecipe;
 import modfest.lacrimis.init.ModBlockEntityTypes;
-import modfest.lacrimis.init.ModInfusion;
+import modfest.lacrimis.init.ModCrafting;
 import modfest.lacrimis.init.ModParticles;
 import modfest.lacrimis.util.ConduitUtil;
 import modfest.lacrimis.util.SoulTank;
@@ -14,7 +14,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.collection.DefaultedList;
@@ -71,9 +70,9 @@ public class InfusionTableEntity extends SoulTankEntity implements Inventory, Ti
 
         //Check for new recipe
         if(holding.isEmpty()) {
-            InfusionRecipe recipe = this.world.getRecipeManager().getFirstMatch(ModInfusion.INFUSION_RECIPE, inventory, this.world).orElse(null);
+            InfusionRecipe recipe = this.world.getRecipeManager().getFirstMatch(ModCrafting.INFUSION_RECIPE, inventory, this.world).orElse(null);
             if(recipe == null)
-                recipe = this.world.getRecipeManager().getFirstMatch(ModInfusion.CRUCIBLE_RECIPE, inventory, this.world).orElse(null);
+                recipe = this.world.getRecipeManager().getFirstMatch(ModCrafting.CRUCIBLE_RECIPE, inventory, this.world).orElse(null);
             
             //Start crafting progress
             if(recipe != null && canAcceptRecipeOutput(recipe) &&
@@ -95,7 +94,7 @@ public class InfusionTableEntity extends SoulTankEntity implements Inventory, Ti
 
     public void takeIngredients() {
         if(world != null) {
-            DefaultedList<ItemStack> defaultedList = world.getRecipeManager().getRemainingStacks(ModInfusion.INFUSION_RECIPE, inventory, world);
+            DefaultedList<ItemStack> defaultedList = world.getRecipeManager().getRemainingStacks(ModCrafting.INFUSION_RECIPE, inventory, world);
 
             for(int i = 0; i < 9; ++i) {
                 ItemStack itemStack = inventory.getStack(i);

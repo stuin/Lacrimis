@@ -1,16 +1,13 @@
 package modfest.lacrimis.block;
 
 import modfest.lacrimis.block.entity.InfusionTableEntity;
-import modfest.lacrimis.init.ModInfusion;
+import modfest.lacrimis.init.ModCrafting;
 import modfest.lacrimis.init.ModItems;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
@@ -41,7 +38,7 @@ public class InfusionTableBlock extends SoulTankBlock {
 			if(world.isClient) {
 				return ActionResult.SUCCESS;
 			} else {
-				ContainerProviderRegistry.INSTANCE.openContainer(ModInfusion.INFUSION_SCREEN_ID, player, buf -> buf.writeBlockPos(pos));
+				ContainerProviderRegistry.INSTANCE.openContainer(ModCrafting.INFUSION_SCREEN_ID, player, buf -> buf.writeBlockPos(pos));
 
 				return ActionResult.CONSUME;
 			}

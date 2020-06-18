@@ -3,6 +3,7 @@ package modfest.lacrimis.init;
 import java.util.function.Supplier;
 
 import modfest.lacrimis.Lacrimis;
+import modfest.lacrimis.block.entity.CombinerEntity;
 import modfest.lacrimis.block.entity.CrucibleEntity;
 import modfest.lacrimis.block.entity.InfusionTableEntity;
 import modfest.lacrimis.block.entity.TearLanternEntity;
@@ -16,11 +17,13 @@ public class ModBlockEntityTypes {
 
     public static BlockEntityType<InfusionTableEntity> infusionTable;
     public static BlockEntityType<CrucibleEntity> crucible;
+    public static BlockEntityType<CombinerEntity> combiner;
     public static BlockEntityType<TearLanternEntity> tearLantern;
 
     public static void register() {
         infusionTable = register("infusion_table_entity", InfusionTableEntity::new, ModBlocks.infusionTable);
         crucible = register("crucible_entity", CrucibleEntity::new, ModBlocks.crucible);
+        combiner = register("combiner_entity", CombinerEntity::new, ModBlocks.combiner);
         tearLantern = register("tear_lantern_entity", TearLanternEntity::new, ModBlocks.tearLantern);
     }
 

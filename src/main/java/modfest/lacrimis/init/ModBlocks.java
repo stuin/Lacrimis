@@ -25,6 +25,7 @@ public class ModBlocks {
     //Main blocks
     public static InfusionTableBlock infusionTable;
     public static CrucibleBlock crucible;
+    public static CombinerBlock combiner;
     public static ConduitBlock conduit;
     public static GatedConduitBlock gatedConduit;
     public static OneWayConduitBlock oneWayConduit;
@@ -54,6 +55,7 @@ public class ModBlocks {
     public static void register() {
         infusionTable = register("infusion_table", new InfusionTableBlock(FabricBlockSettings.copy(Blocks.ENCHANTING_TABLE).nonOpaque()));
         crucible = register("crucible", new CrucibleBlock(FabricBlockSettings.copy(Blocks.CAULDRON).strength(5.0F, 1200.0F).nonOpaque()));
+        combiner = register("combiner", new CombinerBlock(FabricBlockSettings.copy(Blocks.ENCHANTING_TABLE)));
         conduit = register("conduit", new ConduitBlock(conduitSettings));
         gatedConduit = register("gated_conduit", new GatedConduitBlock(conduitSettings));
         oneWayConduit = register("one_way_conduit", new OneWayConduitBlock(conduitSettings));

@@ -1,8 +1,8 @@
-package modfest.lacrimis.infusion;
+package modfest.lacrimis.crafting;
 
 import com.google.gson.*;
 import modfest.lacrimis.init.ModBlocks;
-import modfest.lacrimis.init.ModInfusion;
+import modfest.lacrimis.init.ModCrafting;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.item.ItemStack;
@@ -25,7 +25,7 @@ public class ShapelessInfusionRecipe extends InfusionRecipe {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return ModInfusion.SHAPED_INFUSION_SERIALIZER;
+		return ModCrafting.SHAPED_INFUSION_SERIALIZER;
 	}
 
 	@Override
