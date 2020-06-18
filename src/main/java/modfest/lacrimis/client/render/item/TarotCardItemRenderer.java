@@ -26,10 +26,10 @@ public class TarotCardItemRenderer {
         Entry tos = matrices.peek();
         Matrix3f normal = tos.getNormal();
         Matrix4f tr = tos.getModel();
-        buffer.vertex(tr, 4.5f / 16f, 2.5f / 16f, 8.51f / 16f).color(1f, 1f, 1f, 1f).texture(0f, 0f).overlay(overlay).light(light).normal(normal, 0f, 0f, 1f).next();
-        buffer.vertex(tr, 11f / 16f, 2.5f / 16f, 8.51f / 16f).color(1f, 1f, 1f, 1f).texture(1f, 0f).overlay(overlay).light(light).normal(normal, 0f, 0f, 1f).next();
-        buffer.vertex(tr, 11f / 16f, 14 / 16f, 8.51f / 16f).color(1f, 1f, 1f, 1f).texture(1f, 1f).overlay(overlay).light(light).normal(normal, 0f, 0f, 1f).next();
-        buffer.vertex(tr, 4.5f / 16f, 14 / 16f, 8.51f / 16f).color(1f, 1f, 1f, 1f).texture(0f, 1f).overlay(overlay).light(light).normal(normal, 0f, 0f, 1f).next();
+        buffer.vertex(tr, 9 / 32f, 5 / 32f, 8.51f / 16f).color(1f, 1f, 1f, 1f).texture(0f, 0f).overlay(overlay).light(light).normal(normal, 0f, 0f, 1f).next();
+        buffer.vertex(tr, 22 / 32f, 5 / 32f, 8.51f / 16f).color(1f, 1f, 1f, 1f).texture(1f, 0f).overlay(overlay).light(light).normal(normal, 0f, 0f, 1f).next();
+        buffer.vertex(tr, 22 / 32f, 28 / 32f, 8.51f / 16f).color(1f, 1f, 1f, 1f).texture(1f, 1f).overlay(overlay).light(light).normal(normal, 0f, 0f, 1f).next();
+        buffer.vertex(tr, 9 / 32f, 28 / 32f, 8.51f / 16f).color(1f, 1f, 1f, 1f).texture(0f, 1f).overlay(overlay).light(light).normal(normal, 0f, 0f, 1f).next();
     }
 
 }
