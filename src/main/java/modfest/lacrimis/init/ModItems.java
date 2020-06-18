@@ -27,6 +27,7 @@ public class ModItems {
     //Main blocks
     public static BlockItem infusionTable;
     public static BlockItem crucible;
+    public static BlockItem combiner;
     public static BlockItem conduit;
     public static BlockItem gatedConduit;
     public static BlockItem oneWayConduit;
@@ -73,6 +74,7 @@ public class ModItems {
     public static void register() {
         infusionTable = register("infusion_table", ModBlocks.infusionTable);
         crucible = register("crucible", ModBlocks.crucible);
+        combiner = register("combiner", ModBlocks.combiner);
         conduit = register("conduit", ModBlocks.conduit);
         gatedConduit = register("gated_conduit", ModBlocks.gatedConduit);
         oneWayConduit = register("one_way_conduit", ModBlocks.oneWayConduit);

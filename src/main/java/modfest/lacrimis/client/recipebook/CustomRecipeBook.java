@@ -1,6 +1,6 @@
 package modfest.lacrimis.client.recipebook;
 
-import modfest.lacrimis.infusion.InfusionRecipe;
+import modfest.lacrimis.crafting.InfusionRecipe;
 import net.minecraft.client.gui.screen.recipebook.RecipeResultCollection;
 import net.minecraft.client.recipebook.ClientRecipeBook;
 import net.minecraft.client.recipebook.RecipeBookGroup;

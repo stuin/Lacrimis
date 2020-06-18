@@ -1,4 +1,4 @@
-package modfest.lacrimis.infusion;
+package modfest.lacrimis.crafting;
 
 import modfest.lacrimis.block.entity.SoulTankEntity;
 import net.minecraft.inventory.SimpleInventory;

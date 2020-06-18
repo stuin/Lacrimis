@@ -1,4 +1,4 @@
-package modfest.lacrimis.infusion;
+package modfest.lacrimis.crafting;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 

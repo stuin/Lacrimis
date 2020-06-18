@@ -1,4 +1,4 @@
-package modfest.lacrimis.infusion;
+package modfest.lacrimis.crafting;
 
 import modfest.lacrimis.block.entity.InfusionTableEntity;
 import modfest.lacrimis.init.ModNetworking;

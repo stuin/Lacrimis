@@ -4,6 +4,7 @@ import java.util.stream.Stream;
 
 import io.netty.buffer.Unpooled;
 import modfest.lacrimis.Lacrimis;
+import modfest.lacrimis.block.entity.CombinerEntity;
 import modfest.lacrimis.block.entity.InfusionTableEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -23,9 +24,11 @@ import net.minecraft.world.World;
 public class ModNetworking {
     public static final Identifier CRUCIBLE_PARTICLES_ID = new Identifier(Lacrimis.MODID + ":crucible_particles");
     public static final Identifier INFUSION_START_ID = new Identifier(Lacrimis.MODID + ":infusion_start");
+    public static final Identifier COMBINER_NULL_ID = new Identifier(Lacrimis.MODID + ":combiner_null");
 
     public static void register() {
         ServerSidePacketRegistry.INSTANCE.register(INFUSION_START_ID, ModNetworking::handleInfusionStartPacket);
+        ServerSidePacketRegistry.INSTANCE.register(COMBINER_NULL_ID, ModNetworking::handleCombinerNullPacket);
     }
 
     @Environment(EnvType.CLIENT)
@@ -75,6 +78,22 @@ public class ModNetworking {
     
     public static void sendInfusionStartPacket(BlockPos pos) {
         Lacrimis.LOGGER.info("Start pressed");
+        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+        buf.writeBlockPos(pos);
+
+        ClientSidePacketRegistry.INSTANCE.sendToServer(INFUSION_START_ID, buf);
+    }
+
+    public static void handleCombinerNullPacket(PacketContext context, PacketByteBuf buffer) {
+        BlockPos pos = buffer.readBlockPos();
+        context.getTaskQueue().execute(() -> {
+            BlockEntity entity = context.getPlayer().world.getBlockEntity(pos);
+            if(entity instanceof CombinerEntity)
+                ((CombinerEntity) entity).type = null;
+        });
+    }
+
+    public static void sendCombinerNullPacket(BlockPos pos) {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeBlockPos(pos);
 

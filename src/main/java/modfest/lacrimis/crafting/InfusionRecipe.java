@@ -1,6 +1,6 @@
-package modfest.lacrimis.infusion;
+package modfest.lacrimis.crafting;
 
-import modfest.lacrimis.init.ModInfusion;
+import modfest.lacrimis.init.ModCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeType;
@@ -29,7 +29,7 @@ public abstract class InfusionRecipe implements Recipe<InfusionInventory> {
 
 
     public RecipeType<?> getType() {
-        return ModInfusion.INFUSION_RECIPE;
+        return ModCrafting.INFUSION_RECIPE;
     }
 
     @Override

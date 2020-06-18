@@ -1,10 +1,9 @@
-package modfest.lacrimis.infusion;
+package modfest.lacrimis.crafting;
 
 import com.google.gson.JsonObject;
 
-import modfest.lacrimis.block.entity.InfusionTableEntity;
 import modfest.lacrimis.init.ModBlocks;
-import modfest.lacrimis.init.ModInfusion;
+import modfest.lacrimis.init.ModCrafting;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.item.ItemStack;
@@ -28,11 +27,11 @@ public class CrucibleRecipe extends InfusionRecipe {
 
     @Override
     public RecipeType<?> getType() {
-        return ModInfusion.CRUCIBLE_RECIPE;
+        return ModCrafting.CRUCIBLE_RECIPE;
     }
 
     public RecipeSerializer<?> getSerializer() {
-        return ModInfusion.CRUCIBLE_SERIALIZER;
+        return ModCrafting.CRUCIBLE_SERIALIZER;
     }
 
     @Environment(EnvType.CLIENT)

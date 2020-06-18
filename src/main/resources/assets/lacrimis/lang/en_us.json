@@ -1,6 +1,7 @@
 {
   "block.lacrimis.infusion_table": "Infusion Table",
   "block.lacrimis.crucible": "Crucible",
+  "block.lacrimis.combiner": "Soul Combiner",
   "block.lacrimis.conduit": "Tear Conduit",
   "block.lacrimis.gated_conduit": "Gated Tear Conduit",
   "block.lacrimis.one_way_conduit": "One Way Conduit",
@@ -47,6 +48,9 @@
   "lacrimis.tooltip.rune.tier3": "Tier III Soul Cage required",
 
   "lacrimis.gui.infusion": "Infusion Table",
+  "lacrimis.gui.combiner": "Soul Combiner",
+  "lacrimis.gui.combiner.entity": "Soul: ",
+  "lacrimis.gui.combiner.none": "Soul: None",
   "itemGroup.lacrimis.base": "Lacrimis",
   "itemGroup.lacrimis.runes": "Lacrimis Runes",
   "itemGroup.lacrimis.tarot": "Lacrimis Tarot",

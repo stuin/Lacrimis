@@ -1,9 +1,9 @@
 package modfest.lacrimis.client.patchiouli;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import modfest.lacrimis.infusion.InfusionRecipe;
-import modfest.lacrimis.infusion.ShapedInfusionRecipe;
-import modfest.lacrimis.init.ModInfusion;
+import modfest.lacrimis.crafting.InfusionRecipe;
+import modfest.lacrimis.crafting.ShapedInfusionRecipe;
+import modfest.lacrimis.init.ModCrafting;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
@@ -14,11 +14,11 @@ import vazkii.patchouli.client.book.page.abstr.PageDoubleRecipeRegistry;
 
 public class PageInfusion extends PageDoubleRecipeRegistry<InfusionRecipe> {
     public PageInfusion() {
-        super(ModInfusion.INFUSION_RECIPE);
+        super(ModCrafting.INFUSION_RECIPE);
     }
 
     protected void drawRecipe(MatrixStack ms, InfusionRecipe recipe, int recipeX, int recipeY, int mouseX, int mouseY, boolean second) {
-        this.mc.getTextureManager().bindTexture(ModInfusion.craftingTexture);
+        this.mc.getTextureManager().bindTexture(ModCrafting.craftingTexture);
         RenderSystem.enableBlend();
         DrawableHelper.drawTexture(ms, recipeX - 2, recipeY - 2, 0.0F, 0.0F, 100, 62, 128, 128);
         boolean shaped = recipe instanceof ShapedInfusionRecipe;

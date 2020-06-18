@@ -2,10 +2,10 @@ package modfest.lacrimis.block.entity;
 
 import java.util.Optional;
 
-import modfest.lacrimis.infusion.CrucibleRecipe;
-import modfest.lacrimis.infusion.InfusionInventory;
+import modfest.lacrimis.crafting.CrucibleRecipe;
+import modfest.lacrimis.crafting.InfusionInventory;
 import modfest.lacrimis.init.ModBlockEntityTypes;
-import modfest.lacrimis.init.ModInfusion;
+import modfest.lacrimis.init.ModCrafting;
 import modfest.lacrimis.init.ModNetworking;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -52,7 +52,7 @@ public class CrucibleEntity extends SoulTankEntity implements Tickable {
 
                 Optional<CrucibleRecipe> optional = world.getServer()
                         .getRecipeManager()
-                        .getFirstMatch(ModInfusion.CRUCIBLE_RECIPE, inventory, world);
+                        .getFirstMatch(ModCrafting.CRUCIBLE_RECIPE, inventory, world);
                 if (optional.isPresent()) {
                     CrucibleRecipe recipe = optional.get();
                     if (recipe.matches(inventory, world)) {

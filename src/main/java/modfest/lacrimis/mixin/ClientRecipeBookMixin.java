@@ -1,8 +1,8 @@
 package modfest.lacrimis.mixin;
 
 import com.google.common.collect.Lists;
-import modfest.lacrimis.infusion.InfusionScreenHandler;
-import modfest.lacrimis.init.ModInfusion;
+import modfest.lacrimis.crafting.InfusionScreenHandler;
+import modfest.lacrimis.init.ModCrafting;
 import net.minecraft.client.recipebook.ClientRecipeBook;
 import net.minecraft.client.recipebook.RecipeBookGroup;
 import net.minecraft.recipe.Recipe;
@@ -20,7 +20,7 @@ public abstract class ClientRecipeBookMixin extends RecipeBook {
 
     @Inject(at = @At("HEAD"), cancellable = true, method = "getGroupForRecipe(Lnet/minecraft/recipe/Recipe;)Lnet/minecraft/client/recipebook/RecipeBookGroup;")
     private static void getGroupForRecipe(Recipe<?> recipe, CallbackInfoReturnable<RecipeBookGroup> cir) {
-        if(recipe.getType() == ModInfusion.INFUSION_RECIPE || recipe.getType() == ModInfusion.CRUCIBLE_RECIPE)
+        if(recipe.getType() == ModCrafting.INFUSION_RECIPE || recipe.getType() == ModCrafting.CRUCIBLE_RECIPE)
             cir.setReturnValue(RecipeBookGroup.UNKNOWN);
     }
 

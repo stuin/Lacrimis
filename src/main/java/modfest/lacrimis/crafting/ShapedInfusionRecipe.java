@@ -1,4 +1,4 @@
-package modfest.lacrimis.infusion;
+package modfest.lacrimis.crafting;
 
 import java.util.Map;
 import java.util.Map.Entry;
@@ -13,7 +13,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 
-import modfest.lacrimis.init.ModInfusion;
+import modfest.lacrimis.init.ModCrafting;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.item.Item;
@@ -21,7 +21,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
@@ -42,7 +41,7 @@ public class ShapedInfusionRecipe extends InfusionRecipe {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return ModInfusion.SHAPED_INFUSION_SERIALIZER;
+		return ModCrafting.SHAPED_INFUSION_SERIALIZER;
 	}
 
 	@Override
