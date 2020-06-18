@@ -1,6 +1,5 @@
 package modfest.lacrimis.infusion;
 
-import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.InfusionTableEntity;
 import modfest.lacrimis.init.ModNetworking;
 import net.fabricmc.api.EnvType;
@@ -9,7 +8,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.InventoryChangedListener;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeFinder;
 import net.minecraft.screen.AbstractRecipeScreenHandler;

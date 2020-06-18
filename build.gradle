@@ -55,10 +55,8 @@ dependencies {
 	modImplementation  "com.github.cottonmc:cotton-resources:${project.cotton_resources_version}"
 	include "com.github.cottonmc:cotton-resources:${project.cotton_resources_version}"
 
-	//Patchouli api (Official way)
-	//def patchouliVersion = "vazkii.patchouli:Patchouli:${project.patchouli_version}"
 	//Patchouli api (Current Snapshot way)
-	include modImplementation("com.github.Vazkii:Patchouli:${project.patchouli_version}")
+	include modImplementation("vazkii.patchouli:Patchouli_1.16-fabric:${project.patchouli_version}")
 
 	//Jankson
 	//modApi "io.github.cottonmc:Jankson-Fabric:${project.jankson_version}"
