@@ -1,0 +1,35 @@
+{
+  "parent": "lacrimis:base/root",
+  "display": {
+    "icon": {
+      "item": "lacrimis:divining_rod"
+    },
+    "title": {
+      "translate": "lacrimis.advancements.divining_rod.title"
+    },
+    "description": {
+      "translate": "lacrimis.advancements.divining_rod.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "collect": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "lacrimis:divining_rod"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "collect"
+    ]
+  ]
+}

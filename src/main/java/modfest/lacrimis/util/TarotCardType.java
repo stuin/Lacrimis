@@ -59,7 +59,7 @@ public enum TarotCardType {
 
     private static void initShulker(ShulkerEntity e) {
         e.setAiDisabled(true);
-        int peekTarget = 30;
+        int peekTarget = 40;
         e.setPeekAmount(peekTarget);
         while (!MathHelper.approximatelyEquals(e.getOpenProgress(1.0f), peekTarget * 0.01f)) {
             e.tick();

@@ -5,6 +5,7 @@ import net.minecraft.client.gl.Framebuffer;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.resource.ResourceManager;
@@ -24,15 +25,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import modfest.lacrimis.Lacrimis;
+import modfest.lacrimis.client.texture.FramebufferBackedTexture;
+import modfest.lacrimis.init.ModItems;
+import modfest.lacrimis.util.TarotCardType;
 import org.lwjgl.opengl.GL11;
 
 import net.dblsaiko.qcommon.croco.Mat4;
 import net.dblsaiko.qcommon.croco.MatStack;
 import net.dblsaiko.qcommon.croco.Vec3;
-import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.client.texture.FramebufferBackedTexture;
-import modfest.lacrimis.init.ModItems;
-import modfest.lacrimis.util.TarotCardType;
 
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -79,9 +80,14 @@ public final class CardTextureGen {
 
         MatStack tr = new MatStack();
         // texture size as rendered on the item has an aspect ratio of 3:5
-        tr.load(Mat4.ortho(0, 3, 0, 5, -50, 50));
+        tr.load(Mat4.ortho(0, 13, 0, 23, -50, 50));
         tr.rotate(1.0f, 0.0f, 0.0f, -22.5f);
         tr.rotate(0.0f, 1.0f, 0.0f, 45f);
+
+        MatStack textTr = new MatStack();
+        textTr.load(Mat4.ortho(0, 13, 23, 0, 0, 100));
+        textTr.translate(1.0f, 21.0f, 0.0f);
+        textTr.scale(0.2f, 0.2f, 0.2f);
 
         Tessellator t = Tessellator.getInstance();
         VertexConsumerProvider.Immediate vcp = VertexConsumerProvider.immediate(t.getBuffer());
@@ -91,6 +97,7 @@ public final class CardTextureGen {
             FramebufferBackedTexture tex = e.getValue();
 
             tr.push();
+            textTr.push();
 
             Framebuffer fb = tex.getFramebuffer();
             fb.clear(MinecraftClient.IS_SYSTEM_MAC);
@@ -98,14 +105,25 @@ public final class CardTextureGen {
 
             Entity ent = Objects.requireNonNull(type.create(new DummyWorld()));
 
-            fitToBounds(tr, adjustBoundingBox(ent.getBoundingBox(), ent.getType()));
+            fitToBounds(tr, adjustBoundingBox(ent.getBoundingBox(), ent.getType()), 23, 20);
 
             EntityRenderer<? super Entity> renderer = MinecraftClient.getInstance().getEntityRenderManager().getRenderer(ent);
 
             renderer.render(ent, 0.0f, 1.0f, tr.toMatrixStack(), vcp, 0x00F000F0);
 
+            String cardName = I18n.translate(String.format("item.lacrimis.tarot_card_%s", e.getKey().id));
+            int width = mc.textRenderer.getWidth(cardName);
+            float limit = 55f;
+            if (width > limit) {
+                textTr.scale(limit / width, 1.0f, 1.0f);
+            } else {
+                textTr.translate((limit - width) / 2, 0.0f, 0.0f);
+            }
+            mc.textRenderer.draw(cardName, 0, 1, -1, false, textTr.mat().toMatrix4f(), vcp, false, 0, 0x00F000F0);
+
             vcp.draw();
             tr.pop();
+            textTr.pop();
         }
 
         RenderSystem.popMatrix();
@@ -118,7 +136,7 @@ public final class CardTextureGen {
 
     // Modifies the transformation matrix so that the passed box is centered
     // and scaled to fit the frame buffer.
-    private static void fitToBounds(MatStack tr, Box box) {
+    private static void fitToBounds(MatStack tr, Box box, int texHeight, int height) {
         Set<Vec3> positions = Stream.of(
                 new Vec3((float) box.minX, (float) box.minY, (float) box.minZ),
                 new Vec3((float) box.minX, (float) box.minY, (float) box.maxZ),
@@ -141,7 +159,8 @@ public final class CardTextureGen {
         tr.loadIdentity();
         float sizeX = max.x - min.x;
         float sizeY = max.y - min.y;
-        float scale = 2 / max(sizeX, sizeY);
+        float scale = min(2 / sizeX, 2f * height / texHeight / sizeY);
+        tr.translate(0.0f, (float) -(height - texHeight) / texHeight, 0.0f);
         tr.scale(scale, scale, scale);
         tr.translate(min.add(max).div(-2));
         tr.mul(mat);
@@ -163,9 +182,9 @@ public final class CardTextureGen {
         } else if (type == EntityType.TURTLE) {
             return self.expand(0.2);
         } else if (type == EntityType.SILVERFISH) {
-            return self.stretch(0.0,0.0,-0.3);
+            return self.stretch(0.0, 0.0, -0.3);
         } else if (type == EntityType.BLAZE) {
-            return self.stretch(0.0,0.0,-0.3);
+            return self.stretch(0.0, 0.0, -0.3);
         } else {
             return self;
         }

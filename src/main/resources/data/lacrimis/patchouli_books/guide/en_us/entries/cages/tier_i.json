@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "To start you will need seven tier I runes, and a tier I pipe connector. You will also need sixteen valid cage blocks, any combination of the following: $(li)Iron Bars$(li)Chains$(li)End rods$(br)"
+      "text": "To start you will need seven tier I runes, and a tier I conduit connector. You will also need sixteen valid cage blocks, any combination of the following: $(li)Iron Bars$(li)Chains$(li)End rods$(br)"
     },
     {
       "type": "multiblock",

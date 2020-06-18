@@ -15,6 +15,10 @@
       "cost": "50",
       "tier": "I",
       "text": "A small amount of tears pushed through this rune can instantly heal small wounds."
+    },
+    {
+      "type": "text",
+      "text": "$(br2)Maybe I can use this newfound method of reversing the effects of tears to create some kind of $(m)$(t:wip)healing cloth$(/t)?"
     }
   ]
 }
