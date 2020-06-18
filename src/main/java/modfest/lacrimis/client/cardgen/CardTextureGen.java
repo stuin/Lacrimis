@@ -105,7 +105,7 @@ public final class CardTextureGen {
 
             Entity ent = Objects.requireNonNull(type.create(new DummyWorld()));
 
-            fitToBounds(tr, adjustBoundingBox(ent.getBoundingBox(), ent.getType()), 23, 21);
+            fitToBounds(tr, adjustBoundingBox(ent.getBoundingBox(), ent.getType()), 23, 20);
 
             EntityRenderer<? super Entity> renderer = MinecraftClient.getInstance().getEntityRenderManager().getRenderer(ent);
 
@@ -160,7 +160,7 @@ public final class CardTextureGen {
         float sizeX = max.x - min.x;
         float sizeY = max.y - min.y;
         float scale = min(2 / sizeX, 2f * height / texHeight / sizeY);
-        tr.translate(0.0f, -2.0f * (height - texHeight) / texHeight, 0.0f);
+        tr.translate(0.0f, (float) -(height - texHeight) / texHeight, 0.0f);
         tr.scale(scale, scale, scale);
         tr.translate(min.add(max).div(-2));
         tr.mul(mat);
