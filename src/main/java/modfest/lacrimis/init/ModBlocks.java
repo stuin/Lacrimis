@@ -19,8 +19,6 @@ public class ModBlocks {
     public static final Block.Settings wardedSettings = FabricBlockSettings.copy(Blocks.STONE)
             .strength(-1.0F, 3600000.0F);
     public static final Block.Settings runeSettings = FabricBlockSettings.copy(Blocks.STONE);
-    public static Tag<Block> cage_materials;
-    public static Tag<Block> non_transportable;
 
     //Main blocks
     public static InfusionTableBlock infusionTable;
@@ -52,6 +50,13 @@ public class ModBlocks {
     public static BlockTeleportBlock blockTransportRune;
     public static WardingBlock wardingRune;
 
+    //Block tags
+    public static Tag<Block> cage_materials;
+    public static Tag<Block> non_transportable;
+    public static Tag<Block> tier1;
+    public static Tag<Block> tier2;
+    public static Tag<Block> tier3;
+
     public static void register() {
         infusionTable = register("infusion_table", new InfusionTableBlock(FabricBlockSettings.copy(Blocks.ENCHANTING_TABLE).nonOpaque()));
         crucible = register("crucible", new CrucibleBlock(FabricBlockSettings.copy(Blocks.CAULDRON).strength(5.0F, 1200.0F).nonOpaque()));
@@ -82,6 +87,9 @@ public class ModBlocks {
         //Block tags
         cage_materials = TagRegistry.block(new Identifier(Lacrimis.MODID, "cage_materials"));
         non_transportable = TagRegistry.block(new Identifier(Lacrimis.MODID, "non_transportable"));
+        tier1 = TagRegistry.block(new Identifier(Lacrimis.MODID, "tier1"));
+        tier2 = TagRegistry.block(new Identifier(Lacrimis.MODID, "tier2"));
+        tier3 = TagRegistry.block(new Identifier(Lacrimis.MODID, "tier3"));
     }
 
     private static <T extends Block> T register(String name, T block) {

@@ -68,16 +68,12 @@ public class ModNetworking {
         BlockPos pos = buffer.readBlockPos();
         context.getTaskQueue().execute(() -> {
             BlockEntity entity = context.getPlayer().world.getBlockEntity(pos);
-            if(entity instanceof InfusionTableEntity){
+            if(entity instanceof InfusionTableEntity)
                 ((InfusionTableEntity) entity).startCrafting = true;
-                Lacrimis.LOGGER.info("Start received");
-            }
-
         });
     }
     
     public static void sendInfusionStartPacket(BlockPos pos) {
-        Lacrimis.LOGGER.info("Start pressed");
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeBlockPos(pos);
 
