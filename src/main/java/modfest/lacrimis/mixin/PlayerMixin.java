@@ -61,7 +61,19 @@ public abstract class PlayerMixin extends LivingEntity implements CardHolder {
     public TarotCardType[] getCards() {
         return cards;
     }
-    
+
+    @Override
+    public TarotCardType removeCard() {
+        TarotCardType card = null;
+        for(int i = cards.length; i > 0 && card == null; i--) {
+            if(cards[i - 1] != null) {
+                card = cards[i - 1];
+                cards[i - 1] = null;
+            }
+        }
+        return card;
+    }
+
     @Inject(at = @At("TAIL"), method = "readCustomDataFromTag(Lnet/minecraft/nbt/CompoundTag;)V")
     public void readCustomDataFromTag(CompoundTag tag, CallbackInfo ci) {
         if(tag.contains("tarot0"))

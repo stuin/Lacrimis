@@ -70,6 +70,7 @@ public class ModItems {
     public static BlockItem blockTransportRune;
     public static BlockItem wardingRune;
     public static BlockItem spawnerRune;
+    public static BlockItem tarotAdderRune;
 
     public static void register() {
         infusionTable = register("infusion_table", ModBlocks.infusionTable);
@@ -118,6 +119,7 @@ public class ModItems {
         blockTransportRune = register2("rune/block_transport", ModBlocks.blockTransportRune);
         wardingRune = register2("rune/warding", ModBlocks.wardingRune);
         spawnerRune = register2("rune/spawner", ModBlocks.spawnerRune);
+        tarotAdderRune = register2("rune/tarot_adder", ModBlocks.tarotAdderRune);
 
     }
 
