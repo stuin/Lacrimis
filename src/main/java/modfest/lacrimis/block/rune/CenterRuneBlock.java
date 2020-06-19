@@ -69,8 +69,8 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
 
             //Check for single pipe
             if(block instanceof PipeConnectorBlock ||
-                    (block instanceof AdvancedRuneBlock &&
-                            world.getBlockState(pos.add(next)).get(AdvancedRuneBlock.PIPE) != 3)) {
+                    block instanceof AdvancedRuneBlock &&
+                            world.getBlockState(pos.add(next)).get(AdvancedRuneBlock.PIPE) != 3) {
                 if(pipe) {
                     if(world instanceof World)
                         ((World) world).setBlockState(pos, world.getBlockState(pos).with(PIPE, 8));
@@ -103,12 +103,12 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
         }
         return 0;
     }
-    
+
     private int actualCost(int tier) {
         if(tier == 3 && requiredTier < 3)
             return requiredTears / 2;
         if(tier > requiredTier)
-            return requiredTears - (requiredTears / 4);
+            return requiredTears - requiredTears / 4;
         return requiredTears;
     }
 
@@ -121,7 +121,7 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
         }
         return activate(world, pos, pipe, null, player);
     }
-    
+
     public BlockPos getPipe(BlockView world, BlockPos pos) {
         //Locate pipe connection
         int i = world.getBlockState(pos).get(PIPE);
@@ -136,6 +136,7 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
             return pipe;
     }
 
+    @Override
     public boolean activate(World world, BlockPos pos, PlayerEntity player) {
         //Mark powered
         if(player == null && world.isReceivingRedstonePower(pos))
@@ -191,7 +192,7 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
         Block from = world.getBlockState(fromPos).getBlock();
         boolean a = state.get(POWERED);
         boolean b = world.isReceivingRedstonePower(pos);
-        boolean c = (from instanceof RuneBlock || from instanceof CenterRuneBlock);
+        boolean c = from instanceof RuneBlock || from instanceof CenterRuneBlock;
         if(!a && b && !c)
             activate(world, pos, null);
         else if(a && !b)

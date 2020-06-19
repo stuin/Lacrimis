@@ -19,8 +19,9 @@ import net.minecraft.world.World;
 
 public class InfusionTableBlock extends SoulTankBlock {
 	protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
-	
-	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+
+	@Override
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
 		return SHAPE;
 	}
 	public InfusionTableBlock(AbstractBlock.Settings settings) {
@@ -32,7 +33,8 @@ public class InfusionTableBlock extends SoulTankBlock {
 		return new InfusionTableEntity();
 	}
 
-	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+	@Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		ActionResult parentResult = super.onUse(state, world, pos, player, hand, hit);
 		if(parentResult == ActionResult.PASS && player.getStackInHand(hand).getItem() != ModItems.diviningRod) {
 			if(world.isClient) {
@@ -46,7 +48,8 @@ public class InfusionTableBlock extends SoulTankBlock {
 		return parentResult;
 	}
 
-	public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+	@Override
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
 		if (!state.isOf(newState.getBlock())) {
 			BlockEntity blockEntity = world.getBlockEntity(pos);
 			if (blockEntity instanceof Inventory) {

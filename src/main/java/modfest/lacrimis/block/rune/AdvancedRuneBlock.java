@@ -33,7 +33,7 @@ public class AdvancedRuneBlock extends RuneBlock {
         if(NeighborList.isEdge(i)) {
             for(int j = -1; j < 2; j++) {
                 Block block = world.getBlockState(pos.add(NeighborList.platform[(i + j) % 8])).getBlock();
-                if(!(block instanceof RuneBlock && ((RuneBlock) block).tier == 2))
+                if((!(block instanceof RuneBlock) || (((RuneBlock) block).tier != 2)))
                     return -2;
 
                 //Check for single pipe
@@ -64,7 +64,7 @@ public class AdvancedRuneBlock extends RuneBlock {
         super.appendProperties(builder);
         builder.add(PIPE);
     }
-    
+
     static {
         PIPE = IntProperty.of("pipe", 0, 3);
     }

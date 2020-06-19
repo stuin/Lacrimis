@@ -39,24 +39,32 @@ public enum CustomArmorMaterials implements ArmorMaterial {
         this.knockbackResistance = knockbackResistance;
     }
 
+    @Override
     public int getDurability(EquipmentSlot equipmentSlot_1) {
         return baseDurability[equipmentSlot_1.getEntitySlotId()] * this.durabilityMultiplier;
     }
 
+    @Override
     public int getProtectionAmount(EquipmentSlot equipmentSlot_1) {
         return armorValues[equipmentSlot_1.getEntitySlotId()];
     }
 
+    @Override
     public int getEnchantability() { return this.enchantability; }
 
+    @Override
     public SoundEvent getEquipSound() { return this.equipSound; }
 
+    @Override
     public Ingredient getRepairIngredient() { return this.repairIngredient.get(); }
 
+    @Override
     @Environment(EnvType.CLIENT)
     public String getName() { return this.name; }
 
+    @Override
     public float getToughness() { return this.toughness; }
 
+    @Override
     public float getKnockbackResistance() { return this.knockbackResistance; }
 }

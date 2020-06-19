@@ -30,7 +30,7 @@ public class SoulTeleportBlock extends SoulExtractionBlock {
     public boolean insert(BlockPos pos, BlockView world, Object value) {
         Direction flipped = flipside(world, pos);
         if(value instanceof Entity && testCage(world, pos, flipped, null) > 0) {
-            int vertical = (flipped == Direction.UP) ? 1 : -(int)Math.ceil(((Entity) value).getHeight());
+            int vertical = flipped == Direction.UP ? 1 : -(int)Math.ceil(((Entity) value).getHeight());
             ((Entity) value).teleport(pos.getX() + 0.5, pos.getY() + vertical, pos.getZ() + 0.5);
 
             TaintPacket taint = new TaintPacket(250);

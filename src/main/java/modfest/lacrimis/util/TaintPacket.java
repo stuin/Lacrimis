@@ -18,7 +18,7 @@ public class TaintPacket {
     public int getAmount() {
         return amount;
     }
-    
+
     public void spawn(World world, BlockPos pos) {
         if(amount > 0) {
             AreaEffectCloudEntity entity = new AreaEffectCloudEntity(world, pos.getX(), pos.getY(), pos.getZ());

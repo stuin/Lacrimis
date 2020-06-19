@@ -64,12 +64,12 @@ public class RuneBlock extends Block implements Activatable {
                 return next;
             }
         }
-        
+
         if(world instanceof World)
             ((World)world).setBlockState(pos, state.with(CENTER, 8));
         return null;
     }
-    
+
     protected BlockPos getTrueCenter(BlockView world, BlockPos pos) {
         //Get actual center
         BlockPos center = getCenter(world, pos);
@@ -86,7 +86,7 @@ public class RuneBlock extends Block implements Activatable {
     protected boolean validCenter(BlockState state) {
         Block block = state.getBlock();
         return block instanceof CenterRuneBlock ||
-                (block instanceof AdvancedRuneBlock && NeighborList.isEdge(state.get(CENTER)));
+                block instanceof AdvancedRuneBlock && NeighborList.isEdge(state.get(CENTER));
     }
 
     @Override
@@ -99,7 +99,7 @@ public class RuneBlock extends Block implements Activatable {
         Block from = world.getBlockState(fromPos).getBlock();
         boolean a = state.get(POWERED);
         boolean b = world.isReceivingRedstonePower(pos);
-        boolean c = (from instanceof RuneBlock || from instanceof CenterRuneBlock);
+        boolean c = from instanceof RuneBlock || from instanceof CenterRuneBlock;
         if(!a && b && !c) {
             world.setBlockState(pos, state.with(POWERED, true));
             activate(world, pos, null);

@@ -65,7 +65,7 @@ public class BlockTeleportBlock extends CenterRuneBlock {
         }
         return false;
     }
-    
+
     private void swap(World world, BlockEntity sourceEntity, BlockState sourceState, BlockPos dest) {
         CompoundTag sourceTag = sourceEntity.toTag(new CompoundTag());
         sourceEntity.fromTag(sourceState, new CompoundTag());

@@ -72,7 +72,7 @@ public class ModNetworking {
                 ((InfusionTableEntity) entity).startCrafting = true;
         });
     }
-    
+
     public static void sendInfusionStartPacket(BlockPos pos) {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeBlockPos(pos);

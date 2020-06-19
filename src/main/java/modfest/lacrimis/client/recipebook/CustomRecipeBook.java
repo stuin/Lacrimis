@@ -17,6 +17,7 @@ public class CustomRecipeBook extends ClientRecipeBook {
         this.source = source;
     }
 
+    @Override
     public void reload() {
         this.results.clear();
         results.add(new RecipeResultCollection());

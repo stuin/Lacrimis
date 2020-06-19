@@ -46,7 +46,7 @@ public enum TarotCardType {
         this.id = id;
         this.cover = cover;
         this.init = init;
-        
+
         if(effect == null)
             this.effect = new TarotCardEffect(this);
         else

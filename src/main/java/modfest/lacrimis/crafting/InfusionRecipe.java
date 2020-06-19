@@ -28,6 +28,7 @@ public abstract class InfusionRecipe implements Recipe<InfusionInventory> {
     }
 
 
+    @Override
     public RecipeType<?> getType() {
         return ModCrafting.INFUSION_RECIPE;
     }

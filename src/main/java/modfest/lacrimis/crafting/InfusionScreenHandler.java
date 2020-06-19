@@ -26,10 +26,10 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 		this.entity = entity;
 		this.player = player;
 		this.addProperties(input.properties);
-		
+
 		if (entity.getWorld() != null && !entity.getWorld().isClient)
 			this.input.addListener(this);
-		
+
 		for (int y = 0; y < 3; ++y) {
 			for (int x = 0; x < 3; ++x) {
 				this.addSlot(new Slot(this.input, x + y * 3, 30 + x * 18, 17 + y * 18));
@@ -47,7 +47,7 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 
 		onContentChanged(input);
 	}
-	
+
 	public void startCrafting() {
 		entity.startCrafting = true;
 		ModNetworking.sendInfusionStartPacket(entity.getPos());
@@ -155,7 +155,7 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 	public int getRequiredTears() {
 		return this.entity.getTank().getCapacity();
 	}
-	
+
 	public int getCurrentTears() {
 		return this.entity.getTank().getTears();
 	}

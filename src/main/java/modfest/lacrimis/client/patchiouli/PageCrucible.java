@@ -14,6 +14,7 @@ public class PageCrucible extends PageDoubleRecipeRegistry<CrucibleRecipe> {
         super(ModCrafting.CRUCIBLE_RECIPE);
     }
 
+    @Override
     protected void drawRecipe(MatrixStack ms, CrucibleRecipe recipe, int recipeX, int recipeY, int mouseX, int mouseY, boolean second) {
         this.mc.getTextureManager().bindTexture(ModCrafting.craftingTexture);
         RenderSystem.enableBlend();
@@ -27,10 +28,12 @@ public class PageCrucible extends PageDoubleRecipeRegistry<CrucibleRecipe> {
         ms.pop();
     }
 
+    @Override
     protected ItemStack getRecipeOutput(CrucibleRecipe recipe) {
         return recipe == null ? ItemStack.EMPTY : recipe.getOutput();
     }
 
+    @Override
     protected int getRecipeHeight() {
         return 45;
     }

@@ -5,7 +5,6 @@ import modfest.lacrimis.init.ModCrafting;
 import modfest.lacrimis.init.ModItems;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,6 +28,7 @@ public class CombinerBlock extends SoulTankBlock {
         return new CombinerEntity();
     }
 
+    @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ActionResult parentResult = super.onUse(state, world, pos, player, hand, hit);
         if(parentResult == ActionResult.PASS && player.getStackInHand(hand).getItem() != ModItems.diviningRod) {
@@ -43,6 +43,7 @@ public class CombinerBlock extends SoulTankBlock {
         return parentResult;
     }
 
+    @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (!state.isOf(newState.getBlock())) {
             BlockEntity blockEntity = world.getBlockEntity(pos);

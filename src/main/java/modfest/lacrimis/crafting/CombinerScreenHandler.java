@@ -30,6 +30,7 @@ public class CombinerScreenHandler extends ScreenHandler implements InventoryCha
         this.addSlot(new Slot(entity.inventory, 0, 27, 47));
         this.addSlot(new Slot(entity.inventory, 1, 76, 47));
         this.addSlot(new FurnaceOutputSlot(player, output, 0, 134, 47) {
+            @Override
             public ItemStack onTakeItem(PlayerEntity player, ItemStack stack) {
                 return CombinerScreenHandler.this.onTakeOutput(stack);
             }
@@ -82,6 +83,7 @@ public class CombinerScreenHandler extends ScreenHandler implements InventoryCha
         onContentChanged(sender);
     }
 
+    @Override
     public void onContentChanged(Inventory inventory) {
         super.onContentChanged(inventory);
         if(entity.inventory == inventory)
@@ -93,6 +95,7 @@ public class CombinerScreenHandler extends ScreenHandler implements InventoryCha
         return this.entity.inventory.canPlayerUse(player);
     }
 
+    @Override
     public ItemStack transferSlot(PlayerEntity player, int index) {
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = slots.get(index);
@@ -135,7 +138,7 @@ public class CombinerScreenHandler extends ScreenHandler implements InventoryCha
         if(entity.type != null) {
             Text t = new TranslatableText(entity.type.getTranslationKey());
             return new TranslatableText(Lacrimis.MODID + ".gui.combiner.entity").append(t);
-        }    
+        }
         return new TranslatableText(Lacrimis.MODID + ".gui.combiner.none");
     }
 }

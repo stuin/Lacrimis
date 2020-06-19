@@ -19,11 +19,11 @@ public abstract class SoulTankEntity extends BlockEntity implements BlockEntityC
     public float getRelativeLevel() {
         return tank.getTears() / (float) tank.getCapacity();
     }
-    
+
     public SoulTank getTank() {
         return tank;
     }
-    
+
     public void mark() {
         if (this.world != null) {
             this.markDirty();

@@ -17,6 +17,7 @@ public class PageInfusion extends PageDoubleRecipeRegistry<InfusionRecipe> {
         super(ModCrafting.INFUSION_RECIPE);
     }
 
+    @Override
     protected void drawRecipe(MatrixStack ms, InfusionRecipe recipe, int recipeX, int recipeY, int mouseX, int mouseY, boolean second) {
         this.mc.getTextureManager().bindTexture(ModCrafting.craftingTexture);
         RenderSystem.enableBlend();
@@ -27,7 +28,7 @@ public class PageInfusion extends PageDoubleRecipeRegistry<InfusionRecipe> {
             int iconX = recipeX + 62;
             wrap = recipeY + 2;
             DrawableHelper.drawTexture(ms, iconX, wrap, 0.0F, 64.0F, 11, 11, 128, 128);
-            if (this.parent.isMouseInRelativeRange((double)mouseX, (double)mouseY, iconX, wrap, 11, 11)) {
+            if (this.parent.isMouseInRelativeRange(mouseX, mouseY, iconX, wrap, 11, 11)) {
                 this.parent.setTooltip(new TranslatableText("patchouli.gui.lexicon.shapeless"));
             }
         }
@@ -41,7 +42,7 @@ public class PageInfusion extends PageDoubleRecipeRegistry<InfusionRecipe> {
         }
 
         for(int i = 0; i < ingredients.size(); ++i) {
-            this.parent.renderIngredient(ms, recipeX + i % wrap * 19 + 3, recipeY + i / wrap * 19 + 3, mouseX, mouseY, (Ingredient)ingredients.get(i));
+            this.parent.renderIngredient(ms, recipeX + i % wrap * 19 + 3, recipeY + i / wrap * 19 + 3, mouseX, mouseY, ingredients.get(i));
         }
 
         ms.push();
@@ -50,10 +51,12 @@ public class PageInfusion extends PageDoubleRecipeRegistry<InfusionRecipe> {
         ms.pop();
     }
 
+    @Override
     protected int getRecipeHeight() {
         return 78;
     }
 
+    @Override
     protected ItemStack getRecipeOutput(InfusionRecipe recipe) {
         return recipe == null ? ItemStack.EMPTY : recipe.getOutput();
     }

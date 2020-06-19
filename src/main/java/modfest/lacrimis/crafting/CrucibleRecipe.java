@@ -30,15 +30,18 @@ public class CrucibleRecipe extends InfusionRecipe {
         return ModCrafting.CRUCIBLE_RECIPE;
     }
 
+    @Override
     public RecipeSerializer<?> getSerializer() {
         return ModCrafting.CRUCIBLE_SERIALIZER;
     }
 
+    @Override
     @Environment(EnvType.CLIENT)
     public boolean fits(int width, int height) {
         return width * height >= 2;
     }
 
+    @Override
     public boolean matches(InfusionInventory inv, World world) {
         if(inv.size() > 1) {
             for(int i = 0; i < inv.size() - 1; i++)
@@ -65,12 +68,14 @@ public class CrucibleRecipe extends InfusionRecipe {
         return base;
     }
 
+    @Override
     @Environment(EnvType.CLIENT)
     public ItemStack getRecipeKindIcon() {
         return new ItemStack(ModBlocks.crucible);
     }
 
     public static class Serializer implements RecipeSerializer<CrucibleRecipe> {
+        @Override
         public CrucibleRecipe read(Identifier identifier, JsonObject jsonObject) {
             Ingredient ingredient = Ingredient.fromJson(JsonHelper.getObject(jsonObject, "base"));
             int tears = JsonHelper.getInt(jsonObject, "tears");
@@ -78,6 +83,7 @@ public class CrucibleRecipe extends InfusionRecipe {
             return new CrucibleRecipe(identifier, ingredient, tears, itemStack);
         }
 
+        @Override
         public CrucibleRecipe read(Identifier identifier, PacketByteBuf packetByteBuf) {
             Ingredient ingredient = Ingredient.fromPacket(packetByteBuf);
             int tears = packetByteBuf.readVarInt();
@@ -85,6 +91,7 @@ public class CrucibleRecipe extends InfusionRecipe {
             return new CrucibleRecipe(identifier, ingredient, tears, itemStack);
         }
 
+        @Override
         public void write(PacketByteBuf packetByteBuf, CrucibleRecipe recipe) {
             recipe.base.write(packetByteBuf);
             packetByteBuf.writeVarInt(recipe.getTears());

@@ -10,7 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class SoulExtractionBlock extends CenterRuneBlock {
-    
+
     public SoulExtractionBlock() {
         this(300,1);
     }

@@ -21,7 +21,7 @@ import net.minecraft.util.collection.DefaultedList;
 public class InfusionTableEntity extends SoulTankEntity implements Inventory, Tickable {
     public static final int OUTPUT_STACK = 9;
     private final Random random = new Random();
-    
+
     public final InfusionInventory inventory;
     public ItemStack holding = ItemStack.EMPTY;
     public boolean startCrafting = false;
@@ -73,7 +73,7 @@ public class InfusionTableEntity extends SoulTankEntity implements Inventory, Ti
             InfusionRecipe recipe = this.world.getRecipeManager().getFirstMatch(ModCrafting.INFUSION_RECIPE, inventory, this.world).orElse(null);
             if(recipe == null)
                 recipe = this.world.getRecipeManager().getFirstMatch(ModCrafting.CRUCIBLE_RECIPE, inventory, this.world).orElse(null);
-            
+
             //Start crafting progress
             if(recipe != null && canAcceptRecipeOutput(recipe) &&
                     (startCrafting || !inventory.getStack(OUTPUT_STACK).isEmpty())) {
@@ -83,10 +83,10 @@ public class InfusionTableEntity extends SoulTankEntity implements Inventory, Ti
                 startCrafting = false;
             }
         }
-        
+
         if(startCrafting)
             startCrafting = false;
-        
+
         //Collect tears
         if(tank.getSpace() > 0)
             tank.addTears(ConduitUtil.locateTears(world, pos, 5));

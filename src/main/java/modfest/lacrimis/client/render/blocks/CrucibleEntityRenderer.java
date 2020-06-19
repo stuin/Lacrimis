@@ -30,14 +30,14 @@ public class CrucibleEntityRenderer extends BlockEntityRenderer<CrucibleEntity> 
 		float level = entity.getRelativeLevel();
 		if (level > 0) {
 			float displayLevel = 4F / 16F + level * 11 / 16F;
-			
+
 			MinecraftClient mc = MinecraftClient.getInstance();
 			BakedModel model = mc.getBakedModelManager().getModel(CrucibleEntityRenderer.CRUCIBLE_TEARS_MODEL_ID);
 			BlockPos pos = entity.getPos();
-			
+
 			matrices.push();
 			matrices.translate(0, displayLevel, 0);
-			
+
 			BlockState visualProperties = Blocks.GLOWSTONE.getDefaultState();
             mc.getBlockRenderManager()
 					.getModelRenderer()

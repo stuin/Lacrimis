@@ -6,6 +6,7 @@ import modfest.lacrimis.block.rune.*;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.AbstractBlock.Settings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
@@ -58,15 +59,15 @@ public class ModBlocks {
     public static Tag<Block> tier3;
 
     public static void register() {
-        infusionTable = register("infusion_table", new InfusionTableBlock(FabricBlockSettings.copy(Blocks.ENCHANTING_TABLE).nonOpaque()));
-        crucible = register("crucible", new CrucibleBlock(FabricBlockSettings.copy(Blocks.CAULDRON).strength(5.0F, 1200.0F).nonOpaque()));
-        combiner = register("combiner", new CombinerBlock(FabricBlockSettings.copy(Blocks.ENCHANTING_TABLE)));
+        infusionTable = register("infusion_table", new InfusionTableBlock(Settings.copy(Blocks.ENCHANTING_TABLE).nonOpaque()));
+        crucible = register("crucible", new CrucibleBlock(Settings.copy(Blocks.CAULDRON).strength(5.0F, 1200.0F).nonOpaque()));
+        combiner = register("combiner", new CombinerBlock(Settings.copy(Blocks.ENCHANTING_TABLE)));
         conduit = register("conduit", new ConduitBlock(conduitSettings));
         gatedConduit = register("gated_conduit", new GatedConduitBlock(conduitSettings));
         oneWayConduit = register("one_way_conduit", new OneWayConduitBlock(conduitSettings));
-        taintOutput = register("taint_output", new TaintOutputBlock(FabricBlockSettings.copy(Blocks.DISPENSER)));
+        taintOutput = register("taint_output", new TaintOutputBlock(Settings.copy(Blocks.DISPENSER)));
         tearLantern = register("tear_lantern", new TearLantern(AbstractBlock.Settings.of(Material.METAL).requiresTool().strength(3.5F).sounds(BlockSoundGroup.LANTERN).lightLevel((state) -> 5).nonOpaque()));
-        drainedCryingObsidian = register("drained_crying_obsidian", new DrainedCryingObsidianBlock(FabricBlockSettings.copy(Blocks.CRYING_OBSIDIAN)));
+        drainedCryingObsidian = register("drained_crying_obsidian", new DrainedCryingObsidianBlock(Settings.copy(Blocks.CRYING_OBSIDIAN)));
         creativeTearsBlock = register("creative_tears_block", new CreativeTearsBlock(wardedSettings));
         wardedStone = register("warded", new WardedBlock(wardedSettings));
 

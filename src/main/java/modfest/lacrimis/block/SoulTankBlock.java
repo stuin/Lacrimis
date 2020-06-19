@@ -26,7 +26,7 @@ import net.minecraft.world.World;
 
 public abstract class SoulTankBlock extends BlockWithEntity implements BlockConduitConnect {
     private final boolean canExtract;
-    
+
     protected SoulTankBlock(AbstractBlock.Settings settings, boolean canExtract) {
         super(settings);
         this.canExtract = canExtract;
@@ -42,7 +42,7 @@ public abstract class SoulTankBlock extends BlockWithEntity implements BlockCond
         final BlockEntity blockEntity = world.getBlockEntity(blockPos);
 
         if (blockEntity instanceof SoulTankEntity)
-            return (int) (Math.floor(14.0 * ((SoulTankEntity) blockEntity).getRelativeLevel())) + 1;
+            return (int) Math.floor(14.0 * ((SoulTankEntity) blockEntity).getRelativeLevel()) + 1;
 
         return 0;
     }

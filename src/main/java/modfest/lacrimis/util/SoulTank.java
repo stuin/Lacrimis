@@ -20,16 +20,16 @@ public class SoulTank {
 	public int getTears() {
 		return tears;
 	}
-	
+
 	public int getSpace() {
 		return capacity - tears;
 	}
-	
+
 	public void setLimit(int capacity) {
 		if(capacity < max_capacity && capacity >= 0)
 			this.capacity = Math.max(capacity, tears);
 	}
-	
+
 	public void setTears(int tears) {
 		if(tears >= 0 && tears <= capacity)
 			this.tears = tears;
@@ -61,7 +61,7 @@ public class SoulTank {
 			r.run();
 		return goal;
 	}
-	
+
 	public int addTears(int goal) {
 		if(tears + goal > capacity) {
 			goal = capacity - tears;
@@ -73,7 +73,7 @@ public class SoulTank {
 			r.run();
 		return goal;
 	}
-	
+
 	public void addListener(Runnable listener) {
 		listeners.add(listener);
 	}

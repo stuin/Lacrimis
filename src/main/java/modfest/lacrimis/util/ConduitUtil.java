@@ -89,7 +89,7 @@ public class ConduitUtil {
         }
         return null;
     }
-    
+
     public static boolean locateTearsStrong(BlockView world, BlockPos pos, int request, boolean simulate) {
         return locateTearsStrong(world, listScanConduits(world, pos, true), request, simulate);
     }
@@ -97,7 +97,7 @@ public class ConduitUtil {
     public static boolean locateTearsStrong(BlockView world, List<ConduitEntry> list, int request, boolean simulate) {
         if(list != null && list.size() > 0) {
             int found = 0;
-            
+
             //Test for requested amount
             for(int i = 0; i < list.size() && found < request; i++)
                 found += list.get(i).extractTears(world, request - found, simulate);

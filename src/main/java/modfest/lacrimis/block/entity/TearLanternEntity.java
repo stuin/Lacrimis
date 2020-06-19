@@ -23,7 +23,7 @@ public class TearLanternEntity extends BlockEntity implements Tickable {
         BlockPos obsidianPos = this.pos.up(1);
         if (world != null) {
             if (world.isClient && Math.random() > 0.9)
-                world.addParticle(ParticleTypes.DRIPPING_OBSIDIAN_TEAR, (double) pos.getX() + (0.4 + Math.random() * (0.6 - 0.4)), (double) pos.getY() - 0.1D, (double) pos.getZ() + (0.4 + Math.random() * (0.6 - 0.4)), 0.0D, 0.0D, 0.0D);
+                world.addParticle(ParticleTypes.DRIPPING_OBSIDIAN_TEAR, pos.getX() + (0.4 + Math.random() * (0.6 - 0.4)), pos.getY() - 0.1D, pos.getZ() + (0.4 + Math.random() * (0.6 - 0.4)), 0.0D, 0.0D, 0.0D);
             BlockState obsidianState = this.world.getBlockState(obsidianPos);
             if (obsidianState.getBlock() == Blocks.CRYING_OBSIDIAN) {
                 for (int x = -range; x <= range; x++)

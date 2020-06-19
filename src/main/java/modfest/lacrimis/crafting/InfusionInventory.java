@@ -23,7 +23,8 @@ public class InfusionInventory extends SimpleInventory {
 				return 1;
 			}
 
-			public int get(int index) {
+			@Override
+            public int get(int index) {
 				switch (index) {
 					case 0:
 						return entity.getTank().getTears();
@@ -32,7 +33,8 @@ public class InfusionInventory extends SimpleInventory {
 				}
 			}
 
-			public void set(int index, int value) {
+			@Override
+            public void set(int index, int value) {
 				switch (index) {
 					case 0:
 						entity.getTank().setTears(value);
@@ -56,7 +58,8 @@ public class InfusionInventory extends SimpleInventory {
 		entity.getTank().removeTears(tears);
 	}
 
-	public void readTags(ListTag tags) {
+	@Override
+    public void readTags(ListTag tags) {
 		int j;
 		for(j = 0; j < this.size(); ++j) {
 			this.setStack(j, ItemStack.EMPTY);
@@ -72,7 +75,8 @@ public class InfusionInventory extends SimpleInventory {
 
 	}
 
-	public ListTag getTags() {
+	@Override
+    public ListTag getTags() {
 		ListTag listTag = new ListTag();
 
 		for(int i = 0; i < this.size(); ++i) {

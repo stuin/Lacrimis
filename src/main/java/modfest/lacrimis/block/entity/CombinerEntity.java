@@ -12,7 +12,7 @@ import net.minecraft.util.registry.Registry;
 public class CombinerEntity extends SoulTankEntity {
     public EntityType<?> type;
     public InfusionInventory inventory;
-    
+
     public CombinerEntity() {
         super(ModBlockEntityTypes.combiner, 0);
         inventory = new InfusionInventory(this, 2);

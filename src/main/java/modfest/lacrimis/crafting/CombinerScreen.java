@@ -1,13 +1,10 @@
 package modfest.lacrimis.crafting;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import modfest.lacrimis.Lacrimis;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
 public class CombinerScreen extends HandledScreen<CombinerScreenHandler> {
@@ -19,6 +16,7 @@ public class CombinerScreen extends HandledScreen<CombinerScreenHandler> {
         this.titleY = 18;
     }
 
+    @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         this.renderBackground(matrices);
         super.render(matrices, mouseX, mouseY, delta);
@@ -30,6 +28,7 @@ public class CombinerScreen extends HandledScreen<CombinerScreenHandler> {
         this.drawMouseoverTooltip(matrices, mouseX, mouseY);
     }
 
+    @Override
     protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         client.getTextureManager().bindTexture(TEXTURE);
