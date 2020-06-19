@@ -1,7 +1,9 @@
 {
   "rewards": {
     "recipes": [
-      "lacrimis:infusion/rune_warding"
+      "lacrimis:infusion/rune_warding",
+      "lacrimis:infusion/rune_spawner",
+      "lacrimis:infusion/rune_tarot_adder"
     ]
   },
   "criteria": {

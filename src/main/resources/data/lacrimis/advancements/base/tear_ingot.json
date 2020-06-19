@@ -17,7 +17,11 @@
   },
   "rewards": {
     "recipes": [
-      "lacrimis:crucible/tear_ingot"
+      "lacrimis:crucible/tear_ingot",
+      "lacrimis:infusion/tear_soaked_boots",
+      "lacrimis:infusion/tear_soaked_chestplate",
+      "lacrimis:infusion/tear_soaked_helmet",
+      "lacrimis:infusion/tear_soaked_leggings"
     ]
   },
   "criteria": {

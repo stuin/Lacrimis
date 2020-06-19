@@ -4,7 +4,8 @@
       "lacrimis:infusion/rune_pipe2",
       "lacrimis:infusion/rune_entity_transport",
       "lacrimis:infusion/rune_block_transport",
-      "lacrimis:crafting/dismantle_pipe2"
+      "lacrimis:crafting/dismantle_pipe2",
+      "lacrimis:infusion/dismantle_pipe2"
     ]
   },
   "criteria": {

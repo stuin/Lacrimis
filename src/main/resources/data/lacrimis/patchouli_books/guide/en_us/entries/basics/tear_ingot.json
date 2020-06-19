@@ -11,8 +11,7 @@
     },
     {
       "type": "lacrimis:crucible",
-      "recipe": "lacrimis:crucible/tear_ingot",
-      "text": "What can I make with $(l:infusion/infusion_basics)rune stone and silver$(/l)?"
+      "recipe": "lacrimis:crucible/tear_ingot"
     }
   ]
 }

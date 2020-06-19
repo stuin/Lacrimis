@@ -17,7 +17,8 @@
   },
   "rewards": {
     "recipes": [
-      "lacrimis:infusion/rune_tier1"
+      "lacrimis:infusion/gated_conduit",
+      "lacrimis:infusion/one_way_conduit"
     ]
   },
   "criteria": {
