@@ -22,6 +22,7 @@ public class InfusionScreen extends HandledScreen<InfusionScreenHandler> impleme
     private static final Identifier TEXTURE = new Identifier("textures/gui/container/crafting_table.png");
     private static final Identifier RECIPE_BUTTON_TEXTURE = new Identifier("textures/gui/recipe_button.png");
     private final RecipeBookWidget recipeBook = new CustomRecipeBookWidget();
+    private TexturedButtonWidget startButton;
     private boolean isNarrow;
 
     public InfusionScreen(InfusionScreenHandler handler, PlayerInventory inventory, Text title) {
@@ -36,14 +37,16 @@ public class InfusionScreen extends HandledScreen<InfusionScreenHandler> impleme
         x = recipeBook.findLeftEdge(isNarrow, width, backgroundWidth);
         children.add(recipeBook);
         setInitialFocus(recipeBook);
+        startButton = new TexturedButtonWidget(x + backgroundWidth - 54, y + titleY + 3, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEXTURE, (buttonWidget) -> {
+            handler.startCrafting();
+        });
+        addButton(startButton);
         addButton(new TexturedButtonWidget(x + 5, height / 2 - 49, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEXTURE, (buttonWidget) -> {
             recipeBook.reset(isNarrow);
             recipeBook.toggleOpen();
             x = recipeBook.findLeftEdge(isNarrow, width, backgroundWidth);
             ((TexturedButtonWidget)buttonWidget).setPos(x + 5, height / 2 - 49);
-        }));
-        addButton(new TexturedButtonWidget(x + backgroundWidth - 54, y + titleY + 3, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEXTURE, (buttonWidget) -> {
-            handler.startCrafting();
+            startButton.setPos(x + backgroundWidth - 54, y + titleY + 3);
         }));
         titleX = 24;
     }

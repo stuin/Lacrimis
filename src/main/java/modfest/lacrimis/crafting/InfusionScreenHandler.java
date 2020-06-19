@@ -15,7 +15,7 @@ import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
 
 public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionInventory> implements InventoryChangedListener {
-	private static final int OUTPUT_SLOT = 9;
+	private static final int OUTPUT_SLOT = 0;
 	private final InfusionInventory input;
 	private final InfusionTableEntity entity;
 	private final PlayerEntity player;
@@ -30,12 +30,12 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 		if (entity.getWorld() != null && !entity.getWorld().isClient)
 			this.input.addListener(this);
 
+		this.addSlot(new FurnaceOutputSlot(player, this.input, InfusionTableEntity.OUTPUT_STACK, 124, 35));
 		for (int y = 0; y < 3; ++y) {
 			for (int x = 0; x < 3; ++x) {
 				this.addSlot(new Slot(this.input, x + y * 3, 30 + x * 18, 17 + y * 18));
 			}
 		}
-		this.addSlot(new FurnaceOutputSlot(player, this.input, InfusionTableEntity.OUTPUT_STACK, 124, 35));
 		for (int y = 0; y < 3; ++y) {
 			for (int x = 0; x < 9; ++x) {
 				this.addSlot(new Slot(player.inventory, x + y * 9 + 9, 8 + x * 18, 84 + y * 18));
@@ -94,7 +94,7 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 
 				slot.onStackChanged(transfered, leftInHand);
 			} else if (index >= input.size() && index < 46) {
-				if (!this.insertItem(transfered, 0, 8, false)) {
+				if (!this.insertItem(transfered, 1, 9, false)) {
 					if (index < 37) {
 						if (!this.insertItem(transfered, 37, 46, false)) {
 							return ItemStack.EMPTY;
@@ -133,7 +133,7 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 
 	@Override
 	public int getCraftingResultSlotIndex() {
-		return InfusionTableEntity.OUTPUT_STACK;
+		return OUTPUT_SLOT;
 	}
 
 	@Override

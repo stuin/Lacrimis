@@ -15,6 +15,7 @@ import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.ShapedRecipe;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 
 public class CrucibleRecipe extends InfusionRecipe {
@@ -38,7 +39,12 @@ public class CrucibleRecipe extends InfusionRecipe {
     @Override
     @Environment(EnvType.CLIENT)
     public boolean fits(int width, int height) {
-        return width * height >= 2;
+        return width * height >= 1;
+    }
+
+    @Override
+    public DefaultedList<Ingredient> getPreviewInputs() {
+        return DefaultedList.ofSize(1, base);
     }
 
     @Override
