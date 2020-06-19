@@ -2,7 +2,7 @@ package modfest.lacrimis.item;
 
 import net.minecraft.item.Item;
 
-import modfest.lacrimis.util.TarotCardType;
+import modfest.lacrimis.tarot.TarotCardType;
 
 public class TarotCardItem extends Item {
 

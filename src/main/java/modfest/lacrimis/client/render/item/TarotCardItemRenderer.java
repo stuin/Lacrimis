@@ -12,14 +12,16 @@ import net.minecraft.util.math.Matrix4f;
 
 import modfest.lacrimis.client.cardgen.CardTextureGen;
 import modfest.lacrimis.item.TarotCardItem;
-import modfest.lacrimis.util.TarotCardType;
+import modfest.lacrimis.tarot.TarotCardType;
 
 public class TarotCardItemRenderer {
 
     public static void renderOverlay(ItemStack stack, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-        CardTextureGen.updateTexturesIfNeeded();
+        renderOverlay(((TarotCardItem) stack.getItem()).getType(), matrices, vertexConsumers, light, overlay);
+    }
 
-        TarotCardType type = ((TarotCardItem) stack.getItem()).getType();
+    public static void renderOverlay(TarotCardType type, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+        CardTextureGen.updateTexturesIfNeeded();
 
         Identifier tex = CardTextureGen.tarotCardTextureIds.get(type);
         VertexConsumer buffer = vertexConsumers.getBuffer(RenderLayer.getEntityCutout(tex));

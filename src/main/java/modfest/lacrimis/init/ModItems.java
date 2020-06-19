@@ -1,15 +1,13 @@
 package modfest.lacrimis.init;
 
-import java.util.Arrays;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.item.BottleOfTearsItem;
 import modfest.lacrimis.item.DiviningRodItem;
 import modfest.lacrimis.item.TarotCardItem;
 import modfest.lacrimis.item.armor.CustomArmorMaterials;
-import modfest.lacrimis.util.TarotCardType;
+import modfest.lacrimis.tarot.TarotCardType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
@@ -101,10 +99,7 @@ public class ModItems {
                 new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.FEET, TOOL_SETTINGS));
 
         baseTarot = register("base_tarot", new Item(TAROT_SETTINGS));
-        tarotCards = Arrays.stream(TarotCardType.values())
-                .collect(Collectors.toMap(
-                        k -> k,
-                        k -> register(String.format("tarot_card_%s", k.id), new TarotCardItem(k, TAROT_SETTINGS))));
+        tarotCards = TarotCardType.tarotInit(k -> register(String.format("tarot_card_%s", k.id), new TarotCardItem(k, TAROT_SETTINGS)));
 
         runeStone = register2("rune/stone", ModBlocks.runeStone);
         rune1 = register2("rune/tier1", ModBlocks.rune1);

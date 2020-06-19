@@ -27,7 +27,7 @@ import java.util.stream.Stream;
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.client.texture.FramebufferBackedTexture;
 import modfest.lacrimis.init.ModItems;
-import modfest.lacrimis.util.TarotCardType;
+import modfest.lacrimis.tarot.TarotCardType;
 import org.lwjgl.opengl.GL11;
 
 import net.dblsaiko.qcommon.croco.Mat4;

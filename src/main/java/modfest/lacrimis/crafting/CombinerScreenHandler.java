@@ -4,7 +4,7 @@ import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.CombinerEntity;
 import modfest.lacrimis.init.ModItems;
 import modfest.lacrimis.init.ModNetworking;
-import modfest.lacrimis.util.TarotCardType;
+import modfest.lacrimis.tarot.TarotCardType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.CraftingResultInventory;
 import net.minecraft.inventory.Inventory;
@@ -13,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 

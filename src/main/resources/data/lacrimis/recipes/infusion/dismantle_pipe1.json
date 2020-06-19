@@ -1,5 +1,5 @@
 {
-  "type": "lacrimis:crafting_shapeless",
+  "type": "lacrimis:infusion_shapeless",
   "ingredients": [
     {
       "item": "lacrimis:rune/pipe1"
