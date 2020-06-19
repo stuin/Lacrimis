@@ -2,7 +2,7 @@
   "name": "Rune Stone",
   "icon": "lacrimis:rune/stone",
   "category": "lacrimis:basics",
-  "advancement": "lacrimis:base/rune_stone",
+  "advancement": "lacrimis:base/tainted_sludge",
   "sortnum": 6,
   "pages": [
     {
@@ -12,7 +12,7 @@
     {
       "type": "crafting",
       "recipe": "lacrimis:crafting/rune_stone",
-      "text": "What can I make with rune stone and silver?"
+      "text": "What can I make with $(l:infusion/infusion_basics)rune stone and silver$(/l)?"
     }
   ]
 }

@@ -2,12 +2,12 @@
   "name": "Basic Rune Blocks",
   "icon": "lacrimis:rune/stone",
   "category": "lacrimis:cages",
-  "advancement": "lacrimis:recipes/rune_tier1",
+  "advancement": "lacrimis:base/rune_stone",
   "sortnum": 1,
   "pages": [
     {
       "type": "text",
-      "text": "By engraving silver into the blocks, they can disperse the soul tears in a slightly safer manor.$(br) I will need to make a proper structure out of this, something to contain the soul tears without being solid silver. Some kind of $(l:cages/tier_i)soul cage$(/l) perhaps?"
+      "text": "By engraving silver into the blocks, they can disperse the soul tears in a slightly safer manner.$(br) I will need to make a proper structure out of this, something to contain the soul tears without being solid silver. Some kind of $(l:cages/tier_i)soul cage$(/l) perhaps?"
     },
     {
       "type": "lacrimis:infusion",

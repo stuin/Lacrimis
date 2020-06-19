@@ -1,0 +1,18 @@
+{
+  "name": "Tear Soaked Iron",
+  "icon": "lacrimis:tear_ingot",
+  "category": "lacrimis:basics",
+  "advancement": "lacrimis:base/tear_ingot",
+  "sortnum": 6,
+  "pages": [
+    {
+      "type": "text",
+      "text": "This metal seems to almost \"hold\" the tears within it and they seem to react differently than if they weren't infused into the iron. I wonder if I can make armor out of this?"
+    },
+    {
+      "type": "lacrimis:crucible",
+      "recipe": "lacrimis:crucible/tear_ingot",
+      "text": "What can I make with $(l:infusion/infusion_basics)rune stone and silver$(/l)?"
+    }
+  ]
+}

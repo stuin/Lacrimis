@@ -2,7 +2,7 @@
   "name": "Conduit",
   "icon": "lacrimis:conduit",
   "category": "lacrimis:infusion",
-  "advancement": "lacrimis:base/conduit",
+  "advancement": "lacrimis:base/infusion_table",
   "sortnum": 2,
   "pages": [
     {
