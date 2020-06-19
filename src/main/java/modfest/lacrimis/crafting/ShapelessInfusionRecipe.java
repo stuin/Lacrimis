@@ -25,7 +25,7 @@ public class ShapelessInfusionRecipe extends InfusionRecipe {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return ModCrafting.SHAPED_INFUSION_SERIALIZER;
+		return ModCrafting.SHAPELESS_INFUSION_SERIALIZER;
 	}
 
 	@Override

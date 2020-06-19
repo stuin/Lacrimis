@@ -12,10 +12,10 @@ import modfest.lacrimis.client.cardgen.CardTextureGen;
 import modfest.lacrimis.client.render.blocks.CrucibleEntityRenderer;
 import modfest.lacrimis.client.render.blocks.InfusionTableEntityRenderer;
 import modfest.lacrimis.client.render.entity.GhostEntityRenderer;
+import modfest.lacrimis.init.ClientModCrafting;
 import modfest.lacrimis.init.ModBlockEntityTypes;
 import modfest.lacrimis.init.ModBlocks;
 import modfest.lacrimis.init.ModEntityTypes;
-import modfest.lacrimis.init.ModCrafting;
 import modfest.lacrimis.init.ModNetworking;
 import modfest.lacrimis.init.ModParticles;
 
@@ -35,7 +35,7 @@ public class ClientLacrimis implements ClientModInitializer {
 
         EntityRendererRegistry.INSTANCE.register(ModEntityTypes.ghost, (dispatcher, ctx) -> new GhostEntityRenderer(dispatcher));
 
-        ModCrafting.registerClient();
+        ClientModCrafting.register();
         ModNetworking.registerClient();
         ModParticles.registerClient();
         CardTextureGen.register();
