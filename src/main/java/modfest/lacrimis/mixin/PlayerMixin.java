@@ -8,8 +8,12 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerMixin extends LivingEntity implements CardHolder {
@@ -47,6 +51,7 @@ public abstract class PlayerMixin extends LivingEntity implements CardHolder {
                 return;
             }
         }
+        removeStatusEffect(cards[2].effect);
         cards[2] = cards[1];
         cards[1] = cards[0];
         cards[0] = type;
@@ -55,5 +60,31 @@ public abstract class PlayerMixin extends LivingEntity implements CardHolder {
     @Override
     public TarotCardType[] getCards() {
         return cards;
+    }
+    
+    @Inject(at = @At("TAIL"), method = "readCustomDataFromTag(Lnet/minecraft/nbt/CompoundTag;)V")
+    public void readCustomDataFromTag(CompoundTag tag, CallbackInfo ci) {
+        if(tag.contains("tarot0"))
+            cards[0] = TarotCardType.valueOf(tag.getString("tarot0"));
+        else
+            cards[0] = null;
+        if(tag.contains("tarot1"))
+            cards[1] = TarotCardType.valueOf(tag.getString("tarot1"));
+        else
+            cards[1] = null;
+        if(tag.contains("tarot2"))
+            cards[2] = TarotCardType.valueOf(tag.getString("tarot2"));
+        else
+            cards[2] = null;
+    }
+
+    @Inject(at = @At("TAIL"), method = "writeCustomDataToTag(Lnet/minecraft/nbt/CompoundTag;)V")
+    public void writeCustomDataToTag(CompoundTag tag, CallbackInfo ci) {
+        if(cards[0] != null)
+            tag.putString("tarot0", cards[0].name());
+        if(cards[1] != null)
+            tag.putString("tarot1", cards[1].name());
+        if(cards[2] != null)
+            tag.putString("tarot2", cards[2].name());
     }
 }
