@@ -17,6 +17,7 @@
   "item.lacrimis.warped_sigil": "Warped Sigil",
   "item.lacrimis.tainted_sludge": "Tainted Sludge",
   "item.lacrimis.solidified_tear": "Solidified Tear",
+  "item.lacrimis.broken_spawner": "Broken Spawner",
 
   "item.lacrimis.tear_soaked_helmet": "Tear Soaked Helmet",
   "item.lacrimis.tear_soaked_chestplate": "Tear Soaked Chestplate",
@@ -38,6 +39,7 @@
   "block.lacrimis.rune.entity_transport": "Soul Transport Rune",
   "block.lacrimis.rune.block_transport": "Block Transport Rune",
   "block.lacrimis.rune.warding": "Warding Rune",
+  "block.lacrimis.rune.spawner": "Spawner Breaking Rune",
 
   "effect.lacrimis.wavering_soul": "Wavering Soul",
 

@@ -5,16 +5,25 @@ import modfest.lacrimis.block.entity.CombinerEntity;
 import modfest.lacrimis.init.ModItems;
 import modfest.lacrimis.init.ModNetworking;
 import modfest.lacrimis.tarot.TarotCardType;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.CraftingResultInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.InventoryChangedListener;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
+
+import java.io.DataInput;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CombinerScreenHandler extends ScreenHandler implements InventoryChangedListener {
     private final CombinerEntity entity;
@@ -73,6 +82,31 @@ public class CombinerScreenHandler extends ScreenHandler implements InventoryCha
                             output.setStack(0, new ItemStack(ModItems.tarotCards.get(t)));
                         return;
                     }
+            if(entity.inventory.getStack(0).getItem() == ModItems.brokenSpawner)
+                if(output.getStack(0).isEmpty()) {
+                    String id = EntityType.getId(entity.type).toString();
+                    CompoundTag[] tags = new CompoundTag[5];
+                    for(int i = 0; i < tags.length; i++)
+                        tags[i] = new CompoundTag();
+
+                    //Build tags
+                    tags[4].putString("id", id);
+                    tags[3].put("Entity", tags[4]);
+                    tags[3].putInt("Weight", 1);
+                    ListTag list = new ListTag();
+                    list.add(tags[3]);
+                    tags[1].put("SpawnPotentials", list);
+                    tags[2].putString("id", id);
+                    tags[1].put("SpawnData", tags[2]);
+                    tags[0].put("BlockEntityTag", tags[1]);
+
+                    //Set output
+                    ItemStack stack = new ItemStack(Items.SPAWNER);
+                    stack.setTag(tags[0]);
+                    //{BlockEntityTag:{SpawnData:{id:"#ID"},SpawnPotentials:[{Entity:{id:"#ID"}, Weight:1}]}}
+                    output.setStack(0, stack);
+                }
+                return;
         }
         if(!output.getStack(0).isEmpty())
             output.setStack(0, ItemStack.EMPTY);

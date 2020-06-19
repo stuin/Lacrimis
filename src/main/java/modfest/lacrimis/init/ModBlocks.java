@@ -50,6 +50,7 @@ public class ModBlocks {
     public static SoulTeleportBlock transportRune;
     public static BlockTeleportBlock blockTransportRune;
     public static WardingBlock wardingRune;
+    public static SpawnerBreakerBlock spawnerRune;
 
     //Block tags
     public static Tag<Block> cage_materials;
@@ -84,6 +85,7 @@ public class ModBlocks {
         transportRune = register("rune/entity_transport", new SoulTeleportBlock(true));
         blockTransportRune = register("rune/block_transport", new BlockTeleportBlock());
         wardingRune = register("rune/warding", new WardingBlock());
+        spawnerRune = register("rune/spawner", new SpawnerBreakerBlock());
 
         //Block tags
         cage_materials = TagRegistry.block(new Identifier(Lacrimis.MODID, "cage_materials"));

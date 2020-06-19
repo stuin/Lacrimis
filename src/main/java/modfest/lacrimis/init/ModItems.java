@@ -42,6 +42,7 @@ public class ModItems {
     public static Item warpedSigil;
     public static Item taintedSludge;
     public static Item solidifiedTear;
+    public static Item brokenSpawner;
 
     public static Item tearSoakenHelmet;
     public static Item tearSoakenChestplate;
@@ -68,6 +69,7 @@ public class ModItems {
     public static BlockItem transportRune;
     public static BlockItem blockTransportRune;
     public static BlockItem wardingRune;
+    public static BlockItem spawnerRune;
 
     public static void register() {
         infusionTable = register("infusion_table", ModBlocks.infusionTable);
@@ -88,6 +90,7 @@ public class ModItems {
         warpedSigil = register("warped_sigil", new Item(SETTINGS));
         taintedSludge = register("tainted_sludge", new Item(SETTINGS));
         solidifiedTear = register("solidified_tear", new Item(SETTINGS));
+        brokenSpawner = register("broken_spawner", new Item(SETTINGS));
 
         tearSoakenHelmet = register("tear_soaked_helmet",
                 new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.HEAD, TOOL_SETTINGS));
@@ -114,6 +117,7 @@ public class ModItems {
         transportRune = register2("rune/entity_transport", ModBlocks.transportRune);
         blockTransportRune = register2("rune/block_transport", ModBlocks.blockTransportRune);
         wardingRune = register2("rune/warding", ModBlocks.wardingRune);
+        spawnerRune = register2("rune/spawner", ModBlocks.spawnerRune);
 
     }
 
