@@ -36,12 +36,12 @@ public class InfusionScreen extends HandledScreen<InfusionScreenHandler> impleme
         x = recipeBook.findLeftEdge(isNarrow, width, backgroundWidth);
         children.add(recipeBook);
         setInitialFocus(recipeBook);
-        /*addButton(new TexturedButtonWidget(x + 5, height / 2 - 49, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEXTURE, (buttonWidget) -> {
+        addButton(new TexturedButtonWidget(x + 5, height / 2 - 49, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEXTURE, (buttonWidget) -> {
             recipeBook.reset(isNarrow);
             recipeBook.toggleOpen();
             x = recipeBook.findLeftEdge(isNarrow, width, backgroundWidth);
             ((TexturedButtonWidget)buttonWidget).setPos(x + 5, height / 2 - 49);
-        }));*/
+        }));
         addButton(new TexturedButtonWidget(x + backgroundWidth - 54, y + titleY + 3, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEXTURE, (buttonWidget) -> {
             handler.startCrafting();
         }));

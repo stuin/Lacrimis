@@ -6,7 +6,8 @@
   "mixins": [
     "ClientRecipeBookMixin",
     "CryingObsidianMixin",
-    "PlayerMixin"
+    "PlayerMixin",
+    "RecipeBookResultsMixin"
   ],
   "client": [
     "ItemRendererMixin"

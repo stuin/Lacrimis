@@ -5,6 +5,7 @@ import net.minecraft.client.gui.screen.recipebook.RecipeResultCollection;
 import net.minecraft.client.recipebook.ClientRecipeBook;
 import net.minecraft.client.recipebook.RecipeBookGroup;
 import net.minecraft.recipe.Recipe;
+import net.minecraft.util.Identifier;
 
 import java.util.*;
 
@@ -20,14 +21,16 @@ public class CustomRecipeBook extends ClientRecipeBook {
     @Override
     public void reload() {
         this.results.clear();
-        results.add(new RecipeResultCollection());
 
         for(Recipe<?> recipe : manager.values()) {
             if(!recipe.isIgnoredInRecipeBook())
-                if(recipe instanceof InfusionRecipe)
-                    results.get(0).addRecipe(recipe);
+                if(recipe instanceof InfusionRecipe) {
+                    RecipeResultCollection collection = new RecipeResultCollection();
+                    collection.addRecipe(recipe);
+                    collection.initialize(source);
+                    results.add(collection);
+                }
         }
-        results.get(0).initialize(source);
     }
 
     @Override
@@ -37,6 +40,17 @@ public class CustomRecipeBook extends ClientRecipeBook {
 
     @Override
     public List<RecipeResultCollection> getResultsForGroup(RecipeBookGroup category) {
+        this.reload();
         return results;
+    }
+
+    @Override
+    public boolean contains(Identifier id) {
+        return true;
+    }
+
+    @Override
+    public boolean contains(Recipe<?> recipe) {
+        return recipe instanceof InfusionRecipe;
     }
 }
