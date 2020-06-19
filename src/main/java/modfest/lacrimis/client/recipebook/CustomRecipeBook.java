@@ -12,6 +12,7 @@ import java.util.*;
 public class CustomRecipeBook extends ClientRecipeBook {
     private final ClientRecipeBook source;
     private final List<RecipeResultCollection> results = new ArrayList<>();
+    private final List<RecipeResultCollection> searchResults = new ArrayList<>();
 
     public CustomRecipeBook(ClientRecipeBook source) {
         super(source.manager);
@@ -29,6 +30,7 @@ public class CustomRecipeBook extends ClientRecipeBook {
                     collection.addRecipe(recipe);
                     collection.initialize(source);
                     results.add(collection);
+                    searchResults.add(collection);
                 }
         }
     }
@@ -41,6 +43,8 @@ public class CustomRecipeBook extends ClientRecipeBook {
     @Override
     public List<RecipeResultCollection> getResultsForGroup(RecipeBookGroup category) {
         this.reload();
+        if(category == RecipeBookGroup.SEARCH)
+            return searchResults;
         return results;
     }
 
