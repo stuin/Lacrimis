@@ -1,5 +1,6 @@
 package modfest.lacrimis;
 
+import modfest.lacrimis.client.render.blocks.TarotAdderEntityRenderer;
 import net.minecraft.client.render.RenderLayer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -32,6 +33,9 @@ public class ClientLacrimis implements ClientModInitializer {
 
         BlockEntityRendererRegistry.INSTANCE.register(ModBlockEntityTypes.infusionTable, InfusionTableEntityRenderer::new);
         InfusionTableEntityRenderer.onInit();
+
+        BlockEntityRendererRegistry.INSTANCE.register(ModBlockEntityTypes.tarotAdder, TarotAdderEntityRenderer::new);
+        TarotAdderEntityRenderer.onInit();
 
         EntityRendererRegistry.INSTANCE.register(ModEntityTypes.ghost, (dispatcher, ctx) -> new GhostEntityRenderer(dispatcher));
 

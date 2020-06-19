@@ -5,6 +5,7 @@ import modfest.lacrimis.init.ModItems;
 import modfest.lacrimis.item.TarotCardItem;
 import modfest.lacrimis.tarot.CardHolder;
 import net.minecraft.block.BlockEntityProvider;
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
@@ -56,6 +57,11 @@ public class TarotAdderBlock extends CenterRuneBlock implements BlockEntityProvi
     @Override
     public BlockEntity createBlockEntity(BlockView world) {
         return new TarotAdderEntity();
+    }
+
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
     }
 
     @Override
