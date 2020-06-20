@@ -74,6 +74,7 @@ public class TarotAdderBlock extends CenterRuneBlock implements BlockEntityProvi
             if(adder.card != null && entity instanceof LivingEntity) {
                 ((LivingEntity) entity).addStatusEffect(adder.card.effect.newInstance());
                 adder.card = null;
+                adder.hasBlank = true;
                 return true;
             } else if(adder.hasBlank) {
                 adder.card = ((CardHolder) entity).removeCard();

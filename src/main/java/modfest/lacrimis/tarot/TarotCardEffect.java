@@ -24,7 +24,7 @@ public class TarotCardEffect extends CustomStatusEffect {
         if(entity instanceof CardHolder && !entity.hasStatusEffect(this)) {
             for(TarotCardType card : ((CardHolder) entity).getCards())
                 if(card == type) {
-                    //entity.applyStatusEffect(newInstance());
+                    entity.applyStatusEffect(newInstance());
                     entity.addStatusEffect(newInstance());
                 }
         }

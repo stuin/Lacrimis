@@ -18,6 +18,7 @@ public class ModStatusEffects {
 
     public static StatusEffect WAVERING_SOUL;
     public static Map<TarotCardType, TarotCardEffect> tarotEffects;
+    public static StatusEffect TAROT_COOLDOWN;
 
     public static void register() {
         WAVERING_SOUL = register("wavering_soul", new CustomStatusEffect(StatusEffectType.NEUTRAL, 13793020) {
@@ -31,6 +32,7 @@ public class ModStatusEffects {
                 super.onRemoved(entity, attributes, amplifier);
             }
         });
+        TAROT_COOLDOWN = register("tarot_cooldown", new CustomStatusEffect(StatusEffectType.NEUTRAL, 13793020));
 
         tarotEffects = TarotCardType.tarotInit(k -> register(String.format("tarot_card_%s", k.id), k.effect));
     }

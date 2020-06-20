@@ -1,28 +1,48 @@
 package modfest.lacrimis.mixin;
 
+import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.init.ModStatusEffects;
 import modfest.lacrimis.tarot.CardHolder;
 import modfest.lacrimis.tarot.TarotCardEffect;
 import modfest.lacrimis.tarot.TarotCardType;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.World;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Random;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerMixin extends LivingEntity implements CardHolder {
     private final TarotCardType[] cards = new TarotCardType[3];
+    
+    @Final @Shadow
+    public PlayerAbilities abilities;
 
     protected PlayerMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
 
+    private void addEffect(LivingEntity entity, StatusEffect effect, int duration, int level) {
+        if(!entity.hasStatusEffect(ModStatusEffects.TAROT_COOLDOWN)) {
+            entity.addStatusEffect(new StatusEffectInstance(effect, duration, level));
+            entity.addStatusEffect(new StatusEffectInstance(ModStatusEffects.TAROT_COOLDOWN, duration - 1, 1));
+        }
+    }
+    
     @Override
     public boolean clearStatusEffects() {
         boolean b = super.clearStatusEffects();
@@ -39,6 +59,55 @@ public abstract class PlayerMixin extends LivingEntity implements CardHolder {
         if(type instanceof TarotCardEffect)
             ((TarotCardEffect) type).reapply(this);
         return b;
+    }
+
+    @Inject(at = @At("HEAD"), cancellable = true, method = "damage(Lnet/minecraft/entity/damage/DamageSource;F)Z")
+    public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+        if(this.isInvulnerableTo(source))
+            cir.setReturnValue(false);
+        else if(abilities.invulnerable && !source.isOutOfWorld())
+            cir.setReturnValue(false);
+
+        //General damage effects
+        if(source.isFire() && hasStatusEffect(TarotCardType.THE_CHARIOT.effect))
+            cir.setReturnValue(false);
+        if(hasStatusEffect(TarotCardType.THE_LOVERS.effect))
+            addEffect(this, StatusEffects.REGENERATION, 100, 3);
+        if(hasStatusEffect(TarotCardType.THE_HIGH_PRIESTESS.effect))
+            addEffect(this, randomEffect(), 200, 1);
+        if(hasStatusEffect(TarotCardType.TEMPERANCE.effect))
+            addEffect(this, StatusEffects.RESISTANCE, 50, 1);
+        if(isSneaking() && hasStatusEffect(TarotCardType.THE_HERMIT.effect))
+            addEffect(this, StatusEffects.RESISTANCE, 50, 2);
+        
+        //Attacker based effects
+        if(source.getAttacker() instanceof LivingEntity) {
+            if(hasStatusEffect(TarotCardType.JUSTICE.effect))
+                addEffect((LivingEntity)source.getAttacker(), StatusEffects.WEAKNESS, 100, 2);
+            if(hasStatusEffect(TarotCardType.JUDGEMENT.effect))
+                source.getAttacker().damage(DamageSource.thorns(this), amount * 2);
+            if(hasStatusEffect(TarotCardType.THE_TOWER.effect))
+                source.getAttacker().setOnFireFor(5);
+        }
+    }
+
+    private StatusEffect randomEffect() {
+        switch(random.nextInt(6)) {
+            case 1:
+                return StatusEffects.ABSORPTION;
+            case 2:
+                return StatusEffects.HEALTH_BOOST;
+            case 3:
+                return StatusEffects.HASTE;
+            case 4:
+                return StatusEffects.JUMP_BOOST;
+            case 5:
+                return StatusEffects.SPEED;
+            case 6:
+                return StatusEffects.STRENGTH;
+            default:
+                return StatusEffects.NIGHT_VISION;
+        }
     }
 
     @Override

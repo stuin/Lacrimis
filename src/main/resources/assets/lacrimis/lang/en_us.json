@@ -43,6 +43,7 @@
   "block.lacrimis.rune.tarot_adder": "Tarot Adding Rune",
 
   "effect.lacrimis.wavering_soul": "Wavering Soul",
+  "effect.lacrimis.tarot_cooldown": "Tarot Card Reset",
 
   "lacrimis.tooltip.crucible": "%s Tears",
   "lacrimis.tooltip.rune.tears": "Base cost: %s Tears",
