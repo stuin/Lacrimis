@@ -1,0 +1,23 @@
+{
+  "type": "lacrimis:infusion_shaped",
+  "pattern": [
+    "RPR",
+    "PSP",
+    "RPR"
+  ],
+  "key": {
+    "R": {
+      "item": "lacrimis:rune/stone"
+    },
+    "S": {
+      "item": "lacrimis:warped_sigil"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    }
+  },
+  "result": {
+    "item": "lacrimis:rune/block_transport"
+  },
+  "tears": 300
+}

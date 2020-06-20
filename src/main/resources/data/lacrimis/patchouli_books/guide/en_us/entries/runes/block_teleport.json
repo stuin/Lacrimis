@@ -10,11 +10,9 @@
       "text": "Now this one has some potential, scarily so if I might add. Connect two of these runes together and you can teleport blocks long distances. It even works on all my storage devices! (Not from both ends at once)."
     },
     {
-      "type": "rune",
-      "item": "lacrimis:rune/block_transport",
-      "cost": "500",
-      "tier": "II",
-      "text": "Swaps blocks at long distance, but at a steeper price."
+      "type": "lacrimis:infusion",
+      "recipe": "lacrimis:infusion/rune_block_transport",
+      "text": "Run cost: 500 Tears$(br)$(l:cages/tier_ii)Tier II Soul Cage$(/l)$(br2)Swaps blocks at long distance, but at a steeper price."
      }
   ]
 }

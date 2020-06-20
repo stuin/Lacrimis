@@ -1,0 +1,23 @@
+{
+  "type": "lacrimis:infusion_shaped",
+  "pattern": [
+    "RDR",
+    "DTD",
+    "RDR"
+  ],
+  "key": {
+    "R": {
+      "item": "lacrimis:rune/stone"
+    },
+    "T": {
+      "item": "lacrimis:base_tarot"
+    },
+    "D": {
+      "item": "minecraft:dispenser"
+    }
+  },
+  "result": {
+    "item": "lacrimis:rune/tarot_adder"
+  },
+  "tears": 400
+}

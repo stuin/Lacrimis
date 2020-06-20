@@ -10,11 +10,9 @@
       "text": "The combination of the Extraction rune and the Destination rune works exactly as I hoped. A teleporter that can both send and receive, though it is no less dangerous than the originals."
     },
     {
-      "type": "rune",
-      "item": "lacrimis:rune/entity_transport",
-      "cost": "200",
-      "tier": "II",
-      "text": "Noticeably more efficient to use, which is nice."
+      "type": "lacrimis:infusion",
+      "recipe": "lacrimis:infusion/rune_entity_transport",
+      "text": "Run cost: 200 Tears$(br)$(l:cages/tier_ii)Tier II Soul Cage$(/l)$(br2)Noticeably more efficient to use, which is nice."
      }
   ]
 }

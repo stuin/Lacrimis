@@ -1,0 +1,23 @@
+{
+  "type": "lacrimis:infusion_shaped",
+  "pattern": [
+    "RIR",
+    "IPI",
+    "RIR"
+  ],
+  "key": {
+    "R": {
+      "item": "lacrimis:rune/stone"
+    },
+    "P": {
+      "item": "minecraft:ender_pearl"
+    },
+    "I": {
+      "item": "lacrimis:tear_ingot"
+    }
+  },
+  "result": {
+    "item": "lacrimis:rune/extraction"
+  },
+  "tears": 200
+}

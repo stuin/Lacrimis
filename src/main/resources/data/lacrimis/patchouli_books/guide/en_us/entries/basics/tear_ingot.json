@@ -3,7 +3,7 @@
   "icon": "lacrimis:tear_ingot",
   "category": "lacrimis:basics",
   "advancement": "lacrimis:base/tear_ingot",
-  "sortnum": 6,
+  "sortnum": 5,
   "pages": [
     {
       "type": "text",

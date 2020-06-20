@@ -10,11 +10,9 @@
       "text": "The obvious follower of the Extraction Rune is the Destination Rune, an output that can reconstruct a soul from the chaos within the tears. $(#f00)Be warned,$() as it may bring some other materials along for the ride. Test it on some other creatures first. And wear safety googles."
     },
     {
-      "type": "rune",
-      "item": "lacrimis:rune/destination",
-      "cost": "300",
-      "tier": "I",
-      "text": "A rune that cannot be activated, at least from this end.$(br)Try the $(l:runes/extraction)Extraction Rune.$(/l)"
+      "type": "lacrimis:infusion",
+      "recipe": "lacrimis:infusion/rune_destination",
+      "text": "Run cost: 300 Tears$(br)$(l:cages/tier_i)Tier I Soul Cage$(/l)$(br2)A rune that cannot be activated, at least from this end.$(br)Try the $(l:runes/extraction)Extraction Rune.$(/l)"
     }
   ]
 }

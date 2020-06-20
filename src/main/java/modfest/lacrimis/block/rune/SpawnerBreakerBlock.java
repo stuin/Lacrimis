@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 
 public class SpawnerBreakerBlock extends CenterRuneBlock {
     public SpawnerBreakerBlock() {
-        super(1000, 3);
+        super(600, 3);
     }
 
     @Override

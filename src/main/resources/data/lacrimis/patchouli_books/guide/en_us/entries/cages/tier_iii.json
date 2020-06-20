@@ -3,11 +3,19 @@
   "icon": "lacrimis:rune/tier2",
   "category": "lacrimis:cages",
   "advancement": "lacrimis:recipes/rune_tier3",
-  "sortnum": 5,
+  "sortnum": 3,
   "pages": [
     {
       "type": "text",
-      "text": "For a tier III soul cage, you need eleven tier II runes, a tier II conduit connector, and seven tier III runes. $(br)Tier I or tier II core runes used in a tier III soul cage will only need half the tears to run"
+      "text": "To make runes any more powerful, I needed the most powerful of ingredients. A single nether star is required to build a tier III soul cage. It is not to be undertaken lightly."
+    },
+    {
+      "type": "lacrimis:infusion",
+      "recipe": "lacrimis:infusion/rune_tier3"
+    },
+    {
+      "type": "text",
+      "text": "A tier III soul cage requires eleven tier II runes, a tier II conduit connector, and seven tier III runes. $(br)Tier I or tier II core runes used in a tier III soul cage will only need half the tears to run"
     },
     {
       "type": "multiblock",

@@ -10,11 +10,9 @@
       "text": "Now this one is not to be trifled with, nor is it useful on its own. This extraction rune can absorb the essence and soul of a being and store them inside the tears. I have theorized that this can be used for some kind of teleportation, though it will not work with this rune alone."
     },
     {
-      "type": "rune",
-      "item": "lacrimis:rune/extraction",
-      "cost": "300",
-      "tier": "I",
-      "text": "Thankfully it does not work without a proper endpoint, such as the $(l:runes/destination)Destination Rune.$(/l)"
+      "type": "lacrimis:infusion",
+      "recipe": "lacrimis:infusion/rune_extraction",
+      "text": "Run cost: 300 Tears$(br)$(l:cages/tier_i)Tier I Soul Cage$(/l)$(br2)Thankfully it does not work without a proper endpoint, such as the $(l:runes/destination)Destination Rune.$(/l)"
     }
   ]
 }

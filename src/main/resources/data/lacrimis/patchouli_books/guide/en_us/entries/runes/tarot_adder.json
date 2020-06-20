@@ -1,0 +1,18 @@
+{
+  "name": "Tarot Adder (Tier III)",
+  "icon": "lacrimis:rune/tarot_adder",
+  "category": "lacrimis:runes",
+  "advancement": "lacrimis:recipes/rune_tier3",
+  "sortnum": 7,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Another very specialized rune, this block is used to add or remove tarot card effects from a person."
+    },
+    {
+      "type": "lacrimis:infusion",
+      "recipe": "lacrimis:infusion/rune_tarot_adder",
+      "text": "Run cost: 500 Tears$(br)$(l:cages/tier_iii)Tier III Soul Cage$(/l)$(br2)"
+    }
+  ]
+}

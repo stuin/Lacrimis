@@ -3,7 +3,7 @@
   "icon": "lacrimis:rune/flip",
   "category": "lacrimis:cages",
   "advancement": "lacrimis:base/rune_tier1",
-  "sortnum": 2,
+  "sortnum": 4,
   "pages": [
     {
       "type": "text",

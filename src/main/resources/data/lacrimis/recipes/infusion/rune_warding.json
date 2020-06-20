@@ -1,0 +1,23 @@
+{
+  "type": "lacrimis:infusion_shaped",
+  "pattern": [
+    "ROR",
+    "ODO",
+    "ROR"
+  ],
+  "key": {
+    "R": {
+      "item": "lacrimis:rune/stone"
+    },
+    "O": {
+      "item": "minecraft:crying_obsidian"
+    },
+    "D": {
+      "item": "minecraft:diamond_block"
+    }
+  },
+  "result": {
+    "item": "lacrimis:rune/warding"
+  },
+  "tears": 400
+}

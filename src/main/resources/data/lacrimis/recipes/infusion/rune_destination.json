@@ -1,0 +1,23 @@
+{
+  "type": "lacrimis:infusion_shaped",
+  "pattern": [
+    "RIR",
+    "IPI",
+    "RIR"
+  ],
+  "key": {
+    "R": {
+      "item": "lacrimis:rune/stone"
+    },
+    "P": {
+      "item": "lacrimis:warped_sigil"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "lacrimis:rune/destination"
+  },
+  "tears": 200
+}
