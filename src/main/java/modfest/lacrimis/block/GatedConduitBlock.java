@@ -15,7 +15,7 @@ public class GatedConduitBlock extends ConduitBlock {
 
     public GatedConduitBlock(Settings settings) {
         super(settings);
-        setDefaultState(getDefaultState().with(POWERED, false));
+        setDefaultState(getDefaultState().with(POWERED, false).with(NODE, true));
     }
 
     @Override
