@@ -45,6 +45,8 @@
   "effect.lacrimis.wavering_soul": "Wavering Soul",
   "effect.lacrimis.tarot_cooldown": "Tarot Card Reset",
 
+  "enchantment.lacrimis.warded": "Warded",
+
   "lacrimis.tooltip.crucible": "%s Tears",
   "lacrimis.tooltip.rune.tears": "Base cost: %s Tears",
   "lacrimis.tooltip.rune.tier1": "Tier I Soul Cage required",

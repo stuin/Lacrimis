@@ -7,6 +7,7 @@ import modfest.lacrimis.item.BottleOfTearsItem;
 import modfest.lacrimis.item.DiviningRodItem;
 import modfest.lacrimis.item.TarotCardItem;
 import modfest.lacrimis.item.armor.CustomArmorMaterials;
+import modfest.lacrimis.item.armor.SoakedArmor;
 import modfest.lacrimis.tarot.TarotCardType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EquipmentSlot;
@@ -94,13 +95,13 @@ public class ModItems {
         brokenSpawner = register("broken_spawner", new Item(SETTINGS));
 
         tearSoakenHelmet = register("tear_soaked_helmet",
-                new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.HEAD, TOOL_SETTINGS));
+                new SoakedArmor(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.HEAD, TOOL_SETTINGS));
         tearSoakenChestplate = register("tear_soaked_chestplate",
-                new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.CHEST, TOOL_SETTINGS));
+                new SoakedArmor(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.CHEST, TOOL_SETTINGS));
         tearSoakenLeggings = register("tear_soaked_leggings",
-                new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.LEGS, TOOL_SETTINGS));
+                new SoakedArmor(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.LEGS, TOOL_SETTINGS));
         tearSoakenBoots = register("tear_soaked_boots",
-                new ArmorItem(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.FEET, TOOL_SETTINGS));
+                new SoakedArmor(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.FEET, TOOL_SETTINGS));
 
         baseTarot = register("base_tarot", new Item(TAROT_SETTINGS));
         tarotCards = TarotCardType.tarotInit(k -> register(String.format("tarot_card_%s", k.id), new TarotCardItem(k, TAROT_SETTINGS)));

@@ -40,6 +40,7 @@ public class Lacrimis implements ModInitializer {
         ModSounds.register();
         ModParticles.register();
         ModStatusEffects.register();
+        ModEnchantments.register();
 
         FabricDefaultAttributeRegistry.register(ModEntityTypes.ghost, GhostEntity.createGhostAttributes());
     }
