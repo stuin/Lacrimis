@@ -10,9 +10,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldAccess;
 
-import java.util.EnumSet;
 import java.util.Map;
 
 public class OneWayConduitBlock extends FacingBlock implements BlockConduitConnect {
@@ -29,34 +27,19 @@ public class OneWayConduitBlock extends FacingBlock implements BlockConduitConne
 
     public OneWayConduitBlock(Settings settings) {
         super(settings);
+        setDefaultState(getDefaultState().with(NORTH, false).with(EAST, false).with(SOUTH, false).with(WEST, false).with(UP, false).with(DOWN, false));
     }
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.connectToBlocks(this.getDefaultState(), ctx.getWorld(), ctx.getBlockPos()).with(FACING, ctx.getPlayerLookDirection());
-    }
-
-    protected BlockState connectToBlocks(BlockState state, WorldAccess world, BlockPos pos) {
-        EnumSet<Direction.Axis> axes = EnumSet.noneOf(Direction.Axis.class);
-        int connections = 0;
-        for (Direction direction : Direction.values()) {
-            BooleanProperty property = FACING_PROPERTIES.get(direction);
-            boolean value = this.connectsTo(world, pos.offset(direction),  direction);
-
-            state = state.with(property, value);
-            if (value) {
-                axes.add(direction.getAxis());
-                connections++;
-            }
-        }
-
+        BlockState state = this.getDefaultState().with(FACING, ctx.getPlayerLookDirection());
+        if (state.get(FACING) == Direction.NORTH || state.get(FACING) == Direction.SOUTH)
+            state = state.with(NORTH, Boolean.TRUE).with(SOUTH, Boolean.TRUE);
+        if (state.get(FACING) == Direction.UP || state.get(FACING) == Direction.DOWN)
+            state = state.with(UP, Boolean.TRUE).with(DOWN, Boolean.TRUE);
+        if (state.get(FACING) == Direction.EAST || state.get(FACING) == Direction.WEST)
+            state = state.with(EAST, Boolean.TRUE).with(WEST, Boolean.TRUE);
         return state;
-    }
-
-    private boolean connectsTo(WorldAccess world, BlockPos pos, Direction side) {
-        BlockState state = world.getBlockState(pos);
-        Block block = state.getBlock();
-        return block instanceof ConduitBlock || block instanceof BlockConduitConnect && ((BlockConduitConnect) block).canConnectConduitTo(pos, world, side);
     }
 
     @Override
@@ -88,13 +71,13 @@ public class OneWayConduitBlock extends FacingBlock implements BlockConduitConne
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        int idx = (byte)(state.get(FACING) == Direction.DOWN?3:0) |
-                (byte)(state.get(FACING) == Direction.UP?3:0) |
-                (byte)(state.get(FACING) == Direction.NORTH?12:0) |
-                (byte)(state.get(FACING) == Direction.SOUTH?12:0) |
-                (byte)(state.get(FACING) == Direction.WEST?48:0) |
-                (byte)(state.get(FACING) == Direction.EAST?48:0) |
-                (byte)(64);
+        int idx = (byte) (state.get(FACING) == Direction.DOWN ? 3 : 0) |
+                (byte) (state.get(FACING) == Direction.UP ? 3 : 0) |
+                (byte) (state.get(FACING) == Direction.NORTH ? 12 : 0) |
+                (byte) (state.get(FACING) == Direction.SOUTH ? 12 : 0) |
+                (byte) (state.get(FACING) == Direction.WEST ? 48 : 0) |
+                (byte) (state.get(FACING) == Direction.EAST ? 48 : 0) |
+                (byte) (64);
         return SHAPES[idx];
     }
 
@@ -105,7 +88,7 @@ public class OneWayConduitBlock extends FacingBlock implements BlockConduitConne
         float max = 0.5F + radius;
         VoxelShape center = VoxelShapes.cuboid(min, min, min, max, max, max);
 
-        VoxelShape[] connections = new VoxelShape[] {
+        VoxelShape[] connections = new VoxelShape[]{
                 VoxelShapes.cuboid(min, 0f, min, max, max, max),
                 VoxelShapes.cuboid(min, min, min, max, 1f, max),
                 VoxelShapes.cuboid(min, min, 0f, max, max, max),

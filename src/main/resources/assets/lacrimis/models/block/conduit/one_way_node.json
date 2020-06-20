@@ -1,20 +1,21 @@
 {
   "parent": "block/block",
   "textures": {
-    "particle": "#block",
-    "block": "lacrimis:block/one_way_conduit_node"
+    "particle": "#arrows",
+    "arrows": "lacrimis:block/one_way_conduit_node",
+    "face": "lacrimis:block/conduit_node"
   },
   "elements": [
     {
       "from": [6, 6, 6],
       "to": [10, 10, 10],
       "faces": {
-        "north": { "texture": "#block" },
-        "south": { "texture": "#block" },
-        "east": { "texture": "#block" },
-        "west": { "texture": "#block" },
-        "up": { "texture": "#block" },
-        "down": { "texture": "#block" }
+        "north": { "texture": "#arrows"},
+        "south": { "texture": "#arrows" },
+        "east": { "texture": "#arrows" },
+        "west": { "texture": "#arrows" },
+        "up": { "texture": "#face" },
+        "down": { "texture": "#face" }
       }
     }
   ]
