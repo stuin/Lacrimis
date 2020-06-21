@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 
 public enum CustomArmorMaterials implements ArmorMaterial {
 
-    TEAR_SOAKEN("tear_soaked", 16, new int[]{3,6,7,3}, 30, SoundEvents.BLOCK_CHAIN_BREAK, 0.0F, () -> {
+    TEAR_SOAKEN("tear_soaked", 16, new int[]{3,6,7,3}, 17, SoundEvents.BLOCK_CHAIN_BREAK, 0.0F, () -> {
         return Ingredient.ofItems(ModItems.tearIngot);
     }, 0.0F);
 

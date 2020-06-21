@@ -8,6 +8,8 @@ import modfest.lacrimis.item.DiviningRodItem;
 import modfest.lacrimis.item.TarotCardItem;
 import modfest.lacrimis.item.armor.CustomArmorMaterials;
 import modfest.lacrimis.item.armor.SoakedArmor;
+import modfest.lacrimis.item.tools.CustomToolMaterials;
+import modfest.lacrimis.item.tools.SoakenSword;
 import modfest.lacrimis.tarot.TarotCardType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EquipmentSlot;
@@ -49,6 +51,8 @@ public class ModItems {
     public static Item tearSoakenChestplate;
     public static Item tearSoakenLeggings;
     public static Item tearSoakenBoots;
+
+    public static Item tearSoakenSword;
 
     // Tarot cards
     public static Item baseTarot;
@@ -94,6 +98,7 @@ public class ModItems {
         solidifiedTear = register("solidified_tear", new Item(SETTINGS));
         brokenSpawner = register("broken_spawner", new Item(SETTINGS));
 
+        // I just realized the inconsistency of soaken/soaked woops, fix later or never >:D
         tearSoakenHelmet = register("tear_soaked_helmet",
                 new SoakedArmor(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.HEAD, TOOL_SETTINGS));
         tearSoakenChestplate = register("tear_soaked_chestplate",
@@ -102,6 +107,8 @@ public class ModItems {
                 new SoakedArmor(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.LEGS, TOOL_SETTINGS));
         tearSoakenBoots = register("tear_soaked_boots",
                 new SoakedArmor(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.FEET, TOOL_SETTINGS));
+
+        tearSoakenSword = register("tear_soaked_sword", new SoakenSword(CustomToolMaterials.SOAKEN ,3,-2.4F, TOOL_SETTINGS));
 
         baseTarot = register("base_tarot", new Item(TAROT_SETTINGS));
         tarotCards = TarotCardType.tarotInit(k -> register(String.format("tarot_card_%s", k.id), new TarotCardItem(k, TAROT_SETTINGS)));

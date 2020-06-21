@@ -24,6 +24,8 @@
   "item.lacrimis.tear_soaked_leggings": "Tear Soaked Leggings",
   "item.lacrimis.tear_soaked_boots": "Tear Soaked Boots",
 
+  "item.lacrimis.tear_soaked_sword": "Tear Soaked Blade",
+
   "item.lacrimis.base_tarot": "Empty Tarot Card",
 
   "block.lacrimis.rune.stone": "Rune Stone",
@@ -43,6 +45,7 @@
   "block.lacrimis.rune.tarot_adder": "Tarot Adding Rune",
 
   "effect.lacrimis.wavering_soul": "Wavering Soul",
+  "effect.lacrimis.tear_poison": "Tear Poison",
   "effect.lacrimis.tarot_cooldown": "Tarot Card Reset",
 
   "enchantment.lacrimis.warded": "Warded",

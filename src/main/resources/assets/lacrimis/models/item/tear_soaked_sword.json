@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "lacrimis:item/tear_soaked_sword"
+  }
+}
