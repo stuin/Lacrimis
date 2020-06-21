@@ -14,6 +14,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.tag.FluidTags;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -77,8 +78,6 @@ public abstract class PlayerMixin extends LivingEntity implements CardHolder {
             addEffect(this, randomEffect(), 200, 1);
         if(hasStatusEffect(TarotCardType.TEMPERANCE.effect))
             addEffect(this, StatusEffects.RESISTANCE, 50, 1);
-        if(isSneaking() && hasStatusEffect(TarotCardType.THE_HERMIT.effect))
-            addEffect(this, StatusEffects.RESISTANCE, 50, 2);
         
         //Attacker based effects
         if(source.getAttacker() instanceof LivingEntity) {
@@ -89,6 +88,18 @@ public abstract class PlayerMixin extends LivingEntity implements CardHolder {
             if(hasStatusEffect(TarotCardType.THE_TOWER.effect))
                 source.getAttacker().setOnFireFor(5);
         }
+    }
+
+    @Inject(at = @At("HEAD"), method = "tick()V")
+    public void tick(CallbackInfo ci) {
+        if(hasStatusEffect(TarotCardType.THE_HIEROPHANT.effect) && hasStatusEffect(StatusEffects.SLOWNESS))
+            removeStatusEffect(StatusEffects.SLOWNESS);
+        if(isSneaking() && hasStatusEffect(TarotCardType.THE_HERMIT.effect) && !hasStatusEffect(StatusEffects.RESISTANCE)) {
+            addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 20));
+            addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 21, 2));
+        }
+        if(hasStatusEffect(TarotCardType.TEMPERANCE.effect) && isSubmergedIn(FluidTags.WATER))
+            addEffect(this, StatusEffects.DOLPHINS_GRACE, 100, 1);
     }
 
     private StatusEffect randomEffect() {

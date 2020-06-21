@@ -3,6 +3,7 @@ package modfest.lacrimis.block.rune;
 import modfest.lacrimis.util.ConduitUtil;
 import modfest.lacrimis.util.TaintPacket;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -31,7 +32,10 @@ public class SoulTeleportBlock extends SoulExtractionBlock {
         Direction flipped = flipside(world, pos);
         if(value instanceof Entity && testCage(world, pos, flipped, null) > 0) {
             int vertical = flipped == Direction.UP ? 1 : -(int)Math.ceil(((Entity) value).getHeight());
-            ((Entity) value).teleport(pos.getX() + 0.5, pos.getY() + vertical, pos.getZ() + 0.5);
+            if(value instanceof LivingEntity)
+                ((LivingEntity) value).teleport(pos.getX() + 0.5, pos.getY() + vertical, pos.getZ() + 0.5, true);
+            else
+                ((Entity) value).teleport(pos.getX() + 0.5, pos.getY() + vertical, pos.getZ() + 0.5);
 
             TaintPacket taint = new TaintPacket(250);
             if(ConduitUtil.locateSink(world, getPipe(world, pos), taint) == null && world instanceof World)

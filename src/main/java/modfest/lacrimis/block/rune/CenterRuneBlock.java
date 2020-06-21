@@ -32,6 +32,7 @@ import java.util.List;
 
 public abstract class CenterRuneBlock extends Block implements Activatable, BlockConduitConnect {
     private static final Box TARGET_BOX = new Box(-0.5, -1, -0.5, 1.5, 1, 1.5);
+    private static final Box LARGE_BOX = new Box(-1.5, -1, -1.5, 2.5, 1, 2.5);
 
     public static final IntProperty PIPE;
     public static final BooleanProperty POWERED;
@@ -112,10 +113,14 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
         return requiredTears;
     }
 
-    private boolean runOnce(World world, BlockPos pos, BlockPos pipe, PlayerEntity player, Direction flipped) {
+    private boolean runOnce(World world, BlockPos pos, BlockPos pipe, PlayerEntity player, Direction flipped, int tier) {
+        Box box = TARGET_BOX;
+        if(tier > 2)
+            box = LARGE_BOX;
+        
         //For all entities on platform
         pos = pos.offset(flipped);
-        for(Entity entity : world.getEntities(null, TARGET_BOX.offset(pos.offset(flipped)))) {
+        for(Entity entity : world.getEntities(null, box.offset(pos.offset(flipped)))) {
             if(activate(world, pos, pipe, entity, player))
                 return true;
         }
@@ -156,7 +161,7 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
         //Grab required tears
         List<ConduitEntry> tearsList = ConduitUtil.listScanConduits(world, pipe, true);
         if(ConduitUtil.locateTearsStrong(world, tearsList, actualCost(tier), true)) {
-            if(runOnce(world, pos, pipe, player, flipped)) {
+            if(runOnce(world, pos, pipe, player, flipped, tier)) {
                 ConduitUtil.locateTearsStrong(world, tearsList, actualCost(tier), false);
                 return true;
             }
