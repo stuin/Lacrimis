@@ -1,6 +1,5 @@
 package modfest.lacrimis.mixin;
 
-import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.init.ModStatusEffects;
 import modfest.lacrimis.tarot.CardHolder;
 import modfest.lacrimis.tarot.TarotCardEffect;
@@ -23,8 +22,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.util.Random;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerMixin extends LivingEntity implements CardHolder {
@@ -92,6 +89,7 @@ public abstract class PlayerMixin extends LivingEntity implements CardHolder {
 
     @Inject(at = @At("HEAD"), method = "tick()V")
     public void tick(CallbackInfo ci) {
+        //Situational tarot effects
         if(hasStatusEffect(TarotCardType.THE_HIEROPHANT.effect) && hasStatusEffect(StatusEffects.SLOWNESS))
             removeStatusEffect(StatusEffects.SLOWNESS);
         if(isSneaking() && hasStatusEffect(TarotCardType.THE_HERMIT.effect) && !hasStatusEffect(StatusEffects.RESISTANCE)) {
@@ -100,6 +98,12 @@ public abstract class PlayerMixin extends LivingEntity implements CardHolder {
         }
         if(hasStatusEffect(TarotCardType.TEMPERANCE.effect) && isSubmergedIn(FluidTags.WATER))
             addEffect(this, StatusEffects.DOLPHINS_GRACE, 100, 1);
+    }
+
+    @Inject(at = @At("HEAD"), cancellable = true, method = "method_29920()Z")
+    public void method_29920(CallbackInfoReturnable<Boolean> cir) {
+        if(hasStatusEffect(TarotCardType.THE_HIEROPHANT.effect))
+            cir.setReturnValue(false);
     }
 
     private StatusEffect randomEffect() {

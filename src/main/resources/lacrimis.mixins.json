@@ -4,8 +4,10 @@
   "package": "modfest.lacrimis.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "ClientMixin",
     "ClientRecipeBookMixin",
     "CryingObsidianMixin",
+    "OptionsMixin",
     "PlayerMixin",
     "RecipeBookResultsMixin",
     "VillagerMixin"

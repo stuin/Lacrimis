@@ -50,6 +50,8 @@
 
   "enchantment.lacrimis.warded": "Warded",
 
+  "lacrimis.key.tarotAbility": "Lacrimis Tarot Ability",
+
   "lacrimis.tooltip.crucible": "%s Tears",
   "lacrimis.tooltip.rune.tears": "Base cost: %s Tears",
   "lacrimis.tooltip.rune.tier1": "Tier I Soul Cage required",
