@@ -11,7 +11,7 @@
     },
     {
       "type": "lacrimis:infusion",
-      "recipe": "lacrimis:infusion/rune_flipped",
+      "recipe": "lacrimis:infusion/rune_flip",
       "text": "It can even be used to stack two rune cages on top of each other, and have them share some walls."
     }
   ]

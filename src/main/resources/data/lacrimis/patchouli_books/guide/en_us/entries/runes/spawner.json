@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "A rune with a very specific purpose, this allows for the breaking and repurposing of mob spawners. Activate it to turn a spawner block into a broken item, which can be re activated in the soul combiner."
+      "text": "A rune with a very specific purpose, this allows for the breaking and repurposing of mob spawners. Activate it to turn a spawner block into a broken item, which can be re activated in the $(l:infusion/combiner)Soul Combiner$(/l)."
     },
     {
       "type": "lacrimis:infusion",

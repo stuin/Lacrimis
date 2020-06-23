@@ -53,6 +53,7 @@
   "lacrimis.key.tarotAbility": "Lacrimis Tarot Ability",
 
   "lacrimis.tooltip.crucible": "%s Tears",
+  "lacrimis.tooltip.spawner": " Spawner",
   "lacrimis.tooltip.rune.tears": "Base cost: %s Tears",
   "lacrimis.tooltip.rune.tier1": "Tier I Soul Cage required",
   "lacrimis.tooltip.rune.tier2": "Tier II Soul Cage required",
@@ -87,6 +88,8 @@
   "lacrimis.advancements.tainted_sludge.description": "Throw some Cobblestone into the Crucible",
   "lacrimis.advancements.tear_ingot.title": "Eww soggy iron!",
   "lacrimis.advancements.tear_ingot.description": "Create Tear Soaked Iron",
+  "lacrimis.advancements.tear_armor.title": "Nice while it lasted",
+  "lacrimis.advancements.tear_armor.description": "Craft a piece of Tear Soaked Armor",
   "lacrimis.advancements.rune_stone.title": "Plain innovation",
   "lacrimis.advancements.rune_stone.description": "Craft some Rune Stone",
   "lacrimis.advancements.infusion_table.title": "A proper workstation",

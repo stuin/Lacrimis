@@ -1,0 +1,23 @@
+{
+  "type": "lacrimis:infusion_shaped",
+  "pattern": [
+    "OIO",
+    "ISI",
+    "OIO"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "S": {
+      "item": "minecraft:smithing_table"
+    },
+    "I": {
+      "item": "lacrimis:tear_ingot"
+    }
+  },
+  "result": {
+    "item": "lacrimis:combiner"
+  },
+  "tears": 400
+}

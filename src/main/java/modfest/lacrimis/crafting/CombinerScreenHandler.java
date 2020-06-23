@@ -18,6 +18,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
@@ -102,7 +103,10 @@ public class CombinerScreenHandler extends ScreenHandler implements InventoryCha
 
                     //Set output
                     ItemStack stack = new ItemStack(Items.SPAWNER);
+                    MutableText text = new TranslatableText(entity.type.getTranslationKey());
+                    text.append(new TranslatableText(Lacrimis.MODID + ".tooltip.spawner"));
                     stack.setTag(tags[0]);
+                    stack.setCustomName(text);
                     //{BlockEntityTag:{SpawnData:{id:"#ID"},SpawnPotentials:[{Entity:{id:"#ID"}, Weight:1}]}}
                     output.setStack(0, stack);
                 }

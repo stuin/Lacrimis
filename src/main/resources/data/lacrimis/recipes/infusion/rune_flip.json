@@ -1,0 +1,15 @@
+{
+  "type": "lacrimis:infusion_shapeless",
+  "ingredients": [
+    {
+      "item": "lacrimis:rune/stone"
+    },
+    {
+      "item": "minecraft:sticky_piston"
+    }
+  ],
+  "result": {
+    "item": "lacrimis:rune/flip"
+  },
+  "tears": 100
+}

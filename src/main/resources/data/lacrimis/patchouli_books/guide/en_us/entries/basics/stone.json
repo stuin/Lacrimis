@@ -3,7 +3,7 @@
   "icon": "lacrimis:rune/stone",
   "category": "lacrimis:basics",
   "advancement": "lacrimis:base/tainted_sludge",
-  "sortnum": 6,
+  "sortnum": 7,
   "pages": [
     {
       "type": "text",
