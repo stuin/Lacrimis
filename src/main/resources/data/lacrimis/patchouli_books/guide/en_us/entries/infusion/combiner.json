@@ -2,7 +2,7 @@
   "name": "Soul Combiner",
   "icon": "lacrimis:combiner",
   "category": "lacrimis:infusion",
-  "advancement": "lacrimis:base/infusion_table",
+  "advancement": "lacrimis:base/solidified_tear",
   "sortnum": 5,
   "pages": [
     {

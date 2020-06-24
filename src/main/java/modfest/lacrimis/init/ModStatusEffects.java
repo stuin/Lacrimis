@@ -64,7 +64,7 @@ public class ModStatusEffects {
 
         TAROT_COOLDOWN = register("tarot_cooldown", new CustomStatusEffect(StatusEffectType.NEUTRAL, 13793020));
 
-        tarotEffects = TarotCardType.tarotInit(k -> register(String.format("tarot_card_%s", k.id), k.effect));
+        tarotEffects = TarotCardType.tarotInit(k -> register(String.format("tarot/%s", k.id), k.effect));
     }
 
     private static <T extends StatusEffect> T register(String name, T StatusEffect) {

@@ -1,19 +1,25 @@
 {
-  "parent": "lacrimis:base/solidified_tear",
+  "parent": "lacrimis:base/infusion_table",
   "display": {
     "icon": {
-      "item": "lacrimis:tarot/base"
+      "item": "lacrimis:solidified_tear"
     },
     "title": {
-      "translate": "lacrimis.advancements.base_tarot.title"
+      "translate": "lacrimis.advancements.solidified_tear.title"
     },
     "description": {
-      "translate": "lacrimis.advancements.base_tarot.description"
+      "translate": "lacrimis.advancements.solidified_tear.description"
     },
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false
+  },
+  "rewards": {
+    "recipes": [
+      "lacrimis:infusion/base_tarot",
+      "lacrimis:infusion/taint_output"
+    ]
   },
   "criteria": {
     "collect": {
@@ -21,7 +27,7 @@
       "conditions": {
         "items": [
           {
-            "item": "lacrimis:tarot/base"
+            "item": "lacrimis:solidified_tear"
           }
         ]
       }
