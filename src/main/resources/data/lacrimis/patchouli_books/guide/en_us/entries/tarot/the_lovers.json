@@ -2,12 +2,19 @@
   "name": "The Lovers",
   "icon": "lacrimis:tarot_card_the_lovers",
   "category": "lacrimis:tarot",
-  "advancement": "lacrimis:recipes/rune_tier3",
+  "advancement": "lacrimis:base/base_tarot",
   "sortnum": 7,
   "pages": [
     {
       "type": "text",
       "text": "This is a very useful and straightforward card, giving the bearer regeneration whenever they are attacked."
+    },
+    {
+      "type": "tarot",
+      "card": "lacrimis:tarot_card_the_lovers",
+      "source": "minecraft:skeleton",
+      "sourcen": "Skeleton",
+      "small": false
     }
   ]
 }

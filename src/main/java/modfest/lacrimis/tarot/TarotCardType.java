@@ -22,7 +22,7 @@ public enum TarotCardType {
     THE_LOVERS("the_lovers", EntityType.SKELETON, null), // TODO: skeleton horseman
     THE_CHARIOT("the_chariot", EntityType.STRIDER, null),
     STRENGTH("strength", EntityType.IRON_GOLEM, null),
-    THE_HERMIT("the_hermit", EntityType.SHULKER, TarotCardType::initShulker, null),
+    THE_HERMIT("the_hermit", EntityType.SHULKER, TarotCardType::initShulker, null), //10
     WHEEL_OF_FORTUNE("wheel_of_fortune", EntityType.VILLAGER, null),
     JUSTICE("justice", EntityType.VINDICATOR, null),
     THE_HANGED_MAN("the_hanged_man", EntityType.PILLAGER, null),
@@ -32,7 +32,7 @@ public enum TarotCardType {
     THE_TOWER("the_tower", EntityType.BLAZE, null),
     THE_STAR("the_star", null, null),
     THE_MOON("the_moon", null, null),
-    THE_SUN("the_sun", null, null),
+    THE_SUN("the_sun", null, null), //20
     JUDGEMENT("judgement", EntityType.PUFFERFISH, e -> e.setPuffState(2), null),
     THE_WORLD("the_world", EntityType.ENDERMAN, null),
     ;

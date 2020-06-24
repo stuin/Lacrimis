@@ -1,0 +1,35 @@
+{
+  "parent": "lacrimis:base/infusion_table",
+  "display": {
+    "icon": {
+      "item": "lacrimis:base_tarot"
+    },
+    "title": {
+      "translate": "lacrimis.advancements.base_tarot.title"
+    },
+    "description": {
+      "translate": "lacrimis.advancements.base_tarot.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "collect": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "lacrimis:base_tarot"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "collect"
+    ]
+  ]
+}

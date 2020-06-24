@@ -9,9 +9,4 @@ public class BottleOfTearsItem extends Item {
 		super(settings);
 	}
 
-	@Override
-	public boolean hasEnchantmentGlint(ItemStack stack) {
-		return true;
-	}
-
 }
