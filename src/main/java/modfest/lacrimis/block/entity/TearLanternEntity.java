@@ -39,7 +39,7 @@ public class TearLanternEntity extends BlockEntity implements Tickable {
                                         double yrand = Math.random() * 0.2 - 0.1;
                                         double zrand = Math.random() * 0.2 - 0.1;
 
-                                        world.addParticle(ModParticles.PURPLE_MIST, this.pos.getX() + 0.5 + xrand, this.pos.getY() + 0.2 + yrand, this.pos.getZ() + 0.5 + zrand, x * 0.02, y * 0.02, z * 0.02);
+                                        world.addParticle(ModParticles.OBSIDIAN_TEAR_FLYING, this.pos.getX() + 0.5 + xrand, this.pos.getY() + 0.2 + yrand, this.pos.getZ() + 0.5 + zrand, x * 0.02, y * 0.02, z * 0.02);
                                     }
                                     break;
                                 }
