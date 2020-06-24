@@ -1,5 +1,6 @@
 package modfest.lacrimis.block.entity;
 
+import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.init.ModBlockEntityTypes;
 import modfest.lacrimis.tarot.TarotCardType;
 import net.minecraft.block.BlockState;
@@ -19,8 +20,11 @@ public class TarotAdderEntity extends BlockEntity {
         super.fromTag(state, tag);
         if(tag.getString("card").equals("null"))
             card = null;
-        else
-            card = TarotCardType.valueOf(tag.getString("card"));
+        else try {
+                card = TarotCardType.valueOf(tag.getString("card"));
+        } catch(IllegalArgumentException e) {
+            Lacrimis.LOGGER.warn("Background error while loading TarotAdderEntity");
+        }
         hasBlank = tag.getBoolean("hasBlank");
     }
 

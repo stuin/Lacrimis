@@ -88,7 +88,7 @@ public class ModItems {
         tearLantern = register("tear_lantern", ModBlocks.tearLantern);
         drainedCryingObsidian = register("drained_crying_obsidian", ModBlocks.drainedCryingObsidian);
         creativeTearsBlock = register("creative_tears_block", ModBlocks.creativeTearsBlock);
-        wardedStone = register("warded_stone", ModBlocks.wardedStone);
+        wardedStone = register("warded", ModBlocks.wardedStone);
 
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
         diviningRod = register("divining_rod", new DiviningRodItem(TOOL_SETTINGS));
@@ -110,8 +110,8 @@ public class ModItems {
 
         tearSoakenSword = register("tear_soaked_sword", new SoakenSword(CustomToolMaterials.SOAKEN ,3,-2.4F, TOOL_SETTINGS));
 
-        baseTarot = register("base_tarot", new Item(TAROT_SETTINGS));
-        tarotCards = TarotCardType.tarotInit(k -> register(String.format("tarot_card_%s", k.id), new TarotCardItem(k, TAROT_SETTINGS)));
+        baseTarot = register("tarot/base", new Item(TAROT_SETTINGS));
+        tarotCards = TarotCardType.tarotInit(k -> register(String.format("tarot/%s", k.id), new TarotCardItem(k, TAROT_SETTINGS)));
 
         runeStone = register2("rune/stone", ModBlocks.runeStone);
         rune1 = register2("rune/tier1", ModBlocks.rune1);

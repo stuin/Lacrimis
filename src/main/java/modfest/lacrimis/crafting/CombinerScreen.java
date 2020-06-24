@@ -1,6 +1,7 @@
 package modfest.lacrimis.crafting;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import modfest.lacrimis.Lacrimis;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
@@ -8,7 +9,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class CombinerScreen extends HandledScreen<CombinerScreenHandler> {
-    private static final Identifier TEXTURE = new Identifier("textures/gui/container/smithing.png");
+    private static final Identifier TEXTURE = new Identifier(Lacrimis.MODID, "textures/gui/combiner.png");
 
     public CombinerScreen(CombinerScreenHandler handler, PlayerInventory playerInventory, Text title) {
         super(handler, playerInventory, title);

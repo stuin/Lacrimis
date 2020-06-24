@@ -34,6 +34,13 @@
   ],
   "accessWidener": "lacrimis.accesswidener",
 
+  "custom": {
+    "modupdater": {
+      "strategy": "curseforge",
+      "projectID": 0
+    }
+  },
+
   "depends": {
     "fabricloader": ">=0.8.8",
     "fabric": "*",

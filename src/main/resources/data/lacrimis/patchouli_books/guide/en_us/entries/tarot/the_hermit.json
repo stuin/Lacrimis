@@ -1,6 +1,6 @@
 {
   "name": "The Hermit",
-  "icon": "lacrimis:tarot_card_the_hermit",
+  "icon": "lacrimis:tarot/the_hermit",
   "category": "lacrimis:tarot",
   "advancement": "lacrimis:base/base_tarot",
   "sortnum": 10,
@@ -11,7 +11,7 @@
     },
     {
       "type": "tarot",
-      "card": "lacrimis:tarot_card_the_hermit",
+      "card": "lacrimis:tarot/the_hermit",
       "source": "minecraft:shulker",
       "sourcen": "Shulker",
       "small": true

@@ -2,7 +2,7 @@
   "parent": "lacrimis:base/infusion_table",
   "display": {
     "icon": {
-      "item": "lacrimis:base_tarot"
+      "item": "lacrimis:tarot/base"
     },
     "title": {
       "translate": "lacrimis.advancements.base_tarot.title"
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "lacrimis:base_tarot"
+            "item": "lacrimis:tarot/base"
           }
         ]
       }

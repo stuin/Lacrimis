@@ -1,6 +1,6 @@
 {
   "name": "Tarot Cards",
   "description": "The powers of Tarot Cards",
-  "icon": "lacrimis:base_tarot",
+  "icon": "lacrimis:tarot/base",
   "sortnum": 5
 }
