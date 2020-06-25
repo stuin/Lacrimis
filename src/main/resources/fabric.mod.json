@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Lacrimis",
-  "description": "Modfest 1.16 Team Fire",
+  "description": "Extracting the magical powers of the soul.",
   "authors": [
     "2xsaiko",
     "amo",
@@ -13,7 +13,7 @@
     "stuin"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/lacrimis",
     "sources": "https://github.com/2xsaiko/modfest-1.16.git"
   },
 
@@ -37,7 +37,7 @@
   "custom": {
     "modupdater": {
       "strategy": "curseforge",
-      "projectID": 0
+      "projectID": 391921
     }
   },
 

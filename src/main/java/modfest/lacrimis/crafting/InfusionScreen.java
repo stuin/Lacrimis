@@ -2,6 +2,7 @@ package modfest.lacrimis.crafting;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
+import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.client.recipebook.CustomRecipeBookWidget;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -21,6 +22,7 @@ import net.minecraft.util.Identifier;
 public class InfusionScreen extends HandledScreen<InfusionScreenHandler> implements RecipeBookProvider {
     private static final Identifier TEXTURE = new Identifier("textures/gui/container/crafting_table.png");
     private static final Identifier RECIPE_BUTTON_TEXTURE = new Identifier("textures/gui/recipe_button.png");
+    private static final Identifier START_BUTTON_TEXTURE = new Identifier(Lacrimis.MODID, "textures/gui/start_button.png");
     private final RecipeBookWidget recipeBook = new CustomRecipeBookWidget();
     private TexturedButtonWidget startButton;
     private boolean isNarrow;
@@ -37,7 +39,7 @@ public class InfusionScreen extends HandledScreen<InfusionScreenHandler> impleme
         x = recipeBook.findLeftEdge(isNarrow, width, backgroundWidth);
         children.add(recipeBook);
         setInitialFocus(recipeBook);
-        startButton = new TexturedButtonWidget(x + backgroundWidth - 54, y + titleY + 3, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEXTURE, (buttonWidget) -> {
+        startButton = new TexturedButtonWidget(x + backgroundWidth - 54, y + titleY + 3, 20, 18, 0, 0, 19, START_BUTTON_TEXTURE, (buttonWidget) -> {
             handler.startCrafting();
         });
         addButton(startButton);

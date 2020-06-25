@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Another very specialized rune, this block is used to add or remove tarot card effects from a person."
+      "text": "Another very specialized rune, this block is used to add or remove tarot card effects from a person. Click the card into the center block and activate. No more than three cards can be on a person at a time. Use a blank tarot card to remove the oldest effect."
     },
     {
       "type": "lacrimis:infusion",
