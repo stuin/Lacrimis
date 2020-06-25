@@ -19,7 +19,8 @@
     },
     {
       "type": "lacrimis:infusion",
-      "recipe": "lacrimis:infusion/base_tarot"
+      "recipe": "lacrimis:infusion/base_tarot",
+      "text": "Use the Tarot Adder Rune to apply a cards abilities to yourself."
     }
   ]
 }

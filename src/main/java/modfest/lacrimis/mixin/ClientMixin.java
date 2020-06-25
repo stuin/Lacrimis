@@ -31,7 +31,7 @@ public abstract class ClientMixin {
         //Custom key input
         if(player instanceof CardHolder && options instanceof CustomOptions) {
             while(((CustomOptions) options).getKeyTarot().wasPressed()) {
-                Lacrimis.LOGGER.info("Tarot Button pressed");
+                //Lacrimis.LOGGER.info("Tarot Button pressed");
                 for(int i = ((CardHolder) player).getCards().length; i > 0; i--) {
                     TarotCardType card = ((CardHolder) player).getCards()[i - 1];
                     if(card == TarotCardType.THE_WORLD) {
