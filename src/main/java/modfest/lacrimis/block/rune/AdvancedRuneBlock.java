@@ -40,7 +40,7 @@ public class AdvancedRuneBlock extends RuneBlock {
                 if(block instanceof PipeConnectorBlock) {
                     if(pipe) {
                         if(world instanceof World)
-                            ((World) world).setBlockState(pos, world.getBlockState(pos).with(PIPE, 8));
+                            ((World) world).setBlockState(pos, world.getBlockState(pos).with(PIPE, 3));
                         return -3;
                     }
                     pipe = true;
