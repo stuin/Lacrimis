@@ -1,13 +1,15 @@
 package modfest.lacrimis.client.recipebook;
 
-import modfest.lacrimis.crafting.InfusionRecipe;
 import net.minecraft.client.gui.screen.recipebook.RecipeResultCollection;
 import net.minecraft.client.recipebook.ClientRecipeBook;
 import net.minecraft.client.recipebook.RecipeBookGroup;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.util.Identifier;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import modfest.lacrimis.crafting.InfusionRecipe;
 
 public class CustomRecipeBook extends ClientRecipeBook {
     private final ClientRecipeBook source;
@@ -23,15 +25,14 @@ public class CustomRecipeBook extends ClientRecipeBook {
     public void reload() {
         this.results.clear();
 
-        for(Recipe<?> recipe : manager.values()) {
-            if(!recipe.isIgnoredInRecipeBook())
-                if(recipe instanceof InfusionRecipe) {
-                    RecipeResultCollection collection = new RecipeResultCollection();
-                    collection.addRecipe(recipe);
-                    collection.initialize(source);
-                    results.add(collection);
-                    searchResults.add(collection);
-                }
+        for (Recipe<?> recipe : manager.values()) {
+            if (!recipe.isIgnoredInRecipeBook() && recipe instanceof InfusionRecipe) {
+                RecipeResultCollection collection = new RecipeResultCollection();
+                collection.addRecipe(recipe);
+                collection.initialize(source);
+                results.add(collection);
+                searchResults.add(collection);
+            }
         }
     }
 
@@ -43,8 +44,7 @@ public class CustomRecipeBook extends ClientRecipeBook {
     @Override
     public List<RecipeResultCollection> getResultsForGroup(RecipeBookGroup category) {
         this.reload();
-        if(category == RecipeBookGroup.SEARCH)
-            return searchResults;
+        if (category == RecipeBookGroup.SEARCH) return searchResults;
         return results;
     }
 

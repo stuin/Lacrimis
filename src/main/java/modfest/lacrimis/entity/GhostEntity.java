@@ -32,11 +32,6 @@ public class GhostEntity extends HostileEntity {
         this.targetSelector.add(5, new FollowTargetGoal<>(this, TurtleEntity.class, 10, true, false, TurtleEntity.BABY_TURTLE_ON_LAND_FILTER));
     }
 
-    @Override
-    public void tickMovement() {
-        super.tickMovement();
-    }
-
     public static DefaultAttributeContainer.Builder createGhostAttributes() {
         return HostileEntity.createHostileAttributes()
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0)

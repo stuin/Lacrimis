@@ -1,21 +1,20 @@
 package modfest.lacrimis.init;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.entity.effect.CustomDamageSources;
-import modfest.lacrimis.entity.effect.CustomStatusEffect;
-import modfest.lacrimis.tarot.TarotCardType;
-import modfest.lacrimis.tarot.TarotCardEffect;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectType;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import java.util.Map;
+
+import modfest.lacrimis.Lacrimis;
+import modfest.lacrimis.entity.effect.CustomDamageSources;
+import modfest.lacrimis.entity.effect.CustomStatusEffect;
+import modfest.lacrimis.tarot.TarotCardEffect;
+import modfest.lacrimis.tarot.TarotCardType;
 
 public class ModStatusEffects {
 
@@ -64,7 +63,7 @@ public class ModStatusEffects {
 
         TAROT_COOLDOWN = register("tarot_cooldown", new CustomStatusEffect(StatusEffectType.NEUTRAL, 13793020));
 
-        tarotEffects = TarotCardType.tarotInit(k -> register(String.format("tarot/%s", k.id), k.effect));
+        tarotEffects = TarotCardType.withValues(k -> register(String.format("tarot/%s", k.id), k.effect));
     }
 
     private static <T extends StatusEffect> T register(String name, T StatusEffect) {

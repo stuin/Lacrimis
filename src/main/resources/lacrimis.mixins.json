@@ -7,7 +7,6 @@
     "ClientMixin",
     "ClientRecipeBookMixin",
     "CryingObsidianMixin",
-    "OptionsMixin",
     "PlayerMixin",
     "RecipeBookResultsMixin",
     "VillagerMixin"

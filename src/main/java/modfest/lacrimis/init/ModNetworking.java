@@ -1,17 +1,5 @@
 package modfest.lacrimis.init;
 
-import java.util.stream.Stream;
-
-import io.netty.buffer.Unpooled;
-import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.block.entity.CombinerEntity;
-import modfest.lacrimis.block.entity.InfusionTableEntity;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
-import net.fabricmc.fabric.api.network.PacketContext;
-import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
-import net.fabricmc.fabric.api.server.PlayerStream;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
@@ -20,11 +8,25 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
+import net.fabricmc.fabric.api.network.PacketContext;
+import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
+import net.fabricmc.fabric.api.server.PlayerStream;
+
+import java.util.stream.Stream;
+
+import io.netty.buffer.Unpooled;
+
+import modfest.lacrimis.Lacrimis;
+import modfest.lacrimis.block.entity.CombinerEntity;
+import modfest.lacrimis.block.entity.InfusionTableEntity;
 
 public class ModNetworking {
-    public static final Identifier CRUCIBLE_PARTICLES_ID = new Identifier(Lacrimis.MODID + ":crucible_particles");
-    public static final Identifier INFUSION_START_ID = new Identifier(Lacrimis.MODID + ":infusion_start");
-    public static final Identifier COMBINER_NULL_ID = new Identifier(Lacrimis.MODID + ":combiner_null");
+    public static final Identifier CRUCIBLE_PARTICLES_ID = new Identifier(Lacrimis.MODID, "crucible_particles");
+    public static final Identifier INFUSION_START_ID = new Identifier(Lacrimis.MODID, "infusion_start");
+    public static final Identifier COMBINER_NULL_ID = new Identifier(Lacrimis.MODID, "combiner_null");
 
     public static void register() {
         ServerSidePacketRegistry.INSTANCE.register(INFUSION_START_ID, ModNetworking::handleInfusionStartPacket);

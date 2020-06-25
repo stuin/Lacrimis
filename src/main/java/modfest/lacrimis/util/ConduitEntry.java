@@ -1,12 +1,13 @@
 package modfest.lacrimis.util;
 
-import modfest.lacrimis.block.BlockConduitConnect;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 
 import java.util.Objects;
+
+import modfest.lacrimis.block.BlockConduitConnect;
 
 public final class ConduitEntry {
     public final BlockConduitConnect b;
@@ -58,6 +59,6 @@ public final class ConduitEntry {
 
     @Override
     public String toString() {
-        return String.format("Entry { b: %s, pos: %s, state: %s }", this.b, this.pos, this.state);
+        return String.format("ConduitEntry { b: %s, pos: %s, state: %s }", this.b, this.pos, this.state);
     }
 }

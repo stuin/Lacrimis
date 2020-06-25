@@ -1,7 +1,5 @@
 package modfest.lacrimis.block.rune;
 
-import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.util.ConduitUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
@@ -9,10 +7,13 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import modfest.lacrimis.Lacrimis;
+import modfest.lacrimis.util.ConduitUtil;
+
 public class SoulExtractionBlock extends CenterRuneBlock {
 
     public SoulExtractionBlock() {
-        this(300,1);
+        this(300, 1);
     }
 
     public SoulExtractionBlock(int requiredTears, int requiredTier) {
@@ -25,7 +26,7 @@ public class SoulExtractionBlock extends CenterRuneBlock {
             BlockPos destination = ConduitUtil.locateSink(world, pipe, entity);
             if(destination != null) {
                 if(!world.isClient)
-                    Lacrimis.LOGGER.info("Soul Extracted");
+                    Lacrimis.LOGGER.debug("Soul Extracted");
                 return true;
             } else
                 error(player, "destination");

@@ -12,8 +12,8 @@ public class CustomRecipeBookWidget extends RecipeBookWidget {
         if (this.isOpen()) {
             this.reset(isNarrow);
         }
-        if(recipesArea instanceof RecipeBookReciever)
-            ((RecipeBookReciever) recipesArea).setRecipeBook(recipeBook);
+        if (recipesArea instanceof RecipeBookReceiver)
+            ((RecipeBookReceiver) recipesArea).setRecipeBook(recipeBook);
     }
 
 

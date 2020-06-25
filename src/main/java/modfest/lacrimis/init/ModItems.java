@@ -1,5 +1,12 @@
 package modfest.lacrimis.init;
 
+import net.minecraft.block.Block;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
+
 import java.util.Map;
 
 import modfest.lacrimis.Lacrimis;
@@ -11,13 +18,6 @@ import modfest.lacrimis.item.armor.SoakedArmor;
 import modfest.lacrimis.item.tools.CustomToolMaterials;
 import modfest.lacrimis.item.tools.SoakenSword;
 import modfest.lacrimis.tarot.TarotCardType;
-import net.minecraft.block.Block;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 public class ModItems {
     private static final Item.Settings SETTINGS = new Item.Settings().group(Lacrimis.ITEM_GROUP);
@@ -108,26 +108,26 @@ public class ModItems {
         tearSoakenBoots = register("tear_soaked_boots",
                 new SoakedArmor(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.FEET, TOOL_SETTINGS));
 
-        tearSoakenSword = register("tear_soaked_sword", new SoakenSword(CustomToolMaterials.SOAKEN ,3,-2.4F, TOOL_SETTINGS));
+        tearSoakenSword = register("tear_soaked_sword", new SoakenSword(CustomToolMaterials.SOAKEN, 3, -2.4F, TOOL_SETTINGS));
 
         baseTarot = register("tarot/base", new Item(TAROT_SETTINGS));
-        tarotCards = TarotCardType.tarotInit(k -> register(String.format("tarot/%s", k.id), new TarotCardItem(k, TAROT_SETTINGS)));
+        tarotCards = TarotCardType.withValues(k -> register(String.format("tarot/%s", k.id), new TarotCardItem(k, TAROT_SETTINGS)));
 
-        runeStone = register2("rune/stone", ModBlocks.runeStone);
-        rune1 = register2("rune/tier1", ModBlocks.rune1);
-        rune2 = register2("rune/tier2", ModBlocks.rune2);
-        rune3 = register2("rune/tier3", ModBlocks.rune3);
-        flipRune = register2("rune/flip", ModBlocks.flipRune);
-        pipeRune1 = register2("rune/pipe1", ModBlocks.pipeRune1);
-        pipeRune2 = register2("rune/pipe2", ModBlocks.pipeRune2);
-        healRune = register2("rune/healing", ModBlocks.healRune);
-        extractionRune = register2("rune/extraction", ModBlocks.extractionRune);
-        destinationRune = register2("rune/destination", ModBlocks.destinationRune);
-        transportRune = register2("rune/entity_transport", ModBlocks.transportRune);
-        blockTransportRune = register2("rune/block_transport", ModBlocks.blockTransportRune);
-        wardingRune = register2("rune/warding", ModBlocks.wardingRune);
-        spawnerRune = register2("rune/spawner", ModBlocks.spawnerRune);
-        tarotAdderRune = register2("rune/tarot_adder", ModBlocks.tarotAdderRune);
+        runeStone = registerRune("rune/stone", ModBlocks.runeStone);
+        rune1 = registerRune("rune/tier1", ModBlocks.rune1);
+        rune2 = registerRune("rune/tier2", ModBlocks.rune2);
+        rune3 = registerRune("rune/tier3", ModBlocks.rune3);
+        flipRune = registerRune("rune/flip", ModBlocks.flipRune);
+        pipeRune1 = registerRune("rune/pipe1", ModBlocks.pipeRune1);
+        pipeRune2 = registerRune("rune/pipe2", ModBlocks.pipeRune2);
+        healRune = registerRune("rune/healing", ModBlocks.healRune);
+        extractionRune = registerRune("rune/extraction", ModBlocks.extractionRune);
+        destinationRune = registerRune("rune/destination", ModBlocks.destinationRune);
+        transportRune = registerRune("rune/entity_transport", ModBlocks.transportRune);
+        blockTransportRune = registerRune("rune/block_transport", ModBlocks.blockTransportRune);
+        wardingRune = registerRune("rune/warding", ModBlocks.wardingRune);
+        spawnerRune = registerRune("rune/spawner", ModBlocks.spawnerRune);
+        tarotAdderRune = registerRune("rune/tarot_adder", ModBlocks.tarotAdderRune);
 
     }
 
@@ -139,7 +139,7 @@ public class ModItems {
         return register(name, new BlockItem(block, SETTINGS));
     }
 
-    private static BlockItem register2(String name, Block block) {
+    private static BlockItem registerRune(String name, Block block) {
         return register(name, new BlockItem(block, RUNE_SETTINGS));
     }
 

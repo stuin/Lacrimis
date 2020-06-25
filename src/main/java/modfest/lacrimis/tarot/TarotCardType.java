@@ -47,10 +47,10 @@ public enum TarotCardType {
         this.cover = cover;
         this.init = init;
 
-        if(effect == null)
-            this.effect = new TarotCardEffect(this);
-        else
-            this.effect = effect;
+        // TODO there can never be a value other than null passed here since
+        //      TarotCardEffect needs a TarotCardType instance, which isn't
+        //      accessible from the enum value constructors
+        this.effect = effect == null ? new TarotCardEffect(this) : effect;
     }
 
     TarotCardType(String id, EntityType<?> cover, TarotCardEffect effect) {
@@ -76,7 +76,7 @@ public enum TarotCardType {
         }
     }
 
-    public static <T> Map<TarotCardType, T> tarotInit(Function<TarotCardType, T> func) {
+    public static <T> Map<TarotCardType, T> withValues(Function<TarotCardType, T> func) {
         return Arrays.stream(TarotCardType.values())
                 .collect(Collectors.toMap(k -> k, func));
     }

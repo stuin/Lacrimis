@@ -47,6 +47,9 @@ public class ModCrafting {
     @SerializedName("crafting_texture")
     public static final Identifier craftingTexture = new Identifier("lacrimis", "textures/gui/crafting.png");
 
+    // Don't convert the container factories to lambdas, it will cause the mod
+    // to crash on the server because of class loading
+    @SuppressWarnings("Convert2Lambda")
     public static void register() {
         ContainerProviderRegistry.INSTANCE.registerFactory(INFUSION_SCREEN_ID, new ContainerFactory<ScreenHandler>() {
             @Override
@@ -65,12 +68,12 @@ public class ModCrafting {
             }
         });
 
-        Registry.register(Registry.RECIPE_TYPE, Lacrimis.MODID + ":infusion", INFUSION_RECIPE);
-        Registry.register(Registry.RECIPE_TYPE, Lacrimis.MODID + ":crucible", CRUCIBLE_RECIPE);
+        Registry.register(Registry.RECIPE_TYPE, new Identifier(Lacrimis.MODID, "infusion"), INFUSION_RECIPE);
+        Registry.register(Registry.RECIPE_TYPE, new Identifier(Lacrimis.MODID, "crucible"), CRUCIBLE_RECIPE);
 
-        Registry.register(Registry.RECIPE_SERIALIZER, Lacrimis.MODID + ":infusion_shaped", SHAPED_INFUSION_SERIALIZER);
-        Registry.register(Registry.RECIPE_SERIALIZER, Lacrimis.MODID + ":infusion_shapeless", SHAPELESS_INFUSION_SERIALIZER);
-        Registry.register(Registry.RECIPE_SERIALIZER, Lacrimis.MODID + ":crucible", CRUCIBLE_SERIALIZER);
+        Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(Lacrimis.MODID, "infusion_shaped"), SHAPED_INFUSION_SERIALIZER);
+        Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(Lacrimis.MODID, "infusion_shapeless"), SHAPELESS_INFUSION_SERIALIZER);
+        Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(Lacrimis.MODID, "crucible"), CRUCIBLE_SERIALIZER);
     }
 
 }

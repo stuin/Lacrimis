@@ -1,6 +1,5 @@
 package modfest.lacrimis.block.rune;
 
-import modfest.lacrimis.util.NeighborList;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.StateManager;
@@ -10,12 +9,14 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
+import modfest.lacrimis.util.NeighborList;
+
 public class AdvancedRuneBlock extends RuneBlock {
     public static final IntProperty PIPE;
 
     public AdvancedRuneBlock() {
         super(3);
-        setDefaultState(getStateManager().getDefaultState().with(PIPE, 3));
+        setDefaultState(getDefaultState().with(PIPE, 3));
     }
 
     public static BlockPos getPipe(BlockView world, BlockPos pos) {

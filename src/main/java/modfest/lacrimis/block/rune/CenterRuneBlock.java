@@ -1,12 +1,5 @@
 package modfest.lacrimis.block.rune;
 
-import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.block.Activatable;
-import modfest.lacrimis.block.BlockConduitConnect;
-import modfest.lacrimis.init.ModBlocks;
-import modfest.lacrimis.util.ConduitEntry;
-import modfest.lacrimis.util.ConduitUtil;
-import modfest.lacrimis.util.NeighborList;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
@@ -29,6 +22,14 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 import java.util.List;
+
+import modfest.lacrimis.Lacrimis;
+import modfest.lacrimis.block.Activatable;
+import modfest.lacrimis.block.BlockConduitConnect;
+import modfest.lacrimis.init.ModBlocks;
+import modfest.lacrimis.util.ConduitEntry;
+import modfest.lacrimis.util.ConduitUtil;
+import modfest.lacrimis.util.NeighborList;
 
 public abstract class CenterRuneBlock extends Block implements Activatable, BlockConduitConnect {
     private static final Box TARGET_BOX = new Box(-0.5, -1, -0.5, 1.5, 1, 1.5);
@@ -90,10 +91,7 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
     }
 
     protected Direction flipside(BlockView world, BlockPos pos) {
-        Direction dir = Direction.UP;
-        if(world.getBlockState(pos.up()).isOf(ModBlocks.flipRune))
-            dir = Direction.DOWN;
-        return dir;
+        return world.getBlockState(pos.up()).isOf(ModBlocks.flipRune) ? Direction.DOWN : Direction.UP;
     }
 
     protected int error(PlayerEntity player, String code) {
@@ -114,9 +112,7 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
     }
 
     private boolean runOnce(World world, BlockPos pos, BlockPos pipe, PlayerEntity player, Direction flipped, int tier) {
-        Box box = TARGET_BOX;
-        if(tier > 2)
-            box = LARGE_BOX;
+        Box box = tier > 2 ? LARGE_BOX : TARGET_BOX;
         
         //For all entities on platform
         pos = pos.offset(flipped);

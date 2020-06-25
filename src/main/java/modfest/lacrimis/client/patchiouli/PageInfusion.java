@@ -1,16 +1,18 @@
 package modfest.lacrimis.client.patchiouli;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import modfest.lacrimis.crafting.InfusionRecipe;
-import modfest.lacrimis.crafting.ShapedInfusionRecipe;
-import modfest.lacrimis.init.ModCrafting;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
+import com.mojang.blaze3d.systems.RenderSystem;
+
 import vazkii.patchouli.client.book.page.abstr.PageDoubleRecipeRegistry;
+
+import modfest.lacrimis.crafting.InfusionRecipe;
+import modfest.lacrimis.crafting.ShapedInfusionRecipe;
+import modfest.lacrimis.init.ModCrafting;
 
 public class PageInfusion extends PageDoubleRecipeRegistry<InfusionRecipe> {
     public PageInfusion() {
@@ -47,7 +49,7 @@ public class PageInfusion extends PageDoubleRecipeRegistry<InfusionRecipe> {
 
         ms.push();
         ms.scale(0.5F, 0.5F, 1.0F);
-        this.parent.drawCenteredStringNoShadow(ms, "" + recipe.getTears(), (recipeX + 69) * 2, (recipeY + 35) * 2, this.book.headerColor);
+        this.parent.drawCenteredStringNoShadow(ms, Integer.toString(recipe.getTears()), (recipeX + 69) * 2, (recipeY + 35) * 2, this.book.headerColor);
         ms.pop();
     }
 

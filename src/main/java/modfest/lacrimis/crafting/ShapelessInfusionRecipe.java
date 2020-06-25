@@ -1,19 +1,24 @@
 package modfest.lacrimis.crafting;
 
-import com.google.gson.*;
-import modfest.lacrimis.init.ModBlocks;
-import modfest.lacrimis.init.ModCrafting;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.recipe.*;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.RecipeFinder;
+import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.ShapedRecipe;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 
-import java.util.Iterator;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+
+import modfest.lacrimis.init.ModBlocks;
+import modfest.lacrimis.init.ModCrafting;
 
 public class ShapelessInfusionRecipe extends InfusionRecipe {
 	private final DefaultedList<Ingredient> inputs;
@@ -106,10 +111,8 @@ public class ShapelessInfusionRecipe extends InfusionRecipe {
 		public void write(PacketByteBuf buf, ShapelessInfusionRecipe recipe) {
 			buf.writeVarInt(recipe.getTears());
 			buf.writeVarInt(recipe.inputs.size());
-			Iterator var3 = recipe.inputs.iterator();
 
-			while(var3.hasNext()) {
-				Ingredient ingredient = (Ingredient)var3.next();
+			for (Ingredient ingredient : recipe.inputs) {
 				ingredient.write(buf);
 			}
 

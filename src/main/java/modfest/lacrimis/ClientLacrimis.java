@@ -1,6 +1,5 @@
 package modfest.lacrimis;
 
-import modfest.lacrimis.client.render.blocks.TarotAdderEntityRenderer;
 import net.minecraft.client.render.RenderLayer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -12,8 +11,10 @@ import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import modfest.lacrimis.client.cardgen.CardTextureGen;
 import modfest.lacrimis.client.render.blocks.CrucibleEntityRenderer;
 import modfest.lacrimis.client.render.blocks.InfusionTableEntityRenderer;
+import modfest.lacrimis.client.render.blocks.TarotAdderEntityRenderer;
 import modfest.lacrimis.client.render.entity.GhostEntityRenderer;
 import modfest.lacrimis.init.ClientModCrafting;
+import modfest.lacrimis.init.KeyBindings;
 import modfest.lacrimis.init.ModBlockEntityTypes;
 import modfest.lacrimis.init.ModBlocks;
 import modfest.lacrimis.init.ModEntityTypes;
@@ -43,5 +44,6 @@ public class ClientLacrimis implements ClientModInitializer {
         ModNetworking.registerClient();
         ModParticles.registerClient();
         CardTextureGen.register();
+        KeyBindings.initialize();
     }
 }

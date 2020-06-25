@@ -1,8 +1,5 @@
 package modfest.lacrimis.block.rune;
 
-import modfest.lacrimis.block.Activatable;
-import modfest.lacrimis.init.ModBlocks;
-import modfest.lacrimis.util.NeighborList;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
@@ -17,6 +14,10 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
+import modfest.lacrimis.block.Activatable;
+import modfest.lacrimis.init.ModBlocks;
+import modfest.lacrimis.util.NeighborList;
+
 public class RuneBlock extends Block implements Activatable {
     public static final BooleanProperty POWERED;
     public static final IntProperty CENTER;
@@ -26,7 +27,7 @@ public class RuneBlock extends Block implements Activatable {
     public RuneBlock(int tier) {
         super(ModBlocks.runeSettings);
         this.tier = tier;
-        setDefaultState(getStateManager().getDefaultState().with(POWERED, false).with(CENTER, 8));
+        setDefaultState(getDefaultState().with(POWERED, false).with(CENTER, 8));
     }
 
     public int testCage(BlockView world, BlockPos pos, Direction flipped) {
@@ -47,26 +48,24 @@ public class RuneBlock extends Block implements Activatable {
 
     protected BlockPos getCenter(BlockView world, BlockPos pos, BlockState state) {
         //Check for valid rotation
-        int i = state.get(CENTER);
-        BlockPos next;
-        Block block;
-        if(i != 8) {
-            next = pos.add(NeighborList.platform[i]);
-            if(validCenter(world.getBlockState(next)))
+        int centerState = state.get(CENTER);
+        if (centerState != 8) {
+            BlockPos next = pos.add(NeighborList.platform[centerState]);
+            if (validCenter(world.getBlockState(next)))
                 return next;
         }
 
         //Find correct rotation
-        for(i = 0; i < 8; i++) {
-            next = pos.add(NeighborList.platform[i]);
-            if(world instanceof World && validCenter(world.getBlockState(next))) {
-                ((World)world).setBlockState(pos, state.with(CENTER, i));
+        for (int i = 0; i < 8; i++) {
+            BlockPos next = pos.add(NeighborList.platform[i]);
+            if (world instanceof World && validCenter(world.getBlockState(next))) {
+                ((World) world).setBlockState(pos, state.with(CENTER, i));
                 return next;
             }
         }
 
-        if(world instanceof World)
-            ((World)world).setBlockState(pos, state.with(CENTER, 8));
+        if (world instanceof World)
+            ((World) world).setBlockState(pos, state.with(CENTER, 8));
         return null;
     }
 
@@ -97,13 +96,13 @@ public class RuneBlock extends Block implements Activatable {
     @Override
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
         Block from = world.getBlockState(fromPos).getBlock();
-        boolean a = state.get(POWERED);
-        boolean b = world.isReceivingRedstonePower(pos);
-        boolean c = from instanceof RuneBlock || from instanceof CenterRuneBlock;
-        if(!a && b && !c) {
+        boolean powered = state.get(POWERED);
+        boolean redstonePower = world.isReceivingRedstonePower(pos);
+        boolean isRune = from instanceof RuneBlock || from instanceof CenterRuneBlock;
+        if (!powered && redstonePower && !isRune) {
             world.setBlockState(pos, state.with(POWERED, true));
             activate(world, pos, null);
-        } else if(a && !b)
+        } else if (powered && !redstonePower)
             world.setBlockState(pos, state.with(POWERED, false));
     }
 

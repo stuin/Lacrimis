@@ -1,10 +1,5 @@
 package modfest.lacrimis.crafting;
 
-import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.block.entity.CombinerEntity;
-import modfest.lacrimis.init.ModItems;
-import modfest.lacrimis.init.ModNetworking;
-import modfest.lacrimis.tarot.TarotCardType;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.CraftingResultInventory;
@@ -14,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
@@ -22,9 +16,11 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
-import java.io.DataInput;
-import java.util.HashMap;
-import java.util.Map;
+import modfest.lacrimis.Lacrimis;
+import modfest.lacrimis.block.entity.CombinerEntity;
+import modfest.lacrimis.init.ModItems;
+import modfest.lacrimis.init.ModNetworking;
+import modfest.lacrimis.tarot.TarotCardType;
 
 public class CombinerScreenHandler extends ScreenHandler implements InventoryChangedListener {
     private final CombinerEntity entity;

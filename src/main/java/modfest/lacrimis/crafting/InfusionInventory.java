@@ -1,11 +1,12 @@
 package modfest.lacrimis.crafting;
 
-import modfest.lacrimis.block.entity.SoulTankEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.screen.PropertyDelegate;
+
+import modfest.lacrimis.block.entity.SoulTankEntity;
 
 public class InfusionInventory extends SimpleInventory {
 	public final PropertyDelegate properties;
@@ -68,7 +69,7 @@ public class InfusionInventory extends SimpleInventory {
 		for(j = 0; j < tags.size(); ++j) {
 			CompoundTag compoundTag = tags.getCompound(j);
 			int k = compoundTag.getByte("Slot") & 255;
-			if (k >= 0 && k < this.size()) {
+			if (k < this.size()) {
 				this.setStack(k, ItemStack.fromTag(compoundTag));
 			}
 		}

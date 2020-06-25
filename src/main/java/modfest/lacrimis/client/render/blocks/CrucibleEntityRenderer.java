@@ -1,10 +1,5 @@
 package modfest.lacrimis.client.render.blocks;
 
-import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.block.entity.CrucibleEntity;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
@@ -15,11 +10,18 @@ import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
+
+import modfest.lacrimis.Lacrimis;
+import modfest.lacrimis.block.entity.CrucibleEntity;
 
 @Environment(EnvType.CLIENT)
 public class CrucibleEntityRenderer extends BlockEntityRenderer<CrucibleEntity> {
-	public static final ModelIdentifier CRUCIBLE_TEARS_MODEL_ID = new ModelIdentifier(Lacrimis.MODID + ":crucible_tears", "");
+	public static final ModelIdentifier CRUCIBLE_TEARS_MODEL_ID = new ModelIdentifier(new Identifier(Lacrimis.MODID, "crucible_tears"), "");
 
 	public CrucibleEntityRenderer(BlockEntityRenderDispatcher dispatcher) {
 		super(dispatcher);

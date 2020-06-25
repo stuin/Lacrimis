@@ -1,8 +1,5 @@
 package modfest.lacrimis.block.rune;
 
-import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.init.ModBlocks;
-import modfest.lacrimis.util.ConduitUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
@@ -13,6 +10,10 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
+import modfest.lacrimis.Lacrimis;
+import modfest.lacrimis.init.ModBlocks;
+import modfest.lacrimis.util.ConduitUtil;
+
 public class BlockTeleportBlock extends CenterRuneBlock {
     public BlockTeleportBlock() {
         super(500, 2);
@@ -21,9 +22,9 @@ public class BlockTeleportBlock extends CenterRuneBlock {
     @Override
     protected boolean activate(World world, BlockPos pos, BlockPos pipe, Entity entity, PlayerEntity player) {
         BlockPos destination = ConduitUtil.locateSink(world, pipe, pos);
-        if(destination != null) {
-            if(!world.isClient)
-                Lacrimis.LOGGER.info("Block Moved");
+        if (destination != null) {
+            if (!world.isClient)
+                Lacrimis.LOGGER.debug("Block Moved");
             return true;
         } else
             error(player, "destination");

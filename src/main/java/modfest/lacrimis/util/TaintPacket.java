@@ -1,15 +1,16 @@
 package modfest.lacrimis.util;
 
-import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.init.ModStatusEffects;
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import modfest.lacrimis.Lacrimis;
+import modfest.lacrimis.init.ModStatusEffects;
+
 public class TaintPacket {
-    private int amount = 0;
+    private int amount;
 
     public TaintPacket(int amount) {
         this.amount = amount;
@@ -29,7 +30,7 @@ public class TaintPacket {
             world.spawnEntity(entity);
 
             if(!world.isClient)
-                Lacrimis.LOGGER.info("Spawned taint " + amount + " at " + pos.toString());
+                Lacrimis.LOGGER.debug("Spawned taint {} at {}", amount, pos.toString());
         }
     }
 }

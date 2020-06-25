@@ -1,12 +1,14 @@
 package modfest.lacrimis.client.patchiouli;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import modfest.lacrimis.crafting.CrucibleRecipe;
-import modfest.lacrimis.init.ModCrafting;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
+import com.mojang.blaze3d.systems.RenderSystem;
+
 import vazkii.patchouli.client.book.page.abstr.PageDoubleRecipeRegistry;
+
+import modfest.lacrimis.crafting.CrucibleRecipe;
+import modfest.lacrimis.init.ModCrafting;
 
 public class PageCrucible extends PageDoubleRecipeRegistry<CrucibleRecipe> {
 
@@ -24,7 +26,7 @@ public class PageCrucible extends PageDoubleRecipeRegistry<CrucibleRecipe> {
         this.parent.renderItemStack(ms, recipeX + 76, recipeY + 4, mouseX, mouseY, recipe.getOutput());
         ms.push();
         ms.scale(0.5F, 0.5F, 1.0F);
-        this.parent.drawCenteredStringNoShadow(ms, "" + recipe.getTears(), (recipeX + 48) * 2, (recipeY + 19) * 2, this.book.headerColor);
+        this.parent.drawCenteredStringNoShadow(ms, Integer.toString(recipe.getTears()), (recipeX + 48) * 2, (recipeY + 19) * 2, this.book.headerColor);
         ms.pop();
     }
 
