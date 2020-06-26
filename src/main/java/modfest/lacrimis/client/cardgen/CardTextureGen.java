@@ -24,15 +24,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.client.texture.FramebufferBackedTexture;
-import modfest.lacrimis.init.ModItems;
-import modfest.lacrimis.tarot.TarotCardType;
 import org.lwjgl.opengl.GL11;
 
 import net.dblsaiko.qcommon.croco.Mat4;
 import net.dblsaiko.qcommon.croco.MatStack;
 import net.dblsaiko.qcommon.croco.Vec3;
+import modfest.lacrimis.Lacrimis;
+import modfest.lacrimis.client.texture.FramebufferBackedTexture;
+import modfest.lacrimis.init.ModItems;
+import modfest.lacrimis.tarot.TarotCardType;
 
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -113,7 +113,7 @@ public final class CardTextureGen {
 
             textTr.push();
 
-            String cardName = I18n.translate(String.format("item.lacrimis.tarot_card_%s", e.getKey().id));
+            String cardName = I18n.translate(String.format("item.lacrimis.tarot.%s", e.getKey().id));
             int width = mc.textRenderer.getWidth(cardName);
             float limit = 55f;
             if (width > limit) {
