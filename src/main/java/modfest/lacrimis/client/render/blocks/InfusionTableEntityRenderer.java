@@ -35,7 +35,7 @@ public class InfusionTableEntityRenderer extends BlockEntityRenderer<InfusionTab
             BlockPos pos = entity.getPos();
 
             matrices.push();
-            matrices.translate(0, 12 / 16F + 0.0005, 0);
+            matrices.translate(0, 13 / 16F + 0.0005, 0);
 
             BlockState visualProperties = Blocks.GLOWSTONE.getDefaultState();
             mc.getBlockRenderManager()
