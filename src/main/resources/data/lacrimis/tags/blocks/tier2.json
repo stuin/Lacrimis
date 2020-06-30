@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "lacrimis:rune/tier2",
-    "lacrimis:rune/pipe2",
-    "lacrimis:rune/block_transport",
-    "lacrimis:rune/entity_transport"
-  ]
-}

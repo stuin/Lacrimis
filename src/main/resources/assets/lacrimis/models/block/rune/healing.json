@@ -1,7 +1,0 @@
-{
-  "parent": "lacrimis:block/rune/edge_block",
-  "textures": {
-    "top": "lacrimis:block/rune_healing",
-    "side": "lacrimis:block/rune_blank"
-  }
-}

@@ -22,17 +22,16 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "modfest.lacrimis.Lacrimis"
+      "azoth.Azoth"
     ],
     "client": [
-      "modfest.lacrimis.ClientLacrimis"
+      "azoth.AzothClient"
     ]
   },
 
   "mixins": [
-    "lacrimis.mixins.json"
+    "azoth.mixins.json"
   ],
-  "accessWidener": "lacrimis.accesswidener",
 
   "custom": {
     "modupdater": {
@@ -44,8 +43,7 @@
   "depends": {
     "fabricloader": ">=0.8.8",
     "fabric": "*",
-    "minecraft": "~1.16",
-    "patchouli": ">=1.16-35.1-FABRIC",
-    "cotton-resources": "*"
+    "minecraft": "*",
+    "patchouli": "*"
   }
 }
