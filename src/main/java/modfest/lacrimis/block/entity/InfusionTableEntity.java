@@ -94,24 +94,13 @@ public class InfusionTableEntity extends SoulTankEntity implements Inventory, Ti
 
     public void takeIngredients() {
         if(world != null) {
-            DefaultedList<ItemStack> defaultedList = world.getRecipeManager().getRemainingStacks(ModCrafting.INFUSION_RECIPE, inventory, world);
+            //DefaultedList<ItemStack> defaultedList = world.getRecipeManager().getRemainingStacks(ModCrafting.INFUSION_RECIPE, inventory, world);
 
             for(int i = 0; i < 9; ++i) {
                 ItemStack itemStack = inventory.getStack(i);
-                ItemStack itemStack2 = defaultedList.get(i);
-                if(!itemStack.isEmpty()) {
+                //ItemStack itemStack2 = defaultedList.get(i);
+                if(!itemStack.isEmpty())
                     inventory.getStack(i).decrement(1);
-                }
-
-                if(!itemStack2.isEmpty()) {
-                    if(itemStack.isEmpty()) {
-                        inventory.setStack(i, itemStack2);
-                    }
-                    if(ItemStack.areItemsEqualIgnoreDamage(itemStack, itemStack2) && ItemStack.areTagsEqual(itemStack, itemStack2)) {
-                        itemStack2.increment(itemStack.getCount());
-                        inventory.setStack(i, itemStack2);
-                    }
-                }
             }
         }
     }

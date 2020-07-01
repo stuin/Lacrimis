@@ -11,7 +11,8 @@
     },
     {
       "type": "crafting",
-      "recipe": "lacrimis:crafting/infusion_table"
+      "recipe": "lacrimis:crafting/infusion_table",
+      "text": "Place the items in the table and click the button to begin."
     }
   ]
 }
