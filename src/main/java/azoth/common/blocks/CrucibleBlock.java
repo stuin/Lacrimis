@@ -1,5 +1,6 @@
 package azoth.common.blocks;
 
+import azoth.common.blocks.entity.CrucibleBlockEntity;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;

@@ -1,7 +1,7 @@
 package azoth.client.render;
 
 import azoth.Azoth;
-import azoth.common.blocks.entity.CrucibleBlockEntity;
+import azoth.common.blocks.entity.InfusionTableBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
@@ -17,25 +17,22 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.BlockPos;
 
 @Environment(EnvType.CLIENT)
-public class CrucibleEntityRenderer extends BlockEntityRenderer<CrucibleBlockEntity> {
-    public static final ModelIdentifier CRUCIBLE_AZOTH_MODEL_ID = new ModelIdentifier(Azoth.createID("special/crucible_azoth"), "");
+public class InfusionTableEntityRenderer extends BlockEntityRenderer<InfusionTableBlockEntity> {
+    public static final ModelIdentifier INFUSION_TABLE_OVERLAY_MODEL_ID = new ModelIdentifier(Azoth.createID("special/infusion_table_overlay"), "");
 
-    public CrucibleEntityRenderer(BlockEntityRenderDispatcher dispatcher) {
+    public InfusionTableEntityRenderer(BlockEntityRenderDispatcher dispatcher) {
         super(dispatcher);
     }
 
     @Override
-    public void render(CrucibleBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-        float level = entity.getLevelForDisplay();
-        if (level > 0) {
+    public void render(InfusionTableBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+        if (entity.shouldDisplayTears()) {
             MinecraftClient mc = MinecraftClient.getInstance();
-            BakedModel model = mc.getBakedModelManager().getModel(CRUCIBLE_AZOTH_MODEL_ID);
+            BakedModel model = mc.getBakedModelManager().getModel(INFUSION_TABLE_OVERLAY_MODEL_ID);
             BlockPos pos = entity.getPos();
 
             matrices.push();
-
-            float dy = 4F / 16F + level * 11 / 16F;
-            matrices.translate(0, dy, 0);
+            matrices.translate(0, 13 / 16F + 0.0005, 0);
 
             BlockState visualProperties = Blocks.GLOWSTONE.getDefaultState();
             mc.getBlockRenderManager()
