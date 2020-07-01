@@ -1,0 +1,21 @@
+{
+    "parent": "block/block",
+    "textures": {
+        "particle": "#block",
+        "block": "azoth:block/conduit"
+    },
+    "elements": [
+        {
+            "from": [ 7, 7, 7 ],
+            "to": [ 9, 9, 9 ],
+            "faces": {
+                "north": { "texture": "#block" },
+                "south": { "texture": "#block" },
+                "east": { "texture": "#block" },
+                "west": { "texture": "#block" },
+                "up": { "texture": "#block" },
+                "down": { "texture": "#block" }
+            }
+        }
+    ]
+}

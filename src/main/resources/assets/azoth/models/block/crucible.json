@@ -6,6 +6,7 @@
         "inner": "azoth:block/crucible_inner",
         "side": "azoth:block/crucible_side",
         "side_inside": "azoth:block/crucible_side_inside",
+        "bottom": "azoth:block/infusion_table_bottom",
         "particle": "azoth:block/crucible_top"
     },
     "elements": [
@@ -18,7 +19,7 @@
                 "south": {"uv": [0, 12, 16, 16], "texture": "#side"},
                 "west": {"uv": [0, 12, 16, 16], "texture": "#side"},
                 "up": {"uv": [0, 0, 16, 16], "texture": "#inner"},
-                "down": {"uv": [0, 0, 16, 16], "texture": "#inner"}
+                "down": {"uv": [0, 0, 16, 16], "texture": "#bottom"}
             }
         },
         {

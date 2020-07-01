@@ -1,5 +1,6 @@
 {
     "itemGroup.azoth.main": "Azoth",
     "block.azoth.crucible": "Crucible",
-    "block.azoth.infusion_table": "Infusion Table"
+    "block.azoth.infusion_table": "Infusion Table",
+    "block.azoth.conduit": "Conduit"
 }

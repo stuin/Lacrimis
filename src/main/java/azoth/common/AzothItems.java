@@ -14,6 +14,7 @@ public class AzothItems {
     public static void register() {
         Registry.register(Registry.ITEM, Azoth.createID("crucible"), new BlockItem(AzothBlocks.CRUCIBLE, createSettings()));
         Registry.register(Registry.ITEM, Azoth.createID("infusion_table"), new BlockItem(AzothBlocks.INFUSION_TABLE, createSettings()));
+        Registry.register(Registry.ITEM, Azoth.createID("conduit"), new BlockItem(AzothBlocks.CONDUIT, createSettings()));
     }
 
     private static Item.Settings createSettings() {
