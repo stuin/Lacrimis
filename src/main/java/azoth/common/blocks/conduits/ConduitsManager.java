@@ -32,6 +32,7 @@ public class ConduitsManager {
                 }
             }
         }
+        this.cache.remove(pos);
     }
 
     public int offer(BlockPos pos, int amount) {
