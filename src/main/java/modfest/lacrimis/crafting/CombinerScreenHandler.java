@@ -60,7 +60,8 @@ public class CombinerScreenHandler extends ScreenHandler implements InventoryCha
         decrement(1);
         entity.type = null;
         output.setStack(0, ItemStack.EMPTY);
-        ModNetworking.sendCombinerNullPacket(entity.getPos());
+        if(entity.getWorld() != null && entity.getWorld().isClient)
+            ModNetworking.sendCombinerNullPacket(entity.getPos());
         return stack;
     }
 

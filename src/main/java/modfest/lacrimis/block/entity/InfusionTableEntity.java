@@ -2,33 +2,26 @@ package modfest.lacrimis.block.entity;
 
 import java.util.Random;
 
-import modfest.lacrimis.crafting.InfusionInventory;
 import modfest.lacrimis.crafting.InfusionRecipe;
 import modfest.lacrimis.init.ModBlockEntityTypes;
 import modfest.lacrimis.init.ModCrafting;
 import modfest.lacrimis.init.ModParticles;
 import modfest.lacrimis.util.ConduitUtil;
 import modfest.lacrimis.util.SoulTank;
-import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Tickable;
-import net.minecraft.util.collection.DefaultedList;
 
-public class InfusionTableEntity extends SoulTankEntity implements Inventory, Tickable {
+public class InfusionTableEntity extends SoulTankEntity implements Tickable {
     public static final int OUTPUT_STACK = 9;
     private final Random random = new Random();
-
-    public final InfusionInventory inventory;
+    
     public ItemStack holding = ItemStack.EMPTY;
     public boolean startCrafting = false;
 
     public InfusionTableEntity() {
-        super(ModBlockEntityTypes.infusionTable, 500);
-        this.inventory = new InfusionInventory(this, 10);
+        super(ModBlockEntityTypes.infusionTable, 500, 10);
         getTank().setLimit(0);
     }
 
@@ -124,60 +117,15 @@ public class InfusionTableEntity extends SoulTankEntity implements Inventory, Ti
     @Override
     public void fromTag(BlockState state, CompoundTag tag) {
         super.fromTag(state, tag);
-        this.inventory.clear();
-        this.inventory.readTags(tag.getList("Inventory", NbtType.COMPOUND));
         holding = ItemStack.fromTag(tag.getCompound("Holding"));
     }
 
     @Override
     public CompoundTag toTag(CompoundTag tag) {
         super.toTag(tag);
-        tag.put("Inventory", this.inventory.getTags());
-
         CompoundTag itemTag = new CompoundTag();
         holding.toTag(itemTag);
         tag.put("Holding", itemTag);
         return tag;
-    }
-
-    @Override
-    public int size() {
-        return inventory.size();
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return inventory.isEmpty();
-    }
-
-    @Override
-    public ItemStack getStack(int slot) {
-        return inventory.getStack(slot);
-    }
-
-    @Override
-    public ItemStack removeStack(int slot, int amount) {
-        return inventory.removeStack(slot, amount);
-    }
-
-    @Override
-    public ItemStack removeStack(int slot) {
-        return inventory.removeStack(slot);
-    }
-
-    @Override
-    public void setStack(int slot, ItemStack stack) {
-        inventory.setStack(slot, stack);
-    }
-
-    @Override
-    public boolean canPlayerUse(PlayerEntity player) {
-        return inventory.canPlayerUse(player);
-    }
-
-    @Override
-    public void clear() {
-        inventory.clear();
-        getTank().setTears(0);
     }
 }

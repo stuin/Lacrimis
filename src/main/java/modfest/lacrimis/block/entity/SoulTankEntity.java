@@ -1,19 +1,26 @@
 package modfest.lacrimis.block.entity;
 
+import modfest.lacrimis.crafting.InfusionInventory;
 import modfest.lacrimis.util.SoulTank;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
+import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 
-public abstract class SoulTankEntity extends BlockEntity implements BlockEntityClientSerializable {
+public abstract class SoulTankEntity extends BlockEntity implements Inventory, BlockEntityClientSerializable {
     private final SoulTank tank;
+    public final InfusionInventory inventory;
 
-    public SoulTankEntity(BlockEntityType<?> type, int capacity) {
+    public SoulTankEntity(BlockEntityType<?> type, int capacity, int inventory) {
         super(type);
         tank = new SoulTank(capacity);
         tank.addListener(this::mark);
+        this.inventory = new InfusionInventory(this, inventory);
     }
 
     public float getRelativeLevel() {
@@ -38,6 +45,9 @@ public abstract class SoulTankEntity extends BlockEntity implements BlockEntityC
 
         tank.setTears(tag.getInt("TearLevel"));
         tank.setLimit(tag.getInt("TearLimit"));
+
+        this.inventory.clear();
+        this.inventory.readTags(tag.getList("Inventory", NbtType.COMPOUND));
     }
 
     @Override
@@ -45,6 +55,8 @@ public abstract class SoulTankEntity extends BlockEntity implements BlockEntityC
         super.toTag(tag);
         tag.putInt("TearLevel", tank.getTears());
         tag.putInt("TearLimit", tank.getCapacity());
+
+        tag.put("Inventory", this.inventory.getTags());
         return tag;
     }
 
@@ -61,5 +73,46 @@ public abstract class SoulTankEntity extends BlockEntity implements BlockEntityC
     @Override
     public CompoundTag toClientTag(CompoundTag tag) {
         return this.toTag(tag);
+    }
+
+    @Override
+    public int size() {
+        return inventory.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return inventory.isEmpty();
+    }
+
+    @Override
+    public ItemStack getStack(int slot) {
+        return inventory.getStack(slot);
+    }
+
+    @Override
+    public ItemStack removeStack(int slot, int amount) {
+        return inventory.removeStack(slot, amount);
+    }
+
+    @Override
+    public ItemStack removeStack(int slot) {
+        return inventory.removeStack(slot);
+    }
+
+    @Override
+    public void setStack(int slot, ItemStack stack) {
+        inventory.setStack(slot, stack);
+    }
+
+    @Override
+    public boolean canPlayerUse(PlayerEntity player) {
+        return inventory.canPlayerUse(player);
+    }
+
+    @Override
+    public void clear() {
+        inventory.clear();
+        getTank().setTears(0);
     }
 }

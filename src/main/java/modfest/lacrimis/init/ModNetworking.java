@@ -95,6 +95,6 @@ public class ModNetworking {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeBlockPos(pos);
 
-        ClientSidePacketRegistry.INSTANCE.sendToServer(INFUSION_START_ID, buf);
+        ClientSidePacketRegistry.INSTANCE.sendToServer(COMBINER_NULL_ID, buf);
     }
 }
