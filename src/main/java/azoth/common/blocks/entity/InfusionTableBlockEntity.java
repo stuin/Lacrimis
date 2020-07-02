@@ -6,12 +6,14 @@ import azoth.common.AzothBlocks;
 import azoth.common.AzothParticles;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.entity.BlockEntity;
+import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.util.Tickable;
 
-public class InfusionTableBlockEntity extends BlockEntity implements Tickable {
+public class InfusionTableBlockEntity extends AzothContainerBlockEntity implements Tickable, BlockEntityClientSerializable {
     @Environment(EnvType.CLIENT)
     private static final Random RANDOM = new Random();
+
+    private static final int AZOTH_CAPACITY = 250;
 
     public InfusionTableBlockEntity() {
         super(AzothBlocks.INFUSION_TABLE_ENTITY);
@@ -19,7 +21,7 @@ public class InfusionTableBlockEntity extends BlockEntity implements Tickable {
 
     @Environment(EnvType.CLIENT)
     public boolean shouldDisplayTears() {
-        return true;
+        return this.level > 0;
     }
 
     @Override
@@ -43,5 +45,11 @@ public class InfusionTableBlockEntity extends BlockEntity implements Tickable {
 
             this.world.addParticle(AzothParticles.AZOTH_MIST, x, y, z, dx, 0.005, dz);
         }
+    }
+
+    public int tryAcceptAzoth(int amount) {
+        int accepted = Math.min(amount, AZOTH_CAPACITY - this.level);
+        this.setLevel(this.level + accepted);
+        return amount - accepted;
     }
 }

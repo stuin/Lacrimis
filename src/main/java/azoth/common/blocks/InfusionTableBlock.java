@@ -58,7 +58,8 @@ public class InfusionTableBlock extends Block implements ConduitConnectable, Blo
     }
 
     @Override
-    public int tryReceive(int amount) {
-        return amount;
+    public int tryReceive(World world, BlockPos pos, int amount) {
+        InfusionTableBlockEntity entity = (InfusionTableBlockEntity) world.getBlockEntity(pos);
+        return entity.tryAcceptAzoth(amount);
     }
 }

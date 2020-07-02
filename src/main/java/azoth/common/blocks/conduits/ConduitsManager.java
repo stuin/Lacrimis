@@ -46,7 +46,7 @@ public class ConduitsManager {
             BlockState state = this.world.getBlockState(path.end);
             Block block = state.getBlock();
             if (block instanceof ConduitConnectable) {
-                amount -= ((ConduitConnectable) block).tryReceive(amount);
+                amount -= ((ConduitConnectable) block).tryReceive(this.world, path.end, amount);
                 if (amount == 0) {
                     break;
                 }
