@@ -4,6 +4,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.TranslatableText;
 import net.fabricmc.fabric.api.client.screen.ScreenProviderRegistry;
 
+import net.minecraft.util.Identifier;
 import vazkii.patchouli.client.book.ClientBookRegistry;
 
 import modfest.lacrimis.Lacrimis;
@@ -24,8 +25,8 @@ public class ClientModCrafting {
                 container -> new CombinerScreen(container, MinecraftClient.getInstance().player.inventory, new TranslatableText(Lacrimis.MODID + ".gui.combiner")));
 
         // Patchouli pages
-        ClientBookRegistry.INSTANCE.pageTypes.put(Lacrimis.MODID + ":crucible", PageCrucible.class);
-        ClientBookRegistry.INSTANCE.pageTypes.put(Lacrimis.MODID + ":infusion", PageInfusion.class);
+        ClientBookRegistry.INSTANCE.pageTypes.put(new Identifier(Lacrimis.MODID, "crucible"), PageCrucible.class);
+        ClientBookRegistry.INSTANCE.pageTypes.put(new Identifier(Lacrimis.MODID, "infusion"), PageInfusion.class);
     }
 
 }

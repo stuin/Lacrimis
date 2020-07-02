@@ -52,10 +52,10 @@ dependencies {
 	include 'net.dblsaiko.qcommon.croco:croco:2.1.2'
 
 	//Cotton Resources
-	modImplementation "com.github.cottonmc:cotton-resources:${project.cotton_resources_version}"
+	modImplementation "io.github.cottonmc:cotton-resources:${project.cotton_resources_version}"
 
 	//Patchouli api
-	modImplementation("vazkii.patchouli:Patchouli_1.16-fabric:${project.patchouli_version}")
+	modImplementation("vazkii.patchouli:Patchouli_release-${project.patchouli_version}")
 
 	//Jankson
 	//modApi "io.github.cottonmc:Jankson-Fabric:${project.jankson_version}"
