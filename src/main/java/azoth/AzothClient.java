@@ -3,6 +3,7 @@ package azoth;
 import azoth.client.render.CrucibleEntityRenderer;
 import azoth.client.render.InfusionTableEntityRenderer;
 import azoth.common.AzothBlocks;
+import azoth.common.AzothParticles;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -20,5 +21,7 @@ public class AzothClient implements ClientModInitializer {
             out.accept(CrucibleEntityRenderer.CRUCIBLE_AZOTH_MODEL_ID);
             out.accept(InfusionTableEntityRenderer.INFUSION_TABLE_OVERLAY_MODEL_ID);
         });
+
+        AzothParticles.registerClient();
     }
 }
