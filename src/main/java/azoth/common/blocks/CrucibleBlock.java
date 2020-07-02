@@ -1,5 +1,6 @@
 package azoth.common.blocks;
 
+import azoth.Azoth;
 import azoth.common.blocks.entity.CrucibleBlockEntity;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -13,6 +14,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 
 public class CrucibleBlock extends Block implements BlockEntityProvider, ConduitConnectable {
     protected static final VoxelShape RAY_TRACE_SHAPE = createCuboidShape(3.0D, 4.0D, 3.0D, 13.0D, 16.0D, 13.0D);
@@ -43,5 +45,15 @@ public class CrucibleBlock extends Block implements BlockEntityProvider, Conduit
     @Override
     public BlockEntity createBlockEntity(BlockView world) {
         return new CrucibleBlockEntity();
+    }
+
+    @Override
+    public boolean isSource() {
+        return true;
+    }
+
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        super.onStateReplaced(state, world, pos, newState, moved);
+        Azoth.getConduitManager(world).notifyUpdate(pos);
     }
 }

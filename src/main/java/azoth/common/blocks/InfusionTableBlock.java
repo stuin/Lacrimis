@@ -1,5 +1,6 @@
 package azoth.common.blocks;
 
+import azoth.Azoth;
 import azoth.common.blocks.entity.InfusionTableBlockEntity;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -12,6 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 
 public class InfusionTableBlock extends Block implements ConduitConnectable, BlockEntityProvider {
     protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
@@ -43,5 +45,20 @@ public class InfusionTableBlock extends Block implements ConduitConnectable, Blo
     @Override
     public BlockEntity createBlockEntity(BlockView world) {
         return new InfusionTableBlockEntity();
+    }
+
+    @Override
+    public boolean isSink() {
+        return true;
+    }
+
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        super.onStateReplaced(state, world, pos, newState, moved);
+        Azoth.getConduitManager(world).notifyUpdate(pos);
+    }
+
+    @Override
+    public int tryReceive(int amount) {
+        return amount;
     }
 }

@@ -3,6 +3,7 @@ package azoth.common.blocks;
 import java.util.EnumSet;
 import java.util.Map;
 
+import azoth.Azoth;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ConnectingBlock;
@@ -17,6 +18,7 @@ import net.minecraft.util.math.Direction.Axis;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
 public class AzothConduitBlock extends Block {
@@ -122,5 +124,10 @@ public class AzothConduitBlock extends Block {
                 (state.get(EAST) ? 32 : 0) |
                 (state.get(NODE) ? 64 : 0);
         return SHAPES[idx];
+    }
+
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        super.onStateReplaced(state, world, pos, newState, moved);
+        Azoth.getConduitManager(world).notifyUpdate(pos);
     }
 }
