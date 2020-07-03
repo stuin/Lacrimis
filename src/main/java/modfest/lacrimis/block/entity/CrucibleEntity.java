@@ -1,11 +1,5 @@
 package modfest.lacrimis.block.entity;
 
-import java.util.Optional;
-
-import modfest.lacrimis.crafting.CrucibleRecipe;
-import modfest.lacrimis.init.ModBlockEntityTypes;
-import modfest.lacrimis.init.ModCrafting;
-import modfest.lacrimis.init.ModNetworking;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.ItemEntity;
@@ -16,6 +10,13 @@ import net.minecraft.util.Tickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 
+import java.util.Optional;
+
+import modfest.lacrimis.crafting.CrucibleRecipe;
+import modfest.lacrimis.init.ModBlockEntityTypes;
+import modfest.lacrimis.init.ModCrafting;
+import modfest.lacrimis.init.ModNetworking;
+
 public class CrucibleEntity extends SoulTankEntity implements Tickable {
     private static final Box ITEM_BOX = new Box(0, 0.4, 0, 1, 1, 1);
     private static final int CRAFT_COOLDOWN = 15;
@@ -23,7 +24,7 @@ public class CrucibleEntity extends SoulTankEntity implements Tickable {
     private int craftTime = 0;
 
     public CrucibleEntity() {
-        super(ModBlockEntityTypes.crucible, 1000, 0);
+        super(ModBlockEntityTypes.crucible, 1000, 1);
     }
 
     @Override
