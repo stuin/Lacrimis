@@ -1,0 +1,11 @@
+{
+  "type": "lacrimis:crucible",
+  "base": {
+    "item": "c:silver_ore"
+  },
+  "result": {
+    "item": "c:silver_dust",
+    "count": 2
+  },
+  "tears": 50
+}
