@@ -1,6 +1,8 @@
 package modfest.lacrimis.block.entity;
 
+import modfest.lacrimis.block.DrainedCryingObsidianBlock;
 import modfest.lacrimis.init.ModBlockEntityTypes;
+import modfest.lacrimis.init.ModBlocks;
 import modfest.lacrimis.init.ModParticles;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -21,11 +23,12 @@ public class TearLanternEntity extends BlockEntity implements Tickable {
     public void tick() {
         int range = 6;
         BlockPos obsidianPos = this.pos.up(1);
-        if (world != null) {
+        if (world != null && this.world.getTime() % 3 == 0) {
             if (world.isClient && Math.random() > 0.9)
                 world.addParticle(ParticleTypes.DRIPPING_OBSIDIAN_TEAR, pos.getX() + (0.4 + Math.random() * (0.6 - 0.4)), pos.getY() - 0.1D, pos.getZ() + (0.4 + Math.random() * (0.6 - 0.4)), 0.0D, 0.0D, 0.0D);
             BlockState obsidianState = this.world.getBlockState(obsidianPos);
-            if (obsidianState.getBlock() == Blocks.CRYING_OBSIDIAN) {
+            if (obsidianState.getBlock() == ModBlocks.drainedCryingObsidian || obsidianState.getBlock() == Blocks.CRYING_OBSIDIAN) {
+                int count = 0;
                 for (int x = -range; x <= range; x++)
                     for (int y = -range; y <= range; y++)
                         for (int z = -range; z <= range; z++) {
@@ -33,7 +36,6 @@ public class TearLanternEntity extends BlockEntity implements Tickable {
                             if (table instanceof CrucibleEntity) {
                                 CrucibleEntity casted = (CrucibleEntity) table;
                                 if (casted.getTank().getSpace() > 0) {
-                                    casted.getTank().addTears(2);
                                     if (world.isClient) {
                                         double xrand = Math.random() * 0.2 - 0.1;
                                         double yrand = Math.random() * 0.2 - 0.1;
@@ -41,10 +43,13 @@ public class TearLanternEntity extends BlockEntity implements Tickable {
 
                                         world.addParticle(ModParticles.OBSIDIAN_TEAR_FLYING, this.pos.getX() + 0.5 + xrand, this.pos.getY() + 0.2 + yrand, this.pos.getZ() + 0.5 + zrand, x * 0.02, y * 0.02, z * 0.02);
                                     }
-                                    break;
+                                    count++;
+                                    casted.getTank().addTears(2);
                                 }
                             }
                         }
+                if(count > 0)
+                    world.setBlockState(obsidianPos, DrainedCryingObsidianBlock.removeTearState(obsidianState, count * 2));
             }
         }
     }

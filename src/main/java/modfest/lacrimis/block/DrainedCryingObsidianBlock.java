@@ -58,28 +58,27 @@ public class DrainedCryingObsidianBlock extends CryingObsidianBlock {
     }
 
     public static BlockState setTearsValue(BlockState self, int tears) {
+        tears -= 1;
         int least = tears % 50;
         int most = tears / 50;
         return self.with(TEARS_LEAST, least).with(TEARS_MOST, most);
     }
 
-    public static int getTearsValue(BlockState self) {
-        return self.get(TEARS_MOST) * 50 + self.get(TEARS_LEAST);
-    }
-
-    public static BlockState getStateForTearsLevel(int tears) {
-        if (tears == 501) {
-            return Blocks.CRYING_OBSIDIAN.getDefaultState();
-        } else if (tears == 0) {
+    public static BlockState removeTearState(BlockState state, int count) {
+        int tears = getTearsLevel(state) - count;
+        if (tears <= 1)
             return Blocks.OBSIDIAN.getDefaultState();
-        } else {
-            return setTearsValue(ModBlocks.drainedCryingObsidian.getDefaultState(), tears - 1);
+        else if(tears <= 500) {
+            if(state.getBlock() == ModBlocks.drainedCryingObsidian)
+                return setTearsValue(state, tears);
+            return setTearsValue(ModBlocks.drainedCryingObsidian.getDefaultState(), tears);
         }
+        return state;
     }
 
     public static int getTearsLevel(BlockState self) {
         if (self.getBlock() == Blocks.OBSIDIAN) return 0;
         else if (self.getBlock() == Blocks.CRYING_OBSIDIAN) return 501;
-        else return getTearsValue(self) + 1;
+        else return self.get(TEARS_MOST) * 50 + self.get(TEARS_LEAST) + 1;
     }
 }

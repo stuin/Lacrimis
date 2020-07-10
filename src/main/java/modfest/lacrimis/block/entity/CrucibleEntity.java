@@ -1,5 +1,7 @@
 package modfest.lacrimis.block.entity;
 
+import modfest.lacrimis.block.DrainedCryingObsidianBlock;
+import modfest.lacrimis.init.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.ItemEntity;
@@ -33,8 +35,11 @@ public class CrucibleEntity extends SoulTankEntity implements Tickable {
             for (int dy = 1; dy < 5; dy++) {
                 BlockPos obsidianPos = this.pos.up(dy);
                 BlockState obsidianState = this.world.getBlockState(obsidianPos);
-                if (obsidianState.getBlock() == Blocks.CRYING_OBSIDIAN) {
+                if (obsidianState.getBlock() == ModBlocks.tearLantern)
+                    break;
+                if (obsidianState.getBlock() == ModBlocks.drainedCryingObsidian || obsidianState.getBlock() == Blocks.CRYING_OBSIDIAN) {
                     this.getTank().addTears(1);
+                    world.setBlockState(obsidianPos, DrainedCryingObsidianBlock.removeTearState(obsidianState, 1));
                     break;
                 }
             }
