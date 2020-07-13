@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "The soul combiner is a special device used to infuse items with mob souls. When an $(l:runes/extraction)Soul Extraction Rune$(/l) connected to the same conduit network is activated, it will kill the mob and store its soul for later use.$(br)"
+      "text": "The soul combiner is a special device used to infuse items with mob souls. When an $(l:runes/extraction)Soul Extraction Rune$(/l) connected to the same duct network is activated, it will kill the mob and store its soul for later use.$(br)"
     },
     {
       "type": "lacrimis:infusion",
