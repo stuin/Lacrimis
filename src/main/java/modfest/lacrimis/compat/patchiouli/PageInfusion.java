@@ -1,4 +1,4 @@
-package modfest.lacrimis.client.patchiouli;
+package modfest.lacrimis.compat.patchiouli;
 
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
