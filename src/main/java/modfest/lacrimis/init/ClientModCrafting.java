@@ -1,5 +1,7 @@
 package modfest.lacrimis.init;
 
+import modfest.lacrimis.compat.patchiouli.PageCrucible;
+import modfest.lacrimis.compat.patchiouli.PageInfusion;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.TranslatableText;
 import net.fabricmc.fabric.api.client.screen.ScreenProviderRegistry;
@@ -8,8 +10,6 @@ import net.minecraft.util.Identifier;
 import vazkii.patchouli.client.book.ClientBookRegistry;
 
 import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.client.patchiouli.PageCrucible;
-import modfest.lacrimis.client.patchiouli.PageInfusion;
 import modfest.lacrimis.crafting.CombinerScreen;
 import modfest.lacrimis.crafting.CombinerScreenHandler;
 import modfest.lacrimis.crafting.InfusionScreen;

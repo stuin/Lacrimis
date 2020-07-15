@@ -63,8 +63,8 @@ public class CombinerBlock extends SoulTankBlock {
     @Override
     public boolean insert(BlockPos pos, BlockView world, Object value) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
-        if(value instanceof LivingEntity && blockEntity instanceof CombinerEntity &&
-            ((CombinerEntity) blockEntity).type == null) {
+        if(value instanceof LivingEntity && !(value instanceof PlayerEntity) &&
+                blockEntity instanceof CombinerEntity && ((CombinerEntity) blockEntity).type == null) {
             ((CombinerEntity) blockEntity).type = ((LivingEntity) value).getType();
             ((LivingEntity) value).kill();
             return true;
