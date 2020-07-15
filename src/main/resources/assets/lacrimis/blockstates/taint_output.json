@@ -1,7 +1,30 @@
 {
   "variants": {
-    "": {
+    "facing=down": {
+      "model": "lacrimis:block/taint_output",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "lacrimis:block/taint_output",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "lacrimis:block/taint_output",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "lacrimis:block/taint_output",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
       "model": "lacrimis:block/taint_output"
+    },
+    "facing=west": {
+      "model": "lacrimis:block/taint_output",
+      "x": 90,
+      "y": 270
     }
   }
 }

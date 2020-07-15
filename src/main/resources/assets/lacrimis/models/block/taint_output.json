@@ -1,6 +1,8 @@
 {
-  "parent": "block/cube_all",
+  "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "all": "lacrimis:block/taint_output"
+    "top": "lacrimis:block/taint_output",
+    "bottom": "lacrimis:block/rune_pipe_side",
+    "side": "lacrimis:block/rune_blank"
   }
 }
