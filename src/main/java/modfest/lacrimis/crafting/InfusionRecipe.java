@@ -1,6 +1,9 @@
 package modfest.lacrimis.crafting;
 
 import modfest.lacrimis.init.ModCrafting;
+import modfest.lacrimis.init.ModItems;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeType;
@@ -27,6 +30,13 @@ public abstract class InfusionRecipe implements Recipe<InfusionInventory> {
         return result;
     }
 
+    @Override
+    @Environment(EnvType.CLIENT)
+    public ItemStack getRecipeKindIcon() {
+        ItemStack item = new ItemStack(ModItems.infusionTable);
+        item.getOrCreateTag().putInt("TearLevel", getTears());
+        return item;
+    }
 
     @Override
     public RecipeType<?> getType() {

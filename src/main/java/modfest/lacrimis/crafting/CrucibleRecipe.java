@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 
 import modfest.lacrimis.init.ModBlocks;
 import modfest.lacrimis.init.ModCrafting;
+import modfest.lacrimis.init.ModItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.item.ItemStack;
@@ -77,7 +78,9 @@ public class CrucibleRecipe extends InfusionRecipe {
     @Override
     @Environment(EnvType.CLIENT)
     public ItemStack getRecipeKindIcon() {
-        return new ItemStack(ModBlocks.crucible);
+        ItemStack item = new ItemStack(ModItems.crucible);
+        item.getOrCreateTag().putInt("TearLevel", getTears());
+        return item;
     }
 
     public static class Serializer implements RecipeSerializer<CrucibleRecipe> {

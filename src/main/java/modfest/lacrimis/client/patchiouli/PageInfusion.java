@@ -47,9 +47,11 @@ public class PageInfusion extends PageDoubleRecipeRegistry<InfusionRecipe> {
             this.parent.renderIngredient(ms, recipeX + i % wrap * 19 + 3, recipeY + i / wrap * 19 + 3, mouseX, mouseY, ingredients.get(i));
         }
 
+        this.parent.renderItemStack(ms, recipeX + 79, recipeY + 41, mouseX, mouseY, recipe.getRecipeKindIcon());
+
         ms.push();
         ms.scale(0.5F, 0.5F, 1.0F);
-        this.parent.drawCenteredStringNoShadow(ms, Integer.toString(recipe.getTears()), (recipeX + 69) * 2, (recipeY + 35) * 2, this.book.headerColor);
+        this.parent.drawCenteredStringNoShadow(ms, Integer.toString(recipe.getTears()), (recipeX + 68) * 2, (recipeY + 35) * 2, this.book.headerColor);
         ms.pop();
     }
 

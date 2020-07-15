@@ -44,7 +44,7 @@ public class CrucibleBlock extends SoulTankBlock implements Activatable {
     @Override
     public boolean activate(World world, BlockPos pos, PlayerEntity player) {
         SoulTank tank = getTank(world, pos);
-        if (tank != null) {
+        if (tank != null && tank.getTears() > 0) {
             ItemStack item = new ItemStack(ModItems.crucible);
             item.getOrCreateTag().putInt("TearLevel", tank.getTears());
             world.setBlockState(pos, Blocks.AIR.getDefaultState());

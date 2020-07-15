@@ -59,12 +59,6 @@ public class ShapelessInfusionRecipe extends InfusionRecipe {
 		return i == inputs.size() && recipeFinder.findRecipe(this, null);
 	}
 
-	@Override
-    @Environment(EnvType.CLIENT)
-	public ItemStack getRecipeKindIcon() {
-		return new ItemStack(ModBlocks.infusionTable);
-	}
-
 	public static class Serializer implements RecipeSerializer<ShapelessInfusionRecipe> {
 		@Override
 		public ShapelessInfusionRecipe read(Identifier identifier, JsonObject json) {
