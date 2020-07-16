@@ -2,12 +2,12 @@
   "name": "Tier I Soul Cage",
   "icon": "lacrimis:rune/tier1",
   "category": "lacrimis:cages",
-  "advancement": "lacrimis:recipes/rune_tier1",
+  "advancement": "lacrimis:base/infusion_table",
   "sortnum": 1,
   "pages": [
     {
       "type": "text",
-      "text": "By engraving silver into the blocks, they can disperse the soul tears in a slightly safer manner.$(br) I will need to make a proper structure out of this, something to contain the soul tears without being solid silver. Some kind of $(l:cages/tier_i)soul cage$(/l) perhaps?"
+      "text": "By engraving silver into the blocks, they can disperse the soul tears in a slightly safer manner.$(br) I will need to make a proper structure out of this, something to contain the soul tears without being solid silver. Some kind of soul cage perhaps?"
     },
     {
       "type": "lacrimis:infusion",
@@ -25,7 +25,7 @@
     },
     {
       "type": "text",
-      "text": "This soul cage uses seven tier I runes, and a tier I duct connector. It also requires sixteen valid cage blocks, any combination of the following: $(li)Iron Bars$(li)Chains$(li)End rods$(br)"
+      "text": "This soul cage uses seven tier I runes, and a tier I duct connector. It also requires sixteen valid cage blocks, any combination of the following: $(li)Iron Bars$(li)Chains$(li)End rods$(br2)Activate it with redstone or a $(l:basics/divining_rod)Divining Rod$(/l)."
     },
     {
       "type": "multiblock",

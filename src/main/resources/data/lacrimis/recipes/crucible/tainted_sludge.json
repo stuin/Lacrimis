@@ -1,7 +1,7 @@
 {
   "type": "lacrimis:crucible",
   "base": {
-    "item": "minecraft:cobblestone"
+    "tag": "lacrimis:sludge_materials"
   },
   "result": {
     "item": "lacrimis:tainted_sludge"
