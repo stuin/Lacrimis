@@ -13,7 +13,7 @@ import modfest.lacrimis.util.ConduitUtil;
 public class SoulExtractionBlock extends CenterRuneBlock {
 
     public SoulExtractionBlock() {
-        this(300, 1);
+        this(200, 1);
     }
 
     public SoulExtractionBlock(int requiredTears, int requiredTier) {

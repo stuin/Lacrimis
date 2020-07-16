@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 public class TarotAdderBlock extends CenterRuneBlock implements BlockEntityProvider {
 
     public TarotAdderBlock() {
-        super(500, 3);
+        super(250, 3);
     }
 
     @Override

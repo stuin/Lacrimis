@@ -16,7 +16,7 @@ import modfest.lacrimis.util.ConduitUtil;
 
 public class BlockTeleportBlock extends CenterRuneBlock {
     public BlockTeleportBlock() {
-        super(500, 2);
+        super(250, 2);
     }
 
     @Override

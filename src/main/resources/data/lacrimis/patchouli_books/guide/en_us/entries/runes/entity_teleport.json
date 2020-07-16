@@ -12,7 +12,7 @@
     {
       "type": "lacrimis:infusion",
       "recipe": "lacrimis:infusion/rune_entity_transport",
-      "text": "Run cost: 200 Tears$(br)$(l:cages/tier_ii)Tier II Soul Cage$(/l)$(br2)Noticeably more efficient to use, which is nice."
+      "text": "Run cost: 100 Tears$(br)$(l:cages/tier_ii)Tier II Soul Cage$(/l)$(br2)Noticeably more efficient to use, which is nice."
      }
   ]
 }

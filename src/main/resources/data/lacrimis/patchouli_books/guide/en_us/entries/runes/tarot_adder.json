@@ -12,7 +12,7 @@
     {
       "type": "lacrimis:infusion",
       "recipe": "lacrimis:infusion/rune_tarot_adder",
-      "text": "Run cost: 500 Tears$(br)$(l:cages/tier_iii)Tier III Soul Cage$(/l)$(br2)"
+      "text": "Run cost: 250 Tears$(br)$(l:cages/tier_iii)Tier III Soul Cage$(/l)$(br2)"
     }
   ]
 }

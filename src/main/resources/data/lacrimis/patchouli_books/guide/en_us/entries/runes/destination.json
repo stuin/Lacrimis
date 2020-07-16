@@ -12,7 +12,7 @@
     {
       "type": "lacrimis:infusion",
       "recipe": "lacrimis:infusion/rune_destination",
-      "text": "Run cost: 300 Tears$(br)$(l:cages/tier_i)Tier I Soul Cage$(/l)$(br2)A rune that cannot be activated, at least from this end.$(br)Try the $(l:runes/extraction)Extraction Rune.$(/l)"
+      "text": "Run cost: 200 Tears$(br)$(l:cages/tier_i)Tier I Soul Cage$(/l)$(br2)A rune that cannot be activated, at least from this end.$(br)Try the $(l:runes/extraction)Extraction Rune.$(/l)"
     }
   ]
 }

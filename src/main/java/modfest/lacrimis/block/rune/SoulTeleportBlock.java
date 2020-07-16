@@ -14,7 +14,7 @@ public class SoulTeleportBlock extends SoulExtractionBlock {
     private final boolean canSend;
 
     public SoulTeleportBlock(boolean canSend) {
-        super(canSend ? 200 : 300, canSend ? 2 : 1);
+        super(canSend ? 100 : 200, canSend ? 2 : 1);
         this.canSend = canSend;
     }
 
@@ -31,13 +31,15 @@ public class SoulTeleportBlock extends SoulExtractionBlock {
     public boolean insert(BlockPos pos, BlockView world, Object value) {
         Direction flipped = flipside(world, pos);
         if(value instanceof Entity && testCage(world, pos, flipped, null) > 0) {
+            //Teleport entity
             int vertical = flipped == Direction.UP ? 1 : -(int)Math.ceil(((Entity) value).getHeight());
             if(value instanceof LivingEntity)
                 ((LivingEntity) value).teleport(pos.getX() + 0.5, pos.getY() + vertical, pos.getZ() + 0.5, true);
             else
                 ((Entity) value).teleport(pos.getX() + 0.5, pos.getY() + vertical, pos.getZ() + 0.5);
 
-            TaintPacket taint = new TaintPacket(250);
+            //Spawn taint
+            TaintPacket taint = new TaintPacket(requiredTears);
             if(ConduitUtil.locateSink(world, getPipe(world, pos), taint) == null && world instanceof World)
                     taint.spawn((World) world, pos.up(vertical));
             return true;
