@@ -1,9 +1,11 @@
 package modfest.lacrimis.init;
 
+import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -77,6 +79,9 @@ public class ModItems {
     public static BlockItem spawnerRune;
     public static BlockItem tarotAdderRune;
 
+    //Item tags
+    public static Tag<Item> sludgeMaterials;
+
     public static void register() {
         infusionTable = register("infusion_table", ModBlocks.infusionTable);
         crucible = register("crucible", ModBlocks.crucible);
@@ -129,6 +134,8 @@ public class ModItems {
         spawnerRune = registerRune("rune/spawner", ModBlocks.spawnerRune);
         tarotAdderRune = registerRune("rune/tarot_adder", ModBlocks.tarotAdderRune);
 
+        //Item tags
+        sludgeMaterials = TagRegistry.item(new Identifier(Lacrimis.MODID, "sludge_materials"));
     }
 
     private static <T extends Item> T register(String name, T item) {
