@@ -17,6 +17,7 @@ import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.text.LiteralText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
@@ -52,6 +53,8 @@ public class InfusionCategory implements TransferRecipeCategory<InfusionDisplay>
         widgets.add(Widgets.createResultSlotBackground(new Point(startPoint.x + 95, startPoint.y + 19)));
         List<List<EntryStack>> input = display.getInputEntries();
         List<Slot> slots = Lists.newArrayList();
+
+        widgets.add(Widgets.createLabel(new Point(startPoint.x + 68, startPoint.y + 35), new LiteralText("" + display.getTears())));
 
         int i;
         for(i = 0; i < 3; ++i) {

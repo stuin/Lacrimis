@@ -53,6 +53,10 @@ public abstract class InfusionDisplay implements TransferRecipeDisplay {
     public List<List<EntryStack>> getRequiredEntries() {
         return this.input;
     }
+    
+    public int getTears() {
+        return display.getTears();
+    }
 
     public List<List<EntryStack>> getOrganisedInputEntries(ContainerInfo<ScreenHandler> containerInfo, ScreenHandler container) {
         List<List<EntryStack>> list = Lists.newArrayListWithCapacity(containerInfo.getCraftingWidth(container) * containerInfo.getCraftingHeight(container));

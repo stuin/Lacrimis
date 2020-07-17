@@ -38,8 +38,8 @@ public class ModBlocks {
     public static Block runeStone;
     public static RuneBlock rune1;
     public static RuneBlock rune2;
-    public static Block flipRune;
     public static AdvancedRuneBlock rune3;
+    public static Block flipRune;
     public static PipeConnectorBlock pipeRune1;
     public static PipeConnectorBlock pipeRune2;
 

@@ -12,12 +12,26 @@ import modfest.lacrimis.init.ModBlocks;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.LiteralText;
 import net.minecraft.util.Identifier;
 
 import java.util.List;
 
 public class CrucibleCategory implements TransferRecipeCategory<CrucibleDisplay> {
     public CrucibleCategory() {
+    }
+
+    public List<Widget> setupDisplay(CrucibleDisplay display, Rectangle bounds) {
+        Point startPoint = new Point(bounds.getCenterX() - 41, bounds.getCenterY() - 13);
+        List<Widget> widgets = Lists.newArrayList();
+        widgets.add(Widgets.createRecipeBase(bounds));
+        widgets.add(Widgets.createArrow(new Point(startPoint.x + 24, startPoint.y + 4)));
+        widgets.add(Widgets.createResultSlotBackground(new Point(startPoint.x + 61, startPoint.y + 5)));
+        widgets.add(Widgets.createSlot(new Point(startPoint.x + 1, startPoint.y + 5)).entries(display.getInputEntries().get(0)).markInput());
+        widgets.add(Widgets.createSlot(new Point(startPoint.x + 61, startPoint.y + 5)).entries(display.getOutputEntries()).disableBackground().markOutput());
+
+        widgets.add(Widgets.createLabel(new Point(startPoint.x + 32, startPoint.y + 21), new LiteralText("" + display.getTears())));
+        return widgets;
     }
 
     @Override
@@ -32,19 +46,8 @@ public class CrucibleCategory implements TransferRecipeCategory<CrucibleDisplay>
         matrices.pop();
     }
 
-    public List<Widget> setupDisplay(CrucibleDisplay display, Rectangle bounds) {
-        Point startPoint = new Point(bounds.getCenterX() - 41, bounds.y + 10);
-        List<Widget> widgets = Lists.newArrayList();
-        widgets.add(Widgets.createRecipeBase(bounds));
-        widgets.add(Widgets.createResultSlotBackground(new Point(startPoint.x + 61, startPoint.y + 9)));
-        widgets.add(Widgets.createBurningFire(new Point(startPoint.x + 1, startPoint.y + 20)).animationDurationMS(10000.0D));
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 1, startPoint.y + 1)).entries(display.getInputEntries().get(0)).markInput());
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 61, startPoint.y + 9)).entries(display.getOutputEntries()).disableBackground().markOutput());
-        return widgets;
-    }
-
     public int getDisplayHeight() {
-        return 49;
+        return 40;
     }
 
     public Identifier getIdentifier() {

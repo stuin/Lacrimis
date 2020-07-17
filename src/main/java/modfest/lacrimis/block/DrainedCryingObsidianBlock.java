@@ -1,13 +1,19 @@
 package modfest.lacrimis.block;
 
+import modfest.lacrimis.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CryingObsidianBlock;
 import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.state.StateManager.Builder;
 import net.minecraft.state.property.IntProperty;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
@@ -37,6 +43,19 @@ public class DrainedCryingObsidianBlock extends CryingObsidianBlock {
     @Override
     public PistonBehavior getPistonBehavior(BlockState state) {
         return PistonBehavior.BLOCK;
+    }
+
+    @Override
+    public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
+        if(itemStack.hasTag())
+            world.setBlockState(pos, setTearsValue(state, itemStack.getOrCreateTag().getInt("TearLevel")));
+    }
+
+    @Override
+    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        ItemStack item = new ItemStack(ModItems.drainedCryingObsidian);
+        item.getOrCreateTag().putInt("TearLevel", getTearsLevel(state));
+        ItemScatterer.spawn(world, pos, new SimpleInventory(item));
     }
 
     public static BlockState setTearsValue(BlockState self, int tears) {

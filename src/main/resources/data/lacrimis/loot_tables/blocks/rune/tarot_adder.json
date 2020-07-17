@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "lacrimis:drained_crying_obsidian"
+          "name": "lacrimis:rune/tarot_adder"
         }
       ],
       "conditions": [
