@@ -78,8 +78,9 @@ public class DrainedCryingObsidianBlock extends CryingObsidianBlock {
     }
 
     public static int getTearsLevel(BlockState self) {
-        if (self.getBlock() == Blocks.OBSIDIAN) return 0;
-        else if (self.getBlock() == Blocks.CRYING_OBSIDIAN) return 501;
-        else return self.get(TEARS_MOST) * 50 + self.get(TEARS_LEAST) + 1;
+        if (self.getBlock() == Blocks.CRYING_OBSIDIAN) return 501;
+        else if(self.getBlock() == ModBlocks.drainedCryingObsidian)
+            return self.get(TEARS_MOST) * 50 + self.get(TEARS_LEAST) + 1;
+        return 0;
     }
 }
