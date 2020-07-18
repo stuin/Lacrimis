@@ -1,10 +1,10 @@
 {
   "type": "lacrimis:crucible",
   "base": {
-    "tag": "c:silver_ores"
+    "tag": "c:lead_ores"
   },
   "result": {
-    "item": "c:silver_dust",
+    "item": "c:lead_dust",
     "count": 2
   },
   "tears": 50

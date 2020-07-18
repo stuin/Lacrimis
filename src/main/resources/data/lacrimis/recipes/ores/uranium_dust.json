@@ -1,10 +1,10 @@
 {
   "type": "lacrimis:crucible",
   "base": {
-    "tag": "c:silver_ores"
+    "tag": "c:uranium_ores"
   },
   "result": {
-    "item": "c:silver_dust",
+    "item": "c:uranium_dust",
     "count": 2
   },
   "tears": 50
