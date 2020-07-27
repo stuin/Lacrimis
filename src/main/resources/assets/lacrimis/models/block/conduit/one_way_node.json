@@ -3,7 +3,8 @@
   "textures": {
     "particle": "#arrows",
     "arrows": "lacrimis:block/one_way_conduit_node",
-    "face": "lacrimis:block/conduit_node"
+    "face": "lacrimis:block/conduit_node",
+    "block": "lacrimis:block/conduit"
   },
   "elements": [
     {

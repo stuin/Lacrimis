@@ -3,49 +3,37 @@ package modfest.lacrimis.block;
 import net.minecraft.block.*;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.Properties;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 
-import java.util.Map;
-
 public class OneWayConduitBlock extends FacingBlock implements BlockConduitConnect {
-    public static final BooleanProperty DOWN = Properties.DOWN;
-    public static final BooleanProperty UP = Properties.UP;
-    public static final BooleanProperty NORTH = Properties.NORTH;
-    public static final BooleanProperty SOUTH = Properties.SOUTH;
-    public static final BooleanProperty EAST = Properties.EAST;
-    public static final BooleanProperty WEST = Properties.WEST;
-
-    public static final Map<Direction, BooleanProperty> FACING_PROPERTIES = ConnectingBlock.FACING_PROPERTIES;
-
     private static final VoxelShape[] SHAPES = generateShapes();
 
     public OneWayConduitBlock(Settings settings) {
         super(settings);
-        setDefaultState(getDefaultState().with(NORTH, false).with(EAST, false).with(SOUTH, false).with(WEST, false).with(UP, false).with(DOWN, false));
     }
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        BlockState state = this.getDefaultState().with(FACING, ctx.getPlayerLookDirection());
-        if (state.get(FACING) == Direction.NORTH || state.get(FACING) == Direction.SOUTH)
-            state = state.with(NORTH, Boolean.TRUE).with(SOUTH, Boolean.TRUE);
-        if (state.get(FACING) == Direction.UP || state.get(FACING) == Direction.DOWN)
-            state = state.with(UP, Boolean.TRUE).with(DOWN, Boolean.TRUE);
-        if (state.get(FACING) == Direction.EAST || state.get(FACING) == Direction.WEST)
-            state = state.with(EAST, Boolean.TRUE).with(WEST, Boolean.TRUE);
-        return state;
+        return this.getDefaultState().with(FACING, ctx.getPlayerLookDirection());
+    }
+
+    public BlockState rotate(BlockState state, BlockRotation rotation) {
+        return state.with(FACING, rotation.rotate(state.get(FACING)));
+    }
+
+    public BlockState mirror(BlockState state, BlockMirror mirror) {
+        return state.rotate(mirror.getRotation(state.get(FACING)));
     }
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder);
-        builder.add(FACING, DOWN, UP, NORTH, SOUTH, EAST, WEST);
+        builder.add(FACING);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package modfest.lacrimis.block.rune;
 
+import com.zundrel.wrenchable.block.BlockWrenchable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
@@ -9,16 +10,16 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-import modfest.lacrimis.block.Activatable;
 import modfest.lacrimis.init.ModBlocks;
 import modfest.lacrimis.util.NeighborList;
 
-public class RuneBlock extends Block implements Activatable {
+public class RuneBlock extends Block implements BlockWrenchable {
     public static final BooleanProperty POWERED;
     public static final IntProperty CENTER;
 
@@ -107,11 +108,14 @@ public class RuneBlock extends Block implements Activatable {
     }
 
     @Override
-    public boolean activate(World world, BlockPos pos, PlayerEntity player) {
+    public void onWrenched(World world, PlayerEntity player, BlockHitResult blockHitResult) {
+        activate(world, blockHitResult.getBlockPos(), player);
+    }
+
+    public void activate(World world, BlockPos pos, PlayerEntity player) {
         BlockPos center = getTrueCenter(world, pos);
         if(center != null)
-            return ((CenterRuneBlock) world.getBlockState(center).getBlock()).activate(world, center, player);
-        return false;
+            ((CenterRuneBlock) world.getBlockState(center).getBlock()).activate(world, center, player);
     }
 
     @Override

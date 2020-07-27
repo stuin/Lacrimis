@@ -1,5 +1,6 @@
 package modfest.lacrimis.block;
 
+import com.zundrel.wrenchable.block.BlockWrenchable;
 import modfest.lacrimis.block.entity.SoulTankEntity;
 import modfest.lacrimis.init.ModItems;
 import modfest.lacrimis.item.BottleOfTearsItem;
@@ -16,6 +17,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -23,8 +26,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import sun.jvm.hotspot.opto.Block;
 
-public abstract class SoulTankBlock extends BlockWithEntity implements BlockConduitConnect {
+public abstract class SoulTankBlock extends BlockWithEntity implements BlockConduitConnect, BlockWrenchable {
     private final boolean canExtract;
 
     protected SoulTankBlock(AbstractBlock.Settings settings, boolean canExtract) {
@@ -45,6 +49,16 @@ public abstract class SoulTankBlock extends BlockWithEntity implements BlockCond
             return (int) Math.floor(14.0 * ((SoulTankEntity) blockEntity).getRelativeLevel()) + 1;
 
         return 0;
+    }
+
+    @Override
+    public void onWrenched(World world, PlayerEntity player, BlockHitResult blockHitResult) {
+        //Read tears
+        if(player != null && !player.isSneaking() && !world.isClient) {
+            int level = getTank(world, blockHitResult.getBlockPos()).getTears();
+            Text text = new LiteralText(level + " Tears");
+            player.sendMessage(text, false);
+        }
     }
 
     @Override

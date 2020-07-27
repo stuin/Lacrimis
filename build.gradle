@@ -34,6 +34,10 @@ repositories {
 	maven {
 		url = 'https://maven.dblsaiko.net'
 	}
+	maven {
+		name = "Wrenchable"
+		url  "https://dl.bintray.com/zundrel/wrenchable"
+	}
 }
 
 dependencies {
@@ -57,18 +61,13 @@ dependencies {
 	//REI
 	modImplementation("me.shedaniel:RoughlyEnoughItems:${project.rei_version}")
 
-	//Jankson
-	//modApi "io.github.cottonmc:Jankson-Fabric:${project.jankson_version}"
-	//include "io.github.cottonmc:Jankson-Fabric:${project.jankson_version}"
-
 	//Wrenchable api
-	//def wrenchVersion = "com.github.Zundrel:Wrenchable:${project.wrenchable_version}"
-	//modImplementation (wrenchVersion) {
-	//	exclude group: "io.github.prospector"
-	//	exclude group: "io.github.cottonmc"
-	//	exclude group: "net.fabricmc"
-	//}
-	//include wrenchVersion
+	def wrenchVersion = "com.zundrel:wrenchable:${project.wrenchable_version}"
+	modImplementation (wrenchVersion) {
+		exclude group: "io.github.prospector"
+		exclude group: "net.fabricmc"
+	}
+	include wrenchVersion
 }
 
 processResources {

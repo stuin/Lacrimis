@@ -1,5 +1,6 @@
 package modfest.lacrimis.block;
 
+import com.zundrel.wrenchable.block.BlockWrenchable;
 import modfest.lacrimis.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -10,21 +11,18 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.state.StateManager.Builder;
 import net.minecraft.state.property.IntProperty;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.util.ItemScatterer;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-
-import java.util.Random;
 
 import modfest.lacrimis.init.ModBlocks;
 
-public class DrainedCryingObsidianBlock extends CryingObsidianBlock {
+public class DrainedCryingObsidianBlock extends CryingObsidianBlock implements BlockWrenchable {
 
     public static final IntProperty TEARS_LEAST = IntProperty.of("tears_least_sig", 0, 49);
     public static final IntProperty TEARS_MOST = IntProperty.of("tears_most_sig", 0, 9);
@@ -35,11 +33,13 @@ public class DrainedCryingObsidianBlock extends CryingObsidianBlock {
     }
 
     @Override
-    protected void appendProperties(Builder<Block, BlockState> builder) {
-        builder.add(TEARS_LEAST);
-        builder.add(TEARS_MOST);
+    public void onWrenched(World world, PlayerEntity player, BlockHitResult blockHitResult) {
+        if(player != null && !player.isSneaking() && !world.isClient) {
+            int level = getTearsLevel(world.getBlockState(blockHitResult.getBlockPos()));
+            Text text = new LiteralText(level + " Tears");
+            player.sendMessage(text, false);
+        }
     }
-
     @Override
     public PistonBehavior getPistonBehavior(BlockState state) {
         return PistonBehavior.BLOCK;
@@ -57,6 +57,13 @@ public class DrainedCryingObsidianBlock extends CryingObsidianBlock {
         item.getOrCreateTag().putInt("TearLevel", getTearsLevel(state));
         ItemScatterer.spawn(world, pos, new SimpleInventory(item));
     }
+
+    @Override
+    protected void appendProperties(Builder<Block, BlockState> builder) {
+        builder.add(TEARS_LEAST);
+        builder.add(TEARS_MOST);
+    }
+
 
     public static BlockState setTearsValue(BlockState self, int tears) {
         tears -= 1;

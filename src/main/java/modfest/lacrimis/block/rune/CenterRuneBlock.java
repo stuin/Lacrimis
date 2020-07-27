@@ -1,5 +1,6 @@
 package modfest.lacrimis.block.rune;
 
+import com.zundrel.wrenchable.block.BlockWrenchable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
@@ -15,6 +16,7 @@ import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
@@ -24,14 +26,13 @@ import net.minecraft.world.World;
 import java.util.List;
 
 import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.block.Activatable;
 import modfest.lacrimis.block.BlockConduitConnect;
 import modfest.lacrimis.init.ModBlocks;
 import modfest.lacrimis.util.ConduitEntry;
 import modfest.lacrimis.util.ConduitUtil;
 import modfest.lacrimis.util.NeighborList;
 
-public abstract class CenterRuneBlock extends Block implements Activatable, BlockConduitConnect {
+public abstract class CenterRuneBlock extends Block implements BlockConduitConnect, BlockWrenchable {
     private static final Box TARGET_BOX = new Box(-0.5, -1, -0.5, 1.5, 1, 1.5);
     private static final Box LARGE_BOX = new Box(-1.5, -1, -1.5, 2.5, 1, 2.5);
 
@@ -138,6 +139,10 @@ public abstract class CenterRuneBlock extends Block implements Activatable, Bloc
     }
 
     @Override
+    public void onWrenched(World world, PlayerEntity player, BlockHitResult blockHitResult) {
+        activate(world, blockHitResult.getBlockPos(), player);
+    }
+
     public boolean activate(World world, BlockPos pos, PlayerEntity player) {
         //Mark powered
         if(player == null && world.isReceivingRedstonePower(pos))
