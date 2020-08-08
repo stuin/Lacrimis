@@ -11,11 +11,12 @@ import net.minecraft.recipe.RecipeManager;
 import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.tag.RegistryTagManager;
+import net.minecraft.tag.TagManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.profiler.DummyProfiler;
+import net.minecraft.util.registry.DynamicRegistryManager;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.Difficulty;
@@ -37,7 +38,7 @@ public class DummyWorld extends World {
                 new ClientWorld.Properties(Difficulty.NORMAL, false, false),
                 RegistryKey.of(Registry.DIMENSION, new Identifier("dummy")),
                 DimensionType.OVERWORLD_REGISTRY_KEY,
-                DimensionType.getOverworldDimensionType(),
+                DimensionType.OVERWORLD_REGISTRY_KEY,
                 () -> DummyProfiler.INSTANCE,
                 true,
                 false,
@@ -100,7 +101,7 @@ public class DummyWorld extends World {
     }
 
     @Override
-    public RegistryTagManager getTagManager() {
+    public TagManager getTagManager() {
         throw new IllegalStateException("not implemented");
     }
 
@@ -131,6 +132,11 @@ public class DummyWorld extends World {
 
     @Override
     public Biome getGeneratorStoredBiome(int biomeX, int biomeY, int biomeZ) {
+        throw new IllegalStateException("not implemented");
+    }
+
+    @Override
+    public DynamicRegistryManager getRegistryManager() {
         throw new IllegalStateException("not implemented");
     }
 }

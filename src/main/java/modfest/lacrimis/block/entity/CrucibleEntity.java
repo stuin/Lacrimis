@@ -50,7 +50,7 @@ public class CrucibleEntity extends SoulTankEntity implements Tickable {
             craftTime++;
 
         if (craftTime >= CRAFT_COOLDOWN && !world.isClient) {
-            for (ItemEntity entity : world.getEntities(ItemEntity.class, ITEM_BOX.offset(pos), null)) {
+            for (ItemEntity entity : world.getEntitiesByClass(ItemEntity.class, ITEM_BOX.offset(pos), null)) {
                 inventory.setStack(0, entity.getStack());
 
                 Optional<CrucibleRecipe> optional = world.getServer()

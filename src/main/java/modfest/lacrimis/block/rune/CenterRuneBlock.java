@@ -117,7 +117,7 @@ public abstract class CenterRuneBlock extends Block implements BlockConduitConne
         
         //For all entities on platform
         pos = pos.offset(flipped);
-        for(Entity entity : world.getEntities(null, box.offset(pos.offset(flipped)))) {
+        for(Entity entity : world.getEntitiesByType(null, box.offset(pos.offset(flipped)), null)) {
             if(activate(world, pos, pipe, entity, player))
                 return true;
         }
@@ -206,8 +206,8 @@ public abstract class CenterRuneBlock extends Block implements BlockConduitConne
     }
 
     @Override
-    public void buildTooltip(ItemStack stack, BlockView world, List<Text> tooltip, TooltipContext options) {
-        super.buildTooltip(stack, world, tooltip, options);
+    public void appendTooltip(ItemStack stack, BlockView world, List<Text> tooltip, TooltipContext options) {
+        super.appendTooltip(stack, world, tooltip, options);
         tooltip.add(new TranslatableText(Lacrimis.MODID + ".tooltip.rune.tears",
                 requiredTears).formatted(Formatting.GRAY));
         tooltip.add(new TranslatableText(Lacrimis.MODID + ".tooltip.rune.tier" + requiredTier).formatted(Formatting.GRAY));

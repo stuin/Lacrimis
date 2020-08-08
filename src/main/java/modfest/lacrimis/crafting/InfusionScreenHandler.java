@@ -10,6 +10,7 @@ import net.minecraft.inventory.InventoryChangedListener;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeFinder;
+import net.minecraft.recipe.book.RecipeBookCategory;
 import net.minecraft.screen.AbstractRecipeScreenHandler;
 import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
@@ -150,6 +151,11 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 	@Environment(EnvType.CLIENT)
 	public int getCraftingSlotCount() {
 		return input.size();
+	}
+
+	@Override
+	public RecipeBookCategory getCategory() {
+		return null;
 	}
 
 	public int getRequiredTears() {

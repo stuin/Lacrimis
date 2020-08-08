@@ -10,7 +10,6 @@
   ],
   "client": [
     "ItemRendererMixin",
-    "RecipeBookResultsMixin",
     "ClientMixin",
     "ClientRecipeBookMixin"
   ],
