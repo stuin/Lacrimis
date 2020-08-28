@@ -18,7 +18,7 @@ public class FramebufferBackedTexture extends AbstractTexture {
         RenderSystem.assertThread(RenderSystem::isOnRenderThreadOrInit);
         if (this.fb == null) {
             this.fb = new Framebuffer(256, 256, true, MinecraftClient.IS_SYSTEM_MAC);
-            this.glId = this.fb.colorAttachment; // just in case
+            this.glId = this.fb.method_30277(); // .getColorAttachment()
         }
 
         return this.fb;
@@ -26,7 +26,7 @@ public class FramebufferBackedTexture extends AbstractTexture {
 
     @Override
     public int getGlId() {
-        return this.getFramebuffer().colorAttachment;
+        return this.getFramebuffer().method_30277(); // .getColorAttachment()
     }
 
     @Override

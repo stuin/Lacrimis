@@ -62,7 +62,8 @@ public final class CardTextureGen {
     }
 
     public static void updateTexturesIfNeeded() {
-        if (!needsGeneration) return;
+        if (!needsGeneration)
+            return;
         needsGeneration = false;
 
         initTextures();
@@ -105,7 +106,7 @@ public final class CardTextureGen {
 
                 fitToBounds(tr, adjustBoundingBox(ent.getBoundingBox(), ent.getType()), 23, 20);
 
-                EntityRenderer<? super Entity> renderer = MinecraftClient.getInstance().getEntityRenderManager().getRenderer(ent);
+                EntityRenderer<? super Entity> renderer = MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(ent);
 
                 renderer.render(ent, 0.0f, 1.0f, tr.toMatrixStack(), vcp, 0x00F000F0);
                 tr.pop();
@@ -146,8 +147,7 @@ public final class CardTextureGen {
                 new Vec3((float) box.maxX, (float) box.minY, (float) box.minZ),
                 new Vec3((float) box.maxX, (float) box.minY, (float) box.maxZ),
                 new Vec3((float) box.maxX, (float) box.maxY, (float) box.minZ),
-                new Vec3((float) box.maxX, (float) box.maxY, (float) box.maxZ)
-        )
+                new Vec3((float) box.maxX, (float) box.maxY, (float) box.maxZ))
                 .map(tr.mat()::mul)
                 .collect(Collectors.toSet());
         Vec3 min = positions.stream().reduce(
@@ -192,7 +192,8 @@ public final class CardTextureGen {
     }
 
     private static void initTextures() {
-        if (tarotCardTextures != null) return;
+        if (tarotCardTextures != null)
+            return;
 
         HashMap<TarotCardType, FramebufferBackedTexture> map = new HashMap<>();
         HashMap<TarotCardType, Identifier> idMap = new HashMap<>();

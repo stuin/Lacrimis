@@ -35,7 +35,7 @@ public class PageInfusion extends PageDoubleRecipeRegistry<InfusionRecipe> {
             }
         }
 
-        this.parent.drawCenteredStringNoShadow(ms, this.getTitle(second), 58, recipeY - 10, this.book.headerColor);
+        this.parent.drawCenteredStringNoShadow(ms, this.getTitle(second).asOrderedText(), 58, recipeY - 10, this.book.headerColor);
         this.parent.renderItemStack(ms, recipeX + 79, recipeY + 22, mouseX, mouseY, recipe.getOutput());
         DefaultedList<Ingredient> ingredients = recipe.getPreviewInputs();
         wrap = 3;

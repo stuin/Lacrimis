@@ -1,6 +1,7 @@
 package modfest.lacrimis.block;
 
 import com.zundrel.wrenchable.block.BlockWrenchable;
+
 import modfest.lacrimis.block.entity.SoulTankEntity;
 import modfest.lacrimis.init.ModItems;
 import modfest.lacrimis.item.BottleOfTearsItem;
@@ -26,7 +27,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import sun.jvm.hotspot.opto.Block;
 
 public abstract class SoulTankBlock extends BlockWithEntity implements BlockConduitConnect, BlockWrenchable {
     private final boolean canExtract;

@@ -56,7 +56,7 @@ dependencies {
 	include 'net.dblsaiko.qcommon.croco:croco:2.1.2'
 
 	//Cotton Resources
-	modImplementation "io.github.cottonmc:cotton-resources:${project.cotton_resources_version}"
+	// modImplementation "io.github.cottonmc:cotton-resources:${project.cotton_resources_version}"
 
 	//Patchouli api
 	modImplementation("vazkii.patchouli:Patchouli:${project.patchouli_version}")

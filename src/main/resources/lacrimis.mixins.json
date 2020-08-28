@@ -6,7 +6,8 @@
   "mixins": [
     "CryingObsidianMixin",
     "PlayerMixin",
-    "VillagerMixin"
+    "VillagerMixin",
+    "DimensionTypeInvoker"
   ],
   "client": [
     "ItemRendererMixin",

@@ -1,5 +1,8 @@
 package modfest.lacrimis.client.cardgen;
 
+import java.util.List;
+
+import modfest.lacrimis.mixin.DimensionTypeInvoker;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.world.ClientWorld;
@@ -24,9 +27,6 @@ import net.minecraft.world.TickScheduler;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkManager;
-import net.minecraft.world.dimension.DimensionType;
-
-import java.util.List;
 
 public class DummyWorld extends World {
 
@@ -37,13 +37,11 @@ public class DummyWorld extends World {
         super(
                 new ClientWorld.Properties(Difficulty.NORMAL, false, false),
                 RegistryKey.of(Registry.DIMENSION, new Identifier("dummy")),
-                DimensionType.OVERWORLD_REGISTRY_KEY,
-                DimensionType.OVERWORLD_REGISTRY_KEY,
+                DimensionTypeInvoker.getOverworld(),
                 () -> DummyProfiler.INSTANCE,
                 true,
                 false,
-                0L
-        );
+                0L);
     }
 
     @Override
