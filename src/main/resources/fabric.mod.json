@@ -43,7 +43,6 @@
   "depends": {
     "fabricloader": ">=0.8.8",
     "fabric": "*",
-    "minecraft": "*",
-    "patchouli": "*"
+    "minecraft": "*"
   }
 }
