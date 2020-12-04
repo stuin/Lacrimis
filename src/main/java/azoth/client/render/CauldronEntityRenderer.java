@@ -17,10 +17,10 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.BlockPos;
 
 @Environment(EnvType.CLIENT)
-public class CrucibleEntityRenderer extends BlockEntityRenderer<AzothCauldronBlockEntity> {
-    public static final ModelIdentifier CRUCIBLE_AZOTH_MODEL_ID = new ModelIdentifier(Azoth.createID("special/crucible_azoth"), "");
+public class CauldronEntityRenderer extends BlockEntityRenderer<AzothCauldronBlockEntity> {
+    public static final ModelIdentifier CRUCIBLE_AZOTH_MODEL_ID = new ModelIdentifier(Azoth.createID("cauldron/azoth"), "");
 
-    public CrucibleEntityRenderer(BlockEntityRenderDispatcher dispatcher) {
+    public CauldronEntityRenderer(BlockEntityRenderDispatcher dispatcher) {
         super(dispatcher);
     }
 

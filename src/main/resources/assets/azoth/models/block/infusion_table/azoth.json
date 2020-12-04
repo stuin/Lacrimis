@@ -2,14 +2,14 @@
     "parent": "block/block",
     "textures": {
         "particle": "azoth:block/azoth_still",
-        "azoth": "azoth:block/azoth_still"
+        "texture": "azoth:block/azoth_still"
     },
     "elements": [
         {   
             "from": [ 6.99, 0, 6.99 ],
             "to": [ 9.01, 0, 9.01 ],
             "faces": {
-                "up": { "texture": "#azoth"}
+                "up": { "texture": "#texture"}
             }
         }
     ]

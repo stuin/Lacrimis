@@ -1,6 +1,6 @@
 {
     "itemGroup.azoth.main": "Azoth",
-    "block.azoth.crucible": "Crucible",
+    "block.azoth.cauldron": "Cauldron (Azoth)",
     "block.azoth.infusion_table": "Infusion Table",
-    "block.azoth.conduit": "Conduit"
+    "block.azoth.conduit": "Capillary Duct"
 }

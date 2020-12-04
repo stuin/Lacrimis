@@ -18,7 +18,7 @@ import net.minecraft.util.math.BlockPos;
 
 @Environment(EnvType.CLIENT)
 public class InfusionTableEntityRenderer extends BlockEntityRenderer<InfusionTableBlockEntity> {
-    public static final ModelIdentifier INFUSION_TABLE_OVERLAY_MODEL_ID = new ModelIdentifier(Azoth.createID("special/infusion_table_overlay"), "");
+    public static final ModelIdentifier INFUSION_TABLE_OVERLAY_MODEL_ID = new ModelIdentifier(Azoth.createID("infusion_table/azoth"), "");
 
     public InfusionTableEntityRenderer(BlockEntityRenderDispatcher dispatcher) {
         super(dispatcher);

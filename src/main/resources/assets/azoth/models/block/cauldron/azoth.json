@@ -2,13 +2,13 @@
     "parent": "block/block",
     "textures": {
         "particle": "azoth:block/azoth_still",
-        "fluid": "azoth:block/azoth_still"
+        "texture": "azoth:block/azoth_still"
     },
     "elements": [
-        {   "from": [ 3, 0, 3 ],
-            "to": [ 13, 0, 13 ],
+        {   "from": [ 2, 0, 2 ],
+            "to": [ 14, 0, 14 ],
             "faces": {
-                "up": { "texture": "#fluid"}
+                "up": { "texture": "#texture"}
             }
         }
     ]

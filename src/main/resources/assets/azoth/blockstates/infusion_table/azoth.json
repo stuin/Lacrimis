@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "": { "model": "azoth:block/infusion_table/azoth" }
+    }
+}

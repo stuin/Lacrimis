@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "": { "model": "azoth:block/cauldron/azoth" }
+    }
+}
