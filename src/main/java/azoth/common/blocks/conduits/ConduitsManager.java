@@ -23,7 +23,7 @@ public class ConduitsManager {
     public void notifyUpdate(BlockPos pos) {
         BlockState state = this.world.getBlockState(pos);
         Block block = state.getBlock();
-        if (block == AzothBlocks.CONDUIT
+        if (block == AzothBlocks.AZOTH_CONDUIT
                 || block instanceof ConduitConnectable && ((ConduitConnectable) block).isSink()) {
             List<ConduitPath> sources = ConduitsUtils.buildPaths(this.world, pos, PathMode.TO_SOURCES);
             for (ConduitPath source : sources) {
@@ -37,7 +37,7 @@ public class ConduitsManager {
 
     public int offer(BlockPos pos, int amount) {
         if (!this.cache.containsKey(pos)) {
-            List<ConduitPath> paths = ConduitsUtils.buildPaths(world, pos, PathMode.TO_SINKS);
+            List<ConduitPath> paths = ConduitsUtils.buildPaths(this.world, pos, PathMode.TO_SINKS);
             paths.sort((a, b) -> Integer.compare(a.length, b.length));
             this.cache.put(pos, paths);
         }

@@ -9,12 +9,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.registry.Registry;
 
 public class AzothItems {
-    private static final ItemGroup GROUP = FabricItemGroupBuilder.build(Azoth.createID("main"), () -> new ItemStack(AzothBlocks.CRUCIBLE));
+    private static final ItemGroup GROUP = FabricItemGroupBuilder.build(Azoth.createID("main"), () -> new ItemStack(AzothBlocks.INFUSION_TABLE));
 
     public static void register() {
-        Registry.register(Registry.ITEM, Azoth.createID("crucible"), new BlockItem(AzothBlocks.CRUCIBLE, createSettings()));
         Registry.register(Registry.ITEM, Azoth.createID("infusion_table"), new BlockItem(AzothBlocks.INFUSION_TABLE, createSettings()));
-        Registry.register(Registry.ITEM, Azoth.createID("conduit"), new BlockItem(AzothBlocks.CONDUIT, createSettings()));
+        Registry.register(Registry.ITEM, Azoth.createID("conduit"), new BlockItem(AzothBlocks.AZOTH_CONDUIT, createSettings()));
+        Registry.register(Registry.ITEM, Azoth.createID("cauldron"), new BlockItem(AzothBlocks.AZOTH_CAULDRON, createSettings().group(null)));
     }
 
     private static Item.Settings createSettings() {

@@ -52,6 +52,7 @@ public class InfusionTableBlock extends Block implements ConduitConnectable, Blo
         return true;
     }
 
+    @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         super.onStateReplaced(state, world, pos, newState, moved);
         Azoth.getConduitManager(world).notifyUpdate(pos);

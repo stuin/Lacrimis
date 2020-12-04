@@ -1,7 +1,7 @@
 package azoth.client.render;
 
 import azoth.Azoth;
-import azoth.common.blocks.entity.CrucibleBlockEntity;
+import azoth.common.blocks.entity.AzothCauldronBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
@@ -17,7 +17,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.BlockPos;
 
 @Environment(EnvType.CLIENT)
-public class CrucibleEntityRenderer extends BlockEntityRenderer<CrucibleBlockEntity> {
+public class CrucibleEntityRenderer extends BlockEntityRenderer<AzothCauldronBlockEntity> {
     public static final ModelIdentifier CRUCIBLE_AZOTH_MODEL_ID = new ModelIdentifier(Azoth.createID("special/crucible_azoth"), "");
 
     public CrucibleEntityRenderer(BlockEntityRenderDispatcher dispatcher) {
@@ -25,7 +25,7 @@ public class CrucibleEntityRenderer extends BlockEntityRenderer<CrucibleBlockEnt
     }
 
     @Override
-    public void render(CrucibleBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+    public void render(AzothCauldronBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         float level = entity.getLevelForDisplay();
         if (level > 0) {
             MinecraftClient mc = MinecraftClient.getInstance();

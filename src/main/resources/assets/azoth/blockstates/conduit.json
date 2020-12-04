@@ -8,29 +8,55 @@
       "when": { "node": false },
       "apply": { "model": "azoth:block/conduit_center" }
     },
+    
     {
-      "when": { "down": true },
+      "when": { "down": "normal" },
       "apply": { "model": "azoth:block/conduit_connection", "uvlock": true }
     },
     {
-      "when": { "up": true },
+      "when": { "up": "normal" },
       "apply": { "model": "azoth:block/conduit_connection", "uvlock": true, "x": 180 }
     },
     {
-      "when": { "north": true },
+      "when": { "north": "normal" },
       "apply": { "model": "azoth:block/conduit_connection", "uvlock": true, "x": 90, "y": 180 }
     },
     {
-      "when": { "south": true },
+      "when": { "south": "normal" },
       "apply": { "model": "azoth:block/conduit_connection", "uvlock": true, "x": 90 }
     },
     {
-      "when": { "west": true },
+      "when": { "west": "normal" },
       "apply": { "model": "azoth:block/conduit_connection", "uvlock": true, "x": 90, "y": 90 }
     },
     {
-      "when": { "east": true },
+      "when": { "east": "normal" },
       "apply": { "model": "azoth:block/conduit_connection", "uvlock": true, "x": 90, "y": 270 }
+    },
+    
+    {
+      "when": { "down": "cauldron" },
+      "apply": { "model": "azoth:block/conduit_cauldron_connection", "uvlock": true }
+    },
+    {
+      "when": { "up": "cauldron" },
+      "apply": { "model": "azoth:block/conduit_cauldron_connection", "uvlock": true, "x": 180 }
+    },
+    {
+      "when": { "north": "cauldron" },
+      "apply": { "model": "azoth:block/conduit_cauldron_connection", "uvlock": true, "x": 90, "y": 180 }
+    },
+    {
+      "when": { "south": "cauldron" },
+      "apply": { "model": "azoth:block/conduit_cauldron_connection", "uvlock": true, "x": 90 }
+    },
+    {
+      "when": { "west": "cauldron" },
+      "apply": { "model": "azoth:block/conduit_cauldron_connection", "uvlock": true, "x": 90, "y": 90 }
+    },
+    {
+      "when": { "east": "cauldron" },
+      "apply": { "model": "azoth:block/conduit_cauldron_connection", "uvlock": true, "x": 90, "y": 270 }
     }
   ]
 }

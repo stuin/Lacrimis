@@ -10,10 +10,10 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.math.BlockPos;
 
-public class CrucibleBlockEntity extends AzothContainerBlockEntity implements Tickable, BlockEntityClientSerializable {
+public class AzothCauldronBlockEntity extends AzothContainerBlockEntity implements Tickable, BlockEntityClientSerializable {
     private static final int AZOTH_CAPACITY = 1000;
 
-    public CrucibleBlockEntity() {
+    public AzothCauldronBlockEntity() {
         super(AzothBlocks.CRUCIBLE_ENTITY);
     }
 

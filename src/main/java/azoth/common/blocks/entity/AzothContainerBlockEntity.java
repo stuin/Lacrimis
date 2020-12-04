@@ -34,7 +34,7 @@ public abstract class AzothContainerBlockEntity extends BlockEntity implements B
 
     @Override
     public void fromClientTag(CompoundTag tag) {
-        this.fromTag(getCachedState(), tag);
+        this.fromTag(this.getCachedState(), tag);
     }
 
     @Override

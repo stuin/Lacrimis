@@ -16,7 +16,7 @@ import net.minecraft.particle.DefaultParticleType;
 public class AzothMistParticle extends SpriteBillboardParticle {
     protected AzothMistParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
-        
+
         float f = this.random.nextFloat();
         this.colorRed = 0.168F + (0.375F - 0.168F) * f;
         this.colorGreen = 0.004F + (0.02F - 0.004F) * f;

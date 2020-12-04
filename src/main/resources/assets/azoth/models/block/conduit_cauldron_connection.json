@@ -1,0 +1,30 @@
+{
+    "ambientocclusion": false,
+    "textures": {
+        "particle": "azoth:block/conduit",
+        "block": "azoth:block/conduit",
+        "connector": "azoth:block/conduit_cauldron_connection"
+    },
+    "elements": [
+        {
+            "from": [ 7, 0, 7 ],
+            "to": [ 9, 7, 9 ],
+            "faces": {
+                "north": { "texture": "#block" },
+                "south": { "texture": "#block" },
+                "east": { "texture": "#block" },
+                "west": { "texture": "#block" },
+                "up": { "texture": "#block" },
+                "down": { "texture": "#block" }
+            }
+        },
+        {
+            "from": [ 0, 0, 0 ],
+            "to": [ 16, 0.01, 16 ],
+            "faces": {
+                "up": { "texture": "#connector" },
+                "down": { "texture": "#connector" }
+            }
+        }
+    ]
+}
