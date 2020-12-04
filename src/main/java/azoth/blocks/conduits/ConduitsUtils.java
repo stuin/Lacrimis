@@ -1,4 +1,4 @@
-package azoth.common.blocks.conduits;
+package azoth.blocks.conduits;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import azoth.common.AzothBlocks;
-import azoth.common.blocks.ConduitConnectable;
+import azoth.Azoth.Blocks;
+import azoth.blocks.ConduitConnectable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -29,13 +29,13 @@ public class ConduitsUtils {
                 BlockPos neighborPos = pos.offset(direction);
                 if (neighborPos != start) {
                     BlockState neighbor = world.getBlockState(neighborPos);
-                    if (neighbor.getBlock() == AzothBlocks.AZOTH_CONDUIT || mode.isValidEnd(neighbor)) {
+                    if (neighbor.getBlock() == Blocks.AZOTH_CONDUIT || mode.isValidEnd(neighbor)) {
                         int nextLength = length + 1;
                         if (links.containsKey(neighborPos) && nextLength >= links.get(neighborPos).length) {
                             continue;
                         }
                         links.put(neighborPos, new Link(pos, direction, nextLength));
-                        if (neighbor.getBlock() == AzothBlocks.AZOTH_CONDUIT && !queue.contains(neighborPos)) {
+                        if (neighbor.getBlock() == Blocks.AZOTH_CONDUIT && !queue.contains(neighborPos)) {
                             queue.add(neighborPos);
                         }
                     }
@@ -52,7 +52,7 @@ public class ConduitsUtils {
                 Deque<BlockPos> conduits = new ArrayDeque<>(link.length);
                 while (link != null && link.prev != start) {
                     BlockPos prevPos = link.prev;
-                    if (world.getBlockState(prevPos).getBlock() == AzothBlocks.AZOTH_CONDUIT) {
+                    if (world.getBlockState(prevPos).getBlock() == Blocks.AZOTH_CONDUIT) {
                         conduits.addFirst(prevPos);
                     }
                     link = links.get(prevPos);

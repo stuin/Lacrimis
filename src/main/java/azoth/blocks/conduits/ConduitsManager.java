@@ -1,12 +1,12 @@
-package azoth.common.blocks.conduits;
+package azoth.blocks.conduits;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import azoth.common.AzothBlocks;
-import azoth.common.blocks.ConduitConnectable;
-import azoth.common.blocks.conduits.ConduitsUtils.PathMode;
+import azoth.Azoth.Blocks;
+import azoth.blocks.ConduitConnectable;
+import azoth.blocks.conduits.ConduitsUtils.PathMode;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -23,7 +23,7 @@ public class ConduitsManager {
     public void notifyUpdate(BlockPos pos) {
         BlockState state = this.world.getBlockState(pos);
         Block block = state.getBlock();
-        if (block == AzothBlocks.AZOTH_CONDUIT
+        if (block == Blocks.AZOTH_CONDUIT
                 || block instanceof ConduitConnectable && ((ConduitConnectable) block).isSink()) {
             List<ConduitPath> sources = ConduitsUtils.buildPaths(this.world, pos, PathMode.TO_SOURCES);
             for (ConduitPath source : sources) {

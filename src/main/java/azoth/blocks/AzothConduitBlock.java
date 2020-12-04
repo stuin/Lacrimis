@@ -1,8 +1,8 @@
-package azoth.common.blocks;
+package azoth.blocks;
 
 import java.util.EnumSet;
 
-import azoth.Azoth;
+import azoth.AzothInitializer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -110,11 +110,11 @@ public class AzothConduitBlock extends Block {
     public ConnectionType getConnectionType(BlockView view, BlockPos pos, Direction side) {
         BlockState neighbor = view.getBlockState(pos.offset(side));
         Block block = neighbor.getBlock();
-        if (block instanceof AzothCauldronBlock) {
-            return ConnectionType.CAULDRON;
-        }
-        if (block instanceof AzothConduitBlock || block instanceof ConduitConnectable && ((ConduitConnectable) block).connectsToConduit(neighbor, side)) {
+        if (block instanceof AzothConduitBlock) {
             return ConnectionType.NORMAL;
+        }
+        if (block instanceof ConduitConnectable) {
+            return ((ConduitConnectable) block).getConnectionType(neighbor, side);
         }
         return ConnectionType.NONE;
     }
@@ -134,7 +134,7 @@ public class AzothConduitBlock extends Block {
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         super.onStateReplaced(state, world, pos, newState, moved);
-        Azoth.getConduitManager(world).notifyUpdate(pos);
+        AzothInitializer.getConduitManager(world).notifyUpdate(pos);
     }
 
     public static EnumProperty<ConnectionType> getConnectionProperty(Direction direction) {

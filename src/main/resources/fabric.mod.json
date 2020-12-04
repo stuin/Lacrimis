@@ -22,10 +22,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "azoth.Azoth"
+      "azoth.AzothInitializer"
     ],
     "client": [
-      "azoth.AzothClient"
+      "azoth.AzothInitializer"
     ]
   },
 

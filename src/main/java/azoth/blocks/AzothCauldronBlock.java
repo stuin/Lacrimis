@@ -1,6 +1,7 @@
-package azoth.common.blocks;
+package azoth.blocks;
 
-import azoth.common.blocks.entity.AzothCauldronBlockEntity;
+import azoth.blocks.AzothConduitBlock.ConnectionType;
+import azoth.blocks.entity.AzothCauldronBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
@@ -40,8 +41,8 @@ public class AzothCauldronBlock extends Block implements BlockEntityProvider, Co
     }
 
     @Override
-    public boolean connectsToConduit(BlockState state, Direction side) {
-        return side != Direction.DOWN;
+    public ConnectionType getConnectionType(BlockState state, Direction side) {
+        return side.getAxis().isHorizontal() ? ConnectionType.CAULDRON : ConnectionType.NONE;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package azoth.client.render;
 
 import azoth.Azoth;
-import azoth.common.blocks.entity.AzothCauldronBlockEntity;
+import azoth.blocks.entity.AzothCauldronBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;

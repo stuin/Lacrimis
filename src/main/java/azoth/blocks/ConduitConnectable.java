@@ -1,12 +1,13 @@
-package azoth.common.blocks;
+package azoth.blocks;
 
+import azoth.blocks.AzothConduitBlock.ConnectionType;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 public interface ConduitConnectable {
-    boolean connectsToConduit(BlockState state, Direction side);
+    ConnectionType getConnectionType(BlockState state, Direction side);
 
     default boolean isSource() {
         return false;

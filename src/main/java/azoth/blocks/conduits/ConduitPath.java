@@ -1,4 +1,4 @@
-package azoth.common.blocks.conduits;
+package azoth.blocks.conduits;
 
 import java.util.List;
 

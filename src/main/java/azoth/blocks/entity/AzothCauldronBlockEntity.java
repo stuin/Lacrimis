@@ -1,7 +1,7 @@
-package azoth.common.blocks.entity;
+package azoth.blocks.entity;
 
-import azoth.Azoth;
-import azoth.common.AzothBlocks;
+import azoth.Azoth.BlockEntityTypes;
+import azoth.AzothInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
@@ -14,7 +14,7 @@ public class AzothCauldronBlockEntity extends AzothContainerBlockEntity implemen
     private static final int AZOTH_CAPACITY = 1000;
 
     public AzothCauldronBlockEntity() {
-        super(AzothBlocks.CRUCIBLE_ENTITY);
+        super(BlockEntityTypes.AZOTH_CAULDRON);
     }
 
     @Environment(EnvType.CLIENT)
@@ -36,7 +36,7 @@ public class AzothCauldronBlockEntity extends AzothContainerBlockEntity implemen
             }
         }
         if (!this.world.isClient && this.level > 0) {
-            if (Azoth.getConduitManager(this.world).offer(this.pos, 1) != 1) {
+            if (AzothInitializer.getConduitManager(this.world).offer(this.pos, 1) != 1) {
                 this.level -= 1;
                 this.markDirty();
                 this.sync();

@@ -1,7 +1,8 @@
-package azoth.common.blocks;
+package azoth.blocks;
 
-import azoth.Azoth;
-import azoth.common.blocks.entity.InfusionTableBlockEntity;
+import azoth.AzothInitializer;
+import azoth.blocks.AzothConduitBlock.ConnectionType;
+import azoth.blocks.entity.InfusionTableBlockEntity;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
@@ -16,7 +17,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public class InfusionTableBlock extends Block implements ConduitConnectable, BlockEntityProvider {
-    protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
+    protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 13.0D, 16.0D);
 
     public InfusionTableBlock(AbstractBlock.Settings settings) {
         super(settings);
@@ -38,8 +39,8 @@ public class InfusionTableBlock extends Block implements ConduitConnectable, Blo
     }
 
     @Override
-    public boolean connectsToConduit(BlockState state, Direction side) {
-        return side != Direction.DOWN;
+    public ConnectionType getConnectionType(BlockState state, Direction side) {
+        return side == Direction.DOWN ? ConnectionType.NONE : ConnectionType.NORMAL;
     }
 
     @Override
@@ -55,7 +56,7 @@ public class InfusionTableBlock extends Block implements ConduitConnectable, Blo
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         super.onStateReplaced(state, world, pos, newState, moved);
-        Azoth.getConduitManager(world).notifyUpdate(pos);
+        AzothInitializer.getConduitManager(world).notifyUpdate(pos);
     }
 
     @Override

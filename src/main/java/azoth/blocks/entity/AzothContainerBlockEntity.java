@@ -1,4 +1,4 @@
-package azoth.common.blocks.entity;
+package azoth.blocks.entity;
 
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;

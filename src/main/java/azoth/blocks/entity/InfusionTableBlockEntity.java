@@ -1,9 +1,9 @@
-package azoth.common.blocks.entity;
+package azoth.blocks.entity;
 
 import java.util.Random;
 
-import azoth.common.AzothBlocks;
-import azoth.common.AzothParticles;
+import azoth.Azoth;
+import azoth.Azoth.BlockEntityTypes;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
@@ -16,7 +16,7 @@ public class InfusionTableBlockEntity extends AzothContainerBlockEntity implemen
     private static final int AZOTH_CAPACITY = 250;
 
     public InfusionTableBlockEntity() {
-        super(AzothBlocks.INFUSION_TABLE_ENTITY);
+        super(BlockEntityTypes.INFUSION_TABLE);
     }
 
     @Environment(EnvType.CLIENT)
@@ -43,7 +43,7 @@ public class InfusionTableBlockEntity extends AzothContainerBlockEntity implemen
             double dx = 0.005 * Math.cos(a + 1.5 * Math.PI / 2);
             double dz = 0.005 * Math.sin(a + 1.5 * Math.PI / 2);
 
-            this.world.addParticle(AzothParticles.AZOTH_MIST, x, y, z, dx, 0.005, dz);
+            this.world.addParticle(Azoth.ParticleTypes.AZOTH_MIST, x, y, z, dx, 0.005, dz);
         }
     }
 

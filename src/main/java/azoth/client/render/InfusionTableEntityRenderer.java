@@ -1,7 +1,7 @@
 package azoth.client.render;
 
 import azoth.Azoth;
-import azoth.common.blocks.entity.InfusionTableBlockEntity;
+import azoth.blocks.entity.InfusionTableBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
@@ -18,7 +18,7 @@ import net.minecraft.util.math.BlockPos;
 
 @Environment(EnvType.CLIENT)
 public class InfusionTableEntityRenderer extends BlockEntityRenderer<InfusionTableBlockEntity> {
-    public static final ModelIdentifier INFUSION_TABLE_OVERLAY_MODEL_ID = new ModelIdentifier(Azoth.createID("infusion_table/azoth"), "");
+    public static final ModelIdentifier INFUSION_TABLE_AZOTH_MODEL_ID = new ModelIdentifier(Azoth.createID("infusion_table/azoth"), "");
 
     public InfusionTableEntityRenderer(BlockEntityRenderDispatcher dispatcher) {
         super(dispatcher);
@@ -28,7 +28,7 @@ public class InfusionTableEntityRenderer extends BlockEntityRenderer<InfusionTab
     public void render(InfusionTableBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         if (entity.shouldDisplayTears()) {
             MinecraftClient mc = MinecraftClient.getInstance();
-            BakedModel model = mc.getBakedModelManager().getModel(INFUSION_TABLE_OVERLAY_MODEL_ID);
+            BakedModel model = mc.getBakedModelManager().getModel(INFUSION_TABLE_AZOTH_MODEL_ID);
             BlockPos pos = entity.getPos();
 
             matrices.push();
