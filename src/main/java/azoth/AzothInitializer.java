@@ -48,7 +48,7 @@ public class AzothInitializer implements ModInitializer, ClientModInitializer {
         BlockEntityRendererRegistry.INSTANCE.register(BlockEntityTypes.INFUSION_TABLE, InfusionTableEntityRenderer::new);
 
         ModelLoadingRegistry.INSTANCE.registerAppender((manager, out) -> {
-            out.accept(CauldronEntityRenderer.CRUCIBLE_AZOTH_MODEL_ID);
+            out.accept(CauldronEntityRenderer.CAULDRON_AZOTH_MODEL_ID);
             out.accept(InfusionTableEntityRenderer.INFUSION_TABLE_AZOTH_MODEL_ID);
         });
 

@@ -18,7 +18,7 @@ import net.minecraft.util.math.BlockPos;
 
 @Environment(EnvType.CLIENT)
 public class CauldronEntityRenderer extends BlockEntityRenderer<AzothCauldronBlockEntity> {
-    public static final ModelIdentifier CRUCIBLE_AZOTH_MODEL_ID = new ModelIdentifier(Azoth.createID("cauldron/azoth"), "");
+    public static final ModelIdentifier CAULDRON_AZOTH_MODEL_ID = new ModelIdentifier(Azoth.createID("cauldron/azoth"), "");
 
     public CauldronEntityRenderer(BlockEntityRenderDispatcher dispatcher) {
         super(dispatcher);
@@ -29,7 +29,7 @@ public class CauldronEntityRenderer extends BlockEntityRenderer<AzothCauldronBlo
         float level = entity.getLevelForDisplay();
         if (level > 0) {
             MinecraftClient mc = MinecraftClient.getInstance();
-            BakedModel model = mc.getBakedModelManager().getModel(CRUCIBLE_AZOTH_MODEL_ID);
+            BakedModel model = mc.getBakedModelManager().getModel(CAULDRON_AZOTH_MODEL_ID);
             BlockPos pos = entity.getPos();
 
             matrices.push();

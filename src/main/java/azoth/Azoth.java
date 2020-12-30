@@ -7,6 +7,7 @@ import azoth.blocks.AzothConduitBlock;
 import azoth.blocks.InfusionTableBlock;
 import azoth.blocks.entity.AzothCauldronBlockEntity;
 import azoth.blocks.entity.InfusionTableBlockEntity;
+import azoth.items.DivinationRodItem;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
@@ -22,6 +23,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 
 public class Azoth {
@@ -57,6 +59,8 @@ public class Azoth {
         public static final Item AZOTH_CAULDRON = register("cauldron", new BlockItem(Blocks.AZOTH_CAULDRON, createSettings().group(null)));
         public static final Item INFUSION_TABLE = register("infusion_table", new BlockItem(Blocks.INFUSION_TABLE, createSettings()));
         public static final Item AZOTH_CONDUIT = register("conduit", new BlockItem(Blocks.AZOTH_CONDUIT, createSettings()));
+
+        public static final Item DIVINATION_ROD = register("divination_rod", new DivinationRodItem(createSettings().maxDamage(256).rarity(Rarity.UNCOMMON)));
 
         private static Item.Settings createSettings() {
             return new Item.Settings().group(Azoth.ITEMGROUP);
