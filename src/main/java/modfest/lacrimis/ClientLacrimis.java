@@ -6,7 +6,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 
 import modfest.lacrimis.client.render.blocks.CrucibleEntityRenderer;
 import modfest.lacrimis.client.render.blocks.InfusionTableEntityRenderer;

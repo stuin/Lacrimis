@@ -18,11 +18,9 @@ import net.minecraft.util.Identifier;
 
 //Mostly copied from CraftingScreen
 @Environment(EnvType.CLIENT)
-public class InfusionScreen extends HandledScreen<InfusionScreenHandler> implements RecipeBookProvider {
+public class InfusionScreen extends HandledScreen<InfusionScreenHandler> {
     private static final Identifier TEXTURE = new Identifier("textures/gui/container/crafting_table.png");
-    private static final Identifier RECIPE_BUTTON_TEXTURE = new Identifier("textures/gui/recipe_button.png");
     private static final Identifier START_BUTTON_TEXTURE = new Identifier(Lacrimis.MODID, "textures/gui/start_button.png");
-    private final RecipeBookWidget recipeBook = new RecipeBookWidget();
     private TexturedButtonWidget startButton;
     private boolean isNarrow;
 
@@ -34,41 +32,17 @@ public class InfusionScreen extends HandledScreen<InfusionScreenHandler> impleme
     protected void init() {
         super.init();
         isNarrow = width < 379;
-        recipeBook.initialize(width, height, client, isNarrow, handler);
-        x = recipeBook.findLeftEdge(isNarrow, width, backgroundWidth);
-        children.add(recipeBook);
-        setInitialFocus(recipeBook);
         startButton = new TexturedButtonWidget(x + backgroundWidth - 54, y + titleY + 3, 20, 18, 0, 0, 19, START_BUTTON_TEXTURE, (buttonWidget) -> {
             handler.startCrafting();
         });
         addButton(startButton);
-        addButton(new TexturedButtonWidget(x + 5, height / 2 - 49, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEXTURE, (buttonWidget) -> {
-            recipeBook.reset(isNarrow);
-            recipeBook.toggleOpen();
-            x = recipeBook.findLeftEdge(isNarrow, width, backgroundWidth);
-            ((TexturedButtonWidget)buttonWidget).setPos(x + 5, height / 2 - 49);
-            startButton.setPos(x + backgroundWidth - 54, y + titleY + 3);
-        }));
         titleX = 24;
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-        recipeBook.update();
     }
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         renderBackground(matrices);
-        if (recipeBook.isOpen() && isNarrow) {
-            drawBackground(matrices, delta, mouseX, mouseY);
-            recipeBook.render(matrices, mouseX, mouseY, delta);
-        } else {
-            recipeBook.render(matrices, mouseX, mouseY, delta);
-            super.render(matrices, mouseX, mouseY, delta);
-            recipeBook.drawGhostSlots(matrices, x, y, true, delta);
-        }
+        super.render(matrices, mouseX, mouseY, delta);
 
         drawMouseoverTooltip(matrices, mouseX, mouseY);
         String s = handler.getCurrentTears() + "/" + handler.getRequiredTears();
@@ -79,53 +53,18 @@ public class InfusionScreen extends HandledScreen<InfusionScreenHandler> impleme
     protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         client.getTextureManager().bindTexture(TEXTURE);
-        int i = x;
+        int i = (width - backgroundWidth) / 2;
         int j = (height - backgroundHeight) / 2;
         drawTexture(matrices, i, j, 0, 0, backgroundWidth, backgroundHeight);
     }
 
     @Override
     protected boolean isPointWithinBounds(int xPosition, int yPosition, int width, int height, double pointX, double pointY) {
-        return (!isNarrow || !recipeBook.isOpen()) &&
-                super.isPointWithinBounds(xPosition, yPosition, width, height, pointX, pointY);
+        return (!isNarrow) && super.isPointWithinBounds(xPosition, yPosition, width, height, pointX, pointY);
     }
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (recipeBook.mouseClicked(mouseX, mouseY, button)) {
-            setFocused(recipeBook);
-            return true;
-        } else {
-            return isNarrow && recipeBook.isOpen() || super.mouseClicked(mouseX, mouseY, button);
-        }
-    }
-
-    @Override
-    protected boolean isClickOutsideBounds(double mouseX, double mouseY, int left, int top, int button) {
-        boolean bl = mouseX < left || mouseY < top ||
-                mouseX >= left + backgroundWidth || mouseY >= top + backgroundHeight;
-        return recipeBook.isClickOutsideBounds(mouseX, mouseY, x, y, backgroundWidth, backgroundHeight, button) && bl;
-    }
-
-    @Override
-    protected void onMouseClick(Slot slot, int invSlot, int clickData, SlotActionType actionType) {
-        super.onMouseClick(slot, invSlot, clickData, actionType);
-        recipeBook.slotClicked(slot);
-    }
-
-    @Override
-    public void refreshRecipeBook() {
-        recipeBook.refresh();
-    }
-
-    @Override
-    public void removed() {
-        recipeBook.close();
-        super.removed();
-    }
-
-    @Override
-    public RecipeBookWidget getRecipeBookWidget() {
-        return recipeBook;
+        return isNarrow || super.mouseClicked(mouseX, mouseY, button);
     }
 }

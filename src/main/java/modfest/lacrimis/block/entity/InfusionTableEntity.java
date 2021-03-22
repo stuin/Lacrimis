@@ -21,7 +21,7 @@ public class InfusionTableEntity extends SoulTankEntity implements Tickable {
     public boolean startCrafting = false;
 
     public InfusionTableEntity() {
-        super(ModBlockEntityTypes.infusionTable, 500, 10);
+        super(ModBlockEntityTypes.infusionTable, 1000, 10);
         getTank().setLimit(0);
     }
 

@@ -34,7 +34,7 @@ public class LacrimisPlugin implements REIPluginV0 {
     public void registerOthers(RecipeHelper recipeHelper) {
         recipeHelper.registerWorkingStations(INFUSION, EntryStack.create(ModItems.infusionTable));
         recipeHelper.registerWorkingStations(CRUCIBLE, EntryStack.create(ModItems.crucible), EntryStack.create(ModItems.infusionTable));
-        recipeHelper.registerScreenClickArea(new Rectangle(88, 32, 28, 23), InfusionScreen.class, INFUSION);
-        recipeHelper.registerScreenClickArea(new Rectangle(88, 32, 28, 23), InfusionScreen.class, CRUCIBLE);
+        //recipeHelper.registerScreenClickArea(new Rectangle(88, 32, 28, 23), InfusionScreen.class, INFUSION);
+        //recipeHelper.registerScreenClickArea(new Rectangle(88, 32, 28, 23), InfusionScreen.class, CRUCIBLE);
     }
 }

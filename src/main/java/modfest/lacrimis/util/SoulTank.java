@@ -26,7 +26,7 @@ public class SoulTank {
 	}
 
 	public void setLimit(int capacity) {
-		if(capacity < max_capacity && capacity >= 0)
+		if(capacity <= max_capacity && capacity >= 0)
 			this.capacity = Math.max(capacity, tears);
 	}
 

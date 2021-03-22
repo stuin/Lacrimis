@@ -52,7 +52,7 @@ dependencies {
 	modImplementation("vazkii.patchouli:Patchouli:${project.patchouli_version}")
 
 	//REI
-	modImplementation("me.shedaniel:RoughlyEnoughItems-api:${project.rei_version}")
+	modImplementation("me.shedaniel:RoughlyEnoughItems:${project.rei_version}")
 
 	//Wrenchable api
 	def wrenchVersion = "com.zundrel:wrenchable:${project.wrenchable_version}"
