@@ -51,7 +51,6 @@ public class ModBlocks {
     public static BlockTeleportBlock blockTransportRune;
     public static WardingBlock wardingRune;
     public static SpawnerBreakerBlock spawnerRune;
-    public static TarotAdderBlock tarotAdderRune;
 
     //Block tags
     public static Tag<Block> cage_materials;
@@ -68,7 +67,7 @@ public class ModBlocks {
         gatedConduit = register("gated_conduit", new GatedConduitBlock(conduitSettings));
         oneWayConduit = register("one_way_conduit", new OneWayConduitBlock(conduitSettings));
         taintOutput = register("taint_output", new TaintOutputBlock(Settings.copy(Blocks.DISPENSER)));
-        tearLantern = register("tear_lantern", new TearLantern(AbstractBlock.Settings.of(Material.METAL).requiresTool().strength(3.5F).sounds(BlockSoundGroup.LANTERN).lightLevel((state) -> 5).nonOpaque()));
+        tearLantern = register("tear_lantern", new TearLantern(AbstractBlock.Settings.of(Material.METAL).requiresTool().strength(3.5F).sounds(BlockSoundGroup.LANTERN).luminance((state) -> 5).nonOpaque()));
         drainedCryingObsidian = register("drained_crying_obsidian", new DrainedCryingObsidianBlock(Settings.copy(Blocks.CRYING_OBSIDIAN)));
         creativeTearsBlock = register("creative_tears_block", new CreativeTearsBlock(wardedSettings));
         wardedStone = register("warded", new WardedBlock(wardedSettings));
@@ -87,7 +86,6 @@ public class ModBlocks {
         blockTransportRune = register("rune/block_transport", new BlockTeleportBlock());
         wardingRune = register("rune/warding", new WardingBlock());
         spawnerRune = register("rune/spawner", new SpawnerBreakerBlock());
-        tarotAdderRune = register("rune/tarot_adder", new TarotAdderBlock());
 
         //Block tags
         cage_materials = TagRegistry.block(new Identifier(Lacrimis.MODID, "cage_materials"));

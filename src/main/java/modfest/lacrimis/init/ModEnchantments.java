@@ -9,7 +9,7 @@ import net.minecraft.util.registry.Registry;
 
 public class ModEnchantments {
 
-    private static EquipmentSlot[] ALL_ARMOR;
+    public static EquipmentSlot[] ALL_ARMOR;
     public static Enchantment WARDED;
 
     public static void register() {

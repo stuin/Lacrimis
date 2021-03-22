@@ -79,9 +79,4 @@ public class CrucibleBlock extends SoulTankBlock implements BlockWrenchable {
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return OUTLINE_SHAPE;
     }
-
-    @Override
-    public VoxelShape getRayTraceShape(BlockState state, BlockView world, BlockPos pos) {
-        return RAY_TRACE_SHAPE;
-    }
 }

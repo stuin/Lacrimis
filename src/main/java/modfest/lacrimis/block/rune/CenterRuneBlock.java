@@ -117,7 +117,7 @@ public abstract class CenterRuneBlock extends Block implements BlockConduitConne
         
         //For all entities on platform
         pos = pos.offset(flipped);
-        for(Entity entity : world.getEntitiesByType(null, box.offset(pos.offset(flipped)), null)) {
+        for(Entity entity : world.getEntitiesByClass(Entity.class, box.offset(pos.offset(flipped)), null)) {
             if(activate(world, pos, pipe, entity, player))
                 return true;
         }

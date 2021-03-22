@@ -39,15 +39,11 @@
   "block.lacrimis.rune.block_transport": "Block Transport Rune",
   "block.lacrimis.rune.warding": "Warding Rune",
   "block.lacrimis.rune.spawner": "Spawner Breaking Rune",
-  "block.lacrimis.rune.tarot_adder": "Tarot Adding Rune",
 
   "effect.lacrimis.wavering_soul": "Wavering Soul",
   "effect.lacrimis.tear_poison": "Tear Poison",
-  "effect.lacrimis.tarot_cooldown": "Tarot Card Reset",
 
   "enchantment.lacrimis.warded": "Warded",
-
-  "lacrimis.key.tarotAbility": "Lacrimis Tarot Ability",
 
   "lacrimis.tooltip.crucible": "%s Tears",
   "lacrimis.tooltip.spawner": " Spawner",
@@ -63,7 +59,6 @@
   "lacrimis.gui.combiner.none": "Soul: None",
   "itemGroup.lacrimis.base": "Lacrimis",
   "itemGroup.lacrimis.runes": "Lacrimis Runes",
-  "itemGroup.lacrimis.tarot": "Lacrimis Tarot",
 
   "lacrimis.error.tears": "Not enough Tears",
   "lacrimis.error.barrier": "Tier I runes require cage",
@@ -102,34 +97,8 @@
   "lacrimis.advancements.rune_tier3.description": "Activate a Tier III Rune",
   "lacrimis.advancements.solidified_tear.title": "Wavering till Death",
   "lacrimis.advancements.solidified_tear.description": "Collect a Solidified Tear",
-  "lacrimis.advancements.base_tarot.title": "Powers of the future, today",
-  "lacrimis.advancements.base_tarot.description": "Craft a Tarot Card",
   "lacrimis.advancements.tear_lantern.title": "Faster and Brighter",
   "lacrimis.advancements.tear_lantern.description": "Throw a Soul Lantern into the Crucible",
   "lacrimis.advancements.divining_rod.title": "Is this a wrench?",
-  "lacrimis.advancements.divining_rod.description": "Craft a divining rod",
-
-  "item.lacrimis.tarot.base": "Empty Tarot Card",
-  "item.lacrimis.tarot.the_fool": "The Fool",
-  "item.lacrimis.tarot.the_magician": "The Magician",
-  "item.lacrimis.tarot.the_high_priestess": "The High Priestess",
-  "item.lacrimis.tarot.the_empress": "The Empress",
-  "item.lacrimis.tarot.the_emperor": "The Emperor",
-  "item.lacrimis.tarot.the_hierophant": "The Hierophant",
-  "item.lacrimis.tarot.the_lovers": "The Lovers",
-  "item.lacrimis.tarot.the_chariot": "The Chariot",
-  "item.lacrimis.tarot.strength": "Strength",
-  "item.lacrimis.tarot.the_hermit": "The Hermit",
-  "item.lacrimis.tarot.wheel_of_fortune": "Wheel of Fortune",
-  "item.lacrimis.tarot.justice": "Justice",
-  "item.lacrimis.tarot.the_hanged_man": "The Hanged Man",
-  "item.lacrimis.tarot.death": "Death",
-  "item.lacrimis.tarot.temperance": "Temperance",
-  "item.lacrimis.tarot.the_devil": "The Devil",
-  "item.lacrimis.tarot.the_tower": "The Tower",
-  "item.lacrimis.tarot.the_star": "The Star",
-  "item.lacrimis.tarot.the_moon": "The Moon",
-  "item.lacrimis.tarot.the_sun": "The Sun",
-  "item.lacrimis.tarot.judgement": "Judgement",
-  "item.lacrimis.tarot.the_world": "The World"
+  "lacrimis.advancements.divining_rod.description": "Craft a divining rod"
 }

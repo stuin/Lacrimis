@@ -8,16 +8,12 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 
-import modfest.lacrimis.client.cardgen.CardTextureGen;
 import modfest.lacrimis.client.render.blocks.CrucibleEntityRenderer;
 import modfest.lacrimis.client.render.blocks.InfusionTableEntityRenderer;
-import modfest.lacrimis.client.render.blocks.TarotAdderEntityRenderer;
-import modfest.lacrimis.client.render.entity.GhostEntityRenderer;
 import modfest.lacrimis.init.ClientModCrafting;
 import modfest.lacrimis.init.KeyBindings;
 import modfest.lacrimis.init.ModBlockEntityTypes;
 import modfest.lacrimis.init.ModBlocks;
-import modfest.lacrimis.init.ModEntityTypes;
 import modfest.lacrimis.init.ModNetworking;
 import modfest.lacrimis.init.ModParticles;
 
@@ -35,15 +31,9 @@ public class ClientLacrimis implements ClientModInitializer {
         BlockEntityRendererRegistry.INSTANCE.register(ModBlockEntityTypes.infusionTable, InfusionTableEntityRenderer::new);
         InfusionTableEntityRenderer.onInit();
 
-        BlockEntityRendererRegistry.INSTANCE.register(ModBlockEntityTypes.tarotAdder, TarotAdderEntityRenderer::new);
-        TarotAdderEntityRenderer.onInit();
-
-        EntityRendererRegistry.INSTANCE.register(ModEntityTypes.ghost, (dispatcher, ctx) -> new GhostEntityRenderer(dispatcher));
-
         ClientModCrafting.register();
         ModNetworking.registerClient();
         ModParticles.registerClient();
-        CardTextureGen.register();
         KeyBindings.initialize();
     }
 }

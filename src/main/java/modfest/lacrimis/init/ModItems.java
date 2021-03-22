@@ -9,23 +9,18 @@ import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import java.util.Map;
-
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.item.BottleOfTearsItem;
 import modfest.lacrimis.item.DiviningRodItem;
-import modfest.lacrimis.item.TarotCardItem;
 import modfest.lacrimis.item.armor.CustomArmorMaterials;
 import modfest.lacrimis.item.armor.SoakedArmor;
 import modfest.lacrimis.item.tools.CustomToolMaterials;
 import modfest.lacrimis.item.tools.SoakenSword;
-import modfest.lacrimis.tarot.TarotCardType;
 
 public class ModItems {
     private static final Item.Settings SETTINGS = new Item.Settings().group(Lacrimis.ITEM_GROUP);
     private static final Item.Settings TOOL_SETTINGS = new Item.Settings().group(Lacrimis.ITEM_GROUP).maxCount(1);
     private static final Item.Settings RUNE_SETTINGS = new Item.Settings().group(Lacrimis.RUNE_ITEM_GROUP);
-    private static final Item.Settings TAROT_SETTINGS = new Item.Settings().group(Lacrimis.TAROT_ITEM_GROUP);
 
     //Main blocks
     public static BlockItem infusionTable;
@@ -56,10 +51,6 @@ public class ModItems {
 
     public static Item tearSoakenSword;
 
-    // Tarot cards
-    public static Item baseTarot;
-    public static Map<TarotCardType, TarotCardItem> tarotCards;
-
     //Rune cage blocks
     public static BlockItem runeStone;
     public static BlockItem rune1;
@@ -77,7 +68,6 @@ public class ModItems {
     public static BlockItem blockTransportRune;
     public static BlockItem wardingRune;
     public static BlockItem spawnerRune;
-    public static BlockItem tarotAdderRune;
 
     //Item tags
     public static Tag<Item> sludgeMaterials;
@@ -115,9 +105,6 @@ public class ModItems {
 
         tearSoakenSword = register("tear_soaked_sword", new SoakenSword(CustomToolMaterials.SOAKEN, 3, -2.4F, TOOL_SETTINGS));
 
-        baseTarot = register("tarot/base", new Item(TAROT_SETTINGS));
-        tarotCards = TarotCardType.withValues(k -> register(String.format("tarot/%s", k.id), new TarotCardItem(k, TAROT_SETTINGS)));
-
         runeStone = registerRune("rune/stone", ModBlocks.runeStone);
         rune1 = registerRune("rune/tier1", ModBlocks.rune1);
         rune2 = registerRune("rune/tier2", ModBlocks.rune2);
@@ -132,7 +119,6 @@ public class ModItems {
         blockTransportRune = registerRune("rune/block_transport", ModBlocks.blockTransportRune);
         wardingRune = registerRune("rune/warding", ModBlocks.wardingRune);
         spawnerRune = registerRune("rune/spawner", ModBlocks.spawnerRune);
-        tarotAdderRune = registerRune("rune/tarot_adder", ModBlocks.tarotAdderRune);
 
         //Item tags
         sludgeMaterials = TagRegistry.item(new Identifier(Lacrimis.MODID, "sludge_materials"));

@@ -20,7 +20,6 @@ import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.CombinerEntity;
 import modfest.lacrimis.init.ModItems;
 import modfest.lacrimis.init.ModNetworking;
-import modfest.lacrimis.tarot.TarotCardType;
 
 public class CombinerScreenHandler extends ScreenHandler implements InventoryChangedListener {
     private final CombinerEntity entity;
@@ -73,13 +72,6 @@ public class CombinerScreenHandler extends ScreenHandler implements InventoryCha
 
     public void updateResult() {
         if(entity.type != null && entity.inventory.getStack(1).getItem() == ModItems.taintedSludge) {
-            if(entity.inventory.getStack(0).getItem() == ModItems.baseTarot)
-                for(TarotCardType t : TarotCardType.values())
-                    if(t.cover == entity.type) {
-                        if(output.getStack(0).isEmpty())
-                            output.setStack(0, new ItemStack(ModItems.tarotCards.get(t)));
-                        return;
-                    }
             if(entity.inventory.getStack(0).getItem() == ModItems.brokenSpawner)
                 if(output.getStack(0).isEmpty()) {
                     String id = EntityType.getId(entity.type).toString();

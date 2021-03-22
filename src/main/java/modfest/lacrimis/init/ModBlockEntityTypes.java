@@ -16,14 +16,12 @@ public class ModBlockEntityTypes {
     public static BlockEntityType<CrucibleEntity> crucible;
     public static BlockEntityType<CombinerEntity> combiner;
     public static BlockEntityType<TearLanternEntity> tearLantern;
-    public static BlockEntityType<TarotAdderEntity> tarotAdder;
 
     public static void register() {
         infusionTable = register("infusion_table_entity", InfusionTableEntity::new, ModBlocks.infusionTable);
         crucible = register("crucible_entity", CrucibleEntity::new, ModBlocks.crucible);
         combiner = register("combiner_entity", CombinerEntity::new, ModBlocks.combiner);
         tearLantern = register("tear_lantern_entity", TearLanternEntity::new, ModBlocks.tearLantern);
-        tarotAdder = register("tarot_adder_entity", TarotAdderEntity::new, ModBlocks.tarotAdderRune);
     }
 
     private static <T extends BlockEntity> BlockEntityType<T> register(String name, Supplier<T> f, Block... blocks) {

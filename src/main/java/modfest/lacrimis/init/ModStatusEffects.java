@@ -8,21 +8,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import java.util.Map;
-
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.entity.effect.CustomDamageSources;
 import modfest.lacrimis.entity.effect.CustomStatusEffect;
-import modfest.lacrimis.tarot.TarotCardEffect;
-import modfest.lacrimis.tarot.TarotCardType;
 
 public class ModStatusEffects {
 
     public static StatusEffect WAVERING_SOUL;
     public static StatusEffect TEAR_POISON;
-    public static Map<TarotCardType, TarotCardEffect> tarotEffects;
-    public static StatusEffect TAROT_COOLDOWN;
-
     public static void register() {
         WAVERING_SOUL = register("wavering_soul", new CustomStatusEffect(StatusEffectType.NEUTRAL, 13793020) {
             @Override
@@ -60,10 +53,6 @@ public class ModStatusEffects {
                 return super.canApplyUpdateEffect(duration, amplifier);
             }
         });
-
-        TAROT_COOLDOWN = register("tarot_cooldown", new CustomStatusEffect(StatusEffectType.NEUTRAL, 13793020));
-
-        tarotEffects = TarotCardType.withValues(k -> register(String.format("tarot/%s", k.id), k.effect));
     }
 
     private static <T extends StatusEffect> T register(String name, T StatusEffect) {

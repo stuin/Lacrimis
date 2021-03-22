@@ -3,7 +3,6 @@
   "values": [
     "lacrimis:rune/tier3",
     "lacrimis:rune/warding",
-    "lacrimis:rune/spawner",
-    "lacrimis:rune/tarot_adder"
+    "lacrimis:rune/spawner"
   ]
 }
