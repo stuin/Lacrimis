@@ -20,7 +20,7 @@
     },
     {
       "type": "crafting",
-      "recipe": "lacrimis:crafting/rune_pipe1",
+      "recipe": "lacrimis:crafting/rune_duct1",
       "text": "Make sure to include one in every soul cage. No more than that, as it is hard to control the flow as it is."
     },
     {
@@ -41,7 +41,7 @@
         ],
         "mapping": {
           "0": "lacrimis:rune/stone",
-          "P": "lacrimis:rune/pipe1[center=1]",
+          "P": "lacrimis:rune/duct1[center=1]",
           "2": "lacrimis:rune/tier1[center=2]",
           "3": "lacrimis:rune/tier1[center=3]",
           "4": "lacrimis:rune/tier1[center=4]",
@@ -82,7 +82,7 @@
           "r": "minecraft:iron_bars[south=true,west=true]",
           "l": "minecraft:iron_bars[north=true,west=true]",
           "S": "lacrimis:rune/stone",
-          "P": "lacrimis:rune/pipe1[center=1]",
+          "P": "lacrimis:rune/duct1[center=1]",
           "2": "lacrimis:rune/tier1[center=2]",
           "3": "lacrimis:rune/tier1[center=3]",
           "4": "lacrimis:rune/tier1[center=4]",
@@ -117,7 +117,7 @@
         "mapping": {
           "C": "minecraft:chain",
           "S": "lacrimis:rune/stone",
-          "P": "lacrimis:rune/pipe1[center=1]",
+          "P": "lacrimis:rune/duct1[center=1]",
           "2": "lacrimis:rune/tier1[center=2]",
           "3": "lacrimis:rune/tier1[center=3]",
           "4": "lacrimis:rune/tier1[center=4]",

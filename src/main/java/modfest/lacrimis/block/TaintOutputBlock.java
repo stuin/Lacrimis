@@ -13,7 +13,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class TaintOutputBlock extends FacingBlock implements BlockConduitConnect {
+public class TaintOutputBlock extends FacingBlock implements DuctConnectBlock {
     public TaintOutputBlock(Settings settings) {
         super(settings);
     }
@@ -37,7 +37,7 @@ public class TaintOutputBlock extends FacingBlock implements BlockConduitConnect
     }
 
     @Override
-    public boolean canConnectConduitTo(BlockPos pos, BlockView world, Direction side) {
+    public boolean canConnectDuctTo(BlockPos pos, BlockView world, Direction side) {
         return side == world.getBlockState(pos).get(FACING);
     }
 

@@ -5,14 +5,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 
-public class CreativeTearsBlock extends Block implements BlockConduitConnect {
+public class CreativeTearsBlock extends Block implements DuctConnectBlock {
 
     public CreativeTearsBlock(Settings settings) {
         super(settings);
     }
 
     @Override
-    public boolean canConnectConduitTo(BlockPos pos, BlockView world, Direction side) {
+    public boolean canConnectDuctTo(BlockPos pos, BlockView world, Direction side) {
         return true;
     }
 

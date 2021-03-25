@@ -2,10 +2,12 @@
   "replace": false,
   "values": [
     "minecraft:cobblestone",
+    "minecraft:stone",
     "minecraft:blackstone",
     "minecraft:gravel",
     "minecraft:andesite",
     "minecraft:diorite",
-    "minecraft:granite"
+    "minecraft:granite",
+    "minecraft:dirt"
   ]
 }

@@ -2,7 +2,7 @@
   "parent": "minecraft:block/cube_bottom_top",
   "textures": {
     "top": "lacrimis:block/taint_output",
-    "bottom": "lacrimis:block/rune_pipe_side",
+    "bottom": "lacrimis:block/rune_duct_side",
     "side": "lacrimis:block/rune_blank"
   }
 }

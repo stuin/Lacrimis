@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.init.ModBlocks;
-import modfest.lacrimis.util.ConduitUtil;
+import modfest.lacrimis.util.DuctUtil;
 
 public class BlockTeleportBlock extends CenterRuneBlock {
     public BlockTeleportBlock() {
@@ -20,8 +20,8 @@ public class BlockTeleportBlock extends CenterRuneBlock {
     }
 
     @Override
-    protected boolean activate(World world, BlockPos pos, BlockPos pipe, Entity entity, PlayerEntity player) {
-        BlockPos destination = ConduitUtil.locateSink(world, pipe, pos);
+    protected boolean activate(World world, BlockPos pos, BlockPos duct, Entity entity, PlayerEntity player) {
+        BlockPos destination = DuctUtil.locateSink(world, duct, pos);
         if (destination != null) {
             if (!world.isClient)
                 Lacrimis.LOGGER.debug("Block Moved");

@@ -1,12 +1,14 @@
 package modfest.lacrimis.enchantments;
 
-import modfest.lacrimis.item.armor.Soaked;
+import modfest.lacrimis.item.Soaked;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 
-public class WardedEnchantment extends CustomEnchantment {
+public class WardedEnchantment extends Enchantment {
     public WardedEnchantment(Rarity weight, EquipmentSlot[] slotTypes) {
-        super(weight, CustomEnchantmentTarget.SOAKED, slotTypes);
+        super(weight, EnchantmentTarget.ARMOR, slotTypes);
     }
 
     @Override
@@ -19,9 +21,8 @@ public class WardedEnchantment extends CustomEnchantment {
         return 1;
     }
 
-    public static boolean shouldPreventDamage(ItemStack item) {
-        // If warded, it should only have a very small chance of loosing durability
-        if(item.getItem() instanceof Soaked) return (Math.random() < 0.995);
-        else return false;
+    @Override
+    public boolean isAcceptableItem(ItemStack stack) {
+        return stack.getItem() instanceof Soaked;
     }
 }

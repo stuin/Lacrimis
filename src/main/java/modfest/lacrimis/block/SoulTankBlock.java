@@ -28,7 +28,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public abstract class SoulTankBlock extends BlockWithEntity implements BlockConduitConnect, BlockWrenchable {
+public abstract class SoulTankBlock extends BlockWithEntity implements DuctConnectBlock, BlockWrenchable {
     private final boolean canExtract;
 
     protected SoulTankBlock(AbstractBlock.Settings settings, boolean canExtract) {
@@ -127,7 +127,7 @@ public abstract class SoulTankBlock extends BlockWithEntity implements BlockCond
     }
 
     @Override
-    public boolean canConnectConduitTo(BlockPos pos, BlockView world, Direction side) {
+    public boolean canConnectDuctTo(BlockPos pos, BlockView world, Direction side) {
         return side.getAxis() != Direction.Axis.Y;
     }
 

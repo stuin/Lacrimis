@@ -6,7 +6,7 @@ import modfest.lacrimis.crafting.InfusionRecipe;
 import modfest.lacrimis.init.ModBlockEntityTypes;
 import modfest.lacrimis.init.ModCrafting;
 import modfest.lacrimis.init.ModParticles;
-import modfest.lacrimis.util.ConduitUtil;
+import modfest.lacrimis.util.DuctUtil;
 import modfest.lacrimis.util.SoulTank;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
@@ -82,7 +82,7 @@ public class InfusionTableEntity extends SoulTankEntity implements Tickable {
 
         //Collect tears
         if(tank.getSpace() > 0)
-            tank.addTears(ConduitUtil.locateTears(world, pos, 5));
+            tank.addTears(DuctUtil.locateTears(world, pos, 5));
     }
 
     public void takeIngredients() {
