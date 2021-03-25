@@ -3,7 +3,7 @@
   "icon": "lacrimis:tainted_sludge",
   "category": "lacrimis:basics",
   "advancement": "lacrimis:base/tainted_sludge",
-  "sortnum": 6,
+  "sortnum": 3,
   "pages": [
     {
       "type": "text",
@@ -12,15 +12,11 @@
     {
       "type": "lacrimis:crucible",
       "recipe": "lacrimis:crucible/tainted_sludge",
-      "text": "Unfortunately, this sludge seems rather mundane. I wonder if more exotic materials can yield more promising results?$(br2)"
+      "text": "Unfortunately, this sludge seems rather mundane. There might be a way to polish it up, but I wonder if more exotic materials can yield more promising results?$(br2)"
     },
     {
       "type": "text",
-      "text": "However, the way tears interacted with stone seem rather remarkable.$(br2)At first, the fluids soaks into cracks and crevices making them glow; a moment later, the whole stone starts to dimly glow and shortly after it just crumbles apart."
-    },
-    {
-      "type": "text",
-      "text": "Another thing that the experiment had shown is that touching the fluid is $(o)unimaginably painful$().$(br2)The main outtake so far is that I need a more controllable way of studying tear interactions instead of just throwing stuff into a crucible.$(br2)todo: infusion table..."
+      "text": "One thing that this experiment has shown is that touching the fluid is $(o)unimaginably painful$().$(br2)I probably need a more controllable way of studying tear interactions, not just throwing stuff into a crucible.$(br2)todo: infusion table..."
     }
   ]
 }

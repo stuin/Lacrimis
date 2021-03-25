@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "lacrimis:infusion_shaped",
   "pattern": [
     "#G#",
     "#G#",
@@ -15,5 +15,6 @@
   },
   "result": {
     "item": "lacrimis:crucible"
-  }
+  },
+  "tears": 0
 }

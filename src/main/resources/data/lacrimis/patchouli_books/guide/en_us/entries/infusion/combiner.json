@@ -3,24 +3,16 @@
   "icon": "lacrimis:combiner",
   "category": "lacrimis:infusion",
   "advancement": "lacrimis:base/solidified_tear",
-  "sortnum": 5,
+  "sortnum": 6,
   "pages": [
     {
       "type": "text",
-      "text": "The soul combiner is a special device used to infuse items with mob souls. When an $(l:runes/extraction)Soul Extraction Rune$(/l) connected to the same duct network is activated, it will kill the mob and store its soul for later use.$(br)"
+      "text": "The soul combiner is a special device used to infuse items with mob souls. When an $(l:runes/extraction)Soul Extraction Rune$(/l) connected to the same duct network is activated, it will kill the mob and store its soul for later use.$(br)Currently there is only one type of item craft-able in the soul combiner."
     },
     {
       "type": "lacrimis:infusion",
-      "recipe": "lacrimis:infusion/combiner"
-    },
-    {
-      "type": "text",
-      "text": "Currently there are two types of items craft-able in the soul combiner. Placing a Blank Tarot Card in the first slot will create the associated Tarot Card. Placing a $(l:runes/spawner)Broken Spawner$(/l) in the first slot will craft a new mob spawner. The second slot must have $(l:basics/tear_handling)Tainted Sludge$(/l)."
-    },
-    {
-      "type": "lacrimis:infusion",
-      "recipe": "lacrimis:infusion/base_tarot",
-      "text": "Use the Tarot Adder Rune to apply a cards abilities to yourself."
+      "recipe": "lacrimis:infusion/combiner",
+      "text": "Placing a $(l:runes/spawner)Broken Spawner$(/l) in the first slot will craft a new mob spawner. The second slot must have $(l:basics/tear_handling)Tainted Sludge$(/l)."
     }
   ]
 }

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lacrimis:conduit"
+    },
+    {
+      "item": "lacrimis:rune/tier2"
+    }
+  ],
+  "result": {
+    "item": "lacrimis:rune/pipe2"
+  }
+}

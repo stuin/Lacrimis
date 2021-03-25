@@ -1,0 +1,18 @@
+{
+  "name": "Divining Rod",
+  "icon": "lacrimis:divining_rod",
+  "category": "lacrimis:infusion",
+  "advancement": "lacrimis:base/divining_rod",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "text",
+      "text": "The new metal seems very useful, so I created a \"divining rod\" out of it, as a tool I can use for my work. $(br2)$(#12b88e)$(t:)Notes$(/t)"
+    },
+    {
+      "type": "crafting",
+      "recipe": "lacrimis:crafting/divining_rod",
+      "text": "Right click on a block holding tears to see the amount inside, shift + right click to safely pick up a crucible."
+    }
+  ]
+}

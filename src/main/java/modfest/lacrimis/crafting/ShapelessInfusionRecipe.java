@@ -10,14 +10,11 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-import modfest.lacrimis.init.ModBlocks;
 import modfest.lacrimis.init.ModCrafting;
 
 public class ShapelessInfusionRecipe extends InfusionRecipe {

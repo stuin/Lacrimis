@@ -1,6 +1,5 @@
 package modfest.lacrimis.compat.rei;
 
-import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.EntryStack;
 import me.shedaniel.rei.api.RecipeHelper;
 import me.shedaniel.rei.api.plugins.REIPluginV0;

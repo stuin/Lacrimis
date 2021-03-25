@@ -12,7 +12,7 @@
     {
       "type": "lacrimis:infusion",
       "recipe": "lacrimis:infusion/rune_tier2",
-      "recipe2": "lacrimis:infusion/rune_pipe2"
+      "recipe2": "lacrimis:incrafting/rune_pipe2"
     },
     {
       "type": "text",

@@ -1,5 +1,5 @@
 {
-  "parent": "lacrimis:base/root",
+  "parent": "lacrimis:base/tear_ingot",
   "display": {
     "icon": {
       "item": "lacrimis:divining_rod"

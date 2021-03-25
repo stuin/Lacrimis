@@ -1,19 +1,19 @@
 {
   "type": "lacrimis:infusion_shaped",
   "pattern": [
-    "RSR"
+    "@@@",
+    "###"
   ],
   "key": {
-    "R": {
+    "#": {
       "item": "lacrimis:rune/stone"
     },
-    "S": {
-      "item": "c:silver_ingot"
+    "@": {
+      "item": "minecraft:iron_ingot"
     }
   },
   "result": {
-    "item": "lacrimis:conduit",
-    "count": 12
+    "item": "lacrimis:infusion_table"
   },
-  "tears": 120
+  "tears": 0
 }

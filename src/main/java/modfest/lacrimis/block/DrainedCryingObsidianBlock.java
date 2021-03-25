@@ -1,6 +1,7 @@
 package modfest.lacrimis.block;
 
 import com.zundrel.wrenchable.block.BlockWrenchable;
+import modfest.lacrimis.init.ModBlocks;
 import modfest.lacrimis.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -19,8 +20,6 @@ import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import modfest.lacrimis.init.ModBlocks;
 
 public class DrainedCryingObsidianBlock extends CryingObsidianBlock implements BlockWrenchable {
 
@@ -49,13 +48,6 @@ public class DrainedCryingObsidianBlock extends CryingObsidianBlock implements B
     public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
         if(itemStack.hasTag())
             world.setBlockState(pos, setTearsValue(state, itemStack.getOrCreateTag().getInt("TearLevel")));
-    }
-
-    @Override
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        ItemStack item = new ItemStack(ModItems.drainedCryingObsidian);
-        item.getOrCreateTag().putInt("TearLevel", getTearsLevel(state));
-        ItemScatterer.spawn(world, pos, new SimpleInventory(item));
     }
 
     @Override

@@ -10,12 +10,12 @@
       "item": "lacrimis:rune/stone"
     },
     "S": {
-      "item": "c:silver_ingot"
+      "item": "minecraft:gold_ingot"
     }
   },
   "result": {
     "item": "lacrimis:rune/tier1",
     "count": 8
   },
-  "tears": 300
+  "tears": 200
 }

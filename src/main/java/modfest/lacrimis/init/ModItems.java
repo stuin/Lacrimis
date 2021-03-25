@@ -1,5 +1,7 @@
 package modfest.lacrimis.init;
 
+import modfest.lacrimis.item.BottleOfTearsItem;
+import modfest.lacrimis.item.DiviningRodItem;
 import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EquipmentSlot;
@@ -10,8 +12,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.item.BottleOfTearsItem;
-import modfest.lacrimis.item.DiviningRodItem;
 import modfest.lacrimis.item.armor.CustomArmorMaterials;
 import modfest.lacrimis.item.armor.SoakedArmor;
 import modfest.lacrimis.item.tools.CustomToolMaterials;

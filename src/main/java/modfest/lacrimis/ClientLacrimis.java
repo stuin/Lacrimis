@@ -10,7 +10,6 @@ import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegi
 import modfest.lacrimis.client.render.blocks.CrucibleEntityRenderer;
 import modfest.lacrimis.client.render.blocks.InfusionTableEntityRenderer;
 import modfest.lacrimis.init.ClientModCrafting;
-import modfest.lacrimis.init.KeyBindings;
 import modfest.lacrimis.init.ModBlockEntityTypes;
 import modfest.lacrimis.init.ModBlocks;
 import modfest.lacrimis.init.ModNetworking;
@@ -33,6 +32,5 @@ public class ClientLacrimis implements ClientModInitializer {
         ClientModCrafting.register();
         ModNetworking.registerClient();
         ModParticles.registerClient();
-        KeyBindings.initialize();
     }
 }

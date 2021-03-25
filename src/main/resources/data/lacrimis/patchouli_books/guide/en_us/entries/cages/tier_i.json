@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "By engraving silver into the blocks, they can disperse the soul tears in a slightly safer manner.$(br) I will need to make a proper structure out of this, something to contain the soul tears without being solid silver. Some kind of soul cage perhaps?"
+      "text": "By engraving gold into the blocks, they can disperse the soul tears in a slightly safer manner.$(br) I will need to make a proper structure out of this, something to contain the soul tears without being solid. Some kind of soul cage perhaps?"
     },
     {
       "type": "lacrimis:infusion",
@@ -19,8 +19,8 @@
       "text": "While these blocks will not accept tears from an outside source, it is pretty simple to fix that.$(br)These duct connectors can be used to provide the soul cage with the tears it needs. They could also carry things through the tears out of the cage? That sounds a bit hazardous though."
     },
     {
-      "type": "lacrimis:infusion",
-      "recipe": "lacrimis:infusion/rune_pipe1",
+      "type": "crafting",
+      "recipe": "lacrimis:crafting/rune_pipe1",
       "text": "Make sure to include one in every soul cage. No more than that, as it is hard to control the flow as it is."
     },
     {

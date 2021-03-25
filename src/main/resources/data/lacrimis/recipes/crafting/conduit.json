@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "@@@",
-    "###"
+    "RIR"
   ],
   "key": {
-    "#": {
+    "R": {
       "item": "lacrimis:rune/stone"
     },
-    "@": {
+    "I": {
       "item": "minecraft:iron_ingot"
     }
   },
   "result": {
-    "item": "lacrimis:infusion_table"
+    "item": "lacrimis:conduit",
+    "count": 12
   }
 }

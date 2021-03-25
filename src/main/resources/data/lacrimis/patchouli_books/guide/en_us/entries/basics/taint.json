@@ -3,7 +3,7 @@
   "icon": "lacrimis:solidified_tear",
   "category": "lacrimis:basics",
   "advancement": "lacrimis:base/crucible",
-  "sortnum": 8,
+  "sortnum": 7,
   "pages": [
     {
       "type": "text",

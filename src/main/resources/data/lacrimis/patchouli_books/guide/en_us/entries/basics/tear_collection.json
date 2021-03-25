@@ -10,16 +10,7 @@
     },
     {
       "type": "text",
-      "text": "Perhaps... trying to hold it in a noble metal? Something like silver, that shouldn't be too hard to test.$(br2)This doesn't sound completely unreasonable. I should try making something like a \"cauldron\"..."
-    },
-    {
-      "type": "text",
-      "text": "If the silver will actually be able to contain the tears, it opens so many possibilities for experiments on this... \"substance\"...$(br2)Throwing in stone and cobblestone created a kind of $(t:basics/tear_handling)sludge$(/t), but would mundane metals do the same if completely submerged? Unlikely."
-    },
-    {
-      "type": "crafting",
-      "recipe": "lacrimis:crafting/divining_rod",
-      "text": "I may also need a \"wand\""
+      "text": "Perhaps... trying to hold it in a noble metal? Something like gold, that shouldn't be too hard to test.$(br2)This doesn't sound completely unreasonable. I should try adding it to something like a \"cauldron\"...$(br2)I have a lot of junk I could drop in."
     }
   ]
 }

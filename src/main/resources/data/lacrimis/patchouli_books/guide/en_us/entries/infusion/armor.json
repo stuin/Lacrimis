@@ -3,7 +3,7 @@
   "icon": "lacrimis:tear_soaked_chestplate",
   "category": "lacrimis:infusion",
   "advancement": "lacrimis:base/infusion_table",
-  "sortnum": 3,
+  "sortnum": 4,
   "pages": [
     {
       "type": "text",

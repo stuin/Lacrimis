@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "lacrimis:infusion_shaped",
   "pattern": [
     "  #",
     " # ",
@@ -12,5 +12,6 @@
   },
   "result": {
     "item": "lacrimis:divining_rod"
-  }
+  },
+  "tears": 0
 }

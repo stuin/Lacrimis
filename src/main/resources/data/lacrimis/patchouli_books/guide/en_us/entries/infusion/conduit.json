@@ -3,15 +3,15 @@
   "icon": "lacrimis:conduit",
   "category": "lacrimis:infusion",
   "advancement": "lacrimis:base/infusion_table",
-  "sortnum": 2,
+  "sortnum": 3,
   "pages": [
     {
       "type": "text",
       "text": "One of the first things I tried with the new infusion table is a way to move a bit more distant from the crucible. Now that I have a safer way to craft I would like to do it outside the splash zone.$(br2)Given the spreading capabilities of the tears, it turned out to be pretty easy to do."
     },
     {
-      "type": "lacrimis:infusion",
-      "recipe": "lacrimis:infusion/conduit"
+      "type": "crafting",
+      "recipe": "lacrimis:crafting/conduit"
     },
     {
       "type": "text",
