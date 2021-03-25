@@ -5,7 +5,8 @@
 		"0": "lacrimis:block/crucible_top",
 		"1": "lacrimis:block/crucible_inner",
 		"2": "lacrimis:block/crucible_side",
-		"particle": "lacrimis:block/crucible_top"
+		"bottom": "lacrimis:block/crucible_bottom",
+		"particle": "lacrimis:block/crucible_side"
 	},
 	"elements": [
 		{
@@ -16,8 +17,8 @@
 				"east": {"uv": [0, 12, 16, 16], "texture": "#2"},
 				"south": {"uv": [0, 12, 16, 16], "texture": "#2"},
 				"west": {"uv": [0, 12, 16, 16], "texture": "#2"},
-				"up": {"uv": [0, 0, 16, 16], "texture": "#1"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#1"}
+				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#bottom"}
 			}
 		},
 		{
