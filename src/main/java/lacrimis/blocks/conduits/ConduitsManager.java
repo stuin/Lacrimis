@@ -1,12 +1,12 @@
-package azoth.blocks.conduits;
+package lacrimis.blocks.conduits;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import azoth.Azoth.Blocks;
-import azoth.blocks.ConduitConnectable;
-import azoth.blocks.conduits.ConduitsUtils.PathMode;
+import lacrimis.Lacrimis.Blocks;
+import lacrimis.blocks.ConduitConnectable;
+import lacrimis.blocks.conduits.ConduitsUtils.PathMode;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;

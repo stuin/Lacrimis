@@ -1,9 +1,9 @@
-package azoth.blocks.entity;
+package lacrimis.blocks.entity;
 
 import java.util.Random;
 
-import azoth.Azoth;
-import azoth.Azoth.BlockEntityTypes;
+import lacrimis.Lacrimis;
+import lacrimis.Lacrimis.BlockEntityTypes;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
@@ -43,7 +43,7 @@ public class InfusionTableBlockEntity extends AzothContainerBlockEntity implemen
             double dx = 0.005 * Math.cos(a + 1.5 * Math.PI / 2);
             double dz = 0.005 * Math.sin(a + 1.5 * Math.PI / 2);
 
-            this.world.addParticle(Azoth.ParticleTypes.AZOTH_MIST, x, y, z, dx, 0.005, dz);
+            this.world.addParticle(Lacrimis.ParticleTypes.AZOTH_MIST, x, y, z, dx, 0.005, dz);
         }
     }
 

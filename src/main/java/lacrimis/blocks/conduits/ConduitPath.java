@@ -1,4 +1,4 @@
-package azoth.blocks.conduits;
+package lacrimis.blocks.conduits;
 
 import java.util.List;
 

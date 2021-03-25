@@ -1,4 +1,4 @@
-package azoth.client.particles;
+package lacrimis.client.particles;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

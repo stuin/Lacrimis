@@ -1,10 +1,10 @@
 {
     "ambientocclusion": false,
     "textures": {
-        "particle": "azoth:block/conduit",
-        "side": "azoth:block/conduit",
-        "top": "azoth:block/conduit",
-        "connector": "azoth:block/conduit_cauldron_connection"
+        "particle": "lacrimis:block/conduit",
+        "side": "lacrimis:block/conduit",
+        "top": "lacrimis:block/conduit",
+        "connector": "lacrimis:block/conduit_cauldron_connection"
     },
     "elements": [
         {

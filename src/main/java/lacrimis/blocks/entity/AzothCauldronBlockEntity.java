@@ -1,7 +1,7 @@
-package azoth.blocks.entity;
+package lacrimis.blocks.entity;
 
-import azoth.Azoth.BlockEntityTypes;
-import azoth.AzothInitializer;
+import lacrimis.LacrimisInitializer;
+import lacrimis.Lacrimis.BlockEntityTypes;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
@@ -36,7 +36,7 @@ public class AzothCauldronBlockEntity extends AzothContainerBlockEntity implemen
             }
         }
         if (!this.world.isClient && this.level > 0) {
-            if (AzothInitializer.getConduitManager(this.world).offer(this.pos, 1) != 1) {
+            if (LacrimisInitializer.getConduitManager(this.world).offer(this.pos, 1) != 1) {
                 this.level -= 1;
                 this.markDirty();
                 this.sync();

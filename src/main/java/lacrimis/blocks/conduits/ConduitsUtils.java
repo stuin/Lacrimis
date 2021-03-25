@@ -1,4 +1,4 @@
-package azoth.blocks.conduits;
+package lacrimis.blocks.conduits;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import azoth.Azoth.Blocks;
-import azoth.blocks.ConduitConnectable;
+import lacrimis.Lacrimis.Blocks;
+import lacrimis.blocks.ConduitConnectable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;

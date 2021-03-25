@@ -1,25 +1,16 @@
-package azoth.blocks;
+package lacrimis.blocks;
 
-import azoth.blocks.AzothConduitBlock.ConnectionType;
-import azoth.blocks.entity.AzothCauldronBlockEntity;
+import lacrimis.blocks.AzothConduitBlock.ConnectionType;
+import lacrimis.blocks.entity.AzothCauldronBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.CauldronBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.potion.PotionUtil;
-import net.minecraft.potion.Potions;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.function.BooleanBiFunction;
@@ -39,6 +30,11 @@ public class AzothCauldronBlock extends Block implements BlockEntityProvider, Co
 
     public AzothCauldronBlock(Block.Settings settings) {
         super(settings);
+    }
+
+    @Override
+    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
+        return new ItemStack(Blocks.CAULDRON);
     }
 
     @Override
@@ -72,31 +68,8 @@ public class AzothCauldronBlock extends Block implements BlockEntityProvider, Co
         if (!stack.isEmpty()) {
             BlockEntity entity = world.getBlockEntity(pos);
             if (entity instanceof AzothCauldronBlockEntity && ((AzothCauldronBlockEntity) entity).getLevel() == 0) {
-                Item item = stack.getItem();
-                if (item == Items.WATER_BUCKET) {
-                    if (!world.isClient) {
-                        if (!player.abilities.creativeMode) {
-                            player.setStackInHand(hand, new ItemStack(Items.BUCKET));
-                        }
-                        player.incrementStat(Stats.FILL_CAULDRON);
-                        world.setBlockState(pos, Blocks.CAULDRON.getDefaultState().with(CauldronBlock.LEVEL, 3));
-                        world.playSound((PlayerEntity) null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                    }
-                    return ActionResult.success(world.isClient);
-                } else if (item == Items.POTION && PotionUtil.getPotion(stack) == Potions.WATER) {
-                    if (!world.isClient) {
-                        if (!player.abilities.creativeMode) {
-                            player.setStackInHand(hand, new ItemStack(Items.GLASS_BOTTLE));
-                            if (player instanceof ServerPlayerEntity) {
-                                ((ServerPlayerEntity) player).refreshScreenHandler(player.playerScreenHandler);
-                            }
-                        }
-                        player.incrementStat(Stats.USE_CAULDRON);
-                        world.setBlockState(pos, Blocks.CAULDRON.getDefaultState().with(CauldronBlock.LEVEL, 1));
-                        world.playSound((PlayerEntity) null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                    }
-                    return ActionResult.success(world.isClient);
-                }
+                world.setBlockState(pos, Blocks.CAULDRON.getDefaultState());
+                return Blocks.CAULDRON.onUse(world.getBlockState(pos), world, pos, player, hand, hit);
             }
         }
         return ActionResult.PASS;

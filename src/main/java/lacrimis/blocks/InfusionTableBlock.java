@@ -1,8 +1,8 @@
-package azoth.blocks;
+package lacrimis.blocks;
 
-import azoth.AzothInitializer;
-import azoth.blocks.AzothConduitBlock.ConnectionType;
-import azoth.blocks.entity.InfusionTableBlockEntity;
+import lacrimis.LacrimisInitializer;
+import lacrimis.blocks.AzothConduitBlock.ConnectionType;
+import lacrimis.blocks.entity.InfusionTableBlockEntity;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
@@ -56,7 +56,7 @@ public class InfusionTableBlock extends Block implements ConduitConnectable, Blo
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         super.onStateReplaced(state, world, pos, newState, moved);
-        AzothInitializer.getConduitManager(world).notifyUpdate(pos);
+        LacrimisInitializer.getConduitManager(world).notifyUpdate(pos);
     }
 
     @Override

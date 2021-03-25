@@ -2,61 +2,61 @@
   "multipart": [
     {
       "when": { "node": true },
-      "apply": { "model": "azoth:block/conduit_center_node" }
+      "apply": { "model": "lacrimis:block/conduit_center_node" }
     },
     {
       "when": { "node": false },
-      "apply": { "model": "azoth:block/conduit_center" }
+      "apply": { "model": "lacrimis:block/conduit_center" }
     },
     
     {
       "when": { "down": "normal" },
-      "apply": { "model": "azoth:block/conduit_connection", "uvlock": true }
+      "apply": { "model": "lacrimis:block/conduit_connection", "uvlock": true }
     },
     {
       "when": { "up": "normal" },
-      "apply": { "model": "azoth:block/conduit_connection", "uvlock": true, "x": 180 }
+      "apply": { "model": "lacrimis:block/conduit_connection", "uvlock": true, "x": 180 }
     },
     {
       "when": { "north": "normal" },
-      "apply": { "model": "azoth:block/conduit_connection_horizontal", "uvlock": true }
+      "apply": { "model": "lacrimis:block/conduit_connection_horizontal", "uvlock": true }
     },
     {
       "when": { "south": "normal" },
-      "apply": { "model": "azoth:block/conduit_connection_horizontal", "uvlock": true, "y": 180 }
+      "apply": { "model": "lacrimis:block/conduit_connection_horizontal", "uvlock": true, "y": 180 }
     },
     {
       "when": { "west": "normal" },
-      "apply": { "model": "azoth:block/conduit_connection_horizontal", "uvlock": true, "y": 270 }
+      "apply": { "model": "lacrimis:block/conduit_connection_horizontal", "uvlock": true, "y": 270 }
     },
     {
       "when": { "east": "normal" },
-      "apply": { "model": "azoth:block/conduit_connection_horizontal", "uvlock": true, "y": 90 }
+      "apply": { "model": "lacrimis:block/conduit_connection_horizontal", "uvlock": true, "y": 90 }
     },
     
     {
       "when": { "down": "cauldron" },
-      "apply": { "model": "azoth:block/conduit_cauldron_connection", "uvlock": true }
+      "apply": { "model": "lacrimis:block/conduit_cauldron_connection", "uvlock": true }
     },
     {
       "when": { "up": "cauldron" },
-      "apply": { "model": "azoth:block/conduit_cauldron_connection", "uvlock": true, "x": 180 }
+      "apply": { "model": "lacrimis:block/conduit_cauldron_connection", "uvlock": true, "x": 180 }
     },
     {
       "when": { "north": "cauldron" },
-      "apply": { "model": "azoth:block/conduit_cauldron_connection", "uvlock": true }
+      "apply": { "model": "lacrimis:block/conduit_cauldron_connection", "uvlock": true }
     },
     {
       "when": { "south": "cauldron" },
-      "apply": { "model": "azoth:block/conduit_cauldron_connection", "uvlock": true, "y": 180 }
+      "apply": { "model": "lacrimis:block/conduit_cauldron_connection", "uvlock": true, "y": 180 }
     },
     {
       "when": { "west": "cauldron" },
-      "apply": { "model": "azoth:block/conduit_cauldron_connection", "uvlock": true, "y": 270 }
+      "apply": { "model": "lacrimis:block/conduit_cauldron_connection", "uvlock": true, "y": 270 }
     },
     {
       "when": { "east": "cauldron" },
-      "apply": { "model": "azoth:block/conduit_cauldron_connection", "uvlock": true, "y": 90 }
+      "apply": { "model": "lacrimis:block/conduit_cauldron_connection", "uvlock": true, "y": 90 }
     }
   ]
 }

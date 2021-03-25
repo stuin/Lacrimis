@@ -1,4 +1,4 @@
-package azoth.items;
+package lacrimis.items;
 
 import net.minecraft.item.Item;
 

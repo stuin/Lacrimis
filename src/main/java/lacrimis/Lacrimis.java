@@ -1,13 +1,13 @@
-package azoth;
+package lacrimis;
 
 import com.google.common.collect.ImmutableSet;
 
-import azoth.blocks.AzothCauldronBlock;
-import azoth.blocks.AzothConduitBlock;
-import azoth.blocks.InfusionTableBlock;
-import azoth.blocks.entity.AzothCauldronBlockEntity;
-import azoth.blocks.entity.InfusionTableBlockEntity;
-import azoth.items.DivinationRodItem;
+import lacrimis.blocks.AzothCauldronBlock;
+import lacrimis.blocks.AzothConduitBlock;
+import lacrimis.blocks.InfusionTableBlock;
+import lacrimis.blocks.entity.AzothCauldronBlockEntity;
+import lacrimis.blocks.entity.InfusionTableBlockEntity;
+import lacrimis.items.DivinationRodItem;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
@@ -26,8 +26,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 
-public class Azoth {
-    public static final String MODID = "azoth";
+public class Lacrimis {
+    public static final String MODID = "lacrimis";
     public static final ItemGroup ITEMGROUP = FabricItemGroupBuilder.build(createID("main"), () -> new ItemStack(Blocks.INFUSION_TABLE));
 
     public static final Identifier createID(String name) {
@@ -42,7 +42,7 @@ public class Azoth {
         public static final Block AZOTH_CONDUIT = register("conduit", new AzothConduitBlock(IRON));
 
         private static Block register(String name, Block entry) {
-            return Registry.register(Registry.BLOCK, Azoth.createID(name), entry);
+            return Registry.register(Registry.BLOCK, Lacrimis.createID(name), entry);
         }
     }
 
@@ -51,7 +51,7 @@ public class Azoth {
         public static final BlockEntityType<InfusionTableBlockEntity> INFUSION_TABLE = register("infusion_table", new BlockEntityType<>(InfusionTableBlockEntity::new, ImmutableSet.of(Blocks.INFUSION_TABLE), null));
 
         private static <T extends BlockEntity> BlockEntityType<T> register(String name, BlockEntityType<T> entry) {
-            return Registry.register(Registry.BLOCK_ENTITY_TYPE, Azoth.createID(name), entry);
+            return Registry.register(Registry.BLOCK_ENTITY_TYPE, Lacrimis.createID(name), entry);
         }
     }
 
@@ -63,11 +63,11 @@ public class Azoth {
         public static final Item DIVINATION_ROD = register("divination_rod", new DivinationRodItem(createSettings().maxDamage(256).rarity(Rarity.UNCOMMON)));
 
         private static Item.Settings createSettings() {
-            return new Item.Settings().group(Azoth.ITEMGROUP);
+            return new Item.Settings().group(Lacrimis.ITEMGROUP);
         }
 
         private static Item register(String name, Item entry) {
-            return Registry.register(Registry.ITEM, Azoth.createID(name), entry);
+            return Registry.register(Registry.ITEM, Lacrimis.createID(name), entry);
         }
     }
 
@@ -75,7 +75,7 @@ public class Azoth {
         public static final DefaultParticleType AZOTH_MIST = register("azoth_mist", new AzothParticleType(true));
 
         private static DefaultParticleType register(String name, DefaultParticleType entry) {
-            return Registry.register(Registry.PARTICLE_TYPE, Azoth.createID(name), entry);
+            return Registry.register(Registry.PARTICLE_TYPE, Lacrimis.createID(name), entry);
         }
 
         private static final class AzothParticleType extends DefaultParticleType {
@@ -84,5 +84,4 @@ public class Azoth {
             }
         }
     }
-
 }

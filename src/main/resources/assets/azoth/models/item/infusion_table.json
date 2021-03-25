@@ -1,5 +1,5 @@
 {
-    "parent": "azoth:block/infusion_table",
+    "parent": "lacrimis:block/infusion_table",
     "gui_light": "side",
     "display": {
         "gui": {

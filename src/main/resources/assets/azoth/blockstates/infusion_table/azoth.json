@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": { "model": "azoth:block/infusion_table/azoth" }
+        "": { "model": "lacrimis:block/infusion_table/lacrimis" }
     }
 }

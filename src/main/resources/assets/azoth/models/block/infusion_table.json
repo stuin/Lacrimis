@@ -1,10 +1,10 @@
 {   
 	"ambientocclusion": false,
     "textures": {
-        "particle": "azoth:block/infusion_table_side",
-        "bottom": "azoth:block/infusion_table_bottom",
-        "top": "azoth:block/infusion_table_top",
-        "side": "azoth:block/infusion_table_side"
+        "particle": "lacrimis:block/infusion_table_side",
+        "bottom": "lacrimis:block/infusion_table_bottom",
+        "top": "lacrimis:block/infusion_table_top",
+        "side": "lacrimis:block/infusion_table_side"
     },
     "elements": [
         {   

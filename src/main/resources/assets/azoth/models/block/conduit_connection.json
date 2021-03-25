@@ -2,7 +2,7 @@
     "ambientocclusion": false,
     "textures": {
         "particle": "#block",
-        "block": "azoth:block/conduit"
+        "block": "lacrimis:block/conduit"
     },
     "elements": [
         {

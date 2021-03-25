@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "azoth.mixins",
+  "package": "lacrimis.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "CauldronBlockMixin",

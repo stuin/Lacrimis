@@ -22,15 +22,15 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "azoth.AzothInitializer"
+      "lacrimis.LacrimisInitializer"
     ],
     "client": [
-      "azoth.AzothInitializer"
+      "lacrimis.LacrimisInitializer"
     ]
   },
 
   "mixins": [
-    "azoth.mixins.json"
+    "lacrimis.mixins.json"
   ],
 
   "custom": {

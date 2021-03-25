@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "azoth:infusion_table"
+          "name": "lacrimis:infusion_table"
         }
       ],
       "conditions": [

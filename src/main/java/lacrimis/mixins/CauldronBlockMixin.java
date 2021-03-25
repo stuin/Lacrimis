@@ -1,10 +1,10 @@
-package azoth.mixins;
+package lacrimis.mixins;
 
 import org.spongepowered.asm.mixin.Mixin;
 
-import azoth.Azoth;
-import azoth.blocks.AzothConduitBlock.ConnectionType;
-import azoth.blocks.ConduitConnectable;
+import lacrimis.Lacrimis;
+import lacrimis.blocks.ConduitConnectable;
+import lacrimis.blocks.AzothConduitBlock.ConnectionType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -30,7 +30,7 @@ public abstract class CauldronBlockMixin extends Block implements ConduitConnect
             BlockPos above = pos.up(y);
             BlockState state = world.getBlockState(above);
             if (state.isOf(Blocks.CRYING_OBSIDIAN)) {
-                return Azoth.Blocks.AZOTH_CAULDRON.getDefaultState();
+                return Lacrimis.Blocks.AZOTH_CAULDRON.getDefaultState();
             } else if (!state.isAir()) {
                 break;
             }

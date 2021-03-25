@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "azoth:conduit"
+          "name": "lacrimis:conduit"
         }
       ],
       "conditions": [

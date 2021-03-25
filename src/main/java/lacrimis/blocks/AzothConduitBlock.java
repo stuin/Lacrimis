@@ -1,8 +1,8 @@
-package azoth.blocks;
+package lacrimis.blocks;
 
 import java.util.EnumSet;
 
-import azoth.AzothInitializer;
+import lacrimis.LacrimisInitializer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -134,7 +134,7 @@ public class AzothConduitBlock extends Block {
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         super.onStateReplaced(state, world, pos, newState, moved);
-        AzothInitializer.getConduitManager(world).notifyUpdate(pos);
+        LacrimisInitializer.getConduitManager(world).notifyUpdate(pos);
     }
 
     public static EnumProperty<ConnectionType> getConnectionProperty(Direction direction) {

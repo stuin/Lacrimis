@@ -1,6 +1,6 @@
-package azoth.blocks;
+package lacrimis.blocks;
 
-import azoth.blocks.AzothConduitBlock.ConnectionType;
+import lacrimis.blocks.AzothConduitBlock.ConnectionType;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;

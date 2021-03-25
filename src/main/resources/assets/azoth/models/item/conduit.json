@@ -50,8 +50,8 @@
         }
     ],
     "textures": {
-        "particle": "azoth:block/conduit",
-        "conduit": "azoth:block/conduit",
-		"node": "azoth:block/conduit_node"
+        "particle": "lacrimis:block/conduit",
+        "conduit": "lacrimis:block/conduit",
+		"node": "lacrimis:block/conduit_node"
     }
 }
