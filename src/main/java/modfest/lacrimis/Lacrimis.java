@@ -28,7 +28,7 @@ public class Lacrimis implements ModInitializer {
     @Override
     public void onInitialize() {
         ModBlocks.register();
-        ModBlockEntityTypes.register();
+        ModEntityTypes.register();
         ModItems.register();
         ModCrafting.register();
         ModNetworking.register();

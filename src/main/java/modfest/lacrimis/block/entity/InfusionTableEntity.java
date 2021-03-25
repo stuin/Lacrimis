@@ -3,8 +3,8 @@ package modfest.lacrimis.block.entity;
 import java.util.Random;
 
 import modfest.lacrimis.crafting.InfusionRecipe;
-import modfest.lacrimis.init.ModBlockEntityTypes;
 import modfest.lacrimis.init.ModCrafting;
+import modfest.lacrimis.init.ModEntityTypes;
 import modfest.lacrimis.init.ModParticles;
 import modfest.lacrimis.util.DuctUtil;
 import modfest.lacrimis.util.SoulTank;
@@ -21,7 +21,7 @@ public class InfusionTableEntity extends SoulTankEntity implements Tickable {
     public boolean startCrafting = false;
 
     public InfusionTableEntity() {
-        super(ModBlockEntityTypes.infusionTable, 1000, 10);
+        super(ModEntityTypes.infusionTable, 1000, 10);
         getTank().setLimit(0);
     }
 

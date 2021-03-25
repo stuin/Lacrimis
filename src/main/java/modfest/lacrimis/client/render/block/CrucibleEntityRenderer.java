@@ -1,4 +1,4 @@
-package modfest.lacrimis.client.render.blocks;
+package modfest.lacrimis.client.render.block;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

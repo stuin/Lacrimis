@@ -38,7 +38,7 @@ public class TaintOutputBlock extends FacingBlock implements DuctConnectBlock {
 
     @Override
     public boolean canConnectDuctTo(BlockPos pos, BlockView world, Direction side) {
-        return side == world.getBlockState(pos).get(FACING);
+        return side != world.getBlockState(pos).get(FACING).getOpposite();
     }
 
     @Override
