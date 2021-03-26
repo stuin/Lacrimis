@@ -1,5 +1,6 @@
 package modfest.lacrimis.block.rune;
 
+import modfest.lacrimis.item.Soaked;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -8,7 +9,6 @@ import net.minecraft.world.World;
 
 import modfest.lacrimis.init.ModBlocks;
 import modfest.lacrimis.init.ModEnchantments;
-import modfest.lacrimis.item.armor.SoakedArmor;
 
 public class WardingBlock extends CenterRuneBlock {
     public WardingBlock() {
@@ -16,7 +16,7 @@ public class WardingBlock extends CenterRuneBlock {
     }
 
     @Override
-    protected boolean activate(World world, BlockPos pos, BlockPos pipe, Entity entity, PlayerEntity player) {
+    protected boolean activate(World world, BlockPos pos, BlockPos duct, Entity entity, PlayerEntity player) {
         if(world.getBlockState(pos).getBlock() == ModBlocks.runeStone) {
             world.setBlockState(pos, ModBlocks.wardedStone.getDefaultState());
             return true;
@@ -28,7 +28,7 @@ public class WardingBlock extends CenterRuneBlock {
         if(entity instanceof PlayerEntity) {
             boolean added = false;
             for(ItemStack item : entity.getArmorItems())
-                if(item.getItem() instanceof SoakedArmor) {
+                if(item.getItem() instanceof Soaked) {
                     item.addEnchantment(ModEnchantments.WARDED, 1);
                     added = true;
                 }

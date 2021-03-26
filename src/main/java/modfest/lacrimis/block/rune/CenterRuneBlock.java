@@ -26,17 +26,17 @@ import net.minecraft.world.World;
 import java.util.List;
 
 import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.block.BlockConduitConnect;
+import modfest.lacrimis.block.DuctConnectBlock;
 import modfest.lacrimis.init.ModBlocks;
-import modfest.lacrimis.util.ConduitEntry;
-import modfest.lacrimis.util.ConduitUtil;
+import modfest.lacrimis.util.DuctEntry;
+import modfest.lacrimis.util.DuctUtil;
 import modfest.lacrimis.util.NeighborList;
 
-public abstract class CenterRuneBlock extends Block implements BlockConduitConnect, BlockWrenchable {
+public abstract class CenterRuneBlock extends Block implements DuctConnectBlock, BlockWrenchable {
     private static final Box TARGET_BOX = new Box(-0.5, -1, -0.5, 1.5, 1, 1.5);
     private static final Box LARGE_BOX = new Box(-1.5, -1, -1.5, 2.5, 1, 2.5);
 
-    public static final IntProperty PIPE;
+    public static final IntProperty DUCT;
     public static final BooleanProperty POWERED;
 
     public final int requiredTears;
@@ -46,17 +46,17 @@ public abstract class CenterRuneBlock extends Block implements BlockConduitConne
         super(ModBlocks.runeSettings);
         this.requiredTears = requiredTears;
         this.requiredTier = requiredTier;
-        setDefaultState(getDefaultState().with(PIPE, 8).with(POWERED, false));
+        setDefaultState(getDefaultState().with(DUCT, 8).with(POWERED, false));
     }
 
     protected int testCage(BlockView world, BlockPos pos, Direction flipped, PlayerEntity player) {
-        boolean pipe = false;
+        boolean duct = false;
         int actualTier = 10;
         for(int i = 0; i < 8; i++) {
             BlockPos next = NeighborList.platform[i];
             Block block = world.getBlockState(pos.add(next)).getBlock();
-            if(block instanceof RuneBlock) {
-                int nextTier = ((RuneBlock) block).testCage(world, pos.add(next), flipped);
+            if(block instanceof BasicRuneBlock) {
+                int nextTier = ((BasicRuneBlock) block).testCage(world, pos.add(next), flipped);
                 actualTier = Math.min(nextTier, actualTier);
 
                 //Check error codes
@@ -70,24 +70,24 @@ public abstract class CenterRuneBlock extends Block implements BlockConduitConne
             } else
                 return error(player, "missing");
 
-            //Check for single pipe
-            if(block instanceof PipeConnectorBlock ||
+            //Check for single duct
+            if(block instanceof DuctRuneBlock ||
                     block instanceof AdvancedRuneBlock &&
                             world.getBlockState(pos.add(next)).get(AdvancedRuneBlock.PIPE) != 3) {
-                if(pipe) {
+                if(duct) {
                     if(world instanceof World)
-                        ((World) world).setBlockState(pos, world.getBlockState(pos).with(PIPE, 8));
-                    return error(player, "pipes");
+                        ((World) world).setBlockState(pos, world.getBlockState(pos).with(DUCT, 8));
+                    return error(player, "ducts");
                 }
-                pipe = true;
+                duct = true;
 
-                //Save pipe location
+                //Save duct location
                 if(world instanceof World)
-                    ((World) world).setBlockState(pos, world.getBlockState(pos).with(PIPE, i));
+                    ((World) world).setBlockState(pos, world.getBlockState(pos).with(DUCT, i));
             }
         }
-        if(!pipe)
-            return error(player, "pipe");
+        if(!duct)
+            return error(player, "duct");
         return actualTier;
     }
 
@@ -112,30 +112,30 @@ public abstract class CenterRuneBlock extends Block implements BlockConduitConne
         return requiredTears;
     }
 
-    private boolean runOnce(World world, BlockPos pos, BlockPos pipe, PlayerEntity player, Direction flipped, int tier) {
+    private boolean runOnce(World world, BlockPos pos, BlockPos duct, PlayerEntity player, Direction flipped, int tier) {
         Box box = tier > 2 ? LARGE_BOX : TARGET_BOX;
         
         //For all entities on platform
         pos = pos.offset(flipped);
         for(Entity entity : world.getEntitiesByClass(Entity.class, box.offset(pos.offset(flipped)), null)) {
-            if(activate(world, pos, pipe, entity, player))
+            if(activate(world, pos, duct, entity, player))
                 return true;
         }
-        return activate(world, pos, pipe, null, player);
+        return activate(world, pos, duct, null, player);
     }
 
-    public BlockPos getPipe(BlockView world, BlockPos pos) {
-        //Locate pipe connection
-        int i = world.getBlockState(pos).get(PIPE);
+    public BlockPos getDuct(BlockView world, BlockPos pos) {
+        //Locate duct connection
+        int i = world.getBlockState(pos).get(DUCT);
         if(i == 8)
             return null;
-        BlockPos pipe = pos.add(NeighborList.platform[i]);
+        BlockPos duct = pos.add(NeighborList.platform[i]);
 
-        //Adjust pipe for tier 3
-        if(world.getBlockState(pipe).getBlock() instanceof AdvancedRuneBlock)
-            return AdvancedRuneBlock.getPipe(world, pipe);
+        //Adjust duct for tier 3
+        if(world.getBlockState(duct).getBlock() instanceof AdvancedRuneBlock)
+            return AdvancedRuneBlock.getDuct(world, duct);
         else
-            return pipe;
+            return duct;
     }
 
     @Override
@@ -154,16 +154,16 @@ public abstract class CenterRuneBlock extends Block implements BlockConduitConne
         if(tier < requiredTier)
             return false;
 
-        //Get pipe location
-        BlockPos pipe = getPipe(world, pos);
-        if(pipe == null)
+        //Get duct location
+        BlockPos duct = getDuct(world, pos);
+        if(duct == null)
             return false;
 
         //Grab required tears
-        List<ConduitEntry> tearsList = ConduitUtil.listScanConduits(world, pipe, true);
-        if(ConduitUtil.locateTearsStrong(world, tearsList, actualCost(tier), true)) {
-            if(runOnce(world, pos, pipe, player, flipped, tier)) {
-                ConduitUtil.locateTearsStrong(world, tearsList, actualCost(tier), false);
+        List<DuctEntry> tearsList = DuctUtil.listScanDucts(world, duct, true);
+        if(DuctUtil.locateTearsStrong(world, tearsList, actualCost(tier), true)) {
+            if(runOnce(world, pos, duct, player, flipped, tier)) {
+                DuctUtil.locateTearsStrong(world, tearsList, actualCost(tier), false);
                 return true;
             }
         } else
@@ -171,10 +171,10 @@ public abstract class CenterRuneBlock extends Block implements BlockConduitConne
         return false;
     }
 
-    protected abstract boolean activate(World world, BlockPos pos, BlockPos pipe, Entity entity, PlayerEntity player);
+    protected abstract boolean activate(World world, BlockPos pos, BlockPos duct, Entity entity, PlayerEntity player);
 
     @Override
-    public boolean canConnectConduitTo(BlockPos pos, BlockView world, Direction side) {
+    public boolean canConnectDuctTo(BlockPos pos, BlockView world, Direction side) {
         return false;
     }
 
@@ -198,7 +198,7 @@ public abstract class CenterRuneBlock extends Block implements BlockConduitConne
         Block from = world.getBlockState(fromPos).getBlock();
         boolean a = state.get(POWERED);
         boolean b = world.isReceivingRedstonePower(pos);
-        boolean c = from instanceof RuneBlock || from instanceof CenterRuneBlock;
+        boolean c = from instanceof BasicRuneBlock || from instanceof CenterRuneBlock;
         if(!a && b && !c)
             activate(world, pos, null);
         else if(a && !b)
@@ -215,11 +215,11 @@ public abstract class CenterRuneBlock extends Block implements BlockConduitConne
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(POWERED, PIPE);
+        builder.add(POWERED, DUCT);
     }
 
     static {
         POWERED = Properties.POWERED;
-        PIPE = IntProperty.of("pipe", 0, 8);
+        DUCT = IntProperty.of("duct", 0, 8);
     }
 }

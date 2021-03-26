@@ -56,7 +56,7 @@ public class CombinerBlock extends SoulTankBlock {
     }
 
     @Override
-    public boolean canConnectConduitTo(BlockPos pos, BlockView world, Direction side) {
+    public boolean canConnectDuctTo(BlockPos pos, BlockView world, Direction side) {
         return true;
     }
 

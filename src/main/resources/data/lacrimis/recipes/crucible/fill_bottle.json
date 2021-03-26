@@ -1,0 +1,10 @@
+{
+  "type": "lacrimis:crucible",
+  "base": {
+    "item": "minecraft:glass_bottle"
+  },
+  "result": {
+    "item": "lacrimis:bottle_of_tears"
+  },
+  "tears": 250
+}

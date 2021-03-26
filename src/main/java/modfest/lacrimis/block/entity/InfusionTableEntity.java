@@ -1,27 +1,33 @@
 package modfest.lacrimis.block.entity;
 
 import java.util.Random;
+import java.util.stream.IntStream;
 
 import modfest.lacrimis.crafting.InfusionRecipe;
-import modfest.lacrimis.init.ModBlockEntityTypes;
 import modfest.lacrimis.init.ModCrafting;
+import modfest.lacrimis.init.ModEntityTypes;
 import modfest.lacrimis.init.ModParticles;
-import modfest.lacrimis.util.ConduitUtil;
+import modfest.lacrimis.util.DuctUtil;
 import modfest.lacrimis.util.SoulTank;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.recipe.CraftingRecipe;
+import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Tickable;
+import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.Nullable;
 
 public class InfusionTableEntity extends SoulTankEntity implements Tickable {
     public static final int OUTPUT_STACK = 9;
+    public static final int[] INPUT_STACKS = IntStream.rangeClosed(0, 8).toArray();
     private final Random random = new Random();
     
     public ItemStack holding = ItemStack.EMPTY;
     public boolean startCrafting = false;
 
     public InfusionTableEntity() {
-        super(ModBlockEntityTypes.infusionTable, 1000, 10);
+        super(ModEntityTypes.infusionTable, 1000, 10);
         getTank().setLimit(0);
     }
 
@@ -62,17 +68,25 @@ public class InfusionTableEntity extends SoulTankEntity implements Tickable {
         }
 
         //Check for new recipe
-        if(holding.isEmpty()) {
+        if(holding.isEmpty() && (startCrafting || !inventory.getStack(OUTPUT_STACK).isEmpty())) {
             InfusionRecipe recipe = this.world.getRecipeManager().getFirstMatch(ModCrafting.INFUSION_RECIPE, inventory, this.world).orElse(null);
             if(recipe == null)
                 recipe = this.world.getRecipeManager().getFirstMatch(ModCrafting.CRUCIBLE_RECIPE, inventory, this.world).orElse(null);
 
+            CraftingRecipe vanillaRecipe = null;
+            if(recipe == null)
+                vanillaRecipe = this.world.getRecipeManager().getFirstMatch(RecipeType.CRAFTING, inventory.setupCrafting(), this.world).orElse(null);
+
             //Start crafting progress
-            if(recipe != null && canAcceptRecipeOutput(recipe) &&
-                    (startCrafting || !inventory.getStack(OUTPUT_STACK).isEmpty())) {
+            if(recipe != null && canAcceptOutput(recipe.getOutput())) {
                 takeIngredients();
                 tank.setLimit(recipe.getTears());
                 holding = recipe.getOutput().copy();
+                startCrafting = false;
+            } else if(vanillaRecipe != null && canAcceptOutput(vanillaRecipe.getOutput())) {
+                takeIngredients();
+                tank.setLimit(5);
+                holding = vanillaRecipe.getOutput().copy();
                 startCrafting = false;
             }
         }
@@ -82,7 +96,7 @@ public class InfusionTableEntity extends SoulTankEntity implements Tickable {
 
         //Collect tears
         if(tank.getSpace() > 0)
-            tank.addTears(ConduitUtil.locateTears(world, pos, 5));
+            tank.addTears(DuctUtil.locateTears(world, pos, 5));
     }
 
     public void takeIngredients() {
@@ -98,8 +112,7 @@ public class InfusionTableEntity extends SoulTankEntity implements Tickable {
         }
     }
 
-    protected boolean canAcceptRecipeOutput(InfusionRecipe recipe) {
-        ItemStack itemStack = recipe.getOutput();
+    protected boolean canAcceptOutput(ItemStack itemStack) {
         if (itemStack.isEmpty())
             return false;
 
@@ -112,6 +125,20 @@ public class InfusionTableEntity extends SoulTankEntity implements Tickable {
             return true;
         else
             return itemStack2.getCount() < itemStack.getMaxCount();
+    }
+
+    public int[] getAvailableSlots(Direction side) {
+        if (side == Direction.DOWN)
+            return new int[]{OUTPUT_STACK};
+        return INPUT_STACKS;
+    }
+
+    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
+        return this.isValid(slot, stack);
+    }
+
+    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+        return true;
     }
 
     @Override

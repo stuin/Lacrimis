@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 
 import modfest.lacrimis.util.NeighborList;
 
-public class AdvancedRuneBlock extends RuneBlock {
+public class AdvancedRuneBlock extends BasicRuneBlock {
     public static final IntProperty PIPE;
 
     public AdvancedRuneBlock() {
@@ -19,8 +19,8 @@ public class AdvancedRuneBlock extends RuneBlock {
         setDefaultState(getDefaultState().with(PIPE, 3));
     }
 
-    public static BlockPos getPipe(BlockView world, BlockPos pos) {
-        //Calculate pipe connector position
+    public static BlockPos getDuct(BlockView world, BlockPos pos) {
+        //Calculate duct connector position
         int i = NeighborList.getOpposite(world.getBlockState(pos).get(CENTER));
         i = (i + world.getBlockState(pos).get(PIPE) - 1) % 8;
         return pos.add(NeighborList.platform[i]);
@@ -29,24 +29,24 @@ public class AdvancedRuneBlock extends RuneBlock {
     @Override
     public int testCage(BlockView world, BlockPos pos, Direction flipped) {
         int i = NeighborList.getOpposite(world.getBlockState(pos).get(CENTER));
-        boolean pipe = false;
+        boolean duct = false;
 
         if(NeighborList.isEdge(i)) {
             for(int j = -1; j < 2; j++) {
                 Block block = world.getBlockState(pos.add(NeighborList.platform[(i + j) % 8])).getBlock();
-                if((!(block instanceof RuneBlock) || (((RuneBlock) block).tier != 2)))
+                if((!(block instanceof BasicRuneBlock) || (((BasicRuneBlock) block).tier != 2)))
                     return -2;
 
-                //Check for single pipe
-                if(block instanceof PipeConnectorBlock) {
-                    if(pipe) {
+                //Check for single duct
+                if(block instanceof DuctRuneBlock) {
+                    if(duct) {
                         if(world instanceof World)
                             ((World) world).setBlockState(pos, world.getBlockState(pos).with(PIPE, 3));
                         return -3;
                     }
-                    pipe = true;
+                    duct = true;
 
-                    //Save pipe location
+                    //Save duct location
                     if(world instanceof World)
                         ((World) world).setBlockState(pos, world.getBlockState(pos).with(PIPE, j + 1));
                 }
@@ -67,6 +67,6 @@ public class AdvancedRuneBlock extends RuneBlock {
     }
 
     static {
-        PIPE = IntProperty.of("pipe", 0, 3);
+        PIPE = IntProperty.of("duct", 0, 3);
     }
 }

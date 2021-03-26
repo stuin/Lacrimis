@@ -2,6 +2,7 @@ package modfest.lacrimis.crafting;
 
 import com.google.gson.JsonObject;
 
+import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.init.ModCrafting;
 import modfest.lacrimis.init.ModItems;
 import net.fabricmc.api.EnvType;
@@ -49,14 +50,19 @@ public class CrucibleRecipe extends InfusionRecipe {
 
     @Override
     public boolean matches(InfusionInventory inv, World world) {
+        ItemStack item = inv.getStack(0);
         if(inv.size() > 1) {
-            for(int i = 0; i < inv.size() - 1; i++)
-                if(base.test(inv.getStack(i)))
-                    return true;
-                if(!inv.isEmpty())
-                    return false;
+            for(int i = 1; i < 9; i++) {
+                if(!inv.getStack(i).isEmpty()) {
+                    if(item.isEmpty())
+                        item = inv.getStack(i);
+                    else
+                        return false;
+                }
+            }
+            return base.test(item);
         }
-        return this.base.test(inv.getStack(0)) && inv.getTears() >= getTears();
+        return base.test(item) && inv.getTears() >= getTears();
     }
 
     @Override

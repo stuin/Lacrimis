@@ -1,6 +1,6 @@
 package modfest.lacrimis.block.rune;
 
-import modfest.lacrimis.util.ConduitUtil;
+import modfest.lacrimis.util.DuctUtil;
 import modfest.lacrimis.util.TaintPacket;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -19,9 +19,9 @@ public class SoulTeleportBlock extends SoulExtractionBlock {
     }
 
     @Override
-    protected boolean activate(World world, BlockPos pos, BlockPos pipe, Entity entity, PlayerEntity player) {
+    protected boolean activate(World world, BlockPos pos, BlockPos duct, Entity entity, PlayerEntity player) {
         if(canSend)
-            return super.activate(world, pos, pipe, entity, player);
+            return super.activate(world, pos, duct, entity, player);
         else
             error(player, "send");
         return false;
@@ -40,7 +40,7 @@ public class SoulTeleportBlock extends SoulExtractionBlock {
 
             //Spawn taint
             TaintPacket taint = new TaintPacket(requiredTears);
-            if(ConduitUtil.locateSink(world, getPipe(world, pos), taint) == null && world instanceof World)
+            if(DuctUtil.locateSink(world, getDuct(world, pos), taint) == null && world instanceof World)
                     taint.spawn((World) world, pos.up(vertical));
             return true;
         }

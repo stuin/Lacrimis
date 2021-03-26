@@ -17,7 +17,7 @@ public class SpawnerBreakerBlock extends CenterRuneBlock {
     }
 
     @Override
-    protected boolean activate(World world, BlockPos pos, BlockPos pipe, Entity entity, PlayerEntity player) {
+    protected boolean activate(World world, BlockPos pos, BlockPos duct, Entity entity, PlayerEntity player) {
         if(world.getBlockState(pos).getBlock() instanceof SpawnerBlock) {
             world.setBlockState(pos, Blocks.AIR.getDefaultState());
             ItemScatterer.spawn(world, pos, new SimpleInventory(new ItemStack(ModItems.brokenSpawner)));

@@ -2,6 +2,7 @@ package modfest.lacrimis.block;
 
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.InfusionTableEntity;
+import modfest.lacrimis.block.entity.SoulTankEntity;
 import modfest.lacrimis.init.ModCrafting;
 import modfest.lacrimis.init.ModItems;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
@@ -11,6 +12,10 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.state.property.IntProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
@@ -27,18 +32,26 @@ import java.util.List;
 
 public class InfusionTableBlock extends SoulTankBlock {
 	protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
+	public static final BooleanProperty POWERED;
 
-	@Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-		return SHAPE;
-	}
 	public InfusionTableBlock(AbstractBlock.Settings settings) {
 		super(settings, false);
+		setDefaultState(getDefaultState().with(POWERED, false));
 	}
 
 	@Override
 	public BlockEntity createBlockEntity(BlockView world) {
 		return new InfusionTableEntity();
+	}
+
+	@Override
+	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+		return SHAPE;
+	}
+
+	@Override
+	public BlockRenderType getRenderType(BlockState state) {
+		return BlockRenderType.MODEL;
 	}
 
 	@Override
@@ -54,6 +67,16 @@ public class InfusionTableBlock extends SoulTankBlock {
 			}
 		}
 		return parentResult;
+	}
+
+	@Override
+	public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+		if(state.get(POWERED) != world.isReceivingRedstonePower(pos)) {
+			BlockEntity entity = world.getBlockEntity(pos);
+			if(!state.get(POWERED) && entity instanceof InfusionTableEntity)
+				((InfusionTableEntity) entity).startCrafting = true;
+			world.setBlockState(pos, state.with(POWERED, world.isReceivingRedstonePower(pos)));
+		}
 	}
 
 	@Override
@@ -77,7 +100,11 @@ public class InfusionTableBlock extends SoulTankBlock {
 	}
 
 	@Override
-	public BlockRenderType getRenderType(BlockState state) {
-		return BlockRenderType.MODEL;
+	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+		builder.add(POWERED);
+	}
+
+	static {
+		POWERED = Properties.POWERED;
 	}
 }

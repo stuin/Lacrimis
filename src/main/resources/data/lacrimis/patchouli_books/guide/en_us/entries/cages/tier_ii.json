@@ -12,7 +12,7 @@
     {
       "type": "lacrimis:infusion",
       "recipe": "lacrimis:infusion/rune_tier2",
-      "recipe2": "lacrimis:incrafting/rune_pipe2"
+      "recipe2": "lacrimis:incrafting/rune_duct2"
     },
     {
       "type": "text",
@@ -31,7 +31,7 @@
         ],
         "mapping": {
           "0": "lacrimis:rune/stone",
-          "P": "lacrimis:rune/pipe2[center=1]",
+          "P": "lacrimis:rune/duct2[center=1]",
           "2": "lacrimis:rune/tier2[center=2]",
           "3": "lacrimis:rune/tier2[center=3]",
           "4": "lacrimis:rune/tier2[center=4]",
@@ -73,7 +73,7 @@
           "H": "minecraft:iron_bars[south=true,north=true]",
           "V": "minecraft:iron_bars[east=true,west=true]",
           "S": "lacrimis:rune/stone",
-          "P": "lacrimis:rune/pipe2[center=1]",
+          "P": "lacrimis:rune/duct2[center=1]",
           "2": "lacrimis:rune/tier2[center=2]",
           "3": "lacrimis:rune/tier1[center=3]",
           "4": "lacrimis:rune/tier1[center=4]",

@@ -8,7 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.util.ConduitUtil;
+import modfest.lacrimis.util.DuctUtil;
 
 public class SoulExtractionBlock extends CenterRuneBlock {
 
@@ -21,9 +21,9 @@ public class SoulExtractionBlock extends CenterRuneBlock {
     }
 
     @Override
-    protected boolean activate(World world, BlockPos pos, BlockPos pipe, Entity entity, PlayerEntity player) {
+    protected boolean activate(World world, BlockPos pos, BlockPos duct, Entity entity, PlayerEntity player) {
         if(entity instanceof LivingEntity || entity instanceof ItemEntity) {
-            BlockPos destination = ConduitUtil.locateSink(world, pipe, entity);
+            BlockPos destination = DuctUtil.locateSink(world, duct, entity);
             if(destination != null) {
                 if(!world.isClient)
                     Lacrimis.LOGGER.debug("Soul Extracted");

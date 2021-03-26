@@ -15,7 +15,7 @@ import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.item.armor.CustomArmorMaterials;
 import modfest.lacrimis.item.armor.SoakedArmor;
 import modfest.lacrimis.item.tools.CustomToolMaterials;
-import modfest.lacrimis.item.tools.SoakenSword;
+import modfest.lacrimis.item.tools.SoakedSwordItem;
 
 public class ModItems {
     private static final Item.Settings SETTINGS = new Item.Settings().group(Lacrimis.ITEM_GROUP);
@@ -26,9 +26,9 @@ public class ModItems {
     public static BlockItem infusionTable;
     public static BlockItem crucible;
     public static BlockItem combiner;
-    public static BlockItem conduit;
-    public static BlockItem gatedConduit;
-    public static BlockItem oneWayConduit;
+    public static BlockItem duct;
+    public static BlockItem gatedDuct;
+    public static BlockItem oneWayDuct;
     public static BlockItem taintOutput;
     public static BlockItem tearLantern;
     public static BlockItem drainedCryingObsidian;
@@ -57,8 +57,8 @@ public class ModItems {
     public static BlockItem rune2;
     public static BlockItem rune3;
     public static BlockItem flipRune;
-    public static BlockItem pipeRune1;
-    public static BlockItem pipeRune2;
+    public static BlockItem ductRune1;
+    public static BlockItem ductRune2;
 
     //Rune center blocks
     public static BlockItem healRune;
@@ -76,9 +76,9 @@ public class ModItems {
         infusionTable = register("infusion_table", ModBlocks.infusionTable);
         crucible = register("crucible", ModBlocks.crucible);
         combiner = register("combiner", ModBlocks.combiner);
-        conduit = register("conduit", ModBlocks.conduit);
-        gatedConduit = register("gated_conduit", ModBlocks.gatedConduit);
-        oneWayConduit = register("one_way_conduit", ModBlocks.oneWayConduit);
+        duct = register("duct", ModBlocks.duct);
+        gatedDuct = register("gated_duct", ModBlocks.gatedDuct);
+        oneWayDuct = register("one_way_duct", ModBlocks.oneWayDuct);
         taintOutput = register("taint_output", ModBlocks.taintOutput);
         tearLantern = register("tear_lantern", ModBlocks.tearLantern);
         drainedCryingObsidian = register("drained_crying_obsidian", ModBlocks.drainedCryingObsidian);
@@ -103,15 +103,15 @@ public class ModItems {
         tearSoakenBoots = register("tear_soaked_boots",
                 new SoakedArmor(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.FEET, TOOL_SETTINGS));
 
-        tearSoakenSword = register("tear_soaked_sword", new SoakenSword(CustomToolMaterials.SOAKEN, 3, -2.4F, TOOL_SETTINGS));
+        tearSoakenSword = register("tear_soaked_sword", new SoakedSwordItem(CustomToolMaterials.SOAKEN, 3, -2.4F, TOOL_SETTINGS));
 
         runeStone = registerRune("rune/stone", ModBlocks.runeStone);
         rune1 = registerRune("rune/tier1", ModBlocks.rune1);
         rune2 = registerRune("rune/tier2", ModBlocks.rune2);
         rune3 = registerRune("rune/tier3", ModBlocks.rune3);
         flipRune = registerRune("rune/flip", ModBlocks.flipRune);
-        pipeRune1 = registerRune("rune/pipe1", ModBlocks.pipeRune1);
-        pipeRune2 = registerRune("rune/pipe2", ModBlocks.pipeRune2);
+        ductRune1 = registerRune("rune/duct1", ModBlocks.ductRune1);
+        ductRune2 = registerRune("rune/duct2", ModBlocks.ductRune2);
         healRune = registerRune("rune/healing", ModBlocks.healRune);
         extractionRune = registerRune("rune/extraction", ModBlocks.extractionRune);
         destinationRune = registerRune("rune/destination", ModBlocks.destinationRune);

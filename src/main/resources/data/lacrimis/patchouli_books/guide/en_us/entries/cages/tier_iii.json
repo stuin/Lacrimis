@@ -32,7 +32,7 @@
         ],
         "mapping": {
           "0": "lacrimis:rune/stone",
-          "P": "lacrimis:rune/pipe2[center=1]",
+          "P": "lacrimis:rune/duct2[center=1]",
           "2": "lacrimis:rune/tier2[center=2]",
           "3": "lacrimis:rune/tier2[center=3]",
           "4": "lacrimis:rune/tier2[center=4]",

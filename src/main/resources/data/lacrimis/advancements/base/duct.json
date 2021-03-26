@@ -1,0 +1,41 @@
+{
+  "parent": "lacrimis:base/infusion_table",
+  "display": {
+    "icon": {
+      "item": "lacrimis:duct"
+    },
+    "title": {
+      "translate": "lacrimis.advancements.duct.title"
+    },
+    "description": {
+      "translate": "lacrimis.advancements.duct.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "recipes": [
+      "lacrimis:infusion/gated_duct",
+      "lacrimis:infusion/one_way_duct"
+    ]
+  },
+  "criteria": {
+    "collect": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "lacrimis:duct"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "collect"
+    ]
+  ]
+}

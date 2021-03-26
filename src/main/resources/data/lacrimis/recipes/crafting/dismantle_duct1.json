@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lacrimis:rune/duct1"
+    }
+  ],
+  "result": {
+    "item": "lacrimis:rune/tier1"
+  }
+}

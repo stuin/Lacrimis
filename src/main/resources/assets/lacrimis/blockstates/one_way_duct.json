@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "lacrimis:block/duct/one_way_duct",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "lacrimis:block/duct/one_way_duct",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "lacrimis:block/duct/one_way_duct",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "lacrimis:block/duct/one_way_duct",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "lacrimis:block/duct/one_way_duct"
+    },
+    "facing=west": {
+      "model": "lacrimis:block/duct/one_way_duct",
+      "x": 90,
+      "y": 270
+    }
+  }
+}
