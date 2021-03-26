@@ -16,10 +16,12 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -29,11 +31,16 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public class CrucibleBlock extends SoulTankBlock implements BlockWrenchable {
-    private static final VoxelShape RAY_TRACE_SHAPE = createCuboidShape(2.0D, 4.0D, 2.0D, 14.0D, 16.0D, 14.0D);
-    protected static final VoxelShape OUTLINE_SHAPE = VoxelShapes.combineAndSimplify(VoxelShapes.fullCube(), VoxelShapes.union(createCuboidShape(0.0D, 0.0D, 4.0D, 16.0D, 3.0D, 12.0D), createCuboidShape(4.0D, 0.0D, 0.0D, 12.0D, 3.0D, 16.0D), createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 3.0D, 14.0D), RAY_TRACE_SHAPE), BooleanBiFunction.ONLY_FIRST);
+    private static final VoxelShape RAY_TRACE_SHAPE = createCuboidShape(3.0D, 4.0D, 3.0D, 13.0D, 16.0D, 13.0D);
+    protected static final VoxelShape OUTLINE_SHAPE = VoxelShapes.combineAndSimplify(VoxelShapes.fullCube(), RAY_TRACE_SHAPE, BooleanBiFunction.ONLY_FIRST);
 
     public CrucibleBlock(AbstractBlock.Settings settings) {
         super(settings, true);
+    }
+
+    @Override
+    public BlockEntity createBlockEntity(BlockView world) {
+        return new CrucibleEntity();
     }
 
     @Override
@@ -48,19 +55,21 @@ public class CrucibleBlock extends SoulTankBlock implements BlockWrenchable {
         if(!player.isSneaking())
             super.onWrenched(world, player, blockHitResult);
         else {
-            SoulTank tank = getTank(world, blockHitResult.getBlockPos());
-            if(tank != null && tank.getTears() > 0) {
+            BlockPos pos = blockHitResult.getBlockPos();
+            SoulTank tank = getTank(world, pos);
+            if(tank != null) {
+                //Make item
                 ItemStack item = new ItemStack(ModItems.crucible);
-                item.getOrCreateTag().putInt("TearLevel", tank.getTears());
-                world.setBlockState(blockHitResult.getBlockPos(), Blocks.AIR.getDefaultState());
-                player.giveItemStack(item);
+                if(tank.getTears() > 0) {
+                    item.getOrCreateTag().putInt("TearLevel", tank.getTears());
+                    tank.setTears(0);
+                }
+
+                ItemScatterer.spawn(world, pos, new SimpleInventory(item));
+                onBreak(world, pos, world.getBlockState(pos), player);
+                world.setBlockState(pos, Blocks.AIR.getDefaultState());
             }
         }
-    }
-
-    @Override
-    public BlockEntity createBlockEntity(BlockView world) {
-        return new CrucibleEntity();
     }
 
     @Override

@@ -10,7 +10,7 @@ import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.init.ModStatusEffects;
 
 public class TaintPacket {
-    private int amount;
+    private final int amount;
 
     public TaintPacket(int amount) {
         this.amount = amount;
@@ -25,7 +25,7 @@ public class TaintPacket {
             AreaEffectCloudEntity entity = new AreaEffectCloudEntity(world, pos.getX(), pos.getY(), pos.getZ());
             entity.setRadius(amount / 150.0f);
             entity.addEffect(new StatusEffectInstance(ModStatusEffects.WAVERING_SOUL, amount * 2));
-            entity.addEffect(new StatusEffectInstance(StatusEffects.POISON, amount));
+            entity.addEffect(new StatusEffectInstance(ModStatusEffects.TEAR_POISON, amount));
             entity.setDuration(300);
             world.spawnEntity(entity);
 

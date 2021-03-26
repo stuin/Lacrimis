@@ -39,6 +39,7 @@ public class DrainedCryingObsidianBlock extends CryingObsidianBlock implements B
             player.sendMessage(text, false);
         }
     }
+
     @Override
     public PistonBehavior getPistonBehavior(BlockState state) {
         return PistonBehavior.BLOCK;

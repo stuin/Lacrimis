@@ -3,33 +3,37 @@ package modfest.lacrimis.block;
 import java.util.EnumSet;
 import java.util.Map;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ConnectingBlock;
-import net.minecraft.block.ShapeContext;
+import com.zundrel.wrenchable.block.BlockWrenchable;
+import modfest.lacrimis.init.ModItems;
+import net.minecraft.block.*;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager.Builder;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.ItemScatterer;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Direction.Axis;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
-public class DuctBlock extends Block {
+public class DuctBlock extends Block implements BlockWrenchable {
     public static final BooleanProperty DOWN = Properties.DOWN;
     public static final BooleanProperty UP = Properties.UP;
     public static final BooleanProperty NORTH = Properties.NORTH;
     public static final BooleanProperty SOUTH = Properties.SOUTH;
     public static final BooleanProperty EAST = Properties.EAST;
     public static final BooleanProperty WEST = Properties.WEST;
+    public static final BooleanProperty NODE = BooleanProperty.of("node");
 
     public static final Map<Direction, BooleanProperty> FACING_PROPERTIES = ConnectingBlock.FACING_PROPERTIES;
-
-    public static final BooleanProperty NODE = BooleanProperty.of("node");
 
     private static final VoxelShape[] SHAPES = generateShapes();
 
@@ -41,20 +45,10 @@ public class DuctBlock extends Block {
                 .with(EAST, false).with(WEST, false));
     }
 
-    @Override
-    protected void appendProperties(Builder<Block, BlockState> builder) {
-        super.appendProperties(builder);
-        builder.add(NODE, DOWN, UP, NORTH, SOUTH, EAST, WEST);
-    }
-
-    @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
-        return this.connectToBlocks(state, world, pos);
-    }
-
-    @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.connectToBlocks(this.getDefaultState(), ctx.getWorld(), ctx.getBlockPos());
+    private boolean connectsTo(WorldAccess world, BlockPos pos, Direction side) {
+        BlockState state = world.getBlockState(pos);
+        Block block = state.getBlock();
+        return block instanceof DuctBlock || block instanceof DuctConnectBlock && ((DuctConnectBlock) block).canConnectDuctTo(pos, world, side);
     }
 
     protected BlockState connectToBlocks(BlockState state, WorldAccess world, BlockPos pos) {
@@ -75,6 +69,27 @@ public class DuctBlock extends Block {
     }
 
     @Override
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
+        return this.connectToBlocks(state, world, pos);
+    }
+
+    @Override
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        return this.connectToBlocks(this.getDefaultState(), ctx.getWorld(), ctx.getBlockPos());
+    }
+
+    @Override
+    public void onWrenched(World world, PlayerEntity player, BlockHitResult blockHitResult) {
+        if(player.isSneaking()) {
+            BlockPos pos = blockHitResult.getBlockPos();
+            if(!player.isCreative())
+                ItemScatterer.spawn(world, pos, new SimpleInventory(new ItemStack(ModItems.duct)));
+            onBreak(world, pos, world.getBlockState(pos), player);
+            world.setBlockState(pos, Blocks.AIR.getDefaultState());
+        }
+    }
+
+    @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         int idx = (state.get(DOWN) ? 1 : 0) |
                 (state.get(UP) ? 2 : 0) |
@@ -84,12 +99,6 @@ public class DuctBlock extends Block {
                 (state.get(EAST) ? 32 : 0) |
                 (state.get(NODE) ? 64 : 0);
         return SHAPES[idx];
-    }
-
-    private boolean connectsTo(WorldAccess world, BlockPos pos, Direction side) {
-        BlockState state = world.getBlockState(pos);
-        Block block = state.getBlock();
-        return block instanceof DuctBlock || block instanceof DuctConnectBlock && ((DuctConnectBlock) block).canConnectDuctTo(pos, world, side);
     }
 
     private static VoxelShape[] generateShapes() {
@@ -125,4 +134,9 @@ public class DuctBlock extends Block {
         return shapes;
     }
 
+    @Override
+    protected void appendProperties(Builder<Block, BlockState> builder) {
+        super.appendProperties(builder);
+        builder.add(NODE, DOWN, UP, NORTH, SOUTH, EAST, WEST);
+    }
 }
