@@ -8,11 +8,15 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.Nullable;
 
-public abstract class SoulTankEntity extends BlockEntity implements Inventory, BlockEntityClientSerializable {
+import java.util.stream.IntStream;
+
+public abstract class SoulTankEntity extends BlockEntity implements SidedInventory, BlockEntityClientSerializable {
     private final SoulTank tank;
     public final InfusionInventory inventory;
 
@@ -37,6 +41,18 @@ public abstract class SoulTankEntity extends BlockEntity implements Inventory, B
             if(!this.world.isClient)
                 this.sync();
         }
+    }
+    
+    public int[] getAvailableSlots(Direction side) {
+        return IntStream.rangeClosed(0, inventory.size() - 1).toArray();
+    }
+
+    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
+        return this.isValid(slot, stack);
+    }
+
+    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+        return false;
     }
 
     @Override

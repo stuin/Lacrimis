@@ -1,23 +1,24 @@
 package modfest.lacrimis.block.entity;
 
 import modfest.lacrimis.block.DrainedCryingObsidianBlock;
-import modfest.lacrimis.init.ModBlocks;
-import modfest.lacrimis.init.ModEntityTypes;
+import modfest.lacrimis.init.*;
+import modfest.lacrimis.item.BottleOfTearsItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 import modfest.lacrimis.crafting.CrucibleRecipe;
-import modfest.lacrimis.init.ModCrafting;
-import modfest.lacrimis.init.ModNetworking;
+import net.minecraft.util.math.Direction;
 
 public class CrucibleEntity extends SoulTankEntity implements Tickable {
     private static final Box ITEM_BOX = new Box(0, 0.4, 0, 1, 1, 1);
@@ -69,8 +70,21 @@ public class CrucibleEntity extends SoulTankEntity implements Tickable {
                         craftTime = 0;
                         break;
                     }
+                } else if(entity.getStack().getItem() == ModItems.bottleOfTears && getTank().getSpace() >= BottleOfTearsItem.capacity) {
+                    // Craft item
+                    ItemStack remainder = inventory.getStack(0);
+                    remainder.decrement(1);
+                    entity.setStack(remainder);
+                    ItemScatterer.spawn(world, pos.up(), new SimpleInventory(new ItemStack(Items.GLASS_BOTTLE)));
+                    ModNetworking.sendCrucibleParticlesPacket(this, entity.getX(), entity.getY(), entity.getZ());
+                    getTank().addTears(BottleOfTearsItem.capacity);
+                    craftTime = 0;
                 }
             }
         }
+    }
+
+    public int[] getAvailableSlots(Direction side) {
+        return new int[]{};
     }
 }

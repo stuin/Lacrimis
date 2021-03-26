@@ -72,7 +72,8 @@ public abstract class SoulTankBlock extends BlockWithEntity implements DuctConne
             SoulTank tank = entity.getTank();
             Item item = stack.getItem();
             if(item == ModItems.bottleOfTears) {
-                if(tank.getSpace() >= 250 && !world.isClient) {
+                if(tank.getSpace() >= BottleOfTearsItem.capacity && !world.isClient) {
+                    //Empty bottle
                     if(!player.abilities.creativeMode) {
                         ItemStack bottle = new ItemStack(Items.GLASS_BOTTLE);
                         stack.decrement(1);
@@ -87,7 +88,8 @@ public abstract class SoulTankBlock extends BlockWithEntity implements DuctConne
             } else {
                 ItemStack itemStack4;
                 if(item == Items.GLASS_BOTTLE) {
-                    if(tank.getTears() >= 250 && !world.isClient) {
+                    if(tank.getTears() >= BottleOfTearsItem.capacity && !world.isClient) {
+                        //Fill bottle
                         if(!player.abilities.creativeMode) {
                             itemStack4 = new ItemStack(ModItems.bottleOfTears);
                             stack.decrement(1);
@@ -128,7 +130,7 @@ public abstract class SoulTankBlock extends BlockWithEntity implements DuctConne
 
     @Override
     public boolean canConnectDuctTo(BlockPos pos, BlockView world, Direction side) {
-        return side.getAxis() != Direction.Axis.Y;
+        return side != Direction.UP;
     }
 
     @Override

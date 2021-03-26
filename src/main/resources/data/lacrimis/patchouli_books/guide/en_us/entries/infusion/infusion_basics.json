@@ -12,7 +12,7 @@
     {
       "type": "crafting",
       "recipe": "lacrimis:crafting/infusion_table",
-      "text": "Place items in the infusion table and click the button to begin."
+      "text": "Place items in the infusion table and click the button to begin.$(br2)Redstone power should also work."
     }
   ]
 }
