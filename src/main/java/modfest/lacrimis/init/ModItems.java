@@ -2,6 +2,7 @@ package modfest.lacrimis.init;
 
 import modfest.lacrimis.item.BottleOfTearsItem;
 import modfest.lacrimis.item.DiviningRodItem;
+import modfest.lacrimis.item.TaintedPearlItem;
 import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EquipmentSlot;
@@ -38,8 +39,8 @@ public class ModItems {
     //Main items
     public static BottleOfTearsItem bottleOfTears;
     public static DiviningRodItem diviningRod;
+    public static TaintedPearlItem taintedPearl;
     public static Item tearIngot;
-    public static Item warpedSigil;
     public static Item taintedSludge;
     public static Item solidifiedTear;
     public static Item brokenSpawner;
@@ -87,8 +88,8 @@ public class ModItems {
 
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
         diviningRod = register("divining_rod", new DiviningRodItem(TOOL_SETTINGS));
+        taintedPearl = register("tainted_pearl", new TaintedPearlItem(SETTINGS.maxCount(16)));
         tearIngot = register("tear_ingot", new Item(SETTINGS));
-        warpedSigil = register("warped_sigil", new Item(SETTINGS));
         taintedSludge = register("tainted_sludge", new Item(SETTINGS));
         solidifiedTear = register("solidified_tear", new Item(SETTINGS));
         brokenSpawner = register("broken_spawner", new Item(SETTINGS));

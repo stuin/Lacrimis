@@ -2,7 +2,7 @@
   "type": "lacrimis:infusion_shaped",
   "pattern": [
     "ROR",
-    "ODO",
+    "OEO",
     "ROR"
   ],
   "key": {
@@ -12,8 +12,8 @@
     "O": {
       "item": "minecraft:crying_obsidian"
     },
-    "D": {
-      "item": "minecraft:diamond_block"
+    "E": {
+      "item": "minecraft:enchantment_table"
     }
   },
   "result": {

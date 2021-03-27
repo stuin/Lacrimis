@@ -7,7 +7,7 @@
     "CryingObsidianMixin"
   ],
   "client": [
-    "ClientRecipeBookMixin"
+    "ClientNetworkMixin"
   ],
   "injectors": {
     "defaultRequire": 1

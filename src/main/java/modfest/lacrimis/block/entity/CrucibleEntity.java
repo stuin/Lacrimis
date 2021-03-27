@@ -9,6 +9,7 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.math.BlockPos;
@@ -32,6 +33,9 @@ public class CrucibleEntity extends SoulTankEntity implements Tickable {
 
     @Override
     public void tick() {
+        if(world == null)
+            return;
+        
         if (getRelativeLevel() < 1 && this.world.getTime() % 10 == 0) {
             for (int dy = 1; dy < 5; dy++) {
                 BlockPos obsidianPos = this.pos.up(dy);
@@ -45,12 +49,14 @@ public class CrucibleEntity extends SoulTankEntity implements Tickable {
                 }
             }
         }
-
+        
+        if(world.isClient || world.getServer() == null)
+            return;
 
         if (craftTime < CRAFT_COOLDOWN)
             craftTime++;
 
-        if (craftTime >= CRAFT_COOLDOWN && !world.isClient) {
+        if (craftTime >= CRAFT_COOLDOWN) {
             for (ItemEntity entity : world.getEntitiesByClass(ItemEntity.class, ITEM_BOX.offset(pos), null)) {
                 inventory.setStack(0, entity.getStack());
 
@@ -65,7 +71,7 @@ public class CrucibleEntity extends SoulTankEntity implements Tickable {
                         remainder.decrement(1);
                         entity.setStack(remainder);
                         ItemScatterer.spawn(world, pos.up(), new SimpleInventory(recipe.getOutput().copy()));
-                        ModNetworking.sendCrucibleParticlesPacket(this, entity.getX(), entity.getY(), entity.getZ());
+                        ModNetworking.sendCrucibleParticlesPacket((ServerWorld) world, this);
                         getTank().removeTears(recipe.getTears());
                         craftTime = 0;
                         break;
@@ -76,7 +82,7 @@ public class CrucibleEntity extends SoulTankEntity implements Tickable {
                     remainder.decrement(1);
                     entity.setStack(remainder);
                     ItemScatterer.spawn(world, pos.up(), new SimpleInventory(new ItemStack(Items.GLASS_BOTTLE)));
-                    ModNetworking.sendCrucibleParticlesPacket(this, entity.getX(), entity.getY(), entity.getZ());
+                    ModNetworking.sendCrucibleParticlesPacket((ServerWorld) world, this);
                     getTank().addTears(BottleOfTearsItem.capacity);
                     craftTime = 0;
                 }

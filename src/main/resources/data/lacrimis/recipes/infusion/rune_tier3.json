@@ -2,15 +2,15 @@
   "type": "lacrimis:infusion_shaped",
   "pattern": [
     "RRR",
-    "RSR",
+    "RDR",
     "RRR"
   ],
   "key": {
     "R": {
       "item": "lacrimis:rune/tier2"
     },
-    "S": {
-      "item": "minecraft:nether_star"
+    "D": {
+      "item": "minecraft:diamond_block"
     }
   },
   "result": {
