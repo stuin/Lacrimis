@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  #",
+    " G ",
+    "#  "
+  ],
+  "key": {
+    "#": {
+      "item": "lacrimis:tear_ingot"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "result": {
+    "item": "lacrimis:gold_divining_rod"
+  }
+}

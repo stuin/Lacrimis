@@ -39,6 +39,7 @@ public class ModItems {
     //Main items
     public static BottleOfTearsItem bottleOfTears;
     public static DiviningRodItem diviningRod;
+    public static DiviningRodItem goldDiviningRod;
     public static TaintedPearlItem taintedPearl;
     public static Item tearIngot;
     public static Item taintedSludge;
@@ -88,6 +89,7 @@ public class ModItems {
 
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
         diviningRod = register("divining_rod", new DiviningRodItem(TOOL_SETTINGS));
+        goldDiviningRod = register("gold_divining_rod", new DiviningRodItem(TOOL_SETTINGS));
         taintedPearl = register("tainted_pearl", new TaintedPearlItem(SETTINGS.maxCount(16)));
         tearIngot = register("tear_ingot", new Item(SETTINGS));
         taintedSludge = register("tainted_sludge", new Item(SETTINGS));

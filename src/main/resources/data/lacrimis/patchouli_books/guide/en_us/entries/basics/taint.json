@@ -7,13 +7,17 @@
   "pages": [
     {
       "type": "text",
-      "text": "If you have broken a crucible or used a soul extraction rune, you probably noticed a cloud of taint floating above the ground. While it fades eventually, it is important to be aware of its effects and properties. Standing in a cloud of taint will give you two potion effects: Poison and Wavering Soul"
+      "text": "If you have broken a crucible or used a soul extraction rune, you probably noticed a cloud of taint floating above the ground. While it fades eventually, it is important to be aware of its effects and properties. Using an unprotected Soul Extractor will give you Taint poison and Wavering Soul."
+    },
+    {
+      "type": "text",
+      "text": "Taint poison is found in every cloud of taint, and is more dangerous to armor than to the wearer. Any armor will protect the wearer from harm, but will be heavily damaged by the effects. Similar to normal poison, it will not kill a player outright, but will keep them at minimal health."
     },
     {
       "type": "spotlight",
       "item": "lacrimis:solidified_tear",
       "link_recipe": true,
-      "text": "Wavering Soul is a special effect that will kill any creature that drops to half a heart of health while under its effects. Anything killed by Wavering Soul in this way will drop a Solidified Tear. When paired with the Poison this is a very dangerous combo."
+      "text": "Wavering Soul is a special effect that will kill any creature that drops to half a heart of health while under its effects. Anything killed by Wavering Soul in this way will drop a Solidified Tear. When paired with Taint Poison this is a very dangerous combo."
     }
   ]
 }

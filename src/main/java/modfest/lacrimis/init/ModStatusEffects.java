@@ -1,5 +1,7 @@
 package modfest.lacrimis.init;
 
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.damage.DamageSource;
@@ -12,15 +14,16 @@ import net.minecraft.util.registry.Registry;
 import modfest.lacrimis.Lacrimis;
 
 public class ModStatusEffects extends DamageSource {
-    public static final DamageSource TEAR_DAMAGE = (new ModStatusEffects("tear_poison")).setBypassesArmor().setUsesMagic();
+    public static final DamageSource TEAR_DAMAGE = new ModStatusEffects("tear_poison").setBypassesArmor().setUsesMagic();
 
     public static StatusEffect WAVERING_SOUL;
     public static StatusEffect TEAR_POISON;
+
     public static void register() {
         WAVERING_SOUL = register("wavering_soul", new StatusEffect(StatusEffectType.NEUTRAL, 13793020) {
             @Override
             public void onRemoved(LivingEntity entity, AttributeContainer attributes, int amplifier) {
-                if (entity.getHealth() < 1) {
+                if(entity.getHealth() <= 1) {
                     entity.dropStack(new ItemStack(ModItems.solidifiedTear), entity.getHeight() / 2);
                     entity.kill();
                 }
@@ -31,10 +34,23 @@ public class ModStatusEffects extends DamageSource {
         TEAR_POISON = register("tear_poison", new StatusEffect(StatusEffectType.HARMFUL, 10359895) {
             @Override
             public void applyUpdateEffect(LivingEntity entity, int amplifier) {
-                if (this == ModStatusEffects.TEAR_POISON) {
-                    if (entity.getHealth() > 3.0F) {
-                        entity.damage(ModStatusEffects.TEAR_DAMAGE, 2.0F);
+                if(this == ModStatusEffects.TEAR_POISON) {
+                    int damage = 1;
+                    if(!entity.world.isClient) {
+                        for(EquipmentSlot slot : ModEnchantments.ALL_ARMOR) {
+                            ItemStack item = entity.getEquippedStack(slot);
+                            if(item.isEmpty())
+                                damage += 1;
+                            else if(EnchantmentHelper.getLevel(ModEnchantments.WARDED, item) <= 0)
+                                item.damage(20, entity, (p) -> p.sendEquipmentBreakStatus(slot));
+                        }
                     }
+
+                    damage /= 2;
+                    if (entity.getHealth() > damage)
+                        entity.damage(ModStatusEffects.TEAR_DAMAGE, damage);
+                    else if(entity.getHealth() > 1)
+                        entity.damage(ModStatusEffects.TEAR_DAMAGE, 1);
                 }
                 super.applyUpdateEffect(entity, amplifier);
             }
@@ -44,11 +60,10 @@ public class ModStatusEffects extends DamageSource {
                 int k;
                 if(this == ModStatusEffects.TEAR_POISON) {
                     k = 50 >> amplifier;
-                    if (k > 0) {
+                    if (k > 0)
                         return duration % k == 0;
-                    } else {
+                    else
                         return true;
-                    }
                 }
                 return super.canApplyUpdateEffect(duration, amplifier);
             }

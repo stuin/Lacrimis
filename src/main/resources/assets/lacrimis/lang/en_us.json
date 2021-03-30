@@ -13,6 +13,7 @@
   
   "item.lacrimis.bottle_of_tears": "Bottle of Tears",
   "item.lacrimis.divining_rod": "Divining Rod",
+  "item.lacrimis.gold_divining_rod": "Divining Rod",
   "item.lacrimis.tainted_pearl": "Tainted Pearl",
   "item.lacrimis.tear_ingot": "Tear Soaked Iron",
   "item.lacrimis.tainted_sludge": "Tainted Sludge",
@@ -42,7 +43,6 @@
 
   "effect.lacrimis.wavering_soul": "Wavering Soul",
   "effect.lacrimis.tear_poison": "Tear Poison",
-
   "enchantment.lacrimis.warded": "Warded",
 
   "lacrimis.tooltip.crucible": "%s Tears",

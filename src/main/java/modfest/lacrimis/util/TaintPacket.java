@@ -24,7 +24,6 @@ public class TaintPacket {
         if(amount > 0) {
             AreaEffectCloudEntity entity = new AreaEffectCloudEntity(world, pos.getX(), pos.getY(), pos.getZ());
             entity.setRadius(amount / 150.0f);
-            entity.addEffect(new StatusEffectInstance(ModStatusEffects.WAVERING_SOUL, amount * 2));
             entity.addEffect(new StatusEffectInstance(ModStatusEffects.TEAR_POISON, amount));
             entity.setDuration(300);
             world.spawnEntity(entity);

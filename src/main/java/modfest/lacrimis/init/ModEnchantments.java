@@ -1,7 +1,7 @@
 package modfest.lacrimis.init;
 
 import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.enchantments.WardedEnchantment;
+import modfest.lacrimis.item.armor.WardedEnchantment;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.util.Identifier;

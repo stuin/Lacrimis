@@ -1,6 +1,6 @@
 package modfest.lacrimis.block.rune;
 
-import modfest.lacrimis.item.Soaked;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -28,7 +28,7 @@ public class WardingBlock extends CenterRuneBlock {
         if(entity instanceof PlayerEntity) {
             boolean added = false;
             for(ItemStack item : entity.getArmorItems())
-                if(item.getItem() instanceof Soaked) {
+                if(EnchantmentHelper.getLevel(ModEnchantments.WARDED, item) == 0) {
                     item.addEnchantment(ModEnchantments.WARDED, 1);
                     added = true;
                 }

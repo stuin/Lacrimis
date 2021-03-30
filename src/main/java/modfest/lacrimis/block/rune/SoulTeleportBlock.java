@@ -1,9 +1,11 @@
 package modfest.lacrimis.block.rune;
 
+import modfest.lacrimis.init.ModStatusEffects;
 import modfest.lacrimis.util.DuctUtil;
 import modfest.lacrimis.util.TaintPacket;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -33,9 +35,10 @@ public class SoulTeleportBlock extends SoulExtractionBlock {
         if(value instanceof Entity && testCage(world, pos, flipped, null) > 0) {
             //Teleport entity
             int vertical = flipped == Direction.UP ? 1 : -(int)Math.ceil(((Entity) value).getHeight());
-            if(value instanceof LivingEntity)
+            if(value instanceof LivingEntity) {
                 ((LivingEntity) value).teleport(pos.getX() + 0.5, pos.getY() + vertical, pos.getZ() + 0.5, true);
-            else
+                ((LivingEntity) value).addStatusEffect(new StatusEffectInstance(ModStatusEffects.WAVERING_SOUL, 15 * 20));
+            } else
                 ((Entity) value).teleport(pos.getX() + 0.5, pos.getY() + vertical, pos.getZ() + 0.5);
 
             //Spawn taint
