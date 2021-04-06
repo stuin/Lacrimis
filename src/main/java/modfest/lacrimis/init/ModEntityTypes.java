@@ -7,6 +7,8 @@ import modfest.lacrimis.block.entity.TearLanternEntity;
 import modfest.lacrimis.client.render.block.CrucibleEntityRenderer;
 import modfest.lacrimis.client.render.block.InfusionTableEntityRenderer;
 import modfest.lacrimis.client.render.entity.GhostEntityRenderer;
+import modfest.lacrimis.client.render.entity.SoulShellRenderer;
+import modfest.lacrimis.entity.SoulShellEntity;
 import modfest.lacrimis.entity.TaintedPearlEntity;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
@@ -33,6 +35,7 @@ import java.util.function.Supplier;
 public class ModEntityTypes {
 
     public static EntityType<GhostEntity> ghost;
+    public static EntityType<SoulShellEntity> soulShell;
     public static EntityType<TaintedPearlEntity> taintedPearl;
 
     //Block entities
@@ -49,6 +52,13 @@ public class ModEntityTypes {
                         .fireImmune()
                         .build());
         FabricDefaultAttributeRegistry.register(ghost, GhostEntity.createGhostAttributes());
+
+        soulShell = Registry.register(Registry.ENTITY_TYPE, new Identifier(Lacrimis.MODID, "soul_shell"),
+                FabricEntityTypeBuilder.create(SpawnGroup.MISC, SoulShellEntity::new)
+                        .dimensions(EntityDimensions.fixed(0.6F, 1.8F))
+                        .build());
+        FabricDefaultAttributeRegistry.register(soulShell, SoulShellEntity.createSoulShellAttributes());
+
         taintedPearl = Registry.register(Registry.ENTITY_TYPE, new Identifier(Lacrimis.MODID, "tainted_pearl"),
                 FabricEntityTypeBuilder.create(SpawnGroup.MISC, TaintedPearlEntity::new)
                         .dimensions(EntityDimensions.fixed(0.25F, 0.25F))
@@ -64,6 +74,8 @@ public class ModEntityTypes {
     public static void registerClient() {
         EntityRendererRegistry.INSTANCE.register(ModEntityTypes.ghost,
                 (dispatcher, ctx) -> new GhostEntityRenderer(dispatcher));
+        EntityRendererRegistry.INSTANCE.register(ModEntityTypes.soulShell,
+                (dispatcher, ctx) -> new SoulShellRenderer(dispatcher));
         EntityRendererRegistry.INSTANCE.register(ModEntityTypes.taintedPearl,
                 (dispatcher, ctx) -> new FlyingItemEntityRenderer<TaintedPearlEntity>(dispatcher, ctx.getItemRenderer()));
 

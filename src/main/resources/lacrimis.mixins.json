@@ -4,7 +4,8 @@
   "package": "modfest.lacrimis.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "CryingObsidianMixin"
+    "CryingObsidianMixin",
+    "EndSpikeMixin"
   ],
   "client": [
     "ClientNetworkMixin"
