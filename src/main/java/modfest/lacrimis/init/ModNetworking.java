@@ -1,5 +1,6 @@
 package modfest.lacrimis.init;
 
+import modfest.lacrimis.entity.SoulShellEntity;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
@@ -7,6 +8,9 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.MinecraftServer;
@@ -30,6 +34,7 @@ public class ModNetworking {
     public static final Identifier INFUSION_START_ID = new Identifier(Lacrimis.MODID, "infusion_start");
     public static final Identifier COMBINER_NULL_ID = new Identifier(Lacrimis.MODID, "combiner_null");
     public static final Identifier CRUCIBLE_PARTICLES_ID = new Identifier(Lacrimis.MODID, "crucible_particles");
+    public static final Identifier SOUL_SWAP_ID = new Identifier(Lacrimis.MODID, "soul_swap");
 
     public static void register() {
         ServerPlayNetworking.registerGlobalReceiver(INFUSION_START_ID, ModNetworking::handleInfusionStartPacket);
@@ -39,6 +44,7 @@ public class ModNetworking {
     @Environment(EnvType.CLIENT)
     public static void registerClient() {
         ClientPlayNetworking.registerGlobalReceiver(CRUCIBLE_PARTICLES_ID, ModNetworking::handleCrucibleParticlesPacket);
+        ClientPlayNetworking.registerGlobalReceiver(SOUL_SWAP_ID, ModNetworking::handleSoulSwapPacket);
     }
 
     //Server Infusion Start
@@ -101,5 +107,22 @@ public class ModNetworking {
 
         for(ServerPlayerEntity player : PlayerLookup.tracking(world, entity.getPos()))
             ServerPlayNetworking.send(player, CRUCIBLE_PARTICLES_ID, buf);
+    }
+
+    //Client Crucible Particles
+    private static void handleSoulSwapPacket(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buffer, PacketSender sender) {
+        CompoundTag tag = buffer.readCompoundTag();
+        
+        client.execute(() -> {
+            if(client.world != null && client.player != null && tag != null) {
+                SoulShellEntity.playerFromTag(tag, client.player);
+            }
+        });
+    }
+    
+    public static void sendSoulSwapPacket(ServerPlayerEntity player, CompoundTag tag) {
+        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+        buf.writeCompoundTag(tag);
+        ServerPlayNetworking.send(player, SOUL_SWAP_ID, buf);
     }
 }

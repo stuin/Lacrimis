@@ -30,10 +30,8 @@ public class SoulShellRenderer extends LivingEntityRenderer<SoulShellEntity, Sou
         super(dispatcher, new SoulShellModel(0.0F), 0.5F);
         this.addFeature(new ArmorFeatureRenderer(this, new BipedEntityModel(0.5F), new BipedEntityModel(1.0F)));
         this.addFeature(new HeldItemFeatureRenderer(this));
-        this.addFeature(new StuckArrowsFeatureRenderer(this));
         this.addFeature(new HeadFeatureRenderer(this));
         this.addFeature(new ElytraFeatureRenderer(this));
-        this.addFeature(new StuckStingersFeatureRenderer(this));
     }
 
     public void render(SoulShellEntity abstractClientPlayerEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {

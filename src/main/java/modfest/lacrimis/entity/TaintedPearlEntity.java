@@ -31,7 +31,11 @@ public class TaintedPearlEntity extends ThrownItemEntity {
 
     protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
-        if(entityHitResult.getEntity() instanceof LivingEntity)
+        if(entityHitResult.getEntity() instanceof SoulShellEntity && getOwner() instanceof ServerPlayerEntity) {
+            ((SoulShellEntity) entityHitResult.getEntity()).swapWithPlayer(world, (PlayerEntity) getOwner());
+            //((LivingEntity) getOwner()).addStatusEffect(new StatusEffectInstance(ModStatusEffects.TEAR_POISON, DURATION));
+            this.remove();
+        } else if(entityHitResult.getEntity() instanceof LivingEntity)
             ((LivingEntity) entityHitResult.getEntity()).addStatusEffect(new StatusEffectInstance(ModStatusEffects.TEAR_POISON, DURATION));
         else
             entityHitResult.getEntity().damage(DamageSource.thrownProjectile(this, this.getOwner()), 0.0F);
@@ -45,20 +49,15 @@ public class TaintedPearlEntity extends ThrownItemEntity {
             this.world.addParticle(ParticleTypes.PORTAL, this.getX(), this.getY() + this.random.nextDouble() * 2.0D, this.getZ(), this.random.nextGaussian(), 0.0D, this.random.nextGaussian());
 
         if (!this.world.isClient && !this.removed) {
-            if (entity instanceof ServerPlayerEntity) {
-                ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity)entity;
-                if (serverPlayerEntity.networkHandler.getConnection().isOpen() && serverPlayerEntity.world == this.world && !serverPlayerEntity.isSleeping()) {
-                    if (entity.hasVehicle()) {
-                        entity.stopRiding();
-                    }
-
-                    entity.requestTeleport(this.getX(), this.getY(), this.getZ());
-                    entity.fallDistance = 0.0F;
-                    ((ServerPlayerEntity) entity).addStatusEffect(new StatusEffectInstance(ModStatusEffects.TEAR_POISON, DURATION));
-                }
-            } else if (entity != null) {
+            if (entity != null) {
+                if (entity.hasVehicle())
+                    entity.stopRiding();
+                
                 entity.requestTeleport(this.getX(), this.getY(), this.getZ());
                 entity.fallDistance = 0.0F;
+                
+                if(entity instanceof LivingEntity)
+                    ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(ModStatusEffects.TEAR_POISON, DURATION));
             }
 
             this.remove();

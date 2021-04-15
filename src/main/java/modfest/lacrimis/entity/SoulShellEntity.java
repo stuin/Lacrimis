@@ -1,23 +1,35 @@
 package modfest.lacrimis.entity;
 
 import com.google.common.collect.ImmutableList;
+import modfest.lacrimis.Lacrimis;
+import modfest.lacrimis.init.ModEntityTypes;
+import modfest.lacrimis.init.ModNetworking;
 import net.minecraft.SharedConstants;
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Arm;
+import net.minecraft.util.Hand;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,7 +46,7 @@ public class SoulShellEntity extends LivingEntity {
 
     //Player notes
     protected HungerManager hungerManager = new HungerManager();
-    public final PlayerAbilities abilities = new PlayerAbilities();
+    public PlayerAbilities abilities = new PlayerAbilities();
     public int experienceLevel;
     public int totalExperience;
     public float experienceProgress;
@@ -56,9 +68,14 @@ public class SoulShellEntity extends LivingEntity {
         return armor;
     }
 
+    @Override
+    public ItemStack getMainHandStack() {
+        return main.get(selectedSlot);
+    }
+
     public ItemStack getEquippedStack(EquipmentSlot slot) {
         if (slot == EquipmentSlot.MAINHAND) {
-            return getMainHandStack();
+            return main.get(selectedSlot);
         } else if (slot == EquipmentSlot.OFFHAND) {
             return offHand.get(0);
         } else {
@@ -77,7 +94,76 @@ public class SoulShellEntity extends LivingEntity {
             onEquipStack(stack);
             armor.set(slot.getEntitySlotId(), stack);
         }
+    }
 
+    public ActionResult interactAt(PlayerEntity player, Vec3d hitPos, Hand hand) {
+        ItemStack itemStack = player.getStackInHand(hand);
+        if (itemStack.getItem() != Items.NAME_TAG) {
+            if (player.isSpectator()) {
+                return ActionResult.SUCCESS;
+            } else if (player.world.isClient) {
+                return ActionResult.CONSUME;
+            } else {
+                EquipmentSlot equipmentSlot = MobEntity.getPreferredEquipmentSlot(itemStack);
+                if (itemStack.isEmpty()) {
+                    EquipmentSlot equipmentSlot2 = this.slotFromPosition(hitPos);
+                    if (this.hasStackEquipped(equipmentSlot2) && this.equip(player, equipmentSlot2, itemStack, hand)) {
+                        return ActionResult.SUCCESS;
+                    }
+                } else if (this.equip(player, equipmentSlot, itemStack, hand)) {
+                    return ActionResult.SUCCESS;
+                }
+
+                return ActionResult.PASS;
+            }
+        } else {
+            return ActionResult.PASS;
+        }
+    }
+
+    private EquipmentSlot slotFromPosition(Vec3d vec3d) {
+        EquipmentSlot equipmentSlot = EquipmentSlot.MAINHAND;
+        double d = vec3d.y;
+        EquipmentSlot equipmentSlot2 = EquipmentSlot.FEET;
+        if (d >= 0.1D && d < 0.1D + 0.45D && this.hasStackEquipped(equipmentSlot2)) {
+            equipmentSlot = EquipmentSlot.FEET;
+        } else if (d >= 0.9D && d < 0.9D + 0.7D && this.hasStackEquipped(EquipmentSlot.CHEST)) {
+            equipmentSlot = EquipmentSlot.CHEST;
+        } else if (d >= 0.4D && d < 0.4D + 0.8D && this.hasStackEquipped(EquipmentSlot.LEGS)) {
+            equipmentSlot = EquipmentSlot.LEGS;
+        } else if (d >= 1.6D && this.hasStackEquipped(EquipmentSlot.HEAD)) {
+            equipmentSlot = EquipmentSlot.HEAD;
+        } else if (!this.hasStackEquipped(EquipmentSlot.MAINHAND) && this.hasStackEquipped(EquipmentSlot.OFFHAND)) {
+            equipmentSlot = EquipmentSlot.OFFHAND;
+        }
+
+        return equipmentSlot;
+    }
+
+    private boolean equip(PlayerEntity player, EquipmentSlot slot, ItemStack stack, Hand hand) {
+        ItemStack itemStack = this.getEquippedStack(slot);
+
+        ItemStack itemStack3;
+        if (player.abilities.creativeMode && itemStack.isEmpty() && !stack.isEmpty()) {
+            itemStack3 = stack.copy();
+            itemStack3.setCount(1);
+            this.equipStack(slot, itemStack3);
+            return true;
+        } else if (!stack.isEmpty() && stack.getCount() > 1) {
+            if (!itemStack.isEmpty()) {
+                return false;
+            } else {
+                itemStack3 = stack.copy();
+                itemStack3.setCount(1);
+                this.equipStack(slot, itemStack3);
+                stack.decrement(1);
+                return true;
+            }
+        } else {
+            this.equipStack(slot, stack);
+            player.setStackInHand(hand, itemStack);
+            return true;
+        }
     }
 
     protected void dropInventory() {
@@ -93,6 +179,106 @@ public class SoulShellEntity extends LivingEntity {
                 }
             }
         }
+    }
+    
+    public void swapWithPlayer(World world, PlayerEntity player) {
+        SoulShellEntity other = ModEntityTypes.soulShell.create(world);
+        if(other == null)
+            return;
+        Lacrimis.LOGGER.info("Soul Swapped");
+        
+        //Move player inventory
+        List<DefaultedList<ItemStack>> playerInventory = ImmutableList.of(this.main, this.armor, this.offHand);
+        for(int i = 0; i < combinedInventory.size(); ++i) {
+            for(int j = 0; j < combinedInventory.get(i).size(); ++j) {
+                other.combinedInventory.get(i).set(j, playerInventory.get(i).get(j).copy());
+                playerInventory.get(i).set(j, combinedInventory.get(i).get(j).copy());
+            }
+        }
+        
+        //Copy player properties
+        other.hungerManager = player.getHungerManager();
+        other.abilities = player.abilities;
+        other.experienceLevel = player.experienceLevel;
+        other.experienceProgress = player.experienceProgress;
+        other.totalExperience = player.totalExperience;
+        other.selectedSlot = player.inventory.selectedSlot;
+        other.setHealth(player.getHealth());
+        other.setAbsorptionAmount(player.getAbsorptionAmount());
+        other.setStingerCount(player.getStingerCount());
+        other.setStuckArrowCount(player.getStuckArrowCount());
+        for(StatusEffectInstance effect : player.getStatusEffects())
+            other.applyStatusEffect(effect);
+
+        //Spawn other stand
+        float f = (float) MathHelper.floor((MathHelper.wrapDegrees(player.bodyYaw) + 22.5F) / 45.0F) * 45.0F;
+        other.refreshPositionAndAngles(player.getX(), player.getY(), player.getZ(), f, 0.0F);
+        other.setHeadYaw(player.headYaw);
+        world.spawnEntity(other);
+        world.playSound(null, other.getX(), other.getY(), other.getZ(), SoundEvents.ENTITY_ARMOR_STAND_PLACE, SoundCategory.BLOCKS, 0.75F, 0.8F);
+
+        //Set client player properties
+        CompoundTag hungerTag = new CompoundTag();
+        CompoundTag abilitiesTag = new CompoundTag();
+        hungerManager.toTag(hungerTag);
+        abilities.serialize(abilitiesTag);
+        player.getHungerManager().fromTag(hungerTag);
+        player.abilities.deserialize(abilitiesTag);
+        player.experienceLevel = experienceLevel;
+        player.experienceProgress = experienceProgress;
+        player.totalExperience = totalExperience;
+        player.inventory.selectedSlot = selectedSlot;
+
+        //Set server player properties
+        player.setHealth(getHealth());
+        player.setAbsorptionAmount(getAbsorptionAmount());
+        player.setStingerCount(getStingerCount());
+        player.setStuckArrowCount(getStuckArrowCount());
+        player.clearStatusEffects();
+        for(StatusEffectInstance effect : getStatusEffects())
+            player.applyStatusEffect(effect);
+
+        //Move player
+        if(player.hasVehicle())
+            player.stopRiding();
+        player.teleport(getX(), getY(), getZ(), true);
+        player.fallDistance = 0;
+        player.setHeadYaw(headYaw);
+
+        CompoundTag tag = new CompoundTag();
+        toTag(tag);
+        ModNetworking.sendSoulSwapPacket((ServerPlayerEntity) player, tag);
+        this.remove();
+    }
+
+    public static void playerFromTag(CompoundTag tag, PlayerEntity player) {
+        ListTag listTag = tag.getList("Inventory", 10);
+        PlayerInventory inventory = player.inventory;
+        inventory.main.clear();
+        inventory.armor.clear();
+        inventory.offHand.clear();
+
+        for(int i = 0; i < listTag.size(); ++i) {
+            CompoundTag compoundTag = listTag.getCompound(i);
+            int j = compoundTag.getByte("Slot") & 255;
+            ItemStack itemStack = ItemStack.fromTag(compoundTag);
+            if (!itemStack.isEmpty()) {
+                if (j >= 0 && j < inventory.main.size()) {
+                    inventory.main.set(j, itemStack);
+                } else if (j >= 100 && j < inventory.armor.size() + 100) {
+                    inventory.armor.set(j - 100, itemStack);
+                } else if (j >= 150 && j < inventory.offHand.size() + 150) {
+                    inventory.offHand.set(j - 150, itemStack);
+                }
+            }
+        }
+
+        inventory.selectedSlot = tag.getInt("SelectedItemSlot");
+        player.experienceProgress = tag.getFloat("XpP");
+        player.experienceLevel = tag.getInt("XpLevel");
+        player.totalExperience = tag.getInt("XpTotal");
+        player.getHungerManager().fromTag(tag);
+        player.abilities.deserialize(tag);
     }
 
     public void readCustomDataFromTag(CompoundTag tag) {
@@ -131,16 +317,33 @@ public class SoulShellEntity extends LivingEntity {
         super.writeCustomDataToTag(tag);
         tag.putInt("DataVersion", SharedConstants.getGameVersion().getWorldVersion());
 
-        CompoundTag compoundTag3;
+        int k;
         ListTag listTag = new ListTag();
-        for(DefaultedList<ItemStack> itemStacks : combinedInventory) {
-            for(int k = 0; k < itemStacks.size(); ++k) {
-                if(!(itemStacks.get(k)).isEmpty()) {
-                    compoundTag3 = new CompoundTag();
-                    compoundTag3.putByte("Slot", (byte) k);
-                    (itemStacks.get(k)).toTag(compoundTag3);
-                    listTag.add(compoundTag3);
-                }
+        CompoundTag compoundTag3;
+        for(k = 0; k < this.main.size(); ++k) {
+            if (!main.get(k).isEmpty()) {
+                compoundTag3 = new CompoundTag();
+                compoundTag3.putByte("Slot", (byte)k);
+                main.get(k).toTag(compoundTag3);
+                listTag.add(compoundTag3);
+            }
+        }
+
+        for(k = 0; k < this.armor.size(); ++k) {
+            if (!armor.get(k).isEmpty()) {
+                compoundTag3 = new CompoundTag();
+                compoundTag3.putByte("Slot", (byte)(k + 100));
+                armor.get(k).toTag(compoundTag3);
+                listTag.add(compoundTag3);
+            }
+        }
+
+        for(k = 0; k < this.offHand.size(); ++k) {
+            if (!offHand.get(k).isEmpty()) {
+                compoundTag3 = new CompoundTag();
+                compoundTag3.putByte("Slot", (byte)(k + 150));
+                offHand.get(k).toTag(compoundTag3);
+                listTag.add(compoundTag3);
             }
         }
         
