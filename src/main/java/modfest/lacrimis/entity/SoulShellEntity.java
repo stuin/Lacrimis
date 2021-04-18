@@ -45,8 +45,7 @@ public class SoulShellEntity extends LivingEntity {
     public int selectedSlot;
 
     //Player notes
-    protected HungerManager hungerManager = new HungerManager();
-    public PlayerAbilities abilities = new PlayerAbilities();
+    public CompoundTag hunger = new CompoundTag();
     public int experienceLevel;
     public int totalExperience;
     public float experienceProgress;
@@ -188,7 +187,7 @@ public class SoulShellEntity extends LivingEntity {
         Lacrimis.LOGGER.info("Soul Swapped");
         
         //Move player inventory
-        List<DefaultedList<ItemStack>> playerInventory = ImmutableList.of(this.main, this.armor, this.offHand);
+        List<DefaultedList<ItemStack>> playerInventory = ImmutableList.of(player.inventory.main, player.inventory.armor, player.inventory.offHand);
         for(int i = 0; i < combinedInventory.size(); ++i) {
             for(int j = 0; j < combinedInventory.get(i).size(); ++j) {
                 other.combinedInventory.get(i).set(j, playerInventory.get(i).get(j).copy());
@@ -197,12 +196,11 @@ public class SoulShellEntity extends LivingEntity {
         }
         
         //Copy player properties
-        other.hungerManager = player.getHungerManager();
-        other.abilities = player.abilities;
         other.experienceLevel = player.experienceLevel;
         other.experienceProgress = player.experienceProgress;
         other.totalExperience = player.totalExperience;
         other.selectedSlot = player.inventory.selectedSlot;
+        player.getHungerManager().toTag(other.hunger);
         other.setHealth(player.getHealth());
         other.setAbsorptionAmount(player.getAbsorptionAmount());
         other.setStingerCount(player.getStingerCount());
@@ -217,19 +215,12 @@ public class SoulShellEntity extends LivingEntity {
         world.spawnEntity(other);
         world.playSound(null, other.getX(), other.getY(), other.getZ(), SoundEvents.ENTITY_ARMOR_STAND_PLACE, SoundCategory.BLOCKS, 0.75F, 0.8F);
 
-        //Set client player properties
-        CompoundTag hungerTag = new CompoundTag();
-        CompoundTag abilitiesTag = new CompoundTag();
-        hungerManager.toTag(hungerTag);
-        abilities.serialize(abilitiesTag);
-        player.getHungerManager().fromTag(hungerTag);
-        player.abilities.deserialize(abilitiesTag);
+        //Set basic player properties
         player.experienceLevel = experienceLevel;
         player.experienceProgress = experienceProgress;
         player.totalExperience = totalExperience;
         player.inventory.selectedSlot = selectedSlot;
-
-        //Set server player properties
+        player.getHungerManager().fromTag(hunger);
         player.setHealth(getHealth());
         player.setAbsorptionAmount(getAbsorptionAmount());
         player.setStingerCount(getStingerCount());
@@ -244,41 +235,7 @@ public class SoulShellEntity extends LivingEntity {
         player.teleport(getX(), getY(), getZ(), true);
         player.fallDistance = 0;
         player.setHeadYaw(headYaw);
-
-        CompoundTag tag = new CompoundTag();
-        toTag(tag);
-        ModNetworking.sendSoulSwapPacket((ServerPlayerEntity) player, tag);
         this.remove();
-    }
-
-    public static void playerFromTag(CompoundTag tag, PlayerEntity player) {
-        ListTag listTag = tag.getList("Inventory", 10);
-        PlayerInventory inventory = player.inventory;
-        inventory.main.clear();
-        inventory.armor.clear();
-        inventory.offHand.clear();
-
-        for(int i = 0; i < listTag.size(); ++i) {
-            CompoundTag compoundTag = listTag.getCompound(i);
-            int j = compoundTag.getByte("Slot") & 255;
-            ItemStack itemStack = ItemStack.fromTag(compoundTag);
-            if (!itemStack.isEmpty()) {
-                if (j >= 0 && j < inventory.main.size()) {
-                    inventory.main.set(j, itemStack);
-                } else if (j >= 100 && j < inventory.armor.size() + 100) {
-                    inventory.armor.set(j - 100, itemStack);
-                } else if (j >= 150 && j < inventory.offHand.size() + 150) {
-                    inventory.offHand.set(j - 150, itemStack);
-                }
-            }
-        }
-
-        inventory.selectedSlot = tag.getInt("SelectedItemSlot");
-        player.experienceProgress = tag.getFloat("XpP");
-        player.experienceLevel = tag.getInt("XpLevel");
-        player.totalExperience = tag.getInt("XpTotal");
-        player.getHungerManager().fromTag(tag);
-        player.abilities.deserialize(tag);
     }
 
     public void readCustomDataFromTag(CompoundTag tag) {
@@ -308,9 +265,7 @@ public class SoulShellEntity extends LivingEntity {
         this.experienceProgress = tag.getFloat("XpP");
         this.experienceLevel = tag.getInt("XpLevel");
         this.totalExperience = tag.getInt("XpTotal");
-        this.hungerManager.fromTag(tag);
-        this.abilities.deserialize(tag);
-        this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(abilities.getWalkSpeed());
+        this.hunger = tag.getCompound("Hunger");
     }
 
     public void writeCustomDataToTag(CompoundTag tag) {
@@ -352,8 +307,7 @@ public class SoulShellEntity extends LivingEntity {
         tag.putFloat("XpP", this.experienceProgress);
         tag.putInt("XpLevel", this.experienceLevel);
         tag.putInt("XpTotal", this.totalExperience);
-        this.hungerManager.toTag(tag);
-        this.abilities.serialize(tag);
+        tag.put("Hunger", this.hunger);
     }
 
     private void playBreakSound() {
