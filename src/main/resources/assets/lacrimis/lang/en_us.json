@@ -37,10 +37,15 @@
   "block.lacrimis.rune.healing": "Healing Rune",
   "block.lacrimis.rune.extraction": "Soul Extraction Rune",
   "block.lacrimis.rune.destination": "Soul Destination Rune",
+  "block.lacrimis.rune.soul_swap": "Soul Swap Rune",
   "block.lacrimis.rune.entity_transport": "Soul Transport Rune",
   "block.lacrimis.rune.block_transport": "Block Transport Rune",
   "block.lacrimis.rune.warding": "Warding Rune",
   "block.lacrimis.rune.spawner": "Spawner Breaking Rune",
+
+  "entity.lacrimis.ghost": "Ghost",
+  "entity.lacrimis.soul_shell": "Soul Shell",
+  "entity.lacrimis.tainted_pearl": "Tainted Pearl",
 
   "effect.lacrimis.wavering_soul": "Wavering Soul",
   "effect.lacrimis.tear_poison": "Tear Poison",
@@ -70,7 +75,7 @@
   "lacrimis.error.duct": "No duct connector found",
   "lacrimis.error.entity": "No valid target entity",
   "lacrimis.error.destination": "No destination found",
-  "lacrimis.error.send": "Rune cannot send",
+  "lacrimis.error.send": "Rune cannot send entity",
 
   "lacrimis.advancements.root.title": "Lacrimus",
   "lacrimis.advancements.root.description": "Tears of the Soul",

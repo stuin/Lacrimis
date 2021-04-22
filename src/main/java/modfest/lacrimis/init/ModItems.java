@@ -68,6 +68,7 @@ public class ModItems {
     public static BlockItem healRune;
     public static BlockItem extractionRune;
     public static BlockItem destinationRune;
+    public static BlockItem soulSwapRune;
     public static BlockItem transportRune;
     public static BlockItem blockTransportRune;
     public static BlockItem wardingRune;
@@ -121,6 +122,7 @@ public class ModItems {
         healRune = registerRune("rune/healing", ModBlocks.healRune);
         extractionRune = registerRune("rune/extraction", ModBlocks.extractionRune);
         destinationRune = registerRune("rune/destination", ModBlocks.destinationRune);
+        soulSwapRune = registerRune("rune/soul_swap", ModBlocks.soulSwapRune);
         transportRune = registerRune("rune/entity_transport", ModBlocks.transportRune);
         blockTransportRune = registerRune("rune/block_transport", ModBlocks.blockTransportRune);
         wardingRune = registerRune("rune/warding", ModBlocks.wardingRune);

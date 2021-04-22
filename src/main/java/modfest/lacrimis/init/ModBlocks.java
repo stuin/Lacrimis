@@ -48,6 +48,7 @@ public class ModBlocks {
     public static SoulExtractionBlock extractionRune;
     public static SoulTeleportBlock destinationRune;
     public static SoulTeleportBlock transportRune;
+    public static SoulSwapBlock soulSwapRune;
     public static BlockTeleportBlock blockTransportRune;
     public static WardingBlock wardingRune;
     public static SpawnerBreakerBlock spawnerRune;
@@ -82,6 +83,7 @@ public class ModBlocks {
         healRune = register("rune/healing", new HealBlock());
         extractionRune = register("rune/extraction", new SoulExtractionBlock());
         destinationRune = register("rune/destination", new SoulTeleportBlock(false));
+        soulSwapRune = register("rune/soul_swap", new SoulSwapBlock());
         transportRune = register("rune/entity_transport", new SoulTeleportBlock(true));
         blockTransportRune = register("rune/block_transport", new BlockTeleportBlock());
         wardingRune = register("rune/warding", new WardingBlock());

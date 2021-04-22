@@ -1,0 +1,15 @@
+{
+  "type": "lacrimis:infusion_shapeless",
+  "ingredients": [
+    {
+      "item": "lacrimis:rune/entity_transport"
+    },
+    {
+      "item": "minecraft:armor_stand"
+    }
+  ],
+  "result": {
+    "item": "lacrimis:rune/soul_swap"
+  },
+  "tears": 100
+}

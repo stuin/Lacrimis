@@ -16,7 +16,7 @@ public class WardingBlock extends CenterRuneBlock {
     }
 
     @Override
-    protected boolean activate(World world, BlockPos pos, BlockPos duct, Entity entity, PlayerEntity player) {
+    protected boolean onActivate(World world, BlockPos pos, BlockPos duct, Entity entity, PlayerEntity player) {
         if(world.getBlockState(pos).getBlock() == ModBlocks.runeStone) {
             world.setBlockState(pos, ModBlocks.wardedStone.getDefaultState());
             return true;

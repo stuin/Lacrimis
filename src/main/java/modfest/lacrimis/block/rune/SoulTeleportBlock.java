@@ -21,9 +21,9 @@ public class SoulTeleportBlock extends SoulExtractionBlock {
     }
 
     @Override
-    protected boolean activate(World world, BlockPos pos, BlockPos duct, Entity entity, PlayerEntity player) {
+    protected boolean onActivate(World world, BlockPos pos, BlockPos duct, Entity entity, PlayerEntity player) {
         if(canSend)
-            return super.activate(world, pos, duct, entity, player);
+            return super.onActivate(world, pos, duct, entity, player);
         else
             error(player, "send");
         return false;
@@ -32,9 +32,10 @@ public class SoulTeleportBlock extends SoulExtractionBlock {
     @Override
     public boolean insert(BlockPos pos, BlockView world, Object value) {
         Direction flipped = flipside(world, pos);
-        if(value instanceof Entity && testCage(world, pos, flipped, null) > 0) {
+        int tier = testCage(world, pos, flipped, null);
+        if(value instanceof Entity && tier > 0) {
             //Teleport entity
-            int vertical = flipped == Direction.UP ? 1 : -(int)Math.ceil(((Entity) value).getHeight());
+            int vertical = (flipped == Direction.UP) ? 1 : -(int)Math.ceil(((Entity) value).getHeight());
             if(value instanceof LivingEntity) {
                 ((LivingEntity) value).teleport(pos.getX() + 0.5, pos.getY() + vertical, pos.getZ() + 0.5, true);
                 ((LivingEntity) value).addStatusEffect(new StatusEffectInstance(ModStatusEffects.WAVERING_SOUL, 15 * 20));
@@ -42,9 +43,9 @@ public class SoulTeleportBlock extends SoulExtractionBlock {
                 ((Entity) value).teleport(pos.getX() + 0.5, pos.getY() + vertical, pos.getZ() + 0.5);
 
             //Spawn taint
-            TaintPacket taint = new TaintPacket(requiredTears);
-            if(DuctUtil.locateSink(world, getDuct(world, pos), taint) == null && world instanceof World)
-                    taint.spawn((World) world, pos.up(vertical));
+            TaintPacket taint = new TaintPacket(actualCost(tier));
+            if(world instanceof World && DuctUtil.locateSink(world, getDuct(world, pos), taint) == null)
+                taint.spawn((World) world, pos.up(vertical));
             return true;
         }
         return false;

@@ -14,13 +14,11 @@ public class HealBlock extends CenterRuneBlock {
     }
 
     @Override
-    protected boolean activate(World world, BlockPos pos, BlockPos duct, Entity entity, PlayerEntity player) {
+    protected boolean onActivate(World world, BlockPos pos, BlockPos duct, Entity entity, PlayerEntity player) {
         if (entity instanceof LivingEntity) {
             LivingEntity livingEntity = (LivingEntity) entity;
             if (livingEntity.getHealth() < livingEntity.getMaxHealth()) {
                 livingEntity.heal(2);
-                if (!world.isClient)
-                    Lacrimis.LOGGER.debug("Entity Healed");
                 return true;
             } else
                 error(player, "entity");

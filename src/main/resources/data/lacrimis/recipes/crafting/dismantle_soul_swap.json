@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lacrimis:rune/soul_swap"
+    }
+  ],
+  "result": {
+    "item": "lacrimis:rune/entity_transport"
+  }
+}

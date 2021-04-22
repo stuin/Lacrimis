@@ -104,24 +104,27 @@ public abstract class CenterRuneBlock extends Block implements DuctConnectBlock,
         return 0;
     }
 
-    private int actualCost(int tier) {
+    protected int actualCost(int tier) {
         if(tier == 3 && requiredTier < 3)
             return requiredTears / 2;
         if(tier > requiredTier)
             return requiredTears - requiredTears / 4;
         return requiredTears;
     }
+    
+    protected Box getTargetBox(BlockPos pos, Direction flipped, int tier) {
+        Box box = tier > 2 ? LARGE_BOX : TARGET_BOX;
+        pos = pos.offset(flipped);
+        return box.offset(pos.offset(flipped));
+    }
 
     private boolean runOnce(World world, BlockPos pos, BlockPos duct, PlayerEntity player, Direction flipped, int tier) {
-        Box box = tier > 2 ? LARGE_BOX : TARGET_BOX;
-        
         //For all entities on platform
-        pos = pos.offset(flipped);
-        for(Entity entity : world.getEntitiesByClass(Entity.class, box.offset(pos.offset(flipped)), null)) {
-            if(activate(world, pos, duct, entity, player))
+        for(Entity entity : world.getEntitiesByClass(Entity.class, getTargetBox(pos, flipped, tier), null)) {
+            if(onActivate(world, pos, duct, entity, player))
                 return true;
         }
-        return activate(world, pos, duct, null, player);
+        return onActivate(world, pos, duct, null, player);
     }
 
     public BlockPos getDuct(BlockView world, BlockPos pos) {
@@ -143,7 +146,7 @@ public abstract class CenterRuneBlock extends Block implements DuctConnectBlock,
         activate(world, blockHitResult.getBlockPos(), player);
     }
 
-    public boolean activate(World world, BlockPos pos, PlayerEntity player) {
+    public void activate(World world, BlockPos pos, PlayerEntity player) {
         //Mark powered
         if(player == null && world.isReceivingRedstonePower(pos))
             world.setBlockState(pos, world.getBlockState(pos).with(POWERED, true));
@@ -152,26 +155,23 @@ public abstract class CenterRuneBlock extends Block implements DuctConnectBlock,
         Direction flipped = flipside(world, pos);
         int tier = testCage(world, pos, flipped, player);
         if(tier < requiredTier)
-            return false;
+            return;
 
         //Get duct location
         BlockPos duct = getDuct(world, pos);
         if(duct == null)
-            return false;
+            return;
 
         //Grab required tears
         List<DuctEntry> tearsList = DuctUtil.listScanDucts(world, duct, true);
         if(DuctUtil.locateTearsStrong(world, tearsList, actualCost(tier), true)) {
-            if(runOnce(world, pos, duct, player, flipped, tier)) {
+            if(runOnce(world, pos, duct, player, flipped, tier))
                 DuctUtil.locateTearsStrong(world, tearsList, actualCost(tier), false);
-                return true;
-            }
         } else
             error(player, "tears");
-        return false;
     }
 
-    protected abstract boolean activate(World world, BlockPos pos, BlockPos duct, Entity entity, PlayerEntity player);
+    protected abstract boolean onActivate(World world, BlockPos pos, BlockPos duct, Entity entity, PlayerEntity player);
 
     @Override
     public boolean canConnectDuctTo(BlockPos pos, BlockView world, Direction side) {

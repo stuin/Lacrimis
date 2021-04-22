@@ -3,6 +3,7 @@ package modfest.lacrimis.entity;
 import com.google.common.collect.ImmutableList;
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.init.ModEntityTypes;
+import modfest.lacrimis.init.ModItems;
 import modfest.lacrimis.init.ModNetworking;
 import net.minecraft.SharedConstants;
 import net.minecraft.block.Block;
@@ -24,6 +25,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Arm;
 import net.minecraft.util.Hand;
@@ -42,7 +44,7 @@ public class SoulShellEntity extends LivingEntity {
     public final DefaultedList<ItemStack> armor;
     public final DefaultedList<ItemStack> offHand;
     private final List<DefaultedList<ItemStack>> combinedInventory;
-    public int selectedSlot;
+    private int selectedSlot = 0;
 
     //Player notes
     public CompoundTag hunger = new CompoundTag();
@@ -97,7 +99,13 @@ public class SoulShellEntity extends LivingEntity {
 
     public ActionResult interactAt(PlayerEntity player, Vec3d hitPos, Hand hand) {
         ItemStack itemStack = player.getStackInHand(hand);
-        if (itemStack.getItem() != Items.NAME_TAG) {
+        if(itemStack.getItem() == ModItems.taintedPearl) {
+            player.incrementStat(Stats.USED.getOrCreateStat(itemStack.getItem()));
+            if (!player.abilities.creativeMode)
+                itemStack.decrement(1);
+            swapWithPlayer(player.world, player);
+            return ActionResult.SUCCESS;
+        } else if (itemStack.getItem() != Items.NAME_TAG) {
             if (player.isSpectator()) {
                 return ActionResult.SUCCESS;
             } else if (player.world.isClient) {
@@ -182,9 +190,8 @@ public class SoulShellEntity extends LivingEntity {
     
     public void swapWithPlayer(World world, PlayerEntity player) {
         SoulShellEntity other = ModEntityTypes.soulShell.create(world);
-        if(other == null)
+        if(other == null || world.isClient)
             return;
-        Lacrimis.LOGGER.info("Soul Swapped");
         
         //Move player inventory
         List<DefaultedList<ItemStack>> playerInventory = ImmutableList.of(player.inventory.main, player.inventory.armor, player.inventory.offHand);
@@ -219,7 +226,6 @@ public class SoulShellEntity extends LivingEntity {
         player.experienceLevel = experienceLevel;
         player.experienceProgress = experienceProgress;
         player.totalExperience = totalExperience;
-        player.inventory.selectedSlot = selectedSlot;
         player.getHungerManager().fromTag(hunger);
         player.setHealth(getHealth());
         player.setAbsorptionAmount(getAbsorptionAmount());
@@ -261,7 +267,6 @@ public class SoulShellEntity extends LivingEntity {
             }
         }
 
-        this.selectedSlot = tag.getInt("SelectedItemSlot");
         this.experienceProgress = tag.getFloat("XpP");
         this.experienceLevel = tag.getInt("XpLevel");
         this.totalExperience = tag.getInt("XpTotal");
@@ -303,7 +308,6 @@ public class SoulShellEntity extends LivingEntity {
         }
         
         tag.put("Inventory", listTag);
-        tag.putInt("SelectedItemSlot", this.selectedSlot);
         tag.putFloat("XpP", this.experienceProgress);
         tag.putInt("XpLevel", this.experienceLevel);
         tag.putInt("XpTotal", this.totalExperience);

@@ -6,6 +6,7 @@ import com.zundrel.wrenchable.block.BlockWrenchable;
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.CrucibleEntity;
 import modfest.lacrimis.init.ModItems;
+import modfest.lacrimis.init.ModStatusEffects;
 import modfest.lacrimis.util.SoulTank;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockRenderType;
@@ -14,7 +15,9 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
@@ -25,6 +28,7 @@ import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -33,6 +37,7 @@ import net.minecraft.world.World;
 public class CrucibleBlock extends SoulTankBlock implements BlockWrenchable {
     private static final VoxelShape RAY_TRACE_SHAPE = createCuboidShape(3.0D, 4.0D, 3.0D, 13.0D, 16.0D, 13.0D);
     protected static final VoxelShape OUTLINE_SHAPE = VoxelShapes.combineAndSimplify(VoxelShapes.fullCube(), RAY_TRACE_SHAPE, BooleanBiFunction.ONLY_FIRST);
+    private static final Box inside = new Box(0.2, 0.2, 0.2, 0.8, 0.8, 0.8);
 
     public CrucibleBlock(AbstractBlock.Settings settings) {
         super(settings, true);
@@ -70,6 +75,16 @@ public class CrucibleBlock extends SoulTankBlock implements BlockWrenchable {
                 world.setBlockState(pos, Blocks.AIR.getDefaultState());
             }
         }
+    }
+
+    @Override
+    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+        if(entity instanceof LivingEntity && inside.offset(pos).intersects(entity.getBoundingBox())) {
+            int amount = getTank(world, pos).getTears();
+            if(amount > 0)
+                ((LivingEntity) entity).applyStatusEffect(new StatusEffectInstance(ModStatusEffects.TEAR_POISON, amount, 2));
+        }
+
     }
 
     @Override

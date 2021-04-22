@@ -1,0 +1,10 @@
+{
+  "type": "lacrimis:crucible",
+  "base": {
+    "item": "minecraft:armor_stand"
+  },
+  "result": {
+    "item": "lacrimis:soul_shell"
+  },
+  "tears": 500
+}

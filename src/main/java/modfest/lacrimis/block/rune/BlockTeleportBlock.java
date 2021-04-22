@@ -16,15 +16,13 @@ import modfest.lacrimis.util.DuctUtil;
 
 public class BlockTeleportBlock extends CenterRuneBlock {
     public BlockTeleportBlock() {
-        super(250, 2);
+        super(100, 2);
     }
 
     @Override
-    protected boolean activate(World world, BlockPos pos, BlockPos duct, Entity entity, PlayerEntity player) {
+    protected boolean onActivate(World world, BlockPos pos, BlockPos duct, Entity entity, PlayerEntity player) {
         BlockPos destination = DuctUtil.locateSink(world, duct, pos);
         if (destination != null) {
-            if (!world.isClient)
-                Lacrimis.LOGGER.debug("Block Moved");
             return true;
         } else
             error(player, "destination");

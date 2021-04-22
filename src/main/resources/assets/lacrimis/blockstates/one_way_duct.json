@@ -1,30 +1,52 @@
 {
-  "variants": {
-    "facing=down": {
-      "model": "lacrimis:block/duct/one_way_duct",
-      "x": 180
+  "multipart": [
+    {
+      "when": { "facing": "down" },
+      "apply": { "model": "lacrimis:block/duct/one_way_node", "x": 180 }
     },
-    "facing=east": {
-      "model": "lacrimis:block/duct/one_way_duct",
-      "x": 90,
-      "y": 90
+    {
+      "when": { "facing": "east" },
+      "apply": { "model": "lacrimis:block/duct/one_way_node", "x": 90, "y": 90 }
     },
-    "facing=north": {
-      "model": "lacrimis:block/duct/one_way_duct",
-      "x": 90
+    {
+      "when": { "facing": "north" },
+      "apply": { "model": "lacrimis:block/duct/one_way_node", "x": 90 }
     },
-    "facing=south": {
-      "model": "lacrimis:block/duct/one_way_duct",
-      "x": 90,
-      "y": 180
+    {
+      "when": { "facing": "south" },
+      "apply": { "model": "lacrimis:block/duct/one_way_node", "x": 90, "y": 180 }
     },
-    "facing=up": {
-      "model": "lacrimis:block/duct/one_way_duct"
+    {
+      "when": { "facing": "up" },
+      "apply": { "model": "lacrimis:block/duct/one_way_node" }
     },
-    "facing=west": {
-      "model": "lacrimis:block/duct/one_way_duct",
-      "x": 90,
-      "y": 270
+    {
+      "when": { "facing": "west" },
+      "apply": { "model": "lacrimis:block/duct/one_way_node", "x": 90, "y": 270 }
+    },
+    {
+      "when": { "facing": "up|down" },
+      "apply": { "model": "lacrimis:block/duct/side" }
+    },
+    {
+      "when": { "facing": "up|down" },
+      "apply": { "model": "lacrimis:block/duct/side", "uvlock": true, "x": 180 }
+    },
+    {
+      "when": { "facing": "north|south" },
+      "apply": { "model": "lacrimis:block/duct/side", "uvlock": true, "x": 90 }
+    },
+    {
+      "when": { "facing": "north|south" },
+      "apply": { "model": "lacrimis:block/duct/side", "uvlock": true, "x": 90, "y": 180 }
+    },
+    {
+      "when": { "facing": "east|west" },
+      "apply": { "model": "lacrimis:block/duct/side", "uvlock": true, "x": 90, "y": 90 }
+    },
+    {
+      "when": { "facing": "east|west" },
+      "apply": { "model": "lacrimis:block/duct/side", "uvlock": true, "x": 90, "y": 270 }
     }
-  }
+  ]
 }

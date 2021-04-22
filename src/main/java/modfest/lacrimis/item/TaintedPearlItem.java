@@ -25,14 +25,11 @@ public class TaintedPearlItem extends Item {
         user.getItemCooldownManager().set(this, 20);
         if (!world.isClient) {
             ThrownItemEntity pearlEntity = new TaintedPearlEntity(ModEntityTypes.taintedPearl, world);
-            //ThrownItemEntity pearlEntity = new EnderPearlEntity(EntityType.ENDER_PEARL, world);
             pearlEntity.setOwner(user);
             pearlEntity.setPos(user.getX(), user.getEyeY() - 0.10000000149011612D, user.getZ());
             pearlEntity.setItem(itemStack);
             pearlEntity.setProperties(user, user.pitch, user.yaw, 0.0F, 1.5F, 1.0F);
-            //ModNetworking.sendCustomSpawnPacket((ServerWorld) world, pearlEntity);
             world.spawnEntity(pearlEntity);
-            Lacrimis.LOGGER.warn("Pearl thrown");
         }
 
         user.incrementStat(Stats.USED.getOrCreateStat(this));

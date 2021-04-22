@@ -12,7 +12,7 @@
     {
       "type": "lacrimis:infusion",
       "recipe": "lacrimis:infusion/rune_block_transport",
-      "text": "Run cost: 250 Tears$(br)$(l:cages/tier_ii)Tier II Soul Cage$(/l)$(br2)Swaps blocks at long distance, but at a steeper price."
+      "text": "Run cost: 100 Tears$(br)$(l:cages/tier_ii)Tier II Soul Cage$(/l)$(br2)Swaps blocks at long distance, but at a steeper price."
      }
   ]
 }
