@@ -27,9 +27,12 @@ repositories {
 		url = 'https://maven.dblsaiko.net'
 	}
 	maven {
-		name = "Wrenchable"
-		url  "https://dl.bintray.com/zundrel/wrenchable"
+		url 'https://jitpack.io'
 	}
+	//maven {
+	//	name = "Wrenchable"
+	//	url  "https://dl.bintray.com/zundrel/wrenchable"
+	//}
 }
 
 dependencies {
@@ -48,10 +51,11 @@ dependencies {
 	modImplementation("vazkii.patchouli:Patchouli:${project.patchouli_version}")
 
 	//REI
-	modImplementation("me.shedaniel:RoughlyEnoughItems:${project.rei_version}")
+	modImplementation("me.shedaniel:RoughlyEnoughItems-api:${project.rei_version}")
+	modRuntime("me.shedaniel:RoughlyEnoughItems:${project.rei_version}")
 
 	//Wrenchable api
-	def wrenchVersion = "com.zundrel:wrenchable:${project.wrenchable_version}"
+	def wrenchVersion = "com.github.stuin:wrenchable:${project.wrenchable_version}"
 	modImplementation (wrenchVersion) {
 		exclude group: "io.github.prospector"
 		exclude group: "net.fabricmc"
