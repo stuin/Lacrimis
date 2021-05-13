@@ -9,7 +9,7 @@ public class LacrimisContainerPlugin implements Runnable {
                 new InfusionContainerInfo());
         ContainerInfoHandler.registerContainerInfo(new Identifier("lacrimis", "crucible"),
                 new InfusionContainerInfo());
-        //ContainerInfoHandler.registerContainerInfo(new Identifier("minecraft", "crafting"),
-        //        new InfusionContainerInfo());
+        ContainerInfoHandler.registerContainerInfo(new Identifier("minecraft", "plugins/crafting"),
+                new InfusionContainerInfo());
     }
 }

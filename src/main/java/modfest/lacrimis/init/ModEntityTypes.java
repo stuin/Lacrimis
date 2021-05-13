@@ -1,9 +1,6 @@
 package modfest.lacrimis.init;
 
-import modfest.lacrimis.block.entity.CombinerEntity;
-import modfest.lacrimis.block.entity.CrucibleEntity;
-import modfest.lacrimis.block.entity.InfusionTableEntity;
-import modfest.lacrimis.block.entity.TearLanternEntity;
+import modfest.lacrimis.block.entity.*;
 import modfest.lacrimis.client.render.block.CrucibleEntityRenderer;
 import modfest.lacrimis.client.render.block.InfusionTableEntityRenderer;
 import modfest.lacrimis.client.render.entity.GhostEntityRenderer;
@@ -43,6 +40,7 @@ public class ModEntityTypes {
     public static BlockEntityType<CrucibleEntity> crucible;
     public static BlockEntityType<CombinerEntity> combiner;
     public static BlockEntityType<TearLanternEntity> tearLantern;
+    public static BlockEntityType<NetworkLinkEntity> networkLink;
 
     public static void register() {
         ghost = Registry.register(Registry.ENTITY_TYPE, new Identifier(Lacrimis.MODID, "ghost"),
@@ -69,6 +67,7 @@ public class ModEntityTypes {
         crucible = register("crucible_entity", CrucibleEntity::new, ModBlocks.crucible);
         combiner = register("combiner_entity", CombinerEntity::new, ModBlocks.combiner);
         tearLantern = register("tear_lantern_entity", TearLanternEntity::new, ModBlocks.tearLantern);
+        networkLink = register("network_link_entity", NetworkLinkEntity::new, ModBlocks.networkLink);
     }
     
     public static void registerClient() {

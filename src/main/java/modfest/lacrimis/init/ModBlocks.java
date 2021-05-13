@@ -30,6 +30,7 @@ public class ModBlocks {
     public static OneWayDuctBlock oneWayDuct;
     public static TaintOutputBlock taintOutput;
     public static TearLanternBlock tearLantern;
+    public static NetworkLinkBlock networkLink;
     public static DrainedCryingObsidianBlock drainedCryingObsidian;
     public static CreativeTearsBlock creativeTearsBlock;
     public static WardedBlock wardedStone;
@@ -69,6 +70,7 @@ public class ModBlocks {
         oneWayDuct = register("one_way_duct", new OneWayDuctBlock(ductSettings));
         taintOutput = register("taint_output", new TaintOutputBlock(Settings.copy(Blocks.DISPENSER)));
         tearLantern = register("tear_lantern", new TearLanternBlock(AbstractBlock.Settings.of(Material.METAL).requiresTool().strength(3.5F).sounds(BlockSoundGroup.LANTERN).luminance((state) -> 5).nonOpaque()));
+        networkLink = register("network_link", new NetworkLinkBlock(wardedSettings));
         drainedCryingObsidian = register("drained_crying_obsidian", new DrainedCryingObsidianBlock(Settings.copy(Blocks.CRYING_OBSIDIAN)));
         creativeTearsBlock = register("creative_tears_block", new CreativeTearsBlock(wardedSettings));
         wardedStone = register("warded", new WardedBlock(wardedSettings));

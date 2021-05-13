@@ -1,6 +1,5 @@
 package modfest.lacrimis.crafting;
 
-import me.shedaniel.rei.server.ContainerInfo;
 import modfest.lacrimis.block.entity.InfusionTableEntity;
 import modfest.lacrimis.init.ModNetworking;
 import net.fabricmc.api.EnvType;
@@ -13,7 +12,6 @@ import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeFinder;
 import net.minecraft.recipe.book.RecipeBookCategory;
 import net.minecraft.screen.AbstractRecipeScreenHandler;
-import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
 
