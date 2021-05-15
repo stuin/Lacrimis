@@ -18,6 +18,10 @@ public class NetworksState extends PersistentState {
         super("lacrimis_network");
     }
 
+    public static int getColor(float[] color) {
+        return ((int)(color[0] * 255) << 16) + ((int)(color[1] * 255) << 8) + (int)(color[2] * 255);
+    }
+
     public NetworkList getNetwork(int color) {
         return colorMap.getOrDefault(color, null);
     }

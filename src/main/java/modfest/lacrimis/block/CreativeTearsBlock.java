@@ -17,11 +17,6 @@ public class CreativeTearsBlock extends Block implements DuctConnectBlock {
     }
 
     @Override
-    public Object extract(BlockPos pos, BlockView world) {
-        return null;
-    }
-
-    @Override
     public int extractTears(BlockPos pos, BlockView world, int request, boolean simulate) {
         return request;
     }

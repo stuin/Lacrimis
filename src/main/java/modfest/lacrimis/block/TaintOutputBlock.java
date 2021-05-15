@@ -42,11 +42,6 @@ public class TaintOutputBlock extends FacingBlock implements DuctConnectBlock {
     }
 
     @Override
-    public Object extract(BlockPos pos, BlockView world) {
-        return null;
-    }
-
-    @Override
     public int extractTears(BlockPos pos, BlockView world, int request, boolean simulate) {
         return 0;
     }

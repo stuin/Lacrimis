@@ -28,7 +28,6 @@ import java.util.List;
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.DuctConnectBlock;
 import modfest.lacrimis.init.ModBlocks;
-import modfest.lacrimis.util.DuctEntry;
 import modfest.lacrimis.util.DuctUtil;
 import modfest.lacrimis.util.NeighborList;
 
@@ -163,10 +162,13 @@ public abstract class CenterRuneBlock extends Block implements DuctConnectBlock,
             return;
 
         //Grab required tears
-        List<DuctEntry> tearsList = DuctUtil.listScanDucts(world, duct, true);
-        if(DuctUtil.locateTearsStrong(world, tearsList, actualCost(tier), true)) {
-            if(runOnce(world, pos, duct, player, flipped, tier))
-                DuctUtil.locateTearsStrong(world, tearsList, actualCost(tier), false);
+        List<BlockPos> tearsList = DuctUtil.scanDucts(world, pos, true, actualCost(tier), (b) -> ((DuctConnectBlock) b).extractTears(pos, world, actualCost(tier), true));
+        if(tearsList.size() > 0) {
+            if(runOnce(world, pos, duct, player, flipped, tier)) {
+                int goal = actualCost(tier);
+                for(BlockPos pos1 : tearsList)
+                    goal -= ((DuctConnectBlock)world.getBlockState(pos1).getBlock()).extractTears(pos1, world, goal, false);
+            }
         } else
             error(player, "tears");
     }
@@ -176,11 +178,6 @@ public abstract class CenterRuneBlock extends Block implements DuctConnectBlock,
     @Override
     public boolean canConnectDuctTo(BlockPos pos, BlockView world, Direction side) {
         return false;
-    }
-
-    @Override
-    public Object extract(BlockPos pos, BlockView world) {
-        return null;
     }
 
     @Override

@@ -135,11 +135,6 @@ public abstract class SoulTankBlock extends BlockWithEntity implements DuctConne
     }
 
     @Override
-    public SoulTank extract(BlockPos pos, BlockView world) {
-        return null;
-    }
-
-    @Override
     public int extractTears(BlockPos pos, BlockView world, int request, boolean simulate) {
         SoulTank tank = getTank(world, pos);
         if(tank != null && tank.getTears() > 0 && canExtract) {

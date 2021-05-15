@@ -73,11 +73,6 @@ public class NetworkLinkBlock extends BlockWithEntity implements DuctConnectBloc
     }
 
     @Override
-    public SoulTank extract(BlockPos pos, BlockView world) {
-        return null;
-    }
-
-    @Override
     public int extractTears(BlockPos pos, BlockView world, int request, boolean simulate) {
         return 0;
     }

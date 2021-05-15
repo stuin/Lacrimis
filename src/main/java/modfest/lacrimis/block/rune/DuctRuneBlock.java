@@ -17,18 +17,6 @@ public class DuctRuneBlock extends BasicRuneBlock implements DuctConnectBlock {
     }
 
     @Override
-    public Object extract(BlockPos pos, BlockView world) {
-        //Extract from center
-        BlockPos center = getTrueCenter(world, pos);
-        if(center != null) {
-            Block block = world.getBlockState(center).getBlock();
-            if(block instanceof DuctConnectBlock)
-                return ((DuctConnectBlock) block).extract(center, world);
-        }
-        return null;
-    }
-
-    @Override
     public int extractTears(BlockPos pos, BlockView world, int request, boolean simulate) {
         return 0;
     }

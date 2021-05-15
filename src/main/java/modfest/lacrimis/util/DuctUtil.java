@@ -8,7 +8,7 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Predicate;
+import java.util.function.Function;
 
 import modfest.lacrimis.block.DuctConnectBlock;
 import modfest.lacrimis.block.GatedDuctBlock;
@@ -21,14 +21,13 @@ import net.minecraft.world.BlockView;
 
 public class DuctUtil {
 
-    public static List<DuctEntry> listScanDucts(BlockView world, BlockPos pos, boolean extracting) {
+    public static List<BlockPos> scanDucts(BlockView world, BlockPos pos, boolean extracting, int goal, Function<Object, Integer> filter) {
         if(world == null) return null;
 
         Set<BlockPos> scanned = new HashSet<>();
         Deque<BlockPos> stack = new ArrayDeque<>();
-
         List<Direction> all = Arrays.asList(Direction.values());
-        List<DuctEntry> out = new ArrayList<>();
+        List<BlockPos> out = new ArrayList<>();
 
         EnumSet<Direction> outputs;
         BlockState source = world.getBlockState(pos);
@@ -69,67 +68,37 @@ public class DuctUtil {
                     stack.push(next);
                 else if (nextState.getBlock() instanceof DuctConnectBlock) {
                     DuctConnectBlock b = (DuctConnectBlock) nextState.getBlock();
-                    if (b.canConnectDuctTo(next, world, d))
-                        out.add(new DuctEntry(b, next, nextState));
+                    if (b.canConnectDuctTo(next, world, d)) {
+                        int a = filter.apply(b);
+                        if(a > 0) {
+                            out.add(next);
+                            goal -= a;
+                            if (goal <= 0)
+                                return out;
+                        }
+                    }
                 }
             }
         }
 
-        return out;
+        return new ArrayList<>();
     }
 
-    public static Object locateSource(BlockView world, BlockPos pos, Predicate<Object> filter) {
-        List<DuctEntry> list = listScanDucts(world, pos, true);
-        if(list != null && list.size() > 0) {
-            for(DuctEntry e : list) {
-                Object value = e.extract(world);
-                if(value != null && filter.test(value))
-                    return value;
-            }
-        }
-        return null;
-    }
-
-    public static boolean locateTearsStrong(BlockView world, BlockPos pos, int request, boolean simulate) {
-        return locateTearsStrong(world, listScanDucts(world, pos, true), request, simulate);
-    }
-
-    public static boolean locateTearsStrong(BlockView world, List<DuctEntry> list, int request, boolean simulate) {
-        if(list != null && list.size() > 0) {
-            int found = 0;
-
-            //Test for requested amount
-            for(int i = 0; i < list.size() && found < request; i++)
-                found += list.get(i).extractTears(world, request - found, simulate);
-            return found >= request;
-        }
-        return false;
-    }
-
-    public static int locateTears(BlockView world, BlockPos pos, int request) {
-        List<DuctEntry> list = listScanDucts(world, pos, true);
-        if(list != null && list.size() > 0) {
-            int found = 0;
-
-            //Extract some amount
-            for(int i = 0; i < list.size() && found < request; i++)
-                found += list.get(i).extractTears(world, request - found, false);
-            return found;
-        }
+    public static int locateTears(BlockView world, BlockPos pos, int request, boolean simulate) {
+        List<BlockPos> list = scanDucts(world, pos, true, 1, (b) -> ((DuctConnectBlock) b).extractTears(pos, world, request, true));
+        if(list.size() > 0)
+            return ((DuctConnectBlock)world.getBlockState(list.get(0)).getBlock()).extractTears(pos, world, request, simulate);
         return 0;
     }
 
-    public static BlockPos locateSink(BlockView world, BlockPos pos, Object value) {
-        return locateSink(world, listScanDucts(world, pos, false), value);
+    public static int locateTears(BlockView world, BlockPos pos, int request) {
+        return locateTears(world, pos, request, false);
     }
 
-    public static BlockPos locateSink(BlockView world, List<DuctEntry> list, Object value) {
-        if(list != null && list.size() > 0) {
-            for(DuctEntry e : list) {
-                if(e.insert(world, value))
-                    return e.pos;
-            }
-        }
-        return null;
+    public static BlockPos locateSink(BlockView world, BlockPos pos, Object value) {
+        List<BlockPos> list = scanDucts(world, pos, false, 1, (b) -> ((DuctConnectBlock) b).insert(pos, world, value) ? 1 : 0);
+        if(list.size() > 0)
+            return list.get(0);
+        else return null;
     }
 }
