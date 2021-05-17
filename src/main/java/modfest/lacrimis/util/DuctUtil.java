@@ -10,24 +10,33 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 
+import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.DuctConnectBlock;
 import modfest.lacrimis.block.GatedDuctBlock;
+import modfest.lacrimis.block.NetworkLinkBlock;
+import modfest.lacrimis.block.entity.NetworkLinkEntity;
 import modfest.lacrimis.init.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FacingBlock;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 
 public class DuctUtil {
 
-    public static List<BlockPos> scanDucts(BlockView world, BlockPos pos, boolean extracting, int goal, Function<Object, Integer> filter) {
-        if(world == null) return null;
+    public static List<BlockPos> scanDucts(BlockView world, BlockPos pos, boolean extracting, int goal, Tester test) {
+        if(world == null)
+            return new ArrayList<>();
 
         Set<BlockPos> scanned = new HashSet<>();
         Deque<BlockPos> stack = new ArrayDeque<>();
         List<Direction> all = Arrays.asList(Direction.values());
         List<BlockPos> out = new ArrayList<>();
+        NetworksState.NetworkList network = null;
+        NetworksState.NetworkList networkOriginal = null;
 
         EnumSet<Direction> outputs;
         BlockState source = world.getBlockState(pos);
@@ -69,7 +78,7 @@ public class DuctUtil {
                 else if (nextState.getBlock() instanceof DuctConnectBlock) {
                     DuctConnectBlock b = (DuctConnectBlock) nextState.getBlock();
                     if (b.canConnectDuctTo(next, world, d)) {
-                        int a = filter.apply(b);
+                        int a = test.apply(next, b, goal);
                         if(a > 0) {
                             out.add(next);
                             goal -= a;
@@ -77,28 +86,54 @@ public class DuctUtil {
                                 return out;
                         }
                     }
+
+                    if (nextState.getBlock() instanceof NetworkLinkBlock) {
+                        NetworkLinkEntity linkEntity = ((NetworkLinkEntity) world.getBlockEntity(next));
+                        if (linkEntity != null && linkEntity.isOn()) {
+                            if (network == null) {
+                                networkOriginal = linkEntity.getNetwork();
+                                network = (NetworksState.NetworkList) networkOriginal.clone();
+                                network.remove(linkEntity.makePair());
+                            } else if (network.color == linkEntity.getColor())
+                                network.remove(linkEntity.makePair());
+                        }
+                    }
                 }
+            }
+            if(stack.isEmpty() && network != null && network.size() > 0) {
+                while(!world.getBlockState(network.get(0).getRight()).isOf(ModBlocks.networkLink)) {
+                    networkOriginal.remove(network.get(0));
+                    network.remove(network.get(0));
+                }
+
+                stack.push(network.get(0).getRight());
+                network.remove(network.get(0));
             }
         }
 
         return new ArrayList<>();
     }
 
-    public static int locateTears(BlockView world, BlockPos pos, int request, boolean simulate) {
-        List<BlockPos> list = scanDucts(world, pos, true, 1, (b) -> ((DuctConnectBlock) b).extractTears(pos, world, request, true));
-        if(list.size() > 0)
-            return ((DuctConnectBlock)world.getBlockState(list.get(0)).getBlock()).extractTears(pos, world, request, simulate);
-        return 0;
-    }
-
     public static int locateTears(BlockView world, BlockPos pos, int request) {
         return locateTears(world, pos, request, false);
     }
 
+    public static int locateTears(BlockView world, BlockPos pos, int request, boolean simulate) {
+        List<BlockPos> list = scanDucts(world, pos, true, 1, (p, b, r) -> b.extractTears(p, world, request, true));
+        if(list.size() > 0)
+            return ((DuctConnectBlock)world.getBlockState(list.get(0)).getBlock()).extractTears(list.get(0), world, request, simulate);
+        return 0;
+    }
+
     public static BlockPos locateSink(BlockView world, BlockPos pos, Object value) {
-        List<BlockPos> list = scanDucts(world, pos, false, 1, (b) -> ((DuctConnectBlock) b).insert(pos, world, value) ? 1 : 0);
+        List<BlockPos> list = scanDucts(world, pos, false, 1, (p, b, r) -> b.insert(p, world, value) ? 1 : 0);
         if(list.size() > 0)
             return list.get(0);
         else return null;
+    }
+
+    @FunctionalInterface
+    public interface Tester {
+        int apply(BlockPos pos, DuctConnectBlock block, int request);
     }
 }

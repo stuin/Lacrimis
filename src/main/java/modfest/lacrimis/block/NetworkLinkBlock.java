@@ -1,6 +1,7 @@
 package modfest.lacrimis.block;
 
 import com.zundrel.wrenchable.block.BlockWrenchable;
+import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.NetworkLinkEntity;
 import modfest.lacrimis.util.SoulTank;
 import net.minecraft.block.*;
@@ -14,6 +15,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 
 import java.util.Arrays;
 
@@ -50,21 +52,26 @@ public class NetworkLinkBlock extends BlockWithEntity implements DuctConnectBloc
                         color[1] = (color[1] + fs[1]) / 2.0F;
                         color[2] = (color[2] + fs[2]) / 2.0F;
                     }
-                } else {
-                    if (blockState.getOpacity(world, pos) >= 15 && block != Blocks.BEDROCK) {
-                        color = DyeColor.WHITE.getColorComponents();
-                        break;
-                    }
+                } else if (blockState.getOpacity(world, pos) >= 15 && block != Blocks.BEDROCK) {
+                    color = DyeColor.WHITE.getColorComponents();
+                    break;
                 }
 
                 pos = pos.up();
             }
 
             if(Arrays.equals(DyeColor.WHITE.getColorComponents(), color))
-                linkEntity.setState(false, null);
+                linkEntity.setState(true, color, world);
             else
-                linkEntity.setState(true, color);
+                linkEntity.setState(true, color, world);
         }
+    }
+
+    @Override
+    public void onBroken(WorldAccess world, BlockPos pos, BlockState state) {
+        NetworkLinkEntity linkEntity = ((NetworkLinkEntity) world.getBlockEntity(pos));
+        if (linkEntity != null)
+            linkEntity.setState(false, null, null);
     }
 
     @Override

@@ -162,7 +162,7 @@ public abstract class CenterRuneBlock extends Block implements DuctConnectBlock,
             return;
 
         //Grab required tears
-        List<BlockPos> tearsList = DuctUtil.scanDucts(world, pos, true, actualCost(tier), (b) -> ((DuctConnectBlock) b).extractTears(pos, world, actualCost(tier), true));
+        List<BlockPos> tearsList = DuctUtil.scanDucts(world, duct, true, actualCost(tier), (p, b, r) -> b.extractTears(p, world, r, true));
         if(tearsList.size() > 0) {
             if(runOnce(world, pos, duct, player, flipped, tier)) {
                 int goal = actualCost(tier);
