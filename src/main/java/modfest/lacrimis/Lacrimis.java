@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 public class Lacrimis implements ModInitializer {
     public static final String MODID = "lacrimis";
-    public static final Logger LOGGER = LogManager.getLogger(MODID);
+    public static final Logger LOGGER = LogManager.getLogger("Lacrimis");
 
     public static final ItemGroup ITEM_GROUP = FabricItemGroupBuilder.create(
             new Identifier(MODID, "base"))

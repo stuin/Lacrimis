@@ -8,7 +8,6 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Function;
 
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.DuctConnectBlock;
@@ -18,12 +17,9 @@ import modfest.lacrimis.block.entity.NetworkLinkEntity;
 import modfest.lacrimis.init.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FacingBlock;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
 
 public class DuctUtil {
 
@@ -92,26 +88,38 @@ public class DuctUtil {
                         if (linkEntity != null && linkEntity.isOn()) {
                             if (network == null) {
                                 networkOriginal = linkEntity.getNetwork();
-                                network = (NetworksState.NetworkList) networkOriginal.clone();
-                                network.remove(linkEntity.makePair());
+                                if(networkOriginal != null) {
+                                    network = (NetworksState.NetworkList) networkOriginal.clone();
+                                    network.remove(linkEntity.makePair());
+                                }
                             } else if (network.color == linkEntity.getColor())
                                 network.remove(linkEntity.makePair());
                         }
                     }
                 }
             }
-            if(stack.isEmpty() && network != null && network.size() > 0) {
-                while(!world.getBlockState(network.get(0).getRight()).isOf(ModBlocks.networkLink)) {
+            if(stack.isEmpty() && network != null) {
+                while(network.size() > 0 && !validLink(world, network.get(0).getRight(), network.color)) {
                     networkOriginal.remove(network.get(0));
                     network.remove(network.get(0));
                 }
 
-                stack.push(network.get(0).getRight());
-                network.remove(network.get(0));
+                if(network.size() > 0) {
+                    stack.push(network.get(0).getRight());
+                    network.remove(network.get(0));
+                }
             }
         }
 
         return new ArrayList<>();
+    }
+
+    private static boolean validLink(BlockView world, BlockPos pos, int color) {
+        if(world.getBlockState(pos).getBlock() instanceof NetworkLinkBlock) {
+            NetworkLinkEntity linkEntity = (NetworkLinkEntity) world.getBlockEntity(pos);
+            return linkEntity != null && linkEntity.getNetwork() != null && linkEntity.getColor() == color;
+        }
+        return false;
     }
 
     public static int locateTears(BlockView world, BlockPos pos, int request) {

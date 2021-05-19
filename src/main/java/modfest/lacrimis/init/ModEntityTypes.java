@@ -3,6 +3,7 @@ package modfest.lacrimis.init;
 import modfest.lacrimis.block.entity.*;
 import modfest.lacrimis.client.render.block.CrucibleEntityRenderer;
 import modfest.lacrimis.client.render.block.InfusionTableEntityRenderer;
+import modfest.lacrimis.client.render.block.NetworkLinkEntityRenderer;
 import modfest.lacrimis.client.render.entity.GhostEntityRenderer;
 import modfest.lacrimis.client.render.entity.SoulShellRenderer;
 import modfest.lacrimis.entity.SoulShellEntity;
@@ -78,10 +79,13 @@ public class ModEntityTypes {
         EntityRendererRegistry.INSTANCE.register(ModEntityTypes.taintedPearl,
                 (dispatcher, ctx) -> new FlyingItemEntityRenderer<TaintedPearlEntity>(dispatcher, ctx.getItemRenderer()));
 
+
         BlockEntityRendererRegistry.INSTANCE.register(ModEntityTypes.crucible, CrucibleEntityRenderer::new);
         CrucibleEntityRenderer.onInit();
         BlockEntityRendererRegistry.INSTANCE.register(ModEntityTypes.infusionTable, InfusionTableEntityRenderer::new);
         InfusionTableEntityRenderer.onInit();
+        BlockEntityRendererRegistry.INSTANCE.register(ModEntityTypes.networkLink, NetworkLinkEntityRenderer::new);
+        NetworkLinkEntityRenderer.onInit();
     }
 
     private static <T extends BlockEntity> BlockEntityType<T> register(String name, Supplier<T> f, Block... blocks) {

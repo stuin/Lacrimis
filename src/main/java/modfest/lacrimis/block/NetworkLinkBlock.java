@@ -1,14 +1,10 @@
 package modfest.lacrimis.block;
 
 import com.zundrel.wrenchable.block.BlockWrenchable;
-import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.NetworkLinkEntity;
-import modfest.lacrimis.util.SoulTank;
 import net.minecraft.block.*;
-import net.minecraft.block.entity.BeaconBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.DyeColor;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -20,6 +16,8 @@ import net.minecraft.world.WorldAccess;
 import java.util.Arrays;
 
 public class NetworkLinkBlock extends BlockWithEntity implements DuctConnectBlock, BlockWrenchable {
+    private static final float[] BLANK = new float[] {1, 1, 1};
+
     public NetworkLinkBlock(Settings settings) {
         super(settings);
     }
@@ -37,8 +35,9 @@ public class NetworkLinkBlock extends BlockWithEntity implements DuctConnectBloc
     public void onWrenched(World world, PlayerEntity player, BlockHitResult result) {
         NetworkLinkEntity linkEntity = ((NetworkLinkEntity) world.getBlockEntity(result.getBlockPos()));
         if(!world.isClient && linkEntity != null) {
-            BlockPos pos = result.getBlockPos();
-            float[] color = DyeColor.WHITE.getColorComponents();
+            BlockPos pos = result.getBlockPos().up();
+            float[] color = BLANK.clone();
+            boolean changed = false;
             int l = world.getTopY(Heightmap.Type.WORLD_SURFACE, pos.getX(), pos.getZ());
 
             int n;
@@ -51,20 +50,23 @@ public class NetworkLinkBlock extends BlockWithEntity implements DuctConnectBloc
                         color[0] = (color[0] + fs[0]) / 2.0F;
                         color[1] = (color[1] + fs[1]) / 2.0F;
                         color[2] = (color[2] + fs[2]) / 2.0F;
+                        changed = true;
                     }
                 } else if (blockState.getOpacity(world, pos) >= 15 && block != Blocks.BEDROCK) {
-                    color = DyeColor.WHITE.getColorComponents();
+                    changed = false;
                     break;
                 }
 
                 pos = pos.up();
             }
 
-            if(Arrays.equals(DyeColor.WHITE.getColorComponents(), color))
-                linkEntity.setState(true, color, world);
-            else
-                linkEntity.setState(true, color, world);
+            linkEntity.setState(changed && !Arrays.equals(color, BLANK), color, world);
         }
+    }
+
+    @Override
+    public boolean isTranslucent(BlockState state, BlockView world, BlockPos pos) {
+        return true;
     }
 
     @Override
