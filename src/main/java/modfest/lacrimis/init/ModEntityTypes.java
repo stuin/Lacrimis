@@ -15,9 +15,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.client.render.entity.ProjectileEntityRenderer;
 import net.minecraft.client.render.item.ItemRenderer;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -44,25 +46,12 @@ public class ModEntityTypes {
     public static BlockEntityType<NetworkLinkEntity> networkLink;
 
     public static void register() {
-        ghost = Registry.register(Registry.ENTITY_TYPE, new Identifier(Lacrimis.MODID, "ghost"),
-                FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, GhostEntity::new)
-                        .dimensions(EntityDimensions.fixed(0.75f, 2.0f))
-                        .trackRangeBlocks(64).trackedUpdateRate(4)
-                        .fireImmune()
-                        .build());
+        ghost = register("ghost", buildType(SpawnGroup.MONSTER, GhostEntity::new, 0.75f, 2.0f).trackRangeBlocks(64).trackedUpdateRate(4).fireImmune());
+        soulShell = register("soul_shell", buildType(SpawnGroup.MISC, SoulShellEntity::new, 0.6F, 1.8F));
+        taintedPearl = register("tainted_pearl", buildType(SpawnGroup.MISC, TaintedPearlEntity::new, 0.25F, 0.25F).trackRangeChunks(4).trackedUpdateRate(10));
+
         FabricDefaultAttributeRegistry.register(ghost, GhostEntity.createGhostAttributes());
-
-        soulShell = Registry.register(Registry.ENTITY_TYPE, new Identifier(Lacrimis.MODID, "soul_shell"),
-                FabricEntityTypeBuilder.create(SpawnGroup.MISC, SoulShellEntity::new)
-                        .dimensions(EntityDimensions.fixed(0.6F, 1.8F))
-                        .build());
         FabricDefaultAttributeRegistry.register(soulShell, SoulShellEntity.createSoulShellAttributes());
-
-        taintedPearl = Registry.register(Registry.ENTITY_TYPE, new Identifier(Lacrimis.MODID, "tainted_pearl"),
-                FabricEntityTypeBuilder.create(SpawnGroup.MISC, TaintedPearlEntity::new)
-                        .dimensions(EntityDimensions.fixed(0.25F, 0.25F))
-                        .trackRangeChunks(4).trackedUpdateRate(10)
-                        .build());
 
         infusionTable = register("infusion_table_entity", InfusionTableEntity::new, ModBlocks.infusionTable);
         crucible = register("crucible_entity", CrucibleEntity::new, ModBlocks.crucible);
@@ -72,20 +61,25 @@ public class ModEntityTypes {
     }
     
     public static void registerClient() {
-        EntityRendererRegistry.INSTANCE.register(ModEntityTypes.ghost,
-                (dispatcher, ctx) -> new GhostEntityRenderer(dispatcher));
-        EntityRendererRegistry.INSTANCE.register(ModEntityTypes.soulShell,
-                (dispatcher, ctx) -> new SoulShellRenderer(dispatcher));
-        EntityRendererRegistry.INSTANCE.register(ModEntityTypes.taintedPearl,
-                (dispatcher, ctx) -> new FlyingItemEntityRenderer<TaintedPearlEntity>(dispatcher, ctx.getItemRenderer()));
-
+        EntityRendererRegistry.INSTANCE.register(ModEntityTypes.ghost, (dispatcher, ctx) -> new GhostEntityRenderer(dispatcher));
+        EntityRendererRegistry.INSTANCE.register(ModEntityTypes.soulShell, (dispatcher, ctx) -> new SoulShellRenderer(dispatcher));
+        EntityRendererRegistry.INSTANCE.register(ModEntityTypes.taintedPearl, (dispatcher, ctx) -> new FlyingItemEntityRenderer<TaintedPearlEntity>(dispatcher, ctx.getItemRenderer()));
 
         BlockEntityRendererRegistry.INSTANCE.register(ModEntityTypes.crucible, CrucibleEntityRenderer::new);
-        CrucibleEntityRenderer.onInit();
         BlockEntityRendererRegistry.INSTANCE.register(ModEntityTypes.infusionTable, InfusionTableEntityRenderer::new);
-        InfusionTableEntityRenderer.onInit();
         BlockEntityRendererRegistry.INSTANCE.register(ModEntityTypes.networkLink, NetworkLinkEntityRenderer::new);
-        NetworkLinkEntityRenderer.onInit();
+
+        CrucibleEntityRenderer.onInit();
+        InfusionTableEntityRenderer.onInit();
+
+    }
+
+    private static <T extends Entity> EntityType<T> register(String name, FabricEntityTypeBuilder<T> builder) {
+        return Registry.register(Registry.ENTITY_TYPE, new Identifier(Lacrimis.MODID, name), builder.build());
+    }
+
+    private static <T extends Entity> FabricEntityTypeBuilder<T> buildType(SpawnGroup group, EntityType.EntityFactory<T> f, float width, float height) {
+        return FabricEntityTypeBuilder.create(group, f).dimensions(EntityDimensions.fixed(width, height));
     }
 
     private static <T extends BlockEntity> BlockEntityType<T> register(String name, Supplier<T> f, Block... blocks) {

@@ -3,7 +3,6 @@ package modfest.lacrimis.client.render.block;
 import modfest.lacrimis.block.entity.NetworkLinkEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
@@ -29,7 +28,7 @@ public class NetworkLinkEntityRenderer extends BlockEntityRenderer<NetworkLinkEn
         long l = beaconBlockEntity.getWorld().getTime();
 
         if(beaconBlockEntity.getColorComponents() != null)
-            renderLightBeam(matrixStack, vertexConsumerProvider, BEAM_TEXTURE, f, 1.0F, l, 0, 1024, beaconBlockEntity.getColorComponents(), 0.2F, 0.25F);
+            renderLightBeam(matrixStack, vertexConsumerProvider, BEAM_TEXTURE, f, 1.0F, l, 1, 1024, beaconBlockEntity.getColorComponents(), 0.2F, 0.25F);
     }
 
     public static void renderLightBeam(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, Identifier identifier, float f, float g, long l, int i, int j, float[] fs, float h, float k) {
@@ -91,9 +90,5 @@ public class NetworkLinkEntityRenderer extends BlockEntityRenderer<NetworkLinkEn
 
     public boolean rendersOutsideBoundingBox(NetworkLinkEntity beaconBlockEntity) {
         return true;
-    }
-
-    public static void onInit() {
-
     }
 }

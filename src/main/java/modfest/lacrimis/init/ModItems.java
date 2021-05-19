@@ -49,12 +49,12 @@ public class ModItems {
     public static Item solidifiedTear;
     public static Item brokenSpawner;
 
-    public static Item tearSoakenHelmet;
-    public static Item tearSoakenChestplate;
-    public static Item tearSoakenLeggings;
-    public static Item tearSoakenBoots;
-
-    public static Item tearSoakenSword;
+    //Tools/armor
+    public static Item tearSoakedHelmet;
+    public static Item tearSoakedChestplate;
+    public static Item tearSoakedLeggings;
+    public static Item tearSoakedBoots;
+    public static Item tearSoakedSword;
 
     //Rune cage blocks
     public static BlockItem runeStone;
@@ -102,17 +102,11 @@ public class ModItems {
         solidifiedTear = register("solidified_tear", new Item(SETTINGS));
         brokenSpawner = register("broken_spawner", new Item(SETTINGS));
 
-        // I just realized the inconsistency of soaken/soaked woops, fix later or never >:D
-        tearSoakenHelmet = register("tear_soaked_helmet",
-                new SoakedArmor(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.HEAD, TOOL_SETTINGS));
-        tearSoakenChestplate = register("tear_soaked_chestplate",
-                new SoakedArmor(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.CHEST, TOOL_SETTINGS));
-        tearSoakenLeggings = register("tear_soaked_leggings",
-                new SoakedArmor(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.LEGS, TOOL_SETTINGS));
-        tearSoakenBoots = register("tear_soaked_boots",
-                new SoakedArmor(CustomArmorMaterials.TEAR_SOAKEN, EquipmentSlot.FEET, TOOL_SETTINGS));
-
-        tearSoakenSword = register("tear_soaked_sword", new SoakedSwordItem(CustomToolMaterials.SOAKEN, 3, -2.4F, TOOL_SETTINGS));
+        tearSoakedHelmet = registerArmor("tear_soaked_helmet", EquipmentSlot.HEAD);
+        tearSoakedChestplate = registerArmor("tear_soaked_chestplate", EquipmentSlot.CHEST);
+        tearSoakedLeggings = registerArmor("tear_soaked_leggings", EquipmentSlot.LEGS);
+        tearSoakedBoots = registerArmor("tear_soaked_boots", EquipmentSlot.FEET);
+        tearSoakedSword = register("tear_soaked_sword", new SoakedSwordItem(CustomToolMaterials.SOAKEN, 3, -2.4F, TOOL_SETTINGS));
 
         runeStone = registerRune("rune/stone", ModBlocks.runeStone);
         rune1 = registerRune("rune/tier1", ModBlocks.rune1);
@@ -140,6 +134,10 @@ public class ModItems {
 
     private static BlockItem register(String name, Block block) {
         return register(name, new BlockItem(block, SETTINGS));
+    }
+
+    private static SoakedArmor registerArmor(String name, EquipmentSlot slot) {
+        return Registry.register(Registry.ITEM, new Identifier(Lacrimis.MODID, name), new SoakedArmor(CustomArmorMaterials.TEAR_SOAKEN, slot, TOOL_SETTINGS));
     }
 
     private static BlockItem registerRune(String name, Block block) {

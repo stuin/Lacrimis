@@ -17,6 +17,7 @@ import modfest.lacrimis.block.entity.NetworkLinkEntity;
 import modfest.lacrimis.init.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FacingBlock;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
@@ -24,7 +25,7 @@ import net.minecraft.world.BlockView;
 public class DuctUtil {
 
     public static List<BlockPos> scanDucts(BlockView world, BlockPos pos, boolean extracting, int goal, Tester test) {
-        if(world == null)
+        if(world == null || world instanceof ClientWorld)
             return new ArrayList<>();
 
         Set<BlockPos> scanned = new HashSet<>();
