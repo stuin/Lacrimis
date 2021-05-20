@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 
 import modfest.lacrimis.init.ModBlocks;
 import modfest.lacrimis.util.NeighborList;
+import net.minecraft.world.WorldAccess;
 
 public class BasicRuneBlock extends Block implements BlockWrenchable {
     public static final BooleanProperty POWERED;
@@ -31,7 +32,7 @@ public class BasicRuneBlock extends Block implements BlockWrenchable {
         setDefaultState(getDefaultState().with(POWERED, false).with(CENTER, 8));
     }
 
-    public int testCage(BlockView world, BlockPos pos, Direction flipped) {
+    public int testCage(World world, BlockPos pos, Direction flipped) {
         getCenter(world, pos);
         if(tier == 1) {
             for(int y = 0; y < 2; y++) {
@@ -43,11 +44,11 @@ public class BasicRuneBlock extends Block implements BlockWrenchable {
         return tier;
     }
 
-    protected BlockPos getCenter(BlockView world, BlockPos pos) {
+    protected BlockPos getCenter(WorldAccess world, BlockPos pos) {
         return getCenter(world, pos, world.getBlockState(pos));
     }
 
-    protected BlockPos getCenter(BlockView world, BlockPos pos, BlockState state) {
+    protected BlockPos getCenter(WorldAccess world, BlockPos pos, BlockState state) {
         //Check for valid rotation
         int centerState = state.get(CENTER);
         if (centerState != 8) {
@@ -59,18 +60,19 @@ public class BasicRuneBlock extends Block implements BlockWrenchable {
         //Find correct rotation
         for (int i = 0; i < 8; i++) {
             BlockPos next = pos.add(NeighborList.platform[i]);
-            if (world instanceof World && validCenter(world.getBlockState(next))) {
-                ((World) world).setBlockState(pos, state.with(CENTER, i));
+            if (validCenter(world.getBlockState(next))) {
+                if(world instanceof World)
+                    ((World) world).setBlockState(pos, state.with(CENTER, i));
                 return next;
             }
         }
 
-        if (world instanceof World)
+        if(world instanceof World)
             ((World) world).setBlockState(pos, state.with(CENTER, 8));
         return null;
     }
 
-    protected BlockPos getTrueCenter(BlockView world, BlockPos pos) {
+    protected BlockPos getTrueCenter(World world, BlockPos pos) {
         //Get actual center
         BlockPos center = getCenter(world, pos);
         if(center != null) {

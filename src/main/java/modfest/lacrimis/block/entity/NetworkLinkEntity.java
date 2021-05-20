@@ -30,12 +30,12 @@ public class NetworkLinkEntity extends BlockEntity {
             return;
 
         if(network != null)
-            state.removeLink(getColor(), makePair());
+            state.removeLink(getColor(), pos);
 
         this.on = on;
         if(on && color != null) {
             this.color = color;
-            network = state.addLink(getColor(), makePair());
+            network = state.addLink(getColor(), pos);
             Lacrimis.LOGGER.warn("Connected to network " + getColor());
         }
         markDirty();
@@ -60,10 +60,6 @@ public class NetworkLinkEntity extends BlockEntity {
         color[1] = tag.getFloat("colorB");
         color[2] = tag.getFloat("colorC");
         on = tag.getBoolean("on");
-    }
-
-    public NetworksState.NetworkLink makePair() {
-        return new NetworksState.NetworkLink(world.getRegistryKey(), pos);
     }
 
     public boolean isOn() {

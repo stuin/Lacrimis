@@ -9,7 +9,6 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public class SoulTeleportBlock extends SoulExtractionBlock {
@@ -30,7 +29,7 @@ public class SoulTeleportBlock extends SoulExtractionBlock {
     }
 
     @Override
-    public boolean insert(BlockPos pos, BlockView world, Object value) {
+    public boolean insert(BlockPos pos, World world, Object value) {
         Direction flipped = flipside(world, pos);
         int tier = testCage(world, pos, flipped, null);
         if(value instanceof Entity && tier > 0) {
@@ -44,8 +43,8 @@ public class SoulTeleportBlock extends SoulExtractionBlock {
 
             //Spawn taint
             TaintPacket taint = new TaintPacket(actualCost(tier));
-            if(world instanceof World && DuctUtil.locateSink(world, getDuct(world, pos), taint) == null)
-                taint.spawn((World) world, pos.up(vertical));
+            if(DuctUtil.locateSink(world, getDuct(world, pos), taint) == null)
+                taint.spawn(world, pos.up(vertical));
             return true;
         }
         return false;

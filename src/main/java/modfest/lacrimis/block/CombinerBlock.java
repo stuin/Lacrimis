@@ -17,6 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 
 public class CombinerBlock extends SoulTankBlock {
     public CombinerBlock(Settings settings) {
@@ -56,12 +57,12 @@ public class CombinerBlock extends SoulTankBlock {
     }
 
     @Override
-    public boolean canConnectDuctTo(BlockPos pos, BlockView world, Direction side) {
+    public boolean canConnectDuctTo(BlockPos pos, WorldAccess world, Direction side) {
         return true;
     }
 
     @Override
-    public boolean insert(BlockPos pos, BlockView world, Object value) {
+    public boolean insert(BlockPos pos, World world, Object value) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if(value instanceof LivingEntity && !(value instanceof PlayerEntity) &&
                 blockEntity instanceof CombinerEntity && ((CombinerEntity) blockEntity).type == null) {
