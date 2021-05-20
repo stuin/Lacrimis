@@ -244,6 +244,11 @@ public class SoulShellEntity extends LivingEntity {
         this.remove();
     }
 
+    public void swapWithEntity(LivingEntity entity) {
+        if(entity instanceof ServerPlayerEntity)
+            swapWithPlayer(world, (PlayerEntity) entity);
+    }
+
     public void readCustomDataFromTag(CompoundTag tag) {
         super.readCustomDataFromTag(tag);
 

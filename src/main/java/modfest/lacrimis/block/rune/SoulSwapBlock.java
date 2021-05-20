@@ -3,6 +3,7 @@ package modfest.lacrimis.block.rune;
 import modfest.lacrimis.entity.SoulShellEntity;
 import modfest.lacrimis.util.DuctUtil;
 import modfest.lacrimis.util.TaintPacket;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -20,6 +21,13 @@ public class SoulSwapBlock extends SoulExtractionBlock {
     public boolean insert(BlockPos pos, BlockView world, Object value) {
         Direction flipped = flipside(world, pos);
         int tier = testCage(world, pos, flipped, null);
+        int added = 0;
+        if(value instanceof PlayerContainer) {
+            value = ((PlayerContainer) value).entity;
+            added = 100;
+        }
+
+        //Locate destination soul shell
         if(value instanceof PlayerEntity && tier > 0 && world instanceof World) {
             List<SoulShellEntity> shells = ((World) world).getEntitiesByClass(
                     SoulShellEntity.class, getTargetBox(pos, flipped, tier), null);
@@ -27,12 +35,20 @@ public class SoulSwapBlock extends SoulExtractionBlock {
                 shells.get(0).swapWithPlayer((World) world, (PlayerEntity) value);
 
                 //Spawn taint
-                TaintPacket taint = new TaintPacket(actualCost(tier));
+                TaintPacket taint = new TaintPacket(actualCost(tier) + added);
                 if(DuctUtil.locateSink(world, getDuct(world, pos), taint) == null)
                     taint.spawn((World) world, shells.get(0).getBlockPos());
                 return true;
             }
         }
         return false;
+    }
+
+    public static class PlayerContainer {
+        public final Entity entity;
+
+        public PlayerContainer(Entity entity) {
+            this.entity = entity;
+        }
     }
 }

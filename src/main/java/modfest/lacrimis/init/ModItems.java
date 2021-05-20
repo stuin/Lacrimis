@@ -1,9 +1,6 @@
 package modfest.lacrimis.init;
 
-import modfest.lacrimis.item.BottleOfTearsItem;
-import modfest.lacrimis.item.DiviningRodItem;
-import modfest.lacrimis.item.SoulShellItem;
-import modfest.lacrimis.item.TaintedPearlItem;
+import modfest.lacrimis.item.*;
 import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EquipmentSlot;
@@ -45,6 +42,7 @@ public class ModItems {
     public static DiviningRodItem goldDiviningRod;
     public static TaintedPearlItem taintedPearl;
     public static SoulShellItem soulShell;
+    public static SoulTotemItem soulTotem;
     public static Item tearIngot;
     public static Item taintedSludge;
     public static Item solidifiedTear;
@@ -99,6 +97,7 @@ public class ModItems {
         goldDiviningRod = register("gold_divining_rod", new DiviningRodItem(TOOL_SETTINGS));
         taintedPearl = register("tainted_pearl", new TaintedPearlItem(SETTINGS.maxCount(16)));
         soulShell = register("soul_shell", new SoulShellItem(SETTINGS.maxCount(16)));
+        soulTotem = register("soul_totem", new SoulTotemItem(TOOL_SETTINGS));
         tearIngot = register("tear_ingot", new Item(SETTINGS));
         taintedSludge = register("tainted_sludge", new Item(SETTINGS));
         solidifiedTear = register("solidified_tear", new Item(SETTINGS));
