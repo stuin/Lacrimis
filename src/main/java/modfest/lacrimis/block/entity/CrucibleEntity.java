@@ -1,10 +1,13 @@
 package modfest.lacrimis.block.entity;
 
 import modfest.lacrimis.block.DrainedCryingObsidianBlock;
+import modfest.lacrimis.block.TearCollectorBlock;
 import modfest.lacrimis.init.*;
 import modfest.lacrimis.item.BottleOfTearsItem;
+import modfest.lacrimis.util.DuctUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.FacingBlock;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
@@ -26,6 +29,7 @@ public class CrucibleEntity extends SoulTankEntity implements Tickable {
     private static final int CRAFT_COOLDOWN = 15;
 
     private int craftTime = 0;
+    private Direction collector = null;
 
     public CrucibleEntity() {
         super(ModEntityTypes.crucible, 1000, 1);
@@ -35,7 +39,8 @@ public class CrucibleEntity extends SoulTankEntity implements Tickable {
     public void tick() {
         if(world == null)
             return;
-        
+
+        //Catch tears from above
         if (getRelativeLevel() < 1 && this.world.getTime() % 10 == 0) {
             for (int dy = 1; dy < 5; dy++) {
                 BlockPos obsidianPos = this.pos.up(dy);
@@ -53,9 +58,24 @@ public class CrucibleEntity extends SoulTankEntity implements Tickable {
         if(world.isClient || world.getServer() == null)
             return;
 
+        //Check for tear collector
+        if(collector != null && getTank().getSpace() > 10 && validCollector(collector))
+            getTank().addTears(DuctUtil.locateTears(world, pos.offset(collector, 2), 10));
+        else
+            collector = null;
+
+        //Locate new tear collector
+        if(collector == null)
+            for (Direction direction : Direction.values())
+                if(validCollector(direction)) {
+                    collector = direction;
+                    break;
+                }
+
         if (craftTime < CRAFT_COOLDOWN)
             craftTime++;
 
+        //Start new crafting
         if (craftTime >= CRAFT_COOLDOWN) {
             for (ItemEntity entity : world.getEntitiesByClass(ItemEntity.class, ITEM_BOX.offset(pos), null)) {
                 inventory.setStack(0, entity.getStack());
@@ -88,6 +108,12 @@ public class CrucibleEntity extends SoulTankEntity implements Tickable {
                 }
             }
         }
+    }
+
+    private boolean validCollector(Direction dir) {
+        if(world == null || !(world.getBlockState(pos.offset(dir)).isOf(ModBlocks.tearCollector)))
+            return false;
+        return world.getBlockState(pos.offset(dir)).get(FacingBlock.FACING) == dir.getOpposite();
     }
 
     public int[] getAvailableSlots(Direction side) {

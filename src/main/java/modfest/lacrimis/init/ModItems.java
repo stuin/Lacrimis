@@ -32,6 +32,7 @@ public class ModItems {
     public static BlockItem gatedDuct;
     public static BlockItem oneWayDuct;
     public static BlockItem taintOutput;
+    public static BlockItem tearCollector;
     public static BlockItem tearLantern;
     public static BlockItem networkLink;
     public static BlockItem drainedCryingObsidian;
@@ -86,6 +87,7 @@ public class ModItems {
         gatedDuct = register("gated_duct", ModBlocks.gatedDuct);
         oneWayDuct = register("one_way_duct", ModBlocks.oneWayDuct);
         taintOutput = register("taint_output", ModBlocks.taintOutput);
+        tearCollector = register("tear_collector", ModBlocks.tearCollector);
         tearLantern = register("tear_lantern", ModBlocks.tearLantern);
         networkLink = register("network_link", ModBlocks.networkLink);
         drainedCryingObsidian = register("drained_crying_obsidian", ModBlocks.drainedCryingObsidian);
