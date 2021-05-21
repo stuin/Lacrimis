@@ -18,16 +18,19 @@ import modfest.lacrimis.init.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FacingBlock;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
+import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.World;
 
 public class DuctUtil {
 
-    public static List<BlockPos> scanDucts(BlockView world, BlockPos pos, boolean extracting, int goal, Tester test) {
+    public static List<BlockPos> scanDucts(World world, BlockPos pos, boolean extracting, int goal, Tester test) {
         if(world == null || world instanceof ClientWorld)
             return new ArrayList<>();
 
+        //Set up block lists
         Set<BlockPos> scanned = new HashSet<>();
         Deque<BlockPos> stack = new ArrayDeque<>();
         List<Direction> all = Arrays.asList(Direction.values());
@@ -35,6 +38,7 @@ public class DuctUtil {
         NetworksState.NetworkList network = null;
         NetworksState.NetworkList networkOriginal = null;
 
+        //Get initial ducting
         EnumSet<Direction> outputs;
         BlockState source = world.getBlockState(pos);
         if (source.getBlock() instanceof DuctConnectBlock) {
@@ -54,6 +58,7 @@ public class DuctUtil {
         else
             outputs = EnumSet.noneOf(Direction.class);
 
+        //Loop through connected ducts
         stack.push(pos);
         scanned.add(pos);
         while (!stack.isEmpty()) {
@@ -84,6 +89,7 @@ public class DuctUtil {
                         }
                     }
 
+                    //Get network link
                     if (nextState.getBlock() instanceof NetworkLinkBlock) {
                         NetworkLinkEntity linkEntity = ((NetworkLinkEntity) world.getBlockEntity(next));
                         if (linkEntity != null && linkEntity.isOn()) {
@@ -91,22 +97,24 @@ public class DuctUtil {
                                 networkOriginal = linkEntity.getNetwork();
                                 if(networkOriginal != null) {
                                     network = (NetworksState.NetworkList) networkOriginal.clone();
-                                    network.remove(linkEntity.makePair());
+                                    network.remove(linkEntity.getPos());
                                 }
                             } else if (network.color == linkEntity.getColor())
-                                network.remove(linkEntity.makePair());
+                                network.remove(linkEntity.getPos());
                         }
                     }
                 }
             }
+
+            //Fallback to next network link
             if(stack.isEmpty() && network != null) {
-                while(network.size() > 0 && !validLink(world, network.get(0).getRight(), network.color)) {
+                while(network.size() > 0 && !validLink(world, network.get(0), network.color)) {
                     networkOriginal.remove(network.get(0));
                     network.remove(network.get(0));
                 }
 
                 if(network.size() > 0) {
-                    stack.push(network.get(0).getRight());
+                    stack.push(network.get(0));
                     network.remove(network.get(0));
                 }
             }
@@ -115,26 +123,27 @@ public class DuctUtil {
         return new ArrayList<>();
     }
 
-    private static boolean validLink(BlockView world, BlockPos pos, int color) {
-        if(world.getBlockState(pos).getBlock() instanceof NetworkLinkBlock) {
-            NetworkLinkEntity linkEntity = (NetworkLinkEntity) world.getBlockEntity(pos);
+    private static boolean validLink(World world, BlockPos link, int color) {
+        //Check for active network link
+        if(world.getBlockState(link).getBlock() instanceof NetworkLinkBlock) {
+            NetworkLinkEntity linkEntity = (NetworkLinkEntity) world.getBlockEntity(link);
             return linkEntity != null && linkEntity.getNetwork() != null && linkEntity.getColor() == color;
         }
         return false;
     }
 
-    public static int locateTears(BlockView world, BlockPos pos, int request) {
+    public static int locateTears(World world, BlockPos pos, int request) {
         return locateTears(world, pos, request, false);
     }
 
-    public static int locateTears(BlockView world, BlockPos pos, int request, boolean simulate) {
+    public static int locateTears(World world, BlockPos pos, int request, boolean simulate) {
         List<BlockPos> list = scanDucts(world, pos, true, 1, (p, b, r) -> b.extractTears(p, world, request, true));
         if(list.size() > 0)
             return ((DuctConnectBlock)world.getBlockState(list.get(0)).getBlock()).extractTears(list.get(0), world, request, simulate);
         return 0;
     }
 
-    public static BlockPos locateSink(BlockView world, BlockPos pos, Object value) {
+    public static BlockPos locateSink(World world, BlockPos pos, Object value) {
         List<BlockPos> list = scanDucts(world, pos, false, 1, (p, b, r) -> b.insert(p, world, value) ? 1 : 0);
         if(list.size() > 0)
             return list.get(0);

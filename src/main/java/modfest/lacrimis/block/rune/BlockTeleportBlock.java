@@ -7,10 +7,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.init.ModBlocks;
 import modfest.lacrimis.util.DuctUtil;
 
@@ -30,10 +28,9 @@ public class BlockTeleportBlock extends CenterRuneBlock {
     }
 
     @Override
-    public boolean insert(BlockPos dest, BlockView blockView, Object value) {
-        Direction flipped = flipside(blockView, dest);
-        if(blockView instanceof World && value instanceof BlockPos && testCage(blockView, dest, flipped, null) > 0) {
-            World world = (World) blockView;
+    public boolean insert(BlockPos dest, World world, Object value) {
+        Direction flipped = flipside(world, dest);
+        if(value instanceof BlockPos && testCage(world, dest, flipped, null) > 0) {
             dest = dest.offset(flipped);
             BlockPos source = (BlockPos) value;
             BlockState sourceState = world.getBlockState(source);

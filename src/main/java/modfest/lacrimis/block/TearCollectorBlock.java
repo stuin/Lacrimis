@@ -9,7 +9,8 @@ import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 
 public class TearCollectorBlock extends FacingBlock implements DuctConnectBlock {
     public TearCollectorBlock(Settings settings) {
@@ -35,17 +36,17 @@ public class TearCollectorBlock extends FacingBlock implements DuctConnectBlock 
     }
 
     @Override
-    public boolean canConnectDuctTo(BlockPos pos, BlockView world, Direction side) {
+    public boolean canConnectDuctTo(BlockPos pos, WorldAccess world, Direction side) {
         return side == world.getBlockState(pos).get(FACING);
     }
 
     @Override
-    public int extractTears(BlockPos pos, BlockView world, int request, boolean simulate) {
+    public int extractTears(BlockPos pos, World world, int request, boolean simulate) {
         return 0;
     }
 
     @Override
-    public boolean insert(BlockPos pos, BlockView world, Object value) {
+    public boolean insert(BlockPos pos, World world, Object value) {
         return false;
     }
 }

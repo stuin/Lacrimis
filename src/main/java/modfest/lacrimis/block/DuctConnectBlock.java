@@ -2,13 +2,14 @@ package modfest.lacrimis.block;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 
 public interface DuctConnectBlock {
 
-    boolean canConnectDuctTo(BlockPos pos, BlockView world, Direction side);
+    boolean canConnectDuctTo(BlockPos pos, WorldAccess world, Direction side);
 
-    int extractTears(BlockPos pos, BlockView world, int request, boolean simulate);
+    int extractTears(BlockPos pos, World world, int request, boolean simulate);
 
-    boolean insert(BlockPos pos, BlockView world, Object value);
+    boolean insert(BlockPos pos, World world, Object value);
 }

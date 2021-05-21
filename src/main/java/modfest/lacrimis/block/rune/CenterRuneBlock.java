@@ -30,6 +30,7 @@ import modfest.lacrimis.block.DuctConnectBlock;
 import modfest.lacrimis.init.ModBlocks;
 import modfest.lacrimis.util.DuctUtil;
 import modfest.lacrimis.util.NeighborList;
+import net.minecraft.world.WorldAccess;
 
 public abstract class CenterRuneBlock extends Block implements DuctConnectBlock, BlockWrenchable {
     private static final Box TARGET_BOX = new Box(-0.5, -1, -0.5, 1.5, 1, 1.5);
@@ -48,7 +49,7 @@ public abstract class CenterRuneBlock extends Block implements DuctConnectBlock,
         setDefaultState(getDefaultState().with(DUCT, 8).with(POWERED, false));
     }
 
-    protected int testCage(BlockView world, BlockPos pos, Direction flipped, PlayerEntity player) {
+    protected int testCage(World world, BlockPos pos, Direction flipped, PlayerEntity player) {
         boolean duct = false;
         int actualTier = 10;
         for(int i = 0; i < 8; i++) {
@@ -74,15 +75,13 @@ public abstract class CenterRuneBlock extends Block implements DuctConnectBlock,
                     block instanceof AdvancedRuneBlock &&
                             world.getBlockState(pos.add(next)).get(AdvancedRuneBlock.PIPE) != 3) {
                 if(duct) {
-                    if(world instanceof World)
-                        ((World) world).setBlockState(pos, world.getBlockState(pos).with(DUCT, 8));
+                    world.setBlockState(pos, world.getBlockState(pos).with(DUCT, 8));
                     return error(player, "ducts");
                 }
                 duct = true;
 
                 //Save duct location
-                if(world instanceof World)
-                    ((World) world).setBlockState(pos, world.getBlockState(pos).with(DUCT, i));
+                world.setBlockState(pos, world.getBlockState(pos).with(DUCT, i));
             }
         }
         if(!duct)
@@ -90,7 +89,7 @@ public abstract class CenterRuneBlock extends Block implements DuctConnectBlock,
         return actualTier;
     }
 
-    protected Direction flipside(BlockView world, BlockPos pos) {
+    protected Direction flipside(World world, BlockPos pos) {
         return world.getBlockState(pos.up()).isOf(ModBlocks.flipRune) ? Direction.DOWN : Direction.UP;
     }
 
@@ -126,7 +125,7 @@ public abstract class CenterRuneBlock extends Block implements DuctConnectBlock,
         return onActivate(world, pos, duct, null, player);
     }
 
-    public BlockPos getDuct(BlockView world, BlockPos pos) {
+    public BlockPos getDuct(World world, BlockPos pos) {
         //Locate duct connection
         int i = world.getBlockState(pos).get(DUCT);
         if(i == 8)
@@ -176,17 +175,17 @@ public abstract class CenterRuneBlock extends Block implements DuctConnectBlock,
     protected abstract boolean onActivate(World world, BlockPos pos, BlockPos duct, Entity entity, PlayerEntity player);
 
     @Override
-    public boolean canConnectDuctTo(BlockPos pos, BlockView world, Direction side) {
+    public boolean canConnectDuctTo(BlockPos pos, WorldAccess world, Direction side) {
         return false;
     }
 
     @Override
-    public int extractTears(BlockPos pos, BlockView world, int request, boolean simulate) {
+    public int extractTears(BlockPos pos, World world, int request, boolean simulate) {
         return 0;
     }
 
     @Override
-    public boolean insert(BlockPos pos, BlockView world, Object value) {
+    public boolean insert(BlockPos pos, World world, Object value) {
         return false;
     }
 

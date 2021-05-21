@@ -7,7 +7,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public class SoulSwapBlock extends SoulExtractionBlock {
     }
 
     @Override
-    public boolean insert(BlockPos pos, BlockView world, Object value) {
+    public boolean insert(BlockPos pos, World world, Object value) {
         Direction flipped = flipside(world, pos);
         int tier = testCage(world, pos, flipped, null);
         int added = 0;
@@ -28,16 +27,16 @@ public class SoulSwapBlock extends SoulExtractionBlock {
         }
 
         //Locate destination soul shell
-        if(value instanceof PlayerEntity && tier > 0 && world instanceof World) {
-            List<SoulShellEntity> shells = ((World) world).getEntitiesByClass(
+        if(value instanceof PlayerEntity && tier > 0) {
+            List<SoulShellEntity> shells = world.getEntitiesByClass(
                     SoulShellEntity.class, getTargetBox(pos, flipped, tier), null);
             if(shells.size() > 0) {
-                shells.get(0).swapWithPlayer((World) world, (PlayerEntity) value);
+                shells.get(0).swapWithPlayer(world, (PlayerEntity) value);
 
                 //Spawn taint
                 TaintPacket taint = new TaintPacket(actualCost(tier) + added);
                 if(DuctUtil.locateSink(world, getDuct(world, pos), taint) == null)
-                    taint.spawn((World) world, shells.get(0).getBlockPos());
+                    taint.spawn(world, shells.get(0).getBlockPos());
                 return true;
             }
         }

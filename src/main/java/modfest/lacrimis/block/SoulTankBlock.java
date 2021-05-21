@@ -27,6 +27,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 
 public abstract class SoulTankBlock extends BlockWithEntity implements DuctConnectBlock, BlockWrenchable {
     private final boolean canExtract;
@@ -130,12 +131,12 @@ public abstract class SoulTankBlock extends BlockWithEntity implements DuctConne
     }
 
     @Override
-    public boolean canConnectDuctTo(BlockPos pos, BlockView world, Direction side) {
+    public boolean canConnectDuctTo(BlockPos pos, WorldAccess world, Direction side) {
         return side != Direction.UP;
     }
 
     @Override
-    public int extractTears(BlockPos pos, BlockView world, int request, boolean simulate) {
+    public int extractTears(BlockPos pos, World world, int request, boolean simulate) {
         SoulTank tank = getTank(world, pos);
         if(tank != null && tank.getTears() > 0 && canExtract) {
             if(simulate)
@@ -146,7 +147,7 @@ public abstract class SoulTankBlock extends BlockWithEntity implements DuctConne
     }
 
     @Override
-    public boolean insert(BlockPos pos, BlockView world, Object value) {
+    public boolean insert(BlockPos pos, World world, Object value) {
         return false;
     }
 }
