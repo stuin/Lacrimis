@@ -1,6 +1,15 @@
 package modfest.lacrimis.init;
 
-import modfest.lacrimis.item.*;
+import modfest.lacrimis.Lacrimis;
+import modfest.lacrimis.item.BottleOfTearsItem;
+import modfest.lacrimis.item.DiviningRodItem;
+import modfest.lacrimis.item.SoulShellItem;
+import modfest.lacrimis.item.SoulTotemItem;
+import modfest.lacrimis.item.TaintedPearlItem;
+import modfest.lacrimis.item.armor.CustomArmorMaterials;
+import modfest.lacrimis.item.armor.SoakedArmor;
+import modfest.lacrimis.item.tools.CustomToolMaterials;
+import modfest.lacrimis.item.tools.SoakedSwordItem;
 import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EquipmentSlot;
@@ -9,12 +18,6 @@ import net.minecraft.item.Item;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-
-import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.item.armor.CustomArmorMaterials;
-import modfest.lacrimis.item.armor.SoakedArmor;
-import modfest.lacrimis.item.tools.CustomToolMaterials;
-import modfest.lacrimis.item.tools.SoakedSwordItem;
 
 public class ModItems {
     private static final Item.Settings SETTINGS = new Item.Settings().group(Lacrimis.ITEM_GROUP);
@@ -35,6 +38,9 @@ public class ModItems {
     public static BlockItem drainedCryingObsidian;
     public static BlockItem creativeTearsBlock;
     public static BlockItem wardedStone;
+
+    public static BlockItem taintedStone;
+    public static BlockItem taintedDirt;
 
     //Main items
     public static BottleOfTearsItem bottleOfTears;
@@ -91,6 +97,8 @@ public class ModItems {
         drainedCryingObsidian = register("drained_crying_obsidian", ModBlocks.drainedCryingObsidian);
         creativeTearsBlock = register("creative_tears_block", ModBlocks.creativeTearsBlock);
         wardedStone = register("warded", ModBlocks.wardedStone);
+        taintedStone = register("tainted_stone", ModBlocks.taintedStone);
+        taintedDirt = register("tainted_dirt", ModBlocks.taintedDirt);
 
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
         diviningRod = register("divining_rod", new DiviningRodItem(TOOL_SETTINGS));

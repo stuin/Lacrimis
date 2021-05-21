@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "lacrimis:block/tainted_dirt"
+      },
+      {
+        "model": "lacrimis:block/tainted_dirt",
+        "y": 90
+      },
+      {
+        "model": "lacrimis:block/tainted_dirt",
+        "y": 180
+      },
+      {
+        "model": "lacrimis:block/tainted_dirt",
+        "y": 270
+      }
+    ]
+  }
+}

@@ -36,6 +36,9 @@ public class ModBlocks {
     public static CreativeTearsBlock creativeTearsBlock;
     public static WardedBlock wardedStone;
 
+    public static Block taintedStone;
+    public static Block taintedDirt;
+
     //Rune cage blocks
     public static Block runeStone;
     public static Block flipRune;
@@ -76,6 +79,9 @@ public class ModBlocks {
         drainedCryingObsidian = register("drained_crying_obsidian", new DrainedCryingObsidianBlock(Settings.copy(Blocks.CRYING_OBSIDIAN)));
         creativeTearsBlock = register("creative_tears_block", new CreativeTearsBlock(wardedSettings));
         wardedStone = register("warded", new WardedBlock(wardedSettings));
+        
+        taintedStone = register("tainted_stone", new Block(FabricBlockSettings.copy(Blocks.STONE).strength(1F)));
+        taintedDirt = register("tainted_dirt", new Block(FabricBlockSettings.copy(Blocks.DIRT).strength(1F)));
 
         runeStone = register("rune/stone", new Block(runeSettings));
         flipRune = register("rune/flip", new Block(runeSettings));

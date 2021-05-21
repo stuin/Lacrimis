@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "lacrimis:block/tainted_stone"
+      },
+      {
+        "model": "lacrimis:block/tainted_stone_mirrored"
+      },
+      {
+        "model": "lacrimis:block/tainted_stone",
+        "y": 180
+      },
+      {
+        "model": "lacrimis:block/tainted_stone_mirrored",
+        "y": 180
+      }
+    ]
+  }
+}
