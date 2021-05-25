@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "layers=1": {
+      "model": "lacrimis:block/taint_height2"
+    },
+    "layers=2": {
+      "model": "lacrimis:block/taint_height4"
+    },
+    "layers=3": {
+      "model": "lacrimis:block/taint_height6"
+    },
+    "layers=4": {
+      "model": "lacrimis:block/taint_height8"
+    },
+    "layers=5": {
+      "model": "lacrimis:block/taint_height10"
+    },
+    "layers=6": {
+      "model": "lacrimis:block/taint_height12"
+    },
+    "layers=7": {
+      "model": "lacrimis:block/taint_height14"
+    },
+    "layers=8": {
+      "model": "lacrimis:block/taint_block"
+    }
+  }
+}

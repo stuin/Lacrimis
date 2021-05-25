@@ -38,9 +38,9 @@ public class ModItems {
     public static BlockItem drainedCryingObsidian;
     public static BlockItem creativeTearsBlock;
     public static BlockItem wardedStone;
-
     public static BlockItem taintedStone;
     public static BlockItem taintedDirt;
+    public static BlockItem taint;
 
     //Main items
     public static BottleOfTearsItem bottleOfTears;
@@ -99,6 +99,7 @@ public class ModItems {
         wardedStone = register("warded", ModBlocks.wardedStone);
         taintedStone = register("tainted_stone", ModBlocks.taintedStone);
         taintedDirt = register("tainted_dirt", ModBlocks.taintedDirt);
+        taint = register("taint", ModBlocks.taint);
 
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
         diviningRod = register("divining_rod", new DiviningRodItem(TOOL_SETTINGS));
