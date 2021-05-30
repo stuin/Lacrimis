@@ -49,7 +49,6 @@ public class ModBlocks {
     public static DuctRuneBlock ductRune2;
 
     //Rune center blocks
-    public static HealBlock healRune;
     public static SoulExtractionBlock extractionRune;
     public static SoulTeleportBlock destinationRune;
     public static SoulTeleportBlock transportRune;
@@ -91,7 +90,6 @@ public class ModBlocks {
         rune3 = register("rune/tier3", new AdvancedRuneBlock());
         ductRune1 = register("rune/duct1", new DuctRuneBlock(1));
         ductRune2 = register("rune/duct2", new DuctRuneBlock(2));
-        healRune = register("rune/healing", new HealBlock());
         extractionRune = register("rune/extraction", new SoulExtractionBlock());
         destinationRune = register("rune/destination", new SoulTeleportBlock(false));
         soulSwapRune = register("rune/soul_swap", new SoulSwapBlock());

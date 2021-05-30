@@ -3,11 +3,11 @@
   "icon": "lacrimis:rune/destination",
   "category": "lacrimis:runes",
   "advancement": "lacrimis:recipes/rune_tier1",
-  "sortnum": 3,
+  "sortnum": 2,
   "pages": [
     {
       "type": "text",
-      "text": "The obvious follower of the Extraction Rune is the Destination Rune, an output that can reconstruct a soul from the chaos within the tears. $(#f00)Be warned,$() as it may bring some other materials along for the ride. Test it on some other creatures first. And wear safety googles."
+      "text": "The obvious follower of the Extraction Rune is the Destination Rune, an output that can reconstruct a soul from the chaos within tear ducts. $(#f00)Be warned,$() as it may bring some other materials along for the ride. Test it on some other creatures first. And wear safety googles."
     },
     {
       "type": "lacrimis:infusion",

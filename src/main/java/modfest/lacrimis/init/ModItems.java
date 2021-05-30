@@ -71,7 +71,6 @@ public class ModItems {
     public static BlockItem ductRune2;
 
     //Rune center blocks
-    public static BlockItem healRune;
     public static BlockItem extractionRune;
     public static BlockItem destinationRune;
     public static BlockItem soulSwapRune;
@@ -125,7 +124,6 @@ public class ModItems {
         flipRune = registerRune("rune/flip", ModBlocks.flipRune);
         ductRune1 = registerRune("rune/duct1", ModBlocks.ductRune1);
         ductRune2 = registerRune("rune/duct2", ModBlocks.ductRune2);
-        healRune = registerRune("rune/healing", ModBlocks.healRune);
         extractionRune = registerRune("rune/extraction", ModBlocks.extractionRune);
         destinationRune = registerRune("rune/destination", ModBlocks.destinationRune);
         soulSwapRune = registerRune("rune/soul_swap", ModBlocks.soulSwapRune);

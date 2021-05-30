@@ -3,7 +3,7 @@
   "icon": "lacrimis:rune/entity_transport",
   "category": "lacrimis:runes",
   "advancement": "lacrimis:recipes/rune_tier2",
-  "sortnum": 4,
+  "sortnum": 3,
   "pages": [
     {
       "type": "text",

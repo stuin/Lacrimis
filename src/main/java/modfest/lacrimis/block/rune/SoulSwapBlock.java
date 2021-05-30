@@ -13,7 +13,7 @@ import java.util.List;
 
 public class SoulSwapBlock extends SoulExtractionBlock {
     public SoulSwapBlock() {
-        super(50, 1);
+        super(50, 2);
     }
 
     @Override
