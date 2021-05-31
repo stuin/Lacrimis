@@ -6,12 +6,14 @@ import modfest.lacrimis.util.NetworksState;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 public class NetworkLinkEntity extends BlockEntity {
     private float[] color;
@@ -26,20 +28,28 @@ public class NetworkLinkEntity extends BlockEntity {
     public void setState(boolean on, float[] color, World world) {
         if(state == null && world instanceof ServerWorld)
             state = ((ServerWorld) world).getPersistentStateManager().getOrCreate(NetworksState::new, NetworksState.KEY);
-        else if(state == null)
-            return;
 
-        if(network != null)
+        if(network != null && state != null)
             state.removeLink(getColor(), pos);
 
         this.on = on;
         if(on && color != null) {
             this.color = color;
-            network = state.addLink(getColor(), pos);
+            if(state != null)
+                network = state.addLink(getColor(), pos);
             Lacrimis.LOGGER.warn("Connected to network " + getColor());
         }
-        markDirty();
     }
+
+    @Nullable
+    public BlockEntityUpdateS2CPacket toUpdatePacket() {
+        return new BlockEntityUpdateS2CPacket(this.pos, 3, this.toInitialChunkDataTag());
+    }
+
+    public CompoundTag toInitialChunkDataTag() {
+        return this.toTag(new CompoundTag());
+    }
+
 
     @Override
     public CompoundTag toTag(CompoundTag tag) {

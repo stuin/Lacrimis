@@ -38,7 +38,7 @@ public class NetworkLinkBlock extends BlockWithEntity implements DuctConnectBloc
     @Override
     public void onWrenched(World world, PlayerEntity player, BlockHitResult result) {
         NetworkLinkEntity linkEntity = ((NetworkLinkEntity) world.getBlockEntity(result.getBlockPos()));
-        if(!world.isClient && linkEntity != null) {
+        if(linkEntity != null) {
             BlockPos pos = result.getBlockPos().up();
             float[] color = BLANK.clone();
             boolean changed = false;

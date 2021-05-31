@@ -1,5 +1,6 @@
 package modfest.lacrimis.client.render.block;
 
+import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.NetworkLinkEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -27,7 +28,7 @@ public class NetworkLinkEntityRenderer extends BlockEntityRenderer<NetworkLinkEn
     public void render(NetworkLinkEntity beaconBlockEntity, float f, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, int j) {
         long l = beaconBlockEntity.getWorld().getTime();
 
-        if(beaconBlockEntity.getColorComponents() != null)
+        if(beaconBlockEntity.getColorComponents() != null && beaconBlockEntity.isOn())
             renderLightBeam(matrixStack, vertexConsumerProvider, BEAM_TEXTURE, f, 1.0F, l, 1, 1024, beaconBlockEntity.getColorComponents(), 0.2F, 0.25F);
     }
 
