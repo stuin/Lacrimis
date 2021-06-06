@@ -48,8 +48,8 @@ public class TaintOutputBlock extends FacingBlock implements DuctConnectBlock {
 
     @Override
     public boolean insert(BlockPos pos, World world, Object value) {
-        if(value instanceof TaintPacket && world instanceof World) {
-            ((TaintPacket) value).spawn((World) world, pos.offset(world.getBlockState(pos).get(FACING)));
+        if(value instanceof TaintPacket && !world.isClient) {
+            ((TaintPacket) value).spawn(world, pos.offset(world.getBlockState(pos).get(FACING)));
             return true;
         }
         return false;

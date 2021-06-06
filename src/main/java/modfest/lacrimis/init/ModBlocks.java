@@ -35,8 +35,8 @@ public class ModBlocks {
     public static DrainedCryingObsidianBlock drainedCryingObsidian;
     public static CreativeTearsBlock creativeTearsBlock;
     public static WardedBlock wardedStone;
-    public static Block taintedStone;
-    public static Block taintedDirt;
+    public static TaintedBlock taintedStone;
+    public static TaintedBlock taintedDirt;
     public static TaintBlock taint;
 
     //Rune cage blocks
@@ -60,10 +60,11 @@ public class ModBlocks {
     //Block tags
     public static Tag<Block> cage_materials;
     public static Tag<Block> non_transportable;
+    public static Tag<Block> resistant;
+    public static Tag<Block> tainted;
     public static Tag<Block> tier1;
     public static Tag<Block> tier2;
     public static Tag<Block> tier3;
-    public static Tag<Block> tainted;
 
     public static void register() {
         infusionTable = register("infusion_table", new InfusionTableBlock(Settings.copy(Blocks.ENCHANTING_TABLE).nonOpaque()));
@@ -79,9 +80,9 @@ public class ModBlocks {
         drainedCryingObsidian = register("drained_crying_obsidian", new DrainedCryingObsidianBlock(Settings.copy(Blocks.CRYING_OBSIDIAN)));
         creativeTearsBlock = register("creative_tears_block", new CreativeTearsBlock(wardedSettings));
         wardedStone = register("warded", new WardedBlock(wardedSettings));
-        taintedStone = register("tainted_stone", new Block(FabricBlockSettings.copy(Blocks.STONE).strength(1F)));
-        taintedDirt = register("tainted_dirt", new Block(FabricBlockSettings.copy(Blocks.DIRT).strength(1F)));
-        taint = register("taint", new TaintBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES).strength(1F)));
+        taintedStone = register("tainted_stone", new TaintedBlock(FabricBlockSettings.copy(Blocks.STONE)));
+        taintedDirt = register("tainted_dirt", new TaintedBlock(FabricBlockSettings.copy(Blocks.DIRT)));
+        taint = register("taint", new TaintBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES)));
 
         runeStone = register("rune/stone", new Block(runeSettings));
         flipRune = register("rune/flip", new Block(runeSettings));
@@ -101,10 +102,11 @@ public class ModBlocks {
         //Block tags
         cage_materials = TagRegistry.block(new Identifier(Lacrimis.MODID, "cage_materials"));
         non_transportable = TagRegistry.block(new Identifier(Lacrimis.MODID, "non_transportable"));
+        resistant = TagRegistry.block(new Identifier(Lacrimis.MODID, "resistant"));
+        tainted = TagRegistry.block(new Identifier(Lacrimis.MODID, "tainted"));
         tier1 = TagRegistry.block(new Identifier(Lacrimis.MODID, "tier1"));
         tier2 = TagRegistry.block(new Identifier(Lacrimis.MODID, "tier2"));
         tier3 = TagRegistry.block(new Identifier(Lacrimis.MODID, "tier3"));
-        tainted = TagRegistry.block(new Identifier(Lacrimis.MODID, "tainted"));
     }
 
     private static <T extends Block> T register(String name, T block) {

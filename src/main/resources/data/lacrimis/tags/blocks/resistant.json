@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "lacrimis:rune/stone",
+    "lacrimis:rune/flip",
+    "lacrimis:rune/tier1",
+    "lacrimis:rune/duct1",
+    "lacrimis:rune/extraction",
+    "lacrimis:rune/destination",
+    "lacrimis:rune/tier2",
+    "lacrimis:rune/duct2",
+    "lacrimis:rune/soul_swap",
+    "lacrimis:rune/block_transport",
+    "lacrimis:rune/entity_transport",
+    "lacrimis:rune/tier3",
+    "lacrimis:rune/warding",
+    "lacrimis:rune/spawner",
+    "lacrimis:taint_output",
+    "lacrimis:network_link",
+    "minecraft:beacon"
+  ]
+}

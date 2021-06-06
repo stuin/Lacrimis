@@ -1,7 +1,5 @@
 package modfest.lacrimis.block;
 
-import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.init.ModBlocks;
 import modfest.lacrimis.init.ModStatusEffects;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
@@ -24,7 +22,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public class TaintBlock extends FallingBlock {
+import static modfest.lacrimis.util.TaintPacket.convert;
+import static modfest.lacrimis.util.TaintPacket.setLayers;
+
+public class TaintBlock extends Block {
     public static final IntProperty LAYERS;
     protected static final VoxelShape[] LAYERS_TO_SHAPE;
 
@@ -59,39 +60,38 @@ public class TaintBlock extends FallingBlock {
 
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         int layers = state.get(LAYERS);
-        if(random.nextInt(2) == 0 && !convert(world, pos, pos.down(), layers)) {
+        //Try converting downwards
+        int strength = convert(world, pos.down(), layers, false);
+        if(strength > 0)
+            setLayers(world, pos, layers - strength);
+        else {
+            //Try converting random direction
             Direction dir = Direction.fromHorizontal(random.nextInt(4));
-            if(!convert(world, pos, pos.offset(dir), layers))
-                world.setBlockState(pos, getDefaultState().with(LAYERS, Math.min(layers + random.nextInt(3) + 1, 8)));
+            strength = convert(world, pos.offset(dir), layers, true);
+            if(strength > 0)
+                setLayers(world, pos, layers - strength);
+            else if(layers == 8)
+                convert(world, pos.up(), layers, true);
+            else
+                setLayers(world, pos, layers - random.nextInt(4));
         }
     }
 
     @Override
-    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
-        super.neighborUpdate(state, world, pos, block, fromPos, notify);
-        if(world.getBlockState(pos.down()).isOf(this)) {
-            BlockState dest = world.getBlockState(pos.down());
-            world.setBlockState(pos.down(), dest.with(LAYERS, Math.min(dest.get(LAYERS) + state.get(LAYERS), 8)));
-            world.setBlockState(pos, Blocks.AIR.getDefaultState());
-        }
+    public boolean hasRandomTicks(BlockState state) {
+        return true;
     }
 
-    private boolean convert(World world, BlockPos source, BlockPos dest, int layers) {
-        BlockState state = world.getBlockState(dest);
-        int strength = (int)state.getHardness(world, dest);
-        if(strength != -1 && strength < layers) {
-            world.setBlockState(source, getDefaultState().with(LAYERS, Math.min(layers - strength, 8)));
-            if(state.isIn(ModBlocks.tainted))
-                return false;
-            else if(state.getMaterial() == Material.SOIL)
-                world.setBlockState(dest, ModBlocks.taintedDirt.getDefaultState());
-            else if(state.getMaterial() == Material.STONE || state.getMaterial() == Material.PISTON || state.getMaterial() == Material.METAL)
-                world.setBlockState(dest, ModBlocks.taintedStone.getDefaultState());
-            else
-                world.setBlockState(dest, ModBlocks.taint.getDefaultState().with(LAYERS, Math.min(strength + 1, 8)));
-            return true;
+    @Override
+    public void neighborUpdate(BlockState source, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+        BlockState state = world.getBlockState(pos.down());
+        if(state.isOf(this) && state.get(LAYERS) < 8) {
+            setLayers(world, pos, state.get(LAYERS) + source.get(LAYERS) - 8);
+            setLayers(world, pos.down(), state.get(LAYERS) + source.get(LAYERS));
+        } else if(state.isAir()) {
+            world.setBlockState(pos, Blocks.AIR.getDefaultState());
+            setLayers(world, pos.down(), source.get(LAYERS));
         }
-        return false;
     }
 
     @Override
