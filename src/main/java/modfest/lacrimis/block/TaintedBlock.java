@@ -23,8 +23,9 @@ public class TaintedBlock extends Block {
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if(random.nextInt(2) == 0) {
             Direction dir = Direction.random(random);
-            TaintPacket.convert(world, pos.offset(dir),
-                    (int)(state.getHardness(world, pos) + 1) * (random.nextInt(3) + 1), false);
+            int i = (int)(state.getHardness(world, pos) + 1) * (random.nextInt(3) + 1);
+            if(TaintPacket.convert(world, pos.offset(dir), i, false) == 0 && random.nextInt(4) == 0)
+                TaintPacket.setLayers(world, pos, i);
         }
     }
 

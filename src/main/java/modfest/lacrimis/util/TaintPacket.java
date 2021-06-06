@@ -27,7 +27,12 @@ public class TaintPacket {
         if(amount > 0 && !world.isClient && !spawned) {
             if(convert(world, pos, amount / 50, false) == 0) {
                 for(Direction dir : Direction.values())
-                    spawn(world, pos.offset(dir));
+                    if(!spawned && convert(world, pos.offset(dir), amount / 50, false) > 0)
+                        spawned = true;
+
+                if(!spawned)
+                    for(Direction dir : Direction.values())
+                        spawn(world, pos.offset(dir, 2));
             }
 
             Lacrimis.LOGGER.debug("Spawned taint {} at {}", amount, pos.toString());
@@ -59,6 +64,8 @@ public class TaintPacket {
         } else if(!state.getFluidState().isEmpty()) {
             setLayers(world, dest, Math.min(state.getFluidState().getLevel(), layers));
             return 1;
+        } else if(state.isOf(Blocks.FIRE)) {
+            return layers;
         }
 
         //Normal blocks

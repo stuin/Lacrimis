@@ -51,4 +51,9 @@ public abstract class InfusionRecipe implements Recipe<InfusionInventory> {
     public int getTears() {
         return tears;
     }
+
+    @Override
+    public boolean isIgnoredInRecipeBook() {
+        return true;
+    }
 }

@@ -4,6 +4,7 @@ import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.*;
 import modfest.lacrimis.block.rune.*;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractBlock.Settings;
@@ -107,6 +108,10 @@ public class ModBlocks {
         tier1 = TagRegistry.block(new Identifier(Lacrimis.MODID, "tier1"));
         tier2 = TagRegistry.block(new Identifier(Lacrimis.MODID, "tier2"));
         tier3 = TagRegistry.block(new Identifier(Lacrimis.MODID, "tier3"));
+
+        //Flammables
+        FlammableBlockRegistry.getDefaultInstance().add(taintedDirt, 20, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(taintedStone, 20, 5);
     }
 
     private static <T extends Block> T register(String name, T block) {
