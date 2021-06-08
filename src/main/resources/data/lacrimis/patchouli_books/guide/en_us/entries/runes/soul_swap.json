@@ -7,12 +7,12 @@
   "pages": [
     {
       "type": "text",
-      "text": "Yet another expansion on the destination and extraction runes, this rune can extract souls as normal, but when receiving can only swap with a shell."
+      "text": "Yet another expansion on the Destination and Extraction runes, this rune can extract souls as normal, but when receiving can only swap with a placed $(l:immaterial/soul_shell)Soul Shell.$(/l)"
     },
     {
       "type": "lacrimis:infusion",
       "recipe": "lacrimis:infusion/rune_soul_swap",
-      "text": "Run cost: 50 Tears$(br)$(l:cages/tier_ii)Tier II Soul Cage$(/l)$(br2)Only works with a soul shell on top."
+      "text": "Run cost: 50 Tears$(br)$(l:cages/tier_ii)Tier II Soul Cage$(/l)$(br2)Only works with a Soul Shell on top."
      }
   ]
 }

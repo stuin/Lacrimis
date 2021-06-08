@@ -39,10 +39,10 @@ public class SoulTotemItem extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        if(user.isSneaking()) {
+        /*if(user.isSneaking()) {
             user.getStackInHand(hand).setTag(null);
             return TypedActionResult.success(user.getStackInHand(hand));
-        }
+        }*/
         return super.use(world, user, hand);
     }
 

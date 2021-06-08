@@ -1,0 +1,35 @@
+{
+  "parent": "lacrimis:base/rune_tier3",
+  "display": {
+    "icon": {
+      "item": "lacrimis:network_link"
+    },
+    "title": {
+      "translate": "lacrimis.advancements.network_link.title"
+    },
+    "description": {
+      "translate": "lacrimis.advancements.network_link.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "collect": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "lacrimis:network_link"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "collect"
+    ]
+  ]
+}

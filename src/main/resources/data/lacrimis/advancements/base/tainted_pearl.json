@@ -1,0 +1,35 @@
+{
+  "parent": "lacrimis:base/crucible",
+  "display": {
+    "icon": {
+      "item": "lacrimis:tainted_pearl"
+    },
+    "title": {
+      "translate": "lacrimis.advancements.tainted_pearl.title"
+    },
+    "description": {
+      "translate": "lacrimis.advancements.tainted_pearl.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "collect": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "lacrimis:tainted_pearl"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "collect"
+    ]
+  ]
+}
