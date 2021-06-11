@@ -43,11 +43,6 @@ public class SoulSwapBlock extends SoulExtractionBlock {
         return false;
     }
 
-    public static class PlayerContainer {
-        public final Entity entity;
-
-        public PlayerContainer(Entity entity) {
-            this.entity = entity;
-        }
+    public record PlayerContainer(Entity entity) {
     }
 }

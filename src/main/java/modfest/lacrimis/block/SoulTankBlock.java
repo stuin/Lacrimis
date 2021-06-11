@@ -75,10 +75,10 @@ public abstract class SoulTankBlock extends BlockWithEntity implements DuctConne
             if(item == ModItems.bottleOfTears) {
                 if(tank.getSpace() >= BottleOfTearsItem.capacity && !world.isClient) {
                     //Empty bottle
-                    if(!player.abilities.creativeMode) {
+                    if(!player.isCreative()) {
                         ItemStack bottle = new ItemStack(Items.GLASS_BOTTLE);
                         stack.decrement(1);
-                        player.inventory.offerOrDrop(world, bottle);
+                        player.getInventory().offerOrDrop(bottle);
                     }
 
                     world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -91,12 +91,12 @@ public abstract class SoulTankBlock extends BlockWithEntity implements DuctConne
                 if(item == Items.GLASS_BOTTLE) {
                     if(tank.getTears() >= BottleOfTearsItem.capacity && !world.isClient) {
                         //Fill bottle
-                        if(!player.abilities.creativeMode) {
+                        if(!player.isCreative()) {
                             itemStack4 = new ItemStack(ModItems.bottleOfTears);
                             stack.decrement(1);
                             if(stack.isEmpty()) {
                                 player.setStackInHand(hand, itemStack4);
-                            } else if(!player.inventory.insertStack(itemStack4)) {
+                            } else if(!player.getInventory().insertStack(itemStack4)) {
                                 player.dropItem(itemStack4, false);
                             }
                         }

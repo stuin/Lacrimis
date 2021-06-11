@@ -5,7 +5,9 @@ import java.util.List;
 import com.zundrel.wrenchable.block.BlockWrenchable;
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.CrucibleEntity;
+import modfest.lacrimis.block.entity.TearLanternEntity;
 import modfest.lacrimis.init.ModBlocks;
+import modfest.lacrimis.init.ModEntityTypes;
 import modfest.lacrimis.init.ModItems;
 import modfest.lacrimis.init.ModStatusEffects;
 import modfest.lacrimis.util.SoulTank;
@@ -15,6 +17,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -47,8 +51,13 @@ public class CrucibleBlock extends SoulTankBlock implements BlockWrenchable {
     }
 
     @Override
-    public BlockEntity createBlockEntity(BlockView world) {
-        return new CrucibleEntity();
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new CrucibleEntity(pos, state);
+    }
+
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return ModEntityTypes.checkType(type, ModEntityTypes.crucible, CrucibleEntity::tick);
     }
 
     @Override
@@ -85,7 +94,7 @@ public class CrucibleBlock extends SoulTankBlock implements BlockWrenchable {
         if(entity instanceof LivingEntity && inside.offset(pos).intersects(entity.getBoundingBox())) {
             int amount = getTank(world, pos).getTears();
             if(amount > 0)
-                ((LivingEntity) entity).applyStatusEffect(new StatusEffectInstance(ModStatusEffects.TEAR_POISON, amount, 2));
+                ((LivingEntity) entity).setStatusEffect(new StatusEffectInstance(ModStatusEffects.TEAR_POISON, amount, 2), null);
         }
 
     }

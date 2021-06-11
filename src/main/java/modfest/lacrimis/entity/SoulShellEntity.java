@@ -19,8 +19,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -47,13 +47,13 @@ public class SoulShellEntity extends LivingEntity {
     private int selectedSlot = 0;
 
     //Player notes
-    public CompoundTag hunger = new CompoundTag();
+    public NbtCompound hunger = new NbtCompound();
     public int experienceLevel;
     public int totalExperience;
     public float experienceProgress;
 
-    public SoulShellEntity(EntityType<? extends SoulShellEntity> entityType, World world) {
-        super(entityType, world);
+    public SoulShellEntity(World world) {
+        super(ModEntityTypes.soulShell, world);
         this.main = DefaultedList.ofSize(36, ItemStack.EMPTY);
         this.armor = DefaultedList.ofSize(4, ItemStack.EMPTY);
         this.offHand = DefaultedList.ofSize(1, ItemStack.EMPTY);
@@ -101,7 +101,7 @@ public class SoulShellEntity extends LivingEntity {
         ItemStack itemStack = player.getStackInHand(hand);
         if(itemStack.getItem() == ModItems.taintedPearl) {
             player.incrementStat(Stats.USED.getOrCreateStat(itemStack.getItem()));
-            if (!player.abilities.creativeMode)
+            if (!player.isCreative())
                 itemStack.decrement(1);
             swapWithPlayer(player.world, player);
             return ActionResult.SUCCESS;
@@ -151,7 +151,7 @@ public class SoulShellEntity extends LivingEntity {
         ItemStack itemStack = this.getEquippedStack(slot);
 
         ItemStack itemStack3;
-        if (player.abilities.creativeMode && itemStack.isEmpty() && !stack.isEmpty()) {
+        if (player.isCreative() && itemStack.isEmpty() && !stack.isEmpty()) {
             itemStack3 = stack.copy();
             itemStack3.setCount(1);
             this.equipStack(slot, itemStack3);
@@ -194,7 +194,8 @@ public class SoulShellEntity extends LivingEntity {
             return;
         
         //Move player inventory
-        List<DefaultedList<ItemStack>> playerInventory = ImmutableList.of(player.inventory.main, player.inventory.armor, player.inventory.offHand);
+        List<DefaultedList<ItemStack>> playerInventory = ImmutableList.of(
+                player.getInventory().main, player.getInventory().armor, player.getInventory().offHand);
         for(int i = 0; i < combinedInventory.size(); ++i) {
             for(int j = 0; j < combinedInventory.get(i).size(); ++j) {
                 other.combinedInventory.get(i).set(j, playerInventory.get(i).get(j).copy());
@@ -206,14 +207,14 @@ public class SoulShellEntity extends LivingEntity {
         other.experienceLevel = player.experienceLevel;
         other.experienceProgress = player.experienceProgress;
         other.totalExperience = player.totalExperience;
-        other.selectedSlot = player.inventory.selectedSlot;
-        player.getHungerManager().toTag(other.hunger);
+        other.selectedSlot = player.getInventory().selectedSlot;
+        player.getHungerManager().writeNbt(other.hunger);
         other.setHealth(player.getHealth());
         other.setAbsorptionAmount(player.getAbsorptionAmount());
         other.setStingerCount(player.getStingerCount());
         other.setStuckArrowCount(player.getStuckArrowCount());
         for(StatusEffectInstance effect : player.getStatusEffects())
-            other.applyStatusEffect(effect);
+            other.addStatusEffect(effect);
 
         //Spawn other stand
         float f = (float) MathHelper.floor((MathHelper.wrapDegrees(player.bodyYaw) + 22.5F) / 45.0F) * 45.0F;
@@ -226,14 +227,14 @@ public class SoulShellEntity extends LivingEntity {
         player.experienceLevel = experienceLevel;
         player.experienceProgress = experienceProgress;
         player.totalExperience = totalExperience;
-        player.getHungerManager().fromTag(hunger);
+        player.getHungerManager().readNbt(hunger);
         player.setHealth(getHealth());
         player.setAbsorptionAmount(getAbsorptionAmount());
         player.setStingerCount(getStingerCount());
         player.setStuckArrowCount(getStuckArrowCount());
         player.clearStatusEffects();
         for(StatusEffectInstance effect : getStatusEffects())
-            player.applyStatusEffect(effect);
+            player.addStatusEffect(effect);
 
         //Move player
         if(player.hasVehicle())
@@ -241,7 +242,7 @@ public class SoulShellEntity extends LivingEntity {
         player.teleport(getX(), getY(), getZ(), true);
         player.fallDistance = 0;
         player.setHeadYaw(headYaw);
-        this.remove();
+        this.remove(RemovalReason.DISCARDED);
     }
 
     public void swapWithEntity(LivingEntity entity) {
@@ -249,18 +250,18 @@ public class SoulShellEntity extends LivingEntity {
             swapWithPlayer(world, (PlayerEntity) entity);
     }
 
-    public void readCustomDataFromTag(CompoundTag tag) {
-        super.readCustomDataFromTag(tag);
+    public void readCustomDataFromNbt(NbtCompound tag) {
+        super.readCustomDataFromNbt(tag);
 
-        ListTag listTag = tag.getList("Inventory", 10);
+        NbtList listTag = tag.getList("Inventory", 10);
         this.main.clear();
         this.armor.clear();
         this.offHand.clear();
 
         for(int i = 0; i < listTag.size(); ++i) {
-            CompoundTag compoundTag = listTag.getCompound(i);
+            NbtCompound compoundTag = listTag.getCompound(i);
             int j = compoundTag.getByte("Slot") & 255;
-            ItemStack itemStack = ItemStack.fromTag(compoundTag);
+            ItemStack itemStack = ItemStack.fromNbt(compoundTag);
             if (!itemStack.isEmpty()) {
                 if (j >= 0 && j < this.main.size()) {
                     this.main.set(j, itemStack);
@@ -278,36 +279,36 @@ public class SoulShellEntity extends LivingEntity {
         this.hunger = tag.getCompound("Hunger");
     }
 
-    public void writeCustomDataToTag(CompoundTag tag) {
-        super.writeCustomDataToTag(tag);
+    public void writeCustomDataToNbt(NbtCompound tag) {
+        super.writeCustomDataToNbt(tag);
         tag.putInt("DataVersion", SharedConstants.getGameVersion().getWorldVersion());
 
         int k;
-        ListTag listTag = new ListTag();
-        CompoundTag compoundTag3;
+        NbtList listTag = new NbtList();
+        NbtCompound compoundTag3;
         for(k = 0; k < this.main.size(); ++k) {
             if (!main.get(k).isEmpty()) {
-                compoundTag3 = new CompoundTag();
+                compoundTag3 = new NbtCompound();
                 compoundTag3.putByte("Slot", (byte)k);
-                main.get(k).toTag(compoundTag3);
+                main.get(k).writeNbt(compoundTag3);
                 listTag.add(compoundTag3);
             }
         }
 
         for(k = 0; k < this.armor.size(); ++k) {
             if (!armor.get(k).isEmpty()) {
-                compoundTag3 = new CompoundTag();
+                compoundTag3 = new NbtCompound();
                 compoundTag3.putByte("Slot", (byte)(k + 100));
-                armor.get(k).toTag(compoundTag3);
+                armor.get(k).writeNbt(compoundTag3);
                 listTag.add(compoundTag3);
             }
         }
 
         for(k = 0; k < this.offHand.size(); ++k) {
             if (!offHand.get(k).isEmpty()) {
-                compoundTag3 = new CompoundTag();
+                compoundTag3 = new NbtCompound();
                 compoundTag3.putByte("Slot", (byte)(k + 150));
-                offHand.get(k).toTag(compoundTag3);
+                offHand.get(k).writeNbt(compoundTag3);
                 listTag.add(compoundTag3);
             }
         }
@@ -321,10 +322,6 @@ public class SoulShellEntity extends LivingEntity {
 
     private void playBreakSound() {
         this.world.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_ARMOR_STAND_BREAK, this.getSoundCategory(), 1.0F, 1.0F);
-    }
-
-    public void kill() {
-        this.remove();
     }
 
     public boolean handleAttack(Entity attacker) {

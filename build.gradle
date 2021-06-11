@@ -1,10 +1,10 @@
 plugins {
-	id 'fabric-loom' version '0.7-SNAPSHOT'
+	id 'fabric-loom' version '0.8-SNAPSHOT'
 	id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_16
+targetCompatibility = JavaVersion.VERSION_16
 
 archivesBaseName = project.archives_base_name
 group = project.maven_group
@@ -26,9 +26,10 @@ repositories {
 	maven {
 		url = 'https://maven.dblsaiko.net'
 	}
-	maven {
-		url 'https://jitpack.io'
-	}
+	mavenLocal()
+	//maven {
+	//	url 'https://jitpack.io'
+	//}
 	//maven {
 	//	name = "Wrenchable"
 	//	url  "https://dl.bintray.com/zundrel/wrenchable"
@@ -48,14 +49,15 @@ dependencies {
 	include 'net.dblsaiko.qcommon.croco:croco:2.1.2'
 
 	//Patchouli api
-	modImplementation("vazkii.patchouli:Patchouli:${project.patchouli_version}")
+	//modImplementation("vazkii.patchouli:Patchouli:${project.patchouli_version}")
 
 	//REI
 	modImplementation("me.shedaniel:RoughlyEnoughItems-api:${project.rei_version}")
-	modRuntime("me.shedaniel:RoughlyEnoughItems:${project.rei_version}")
+	//modRuntime("me.shedaniel:RoughlyEnoughItems:${project.rei_version}")
 
 	//Wrenchable api
-	def wrenchVersion = "com.github.stuin:wrenchable:${project.wrenchable_version}"
+	def wrenchVersion = "com.zundrel:wrenchable:${project.wrenchable_version}"
+	//def wrenchVersion = "com.github.stuin:wrenchable:${project.wrenchable_version}"
 	modImplementation (wrenchVersion) {
 		exclude group: "io.github.prospector"
 		exclude group: "net.fabricmc"
@@ -66,18 +68,14 @@ dependencies {
 processResources {
 	inputs.property "version", project.version
 
-	from(sourceSets.main.resources.srcDirs) {
-		include "fabric.mod.json"
+	filesMatching("fabric.mod.json") {
 		expand "version": project.version
-	}
-
-	from(sourceSets.main.resources.srcDirs) {
-		exclude "fabric.mod.json"
 	}
 }
 
 tasks.withType(JavaCompile) {
 	options.encoding = "UTF-8"
+	options.release = 16
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {

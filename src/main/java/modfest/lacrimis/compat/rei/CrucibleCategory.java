@@ -2,22 +2,22 @@ package modfest.lacrimis.compat.rei;
 
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.ints.IntList;
-import me.shedaniel.math.Point;
-import me.shedaniel.math.Rectangle;
-import me.shedaniel.rei.api.EntryStack;
-import me.shedaniel.rei.api.TransferRecipeCategory;
-import me.shedaniel.rei.api.widgets.Widgets;
-import me.shedaniel.rei.gui.widget.Widget;
-import modfest.lacrimis.init.ModBlocks;
+import me.shedaniel.rei.api.client.gui.Renderer;
+import me.shedaniel.rei.api.client.gui.widgets.Widget;
+import me.shedaniel.rei.api.client.gui.widgets.Widgets;
+import me.shedaniel.rei.api.client.registry.display.TransferDisplayCategory;
+import me.shedaniel.rei.api.common.category.CategoryIdentifier;
+import modfest.lacrimis.crafting.CrucibleRecipe;
 import net.minecraft.client.gui.DrawableHelper;
-import net.minecraft.client.resource.language.I18n;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
 import java.util.List;
 
-public class CrucibleCategory implements TransferRecipeCategory<CrucibleDisplay> {
+public class CrucibleCategory implements TransferDisplayCategory<CrucibleDisplay> {
     public CrucibleCategory() {
     }
 
@@ -46,19 +46,31 @@ public class CrucibleCategory implements TransferRecipeCategory<CrucibleDisplay>
         matrices.pop();
     }
 
+    @Override
+    public Renderer getIcon() {
+        return null;
+    }
+
+    @Override
+    public Text getTitle() {
+        return new TranslatableText("lacrimis.gui.crucible");
+    }
+
     public int getDisplayHeight() {
         return 40;
+    }
+
+    @Override
+    public CategoryIdentifier<? extends CrucibleRecipe> getCategoryIdentifier() {
+        return null;
     }
 
     public Identifier getIdentifier() {
         return LacrimisPlugin.CRUCIBLE;
     }
 
-    public EntryStack getLogo() {
-        return EntryStack.create(ModBlocks.crucible);
-    }
+    @Override
+    public void renderRedSlots(MatrixStack matrices, List<Widget> widgets, me.shedaniel.math.Rectangle bounds, CrucibleRecipe display, IntList redSlots) {
 
-    public String getCategoryName() {
-        return I18n.translate("lacrimis.gui.crucible");
     }
 }

@@ -8,7 +8,7 @@ import modfest.lacrimis.init.ModItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
@@ -44,7 +44,7 @@ public class CrucibleRecipe extends InfusionRecipe {
     }
 
     @Override
-    public DefaultedList<Ingredient> getPreviewInputs() {
+    public DefaultedList<Ingredient> getIngredients() {
         return DefaultedList.ofSize(1, base);
     }
 
@@ -68,7 +68,7 @@ public class CrucibleRecipe extends InfusionRecipe {
     @Override
     public ItemStack craft(InfusionInventory inv) {
         ItemStack itemStack = super.craft(inv);
-        CompoundTag compoundTag = inv.getStack(0).getTag();
+        NbtCompound compoundTag = inv.getStack(0).getTag();
         if (compoundTag != null) {
             itemStack.setTag(compoundTag.copy());
         }
@@ -82,7 +82,7 @@ public class CrucibleRecipe extends InfusionRecipe {
 
     @Override
     @Environment(EnvType.CLIENT)
-    public ItemStack getRecipeKindIcon() {
+    public ItemStack createIcon() {
         ItemStack item = new ItemStack(ModItems.crucible);
         item.getOrCreateTag().putInt("TearLevel", getTears());
         return item;
@@ -93,7 +93,7 @@ public class CrucibleRecipe extends InfusionRecipe {
         public CrucibleRecipe read(Identifier identifier, JsonObject jsonObject) {
             Ingredient ingredient = Ingredient.fromJson(JsonHelper.getObject(jsonObject, "base"));
             int tears = JsonHelper.getInt(jsonObject, "tears");
-            ItemStack itemStack = ShapedRecipe.getItemStack(JsonHelper.getObject(jsonObject, "result"));
+            ItemStack itemStack = ShapedRecipe.getItem(JsonHelper.getObject(jsonObject, "result")).getDefaultStack();
             return new CrucibleRecipe(identifier, ingredient, tears, itemStack);
         }
 

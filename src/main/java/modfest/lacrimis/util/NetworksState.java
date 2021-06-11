@@ -1,9 +1,9 @@
 package modfest.lacrimis.util;
 
 import modfest.lacrimis.Lacrimis;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
@@ -18,10 +18,6 @@ import java.util.Map;
 public class NetworksState extends PersistentState {
     public static final String KEY = "lacrimis_network";
     private final Map<Integer, NetworkList> colorMap = new HashMap<>();
-
-    public NetworksState() {
-        super(KEY);
-    }
 
     public NetworkList getNetwork(int color) {
         return colorMap.getOrDefault(color, null);
@@ -49,39 +45,40 @@ public class NetworksState extends PersistentState {
         }
     }
 
-    @Override
-    public void fromTag(CompoundTag tag) {
-        for(Tag networkTag : tag.getList("list", 10)) {
-            int color = ((CompoundTag)networkTag).getInt("color");
+    public static NetworksState fromNbt(NbtCompound tag) {
+        NetworksState state = new NetworksState();
+        for(NbtElement networkTag : tag.getList("list", 10)) {
+            int color = ((NbtCompound)networkTag).getInt("color");
             NetworkList list = new NetworkList(color);
-            for(Tag pairTag : ((CompoundTag) networkTag).getList("list", 10)) {
-                int x = ((CompoundTag) pairTag).getInt("X");
-                int y = ((CompoundTag) pairTag).getInt("Y");
-                int z = ((CompoundTag) pairTag).getInt("Z");
+            for(NbtElement pairTag : ((NbtCompound) networkTag).getList("list", 10)) {
+                int x = ((NbtCompound) pairTag).getInt("X");
+                int y = ((NbtCompound) pairTag).getInt("Y");
+                int z = ((NbtCompound) pairTag).getInt("Z");
                 BlockPos pos = new BlockPos(x, y, z);
                 if(!list.contains(pos))
                     list.add(pos);
             }
-            colorMap.put(color, list);
+            state.colorMap.put(color, list);
             Lacrimis.LOGGER.info("Loading network " + color + " " + list);
         }
+        return state;
     }
 
     @Override
-    public CompoundTag toTag(CompoundTag tag) {
-        ListTag list = new ListTag();
+    public NbtCompound writeNbt(NbtCompound tag) {
+        NbtList list = new NbtList();
         for (NetworkList network : colorMap.values()) {
             if(network.size() > 0) {
-                ListTag linkList = new ListTag();
+                NbtList linkList = new NbtList();
                 for (BlockPos pos : network) {
-                    CompoundTag pairTag = new CompoundTag();
+                    NbtCompound pairTag = new NbtCompound();
                     pairTag.putInt("X", pos.getX());
                     pairTag.putInt("Y", pos.getY());
                     pairTag.putInt("Z", pos.getZ());
                     linkList.add(pairTag);
                 }
 
-                CompoundTag networkTag = new CompoundTag();
+                NbtCompound networkTag = new NbtCompound();
                 networkTag.putInt("color", network.color);
                 networkTag.put("list", linkList);
                 list.add(networkTag);

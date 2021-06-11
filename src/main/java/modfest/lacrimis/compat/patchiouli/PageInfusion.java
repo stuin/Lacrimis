@@ -37,7 +37,7 @@ public class PageInfusion extends PageDoubleRecipeRegistry<InfusionRecipe> {
 
         this.parent.drawCenteredStringNoShadow(ms, this.getTitle(second).asOrderedText(), 58, recipeY - 10, this.book.headerColor);
         this.parent.renderItemStack(ms, recipeX + 79, recipeY + 22, mouseX, mouseY, recipe.getOutput());
-        DefaultedList<Ingredient> ingredients = recipe.getPreviewInputs();
+        DefaultedList<Ingredient> ingredients = recipe.getIngredients();
         wrap = 3;
         if (shaped) {
             wrap = ((ShapedInfusionRecipe)recipe).getWidth();
@@ -47,7 +47,7 @@ public class PageInfusion extends PageDoubleRecipeRegistry<InfusionRecipe> {
             this.parent.renderIngredient(ms, recipeX + i % wrap * 19 + 3, recipeY + i / wrap * 19 + 3, mouseX, mouseY, ingredients.get(i));
         }
 
-        this.parent.renderItemStack(ms, recipeX + 79, recipeY + 41, mouseX, mouseY, recipe.getRecipeKindIcon());
+        this.parent.renderItemStack(ms, recipeX + 79, recipeY + 41, mouseX, mouseY, recipe.createIcon());
 
         ms.push();
         ms.scale(0.5F, 0.5F, 1.0F);

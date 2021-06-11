@@ -89,7 +89,7 @@ public class OneWayDuctBlock extends FacingBlock implements DuctConnectBlock {
 
         for (int i = 0; i < 128; i++) {
             VoxelShape shape = i >= 64 ? node : center;
-            for (int side = 0; side < FACINGS.length; ++side) {
+            for (int side = 0; side < DIRECTIONS.length; ++side) {
                 if ((i & 1 << side) != 0) {
                     shape = VoxelShapes.union(shape, connections[side]);
                 }

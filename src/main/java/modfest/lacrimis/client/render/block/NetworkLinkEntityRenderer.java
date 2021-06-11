@@ -1,6 +1,5 @@
 package modfest.lacrimis.client.render.block;
 
-import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.NetworkLinkEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -8,22 +7,17 @@ import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Matrix3f;
 import net.minecraft.util.math.Matrix4f;
+import net.minecraft.util.math.Vec3f;
 
 @Environment(EnvType.CLIENT)
-public class NetworkLinkEntityRenderer extends BlockEntityRenderer<NetworkLinkEntity> {
+public class NetworkLinkEntityRenderer implements BlockEntityRenderer<NetworkLinkEntity> {
     public static final Identifier BEAM_TEXTURE = new Identifier("textures/entity/beacon_beam.png");
-
-    public NetworkLinkEntityRenderer(BlockEntityRenderDispatcher dispatcher) {
-        super(dispatcher);
-    }
 
     public void render(NetworkLinkEntity beaconBlockEntity, float f, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, int j) {
         long l = beaconBlockEntity.getWorld().getTime();
@@ -43,7 +37,7 @@ public class NetworkLinkEntityRenderer extends BlockEntityRenderer<NetworkLinkEn
         float r = fs[1];
         float s = fs[2];
         matrixStack.push();
-        matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(n * 2.25F - 45.0F));
+        matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(n * 2.25F - 45.0F));
         float af = 0.0F;
         float ai = 0.0F;
         float aj = -h;

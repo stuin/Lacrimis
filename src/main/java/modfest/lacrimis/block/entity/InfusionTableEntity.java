@@ -11,14 +11,15 @@ import modfest.lacrimis.util.DuctUtil;
 import modfest.lacrimis.util.SoulTank;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.CraftingRecipe;
 import net.minecraft.recipe.RecipeType;
-import net.minecraft.util.Tickable;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class InfusionTableEntity extends SoulTankEntity implements Tickable {
+public class InfusionTableEntity extends SoulTankEntity {
     public static final int OUTPUT_STACK = 9;
     public static final int[] INPUT_STACKS = IntStream.rangeClosed(0, 8).toArray();
     private final Random random = new Random();
@@ -26,13 +27,16 @@ public class InfusionTableEntity extends SoulTankEntity implements Tickable {
     public ItemStack holding = ItemStack.EMPTY;
     public boolean startCrafting = false;
 
-    public InfusionTableEntity() {
-        super(ModEntityTypes.infusionTable, 1000, 10);
+    public InfusionTableEntity(BlockPos pos, BlockState state) {
+        super(ModEntityTypes.infusionTable,pos, state, 1000, 10);
         getTank().setLimit(0);
     }
 
-    @Override
-    public void tick() {
+    public static void tick(World world, BlockPos pos, BlockState state, InfusionTableEntity blockEntity) {
+        blockEntity.runTick();
+    }
+
+    public void runTick() {
         if(world == null)
             return;
         if (world.isClient && this.getTank().getTears() > 0 && random.nextInt(10) == 0) {
@@ -142,16 +146,16 @@ public class InfusionTableEntity extends SoulTankEntity implements Tickable {
     }
 
     @Override
-    public void fromTag(BlockState state, CompoundTag tag) {
-        super.fromTag(state, tag);
-        holding = ItemStack.fromTag(tag.getCompound("Holding"));
+    public void readNbt(NbtCompound tag) {
+        super.readNbt(tag);
+        holding = ItemStack.fromNbt(tag.getCompound("Holding"));
     }
 
     @Override
-    public CompoundTag toTag(CompoundTag tag) {
-        super.toTag(tag);
-        CompoundTag itemTag = new CompoundTag();
-        holding.toTag(itemTag);
+    public NbtCompound writeNbt(NbtCompound tag) {
+        super.writeNbt(tag);
+        NbtCompound itemTag = new NbtCompound();
+        holding.writeNbt(itemTag);
         tag.put("Holding", itemTag);
         return tag;
     }

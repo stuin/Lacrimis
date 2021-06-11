@@ -3,7 +3,7 @@ package modfest.lacrimis.crafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.RecipeFinder;
+import net.minecraft.recipe.RecipeMatcher;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.ShapedRecipe;
 import net.minecraft.util.Identifier;
@@ -36,24 +36,24 @@ public class ShapelessInfusionRecipe extends InfusionRecipe {
 	}
 
 	@Override
-	public DefaultedList<Ingredient> getPreviewInputs() {
+	public DefaultedList<Ingredient> getIngredients() {
 		return this.inputs;
 	}
 
 	@Override
 	public boolean matches(InfusionInventory inventory, World world) {
-		RecipeFinder recipeFinder = new RecipeFinder();
+		RecipeMatcher recipeFinder = new RecipeMatcher();
 		int i = 0;
 
 		for(int j = 0; j < inventory.size(); ++j) {
 			ItemStack itemStack = inventory.getStack(j);
 			if (!itemStack.isEmpty()) {
 				++i;
-				recipeFinder.method_20478(itemStack, 1);
+				recipeFinder.addInput(itemStack, 1);
 			}
 		}
 
-		return i == inputs.size() && recipeFinder.findRecipe(this, null);
+		return i == inputs.size() && recipeFinder.match(this, null);
 	}
 
 	public static class Serializer implements RecipeSerializer<ShapelessInfusionRecipe> {
@@ -66,7 +66,7 @@ public class ShapelessInfusionRecipe extends InfusionRecipe {
 			} else if (defaultedList.size() > 9) {
 				throw new JsonParseException("Too many ingredients for shapeless recipe");
 			} else {
-				ItemStack itemStack = ShapedRecipe.getItemStack(JsonHelper.getObject(json, "result"));
+				ItemStack itemStack = ShapedRecipe.getItem(JsonHelper.getObject(json, "result")).getDefaultStack();
 				return new ShapelessInfusionRecipe(identifier, defaultedList, tears, itemStack);
 			}
 		}

@@ -25,8 +25,8 @@ public class CombinerBlock extends SoulTankBlock {
     }
 
     @Override
-    public BlockEntity createBlockEntity(BlockView world) {
-        return new CombinerEntity();
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new CombinerEntity(pos, state);
     }
 
     @Override

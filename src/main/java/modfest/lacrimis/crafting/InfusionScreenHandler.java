@@ -9,7 +9,7 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.InventoryChangedListener;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeFinder;
+import net.minecraft.recipe.RecipeMatcher;
 import net.minecraft.recipe.book.RecipeBookCategory;
 import net.minecraft.screen.AbstractRecipeScreenHandler;
 import net.minecraft.screen.slot.FurnaceOutputSlot;
@@ -39,11 +39,11 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 		}
 		for (int y = 0; y < 3; ++y) {
 			for (int x = 0; x < 9; ++x) {
-				this.addSlot(new Slot(player.inventory, x + y * 9 + 9, 8 + x * 18, 84 + y * 18));
+				this.addSlot(new Slot(player.getInventory(), x + y * 9 + 9, 8 + x * 18, 84 + y * 18));
 			}
 		}
 		for (int x = 0; x < 9; ++x) {
-			this.addSlot(new Slot(player.inventory, x, 8 + x * 18, 142));
+			this.addSlot(new Slot(player.getInventory(), x, 8 + x * 18, 142));
 		}
 
 		onContentChanged(input);
@@ -55,7 +55,7 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 	}
 
 	@Override
-	public void populateRecipeFinder(RecipeFinder finder) {
+	public void populateRecipeFinder(RecipeMatcher finder) {
 		this.input.provideRecipeInputs(finder);
 	}
 
@@ -93,7 +93,7 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 					return ItemStack.EMPTY;
 				}
 
-				slot.onStackChanged(transfered, leftInHand);
+				slot.onQuickTransfer(transfered, leftInHand);
 			} else if (index >= input.size() && index < 46) {
 				if (!this.insertItem(transfered, 1, 9, false)) {
 					if (index < 37) {
@@ -118,10 +118,10 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 				return ItemStack.EMPTY;
 			}
 
-			ItemStack itemStack3 = slot.onTakeItem(player, transfered);
-			if (index == OUTPUT_SLOT) {
+			slot.onTakeItem(player, transfered);
+			/*if (index == OUTPUT_SLOT) {
 				player.dropItem(itemStack3, false);
-			}
+			}*/
 		}
 
 		return leftInHand;
@@ -156,6 +156,11 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 	@Override
 	public RecipeBookCategory getCategory() {
 		return null;
+	}
+
+	@Override
+	public boolean canInsertIntoSlot(int index) {
+		return false;
 	}
 
 	public int getRequiredTears() {

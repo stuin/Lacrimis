@@ -27,8 +27,8 @@ public class NetworkLinkBlock extends BlockWithEntity implements DuctConnectBloc
     }
 
     @Override
-    public BlockEntity createBlockEntity(BlockView world) {
-        return new NetworkLinkEntity();
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new NetworkLinkEntity(pos, state);
     }
 
     public BlockRenderType getRenderType(BlockState state) {
@@ -68,7 +68,7 @@ public class NetworkLinkBlock extends BlockWithEntity implements DuctConnectBloc
         }
     }
 
-    public VoxelShape getVisualShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+    public VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return VoxelShapes.empty();
     }
 

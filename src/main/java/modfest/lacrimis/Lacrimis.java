@@ -1,8 +1,6 @@
 package modfest.lacrimis;
 
-import modfest.lacrimis.init.ModBlocks;
 import modfest.lacrimis.init.*;
-import modfest.lacrimis.init.ModItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;

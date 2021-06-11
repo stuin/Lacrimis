@@ -4,7 +4,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
@@ -30,14 +30,13 @@ public class BlockTeleportBlock extends CenterRuneBlock {
     @Override
     public boolean insert(BlockPos dest, World world, Object value) {
         Direction flipped = flipside(world, dest);
-        if(value instanceof BlockPos && testCage(world, dest, flipped, null) > 0) {
+        if(value instanceof BlockPos source && testCage(world, dest, flipped, null) > 0) {
             dest = dest.offset(flipped);
-            BlockPos source = (BlockPos) value;
             BlockState sourceState = world.getBlockState(source);
             BlockState destState = world.getBlockState(dest);
 
-            if(sourceState.getBlock().isIn(ModBlocks.non_transportable) ||
-                    destState.getBlock().isIn(ModBlocks.non_transportable))
+            if(ModBlocks.non_transportable.contains(sourceState.getBlock()) ||
+                ModBlocks.non_transportable.contains(destState.getBlock()))
                 return false;
 
             //Set destination block
@@ -63,8 +62,8 @@ public class BlockTeleportBlock extends CenterRuneBlock {
     }
 
     private void swap(World world, BlockEntity sourceEntity, BlockState sourceState, BlockPos dest) {
-        CompoundTag sourceTag = sourceEntity.toTag(new CompoundTag());
-        sourceEntity.fromTag(sourceState, new CompoundTag());
+        NbtCompound sourceTag = sourceEntity.writeNbt(new NbtCompound());
+        sourceEntity.readNbt(new NbtCompound());
 
         world.setBlockState(dest, sourceState);
         BlockEntity destEntity = world.getBlockEntity(dest);
@@ -73,7 +72,7 @@ public class BlockTeleportBlock extends CenterRuneBlock {
             sourceTag.putInt("x", dest.getX());
             sourceTag.putInt("y", dest.getY());
             sourceTag.putInt("z", dest.getZ());
-            destEntity.fromTag(sourceState, sourceTag);
+            destEntity.readNbt(sourceTag);
         }
     }
 }

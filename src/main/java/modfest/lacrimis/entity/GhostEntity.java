@@ -1,5 +1,6 @@
 package modfest.lacrimis.entity;
 
+import modfest.lacrimis.init.ModEntityTypes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
@@ -19,8 +20,8 @@ import net.minecraft.world.World;
 
 public class GhostEntity extends HostileEntity {
 
-    public GhostEntity(EntityType<? extends GhostEntity> entityType, World world) {
-        super(entityType, world);
+    public GhostEntity(World world) {
+        super(ModEntityTypes.ghost, world);
     }
 
     @Override

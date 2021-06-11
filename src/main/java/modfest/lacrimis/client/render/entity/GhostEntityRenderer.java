@@ -3,8 +3,8 @@ package modfest.lacrimis.client.render.entity;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
@@ -17,8 +17,8 @@ public class GhostEntityRenderer extends EntityRenderer<GhostEntity> {
 
     private final GhostEntityModel model;
 
-    public GhostEntityRenderer(EntityRenderDispatcher dispatcher) {
-        super(dispatcher);
+    public GhostEntityRenderer(EntityRendererFactory.Context context) {
+        super(context);
         this.model = new GhostEntityModel();
         this.shadowRadius = 0.0f;
     }

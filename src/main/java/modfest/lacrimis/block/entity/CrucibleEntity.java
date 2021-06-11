@@ -1,7 +1,6 @@
 package modfest.lacrimis.block.entity;
 
 import modfest.lacrimis.block.DrainedCryingObsidianBlock;
-import modfest.lacrimis.block.TearCollectorBlock;
 import modfest.lacrimis.init.*;
 import modfest.lacrimis.item.BottleOfTearsItem;
 import modfest.lacrimis.util.DuctUtil;
@@ -14,29 +13,31 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ItemScatterer;
-import net.minecraft.util.Tickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 
 import java.util.Optional;
-import java.util.stream.IntStream;
 
 import modfest.lacrimis.crafting.CrucibleRecipe;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
 
-public class CrucibleEntity extends SoulTankEntity implements Tickable {
+public class CrucibleEntity extends SoulTankEntity {
     private static final Box ITEM_BOX = new Box(0, 0.4, 0, 1, 1, 1);
     private static final int CRAFT_COOLDOWN = 15;
 
     private int craftTime = 0;
     private Direction collector = null;
 
-    public CrucibleEntity() {
-        super(ModEntityTypes.crucible, 1000, 1);
+    public CrucibleEntity(BlockPos pos, BlockState state) {
+        super(ModEntityTypes.crucible, pos, state, 1000, 1);
     }
 
-    @Override
-    public void tick() {
+    public static void tick(World world, BlockPos pos, BlockState state, CrucibleEntity blockEntity) {
+        blockEntity.runTick();
+    }
+
+    public void runTick() {
         if(world == null)
             return;
 

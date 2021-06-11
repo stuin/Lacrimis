@@ -32,7 +32,7 @@ public abstract class InfusionRecipe implements Recipe<InfusionInventory> {
 
     @Override
     @Environment(EnvType.CLIENT)
-    public ItemStack getRecipeKindIcon() {
+    public ItemStack createIcon() {
         ItemStack item = new ItemStack(ModItems.infusionTable);
         item.getOrCreateTag().putInt("TearLevel", getTears());
         return item;

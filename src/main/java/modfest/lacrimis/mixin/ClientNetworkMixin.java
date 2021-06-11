@@ -40,9 +40,9 @@ public abstract class ClientNetworkMixin implements ClientPlayPacketListener {
             entity.setPos(d, e, f);
             entity.updateTrackedPosition(d, e, f);
             entity.refreshPositionAfterTeleport(d, e, f);
-            entity.pitch = (float) (packet.getPitch() * 360) / 256.0F;
-            entity.yaw = (float) (packet.getYaw() * 360) / 256.0F;
-            entity.setEntityId(i);
+            entity.setPitch((float) (packet.getPitch() * 360) / 256.0F);
+            entity.setYaw((float) (packet.getYaw() * 360) / 256.0F);
+            entity.setId(i);
             entity.setUuid(packet.getUuid());
             client.world.addEntity(i, entity);
             Lacrimis.LOGGER.warn("Pearl spawned");
@@ -55,7 +55,7 @@ public abstract class ClientNetworkMixin implements ClientPlayPacketListener {
         BlockEntity blockEntity = this.client.world.getBlockEntity(blockPos);
         int i = packet.getBlockEntityType();
         if (i == 20 && blockEntity instanceof NetworkLinkEntity) {
-            blockEntity.fromTag(this.client.world.getBlockState(blockPos), packet.getCompoundTag());
+            blockEntity.readNbt(packet.getNbt());
         }
     }
 }

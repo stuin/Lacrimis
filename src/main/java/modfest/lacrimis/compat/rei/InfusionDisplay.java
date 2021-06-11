@@ -15,14 +15,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public abstract class InfusionDisplay implements TransferRecipeDisplay {
+public abstract class InfusionDisplay implements Display {
     protected InfusionRecipe display;
     protected List<List<EntryStack>> input;
     protected List<EntryStack> output;
 
     public InfusionDisplay(InfusionRecipe recipe) {
         this.display = recipe;
-        this.input = recipe.getPreviewInputs().stream().map((i) -> {
+        this.input = recipe.getIngredients().stream().map((i) -> {
             List<EntryStack> entries = new ArrayList();
             ItemStack[] var2 = i.getMatchingStacksClient();
 

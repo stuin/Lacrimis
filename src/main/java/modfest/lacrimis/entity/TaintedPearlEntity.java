@@ -1,5 +1,6 @@
 package modfest.lacrimis.entity;
 
+import modfest.lacrimis.init.ModEntityTypes;
 import modfest.lacrimis.init.ModItems;
 import modfest.lacrimis.init.ModStatusEffects;
 import net.minecraft.entity.Entity;
@@ -21,8 +22,8 @@ import org.jetbrains.annotations.Nullable;
 public class TaintedPearlEntity extends ThrownItemEntity {
     private static final int DURATION = 15 * 20;
 
-    public TaintedPearlEntity(EntityType<? extends TaintedPearlEntity> entityType, World world) {
-        super(entityType, world);
+    public TaintedPearlEntity(World world) {
+        super(ModEntityTypes.taintedPearl, world);
     }
 
     protected Item getDefaultItem() {
@@ -34,7 +35,7 @@ public class TaintedPearlEntity extends ThrownItemEntity {
         if(entityHitResult.getEntity() instanceof SoulShellEntity && getOwner() instanceof ServerPlayerEntity) {
             ((SoulShellEntity) entityHitResult.getEntity()).swapWithPlayer(world, (PlayerEntity) getOwner());
             //((LivingEntity) getOwner()).addStatusEffect(new StatusEffectInstance(ModStatusEffects.TEAR_POISON, DURATION));
-            this.remove();
+            this.remove(RemovalReason.KILLED);
         } else if(entityHitResult.getEntity() instanceof LivingEntity)
             ((LivingEntity) entityHitResult.getEntity()).addStatusEffect(new StatusEffectInstance(ModStatusEffects.TEAR_POISON, DURATION));
         else
@@ -48,7 +49,7 @@ public class TaintedPearlEntity extends ThrownItemEntity {
         for(int i = 0; i < 32; ++i)
             this.world.addParticle(ParticleTypes.PORTAL, this.getX(), this.getY() + this.random.nextDouble() * 2.0D, this.getZ(), this.random.nextGaussian(), 0.0D, this.random.nextGaussian());
 
-        if (!this.world.isClient && !this.removed) {
+        if (!this.world.isClient && !this.isRemoved()) {
             if (entity != null) {
                 if (entity.hasVehicle())
                     entity.stopRiding();
@@ -60,7 +61,7 @@ public class TaintedPearlEntity extends ThrownItemEntity {
                     ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(ModStatusEffects.TEAR_POISON, DURATION));
             }
 
-            this.remove();
+            this.remove(RemovalReason.KILLED);
         }
     }
 
@@ -68,7 +69,7 @@ public class TaintedPearlEntity extends ThrownItemEntity {
     public void tick() {
         Entity entity = this.getOwner();
         if (entity instanceof PlayerEntity && !entity.isAlive())
-            this.remove();
+            this.remove(RemovalReason.DISCARDED);
         else
             super.tick();
     }

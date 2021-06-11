@@ -3,11 +3,15 @@ package modfest.lacrimis.block;
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.InfusionTableEntity;
 import modfest.lacrimis.block.entity.SoulTankEntity;
+import modfest.lacrimis.block.entity.TearLanternEntity;
 import modfest.lacrimis.init.ModCrafting;
+import modfest.lacrimis.init.ModEntityTypes;
 import modfest.lacrimis.init.ModItems;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
@@ -40,8 +44,13 @@ public class InfusionTableBlock extends SoulTankBlock {
 	}
 
 	@Override
-	public BlockEntity createBlockEntity(BlockView world) {
-		return new InfusionTableEntity();
+	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+		return new InfusionTableEntity(pos, state);
+	}
+
+	@Override
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+		return ModEntityTypes.checkType(type, ModEntityTypes.infusionTable, InfusionTableEntity::tick);
 	}
 
 	@Override

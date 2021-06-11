@@ -13,7 +13,6 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 import modfest.lacrimis.init.ModBlocks;
@@ -37,7 +36,7 @@ public class BasicRuneBlock extends Block implements BlockWrenchable {
         if(tier == 1) {
             for(int y = 0; y < 2; y++) {
                 pos = pos.offset(flipped);
-                if(!world.getBlockState(pos).getBlock().isIn(ModBlocks.cage_materials))
+                if(!ModBlocks.cage_materials.contains(world.getBlockState(pos).getBlock()))
                     return -1;
             }
         }

@@ -10,9 +10,12 @@ import modfest.lacrimis.entity.SoulShellEntity;
 import modfest.lacrimis.entity.TaintedPearlEntity;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.entity.EntityRenderer;
@@ -24,11 +27,13 @@ import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.entity.GhostEntity;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
@@ -61,7 +66,7 @@ public class ModEntityTypes {
     }
     
     public static void registerClient() {
-        EntityRendererRegistry.INSTANCE.register(ModEntityTypes.ghost, (dispatcher, ctx) -> new GhostEntityRenderer(dispatcher));
+        EntityRendererRegistry.INSTANCE.register(ModEntityTypes.ghost, (dispatcher, ctx) -> new GhostEntityRenderer(ctx));
         EntityRendererRegistry.INSTANCE.register(ModEntityTypes.soulShell, (dispatcher, ctx) -> new SoulShellRenderer(dispatcher));
         EntityRendererRegistry.INSTANCE.register(ModEntityTypes.taintedPearl, (dispatcher, ctx) -> new FlyingItemEntityRenderer<TaintedPearlEntity>(dispatcher, ctx.getItemRenderer()));
 
@@ -82,7 +87,17 @@ public class ModEntityTypes {
         return FabricEntityTypeBuilder.create(group, f).dimensions(EntityDimensions.fixed(width, height));
     }
 
-    private static <T extends BlockEntity> BlockEntityType<T> register(String name, Supplier<T> f, Block... blocks) {
-        return Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(Lacrimis.MODID, name), BlockEntityType.Builder.create(f, blocks).build(null));
+    private static <T extends BlockEntity> BlockEntityType<T> register(String name, FabricBlockEntityTypeBuilder.Factory factory, Block... blocks) {
+        return Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(Lacrimis.MODID, name), FabricBlockEntityTypeBuilder.create(factory, blocks).build(null));
+    }
+
+    @Nullable
+    public static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> checkType(BlockEntityType<A> givenType, BlockEntityType<E> expectedType, BlockEntityTicker<? super E> ticker) {
+        return expectedType == givenType ? (BlockEntityTicker<A>) ticker : null;
+    }
+
+    @FunctionalInterface
+    interface Constructor<T> {
+        T build(BlockPos pos, BlockState state);
     }
 }

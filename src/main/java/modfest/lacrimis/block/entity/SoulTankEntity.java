@@ -10,7 +10,8 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
@@ -20,8 +21,8 @@ public abstract class SoulTankEntity extends BlockEntity implements SidedInvento
     private final SoulTank tank;
     public final InfusionInventory inventory;
 
-    public SoulTankEntity(BlockEntityType<?> type, int capacity, int inventory) {
-        super(type);
+    public SoulTankEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, int capacity, int inventory) {
+        super(type, pos, state);
         tank = new SoulTank(capacity);
         tank.addListener(this::mark);
         this.inventory = new InfusionInventory(this, inventory);
@@ -56,39 +57,39 @@ public abstract class SoulTankEntity extends BlockEntity implements SidedInvento
     }
 
     @Override
-    public void fromTag(BlockState state, CompoundTag tag) {
-        super.fromTag(state, tag);
+    public void readNbt(NbtCompound tag) {
+        super.readNbt(tag);
 
         tank.setTears(tag.getInt("TearLevel"));
         tank.setLimit(tag.getInt("TearLimit"));
 
         this.inventory.clear();
-        this.inventory.readTags(tag.getList("Inventory", NbtType.COMPOUND));
+        this.inventory.readNbtList(tag.getList("Inventory", NbtType.COMPOUND));
     }
 
     @Override
-    public CompoundTag toTag(CompoundTag tag) {
-        super.toTag(tag);
+    public NbtCompound writeNbt(NbtCompound tag) {
+        super.writeNbt(tag);
         tag.putInt("TearLevel", tank.getTears());
         tag.putInt("TearLimit", tank.getCapacity());
 
-        tag.put("Inventory", this.inventory.getTags());
+        tag.put("Inventory", this.inventory.toNbtList());
         return tag;
     }
 
     @Override
-    public CompoundTag toInitialChunkDataTag() {
-        return this.toTag(new CompoundTag());
+    public NbtCompound toInitialChunkDataNbt() {
+        return this.writeNbt(new NbtCompound());
     }
 
     @Override
-    public void fromClientTag(CompoundTag tag) {
-        this.fromTag(getCachedState(), tag);
+    public void fromClientTag(NbtCompound tag) {
+        this.readNbt(tag);
     }
 
     @Override
-    public CompoundTag toClientTag(CompoundTag tag) {
-        return this.toTag(tag);
+    public NbtCompound toClientTag(NbtCompound tag) {
+        return this.writeNbt(tag);
     }
 
     @Override

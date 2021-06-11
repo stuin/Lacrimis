@@ -20,12 +20,8 @@ import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.CrucibleEntity;
 
 @Environment(EnvType.CLIENT)
-public class CrucibleEntityRenderer extends BlockEntityRenderer<CrucibleEntity> {
+public class CrucibleEntityRenderer implements BlockEntityRenderer<CrucibleEntity> {
 	public static final ModelIdentifier CRUCIBLE_TEARS_MODEL_ID = new ModelIdentifier(new Identifier(Lacrimis.MODID, "crucible_tears"), "");
-
-	public CrucibleEntityRenderer(BlockEntityRenderDispatcher dispatcher) {
-		super(dispatcher);
-	}
 
 	@Override
 	public void render(CrucibleEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {

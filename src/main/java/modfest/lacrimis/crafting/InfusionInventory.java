@@ -5,8 +5,8 @@ import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.screen.PropertyDelegate;
 
 import modfest.lacrimis.block.entity.SoulTankEntity;
@@ -50,32 +50,32 @@ public class InfusionInventory extends SimpleInventory {
 	}
 
 	@Override
-    public void readTags(ListTag tags) {
+    public void readNbtList(NbtList tags) {
 		int j;
 		for(j = 0; j < this.size(); ++j) {
 			this.setStack(j, ItemStack.EMPTY);
 		}
 
 		for(j = 0; j < tags.size(); ++j) {
-			CompoundTag compoundTag = tags.getCompound(j);
+			NbtCompound compoundTag = tags.getCompound(j);
 			int k = compoundTag.getByte("Slot") & 255;
 			if (k < this.size()) {
-				this.setStack(k, ItemStack.fromTag(compoundTag));
+				this.setStack(k, ItemStack.fromNbt(compoundTag));
 			}
 		}
 
 	}
 
 	@Override
-    public ListTag getTags() {
-		ListTag listTag = new ListTag();
+    public NbtList toNbtList() {
+		NbtList listTag = new NbtList();
 
 		for(int i = 0; i < this.size(); ++i) {
 			ItemStack itemStack = this.getStack(i);
 			if (!itemStack.isEmpty()) {
-				CompoundTag compoundTag = new CompoundTag();
+				NbtCompound compoundTag = new NbtCompound();
 				compoundTag.putByte("Slot", (byte)i);
-				itemStack.toTag(compoundTag);
+				itemStack.writeNbt(compoundTag);
 				listTag.add(compoundTag);
 			}
 		}

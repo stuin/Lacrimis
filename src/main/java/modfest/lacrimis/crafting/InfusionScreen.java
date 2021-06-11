@@ -35,7 +35,7 @@ public class InfusionScreen extends HandledScreen<InfusionScreenHandler> {
         startButton = new TexturedButtonWidget(x + backgroundWidth - 54, y + titleY + 3, 20, 18, 0, 0, 19, START_BUTTON_TEXTURE, (buttonWidget) -> {
             handler.startCrafting();
         });
-        addButton(startButton);
+        addDrawable(startButton);
         titleX = 24;
     }
 
@@ -51,7 +51,7 @@ public class InfusionScreen extends HandledScreen<InfusionScreenHandler> {
 
     @Override
     protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         client.getTextureManager().bindTexture(TEXTURE);
         int i = (width - backgroundWidth) / 2;
         int j = (height - backgroundHeight) / 2;

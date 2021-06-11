@@ -7,8 +7,8 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.InventoryChangedListener;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
@@ -36,20 +36,20 @@ public class CombinerScreenHandler extends ScreenHandler implements InventoryCha
         this.addSlot(new Slot(entity.inventory, 1, 76, 47));
         this.addSlot(new FurnaceOutputSlot(player, output, 0, 134, 47) {
             @Override
-            public ItemStack onTakeItem(PlayerEntity player, ItemStack stack) {
-                return CombinerScreenHandler.this.onTakeOutput(stack);
+            public void onTakeItem(PlayerEntity player, ItemStack stack) {
+                CombinerScreenHandler.this.onTakeOutput(stack);
             }
         });
 
         int k;
         for(k = 0; k < 3; ++k) {
             for(int j = 0; j < 9; ++j) {
-                this.addSlot(new Slot(player.inventory, j + k * 9 + 9, 8 + j * 18, 84 + k * 18));
+                this.addSlot(new Slot(player.getInventory(), j + k * 9 + 9, 8 + j * 18, 84 + k * 18));
             }
         }
 
         for(k = 0; k < 9; ++k) {
-            this.addSlot(new Slot(player.inventory, k, 8 + k * 18, 142));
+            this.addSlot(new Slot(player.getInventory(), k, 8 + k * 18, 142));
         }
         onContentChanged(entity.inventory);
     }
@@ -75,15 +75,15 @@ public class CombinerScreenHandler extends ScreenHandler implements InventoryCha
             if(entity.inventory.getStack(0).getItem() == ModItems.brokenSpawner)
                 if(output.getStack(0).isEmpty()) {
                     String id = EntityType.getId(entity.type).toString();
-                    CompoundTag[] tags = new CompoundTag[5];
+                    NbtCompound[] tags = new NbtCompound[5];
                     for(int i = 0; i < tags.length; i++)
-                        tags[i] = new CompoundTag();
+                        tags[i] = new NbtCompound();
 
                     //Build tags
                     tags[4].putString("id", id);
                     tags[3].put("Entity", tags[4]);
                     tags[3].putInt("Weight", 1);
-                    ListTag list = new ListTag();
+                    NbtList list = new NbtList();
                     list.add(tags[3]);
                     tags[1].put("SpawnPotentials", list);
                     tags[2].putString("id", id);
@@ -134,7 +134,7 @@ public class CombinerScreenHandler extends ScreenHandler implements InventoryCha
                     return ItemStack.EMPTY;
                 }
 
-                slot.onStackChanged(itemStack2, itemStack);
+                slot.onQuickTransfer(itemStack2, itemStack);
             } else if (index != 0 && index != 1) {
                 if (index >= 3 && index < 39) {
                     if (!insertItem(itemStack2, 0, 2, false)) {

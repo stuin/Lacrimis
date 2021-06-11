@@ -52,7 +52,7 @@ public class ShapedInfusionRecipe extends InfusionRecipe {
 
 
 	@Override
-	public DefaultedList<Ingredient> getPreviewInputs() {
+	public DefaultedList<Ingredient> getIngredients() {
 		return this.inputs;
 	}
 

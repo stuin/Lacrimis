@@ -55,11 +55,11 @@ public class SoulShellModel<T extends LivingEntity> extends BipedEntityModel<T> 
 
     public void setAngles(T livingEntity, float f, float g, float h, float i, float j) {
         super.setAngles(livingEntity, f, g, h, i, j);
-        this.leftPantLeg.copyPositionAndRotation(this.leftLeg);
-        this.rightPantLeg.copyPositionAndRotation(this.rightLeg);
-        this.leftSleeve.copyPositionAndRotation(this.leftArm);
-        this.rightSleeve.copyPositionAndRotation(this.rightArm);
-        this.jacket.copyPositionAndRotation(this.torso);
+        this.leftPantLeg.copyTransform(this.leftLeg);
+        this.rightPantLeg.copyTransform(this.rightLeg);
+        this.leftSleeve.copyTransform(this.leftArm);
+        this.rightSleeve.copyTransform(this.rightArm);
+        this.jacket.copyTransform(this.body);
     }
 
     public void setVisible(boolean visible) {

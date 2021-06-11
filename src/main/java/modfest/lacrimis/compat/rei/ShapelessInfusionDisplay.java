@@ -9,10 +9,10 @@ public class ShapelessInfusionDisplay extends InfusionDisplay {
     }
 
     public int getWidth() {
-        return this.display.getPreviewInputs().size() > 4 ? 3 : 2;
+        return this.display.getIngredients().size() > 4 ? 3 : 2;
     }
 
     public int getHeight() {
-        return this.display.getPreviewInputs().size() > 4 ? 3 : 2;
+        return this.display.getIngredients().size() > 4 ? 3 : 2;
     }
 }

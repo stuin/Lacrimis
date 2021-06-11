@@ -5,7 +5,7 @@ import modfest.lacrimis.init.ModEntityTypes;
 import modfest.lacrimis.util.NetworksState;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Pair;
@@ -15,19 +15,22 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.Function;
+
 public class NetworkLinkEntity extends BlockEntity {
     private float[] color;
     private boolean on = false;
     private NetworksState.NetworkList network;
     private NetworksState state = null;
 
-    public NetworkLinkEntity() {
-        super(ModEntityTypes.networkLink);
+    public NetworkLinkEntity(BlockPos pos, BlockState state) {
+        super(ModEntityTypes.networkLink, pos, state);
     }
 
     public void setState(boolean on, float[] color, World world) {
         if(state == null && world instanceof ServerWorld)
-            state = ((ServerWorld) world).getPersistentStateManager().getOrCreate(NetworksState::new, NetworksState.KEY);
+            state = ((ServerWorld) world).getPersistentStateManager().getOrCreate(
+                    NetworksState::fromNbt, NetworksState::new, "lacrimis_network");
 
         if(network != null && state != null)
             state.removeLink(getColor(), pos);
@@ -43,28 +46,28 @@ public class NetworkLinkEntity extends BlockEntity {
 
     @Nullable
     public BlockEntityUpdateS2CPacket toUpdatePacket() {
-        return new BlockEntityUpdateS2CPacket(this.pos, 3, this.toInitialChunkDataTag());
+        return new BlockEntityUpdateS2CPacket(this.pos, 3, this.toInitialChunkDataNbt());
     }
 
-    public CompoundTag toInitialChunkDataTag() {
-        return this.toTag(new CompoundTag());
+    public NbtCompound toInitialChunkDataNbt() {
+        return this.writeNbt(new NbtCompound());
     }
 
 
     @Override
-    public CompoundTag toTag(CompoundTag tag) {
+    public NbtCompound writeNbt(NbtCompound tag) {
         if(color != null) {
             tag.putFloat("colorA", color[0]);
             tag.putFloat("colorB", color[1]);
             tag.putFloat("colorC", color[2]);
         }
         tag.putBoolean("on", on);
-        return super.toTag(tag);
+        return super.writeNbt(tag);
     }
 
     @Override
-    public void fromTag(BlockState state, CompoundTag tag) {
-        super.fromTag(state, tag);
+    public void readNbt(NbtCompound tag) {
+        super.readNbt(tag);
         color = new float[] {0, 0, 0};
         color[0] = tag.getFloat("colorA");
         color[1] = tag.getFloat("colorB");
@@ -86,7 +89,8 @@ public class NetworkLinkEntity extends BlockEntity {
 
     public NetworksState.NetworkList getNetwork() {
         if(state == null && world instanceof ServerWorld)
-            state = ((ServerWorld) world).getPersistentStateManager().getOrCreate(NetworksState::new, "lacrimis_network");
+            state = ((ServerWorld) world).getPersistentStateManager().getOrCreate(
+                    NetworksState::fromNbt, NetworksState::new, "lacrimis_network");
         if(!on || state == null)
             return null;
         if(network == null || network.color != getColor())
