@@ -14,7 +14,7 @@ public class DuctRuneBlock extends BasicRuneBlock implements DuctConnectBlock {
 
     @Override
     public boolean canConnectDuctTo(BlockPos pos, WorldAccess world, Direction side) {
-        return pos.offset(side) != getCenter(world, pos) && side != Direction.UP;
+        return pos.offset(side) != getCenter(world, pos) && side != Direction.DOWN;
     }
 
     @Override

@@ -1,7 +1,7 @@
 {
   "parent": "lacrimis:block/rune/edge_block",
   "textures": {
-    "top": "lacrimis:block/rune_soul_swap",
+    "top": "lacrimis:block/rune_return_arrow",
     "side": "lacrimis:block/rune_blank"
   }
 }
