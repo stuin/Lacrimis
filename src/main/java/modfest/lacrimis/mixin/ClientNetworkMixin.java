@@ -33,7 +33,7 @@ public abstract class ClientNetworkMixin implements ClientPlayPacketListener {
         EntityType<?> entityType = packet.getEntityTypeId();
 
         if(entityType == ModEntityTypes.taintedPearl)
-            entity = new TaintedPearlEntity(ModEntityTypes.taintedPearl, client.world);
+            entity = new TaintedPearlEntity(client.world);
 
         if(entity != null && client.world != null) {
             int i = packet.getId();

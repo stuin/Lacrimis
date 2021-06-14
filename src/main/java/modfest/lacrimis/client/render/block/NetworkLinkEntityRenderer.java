@@ -8,6 +8,7 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
@@ -18,6 +19,10 @@ import net.minecraft.util.math.Vec3f;
 @Environment(EnvType.CLIENT)
 public class NetworkLinkEntityRenderer implements BlockEntityRenderer<NetworkLinkEntity> {
     public static final Identifier BEAM_TEXTURE = new Identifier("textures/entity/beacon_beam.png");
+
+    public NetworkLinkEntityRenderer(BlockEntityRendererFactory.Context context) {
+
+    }
 
     public void render(NetworkLinkEntity beaconBlockEntity, float f, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, int j) {
         long l = beaconBlockEntity.getWorld().getTime();

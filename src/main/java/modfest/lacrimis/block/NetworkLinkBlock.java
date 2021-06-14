@@ -1,11 +1,15 @@
 package modfest.lacrimis.block;
 
 import com.zundrel.wrenchable.block.BlockWrenchable;
+import modfest.lacrimis.block.entity.InfusionTableEntity;
 import modfest.lacrimis.block.entity.NetworkLinkEntity;
+import modfest.lacrimis.init.ModEntityTypes;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -27,8 +31,8 @@ public class NetworkLinkBlock extends BlockWithEntity implements DuctConnectBloc
     }
 
     @Override
-    public BlockEntity createBlockEntity(BlockView world) {
-        return new NetworkLinkEntity();
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new NetworkLinkEntity(pos, state);
     }
 
     public BlockRenderType getRenderType(BlockState state) {

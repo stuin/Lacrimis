@@ -7,6 +7,7 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
@@ -22,6 +23,10 @@ import modfest.lacrimis.block.entity.InfusionTableEntity;
 @Environment(EnvType.CLIENT)
 public class InfusionTableEntityRenderer implements BlockEntityRenderer<InfusionTableEntity> {
     public static final ModelIdentifier INFUSION_TABLE_OVERLAY_MODEL_ID = new ModelIdentifier(new Identifier(Lacrimis.MODID, "infusion_table_overlay"), "");
+
+    public InfusionTableEntityRenderer(BlockEntityRendererFactory.Context context) {
+
+    }
 
     @Override
     public void render(InfusionTableEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {

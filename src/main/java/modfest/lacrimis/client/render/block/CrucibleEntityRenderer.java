@@ -7,6 +7,8 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
+import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
@@ -22,6 +24,10 @@ import modfest.lacrimis.block.entity.CrucibleEntity;
 @Environment(EnvType.CLIENT)
 public class CrucibleEntityRenderer implements BlockEntityRenderer<CrucibleEntity> {
 	public static final ModelIdentifier CRUCIBLE_TEARS_MODEL_ID = new ModelIdentifier(new Identifier(Lacrimis.MODID, "crucible_tears"), "");
+
+	public CrucibleEntityRenderer(BlockEntityRendererFactory.Context context) {
+
+	}
 
 	@Override
 	public void render(CrucibleEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
