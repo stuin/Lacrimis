@@ -27,8 +27,8 @@ public class NetworkLinkBlock extends BlockWithEntity implements DuctConnectBloc
     }
 
     @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new NetworkLinkEntity(pos, state);
+    public BlockEntity createBlockEntity(BlockView world) {
+        return new NetworkLinkEntity();
     }
 
     public BlockRenderType getRenderType(BlockState state) {
@@ -66,20 +66,6 @@ public class NetworkLinkBlock extends BlockWithEntity implements DuctConnectBloc
 
             linkEntity.setState(changed && !Arrays.equals(color, BLANK), color, world);
         }
-    }
-
-    public VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return VoxelShapes.empty();
-    }
-
-    @Environment(EnvType.CLIENT)
-    public float getAmbientOcclusionLightLevel(BlockState state, BlockView world, BlockPos pos) {
-        return 1.0F;
-    }
-
-    @Override
-    public boolean isTranslucent(BlockState state, BlockView world, BlockPos pos) {
-        return true;
     }
 
     @Override

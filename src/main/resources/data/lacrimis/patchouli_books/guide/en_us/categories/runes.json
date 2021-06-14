@@ -1,6 +1,6 @@
 {
   "name": "Core Runes",
   "description": "The differing types of core runes",
-  "icon": "lacrimis:rune/healing",
+  "icon": "lacrimis:rune/extraction",
   "sortnum": 4
 }

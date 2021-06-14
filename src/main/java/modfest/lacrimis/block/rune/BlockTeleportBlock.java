@@ -19,7 +19,8 @@ public class BlockTeleportBlock extends CenterRuneBlock {
 
     @Override
     protected boolean onActivate(World world, BlockPos pos, BlockPos duct, Entity entity, PlayerEntity player) {
-        BlockPos destination = DuctUtil.locateSink(world, duct, pos);
+        Direction flipped = flipside(world, pos);
+        BlockPos destination = DuctUtil.locateSink(world, duct, pos.offset(flipped));
         if (destination != null) {
             return true;
         } else
