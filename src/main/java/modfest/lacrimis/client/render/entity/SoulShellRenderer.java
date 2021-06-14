@@ -24,13 +24,13 @@ import net.minecraft.util.math.Vec3d;
 
 @Environment(EnvType.CLIENT)
 public class SoulShellRenderer extends LivingEntityRenderer<SoulShellEntity, SoulShellModel<SoulShellEntity>> {
-    public static final Identifier TEXTURE = new Identifier(Lacrimis.MODID, "textures/entity/soul_shel.png");
+    public static final Identifier TEXTURE = new Identifier(Lacrimis.MODID, "textures/entity/soul_shell.png");
 
     public SoulShellRenderer(EntityRenderDispatcher dispatcher) {
         super(dispatcher, new SoulShellModel<>(0.0F), 0.5F);
         this.addFeature(new ArmorFeatureRenderer(this, new BipedEntityModel<SoulShellEntity>(0.5F), new BipedEntityModel<SoulShellEntity>(1.0F)));
         this.addFeature(new HeldItemFeatureRenderer<>(this));
-        //this.addFeature(new HeadFeatureRenderer<>(this));
+        this.addFeature(new HeadFeatureRenderer<>(this));
         this.addFeature(new ElytraFeatureRenderer<>(this));
     }
 

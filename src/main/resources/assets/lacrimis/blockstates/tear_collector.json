@@ -1,0 +1,52 @@
+{
+  "multipart": [
+    {
+      "when": { "facing": "down" },
+      "apply": { "model": "lacrimis:block/duct/collector_node", "x": 180 }
+    },
+    {
+      "when": { "facing": "east" },
+      "apply": { "model": "lacrimis:block/duct/collector_node", "x": 90, "y": 90 }
+    },
+    {
+      "when": { "facing": "north" },
+      "apply": { "model": "lacrimis:block/duct/collector_node", "x": 90 }
+    },
+    {
+      "when": { "facing": "south" },
+      "apply": { "model": "lacrimis:block/duct/collector_node", "x": 90, "y": 180 }
+    },
+    {
+      "when": { "facing": "up" },
+      "apply": { "model": "lacrimis:block/duct/collector_node" }
+    },
+    {
+      "when": { "facing": "west" },
+      "apply": { "model": "lacrimis:block/duct/collector_node", "x": 90, "y": 270 }
+    },
+    {
+      "when": { "facing": "up|down" },
+      "apply": { "model": "lacrimis:block/duct/collector_side" }
+    },
+    {
+      "when": { "facing": "up|down" },
+      "apply": { "model": "lacrimis:block/duct/collector_side", "uvlock": true, "x": 180 }
+    },
+    {
+      "when": { "facing": "north|south" },
+      "apply": { "model": "lacrimis:block/duct/collector_side", "uvlock": true, "x": 90 }
+    },
+    {
+      "when": { "facing": "north|south" },
+      "apply": { "model": "lacrimis:block/duct/collector_side", "uvlock": true, "x": 90, "y": 180 }
+    },
+    {
+      "when": { "facing": "east|west" },
+      "apply": { "model": "lacrimis:block/duct/collector_side", "uvlock": true, "x": 90, "y": 90 }
+    },
+    {
+      "when": { "facing": "east|west" },
+      "apply": { "model": "lacrimis:block/duct/collector_side", "uvlock": true, "x": 90, "y": 270 }
+    }
+  ]
+}

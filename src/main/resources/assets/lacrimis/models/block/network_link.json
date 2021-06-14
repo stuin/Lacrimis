@@ -3,7 +3,7 @@
     "textures": {
         "particle": "block/glass",
         "glass": "block/glass",
-        "obsidian": "block/obsidian",
+        "obsidian": "block/crying_obsidian",
         "beacon": "block/beacon"
     },
     "elements": [

@@ -1,0 +1,23 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "particle": "#arrows",
+    "arrows": "lacrimis:block/tear_collector",
+    "face": "lacrimis:block/duct_node",
+    "block": "lacrimis:block/tear_collector"
+  },
+  "elements": [
+    {
+      "from": [6, 6, 6],
+      "to": [10, 10, 10],
+      "faces": {
+        "north": { "texture": "#arrows"},
+        "south": { "texture": "#arrows" },
+        "east": { "texture": "#arrows" },
+        "west": { "texture": "#arrows" },
+        "up": { "texture": "#face" },
+        "down": { "texture": "#face" }
+      }
+    }
+  ]
+}

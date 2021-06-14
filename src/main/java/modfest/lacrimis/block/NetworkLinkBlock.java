@@ -68,20 +68,6 @@ public class NetworkLinkBlock extends BlockWithEntity implements DuctConnectBloc
         }
     }
 
-    public VoxelShape getVisualShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return VoxelShapes.empty();
-    }
-
-    @Environment(EnvType.CLIENT)
-    public float getAmbientOcclusionLightLevel(BlockState state, BlockView world, BlockPos pos) {
-        return 1.0F;
-    }
-
-    @Override
-    public boolean isTranslucent(BlockState state, BlockView world, BlockPos pos) {
-        return true;
-    }
-
     @Override
     public void onBroken(WorldAccess world, BlockPos pos, BlockState state) {
         NetworkLinkEntity linkEntity = ((NetworkLinkEntity) world.getBlockEntity(pos));
