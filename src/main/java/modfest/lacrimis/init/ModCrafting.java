@@ -1,18 +1,11 @@
 package modfest.lacrimis.init;
 
-import modfest.lacrimis.compat.patchiouli.PageCrucible;
-import modfest.lacrimis.compat.patchiouli.PageInfusion;
 import modfest.lacrimis.crafting.*;
-import net.fabricmc.fabric.api.client.screen.ScreenProviderRegistry;
-import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerType;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
@@ -24,7 +17,6 @@ import com.google.gson.annotations.SerializedName;
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.CombinerEntity;
 import modfest.lacrimis.block.entity.InfusionTableEntity;
-import vazkii.patchouli.client.book.ClientBookRegistry;
 
 public class ModCrafting {
     public static final Identifier INFUSION_SCREEN_ID = new Identifier(Lacrimis.MODID, "infusion");
@@ -78,17 +70,4 @@ public class ModCrafting {
         Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(Lacrimis.MODID, "infusion_shapeless"), SHAPELESS_INFUSION_SERIALIZER);
         Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(Lacrimis.MODID, "crucible"), CRUCIBLE_SERIALIZER);
     }
-
-    public static void registerClient() {
-        // Infusion GUI
-        ScreenProviderRegistry.INSTANCE.<InfusionScreenHandler>registerFactory(ModCrafting.INFUSION_SCREEN_ID,
-                container -> new InfusionScreen(container, MinecraftClient.getInstance().player.inventory, new TranslatableText(Lacrimis.MODID + ".gui.infusion")));
-        ScreenProviderRegistry.INSTANCE.<CombinerScreenHandler>registerFactory(ModCrafting.COMBINER_SCREEN_ID,
-                container -> new CombinerScreen(container, MinecraftClient.getInstance().player.inventory, new TranslatableText(Lacrimis.MODID + ".gui.combiner")));
-
-        // Patchouli pages
-        ClientBookRegistry.INSTANCE.pageTypes.put(new Identifier(Lacrimis.MODID, "crucible"), PageCrucible.class);
-        ClientBookRegistry.INSTANCE.pageTypes.put(new Identifier(Lacrimis.MODID, "infusion"), PageInfusion.class);
-    }
-
 }

@@ -25,7 +25,7 @@ public class TearCollectorBlock extends FacingBlock implements DuctConnectBlock 
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getPlayerLookDirection().getOpposite());
+        return this.getDefaultState().with(FACING, ctx.getPlayerLookDirection());
     }
 
     public BlockState rotate(BlockState state, BlockRotation rotation) {

@@ -1,5 +1,8 @@
 package modfest.lacrimis;
 
+import modfest.lacrimis.client.init.ClientModCrafting;
+import modfest.lacrimis.client.init.ClientModNetworking;
+import modfest.lacrimis.client.init.ClientModRenderers;
 import modfest.lacrimis.init.*;
 import net.minecraft.client.render.RenderLayer;
 import net.fabricmc.api.ClientModInitializer;
@@ -15,9 +18,8 @@ public class ClientLacrimis implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.infusionTable, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.tearLantern, RenderLayer.getCutout());
 
-        ModEntityTypes.registerClient();
-        ModCrafting.registerClient();
-        ModNetworking.registerClient();
-        ModParticles.registerClient();
+        ClientModRenderers.registerClient();
+        ClientModCrafting.registerClient();
+        ClientModNetworking.registerClient();
     }
 }

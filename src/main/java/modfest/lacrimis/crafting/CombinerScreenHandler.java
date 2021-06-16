@@ -1,5 +1,6 @@
 package modfest.lacrimis.crafting;
 
+import modfest.lacrimis.client.init.ClientModNetworking;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.CraftingResultInventory;
@@ -19,7 +20,6 @@ import net.minecraft.text.TranslatableText;
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.CombinerEntity;
 import modfest.lacrimis.init.ModItems;
-import modfest.lacrimis.init.ModNetworking;
 
 public class CombinerScreenHandler extends ScreenHandler implements InventoryChangedListener {
     private final CombinerEntity entity;
@@ -60,7 +60,7 @@ public class CombinerScreenHandler extends ScreenHandler implements InventoryCha
         entity.type = null;
         output.setStack(0, ItemStack.EMPTY);
         if(entity.getWorld() != null && entity.getWorld().isClient)
-            ModNetworking.sendCombinerNullPacket(entity.getPos());
+            ClientModNetworking.sendCombinerNullPacket(entity.getPos());
         return stack;
     }
 

@@ -17,27 +17,29 @@
   },
   "rewards": {
     "recipes": [
+      "lacrimis:infusion/rune_duct2",
+      "lacrimis:infusion/rune_entity_transport",
+      "lacrimis:infusion/rune_block_transport",
+      "lacrimis:crafting/dismantle_duct2",
+      "lacrimis:infusion/dismantle_duct2",
       "lacrimis:infusion/rune_tier3"
     ]
   },
   "criteria": {
-    "activate": {
-      "trigger": "minecraft:item_used_on_block",
+    "collect": {
+      "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "location": {
-          "block": {
-            "tag": "lacrimis:tier2"
+        "items": [
+          {
+            "item": "lacrimis:rune/tier2"
           }
-        },
-        "item": {
-          "item": "lacrimis:divining_rod"
-        }
+        ]
       }
     }
   },
   "requirements": [
     [
-      "activate"
+      "collect"
     ]
   ]
 }

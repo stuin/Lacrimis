@@ -1,0 +1,26 @@
+{
+  "type": "lacrimis:infusion_shaped",
+  "pattern": [
+    "BPB",
+    "TST",
+    "BPB"
+  ],
+  "key": {
+    "B": {
+      "item": "lacrimis:tainted_sludge"
+    },
+    "P": {
+      "item": "lacrimis:tainted_pearl"
+    },
+    "T": {
+      "item": "minecraft:totem_of_undying"
+    },
+    "S": {
+      "item": "lacrimis:soul_shell"
+    }
+  },
+  "result": {
+    "item": "lacrimis:soul_totem"
+  },
+  "tears": 200
+}

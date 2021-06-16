@@ -12,15 +12,11 @@
     {
       "type": "lacrimis:infusion",
       "recipe": "lacrimis:infusion/soul_totem",
-      "text": "Instead of just surviving death, this will let a simple (l:immaterial/soul_shell)Soul Shell$(/l) take your place."
+      "text": "Instead of just surviving death, this will let a simple $(l:immaterial/soul_shell)Soul Shell$(/l) take your place. $(br) The Totem of the Soul must be held in your hand the same as an unmodified Totem of Undying."
     },
     {
       "type": "text",
-      "text": "This totem must be bound to a destination (l:immaterial/network_link)Network Link$(/l), (a specific one not just a color) and upon death it will attempt to send you through the ducts there. This teleport can only be received by a $(l:runes/soul_swap)Soul Swap Rune$(/l) and will leave all of your items with the Soul Shell."
-    },
-    {
-      "type": "text",
-      "text": "Remember that the Totem of the Soul must be held in your hand the same as an unmodified Totem of Undying."
+      "text": "This totem must be bound to a destination $(l:immaterial/network_link)Network Link$(/l), (a specific one not just a color) and upon death it will attempt to send you through the ducts there. This teleport can only be received by a $(l:runes/soul_swap)Soul Swap Rune$(/l) and will leave all of your items with the Soul Shell."
     }
   ]
 }
