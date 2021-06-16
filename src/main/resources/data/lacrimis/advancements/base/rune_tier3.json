@@ -15,24 +15,28 @@
     "announce_to_chat": true,
     "hidden": false
   },
+  "rewards": {
+    "recipes": [
+      "lacrimis:infusion/rune_warding",
+      "lacrimis:infusion/rune_spawner",
+      "lacrimis:infusion/network_link"
+    ]
+  },
   "criteria": {
-    "activate": {
-      "trigger": "minecraft:item_used_on_block",
+    "collect": {
+      "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "location": {
-          "block": {
-            "tag": "lacrimis:tier3"
+        "items": [
+          {
+            "item": "lacrimis:rune/tier3"
           }
-        },
-        "item": {
-          "item": "lacrimis:divining_rod"
-        }
+        ]
       }
     }
   },
   "requirements": [
     [
-      "activate"
+      "collect"
     ]
   ]
 }

@@ -2,7 +2,7 @@
   "name": "Soul Swap (II)",
   "icon": "lacrimis:rune/soul_swap",
   "category": "lacrimis:runes",
-  "advancement": "lacrimis:recipes/rune_tier2",
+  "advancement": "lacrimis:base/rune_tier2",
   "sortnum": 4,
   "pages": [
     {

@@ -2,7 +2,7 @@
   "name": "Spawner (Tier III)",
   "icon": "lacrimis:rune/spawner",
   "category": "lacrimis:runes",
-  "advancement": "lacrimis:recipes/rune_tier3",
+  "advancement": "lacrimis:base/rune_tier3",
   "sortnum": 6,
   "pages": [
     {

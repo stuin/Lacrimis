@@ -2,7 +2,7 @@
   "name": "Block Transport (II)",
   "icon": "lacrimis:rune/block_transport",
   "category": "lacrimis:runes",
-  "advancement": "lacrimis:recipes/rune_tier2",
+  "advancement": "lacrimis:base/rune_tier2",
   "sortnum": 5,
   "pages": [
     {

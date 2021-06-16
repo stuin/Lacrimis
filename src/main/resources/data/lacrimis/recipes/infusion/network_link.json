@@ -1,0 +1,23 @@
+{
+  "type": "lacrimis:infusion_shaped",
+  "pattern": [
+    "DPD",
+    "PBP",
+    "DPD"
+  ],
+  "key": {
+    "D": {
+      "item": "lacrimis:duct"
+    },
+    "P": {
+      "item": "lacrimis:tainted_pearl"
+    },
+    "B": {
+      "item": "minecraft:beacon"
+    }
+  },
+  "result": {
+    "item": "lacrimis:network_link"
+  },
+  "tears": 500
+}
