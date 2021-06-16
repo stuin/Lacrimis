@@ -1,17 +1,13 @@
 package modfest.lacrimis.block.entity;
 
 import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.init.ModEntityTypes;
+import modfest.lacrimis.init.ModEntities;
 import modfest.lacrimis.util.NetworksState;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Pair;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,7 +18,7 @@ public class NetworkLinkEntity extends BlockEntity {
     private NetworksState state = null;
 
     public NetworkLinkEntity() {
-        super(ModEntityTypes.networkLink);
+        super(ModEntities.networkLink);
     }
 
     public void setState(boolean on, float[] color, World world) {

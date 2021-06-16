@@ -1,7 +1,6 @@
 package modfest.lacrimis.block.entity;
 
 import modfest.lacrimis.block.DrainedCryingObsidianBlock;
-import modfest.lacrimis.block.TearCollectorBlock;
 import modfest.lacrimis.init.*;
 import modfest.lacrimis.item.BottleOfTearsItem;
 import modfest.lacrimis.util.DuctUtil;
@@ -19,7 +18,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 
 import java.util.Optional;
-import java.util.stream.IntStream;
 
 import modfest.lacrimis.crafting.CrucibleRecipe;
 import net.minecraft.util.math.Direction;
@@ -32,7 +30,7 @@ public class CrucibleEntity extends SoulTankEntity implements Tickable {
     private Direction collector = null;
 
     public CrucibleEntity() {
-        super(ModEntityTypes.crucible, 1000, 1);
+        super(ModEntities.crucible, 1000, 1);
     }
 
     @Override

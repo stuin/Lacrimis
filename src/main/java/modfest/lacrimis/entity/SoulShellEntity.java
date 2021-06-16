@@ -1,10 +1,8 @@
 package modfest.lacrimis.entity;
 
 import com.google.common.collect.ImmutableList;
-import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.init.ModEntityTypes;
+import modfest.lacrimis.init.ModEntities;
 import modfest.lacrimis.init.ModItems;
-import modfest.lacrimis.init.ModNetworking;
 import net.minecraft.SharedConstants;
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
@@ -13,10 +11,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.player.HungerManager;
-import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
@@ -35,7 +30,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class SoulShellEntity extends LivingEntity {
@@ -189,7 +183,7 @@ public class SoulShellEntity extends LivingEntity {
     }
     
     public void swapWithPlayer(World world, PlayerEntity player) {
-        SoulShellEntity other = ModEntityTypes.soulShell.create(world);
+        SoulShellEntity other = ModEntities.soulShell.create(world);
         if(other == null || world.isClient)
             return;
         

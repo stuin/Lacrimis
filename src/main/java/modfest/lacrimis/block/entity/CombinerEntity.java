@@ -1,6 +1,6 @@
 package modfest.lacrimis.block.entity;
 
-import modfest.lacrimis.init.ModEntityTypes;
+import modfest.lacrimis.init.ModEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.nbt.CompoundTag;
@@ -11,7 +11,7 @@ public class CombinerEntity extends SoulTankEntity {
     public EntityType<?> type;
 
     public CombinerEntity() {
-        super(ModEntityTypes.combiner, 0, 2);
+        super(ModEntities.combiner, 0, 2);
         type = null;
     }
 

@@ -1,24 +1,12 @@
 package modfest.lacrimis.init;
 
 import modfest.lacrimis.block.entity.*;
-import modfest.lacrimis.client.render.block.CrucibleEntityRenderer;
-import modfest.lacrimis.client.render.block.InfusionTableEntityRenderer;
-import modfest.lacrimis.client.render.block.NetworkLinkEntityRenderer;
-import modfest.lacrimis.client.render.entity.GhostEntityRenderer;
-import modfest.lacrimis.client.render.entity.SoulShellRenderer;
 import modfest.lacrimis.entity.SoulShellEntity;
 import modfest.lacrimis.entity.TaintedPearlEntity;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.entity.EntityRenderer;
-import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
-import net.minecraft.client.render.entity.ProjectileEntityRenderer;
-import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
@@ -32,7 +20,7 @@ import modfest.lacrimis.entity.GhostEntity;
 
 import java.util.function.Supplier;
 
-public class ModEntityTypes {
+public class ModEntities {
 
     public static EntityType<GhostEntity> ghost;
     public static EntityType<SoulShellEntity> soulShell;
@@ -58,20 +46,6 @@ public class ModEntityTypes {
         combiner = register("combiner_entity", CombinerEntity::new, ModBlocks.combiner);
         tearLantern = register("tear_lantern_entity", TearLanternEntity::new, ModBlocks.tearLantern);
         networkLink = register("network_link_entity", NetworkLinkEntity::new, ModBlocks.networkLink);
-    }
-    
-    public static void registerClient() {
-        EntityRendererRegistry.INSTANCE.register(ModEntityTypes.ghost, (dispatcher, ctx) -> new GhostEntityRenderer(dispatcher));
-        EntityRendererRegistry.INSTANCE.register(ModEntityTypes.soulShell, (dispatcher, ctx) -> new SoulShellRenderer(dispatcher));
-        EntityRendererRegistry.INSTANCE.register(ModEntityTypes.taintedPearl, (dispatcher, ctx) -> new FlyingItemEntityRenderer<TaintedPearlEntity>(dispatcher, ctx.getItemRenderer()));
-
-        BlockEntityRendererRegistry.INSTANCE.register(ModEntityTypes.crucible, CrucibleEntityRenderer::new);
-        BlockEntityRendererRegistry.INSTANCE.register(ModEntityTypes.infusionTable, InfusionTableEntityRenderer::new);
-        BlockEntityRendererRegistry.INSTANCE.register(ModEntityTypes.networkLink, NetworkLinkEntityRenderer::new);
-
-        CrucibleEntityRenderer.onInit();
-        InfusionTableEntityRenderer.onInit();
-
     }
 
     private static <T extends Entity> EntityType<T> register(String name, FabricEntityTypeBuilder<T> builder) {

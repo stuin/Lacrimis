@@ -1,7 +1,7 @@
 package modfest.lacrimis.item;
 
 import modfest.lacrimis.entity.SoulShellEntity;
-import modfest.lacrimis.init.ModEntityTypes;
+import modfest.lacrimis.init.ModEntities;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.item.Item;
@@ -35,7 +35,7 @@ public class SoulShellItem extends Item {
             if (world.isSpaceEmpty(null, box, (entity) -> true) && world.getOtherEntities(null, box).isEmpty()) {
                 if (world instanceof ServerWorld) {
                     ServerWorld serverWorld = (ServerWorld)world;
-                    SoulShellEntity armorStandEntity = ModEntityTypes.soulShell.create(serverWorld, itemStack.getTag(), null, context.getPlayer(), blockPos, SpawnReason.SPAWN_EGG, true, true);
+                    SoulShellEntity armorStandEntity = ModEntities.soulShell.create(serverWorld, itemStack.getTag(), null, context.getPlayer(), blockPos, SpawnReason.SPAWN_EGG, true, true);
                     if (armorStandEntity == null) {
                         return ActionResult.FAIL;
                     }

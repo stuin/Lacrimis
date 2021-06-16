@@ -1,7 +1,7 @@
 package modfest.lacrimis.crafting;
 
 import modfest.lacrimis.block.entity.InfusionTableEntity;
-import modfest.lacrimis.init.ModNetworking;
+import modfest.lacrimis.client.init.ClientModNetworking;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerEntity;
@@ -51,7 +51,7 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 
 	public void startCrafting() {
 		entity.startCrafting = true;
-		ModNetworking.sendInfusionStartPacket(entity.getPos());
+		ClientModNetworking.sendInfusionStartPacket(entity.getPos());
 	}
 
 	@Override

@@ -1,8 +1,7 @@
 package modfest.lacrimis.item;
 
-import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.entity.TaintedPearlEntity;
-import modfest.lacrimis.init.ModEntityTypes;
+import modfest.lacrimis.init.ModEntities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
@@ -24,7 +23,7 @@ public class TaintedPearlItem extends Item {
         world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_ENDER_PEARL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (RANDOM.nextFloat() * 0.4F + 0.8F));
         user.getItemCooldownManager().set(this, 20);
         if (!world.isClient) {
-            ThrownItemEntity pearlEntity = new TaintedPearlEntity(ModEntityTypes.taintedPearl, world);
+            ThrownItemEntity pearlEntity = new TaintedPearlEntity(ModEntities.taintedPearl, world);
             pearlEntity.setOwner(user);
             pearlEntity.setPos(user.getX(), user.getEyeY() - 0.10000000149011612D, user.getZ());
             pearlEntity.setItem(itemStack);

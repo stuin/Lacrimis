@@ -20,10 +20,4 @@ public class ModParticles {
         Registry.register(Registry.PARTICLE_TYPE, new Identifier(Lacrimis.MODID, "purple_mist"), PURPLE_MIST);
         Registry.register(Registry.PARTICLE_TYPE, new Identifier(Lacrimis.MODID, "obsidian_tear_flying"), OBSIDIAN_TEAR_FLYING);
     }
-
-    @Environment(EnvType.CLIENT)
-    public static void registerClient() {
-        ParticleFactoryRegistry.getInstance().register(PURPLE_MIST, PurpleMistParticle.Factory::new);
-        ParticleFactoryRegistry.getInstance().register(OBSIDIAN_TEAR_FLYING, ObsidianTearFlyingParticle.Factory::new);
-    }
 }

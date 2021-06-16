@@ -1,7 +1,7 @@
 package modfest.lacrimis.block.entity;
 
 import modfest.lacrimis.block.DrainedCryingObsidianBlock;
-import modfest.lacrimis.init.ModEntityTypes;
+import modfest.lacrimis.init.ModEntities;
 import modfest.lacrimis.init.ModParticles;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 public class TearLanternEntity extends BlockEntity implements Tickable {
 
     public TearLanternEntity() {
-        super(ModEntityTypes.tearLantern);
+        super(ModEntities.tearLantern);
     }
 
     @Override
