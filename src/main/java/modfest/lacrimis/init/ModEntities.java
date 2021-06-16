@@ -1,22 +1,14 @@
 package modfest.lacrimis.init;
 
 import modfest.lacrimis.block.entity.*;
-import modfest.lacrimis.client.render.block.CrucibleEntityRenderer;
-import modfest.lacrimis.client.render.block.InfusionTableEntityRenderer;
-import modfest.lacrimis.client.render.block.NetworkLinkEntityRenderer;
-import modfest.lacrimis.client.render.entity.GhostEntityRenderer;
-import modfest.lacrimis.client.render.entity.SoulShellRenderer;
 import modfest.lacrimis.entity.SoulShellEntity;
 import modfest.lacrimis.entity.TaintedPearlEntity;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
@@ -29,7 +21,7 @@ import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.entity.GhostEntity;
 import org.jetbrains.annotations.Nullable;
 
-public class ModEntityTypes {
+public class ModEntities {
 
     public static EntityType<GhostEntity> ghost;
     public static EntityType<SoulShellEntity> soulShell;
@@ -55,20 +47,6 @@ public class ModEntityTypes {
         combiner = register("combiner_entity", CombinerEntity::new, ModBlocks.combiner);
         tearLantern = register("tear_lantern_entity", TearLanternEntity::new, ModBlocks.tearLantern);
         networkLink = register("network_link_entity", NetworkLinkEntity::new, ModBlocks.networkLink);
-    }
-    
-    public static void registerClient() {
-        EntityRendererRegistry.INSTANCE.register(ModEntityTypes.ghost, GhostEntityRenderer::new);
-        EntityRendererRegistry.INSTANCE.register(ModEntityTypes.soulShell, SoulShellRenderer::new);
-        EntityRendererRegistry.INSTANCE.register(ModEntityTypes.taintedPearl, FlyingItemEntityRenderer::new);
-
-        BlockEntityRendererRegistry.INSTANCE.register(ModEntityTypes.crucible, CrucibleEntityRenderer::new);
-        BlockEntityRendererRegistry.INSTANCE.register(ModEntityTypes.infusionTable, InfusionTableEntityRenderer::new);
-        BlockEntityRendererRegistry.INSTANCE.register(ModEntityTypes.networkLink, NetworkLinkEntityRenderer::new);
-
-        CrucibleEntityRenderer.onInit();
-        InfusionTableEntityRenderer.onInit();
-
     }
 
     private static <T extends Entity> EntityType<T> register(String name, FabricEntityTypeBuilder<T> builder) {

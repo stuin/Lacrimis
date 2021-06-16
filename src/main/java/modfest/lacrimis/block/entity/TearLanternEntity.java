@@ -1,7 +1,7 @@
 package modfest.lacrimis.block.entity;
 
 import modfest.lacrimis.block.DrainedCryingObsidianBlock;
-import modfest.lacrimis.init.ModEntityTypes;
+import modfest.lacrimis.init.ModEntities;
 import modfest.lacrimis.init.ModParticles;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 public class TearLanternEntity extends BlockEntity {
 
     public TearLanternEntity(BlockPos pos, BlockState state) {
-        super(ModEntityTypes.tearLantern, pos, state);
+        super(ModEntities.tearLantern, pos, state);
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, TearLanternEntity blockEntity) {

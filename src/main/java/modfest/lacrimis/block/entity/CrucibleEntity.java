@@ -30,7 +30,7 @@ public class CrucibleEntity extends SoulTankEntity {
     private Direction collector = null;
 
     public CrucibleEntity(BlockPos pos, BlockState state) {
-        super(ModEntityTypes.crucible, pos, state, 1000, 1);
+        super(ModEntities.crucible, pos, state, 1000, 1);
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, CrucibleEntity blockEntity) {

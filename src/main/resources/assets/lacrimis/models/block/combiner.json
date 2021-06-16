@@ -2,7 +2,7 @@
     "parent": "block/block",
     "textures": {
         "particle": "lacrimis:block/combiner_side_0",
-        "bottom": "lacrimis:block/crucible_inner",
+        "bottom": "lacrimis:block/crucible_bottom",
         "top": "lacrimis:block/combiner_top",
         "side0": "lacrimis:block/combiner_side_0",
         "side1": "lacrimis:block/combiner_side_1",

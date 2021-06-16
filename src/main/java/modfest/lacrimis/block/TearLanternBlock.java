@@ -1,7 +1,7 @@
 package modfest.lacrimis.block;
 
 import modfest.lacrimis.block.entity.TearLanternEntity;
-import modfest.lacrimis.init.ModEntityTypes;
+import modfest.lacrimis.init.ModEntities;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LanternBlock;
@@ -25,6 +25,6 @@ public class TearLanternBlock extends LanternBlock implements BlockEntityProvide
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return ModEntityTypes.checkType(type, ModEntityTypes.tearLantern, TearLanternEntity::tick);
+        return ModEntities.checkType(type, ModEntities.tearLantern, TearLanternEntity::tick);
     }
 }

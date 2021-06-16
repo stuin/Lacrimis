@@ -1,16 +1,12 @@
 package modfest.lacrimis.entity;
 
-import modfest.lacrimis.init.ModEntityTypes;
-import net.minecraft.entity.EntityType;
+import modfest.lacrimis.init.ModEntities;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.passive.MerchantEntity;
@@ -21,7 +17,7 @@ import net.minecraft.world.World;
 public class GhostEntity extends HostileEntity {
 
     public GhostEntity(World world) {
-        super(ModEntityTypes.ghost, world);
+        super(ModEntities.ghost, world);
     }
 
     @Override

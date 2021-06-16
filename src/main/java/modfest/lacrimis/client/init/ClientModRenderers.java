@@ -5,9 +5,7 @@ import modfest.lacrimis.client.PurpleMistParticle;
 import modfest.lacrimis.client.render.block.CrucibleEntityRenderer;
 import modfest.lacrimis.client.render.block.InfusionTableEntityRenderer;
 import modfest.lacrimis.client.render.block.NetworkLinkEntityRenderer;
-import modfest.lacrimis.client.render.entity.GhostEntityRenderer;
 import modfest.lacrimis.client.render.entity.SoulShellRenderer;
-import modfest.lacrimis.entity.TaintedPearlEntity;
 import modfest.lacrimis.init.ModEntities;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
@@ -19,9 +17,9 @@ import static modfest.lacrimis.init.ModParticles.PURPLE_MIST;
 
 public class ClientModRenderers {
     public static void registerClient() {
-        EntityRendererRegistry.INSTANCE.register(ModEntities.ghost, (dispatcher, ctx) -> new GhostEntityRenderer(dispatcher));
-        EntityRendererRegistry.INSTANCE.register(ModEntities.soulShell, (dispatcher, ctx) -> new SoulShellRenderer(dispatcher));
-        EntityRendererRegistry.INSTANCE.register(ModEntities.taintedPearl, (dispatcher, ctx) -> new FlyingItemEntityRenderer<TaintedPearlEntity>(dispatcher, ctx.getItemRenderer()));
+        //EntityRendererRegistry.INSTANCE.register(ModEntities.ghost, GhostEntityRenderer::new);
+        EntityRendererRegistry.INSTANCE.register(ModEntities.soulShell, SoulShellRenderer::new);
+        EntityRendererRegistry.INSTANCE.register(ModEntities.taintedPearl, FlyingItemEntityRenderer::new);
 
         BlockEntityRendererRegistry.INSTANCE.register(ModEntities.crucible, CrucibleEntityRenderer::new);
         BlockEntityRendererRegistry.INSTANCE.register(ModEntities.infusionTable, InfusionTableEntityRenderer::new);
@@ -29,7 +27,6 @@ public class ClientModRenderers {
 
         CrucibleEntityRenderer.onInit();
         InfusionTableEntityRenderer.onInit();
-
 
         ParticleFactoryRegistry.getInstance().register(PURPLE_MIST, PurpleMistParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(OBSIDIAN_TEAR_FLYING, ObsidianTearFlyingParticle.Factory::new);

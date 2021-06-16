@@ -47,7 +47,7 @@ public class SoulShellEntity extends LivingEntity {
     public float experienceProgress;
 
     public SoulShellEntity(World world) {
-        super(ModEntityTypes.soulShell, world);
+        super(ModEntities.soulShell, world);
         this.main = DefaultedList.ofSize(36, ItemStack.EMPTY);
         this.armor = DefaultedList.ofSize(4, ItemStack.EMPTY);
         this.offHand = DefaultedList.ofSize(1, ItemStack.EMPTY);

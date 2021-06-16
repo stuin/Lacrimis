@@ -3,7 +3,7 @@ package modfest.lacrimis.mixin;
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.NetworkLinkEntity;
 import modfest.lacrimis.entity.TaintedPearlEntity;
-import modfest.lacrimis.init.ModEntityTypes;
+import modfest.lacrimis.init.ModEntities;
 import net.minecraft.block.entity.*;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
@@ -32,7 +32,7 @@ public abstract class ClientNetworkMixin implements ClientPlayPacketListener {
         double f = packet.getZ();
         EntityType<?> entityType = packet.getEntityTypeId();
 
-        if(entityType == ModEntityTypes.taintedPearl)
+        if(entityType == ModEntities.taintedPearl)
             entity = new TaintedPearlEntity(client.world);
 
         if(entity != null && client.world != null) {

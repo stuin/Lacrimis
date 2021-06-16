@@ -24,7 +24,7 @@ public class SoulShellRenderer extends LivingEntityRenderer<SoulShellEntity, Sou
     public static final Identifier TEXTURE = new Identifier(Lacrimis.MODID, "textures/entity/soul_shell.png");
 
     public SoulShellRenderer(EntityRendererFactory.Context context) {
-        super(context, new SoulShellModel<>(0.0F), 0.5F);
+        super(context, new SoulShellModel<>(context.getPart(EntityModelLayers.PLAYER_SLIM)), 0.5F);
         this.addFeature(new ArmorFeatureRenderer<>(this,
                 new BipedEntityModel<>(context.getPart(EntityModelLayers.PLAYER_SLIM_INNER_ARMOR)),
                 new BipedEntityModel<>(context.getPart(EntityModelLayers.PLAYER_SLIM_OUTER_ARMOR))));

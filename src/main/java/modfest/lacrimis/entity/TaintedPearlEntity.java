@@ -1,10 +1,9 @@
 package modfest.lacrimis.entity;
 
-import modfest.lacrimis.init.ModEntityTypes;
+import modfest.lacrimis.init.ModEntities;
 import modfest.lacrimis.init.ModItems;
 import modfest.lacrimis.init.ModStatusEffects;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -23,7 +22,7 @@ public class TaintedPearlEntity extends ThrownItemEntity {
     private static final int DURATION = 15 * 20;
 
     public TaintedPearlEntity(World world) {
-        super(ModEntityTypes.taintedPearl, world);
+        super(ModEntities.taintedPearl, world);
     }
 
     protected Item getDefaultItem() {

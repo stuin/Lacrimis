@@ -5,7 +5,7 @@ import java.util.stream.IntStream;
 
 import modfest.lacrimis.crafting.InfusionRecipe;
 import modfest.lacrimis.init.ModCrafting;
-import modfest.lacrimis.init.ModEntityTypes;
+import modfest.lacrimis.init.ModEntities;
 import modfest.lacrimis.init.ModParticles;
 import modfest.lacrimis.util.DuctUtil;
 import modfest.lacrimis.util.SoulTank;
@@ -28,7 +28,7 @@ public class InfusionTableEntity extends SoulTankEntity {
     public boolean startCrafting = false;
 
     public InfusionTableEntity(BlockPos pos, BlockState state) {
-        super(ModEntityTypes.infusionTable,pos, state, 1000, 10);
+        super(ModEntities.infusionTable,pos, state, 1000, 10);
         getTank().setLimit(0);
     }
 

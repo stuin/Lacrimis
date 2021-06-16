@@ -5,9 +5,7 @@ import java.util.List;
 import com.zundrel.wrenchable.block.BlockWrenchable;
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.CrucibleEntity;
-import modfest.lacrimis.block.entity.TearLanternEntity;
-import modfest.lacrimis.init.ModBlocks;
-import modfest.lacrimis.init.ModEntityTypes;
+import modfest.lacrimis.init.ModEntities;
 import modfest.lacrimis.init.ModItems;
 import modfest.lacrimis.init.ModStatusEffects;
 import modfest.lacrimis.util.SoulTank;
@@ -26,7 +24,6 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
@@ -35,7 +32,6 @@ import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -57,7 +53,7 @@ public class CrucibleBlock extends SoulTankBlock implements BlockWrenchable {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return ModEntityTypes.checkType(type, ModEntityTypes.crucible, CrucibleEntity::tick);
+        return ModEntities.checkType(type, ModEntities.crucible, CrucibleEntity::tick);
     }
 
     @Override

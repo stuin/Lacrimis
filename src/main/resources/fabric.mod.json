@@ -27,11 +27,9 @@
     "client": [
       "modfest.lacrimis.ClientLacrimis"
     ],
-    "rei_plugins_v0": [
-      "modfest.lacrimis.compat.rei.LacrimisPlugin"
-    ],
-    "rei_containers": [
-      "modfest.lacrimis.compat.rei.LacrimisContainerPlugin"
+    "rei": [
+      "modfest.lacrimis.compat.rei.LacrimisPlugin",
+      "modfest.lacrimis.compat.rei.client.ClientLacrimisPlugin"
     ]
   },
 
@@ -47,9 +45,9 @@
   },
 
   "depends": {
-    "fabricloader": ">=0.8.8",
+    "fabricloader": ">=0.11.3",
     "fabric": "*",
-    "minecraft": "~1.16",
-    "patchouli": ">=1.16-37-FABRIC"
+    "minecraft": "~1.17",
+    "patchouli": ">=1.17-52-FABRIC"
   }
 }

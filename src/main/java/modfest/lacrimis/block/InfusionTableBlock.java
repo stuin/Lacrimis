@@ -2,10 +2,8 @@ package modfest.lacrimis.block;
 
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.InfusionTableEntity;
-import modfest.lacrimis.block.entity.SoulTankEntity;
-import modfest.lacrimis.block.entity.TearLanternEntity;
 import modfest.lacrimis.init.ModCrafting;
-import modfest.lacrimis.init.ModEntityTypes;
+import modfest.lacrimis.init.ModEntities;
 import modfest.lacrimis.init.ModItems;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.minecraft.block.*;
@@ -18,7 +16,6 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -50,7 +47,7 @@ public class InfusionTableBlock extends SoulTankBlock {
 
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-		return ModEntityTypes.checkType(type, ModEntityTypes.infusionTable, InfusionTableEntity::tick);
+		return ModEntities.checkType(type, ModEntities.infusionTable, InfusionTableEntity::tick);
 	}
 
 	@Override
