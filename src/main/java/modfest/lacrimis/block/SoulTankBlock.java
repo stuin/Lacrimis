@@ -47,7 +47,7 @@ public abstract class SoulTankBlock extends BlockWithEntity implements DuctConne
         final BlockEntity blockEntity = world.getBlockEntity(blockPos);
 
         if (blockEntity instanceof SoulTankEntity)
-            return (int) Math.floor(14.0 * ((SoulTankEntity) blockEntity).getRelativeLevel()) + 1;
+            return (int) Math.floor(15.0 * ((SoulTankEntity) blockEntity).getRelativeLevel());
 
         return 0;
     }

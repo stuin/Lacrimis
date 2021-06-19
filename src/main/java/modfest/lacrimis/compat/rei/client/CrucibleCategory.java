@@ -70,8 +70,6 @@ public class CrucibleCategory implements TransferDisplayCategory<CrucibleDisplay
         List<Widget> widgets = Lists.newArrayList();
         widgets.add(Widgets.createRecipeBase(bounds));
         widgets.add(Widgets.createResultSlotBackground(new Point(startPoint.x + 61, startPoint.y + 9)));
-        widgets.add(Widgets.createLabel(new Point(bounds.x + bounds.width - 5, bounds.y + 5),
-                new TranslatableText("lacrimis.tooltip.crucible", tears)).noShadow().rightAligned().color(0xFF404040, 0xFFBBBBBB));
         widgets.add(Widgets.createArrow(new Point(startPoint.x + 24, startPoint.y + 8)));
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 61, startPoint.y + 9))
                 .entries(display.getOutputEntries().get(0))
@@ -80,6 +78,8 @@ public class CrucibleCategory implements TransferDisplayCategory<CrucibleDisplay
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 1, startPoint.y + 1))
                 .entries(display.getInputEntries().get(0))
                 .markInput());
+        widgets.add(Widgets.createLabel(new Point(startPoint.x + 40, startPoint.y + 20),
+                new TranslatableText("lacrimis.tooltip.crucible", tears)).noShadow().rightAligned().color(0xFF404040, 0xFFBBBBBB));
         return widgets;
     }
     

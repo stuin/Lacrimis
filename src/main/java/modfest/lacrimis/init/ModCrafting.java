@@ -1,26 +1,23 @@
 package modfest.lacrimis.init;
 
 import modfest.lacrimis.crafting.*;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.PacketByteBuf;
+import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
-import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
-import net.fabricmc.fabric.api.container.ContainerFactory;
-import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 
 import com.google.gson.annotations.SerializedName;
 
 import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.block.entity.CombinerEntity;
-import modfest.lacrimis.block.entity.InfusionTableEntity;
 
 public class ModCrafting {
     public static final Identifier INFUSION_SCREEN_ID = new Identifier(Lacrimis.MODID, "infusion");
     public static final Identifier COMBINER_SCREEN_ID = new Identifier(Lacrimis.MODID, "combiner");
+
+    public static ScreenHandlerType<InfusionScreenHandler> INFUSION_SCREEN_HANDLER;
+    public static ScreenHandlerType<CombinerScreenHandler> COMBINER_SCREEN_HANDLER;
 
     public static final RecipeType<InfusionRecipe> INFUSION_RECIPE = new RecipeType<InfusionRecipe>() {
         @Override
@@ -42,26 +39,9 @@ public class ModCrafting {
     @SerializedName("crafting_texture")
     public static final Identifier craftingTexture = new Identifier("lacrimis", "textures/gui/crafting.png");
 
-    // Don't convert the container factories to lambdas, it will cause the mod
-    // to crash on the server because of class loading
-    @SuppressWarnings("Convert2Lambda")
     public static void register() {
-        ContainerProviderRegistry.INSTANCE.registerFactory(INFUSION_SCREEN_ID, new ContainerFactory<ScreenHandler>() {
-            @Override
-            public ScreenHandler create(int syncId, Identifier identifier, PlayerEntity player, PacketByteBuf buf) {
-                BlockPos pos = buf.readBlockPos();
-                InfusionTableEntity entity = (InfusionTableEntity) player.getEntityWorld().getBlockEntity(pos);
-                return new InfusionScreenHandler(syncId, player, entity);
-            }
-        });
-        ContainerProviderRegistry.INSTANCE.registerFactory(COMBINER_SCREEN_ID, new ContainerFactory<ScreenHandler>() {
-            @Override
-            public ScreenHandler create(int syncId, Identifier identifier, PlayerEntity player, PacketByteBuf buf) {
-                BlockPos pos = buf.readBlockPos();
-                CombinerEntity entity = (CombinerEntity) player.getEntityWorld().getBlockEntity(pos);
-                return new CombinerScreenHandler(syncId, player, entity);
-            }
-        });
+        INFUSION_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(INFUSION_SCREEN_ID, InfusionScreenHandler::new);
+        COMBINER_SCREEN_HANDLER = ScreenHandlerRegistry.registerExtended(COMBINER_SCREEN_ID, CombinerScreenHandler::new);
 
         Registry.register(Registry.RECIPE_TYPE, new Identifier(Lacrimis.MODID, "infusion"), INFUSION_RECIPE);
         Registry.register(Registry.RECIPE_TYPE, new Identifier(Lacrimis.MODID, "crucible"), CRUCIBLE_RECIPE);

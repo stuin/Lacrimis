@@ -1,15 +1,18 @@
 package modfest.lacrimis.crafting;
 
-import modfest.lacrimis.client.init.ClientModNetworking;
+import modfest.lacrimis.init.ModCrafting;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.CraftingResultInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.InventoryChangedListener;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
@@ -18,23 +21,34 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
 import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.block.entity.CombinerEntity;
 import modfest.lacrimis.init.ModItems;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.Registry;
 
 public class CombinerScreenHandler extends ScreenHandler implements InventoryChangedListener {
-    private final CombinerEntity entity;
+    private final Inventory input;
     protected final Inventory output = new CraftingResultInventory();
+    private EntityType<?> entityType;
+    private BlockPos pos;
 
-    public CombinerScreenHandler(int syncId, PlayerEntity player, CombinerEntity entity) {
-        super(null, syncId);
-        this.entity = entity;
+    public CombinerScreenHandler(int syncId, PlayerInventory player, PacketByteBuf buf) {
+        this(syncId, player, new SimpleInventory(), null);
+        pos = buf.readBlockPos();
+        String s = buf.readString();
+        if(!s.equals("null"))
+            entityType = Registry.ENTITY_TYPE.get(Identifier.tryParse(s));
+    }
 
-        if (entity.getWorld() != null && !entity.getWorld().isClient)
-            entity.inventory.addListener(this);
+    public CombinerScreenHandler(int syncId, PlayerInventory player, Inventory inventory, EntityType<?> type) {
+        super(ModCrafting.COMBINER_SCREEN_HANDLER, syncId);
+        this.input = inventory;
+        this.entityType = type;
+        pos = BlockPos.ORIGIN;
 
-        this.addSlot(new Slot(entity.inventory, 0, 27, 47));
-        this.addSlot(new Slot(entity.inventory, 1, 76, 47));
-        this.addSlot(new FurnaceOutputSlot(player, output, 0, 134, 47) {
+        this.addSlot(new Slot(inventory, 0, 27, 47));
+        this.addSlot(new Slot(inventory, 1, 76, 47));
+        this.addSlot(new FurnaceOutputSlot(player.player, output, 0, 134, 47) {
             @Override
             public void onTakeItem(PlayerEntity player, ItemStack stack) {
                 CombinerScreenHandler.this.onTakeOutput(stack);
@@ -44,37 +58,34 @@ public class CombinerScreenHandler extends ScreenHandler implements InventoryCha
         int k;
         for(k = 0; k < 3; ++k) {
             for(int j = 0; j < 9; ++j) {
-                this.addSlot(new Slot(player.getInventory(), j + k * 9 + 9, 8 + j * 18, 84 + k * 18));
+                this.addSlot(new Slot(player, j + k * 9 + 9, 8 + j * 18, 84 + k * 18));
             }
         }
 
         for(k = 0; k < 9; ++k) {
-            this.addSlot(new Slot(player.getInventory(), k, 8 + k * 18, 142));
+            this.addSlot(new Slot(player, k, 8 + k * 18, 142));
         }
-        onContentChanged(entity.inventory);
+        onContentChanged(inventory);
     }
 
-    protected ItemStack onTakeOutput(ItemStack stack) {
+    protected void onTakeOutput(ItemStack stack) {
         decrement(0);
         decrement(1);
-        entity.type = null;
+        entityType = null;
         output.setStack(0, ItemStack.EMPTY);
-        if(entity.getWorld() != null && entity.getWorld().isClient)
-            ClientModNetworking.sendCombinerNullPacket(entity.getPos());
-        return stack;
     }
 
     private void decrement(int i) {
-        ItemStack itemStack = entity.inventory.getStack(i);
+        ItemStack itemStack = input.getStack(i);
         itemStack.decrement(1);
-        entity.inventory.setStack(i, itemStack);
+        input.setStack(i, itemStack);
     }
 
     public void updateResult() {
-        if(entity.type != null && entity.inventory.getStack(1).getItem() == ModItems.taintedSludge) {
-            if(entity.inventory.getStack(0).getItem() == ModItems.brokenSpawner)
+        if(entityType != null && input.getStack(1).getItem() == ModItems.taintedSludge) {
+            if(input.getStack(0).getItem() == ModItems.brokenSpawner)
                 if(output.getStack(0).isEmpty()) {
-                    String id = EntityType.getId(entity.type).toString();
+                    String id = EntityType.getId(entityType).toString();
                     NbtCompound[] tags = new NbtCompound[5];
                     for(int i = 0; i < tags.length; i++)
                         tags[i] = new NbtCompound();
@@ -92,7 +103,7 @@ public class CombinerScreenHandler extends ScreenHandler implements InventoryCha
 
                     //Set output
                     ItemStack stack = new ItemStack(Items.SPAWNER);
-                    MutableText text = new TranslatableText(entity.type.getTranslationKey());
+                    MutableText text = new TranslatableText(entityType.getTranslationKey());
                     text.append(new TranslatableText(Lacrimis.MODID + ".tooltip.spawner"));
                     stack.setTag(tags[0]);
                     stack.setCustomName(text);
@@ -113,20 +124,20 @@ public class CombinerScreenHandler extends ScreenHandler implements InventoryCha
     @Override
     public void onContentChanged(Inventory inventory) {
         super.onContentChanged(inventory);
-        if(entity.inventory == inventory)
+        if(input == inventory)
             this.updateResult();
     }
 
     @Override
     public boolean canUse(PlayerEntity player) {
-        return this.entity.inventory.canPlayerUse(player);
+        return input.canPlayerUse(player);
     }
 
     @Override
     public ItemStack transferSlot(PlayerEntity player, int index) {
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = slots.get(index);
-        if (slot != null && slot.hasStack()) {
+        if (slot.hasStack()) {
             ItemStack itemStack2 = slot.getStack();
             itemStack = itemStack2.copy();
             if (index == 2) {
@@ -162,8 +173,8 @@ public class CombinerScreenHandler extends ScreenHandler implements InventoryCha
     }
 
     public Text getEntity() {
-        if(entity.type != null) {
-            Text t = new TranslatableText(entity.type.getTranslationKey());
+        if(entityType != null) {
+            Text t = new TranslatableText(entityType.getTranslationKey());
             return new TranslatableText(Lacrimis.MODID + ".gui.combiner.entity").append(t);
         }
         return new TranslatableText(Lacrimis.MODID + ".gui.combiner.none");

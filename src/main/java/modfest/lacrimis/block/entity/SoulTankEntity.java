@@ -25,7 +25,7 @@ public abstract class SoulTankEntity extends BlockEntity implements SidedInvento
         super(type, pos, state);
         tank = new SoulTank(capacity);
         tank.addListener(this::mark);
-        this.inventory = new InfusionInventory(this, inventory);
+        this.inventory = new InfusionInventory(tank, inventory);
     }
 
     public float getRelativeLevel() {

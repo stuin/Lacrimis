@@ -21,6 +21,7 @@ import net.minecraft.util.registry.Registry;
 
 public class ModItems {
     private static final Item.Settings SETTINGS = new Item.Settings().group(Lacrimis.ITEM_GROUP);
+    private static final Item.Settings SMALL_SETTINGS = new Item.Settings().group(Lacrimis.ITEM_GROUP).maxCount(16);
     private static final Item.Settings TOOL_SETTINGS = new Item.Settings().group(Lacrimis.ITEM_GROUP).maxCount(1);
     private static final Item.Settings RUNE_SETTINGS = new Item.Settings().group(Lacrimis.RUNE_ITEM_GROUP);
 
@@ -103,8 +104,8 @@ public class ModItems {
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
         diviningRod = register("divining_rod", new DiviningRodItem(TOOL_SETTINGS));
         goldDiviningRod = register("gold_divining_rod", new DiviningRodItem(TOOL_SETTINGS));
-        taintedPearl = register("tainted_pearl", new TaintedPearlItem(SETTINGS.maxCount(16)));
-        soulShell = register("soul_shell", new SoulShellItem(SETTINGS.maxCount(16)));
+        taintedPearl = register("tainted_pearl", new TaintedPearlItem(SMALL_SETTINGS));
+        soulShell = register("soul_shell", new SoulShellItem(SMALL_SETTINGS));
         soulTotem = register("soul_totem", new SoulTotemItem(TOOL_SETTINGS));
         tearIngot = register("tear_ingot", new Item(SETTINGS));
         taintedSludge = register("tainted_sludge", new Item(SETTINGS));

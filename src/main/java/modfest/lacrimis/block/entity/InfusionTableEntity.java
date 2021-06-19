@@ -4,22 +4,31 @@ import java.util.Random;
 import java.util.stream.IntStream;
 
 import modfest.lacrimis.crafting.InfusionRecipe;
+import modfest.lacrimis.crafting.InfusionScreenHandler;
 import modfest.lacrimis.init.ModCrafting;
 import modfest.lacrimis.init.ModEntities;
 import modfest.lacrimis.init.ModParticles;
 import modfest.lacrimis.util.DuctUtil;
 import modfest.lacrimis.util.SoulTank;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.CraftingRecipe;
 import net.minecraft.recipe.RecipeType;
+import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class InfusionTableEntity extends SoulTankEntity {
+public class InfusionTableEntity extends SoulTankEntity implements NamedScreenHandlerFactory {
+    public static final int CAPACITY = 1000;
+    public static final int SIZE = 10;
     public static final int OUTPUT_STACK = 9;
     public static final int[] INPUT_STACKS = IntStream.rangeClosed(0, 8).toArray();
     private final Random random = new Random();
@@ -28,7 +37,7 @@ public class InfusionTableEntity extends SoulTankEntity {
     public boolean startCrafting = false;
 
     public InfusionTableEntity(BlockPos pos, BlockState state) {
-        super(ModEntities.infusionTable,pos, state, 1000, 10);
+        super(ModEntities.infusionTable, pos, state, CAPACITY, SIZE);
         getTank().setLimit(0);
     }
 
@@ -114,6 +123,17 @@ public class InfusionTableEntity extends SoulTankEntity {
                     inventory.getStack(i).decrement(1);
             }
         }
+    }
+
+    @Override
+    public Text getDisplayName() {
+        return new TranslatableText("lacrimis.gui.infusion");
+    }
+
+    @Nullable
+    @Override
+    public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
+        return new InfusionScreenHandler(syncId, inv, inventory);
     }
 
     protected boolean canAcceptOutput(ItemStack itemStack) {
