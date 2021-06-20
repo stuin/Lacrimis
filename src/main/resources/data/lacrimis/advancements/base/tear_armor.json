@@ -1,5 +1,5 @@
 {
-  "parent": "lacrimis:base/tear_ingot",
+  "parent": "lacrimis:base/infusion_table",
   "display": {
     "icon": {
       "item": "lacrimis:tear_soaked_chestplate"
@@ -16,42 +16,17 @@
     "hidden": false
   },
   "criteria": {
-    "collect_helmet": {
+    "collect": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "lacrimis:tear_soaked_helmet"
-          }
-        ]
-      }
-    },
-    "collect_chestplate": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "item": "lacrimis:tear_soaked_chestplate"
-          }
-        ]
-      }
-    },
-    "collect_leggings": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "item": "lacrimis:tear_soaked_leggings"
-          }
-        ]
-      }
-    },
-    "collect_boots": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "item": "lacrimis:tear_soaked_boots"
+            "items": [
+              "lacrimis:tear_soaked_helmet",
+              "lacrimis:tear_soaked_chestplate",
+              "lacrimis:tear_soaked_leggings",
+              "lacrimis:tear_soaked_boots"
+            ]
           }
         ]
       }
@@ -59,10 +34,7 @@
   },
   "requirements": [
     [
-      "collect_helmet",
-      "collect_chestplate",
-      "collect_leggings",
-      "collect_boots"
+      "collect"
     ]
   ]
 }

@@ -114,8 +114,9 @@ public abstract class SoulTankBlock extends BlockWithEntity implements DuctConne
 
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        new TaintPacket(getTank(world, pos).getTears()).spawn(world, pos);
+        int tears = getTank(world, pos).getTears();
         super.onBreak(world, pos, state, player);
+        new TaintPacket(tears).spawn(world, pos);
     }
 
     public SoulTank getTank(BlockView world, BlockPos pos) {

@@ -31,7 +31,7 @@
       "conditions": {
         "items": [
           {
-            "item": "lacrimis:tear_ingot"
+            "items": [ "lacrimis:tear_ingot" ]
           }
         ]
       }

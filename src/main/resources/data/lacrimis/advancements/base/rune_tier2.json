@@ -1,5 +1,5 @@
 {
-  "parent": "lacrimis:base/rune_tier1",
+  "parent": "lacrimis:base/solidified_tear",
   "display": {
     "icon": {
       "item": "lacrimis:rune/tier2"
@@ -31,7 +31,7 @@
       "conditions": {
         "items": [
           {
-            "item": "lacrimis:rune/tier2"
+            "items": [ "lacrimis:rune/tier2" ]
           }
         ]
       }

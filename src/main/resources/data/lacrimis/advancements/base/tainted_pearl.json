@@ -12,8 +12,8 @@
     },
     "frame": "task",
     "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
+    "announce_to_chat": false,
+    "hidden": true
   },
   "criteria": {
     "collect": {
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "lacrimis:tainted_pearl"
+            "items": [ "lacrimis:tainted_pearl" ]
           }
         ]
       }

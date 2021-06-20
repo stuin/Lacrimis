@@ -36,9 +36,6 @@ public class ModCrafting {
     public static final RecipeSerializer<ShapelessInfusionRecipe> SHAPELESS_INFUSION_SERIALIZER = new ShapelessInfusionRecipe.Serializer();
     public static final RecipeSerializer<CrucibleRecipe> CRUCIBLE_SERIALIZER = new CrucibleRecipe.Serializer();
 
-    @SerializedName("crafting_texture")
-    public static final Identifier craftingTexture = new Identifier("lacrimis", "textures/gui/crafting.png");
-
     public static void register() {
         INFUSION_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(INFUSION_SCREEN_ID, InfusionScreenHandler::new);
         COMBINER_SCREEN_HANDLER = ScreenHandlerRegistry.registerExtended(COMBINER_SCREEN_ID, CombinerScreenHandler::new);

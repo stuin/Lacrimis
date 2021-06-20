@@ -63,7 +63,19 @@ public class DuctUtil {
         scanned.add(pos);
         while (!stack.isEmpty()) {
             BlockPos cur = stack.pop();
-            for (Direction d : cur.equals(pos) ? outputs : all) {
+            boolean sided = cur.equals(pos);
+            if(world.getBlockState(cur) instanceof DuctConnectBlock) {
+                sided = true;
+                outputs = EnumSet.noneOf(Direction.class);
+                DuctConnectBlock b = (DuctConnectBlock) world.getBlockState(cur).getBlock();
+                for (Direction direction : all) {
+                    if (b.canConnectDuctTo(cur, world, direction)) {
+                        outputs.add(direction);
+                    }
+                }
+            }
+
+            for (Direction d : sided ? outputs : all) {
                 BlockPos next = cur.offset(d);
                 if (scanned.contains(next)) continue;
                 scanned.add(cur);
@@ -80,6 +92,7 @@ public class DuctUtil {
                 else if (nextState.getBlock() instanceof DuctConnectBlock) {
                     DuctConnectBlock b = (DuctConnectBlock) nextState.getBlock();
                     if (b.canConnectDuctTo(next, world, d)) {
+                        //Act on block
                         int a = test.apply(next, b, goal);
                         if(a > 0) {
                             out.add(next);
@@ -87,6 +100,7 @@ public class DuctUtil {
                             if (goal <= 0)
                                 return out;
                         }
+                        stack.push(next);
                     }
 
                     //Get network link

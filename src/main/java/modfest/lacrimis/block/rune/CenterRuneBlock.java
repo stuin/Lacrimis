@@ -118,7 +118,7 @@ public abstract class CenterRuneBlock extends Block implements DuctConnectBlock,
 
     private boolean runOnce(World world, BlockPos pos, BlockPos duct, PlayerEntity player, Direction flipped, int tier) {
         //For all entities on platform
-        for(Entity entity : world.getEntitiesByClass(Entity.class, getTargetBox(pos, flipped, tier), null)) {
+        for(Entity entity : world.getNonSpectatingEntities(Entity.class, getTargetBox(pos, flipped, tier))) {
             if(onActivate(world, pos, duct, entity, player))
                 return true;
         }

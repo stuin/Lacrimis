@@ -1,11 +1,14 @@
 package modfest.lacrimis.block;
 
+import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.CombinerEntity;
 import modfest.lacrimis.block.entity.InfusionTableEntity;
 import modfest.lacrimis.init.ModCrafting;
 import modfest.lacrimis.init.ModItems;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,9 +23,9 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
-public class CombinerBlock extends SoulTankBlock {
+public class CombinerBlock extends BlockWithEntity implements DuctConnectBlock {
     public CombinerBlock(Settings settings) {
-        super(settings, false);
+        super(settings);
     }
 
     @Override
@@ -56,13 +59,24 @@ public class CombinerBlock extends SoulTankBlock {
     }
 
     @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
+
+    @Override
     public boolean canConnectDuctTo(BlockPos pos, WorldAccess world, Direction side) {
         return true;
     }
 
     @Override
+    public int extractTears(BlockPos pos, World world, int request, boolean simulate) {
+        return 0;
+    }
+
+    @Override
     public boolean insert(BlockPos pos, World world, Object value) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
+        Lacrimis.LOGGER.info(value);
         if(value instanceof LivingEntity && !(value instanceof PlayerEntity) &&
                 blockEntity instanceof CombinerEntity && ((CombinerEntity) blockEntity).type == null) {
             ((CombinerEntity) blockEntity).type = ((LivingEntity) value).getType();

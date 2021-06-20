@@ -4,10 +4,12 @@
     "minecraft:cobblestone",
     "minecraft:stone",
     "minecraft:blackstone",
-    "minecraft:gravel",
     "minecraft:andesite",
     "minecraft:diorite",
     "minecraft:granite",
-    "minecraft:dirt"
+    "minecraft:deepslate",
+    "minecraft:cobbled_deepslate",
+    "minecraft:calcite",
+    "minecraft:tuff"
   ]
 }

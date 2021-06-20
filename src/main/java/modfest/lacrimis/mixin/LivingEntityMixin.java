@@ -3,11 +3,15 @@ package modfest.lacrimis.mixin;
 import modfest.lacrimis.block.rune.SoulSwapBlock;
 import modfest.lacrimis.init.ModItems;
 import modfest.lacrimis.util.DuctUtil;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -29,33 +33,30 @@ public abstract class LivingEntityMixin extends Entity {
             ItemStack itemStack = null;
             Hand[] var4 = Hand.values();
 
+            //Check for totem
             for(Hand hand : var4) {
                 ItemStack itemStack2 = this.getStackInHand(hand);
                 if (itemStack2.getItem() == ModItems.soulTotem) {
-                    itemStack = itemStack2.copy();
-                    itemStack2.decrement(1);
+                    itemStack = itemStack2;
                     break;
                 }
             }
 
+
+            //Get destination
             if (itemStack != null && itemStack.hasTag()) {
                 int x = itemStack.getTag().getInt("X");
                 int y = itemStack.getTag().getInt("Y");
                 int z = itemStack.getTag().getInt("Z");
-                this.setHealth(1.0F);
-                this.clearStatusEffects();
-                DuctUtil.locateSink(world, new BlockPos(x, y, z), new SoulSwapBlock.PlayerContainer(this));
-                cir.setReturnValue(true);
+                if(DuctUtil.locateSink(world, new BlockPos(x, y, z),
+                        new SoulSwapBlock.PlayerContainer(this, itemStack.copy())) != null) {
+                    itemStack.decrement(1);
+                    cir.setReturnValue(true);
+                }
             }
         }
     }
 
     @Shadow
     public abstract ItemStack getStackInHand(Hand hand);
-
-    @Shadow
-    public abstract void setHealth(float health);
-
-    @Shadow
-    public abstract boolean clearStatusEffects();
 }

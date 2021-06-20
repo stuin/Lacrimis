@@ -1,0 +1,33 @@
+{
+  "parent": "lacrimis:base/crucible",
+  "display": {
+    "icon": {
+      "item": "lacrimis:bottle_of_tears"
+    },
+    "title": {
+      "translate": "lacrimis.advancements.taint_poison.title"
+    },
+    "description": {
+      "translate": "lacrimis.advancements.taint_poison.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "collect": {
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "effects": {
+          "lacrimis:tear_poison": {}
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "collect"
+    ]
+  ]
+}

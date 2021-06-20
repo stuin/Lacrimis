@@ -30,7 +30,10 @@ public class InfusionScreen extends HandledScreen<InfusionScreenHandler> {
         super.init();
         isNarrow = width < 379;
         addDrawable(new TexturedButtonWidget(x + backgroundWidth - 54, y + titleY + 3, 20, 18,
-                0, 0, 19, START_BUTTON_TEXTURE, (buttonWidget) -> { handler.startCrafting(); }));
+                0, 0, 19, START_BUTTON_TEXTURE, (buttonWidget) -> {
+            Lacrimis.LOGGER.info("Crafting");
+            handler.startCrafting();
+        }));
         titleX = 24;
     }
 

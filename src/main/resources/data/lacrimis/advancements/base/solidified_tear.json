@@ -1,5 +1,5 @@
 {
-  "parent": "lacrimis:base/infusion_table",
+  "parent": "lacrimis:base/rune_tier1",
   "display": {
     "icon": {
       "item": "lacrimis:solidified_tear"
@@ -27,7 +27,7 @@
       "conditions": {
         "items": [
           {
-            "item": "lacrimis:solidified_tear"
+            "items": [ "lacrimis:solidified_tear" ]
           }
         ]
       }

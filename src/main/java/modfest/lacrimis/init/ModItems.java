@@ -26,34 +26,34 @@ public class ModItems {
     private static final Item.Settings RUNE_SETTINGS = new Item.Settings().group(Lacrimis.RUNE_ITEM_GROUP);
 
     //Main blocks
-    public static BlockItem infusionTable;
     public static BlockItem crucible;
+    public static BlockItem infusionTable;
     public static BlockItem combiner;
+    public static BlockItem taintOutput;
+    public static BlockItem networkLink;
     public static BlockItem duct;
     public static BlockItem gatedDuct;
     public static BlockItem oneWayDuct;
-    public static BlockItem taintOutput;
     public static BlockItem tearCollector;
     public static BlockItem tearLantern;
-    public static BlockItem networkLink;
     public static BlockItem drainedCryingObsidian;
     public static BlockItem creativeTearsBlock;
     public static BlockItem wardedStone;
+    public static BlockItem taint;
     public static BlockItem taintedStone;
     public static BlockItem taintedDirt;
-    public static BlockItem taint;
 
     //Main items
-    public static BottleOfTearsItem bottleOfTears;
     public static DiviningRodItem diviningRod;
     public static DiviningRodItem goldDiviningRod;
-    public static TaintedPearlItem taintedPearl;
-    public static SoulShellItem soulShell;
-    public static SoulTotemItem soulTotem;
+    public static BottleOfTearsItem bottleOfTears;
     public static Item tearIngot;
     public static Item taintedSludge;
     public static Item solidifiedTear;
     public static Item brokenSpawner;
+    public static TaintedPearlItem taintedPearl;
+    public static SoulShellItem soulShell;
+    public static SoulTotemItem soulTotem;
 
     //Tools/armor
     public static Item tearSoakedHelmet;
@@ -84,52 +84,52 @@ public class ModItems {
     public static Tag<Item> sludgeMaterials;
 
     public static void register() {
-        infusionTable = register("infusion_table", ModBlocks.infusionTable);
         crucible = register("crucible", ModBlocks.crucible);
-        combiner = register("combiner", ModBlocks.combiner);
-        duct = register("duct", ModBlocks.duct);
-        gatedDuct = register("gated_duct", ModBlocks.gatedDuct);
-        oneWayDuct = register("one_way_duct", ModBlocks.oneWayDuct);
+        infusionTable = register("infusion_table", ModBlocks.infusionTable);
+        runeStone = register("rune/stone", ModBlocks.runeStone);
         taintOutput = register("taint_output", ModBlocks.taintOutput);
-        tearCollector = register("tear_collector", ModBlocks.tearCollector);
-        tearLantern = register("tear_lantern", ModBlocks.tearLantern);
+        combiner = register("combiner", ModBlocks.combiner);
         networkLink = register("network_link", ModBlocks.networkLink);
-        drainedCryingObsidian = register("drained_crying_obsidian", ModBlocks.drainedCryingObsidian);
         creativeTearsBlock = register("creative_tears_block", ModBlocks.creativeTearsBlock);
         wardedStone = register("warded", ModBlocks.wardedStone);
+        drainedCryingObsidian = register("drained_crying_obsidian", ModBlocks.drainedCryingObsidian);
         taintedStone = register("tainted_stone", ModBlocks.taintedStone);
         taintedDirt = register("tainted_dirt", ModBlocks.taintedDirt);
         taint = register("taint", ModBlocks.taint);
+        duct = register("duct", ModBlocks.duct);
+        gatedDuct = register("gated_duct", ModBlocks.gatedDuct);
+        oneWayDuct = register("one_way_duct", ModBlocks.oneWayDuct);
+        tearCollector = register("tear_collector", ModBlocks.tearCollector);
 
+        tearLantern = register("tear_lantern", ModBlocks.tearLantern);
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
         diviningRod = register("divining_rod", new DiviningRodItem(TOOL_SETTINGS));
         goldDiviningRod = register("gold_divining_rod", new DiviningRodItem(TOOL_SETTINGS));
-        taintedPearl = register("tainted_pearl", new TaintedPearlItem(SMALL_SETTINGS));
-        soulShell = register("soul_shell", new SoulShellItem(SMALL_SETTINGS));
-        soulTotem = register("soul_totem", new SoulTotemItem(TOOL_SETTINGS));
-        tearIngot = register("tear_ingot", new Item(SETTINGS));
         taintedSludge = register("tainted_sludge", new Item(SETTINGS));
+        tearIngot = register("tear_ingot", new Item(SETTINGS));
+        taintedPearl = register("tainted_pearl", new TaintedPearlItem(SMALL_SETTINGS));
         solidifiedTear = register("solidified_tear", new Item(SETTINGS));
         brokenSpawner = register("broken_spawner", new Item(SETTINGS));
+        soulShell = register("soul_shell", new SoulShellItem(SMALL_SETTINGS));
+        soulTotem = register("soul_totem", new SoulTotemItem(TOOL_SETTINGS));
 
+        tearSoakedSword = register("tear_soaked_sword", new SoakedSwordItem(CustomToolMaterials.SOAKEN, 3, -2.4F, TOOL_SETTINGS));
         tearSoakedHelmet = registerArmor("tear_soaked_helmet", EquipmentSlot.HEAD);
         tearSoakedChestplate = registerArmor("tear_soaked_chestplate", EquipmentSlot.CHEST);
         tearSoakedLeggings = registerArmor("tear_soaked_leggings", EquipmentSlot.LEGS);
         tearSoakedBoots = registerArmor("tear_soaked_boots", EquipmentSlot.FEET);
-        tearSoakedSword = register("tear_soaked_sword", new SoakedSwordItem(CustomToolMaterials.SOAKEN, 3, -2.4F, TOOL_SETTINGS));
 
-        runeStone = registerRune("rune/stone", ModBlocks.runeStone);
+        flipRune = registerRune("rune/flip", ModBlocks.flipRune);
         rune1 = registerRune("rune/tier1", ModBlocks.rune1);
         rune2 = registerRune("rune/tier2", ModBlocks.rune2);
         rune3 = registerRune("rune/tier3", ModBlocks.rune3);
-        flipRune = registerRune("rune/flip", ModBlocks.flipRune);
         ductRune1 = registerRune("rune/duct1", ModBlocks.ductRune1);
         ductRune2 = registerRune("rune/duct2", ModBlocks.ductRune2);
         extractionRune = registerRune("rune/extraction", ModBlocks.extractionRune);
         destinationRune = registerRune("rune/destination", ModBlocks.destinationRune);
-        soulSwapRune = registerRune("rune/soul_swap", ModBlocks.soulSwapRune);
         transportRune = registerRune("rune/entity_transport", ModBlocks.transportRune);
         blockTransportRune = registerRune("rune/block_transport", ModBlocks.blockTransportRune);
+        soulSwapRune = registerRune("rune/soul_swap", ModBlocks.soulSwapRune);
         wardingRune = registerRune("rune/warding", ModBlocks.wardingRune);
         spawnerRune = registerRune("rune/spawner", ModBlocks.spawnerRune);
 

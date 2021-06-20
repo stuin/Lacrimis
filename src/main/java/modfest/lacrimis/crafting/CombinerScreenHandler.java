@@ -1,5 +1,6 @@
 package modfest.lacrimis.crafting;
 
+import modfest.lacrimis.block.entity.CombinerEntity;
 import modfest.lacrimis.init.ModCrafting;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -33,7 +34,7 @@ public class CombinerScreenHandler extends ScreenHandler implements InventoryCha
     private BlockPos pos;
 
     public CombinerScreenHandler(int syncId, PlayerInventory player, PacketByteBuf buf) {
-        this(syncId, player, new SimpleInventory(), null);
+        this(syncId, player, new SimpleInventory(CombinerEntity.SIZE), null);
         pos = buf.readBlockPos();
         String s = buf.readString();
         if(!s.equals("null"))
@@ -65,7 +66,7 @@ public class CombinerScreenHandler extends ScreenHandler implements InventoryCha
         for(k = 0; k < 9; ++k) {
             this.addSlot(new Slot(player, k, 8 + k * 18, 142));
         }
-        onContentChanged(inventory);
+        updateResult();
     }
 
     protected void onTakeOutput(ItemStack stack) {
@@ -124,8 +125,7 @@ public class CombinerScreenHandler extends ScreenHandler implements InventoryCha
     @Override
     public void onContentChanged(Inventory inventory) {
         super.onContentChanged(inventory);
-        if(input == inventory)
-            this.updateResult();
+        this.updateResult();
     }
 
     @Override

@@ -1,0 +1,35 @@
+{
+  "parent": "lacrimis:base/network_link",
+  "display": {
+    "icon": {
+      "item": "lacrimis:soul_totem"
+    },
+    "title": {
+      "translate": "lacrimis.advancements.soul_totem.title"
+    },
+    "description": {
+      "translate": "lacrimis.advancements.soul_totem.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "used_totem": {
+      "trigger": "minecraft:used_totem",
+      "conditions": {
+        "item": {
+          "items": [
+            "lacrimis:soul_totem"
+          ]
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "used_totem"
+    ]
+  ]
+}

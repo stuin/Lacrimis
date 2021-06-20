@@ -1,8 +1,8 @@
 package modfest.lacrimis.block.entity;
 
 import modfest.lacrimis.crafting.CombinerScreenHandler;
-import modfest.lacrimis.crafting.InfusionScreenHandler;
 import modfest.lacrimis.init.ModEntities;
+import modfest.lacrimis.init.ModItems;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.util.NbtType;
@@ -17,17 +17,17 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
 
-public class CombinerEntity extends BlockEntity implements ExtendedScreenHandlerFactory, Inventory, BlockEntityClientSerializable {
+public class CombinerEntity extends BlockEntity implements ExtendedScreenHandlerFactory, SidedInventory, BlockEntityClientSerializable {
     public static final int SIZE = 2;
     private final SimpleInventory inventory;
     public EntityType<?> type;
@@ -85,6 +85,7 @@ public class CombinerEntity extends BlockEntity implements ExtendedScreenHandler
         return this.writeNbt(tag);
     }
 
+
     @Override
     public int size() {
         return inventory.size();
@@ -133,5 +134,24 @@ public class CombinerEntity extends BlockEntity implements ExtendedScreenHandler
 
         buf.writeBlockPos(pos);
         buf.writeString(s);
+    }
+
+    @Override
+    public int[] getAvailableSlots(Direction side) {
+        return new int[] { 0, 1 };
+    }
+
+    @Override
+    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
+        if(slot == 0 && stack.isOf(ModItems.brokenSpawner))
+            return true;
+        if(slot == 1 && stack.isOf(ModItems.taintedSludge))
+            return true;
+        return false;
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+        return false;
     }
 }

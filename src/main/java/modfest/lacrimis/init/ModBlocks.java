@@ -29,9 +29,9 @@ public class ModBlocks {
     public static DuctBlock duct;
     public static GatedDuctBlock gatedDuct;
     public static OneWayDuctBlock oneWayDuct;
-    public static TaintOutputBlock taintOutput;
     public static TearCollectorBlock tearCollector;
     public static TearLanternBlock tearLantern;
+    public static TaintOutputBlock taintOutput;
     public static NetworkLinkBlock networkLink;
     public static DrainedCryingObsidianBlock drainedCryingObsidian;
     public static CreativeTearsBlock creativeTearsBlock;
@@ -68,35 +68,35 @@ public class ModBlocks {
     public static Tag<Block> tier3;
 
     public static void register() {
-        infusionTable = register("infusion_table", new InfusionTableBlock(Settings.copy(Blocks.ENCHANTING_TABLE).nonOpaque()));
         crucible = register("crucible", new CrucibleBlock(Settings.copy(Blocks.CAULDRON).strength(5.0F, 1200.0F).nonOpaque()));
-        combiner = register("combiner", new CombinerBlock(Settings.copy(Blocks.ENCHANTING_TABLE)));
-        duct = register("duct", new DuctBlock(ductSettings));
-        gatedDuct = register("gated_duct", new GatedDuctBlock(ductSettings));
-        oneWayDuct = register("one_way_duct", new OneWayDuctBlock(ductSettings));
+        infusionTable = register("infusion_table", new InfusionTableBlock(Settings.copy(Blocks.ENCHANTING_TABLE).nonOpaque()));
+        runeStone = register("rune/stone", new Block(runeSettings));
         taintOutput = register("taint_output", new TaintOutputBlock(Settings.copy(Blocks.DISPENSER)));
-        tearCollector = register("tear_collector", new TearCollectorBlock(Settings.copy(Blocks.DISPENSER)));
-        tearLantern = register("tear_lantern", new TearLanternBlock(AbstractBlock.Settings.of(Material.METAL).requiresTool().strength(3.5F).sounds(BlockSoundGroup.LANTERN).luminance((state) -> 5).nonOpaque()));
+        combiner = register("combiner", new CombinerBlock(Settings.copy(Blocks.ENCHANTING_TABLE)));
         networkLink = register("network_link", new NetworkLinkBlock(wardedSettings));
         drainedCryingObsidian = register("drained_crying_obsidian", new DrainedCryingObsidianBlock(Settings.copy(Blocks.CRYING_OBSIDIAN)));
         creativeTearsBlock = register("creative_tears_block", new CreativeTearsBlock(wardedSettings));
         wardedStone = register("warded", new WardedBlock(wardedSettings));
+        duct = register("duct", new DuctBlock(ductSettings));
+        gatedDuct = register("gated_duct", new GatedDuctBlock(ductSettings));
+        oneWayDuct = register("one_way_duct", new OneWayDuctBlock(ductSettings));
+        tearCollector = register("tear_collector", new TearCollectorBlock(Settings.copy(Blocks.DISPENSER)));
+        taint = register("taint", new TaintBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES)));
         taintedStone = register("tainted_stone", new TaintedBlock(FabricBlockSettings.copy(Blocks.STONE)));
         taintedDirt = register("tainted_dirt", new TaintedBlock(FabricBlockSettings.copy(Blocks.DIRT)));
-        taint = register("taint", new TaintBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES)));
+        tearLantern = register("tear_lantern", new TearLanternBlock(AbstractBlock.Settings.of(Material.METAL).requiresTool().strength(3.5F).sounds(BlockSoundGroup.LANTERN).luminance((state) -> 5).nonOpaque()));
 
-        runeStone = register("rune/stone", new Block(runeSettings));
-        flipRune = register("rune/flip", new Block(runeSettings));
         rune1 = register("rune/tier1", new BasicRuneBlock(1));
         rune2 = register("rune/tier2", new BasicRuneBlock(2));
         rune3 = register("rune/tier3", new AdvancedRuneBlock());
         ductRune1 = register("rune/duct1", new DuctRuneBlock(1));
         ductRune2 = register("rune/duct2", new DuctRuneBlock(2));
+        flipRune = register("rune/flip", new Block(runeSettings));
         extractionRune = register("rune/extraction", new SoulExtractionBlock());
         destinationRune = register("rune/destination", new SoulTeleportBlock(false));
-        soulSwapRune = register("rune/soul_swap", new SoulSwapBlock());
         transportRune = register("rune/entity_transport", new SoulTeleportBlock(true));
         blockTransportRune = register("rune/block_transport", new BlockTeleportBlock());
+        soulSwapRune = register("rune/soul_swap", new SoulSwapBlock());
         wardingRune = register("rune/warding", new WardingBlock());
         spawnerRune = register("rune/spawner", new SpawnerBreakerBlock());
 

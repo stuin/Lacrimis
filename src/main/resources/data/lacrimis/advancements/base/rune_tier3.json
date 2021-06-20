@@ -28,7 +28,7 @@
       "conditions": {
         "items": [
           {
-            "item": "lacrimis:rune/tier3"
+            "items": [ "lacrimis:rune/tier3" ]
           }
         ]
       }

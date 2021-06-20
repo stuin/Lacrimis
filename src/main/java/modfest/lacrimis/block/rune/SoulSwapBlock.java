@@ -1,10 +1,16 @@
 package modfest.lacrimis.block.rune;
 
 import modfest.lacrimis.entity.SoulShellEntity;
+import modfest.lacrimis.init.ModItems;
 import modfest.lacrimis.util.DuctUtil;
 import modfest.lacrimis.util.TaintPacket;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
@@ -22,8 +28,16 @@ public class SoulSwapBlock extends SoulExtractionBlock {
         int tier = testCage(world, pos, flipped, null);
         int added = 0;
         if(value instanceof PlayerContainer) {
+            ItemStack stack = ((PlayerContainer) value).itemStack;
             value = ((PlayerContainer) value).entity;
             added = 100;
+
+            if(value instanceof ServerPlayerEntity) {
+                ((PlayerEntity) value).setHealth(1.0F);
+                ((PlayerEntity) value).clearStatusEffects();
+                ((PlayerEntity) value).incrementStat(Stats.USED.getOrCreateStat(ModItems.soulTotem));
+                Criteria.USED_TOTEM.trigger((ServerPlayerEntity) value, stack);
+            }
         }
 
         //Locate destination soul shell
@@ -43,6 +57,6 @@ public class SoulSwapBlock extends SoulExtractionBlock {
         return false;
     }
 
-    public record PlayerContainer(Entity entity) {
+    public record PlayerContainer(Entity entity, ItemStack itemStack) {
     }
 }
