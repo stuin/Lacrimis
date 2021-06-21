@@ -38,12 +38,13 @@ public class SoulSwapBlock extends SoulExtractionBlock {
                 ((PlayerEntity) value).incrementStat(Stats.USED.getOrCreateStat(ModItems.soulTotem));
                 Criteria.USED_TOTEM.trigger((ServerPlayerEntity) value, stack);
             }
+            stack.decrement(1);
         }
 
         //Locate destination soul shell
-        if(value instanceof PlayerEntity && tier > 0) {
-            List<SoulShellEntity> shells = world.getEntitiesByClass(
-                    SoulShellEntity.class, getTargetBox(pos, flipped, tier), null);
+        if(value instanceof PlayerEntity && tier > 1) {
+            List<SoulShellEntity> shells = world.getNonSpectatingEntities(
+                    SoulShellEntity.class, getTargetBox(pos, flipped, tier));
             if(shells.size() > 0) {
                 shells.get(0).swapWithPlayer(world, (PlayerEntity) value);
 

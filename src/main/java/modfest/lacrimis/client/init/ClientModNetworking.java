@@ -40,16 +40,4 @@ public class ClientModNetworking {
             }
         });
     }
-
-    public static void sendCombinerNullPacket(BlockPos pos) {
-        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-        buf.writeBlockPos(pos);
-        ClientPlayNetworking.send(COMBINER_NULL_ID, buf);
-    }
-
-    public static void sendInfusionStartPacket(BlockPos pos) {
-        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-        buf.writeBlockPos(pos);
-        ClientPlayNetworking.send(INFUSION_START_ID, buf);
-    }
 }

@@ -1,0 +1,19 @@
+{
+  "type": "lacrimis:infusion_shaped",
+  "pattern": [
+    "RIR"
+  ],
+  "key": {
+    "R": {
+      "item": "lacrimis:rune/stone"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "lacrimis:duct",
+    "count": 12
+  },
+  "tears": 5
+}

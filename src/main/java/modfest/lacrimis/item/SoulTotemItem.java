@@ -32,7 +32,7 @@ public class SoulTotemItem extends Item {
             tag.putInt("Y", context.getBlockPos().getY());
             tag.putInt("Z", context.getBlockPos().getZ());
             context.getStack().setTag(tag);
-            return ActionResult.SUCCESS;
+            return ActionResult.PASS;
         }
         return super.useOnBlock(context);
     }

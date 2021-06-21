@@ -80,7 +80,7 @@ public class InfusionTableBlock extends SoulTankBlock {
 		if(state.get(POWERED) != world.isReceivingRedstonePower(pos)) {
 			BlockEntity entity = world.getBlockEntity(pos);
 			if(!state.get(POWERED) && entity instanceof InfusionTableEntity)
-				((InfusionTableEntity) entity).startCrafting = true;
+				((InfusionTableEntity) entity).inventory.properties.setSignal(true);
 			world.setBlockState(pos, state.with(POWERED, world.isReceivingRedstonePower(pos)));
 		}
 	}

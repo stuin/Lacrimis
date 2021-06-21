@@ -1,16 +1,15 @@
 package modfest.lacrimis.block;
 
-import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.CombinerEntity;
-import modfest.lacrimis.block.entity.InfusionTableEntity;
-import modfest.lacrimis.init.ModCrafting;
-import modfest.lacrimis.init.ModItems;
-import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
+import modfest.lacrimis.init.ModEntities;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.util.ActionResult;
@@ -19,11 +18,14 @@ import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
+import java.util.HashSet;
+
 public class CombinerBlock extends BlockWithEntity implements DuctConnectBlock {
+    public static HashSet<EntityType<?>> blocked = new HashSet<>();
+
     public CombinerBlock(Settings settings) {
         super(settings);
     }
@@ -76,8 +78,7 @@ public class CombinerBlock extends BlockWithEntity implements DuctConnectBlock {
     @Override
     public boolean insert(BlockPos pos, World world, Object value) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
-        Lacrimis.LOGGER.info(value);
-        if(value instanceof LivingEntity && !(value instanceof PlayerEntity) &&
+        if(value instanceof LivingEntity && !(((LivingEntity) value).getType().isIn(ModEntities.combiner_blocked) || ((LivingEntity) value).getType().getSpawnGroup().equals(SpawnGroup.MISC)) &&
                 blockEntity instanceof CombinerEntity && ((CombinerEntity) blockEntity).type == null) {
             ((CombinerEntity) blockEntity).type = ((LivingEntity) value).getType();
             ((LivingEntity) value).kill();

@@ -25,6 +25,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
@@ -46,8 +47,12 @@ public abstract class SoulTankBlock extends BlockWithEntity implements DuctConne
     public int getComparatorOutput(BlockState blockState, World world, BlockPos blockPos) {
         final BlockEntity blockEntity = world.getBlockEntity(blockPos);
 
-        if (blockEntity instanceof SoulTankEntity)
-            return (int) Math.floor(15.0 * ((SoulTankEntity) blockEntity).getRelativeLevel());
+        if (blockEntity instanceof SoulTankEntity) {
+            SoulTank tank = ((SoulTankEntity) blockEntity).getTank();
+            if(tank.getCapacity() == 0)
+                return 0;
+            return MathHelper.floor(14.0F * tank.getTears() / tank.getCapacity()) + (tank.getTears() > 0 ? 1 : 0);
+        }
 
         return 0;
     }
@@ -116,7 +121,7 @@ public abstract class SoulTankBlock extends BlockWithEntity implements DuctConne
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         int tears = getTank(world, pos).getTears();
         super.onBreak(world, pos, state, player);
-        new TaintPacket(tears).spawn(world, pos);
+        new TaintPacket(tears).spawn(world, pos.up());
     }
 
     public SoulTank getTank(BlockView world, BlockPos pos) {

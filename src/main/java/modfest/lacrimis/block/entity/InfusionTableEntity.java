@@ -34,7 +34,6 @@ public class InfusionTableEntity extends SoulTankEntity implements NamedScreenHa
     private final Random random = new Random();
     
     public ItemStack holding = ItemStack.EMPTY;
-    public boolean startCrafting = false;
 
     public InfusionTableEntity(BlockPos pos, BlockState state) {
         super(ModEntities.infusionTable, pos, state, CAPACITY, SIZE);
@@ -81,7 +80,7 @@ public class InfusionTableEntity extends SoulTankEntity implements NamedScreenHa
         }
 
         //Check for new recipe
-        if(holding.isEmpty() && (startCrafting || !inventory.getStack(OUTPUT_STACK).isEmpty())) {
+        if(holding.isEmpty() && (inventory.properties.hasSignal() || !inventory.getStack(OUTPUT_STACK).isEmpty())) {
             InfusionRecipe recipe = this.world.getRecipeManager().getFirstMatch(ModCrafting.INFUSION_RECIPE, inventory, this.world).orElse(null);
             if(recipe == null)
                 recipe = this.world.getRecipeManager().getFirstMatch(ModCrafting.CRUCIBLE_RECIPE, inventory, this.world).orElse(null);
@@ -95,17 +94,17 @@ public class InfusionTableEntity extends SoulTankEntity implements NamedScreenHa
                 takeIngredients();
                 tank.setLimit(recipe.getTears());
                 holding = recipe.getOutput().copy();
-                startCrafting = false;
+                inventory.properties.setSignal(false);
             } else if(vanillaRecipe != null && canAcceptOutput(vanillaRecipe.getOutput())) {
                 takeIngredients();
                 tank.setLimit(5);
                 holding = vanillaRecipe.getOutput().copy();
-                startCrafting = false;
+                inventory.properties.setSignal(false);
             }
         }
 
-        if(startCrafting)
-            startCrafting = false;
+        if(inventory.properties.hasSignal())
+            inventory.properties.setSignal(false);
 
         //Collect tears
         if(tank.getSpace() > 0)

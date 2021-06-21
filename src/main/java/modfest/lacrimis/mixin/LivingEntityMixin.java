@@ -1,5 +1,6 @@
 package modfest.lacrimis.mixin;
 
+import modfest.lacrimis.block.NetworkLinkBlock;
 import modfest.lacrimis.block.rune.SoulSwapBlock;
 import modfest.lacrimis.init.ModItems;
 import modfest.lacrimis.util.DuctUtil;
@@ -48,9 +49,9 @@ public abstract class LivingEntityMixin extends Entity {
                 int x = itemStack.getTag().getInt("X");
                 int y = itemStack.getTag().getInt("Y");
                 int z = itemStack.getTag().getInt("Z");
-                if(DuctUtil.locateSink(world, new BlockPos(x, y, z),
-                        new SoulSwapBlock.PlayerContainer(this, itemStack.copy())) != null) {
-                    itemStack.decrement(1);
+                BlockPos pos = new BlockPos(x, y, z);
+                if(world.getBlockState(pos).getBlock() instanceof NetworkLinkBlock) {
+                    DuctUtil.locateSink(world, pos, new SoulSwapBlock.PlayerContainer(this, itemStack));
                     cir.setReturnValue(true);
                 }
             }

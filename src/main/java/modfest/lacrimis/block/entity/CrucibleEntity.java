@@ -78,7 +78,7 @@ public class CrucibleEntity extends SoulTankEntity {
 
         //Start new crafting
         if (craftTime >= CRAFT_COOLDOWN) {
-            for (ItemEntity entity : world.getEntitiesByClass(ItemEntity.class, ITEM_BOX.offset(pos), null)) {
+            for (ItemEntity entity : world.getNonSpectatingEntities(ItemEntity.class, ITEM_BOX.offset(pos))) {
                 inventory.setStack(0, entity.getStack());
 
                 Optional<CrucibleRecipe> optional = world.getServer()

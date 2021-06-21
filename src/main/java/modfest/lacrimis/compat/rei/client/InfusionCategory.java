@@ -67,6 +67,7 @@ public class InfusionCategory implements TransferDisplayCategory<InfusionDisplay
     @Override
     public List<Widget> setupDisplay(InfusionDisplay display, Rectangle bounds) {
         Point startPoint = new Point(bounds.getCenterX() - 58, bounds.getCenterY() - 27);
+        int tears = display.getTears();
         List<Widget> widgets = Lists.newArrayList();
         widgets.add(Widgets.createRecipeBase(bounds));
         widgets.add(Widgets.createArrow(new Point(startPoint.x + 60, startPoint.y + 18)));
@@ -82,6 +83,8 @@ public class InfusionCategory implements TransferDisplayCategory<InfusionDisplay
         }
         widgets.addAll(slots);
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 95, startPoint.y + 19)).entries(display.getOutputEntries().get(0)).disableBackground().markOutput());
+        widgets.add(Widgets.createLabel(new Point(startPoint.x + 115, startPoint.y + 45),
+                new TranslatableText("lacrimis.tooltip.crucible", tears)).noShadow().rightAligned().color(0xFF404040, 0xFFBBBBBB));
         return widgets;
     }
 

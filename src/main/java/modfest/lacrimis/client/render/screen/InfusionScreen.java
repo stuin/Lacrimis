@@ -11,6 +11,7 @@ import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.screen.EnchantmentScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -29,10 +30,9 @@ public class InfusionScreen extends HandledScreen<InfusionScreenHandler> {
     protected void init() {
         super.init();
         isNarrow = width < 379;
-        addDrawable(new TexturedButtonWidget(x + backgroundWidth - 54, y + titleY + 3, 20, 18,
+        addDrawableChild(new TexturedButtonWidget(x + backgroundWidth - 54, y + titleY + 3, 20, 18,
                 0, 0, 19, START_BUTTON_TEXTURE, (buttonWidget) -> {
-            Lacrimis.LOGGER.info("Crafting");
-            handler.startCrafting();
+            this.client.interactionManager.clickButton(((InfusionScreenHandler)this.handler).syncId, 0);
         }));
         titleX = 24;
     }

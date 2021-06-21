@@ -46,7 +46,7 @@ public class CombinerEntity extends BlockEntity implements ExtendedScreenHandler
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
-        return new CombinerScreenHandler(syncId, inv, inventory, type);
+        return new CombinerScreenHandler(syncId, inv, inventory, type, pos);
     }
 
     @Override
@@ -84,7 +84,6 @@ public class CombinerEntity extends BlockEntity implements ExtendedScreenHandler
     public NbtCompound toClientTag(NbtCompound tag) {
         return this.writeNbt(tag);
     }
-
 
     @Override
     public int size() {
@@ -131,7 +130,6 @@ public class CombinerEntity extends BlockEntity implements ExtendedScreenHandler
         String s = "null";
         if(type != null)
             s = Registry.ENTITY_TYPE.getId(type).toString();
-
         buf.writeBlockPos(pos);
         buf.writeString(s);
     }
@@ -145,9 +143,7 @@ public class CombinerEntity extends BlockEntity implements ExtendedScreenHandler
     public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
         if(slot == 0 && stack.isOf(ModItems.brokenSpawner))
             return true;
-        if(slot == 1 && stack.isOf(ModItems.taintedSludge))
-            return true;
-        return false;
+        return slot == 1 && stack.isOf(ModItems.taintedSludge);
     }
 
     @Override

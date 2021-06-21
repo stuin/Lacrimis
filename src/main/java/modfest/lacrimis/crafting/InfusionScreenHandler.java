@@ -1,6 +1,5 @@
 package modfest.lacrimis.crafting;
 
-import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.InfusionTableEntity;
 import modfest.lacrimis.init.ModCrafting;
 import net.fabricmc.api.EnvType;
@@ -52,9 +51,11 @@ public class InfusionScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 		onContentChanged(input);
 	}
 
-	public void startCrafting() {
-		Lacrimis.LOGGER.info("Craft");
-		this.input.properties.set(1, 100);
+	@Override
+	public boolean onButtonClick(PlayerEntity player, int id) {
+		if(id == 0)
+			input.properties.setSignal(true);
+		return super.onButtonClick(player, id);
 	}
 
 	@Override

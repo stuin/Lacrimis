@@ -97,8 +97,11 @@ public class DuctUtil {
                         if(a > 0) {
                             out.add(next);
                             goal -= a;
-                            if (goal <= 0)
+                            if (goal <= 0) {
+                                if(scanned.size() > 100)
+                                    Lacrimis.LOGGER.warn(scanned.size() + " ducts scanned from " + pos + " to " + next);
                                 return out;
+                            }
                         }
                         stack.push(next);
                     }
@@ -133,6 +136,9 @@ public class DuctUtil {
                 }
             }
         }
+
+        if(scanned.size() > 100)
+            Lacrimis.LOGGER.warn(scanned.size() + " ducts scanned from " + pos);
 
         return new ArrayList<>();
     }

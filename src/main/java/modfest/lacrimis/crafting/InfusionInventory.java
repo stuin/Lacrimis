@@ -18,6 +18,7 @@ import org.jetbrains.annotations.Nullable;
 public class InfusionInventory extends SimpleInventory {
 	public final static int TEARS = 0;
 	public final static int CAPACITY = 1;
+	public final static int SIGNAL = 2;
 	public final SoulTankDelegate properties;
 	public final SoulTank tank;
 
@@ -46,7 +47,13 @@ public class InfusionInventory extends SimpleInventory {
 		return crafting;
 	}
 
-	public record SoulTankDelegate(SoulTank tank) implements PropertyDelegate {
+	public static class SoulTankDelegate implements PropertyDelegate {
+		private final SoulTank tank;
+		private boolean signal = false;
+
+		SoulTankDelegate(SoulTank tank) {
+			this.tank = tank;
+		}
 
 		@Override
 		public int size() {
@@ -59,6 +66,8 @@ public class InfusionInventory extends SimpleInventory {
 				return tank.getTears();
 			else if(index == CAPACITY)
 				return tank.getCapacity();
+			else if(index == SIGNAL)
+				return signal ? 1 : 0;
 			return 0;
 		}
 
@@ -68,6 +77,16 @@ public class InfusionInventory extends SimpleInventory {
 				tank.setTears(value);
 			else if(index == CAPACITY)
 				tank.setLimit(value);
+			else if(index == SIGNAL)
+				signal = value > 0;
+		}
+
+		public boolean hasSignal() {
+			return get(SIGNAL) > 0;
+		}
+
+		public void setSignal(boolean value) {
+			set(SIGNAL, value ? 1 : 0);
 		}
 	}
 	

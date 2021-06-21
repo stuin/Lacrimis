@@ -5,6 +5,7 @@ import modfest.lacrimis.entity.SoulShellEntity;
 import modfest.lacrimis.entity.TaintedPearlEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -13,6 +14,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.tag.EntityTypeTags;
+import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -34,6 +37,8 @@ public class ModEntities {
     public static BlockEntityType<TearLanternEntity> tearLantern;
     public static BlockEntityType<NetworkLinkEntity> networkLink;
 
+    public static Tag<EntityType<?>> combiner_blocked;
+
     public static void register() {
         ghost = register("ghost", buildType(SpawnGroup.MONSTER, (type, world) -> new GhostEntity(world), 0.75f, 2.0f, 64, 4));
         soulShell = register("soul_shell", buildType((type, world) -> new SoulShellEntity(world), 0.6F, 1.8F));
@@ -47,6 +52,8 @@ public class ModEntities {
         combiner = register("combiner_entity", CombinerEntity::new, ModBlocks.combiner);
         tearLantern = register("tear_lantern_entity", TearLanternEntity::new, ModBlocks.tearLantern);
         networkLink = register("network_link_entity", NetworkLinkEntity::new, ModBlocks.networkLink);
+
+        combiner_blocked = TagRegistry.entityType(new Identifier(Lacrimis.MODID, "combiner_blocked"));
     }
 
     private static <T extends Entity> EntityType<T> register(String name, FabricEntityTypeBuilder<T> builder) {

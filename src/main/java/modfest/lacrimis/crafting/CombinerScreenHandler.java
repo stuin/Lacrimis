@@ -2,6 +2,7 @@ package modfest.lacrimis.crafting;
 
 import modfest.lacrimis.block.entity.CombinerEntity;
 import modfest.lacrimis.init.ModCrafting;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -17,6 +18,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -28,31 +30,31 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 
 public class CombinerScreenHandler extends ScreenHandler implements InventoryChangedListener {
-    private final Inventory input;
+    private final SimpleInventory input;
     protected final Inventory output = new CraftingResultInventory();
     private EntityType<?> entityType;
     private BlockPos pos;
 
     public CombinerScreenHandler(int syncId, PlayerInventory player, PacketByteBuf buf) {
-        this(syncId, player, new SimpleInventory(CombinerEntity.SIZE), null);
-        pos = buf.readBlockPos();
+        this(syncId, player, new SimpleInventory(CombinerEntity.SIZE), null, buf.readBlockPos());
         String s = buf.readString();
         if(!s.equals("null"))
             entityType = Registry.ENTITY_TYPE.get(Identifier.tryParse(s));
     }
 
-    public CombinerScreenHandler(int syncId, PlayerInventory player, Inventory inventory, EntityType<?> type) {
+    public CombinerScreenHandler(int syncId, PlayerInventory player, SimpleInventory inventory, EntityType<?> type, BlockPos pos) {
         super(ModCrafting.COMBINER_SCREEN_HANDLER, syncId);
         this.input = inventory;
+        this.input.addListener(this);
         this.entityType = type;
-        pos = BlockPos.ORIGIN;
+        this.pos = pos;
 
         this.addSlot(new Slot(inventory, 0, 27, 47));
         this.addSlot(new Slot(inventory, 1, 76, 47));
-        this.addSlot(new FurnaceOutputSlot(player.player, output, 0, 134, 47) {
+        this.addSlot(new Slot(output, 2, 134, 47) {
             @Override
             public void onTakeItem(PlayerEntity player, ItemStack stack) {
-                CombinerScreenHandler.this.onTakeOutput(stack);
+                CombinerScreenHandler.this.onTakeOutput(player);
             }
         });
 
@@ -69,11 +71,15 @@ public class CombinerScreenHandler extends ScreenHandler implements InventoryCha
         updateResult();
     }
 
-    protected void onTakeOutput(ItemStack stack) {
+    protected void onTakeOutput(PlayerEntity player) {
         decrement(0);
         decrement(1);
         entityType = null;
         output.setStack(0, ItemStack.EMPTY);
+
+        BlockEntity blockEntity = player.world.getBlockEntity(pos);
+        if(blockEntity instanceof CombinerEntity)
+            ((CombinerEntity) blockEntity).type = null;
     }
 
     private void decrement(int i) {
@@ -83,35 +89,35 @@ public class CombinerScreenHandler extends ScreenHandler implements InventoryCha
     }
 
     public void updateResult() {
-        if(entityType != null && input.getStack(1).getItem() == ModItems.taintedSludge) {
-            if(input.getStack(0).getItem() == ModItems.brokenSpawner)
-                if(output.getStack(0).isEmpty()) {
-                    String id = EntityType.getId(entityType).toString();
-                    NbtCompound[] tags = new NbtCompound[5];
-                    for(int i = 0; i < tags.length; i++)
-                        tags[i] = new NbtCompound();
+        if(entityType != null && input.getStack(1).getItem() == ModItems.taintedSludge &&
+                input.getStack(0).getItem() == ModItems.brokenSpawner) {
+            if(output.getStack(0).isEmpty()) {
+                String id = EntityType.getId(entityType).toString();
+                NbtCompound[] tags = new NbtCompound[5];
+                for(int i = 0; i < tags.length; i++)
+                    tags[i] = new NbtCompound();
 
-                    //Build tags
-                    tags[4].putString("id", id);
-                    tags[3].put("Entity", tags[4]);
-                    tags[3].putInt("Weight", 1);
-                    NbtList list = new NbtList();
-                    list.add(tags[3]);
-                    tags[1].put("SpawnPotentials", list);
-                    tags[2].putString("id", id);
-                    tags[1].put("SpawnData", tags[2]);
-                    tags[0].put("BlockEntityTag", tags[1]);
+                //Build tags
+                tags[4].putString("id", id);
+                tags[3].put("Entity", tags[4]);
+                tags[3].putInt("Weight", 1);
+                NbtList list = new NbtList();
+                list.add(tags[3]);
+                tags[1].put("SpawnPotentials", list);
+                tags[2].putString("id", id);
+                tags[1].put("SpawnData", tags[2]);
+                tags[0].put("BlockEntityTag", tags[1]);
 
-                    //Set output
-                    ItemStack stack = new ItemStack(Items.SPAWNER);
-                    MutableText text = new TranslatableText(entityType.getTranslationKey());
-                    text.append(new TranslatableText(Lacrimis.MODID + ".tooltip.spawner"));
-                    stack.setTag(tags[0]);
-                    stack.setCustomName(text);
-                    //{BlockEntityTag:{SpawnData:{id:"#ID"},SpawnPotentials:[{Entity:{id:"#ID"}, Weight:1}]}}
-                    output.setStack(0, stack);
-                }
-                return;
+                //Set output
+                ItemStack stack = new ItemStack(Items.SPAWNER);
+                MutableText text = new TranslatableText(entityType.getTranslationKey());
+                text.append(new TranslatableText(Lacrimis.MODID + ".tooltip.spawner"));
+                stack.setTag(tags[0]);
+                stack.setCustomName(text);
+                //{BlockEntityTag:{SpawnData:{id:"#ID"},SpawnPotentials:[{Entity:{id:"#ID"}, Weight:1}]}}
+                output.setStack(0, stack);
+            }
+            return;
         }
         if(!output.getStack(0).isEmpty())
             output.setStack(0, ItemStack.EMPTY);
@@ -125,7 +131,13 @@ public class CombinerScreenHandler extends ScreenHandler implements InventoryCha
     @Override
     public void onContentChanged(Inventory inventory) {
         super.onContentChanged(inventory);
-        this.updateResult();
+        if(inventory == output && output.getStack(0).isEmpty()) {
+            entityType = null;
+            this.updateResult();
+        }
+
+        if(inventory == input)
+            this.updateResult();
     }
 
     @Override
