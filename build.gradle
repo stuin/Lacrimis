@@ -54,7 +54,7 @@ dependencies {
 
 	//REI
 	modImplementation("me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}")
-	modRuntime("me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}")
+	//modRuntime("me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}")
 
 	//Wrenchable api
 	def wrenchVersion = "com.zundrel:wrenchable:${project.wrenchable_version}"
