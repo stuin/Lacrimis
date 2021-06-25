@@ -1,18 +1,17 @@
-package modfest.lacrimis.crafting;
+package modfest.lacrimis.client.render.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import modfest.lacrimis.Lacrimis;
+import modfest.lacrimis.crafting.InfusionScreenHandler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
-import net.minecraft.client.gui.screen.recipebook.RecipeBookProvider;
-import net.minecraft.client.gui.screen.recipebook.RecipeBookWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.screen.slot.Slot;
-import net.minecraft.screen.slot.SlotActionType;
+import net.minecraft.screen.EnchantmentScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -21,7 +20,6 @@ import net.minecraft.util.Identifier;
 public class InfusionScreen extends HandledScreen<InfusionScreenHandler> {
     private static final Identifier TEXTURE = new Identifier("textures/gui/container/crafting_table.png");
     private static final Identifier START_BUTTON_TEXTURE = new Identifier(Lacrimis.MODID, "textures/gui/start_button.png");
-    private TexturedButtonWidget startButton;
     private boolean isNarrow;
 
     public InfusionScreen(InfusionScreenHandler handler, PlayerInventory inventory, Text title) {
@@ -32,8 +30,8 @@ public class InfusionScreen extends HandledScreen<InfusionScreenHandler> {
     protected void init() {
         super.init();
         isNarrow = width < 379;
-        startButton = new TexturedButtonWidget(x + backgroundWidth - 54, y + titleY + 3, 20, 18, 0, 0, 19, START_BUTTON_TEXTURE, (buttonWidget) -> {
-            handler.startCrafting();
+        TexturedButtonWidget startButton = new TexturedButtonWidget(x + backgroundWidth - 54, y + titleY + 3, 20, 18, 0, 0, 19, START_BUTTON_TEXTURE, (buttonWidget) -> {
+            this.client.interactionManager.clickButton(this.handler.syncId, 0);
         });
         addButton(startButton);
         titleX = 24;

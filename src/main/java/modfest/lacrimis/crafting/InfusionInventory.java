@@ -1,43 +1,35 @@
 package modfest.lacrimis.crafting;
 
+import modfest.lacrimis.util.SoulTank;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.screen.PropertyDelegate;
 
-import modfest.lacrimis.block.entity.SoulTankEntity;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerType;
-import org.jetbrains.annotations.Nullable;
 
 public class InfusionInventory extends SimpleInventory {
-	public final CustomDelegate properties;
-	public final SoulTankEntity entity;
+	public final static int TEARS = 0;
+	public final static int CAPACITY = 1;
+	public final static int SIGNAL = 2;
+	public final SoulTankDelegate properties;
+	public final SoulTank tank;
 
-	public InfusionInventory(SoulTankEntity entity, int size) {
-		super(size);
-		this.entity = entity;
-		this.properties = new CustomDelegate(entity);
-				
-		entity.getTank().addListener(this::markDirty);
+	public InfusionInventory(int capacity, int size) {
+		this(new SoulTank(capacity), size);
 	}
 
-	@Override
-	public void markDirty() {
-		super.markDirty();
-		this.entity.markDirty();
+	public InfusionInventory(SoulTank tank, int size) {
+		super(size);
+		this.tank = tank;
+		this.properties = new SoulTankDelegate(tank);
+				
+		tank.addListener(this::markDirty);
 	}
 
 	public int getTears() {
-		return properties.get(0);
-	}
-
-	public void removeTears(int tears) {
-		entity.getTank().removeTears(tears);
+		return properties.get(TEARS);
 	}
 	
 	public CraftingInventory setupCrafting() {
@@ -49,69 +41,46 @@ public class InfusionInventory extends SimpleInventory {
 		return crafting;
 	}
 
-	@Override
-    public void readTags(ListTag tags) {
-		int j;
-		for(j = 0; j < this.size(); ++j) {
-			this.setStack(j, ItemStack.EMPTY);
-		}
+	public static class SoulTankDelegate implements PropertyDelegate {
+		private final SoulTank tank;
+		private boolean signal = false;
 
-		for(j = 0; j < tags.size(); ++j) {
-			CompoundTag compoundTag = tags.getCompound(j);
-			int k = compoundTag.getByte("Slot") & 255;
-			if (k < this.size()) {
-				this.setStack(k, ItemStack.fromTag(compoundTag));
-			}
-		}
-
-	}
-
-	@Override
-    public ListTag getTags() {
-		ListTag listTag = new ListTag();
-
-		for(int i = 0; i < this.size(); ++i) {
-			ItemStack itemStack = this.getStack(i);
-			if (!itemStack.isEmpty()) {
-				CompoundTag compoundTag = new CompoundTag();
-				compoundTag.putByte("Slot", (byte)i);
-				itemStack.toTag(compoundTag);
-				listTag.add(compoundTag);
-			}
-		}
-
-		return listTag;
-	}
-	
-	private static class CustomDelegate implements PropertyDelegate {
-		private final SoulTankEntity entity;
-		
-		CustomDelegate(SoulTankEntity entity) {
-			this.entity = entity;
+		SoulTankDelegate(SoulTank tank) {
+			this.tank = tank;
 		}
 
 		@Override
 		public int size() {
-			return 1;
+			return 2;
 		}
 
 		@Override
 		public int get(int index) {
-			switch (index) {
-				case 0:
-					return entity.getTank().getTears();
-				default:
-					return 0;
-			}
+			if(index == TEARS)
+				return tank.getTears();
+			else if(index == CAPACITY)
+				return tank.getCapacity();
+			else if(index == SIGNAL)
+				return signal ? 1 : 0;
+			return 0;
 		}
 
 		@Override
 		public void set(int index, int value) {
-			switch (index) {
-				case 0:
-					entity.getTank().setTears(value);
-					break;
-			}
+			if(index == TEARS)
+				tank.setTears(value);
+			else if(index == CAPACITY)
+				tank.setLimit(value);
+			else if(index == SIGNAL)
+				signal = value > 0;
+		}
+
+		public boolean hasSignal() {
+			return get(SIGNAL) > 0;
+		}
+
+		public void setSignal(boolean value) {
+			set(SIGNAL, value ? 1 : 0);
 		}
 	}
 	

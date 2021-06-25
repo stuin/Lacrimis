@@ -27,7 +27,7 @@ import net.minecraft.world.World;
 public class DuctUtil {
 
     public static List<BlockPos> scanDucts(World world, BlockPos pos, boolean extracting, int goal, Tester test) {
-        if(world == null || world instanceof ClientWorld)
+        if(world == null || world.isClient)
             return new ArrayList<>();
 
         //Set up block lists

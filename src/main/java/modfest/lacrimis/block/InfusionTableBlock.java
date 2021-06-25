@@ -54,19 +54,17 @@ public class InfusionTableBlock extends SoulTankBlock {
 		return BlockRenderType.MODEL;
 	}
 
-	@Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-		ActionResult parentResult = super.onUse(state, world, pos, player, hand, hit);
-		if(parentResult == ActionResult.PASS && player.getStackInHand(hand).getItem() != ModItems.diviningRod) {
-			if(world.isClient) {
-				return ActionResult.SUCCESS;
-			} else {
-				ContainerProviderRegistry.INSTANCE.openContainer(ModCrafting.INFUSION_SCREEN_ID, player, buf -> buf.writeBlockPos(pos));
-
-				return ActionResult.CONSUME;
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+		if (world.isClient) {
+			return ActionResult.SUCCESS;
+		} else {
+			BlockEntity blockEntity = world.getBlockEntity(pos);
+			if (blockEntity instanceof InfusionTableEntity) {
+				player.openHandledScreen((InfusionTableEntity)blockEntity);
 			}
+
+			return ActionResult.CONSUME;
 		}
-		return parentResult;
 	}
 
 	@Override
@@ -74,7 +72,7 @@ public class InfusionTableBlock extends SoulTankBlock {
 		if(state.get(POWERED) != world.isReceivingRedstonePower(pos)) {
 			BlockEntity entity = world.getBlockEntity(pos);
 			if(!state.get(POWERED) && entity instanceof InfusionTableEntity)
-				((InfusionTableEntity) entity).startCrafting = true;
+				((InfusionTableEntity) entity).inventory.properties.setSignal(true);
 			world.setBlockState(pos, state.with(POWERED, world.isReceivingRedstonePower(pos)));
 		}
 	}

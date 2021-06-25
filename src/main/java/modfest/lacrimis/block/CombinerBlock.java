@@ -29,19 +29,17 @@ public class CombinerBlock extends SoulTankBlock {
         return new CombinerEntity();
     }
 
-    @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        ActionResult parentResult = super.onUse(state, world, pos, player, hand, hit);
-        if(parentResult == ActionResult.PASS && player.getStackInHand(hand).getItem() != ModItems.diviningRod) {
-            if(world.isClient) {
-                return ActionResult.SUCCESS;
-            } else {
-                ContainerProviderRegistry.INSTANCE.openContainer(ModCrafting.COMBINER_SCREEN_ID, player, buf -> buf.writeBlockPos(pos));
-
-                return ActionResult.CONSUME;
+        if (world.isClient) {
+            return ActionResult.SUCCESS;
+        } else {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity instanceof CombinerEntity) {
+                player.openHandledScreen((CombinerEntity)blockEntity);
             }
+
+            return ActionResult.CONSUME;
         }
-        return parentResult;
     }
 
     @Override

@@ -4,31 +4,50 @@ import java.util.Random;
 import java.util.stream.IntStream;
 
 import modfest.lacrimis.crafting.InfusionRecipe;
+import modfest.lacrimis.crafting.InfusionScreenHandler;
 import modfest.lacrimis.init.ModCrafting;
 import modfest.lacrimis.init.ModEntities;
 import modfest.lacrimis.init.ModParticles;
 import modfest.lacrimis.util.DuctUtil;
 import modfest.lacrimis.util.SoulTank;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.recipe.CraftingRecipe;
 import net.minecraft.recipe.RecipeType;
+import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
-public class InfusionTableEntity extends SoulTankEntity implements Tickable {
+public class InfusionTableEntity extends SoulTankEntity implements Tickable, NamedScreenHandlerFactory {
+    public static final int CAPACITY = 1000;
+    public static final int SIZE = 10;
     public static final int OUTPUT_STACK = 9;
     public static final int[] INPUT_STACKS = IntStream.rangeClosed(0, 8).toArray();
     private final Random random = new Random();
     
     public ItemStack holding = ItemStack.EMPTY;
-    public boolean startCrafting = false;
 
     public InfusionTableEntity() {
         super(ModEntities.infusionTable, 1000, 10);
         getTank().setLimit(0);
+    }
+
+    @Override
+    public Text getDisplayName() {
+        return new TranslatableText("lacrimis.gui.infusion");
+    }
+
+    @Nullable
+    @Override
+    public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
+        return new InfusionScreenHandler(syncId, inv, inventory);
     }
 
     @Override
@@ -68,7 +87,7 @@ public class InfusionTableEntity extends SoulTankEntity implements Tickable {
         }
 
         //Check for new recipe
-        if(holding.isEmpty() && (startCrafting || !inventory.getStack(OUTPUT_STACK).isEmpty())) {
+        if(holding.isEmpty() && (inventory.properties.hasSignal() || !inventory.getStack(OUTPUT_STACK).isEmpty())) {
             InfusionRecipe recipe = this.world.getRecipeManager().getFirstMatch(ModCrafting.INFUSION_RECIPE, inventory, this.world).orElse(null);
             if(recipe == null)
                 recipe = this.world.getRecipeManager().getFirstMatch(ModCrafting.CRUCIBLE_RECIPE, inventory, this.world).orElse(null);
@@ -82,17 +101,17 @@ public class InfusionTableEntity extends SoulTankEntity implements Tickable {
                 takeIngredients();
                 tank.setLimit(recipe.getTears());
                 holding = recipe.getOutput().copy();
-                startCrafting = false;
+                inventory.properties.setSignal(false);
             } else if(vanillaRecipe != null && canAcceptOutput(vanillaRecipe.getOutput())) {
                 takeIngredients();
                 tank.setLimit(5);
                 holding = vanillaRecipe.getOutput().copy();
-                startCrafting = false;
+                inventory.properties.setSignal(false);
             }
         }
 
-        if(startCrafting)
-            startCrafting = false;
+        if(inventory.properties.hasSignal())
+            inventory.properties.setSignal(false);
 
         //Collect tears
         if(tank.getSpace() > 0)

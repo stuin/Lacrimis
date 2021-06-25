@@ -1,8 +1,10 @@
-package modfest.lacrimis.crafting;
+package modfest.lacrimis.client.render.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import modfest.lacrimis.Lacrimis;
+import modfest.lacrimis.crafting.CombinerScreenHandler;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
