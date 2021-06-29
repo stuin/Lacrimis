@@ -1,9 +1,8 @@
 package modfest.lacrimis.compat.patchiouli;
 
-import net.minecraft.client.util.math.MatrixStack;
-
 import modfest.lacrimis.crafting.CrucibleRecipe;
 import modfest.lacrimis.init.ModCrafting;
+import net.minecraft.client.util.math.MatrixStack;
 import vazkii.patchouli.client.book.page.abstr.PageSimpleProcessingRecipe;
 
 public class PageCrucible extends PageSimpleProcessingRecipe<CrucibleRecipe> {

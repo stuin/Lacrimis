@@ -1,5 +1,6 @@
 package modfest.lacrimis.block.rune;
 
+import modfest.lacrimis.util.NeighborList;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.StateManager;
@@ -7,8 +8,6 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-
-import modfest.lacrimis.util.NeighborList;
 
 public class AdvancedRuneBlock extends BasicRuneBlock {
     public static final IntProperty PIPE;

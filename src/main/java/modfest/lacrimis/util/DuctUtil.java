@@ -1,14 +1,5 @@
 package modfest.lacrimis.util;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.DuctConnectBlock;
 import modfest.lacrimis.block.GatedDuctBlock;
@@ -17,12 +8,11 @@ import modfest.lacrimis.block.entity.NetworkLinkEntity;
 import modfest.lacrimis.init.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FacingBlock;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
+
+import java.util.*;
 
 public class DuctUtil {
 

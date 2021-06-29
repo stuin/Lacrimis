@@ -1,13 +1,12 @@
 package modfest.lacrimis.block.rune;
 
+import modfest.lacrimis.util.DuctUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import modfest.lacrimis.util.DuctUtil;
 
 public class SoulExtractionBlock extends CenterRuneBlock {
 

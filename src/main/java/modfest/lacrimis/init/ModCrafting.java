@@ -1,5 +1,6 @@
 package modfest.lacrimis.init;
 
+import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.crafting.*;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.recipe.RecipeSerializer;
@@ -7,10 +8,6 @@ import net.minecraft.recipe.RecipeType;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-
-import com.google.gson.annotations.SerializedName;
-
-import modfest.lacrimis.Lacrimis;
 
 public class ModCrafting {
     public static final Identifier INFUSION_SCREEN_ID = new Identifier(Lacrimis.MODID, "infusion");

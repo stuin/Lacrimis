@@ -1,5 +1,7 @@
 package modfest.lacrimis.block.rune;
 
+import modfest.lacrimis.init.ModBlocks;
+import modfest.lacrimis.util.DuctUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
@@ -8,9 +10,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-
-import modfest.lacrimis.init.ModBlocks;
-import modfest.lacrimis.util.DuctUtil;
 
 public class BlockTeleportBlock extends CenterRuneBlock {
     public BlockTeleportBlock() {

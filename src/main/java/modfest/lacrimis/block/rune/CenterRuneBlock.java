@@ -1,6 +1,11 @@
 package modfest.lacrimis.block.rune;
 
 import com.zundrel.wrenchable.block.BlockWrenchable;
+import modfest.lacrimis.Lacrimis;
+import modfest.lacrimis.block.DuctConnectBlock;
+import modfest.lacrimis.init.ModBlocks;
+import modfest.lacrimis.util.DuctUtil;
+import modfest.lacrimis.util.NeighborList;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
@@ -22,15 +27,9 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 
 import java.util.List;
-
-import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.block.DuctConnectBlock;
-import modfest.lacrimis.init.ModBlocks;
-import modfest.lacrimis.util.DuctUtil;
-import modfest.lacrimis.util.NeighborList;
-import net.minecraft.world.WorldAccess;
 
 public abstract class CenterRuneBlock extends Block implements DuctConnectBlock, BlockWrenchable {
     private static final Box TARGET_BOX = new Box(-0.5, -1, -0.5, 1.5, 1, 1.5);

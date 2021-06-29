@@ -1,14 +1,13 @@
 package modfest.lacrimis.block.rune;
 
+import modfest.lacrimis.init.ModBlocks;
+import modfest.lacrimis.init.ModEnchantments;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import modfest.lacrimis.init.ModBlocks;
-import modfest.lacrimis.init.ModEnchantments;
 
 public class WardingBlock extends CenterRuneBlock {
     public WardingBlock() {

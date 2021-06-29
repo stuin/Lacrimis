@@ -10,7 +10,6 @@ import modfest.lacrimis.crafting.CrucibleRecipe;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.ApiStatus;
 
 import java.util.Collections;
 import java.util.List;

@@ -1,8 +1,5 @@
 package modfest.lacrimis.block;
 
-import java.util.EnumSet;
-import java.util.Map;
-
 import com.zundrel.wrenchable.block.BlockWrenchable;
 import modfest.lacrimis.init.ModItems;
 import net.minecraft.block.*;
@@ -23,6 +20,9 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+
+import java.util.EnumSet;
+import java.util.Map;
 
 public class DuctBlock extends Block implements BlockWrenchable {
     public static final BooleanProperty DOWN = Properties.DOWN;

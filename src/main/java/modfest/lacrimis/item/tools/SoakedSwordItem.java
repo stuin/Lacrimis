@@ -1,12 +1,11 @@
 package modfest.lacrimis.item.tools;
 
+import modfest.lacrimis.init.ModStatusEffects;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
-
-import modfest.lacrimis.init.ModStatusEffects;
 
 public class SoakedSwordItem extends SwordItem {
     public SoakedSwordItem(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {

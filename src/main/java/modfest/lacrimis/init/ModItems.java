@@ -1,11 +1,7 @@
 package modfest.lacrimis.init;
 
 import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.item.BottleOfTearsItem;
-import modfest.lacrimis.item.DiviningRodItem;
-import modfest.lacrimis.item.SoulShellItem;
-import modfest.lacrimis.item.SoulTotemItem;
-import modfest.lacrimis.item.TaintedPearlItem;
+import modfest.lacrimis.item.*;
 import modfest.lacrimis.item.armor.CustomArmorMaterials;
 import modfest.lacrimis.item.armor.SoakedArmor;
 import modfest.lacrimis.item.tools.CustomToolMaterials;

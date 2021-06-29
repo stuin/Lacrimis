@@ -1,15 +1,9 @@
 package modfest.lacrimis.init;
 
+import modfest.lacrimis.Lacrimis;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
-
-import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.client.ObsidianTearFlyingParticle;
-import modfest.lacrimis.client.PurpleMistParticle;
 
 public class ModParticles {
     public static final DefaultParticleType PURPLE_MIST = new DefaultParticleType(true) {};

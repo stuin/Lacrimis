@@ -1,5 +1,6 @@
 package modfest.lacrimis.init;
 
+import modfest.lacrimis.Lacrimis;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -10,8 +11,6 @@ import net.minecraft.entity.effect.StatusEffectType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-
-import modfest.lacrimis.Lacrimis;
 
 public class ModStatusEffects extends DamageSource {
     public static final DamageSource TEAR_DAMAGE = new ModStatusEffects("tear_poison").setBypassesArmor().setUsesMagic();

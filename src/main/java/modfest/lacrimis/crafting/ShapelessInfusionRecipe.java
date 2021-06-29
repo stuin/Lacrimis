@@ -1,5 +1,9 @@
 package modfest.lacrimis.crafting;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import modfest.lacrimis.init.ModCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.Ingredient;
@@ -10,12 +14,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-
-import modfest.lacrimis.init.ModCrafting;
 
 public class ShapelessInfusionRecipe extends InfusionRecipe {
 	private final DefaultedList<Ingredient> inputs;

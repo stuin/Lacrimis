@@ -4,12 +4,8 @@ import modfest.lacrimis.Lacrimis;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.PersistentState;
-import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.HashMap;

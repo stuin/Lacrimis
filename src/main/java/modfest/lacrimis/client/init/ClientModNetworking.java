@@ -1,6 +1,5 @@
 package modfest.lacrimis.client.init;
 
-import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -9,11 +8,10 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-import static modfest.lacrimis.init.ModNetworking.*;
+import static modfest.lacrimis.init.ModNetworking.CRUCIBLE_PARTICLES_ID;
 
 public class ClientModNetworking {
 

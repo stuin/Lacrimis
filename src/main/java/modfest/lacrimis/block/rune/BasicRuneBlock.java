@@ -1,6 +1,8 @@
 package modfest.lacrimis.block.rune;
 
 import com.zundrel.wrenchable.block.BlockWrenchable;
+import modfest.lacrimis.init.ModBlocks;
+import modfest.lacrimis.util.NeighborList;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
@@ -14,9 +16,6 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-
-import modfest.lacrimis.init.ModBlocks;
-import modfest.lacrimis.util.NeighborList;
 import net.minecraft.world.WorldAccess;
 
 public class BasicRuneBlock extends Block implements BlockWrenchable {

@@ -1,7 +1,6 @@
 package modfest.lacrimis.client.render.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.crafting.InfusionScreenHandler;
 import net.fabricmc.api.EnvType;
@@ -11,7 +10,6 @@ import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.screen.EnchantmentScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 

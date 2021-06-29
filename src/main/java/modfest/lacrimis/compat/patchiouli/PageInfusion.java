@@ -1,5 +1,9 @@
 package modfest.lacrimis.compat.patchiouli;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import modfest.lacrimis.crafting.InfusionRecipe;
+import modfest.lacrimis.crafting.ShapedInfusionRecipe;
+import modfest.lacrimis.init.ModCrafting;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
@@ -7,13 +11,7 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
-import com.mojang.blaze3d.systems.RenderSystem;
-
 import vazkii.patchouli.client.book.page.abstr.PageDoubleRecipeRegistry;
-
-import modfest.lacrimis.crafting.InfusionRecipe;
-import modfest.lacrimis.crafting.ShapedInfusionRecipe;
-import modfest.lacrimis.init.ModCrafting;
 
 public class PageInfusion extends PageDoubleRecipeRegistry<InfusionRecipe> {
     public static final Identifier TEXTURE = new Identifier("lacrimis", "textures/gui/crafting.png");

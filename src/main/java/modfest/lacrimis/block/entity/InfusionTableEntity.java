@@ -1,8 +1,5 @@
 package modfest.lacrimis.block.entity;
 
-import java.util.Random;
-import java.util.stream.IntStream;
-
 import modfest.lacrimis.crafting.InfusionRecipe;
 import modfest.lacrimis.crafting.InfusionScreenHandler;
 import modfest.lacrimis.init.ModCrafting;
@@ -25,6 +22,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Random;
+import java.util.stream.IntStream;
 
 public class InfusionTableEntity extends SoulTankEntity implements NamedScreenHandlerFactory {
     public static final int CAPACITY = 1000;

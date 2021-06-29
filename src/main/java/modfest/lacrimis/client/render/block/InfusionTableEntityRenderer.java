@@ -1,11 +1,15 @@
 package modfest.lacrimis.client.render.block;
 
+import modfest.lacrimis.Lacrimis;
+import modfest.lacrimis.block.entity.InfusionTableEntity;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.model.BakedModel;
@@ -13,12 +17,6 @@ import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
-
-import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.block.entity.InfusionTableEntity;
 
 @Environment(EnvType.CLIENT)
 public class InfusionTableEntityRenderer implements BlockEntityRenderer<InfusionTableEntity> {

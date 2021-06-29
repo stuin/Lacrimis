@@ -1,5 +1,6 @@
 package modfest.lacrimis.util;
 
+import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.TaintBlock;
 import modfest.lacrimis.init.ModBlocks;
 import net.minecraft.block.BlockState;
@@ -8,8 +9,6 @@ import net.minecraft.block.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-
-import modfest.lacrimis.Lacrimis;
 
 public class TaintPacket {
     private final int amount;

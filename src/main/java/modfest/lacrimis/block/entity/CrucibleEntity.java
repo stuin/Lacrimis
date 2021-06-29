@@ -1,6 +1,7 @@
 package modfest.lacrimis.block.entity;
 
 import modfest.lacrimis.block.DrainedCryingObsidianBlock;
+import modfest.lacrimis.crafting.CrucibleRecipe;
 import modfest.lacrimis.init.*;
 import modfest.lacrimis.item.BottleOfTearsItem;
 import modfest.lacrimis.util.DuctUtil;
@@ -15,12 +16,10 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
-
-import java.util.Optional;
-
-import modfest.lacrimis.crafting.CrucibleRecipe;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+
+import java.util.Optional;
 
 public class CrucibleEntity extends SoulTankEntity {
     private static final Box ITEM_BOX = new Box(0, 0.4, 0, 1, 1, 1);

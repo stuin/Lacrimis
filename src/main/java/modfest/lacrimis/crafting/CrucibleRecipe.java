@@ -1,8 +1,6 @@
 package modfest.lacrimis.crafting;
 
 import com.google.gson.JsonObject;
-
-import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.init.ModCrafting;
 import modfest.lacrimis.init.ModItems;
 import net.fabricmc.api.EnvType;

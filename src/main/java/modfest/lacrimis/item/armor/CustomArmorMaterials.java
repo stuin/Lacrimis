@@ -1,17 +1,16 @@
 package modfest.lacrimis.item.armor;
 
+import modfest.lacrimis.init.ModItems;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Lazy;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 
 import java.util.function.Supplier;
-
-import modfest.lacrimis.init.ModItems;
 
 public enum CustomArmorMaterials implements ArmorMaterial {
 
