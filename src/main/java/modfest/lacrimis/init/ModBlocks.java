@@ -68,12 +68,12 @@ public class ModBlocks {
     public static Tag<Block> tier3;
 
     public static void register() {
-        crucible = register("crucible", new CrucibleBlock(Settings.copy(Blocks.CAULDRON).strength(5.0F, 1200.0F).nonOpaque()));
-        infusionTable = register("infusion_table", new InfusionTableBlock(Settings.copy(Blocks.ENCHANTING_TABLE).nonOpaque()));
+        crucible = register("crucible", new CrucibleBlock(Settings.copy(Blocks.CAULDRON).strength(2.0F, 1200.0F).nonOpaque()));
+        infusionTable = register("infusion_table", new InfusionTableBlock(Settings.copy(Blocks.STONECUTTER).nonOpaque()));
         runeStone = register("rune/stone", new Block(runeSettings));
         taintOutput = register("taint_output", new TaintOutputBlock(Settings.copy(Blocks.DISPENSER)));
-        combiner = register("combiner", new CombinerBlock(Settings.copy(Blocks.ENCHANTING_TABLE)));
-        networkLink = register("network_link", new NetworkLinkBlock(wardedSettings));
+        combiner = register("combiner", new CombinerBlock(Settings.copy(Blocks.DISPENSER)));
+        networkLink = register("network_link", new NetworkLinkBlock(Settings.copy(Blocks.BEACON)));
         drainedCryingObsidian = register("drained_crying_obsidian", new DrainedCryingObsidianBlock(Settings.copy(Blocks.CRYING_OBSIDIAN)));
         creativeTearsBlock = register("creative_tears_block", new CreativeTearsBlock(wardedSettings));
         wardedStone = register("warded", new WardedBlock(wardedSettings));
