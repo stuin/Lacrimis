@@ -30,7 +30,7 @@ import net.minecraft.world.WorldAccess;
 
 import java.util.List;
 
-public abstract class CenterRuneBlock extends Block implements DuctConnectBlock {
+public abstract class CenterRuneBlock extends Block implements DuctConnectBlock, activatable {
     private static final Box TARGET_BOX = new Box(-0.5, -1, -0.5, 1.5, 1, 1.5);
     private static final Box LARGE_BOX = new Box(-1.5, -1, -1.5, 2.5, 1, 2.5);
 
@@ -165,7 +165,7 @@ public abstract class CenterRuneBlock extends Block implements DuctConnectBlock 
                 for(BlockPos pos1 : tearsList)
                     goal -= ((DuctConnectBlock)world.getBlockState(pos1).getBlock()).extractTears(pos1, world, goal, false);
             }
-        } else
+        } else if(world.isClient())
             error(player, "tears");
     }
 

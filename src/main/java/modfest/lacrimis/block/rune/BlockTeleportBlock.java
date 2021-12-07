@@ -17,7 +17,7 @@ public class BlockTeleportBlock extends CenterRuneBlock {
     }
 
     @Override
-    protected boolean onActivate(World world, BlockPos pos, BlockPos duct, Entity entity, PlayerEntity player) {
+    public boolean onActivate(World world, BlockPos pos, BlockPos duct, Entity entity, PlayerEntity player) {
         BlockPos destination = DuctUtil.locateSink(world, duct, pos);
         if (destination != null) {
             return true;
@@ -61,7 +61,7 @@ public class BlockTeleportBlock extends CenterRuneBlock {
     }
 
     private void swap(World world, BlockEntity sourceEntity, BlockState sourceState, BlockPos dest) {
-        NbtCompound sourceTag = sourceEntity.createNbt(); // TODO may not be correct replacement
+        NbtCompound sourceTag = sourceEntity.createNbt();
         sourceEntity.readNbt(new NbtCompound());
 
         world.setBlockState(dest, sourceState);

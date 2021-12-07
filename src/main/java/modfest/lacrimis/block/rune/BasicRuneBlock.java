@@ -11,13 +11,15 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
-public class BasicRuneBlock extends Block {
+public class BasicRuneBlock extends Block implements activatable {
     public static final BooleanProperty POWERED;
     public static final IntProperty CENTER;
 
@@ -106,8 +108,8 @@ public class BasicRuneBlock extends Block {
             world.setBlockState(pos, state.with(POWERED, false));
     }
 
-    public void onWrenched(World world, PlayerEntity player, BlockHitResult blockHitResult) {
-        activate(world, blockHitResult.getBlockPos(), player);
+    public void onWrenched(World world, PlayerEntity player, BlockHitResult result) {
+        activate(world, result.getBlockPos(), player);
     }
 
     public void activate(World world, BlockPos pos, PlayerEntity player) {

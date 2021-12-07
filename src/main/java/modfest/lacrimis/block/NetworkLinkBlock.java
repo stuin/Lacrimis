@@ -1,6 +1,7 @@
 package modfest.lacrimis.block;
 
 import modfest.lacrimis.block.entity.NetworkLinkEntity;
+import modfest.lacrimis.block.rune.activatable;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,7 +14,7 @@ import net.minecraft.world.WorldAccess;
 
 import java.util.Arrays;
 
-public class NetworkLinkBlock extends BlockWithEntity implements DuctConnectBlock {
+public class NetworkLinkBlock extends BlockWithEntity implements DuctConnectBlock, activatable {
     private static final float[] BLANK = new float[] {1, 1, 1};
 
     public NetworkLinkBlock(Settings settings) {
@@ -30,9 +31,12 @@ public class NetworkLinkBlock extends BlockWithEntity implements DuctConnectBloc
     }
 
     public void onWrenched(World world, PlayerEntity player, BlockHitResult result) {
-        NetworkLinkEntity linkEntity = ((NetworkLinkEntity) world.getBlockEntity(result.getBlockPos()));
+        activate(world, result.getBlockPos(), player);
+    }
+
+    public void activate(World world, BlockPos pos, PlayerEntity player) {
+        NetworkLinkEntity linkEntity = ((NetworkLinkEntity) world.getBlockEntity(pos));
         if(linkEntity != null) {
-            BlockPos pos = result.getBlockPos().up();
             float[] color = BLANK.clone();
             boolean changed = false;
             int l = world.getTopY(Heightmap.Type.WORLD_SURFACE, pos.getX(), pos.getZ());
@@ -60,6 +64,8 @@ public class NetworkLinkBlock extends BlockWithEntity implements DuctConnectBloc
             linkEntity.setState(changed && !Arrays.equals(color, BLANK), color, world);
         }
     }
+
+
 
     @Override
     public void onBroken(WorldAccess world, BlockPos pos, BlockState state) {

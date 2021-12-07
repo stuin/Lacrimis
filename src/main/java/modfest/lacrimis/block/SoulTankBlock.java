@@ -1,6 +1,7 @@
 package modfest.lacrimis.block;
 
 import modfest.lacrimis.block.entity.SoulTankEntity;
+import modfest.lacrimis.block.rune.activatable;
 import modfest.lacrimis.init.ModItems;
 import modfest.lacrimis.item.BottleOfTearsItem;
 import modfest.lacrimis.util.SoulTank;
@@ -28,7 +29,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
-public abstract class SoulTankBlock extends BlockWithEntity implements DuctConnectBlock {
+public abstract class SoulTankBlock extends BlockWithEntity implements DuctConnectBlock, activatable {
     private final boolean canExtract;
 
     protected SoulTankBlock(AbstractBlock.Settings settings, boolean canExtract) {
@@ -55,10 +56,14 @@ public abstract class SoulTankBlock extends BlockWithEntity implements DuctConne
         return 0;
     }
 
-    public void onWrenched(World world, PlayerEntity player, BlockHitResult blockHitResult) {
+    public void onWrenched(World world, PlayerEntity player, BlockHitResult result) {
+        activate(world, result.getBlockPos(), player);
+    }
+
+    public void activate(World world, BlockPos pos, PlayerEntity player) {
         //Read tears
         if(player != null && !player.isSneaking() && !world.isClient) {
-            int level = getTank(world, blockHitResult.getBlockPos()).getTears();
+            int level = getTank(world, pos).getTears();
             Text text = new LiteralText(level + " Tears");
             player.sendMessage(text, false);
         }

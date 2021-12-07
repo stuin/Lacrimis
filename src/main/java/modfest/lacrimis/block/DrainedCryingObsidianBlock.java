@@ -1,5 +1,6 @@
 package modfest.lacrimis.block;
 
+import modfest.lacrimis.block.rune.activatable;
 import modfest.lacrimis.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -17,7 +18,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class DrainedCryingObsidianBlock extends CryingObsidianBlock {
+public class DrainedCryingObsidianBlock extends CryingObsidianBlock implements activatable {
 
     public static final IntProperty TEARS_LEAST = IntProperty.of("tears_least_sig", 0, 49);
     public static final IntProperty TEARS_MOST = IntProperty.of("tears_most_sig", 0, 9);
@@ -27,9 +28,13 @@ public class DrainedCryingObsidianBlock extends CryingObsidianBlock {
         this.setDefaultState(setTearsValue(this.getDefaultState(), 499));
     }
 
-    public void onWrenched(World world, PlayerEntity player, BlockHitResult blockHitResult) {
+    public void onWrenched(World world, PlayerEntity player, BlockHitResult result) {
+        activate(world, result.getBlockPos(), player);
+    }
+
+    public void activate(World world, BlockPos pos, PlayerEntity player) {
         if(player != null && !player.isSneaking() && !world.isClient) {
-            int level = getTearsLevel(world.getBlockState(blockHitResult.getBlockPos()));
+            int level = getTearsLevel(world.getBlockState(pos));
             Text text = new LiteralText(level + " Tears");
             player.sendMessage(text, false);
         }

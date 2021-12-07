@@ -59,11 +59,12 @@ public class CrucibleBlock extends SoulTankBlock {
     }
 
     @Override
-    public void onWrenched(World world, PlayerEntity player, BlockHitResult blockHitResult) {
-        if(!player.isSneaking())
-            super.onWrenched(world, player, blockHitResult);
-        else {
-            BlockPos pos = blockHitResult.getBlockPos();
+    public void onWrenched(World world, PlayerEntity player, BlockHitResult result) {
+        activate(world, result.getBlockPos(), player);
+    }
+
+    public void activate(World world, BlockPos pos, PlayerEntity player) {
+        if(player.isSneaking()) {
             SoulTank tank = getTank(world, pos);
             if(tank != null) {
                 //Make item
@@ -77,6 +78,9 @@ public class CrucibleBlock extends SoulTankBlock {
                 onBreak(world, pos, world.getBlockState(pos), player);
                 world.setBlockState(pos, Blocks.AIR.getDefaultState());
             }
+        }
+        else {
+            super.activate(world, pos, player);
         }
     }
 

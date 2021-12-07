@@ -1,5 +1,6 @@
 package modfest.lacrimis.block;
 
+import modfest.lacrimis.block.rune.activatable;
 import modfest.lacrimis.init.ModItems;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,7 +24,7 @@ import net.minecraft.world.WorldAccess;
 import java.util.EnumSet;
 import java.util.Map;
 
-public class DuctBlock extends Block {
+public class DuctBlock extends Block implements activatable {
     public static final BooleanProperty DOWN = Properties.DOWN;
     public static final BooleanProperty UP = Properties.UP;
     public static final BooleanProperty NORTH = Properties.NORTH;
@@ -77,9 +78,12 @@ public class DuctBlock extends Block {
         return this.connectToBlocks(this.getDefaultState(), ctx.getWorld(), ctx.getBlockPos());
     }
 
-    public void onWrenched(World world, PlayerEntity player, BlockHitResult blockHitResult) {
+    public void onWrenched(World world, PlayerEntity player, BlockHitResult result) {
+        activate(world, result.getBlockPos(), player);
+    }
+
+    public void activate(World world, BlockPos pos, PlayerEntity player) {
         if(player.isSneaking()) {
-            BlockPos pos = blockHitResult.getBlockPos();
             if(!player.isCreative())
                 ItemScatterer.spawn(world, pos, new SimpleInventory(new ItemStack(ModItems.duct)));
             onBreak(world, pos, world.getBlockState(pos), player);
