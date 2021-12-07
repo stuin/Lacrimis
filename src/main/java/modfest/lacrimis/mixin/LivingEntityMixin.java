@@ -41,10 +41,10 @@ public abstract class LivingEntityMixin extends Entity {
 
 
             //Get destination
-            if (itemStack != null && itemStack.hasTag()) {
-                int x = itemStack.getTag().getInt("X");
-                int y = itemStack.getTag().getInt("Y");
-                int z = itemStack.getTag().getInt("Z");
+            if (itemStack != null && itemStack.hasNbt()) {
+                int x = itemStack.getNbt().getInt("X");
+                int y = itemStack.getNbt().getInt("Y");
+                int z = itemStack.getNbt().getInt("Z");
                 BlockPos pos = new BlockPos(x, y, z);
                 if(world.getBlockState(pos).getBlock() instanceof NetworkLinkBlock) {
                     DuctUtil.locateSink(world, pos, new SoulSwapBlock.PlayerContainer(this, itemStack));

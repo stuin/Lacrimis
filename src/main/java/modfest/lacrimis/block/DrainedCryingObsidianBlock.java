@@ -1,6 +1,5 @@
 package modfest.lacrimis.block;
 
-import com.zundrel.wrenchable.block.BlockWrenchable;
 import modfest.lacrimis.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -18,7 +17,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class DrainedCryingObsidianBlock extends CryingObsidianBlock implements BlockWrenchable {
+public class DrainedCryingObsidianBlock extends CryingObsidianBlock {
 
     public static final IntProperty TEARS_LEAST = IntProperty.of("tears_least_sig", 0, 49);
     public static final IntProperty TEARS_MOST = IntProperty.of("tears_most_sig", 0, 9);
@@ -28,7 +27,6 @@ public class DrainedCryingObsidianBlock extends CryingObsidianBlock implements B
         this.setDefaultState(setTearsValue(this.getDefaultState(), 499));
     }
 
-    @Override
     public void onWrenched(World world, PlayerEntity player, BlockHitResult blockHitResult) {
         if(player != null && !player.isSneaking() && !world.isClient) {
             int level = getTearsLevel(world.getBlockState(blockHitResult.getBlockPos()));
@@ -44,8 +42,8 @@ public class DrainedCryingObsidianBlock extends CryingObsidianBlock implements B
 
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
-        if(itemStack.hasTag())
-            world.setBlockState(pos, setTearsValue(state, itemStack.getOrCreateTag().getInt("TearLevel")));
+        if(itemStack.hasNbt())
+            world.setBlockState(pos, setTearsValue(state, itemStack.getOrCreateNbt().getInt("TearLevel")));
     }
 
     @Override

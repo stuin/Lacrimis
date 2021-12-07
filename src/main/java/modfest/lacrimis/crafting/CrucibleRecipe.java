@@ -66,9 +66,9 @@ public class CrucibleRecipe extends InfusionRecipe {
     @Override
     public ItemStack craft(InfusionInventory inv) {
         ItemStack itemStack = super.craft(inv);
-        NbtCompound compoundTag = inv.getStack(0).getTag();
+        NbtCompound compoundTag = inv.getStack(0).getNbt();
         if (compoundTag != null) {
-            itemStack.setTag(compoundTag.copy());
+            itemStack.setNbt(compoundTag.copy());
         }
 
         return itemStack;
@@ -82,7 +82,7 @@ public class CrucibleRecipe extends InfusionRecipe {
     @Environment(EnvType.CLIENT)
     public ItemStack createIcon() {
         ItemStack item = new ItemStack(ModItems.crucible);
-        item.getOrCreateTag().putInt("TearLevel", getTears());
+        item.getOrCreateNbt().putInt("TearLevel", getTears());
         return item;
     }
 

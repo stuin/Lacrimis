@@ -3,7 +3,6 @@ package modfest.lacrimis.block.entity;
 import modfest.lacrimis.crafting.CombinerScreenHandler;
 import modfest.lacrimis.init.ModEntities;
 import modfest.lacrimis.init.ModItems;
-import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.block.BlockState;
@@ -26,7 +25,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
 
-public class CombinerEntity extends BlockEntity implements ExtendedScreenHandlerFactory, SidedInventory, BlockEntityClientSerializable {
+public class CombinerEntity extends BlockEntity implements ExtendedScreenHandlerFactory, SidedInventory {
     public static final int SIZE = 2;
     private final SimpleInventory inventory;
     public EntityType<?> type;
@@ -59,29 +58,16 @@ public class CombinerEntity extends BlockEntity implements ExtendedScreenHandler
     }
 
     @Override
-    public NbtCompound writeNbt(NbtCompound tag) {
-        if(type != null)
+    public void writeNbt(NbtCompound tag) {
+        super.writeNbt(tag);
+        if(type != null) {
             tag.putString("entity", Registry.ENTITY_TYPE.getId(type).toString());
-        else
+        }
+        else {
             tag.putString("entity", "null");
+        }
 
         tag.put("Inventory", this.inventory.toNbtList());
-        return super.writeNbt(tag);
-    }
-
-    @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return this.writeNbt(new NbtCompound());
-    }
-
-    @Override
-    public void fromClientTag(NbtCompound tag) {
-        this.readNbt(tag);
-    }
-
-    @Override
-    public NbtCompound toClientTag(NbtCompound tag) {
-        return this.writeNbt(tag);
     }
 
     @Override

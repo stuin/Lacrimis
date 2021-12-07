@@ -1,6 +1,5 @@
 package modfest.lacrimis.block;
 
-import com.zundrel.wrenchable.block.BlockWrenchable;
 import modfest.lacrimis.block.entity.SoulTankEntity;
 import modfest.lacrimis.init.ModItems;
 import modfest.lacrimis.item.BottleOfTearsItem;
@@ -29,7 +28,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
-public abstract class SoulTankBlock extends BlockWithEntity implements DuctConnectBlock, BlockWrenchable {
+public abstract class SoulTankBlock extends BlockWithEntity implements DuctConnectBlock {
     private final boolean canExtract;
 
     protected SoulTankBlock(AbstractBlock.Settings settings, boolean canExtract) {
@@ -56,7 +55,6 @@ public abstract class SoulTankBlock extends BlockWithEntity implements DuctConne
         return 0;
     }
 
-    @Override
     public void onWrenched(World world, PlayerEntity player, BlockHitResult blockHitResult) {
         //Read tears
         if(player != null && !player.isSneaking() && !world.isClient) {

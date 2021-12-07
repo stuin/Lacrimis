@@ -109,7 +109,7 @@ public class CombinerScreenHandler extends ScreenHandler implements InventoryCha
                 ItemStack stack = new ItemStack(Items.SPAWNER);
                 MutableText text = new TranslatableText(entityType.getTranslationKey());
                 text.append(new TranslatableText(Lacrimis.MODID + ".tooltip.spawner"));
-                stack.setTag(tags[0]);
+                stack.setNbt(tags[0]);
                 stack.setCustomName(text);
                 //{BlockEntityTag:{SpawnData:{id:"#ID"},SpawnPotentials:[{Entity:{id:"#ID"}, Weight:1}]}}
                 output.setStack(0, stack);

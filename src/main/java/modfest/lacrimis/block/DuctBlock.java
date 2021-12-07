@@ -1,6 +1,5 @@
 package modfest.lacrimis.block;
 
-import com.zundrel.wrenchable.block.BlockWrenchable;
 import modfest.lacrimis.init.ModItems;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,7 +23,7 @@ import net.minecraft.world.WorldAccess;
 import java.util.EnumSet;
 import java.util.Map;
 
-public class DuctBlock extends Block implements BlockWrenchable {
+public class DuctBlock extends Block {
     public static final BooleanProperty DOWN = Properties.DOWN;
     public static final BooleanProperty UP = Properties.UP;
     public static final BooleanProperty NORTH = Properties.NORTH;
@@ -78,7 +77,6 @@ public class DuctBlock extends Block implements BlockWrenchable {
         return this.connectToBlocks(this.getDefaultState(), ctx.getWorld(), ctx.getBlockPos());
     }
 
-    @Override
     public void onWrenched(World world, PlayerEntity player, BlockHitResult blockHitResult) {
         if(player.isSneaking()) {
             BlockPos pos = blockHitResult.getBlockPos();

@@ -31,7 +31,7 @@ public class SoulTotemItem extends Item {
             tag.putInt("X", context.getBlockPos().getX());
             tag.putInt("Y", context.getBlockPos().getY());
             tag.putInt("Z", context.getBlockPos().getZ());
-            context.getStack().setTag(tag);
+            context.getStack().setNbt(tag);
             return ActionResult.PASS;
         }
         return super.useOnBlock(context);
@@ -48,13 +48,13 @@ public class SoulTotemItem extends Item {
 
     @Override
     public boolean hasGlint(ItemStack stack) {
-        return stack.hasTag();
+        return stack.hasNbt();
     }
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
-        if(stack.hasTag())
+        if(stack.hasNbt())
             tooltip.add(new TranslatableText("lacrimis.tooltip.bound").formatted(Formatting.GRAY));
         else
             tooltip.add(new TranslatableText("lacrimis.tooltip.unbound").formatted(Formatting.GRAY));

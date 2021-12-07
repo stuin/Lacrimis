@@ -61,7 +61,7 @@ public class BlockTeleportBlock extends CenterRuneBlock {
     }
 
     private void swap(World world, BlockEntity sourceEntity, BlockState sourceState, BlockPos dest) {
-        NbtCompound sourceTag = sourceEntity.writeNbt(new NbtCompound());
+        NbtCompound sourceTag = sourceEntity.createNbt(); // TODO may not be correct replacement
         sourceEntity.readNbt(new NbtCompound());
 
         world.setBlockState(dest, sourceState);

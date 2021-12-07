@@ -30,7 +30,7 @@ import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
 import me.shedaniel.rei.api.client.gui.widgets.Widget;
 import me.shedaniel.rei.api.client.gui.widgets.Widgets;
-import me.shedaniel.rei.api.client.registry.display.TransferDisplayCategory;
+import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import modfest.lacrimis.compat.rei.CrucibleDisplay;
@@ -46,7 +46,7 @@ import net.minecraft.text.TranslatableText;
 import java.util.List;
 
 @Environment(EnvType.CLIENT)
-public class CrucibleCategory implements TransferDisplayCategory<CrucibleDisplay> {
+public class CrucibleCategory implements DisplayCategory<CrucibleDisplay> {
 
     @Override
     public CategoryIdentifier<? extends CrucibleDisplay> getCategoryIdentifier() {
@@ -88,7 +88,6 @@ public class CrucibleCategory implements TransferDisplayCategory<CrucibleDisplay
         return 49;
     }
 
-    @Override
     public void renderRedSlots(MatrixStack matrices, List<Widget> widgets, Rectangle bounds, CrucibleDisplay display, IntList redSlots) {
         Point startPoint = new Point(bounds.getCenterX() - 41, bounds.y + 10);
         matrices.push();

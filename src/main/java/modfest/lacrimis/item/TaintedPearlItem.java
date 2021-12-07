@@ -30,7 +30,7 @@ public class TaintedPearlItem extends Item {
             pearlEntity.setOwner(user);
             pearlEntity.setPos(user.getX(), user.getEyeY() - 0.10000000149011612D, user.getZ());
             pearlEntity.setItem(itemStack);
-            pearlEntity.setProperties(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
+            pearlEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
             world.spawnEntity(pearlEntity);
         }
 

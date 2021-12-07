@@ -1,6 +1,5 @@
 package modfest.lacrimis.block;
 
-import com.zundrel.wrenchable.block.BlockWrenchable;
 import modfest.lacrimis.block.entity.NetworkLinkEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -14,7 +13,7 @@ import net.minecraft.world.WorldAccess;
 
 import java.util.Arrays;
 
-public class NetworkLinkBlock extends BlockWithEntity implements DuctConnectBlock, BlockWrenchable {
+public class NetworkLinkBlock extends BlockWithEntity implements DuctConnectBlock {
     private static final float[] BLANK = new float[] {1, 1, 1};
 
     public NetworkLinkBlock(Settings settings) {
@@ -30,7 +29,6 @@ public class NetworkLinkBlock extends BlockWithEntity implements DuctConnectBloc
         return BlockRenderType.MODEL;
     }
 
-    @Override
     public void onWrenched(World world, PlayerEntity player, BlockHitResult result) {
         NetworkLinkEntity linkEntity = ((NetworkLinkEntity) world.getBlockEntity(result.getBlockPos()));
         if(linkEntity != null) {

@@ -1,6 +1,5 @@
 package modfest.lacrimis.block.rune;
 
-import com.zundrel.wrenchable.block.BlockWrenchable;
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.DuctConnectBlock;
 import modfest.lacrimis.init.ModBlocks;
@@ -31,7 +30,7 @@ import net.minecraft.world.WorldAccess;
 
 import java.util.List;
 
-public abstract class CenterRuneBlock extends Block implements DuctConnectBlock, BlockWrenchable {
+public abstract class CenterRuneBlock extends Block implements DuctConnectBlock {
     private static final Box TARGET_BOX = new Box(-0.5, -1, -0.5, 1.5, 1, 1.5);
     private static final Box LARGE_BOX = new Box(-1.5, -1, -1.5, 2.5, 1, 2.5);
 
@@ -138,7 +137,6 @@ public abstract class CenterRuneBlock extends Block implements DuctConnectBlock,
             return duct;
     }
 
-    @Override
     public void onWrenched(World world, PlayerEntity player, BlockHitResult blockHitResult) {
         activate(world, blockHitResult.getBlockPos(), player);
     }

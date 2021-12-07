@@ -39,25 +39,22 @@ public class NetworkLinkEntity extends BlockEntity {
         }
     }
 
+    /* //TODO replace
     @Nullable
     public BlockEntityUpdateS2CPacket toUpdatePacket() {
         return new BlockEntityUpdateS2CPacket(this.pos, 3, this.toInitialChunkDataNbt());
     }
-
-    public NbtCompound toInitialChunkDataNbt() {
-        return this.writeNbt(new NbtCompound());
-    }
-
+    */
 
     @Override
-    public NbtCompound writeNbt(NbtCompound tag) {
+    public void writeNbt(NbtCompound tag) {
+        super.writeNbt(tag);
         if(color != null) {
             tag.putFloat("colorA", color[0]);
             tag.putFloat("colorB", color[1]);
             tag.putFloat("colorC", color[2]);
         }
         tag.putBoolean("on", on);
-        return super.writeNbt(tag);
     }
 
     @Override

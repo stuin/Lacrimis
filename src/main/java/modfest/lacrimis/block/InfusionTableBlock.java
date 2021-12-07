@@ -95,9 +95,9 @@ public class InfusionTableBlock extends SoulTankBlock {
 	@Override
 	public void appendTooltip(ItemStack stack, BlockView world, List<Text> tooltip, TooltipContext options) {
 		super.appendTooltip(stack, world, tooltip, options);
-		if(stack.hasTag())
+		if(stack.hasNbt())
 			tooltip.add(new TranslatableText(Lacrimis.MODID + ".tooltip.crucible",
-				stack.getOrCreateTag().getInt("TearLevel")).formatted(Formatting.GRAY));
+				stack.getOrCreateNbt().getInt("TearLevel")).formatted(Formatting.GRAY));
 	}
 
 	@Override

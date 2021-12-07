@@ -1,6 +1,5 @@
 package modfest.lacrimis.block;
 
-import com.zundrel.wrenchable.block.BlockWrenchable;
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.CrucibleEntity;
 import modfest.lacrimis.init.ModEntities;
@@ -33,7 +32,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class CrucibleBlock extends SoulTankBlock implements BlockWrenchable {
+public class CrucibleBlock extends SoulTankBlock {
     private static final VoxelShape RAY_TRACE_SHAPE = createCuboidShape(3.0D, 4.0D, 3.0D, 13.0D, 16.0D, 13.0D);
     protected static final VoxelShape OUTLINE_SHAPE = VoxelShapes.combineAndSimplify(VoxelShapes.fullCube(), RAY_TRACE_SHAPE, BooleanBiFunction.ONLY_FIRST);
     private static final Box inside = new Box(0.2, 0.2, 0.2, 0.8, 0.8, 0.8);
@@ -56,7 +55,7 @@ public class CrucibleBlock extends SoulTankBlock implements BlockWrenchable {
     public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack item) {
         SoulTank tank = getTank(world, pos);
         if (tank != null)
-            tank.setTears(item.getOrCreateTag().getInt("TearLevel"));
+            tank.setTears(item.getOrCreateNbt().getInt("TearLevel"));
     }
 
     @Override
@@ -70,7 +69,7 @@ public class CrucibleBlock extends SoulTankBlock implements BlockWrenchable {
                 //Make item
                 ItemStack item = new ItemStack(ModItems.crucible);
                 if(tank.getTears() > 0) {
-                    item.getOrCreateTag().putInt("TearLevel", tank.getTears());
+                    item.getOrCreateNbt().putInt("TearLevel", tank.getTears());
                     tank.setTears(0);
                 }
 
@@ -95,7 +94,7 @@ public class CrucibleBlock extends SoulTankBlock implements BlockWrenchable {
     public void appendTooltip(ItemStack stack, BlockView world, List<Text> tooltip, TooltipContext options) {
         super.appendTooltip(stack, world, tooltip, options);
         tooltip.add(new TranslatableText(Lacrimis.MODID + ".tooltip.crucible",
-                stack.getOrCreateTag().getInt("TearLevel")).formatted(Formatting.GRAY));
+                stack.getOrCreateNbt().getInt("TearLevel")).formatted(Formatting.GRAY));
     }
 
     @Override

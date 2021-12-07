@@ -1,6 +1,5 @@
 package modfest.lacrimis.block.rune;
 
-import com.zundrel.wrenchable.block.BlockWrenchable;
 import modfest.lacrimis.init.ModBlocks;
 import modfest.lacrimis.util.NeighborList;
 import net.minecraft.block.Block;
@@ -18,7 +17,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
-public class BasicRuneBlock extends Block implements BlockWrenchable {
+public class BasicRuneBlock extends Block {
     public static final BooleanProperty POWERED;
     public static final IntProperty CENTER;
 
@@ -107,7 +106,6 @@ public class BasicRuneBlock extends Block implements BlockWrenchable {
             world.setBlockState(pos, state.with(POWERED, false));
     }
 
-    @Override
     public void onWrenched(World world, PlayerEntity player, BlockHitResult blockHitResult) {
         activate(world, blockHitResult.getBlockPos(), player);
     }

@@ -5,6 +5,7 @@ import modfest.lacrimis.block.entity.NetworkLinkEntity;
 import modfest.lacrimis.entity.TaintedPearlEntity;
 import modfest.lacrimis.init.ModEntities;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.entity.Entity;
@@ -53,8 +54,9 @@ public abstract class ClientNetworkMixin implements ClientPlayPacketListener {
     public void onBlockEntityUpdate(BlockEntityUpdateS2CPacket packet, CallbackInfo info) {
         BlockPos blockPos = packet.getPos();
         BlockEntity blockEntity = this.client.world.getBlockEntity(blockPos);
-        int i = packet.getBlockEntityType();
-        if (i == 20 && blockEntity instanceof NetworkLinkEntity) {
+        BlockEntityType<?> type = packet.getBlockEntityType();
+        // TODO check if type is correct, removed for now
+        if (blockEntity instanceof NetworkLinkEntity) {
             blockEntity.readNbt(packet.getNbt());
         }
     }

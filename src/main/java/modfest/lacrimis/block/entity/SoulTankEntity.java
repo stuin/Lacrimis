@@ -2,7 +2,6 @@ package modfest.lacrimis.block.entity;
 
 import modfest.lacrimis.crafting.InfusionInventory;
 import modfest.lacrimis.util.SoulTank;
-import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -17,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.IntStream;
 
-public abstract class SoulTankEntity extends BlockEntity implements SidedInventory, BlockEntityClientSerializable {
+public abstract class SoulTankEntity extends BlockEntity implements SidedInventory {
     private final SoulTank tank;
     public final InfusionInventory inventory;
 
@@ -39,8 +38,8 @@ public abstract class SoulTankEntity extends BlockEntity implements SidedInvento
     public void mark() {
         if (this.world != null) {
             this.markDirty();
-            if(!this.world.isClient)
-                this.sync();
+            //if(!this.world.isClient)
+                //this.sync(); // TODO replace with 1.18 equivalent
         }
     }
     
@@ -68,28 +67,12 @@ public abstract class SoulTankEntity extends BlockEntity implements SidedInvento
     }
 
     @Override
-    public NbtCompound writeNbt(NbtCompound tag) {
+    public void writeNbt(NbtCompound tag) {
         super.writeNbt(tag);
         tag.putInt("TearLevel", tank.getTears());
         tag.putInt("TearLimit", tank.getCapacity());
 
         tag.put("Inventory", this.inventory.toNbtList());
-        return tag;
-    }
-
-    @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return this.writeNbt(new NbtCompound());
-    }
-
-    @Override
-    public void fromClientTag(NbtCompound tag) {
-        this.readNbt(tag);
-    }
-
-    @Override
-    public NbtCompound toClientTag(NbtCompound tag) {
-        return this.writeNbt(tag);
     }
 
     @Override

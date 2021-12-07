@@ -7,7 +7,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectType;
+import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -19,7 +19,7 @@ public class ModStatusEffects extends DamageSource {
     public static StatusEffect TEAR_POISON;
 
     public static void register() {
-        WAVERING_SOUL = register("wavering_soul", new StatusEffect(StatusEffectType.NEUTRAL, 13793020) {
+        WAVERING_SOUL = register("wavering_soul", new StatusEffect(StatusEffectCategory.NEUTRAL, 13793020) {
             @Override
             public void onRemoved(LivingEntity entity, AttributeContainer attributes, int amplifier) {
                 if(entity.getHealth() <= 1) {
@@ -30,7 +30,7 @@ public class ModStatusEffects extends DamageSource {
             }
         });
 
-        TEAR_POISON = register("tear_poison", new StatusEffect(StatusEffectType.HARMFUL, 10359895) {
+        TEAR_POISON = register("tear_poison", new StatusEffect(StatusEffectCategory.HARMFUL, 10359895) {
             @Override
             public void applyUpdateEffect(LivingEntity entity, int amplifier) {
                 if(this == ModStatusEffects.TEAR_POISON) {

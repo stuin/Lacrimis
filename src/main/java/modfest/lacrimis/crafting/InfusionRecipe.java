@@ -34,7 +34,7 @@ public abstract class InfusionRecipe implements Recipe<InfusionInventory> {
     @Environment(EnvType.CLIENT)
     public ItemStack createIcon() {
         ItemStack item = new ItemStack(ModItems.infusionTable);
-        item.getOrCreateTag().putInt("TearLevel", getTears());
+        item.getOrCreateNbt().putInt("TearLevel", getTears());
         return item;
     }
 

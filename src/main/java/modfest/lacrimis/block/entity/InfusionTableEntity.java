@@ -171,11 +171,10 @@ public class InfusionTableEntity extends SoulTankEntity implements NamedScreenHa
     }
 
     @Override
-    public NbtCompound writeNbt(NbtCompound tag) {
+    public void writeNbt(NbtCompound tag) {
         super.writeNbt(tag);
         NbtCompound itemTag = new NbtCompound();
         holding.writeNbt(itemTag);
         tag.put("Holding", itemTag);
-        return tag;
     }
 }
