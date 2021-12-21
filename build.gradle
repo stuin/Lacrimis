@@ -19,28 +19,6 @@ repositories {
 		name = "Vazkii"
 		url = 'https://maven.blamejared.com'
 	}
-	maven {
-		url = 'https://maven.modmuss50.me'
-	}
-	/*
-	maven {
-		name = "grondag"
-		url = "https://grondag-repo.appspot.com"
-		credentials {
-			username "guest"
-			password ""
-		}
-	}
-
-	mavenLocal()
-	maven {
-		url 'https://jitpack.io'
-	}
-	maven {
-		name = "Wrenchable"
-		url  "https://dl.bintray.com/zundrel/wrenchable"
-	}
-	*/
 }
 
 dependencies {
@@ -58,17 +36,6 @@ dependencies {
 	//REI
 	modImplementation("me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}")
 	//modRuntime("me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}")
-
-	//Wrenchable api
-	/*
-	def wrenchVersion = "com.zundrel:wrenchable:${project.wrenchable_version}"
-	//def wrenchVersion = "com.github.stuin:wrenchable:${project.wrenchable_version}"
-	modImplementation (wrenchVersion) {
-		exclude group: "io.github.prospector"
-		exclude group: "net.fabricmc"
-	}
-	include wrenchVersion
-	*/
 }
 
 processResources {

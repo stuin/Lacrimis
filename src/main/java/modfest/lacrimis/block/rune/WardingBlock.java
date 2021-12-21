@@ -4,6 +4,7 @@ import modfest.lacrimis.init.ModBlocks;
 import modfest.lacrimis.init.ModEnchantments;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -32,6 +33,13 @@ public class WardingBlock extends CenterRuneBlock {
                     added = true;
                 }
             return added;
+        }
+        if(entity instanceof ItemEntity) {
+            ItemStack stack = ((ItemEntity) entity).getStack();
+            if(ModEnchantments.WARDED.isAcceptableItem(stack) && EnchantmentHelper.getLevel(ModEnchantments.WARDED, stack) == 0) {
+                stack.addEnchantment(ModEnchantments.WARDED, 1);
+                return true;
+            }
         }
         return false;
     }
