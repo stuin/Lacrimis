@@ -1,7 +1,8 @@
 package modfest.lacrimis.block;
 
+import com.stuintech.socketwrench.fasteners.FastenerBlock;
+import com.stuintech.socketwrench.socket.CancelFasteningException;
 import modfest.lacrimis.block.entity.SoulTankEntity;
-import modfest.lacrimis.block.rune.activatable;
 import modfest.lacrimis.init.ModItems;
 import modfest.lacrimis.item.BottleOfTearsItem;
 import modfest.lacrimis.util.SoulTank;
@@ -25,11 +26,12 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
-public abstract class SoulTankBlock extends BlockWithEntity implements DuctConnectBlock, activatable {
+public abstract class SoulTankBlock extends BlockWithEntity implements DuctConnectBlock, FastenerBlock {
     private final boolean canExtract;
 
     protected SoulTankBlock(AbstractBlock.Settings settings, boolean canExtract) {
@@ -56,17 +58,18 @@ public abstract class SoulTankBlock extends BlockWithEntity implements DuctConne
         return 0;
     }
 
-    public void onWrenched(World world, PlayerEntity player, BlockHitResult result) {
-        activate(world, result.getBlockPos(), player);
-    }
-
-    public void activate(World world, BlockPos pos, PlayerEntity player) {
+    @Override
+    public boolean onFasten(PlayerEntity player, World world, BlockPos pos, Vec3d vec3d, Direction direction) {
         //Read tears
-        if(player != null && !player.isSneaking() && !world.isClient) {
-            int level = getTank(world, pos).getTears();
-            Text text = new LiteralText(level + " Tears");
-            player.sendMessage(text, false);
+        if(player != null && !player.isSneaking()) {
+            if(!world.isClient) {
+                int level = getTank(world, pos).getTears();
+                Text text = new LiteralText(level + " Tears");
+                player.sendMessage(text, false);
+            }
+            return true;
         }
+        return false;
     }
 
     @Override

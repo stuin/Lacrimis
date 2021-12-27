@@ -1,5 +1,6 @@
 package modfest.lacrimis.block.rune;
 
+import com.stuintech.socketwrench.fasteners.FastenerBlock;
 import modfest.lacrimis.init.ModBlocks;
 import modfest.lacrimis.util.NeighborList;
 import net.minecraft.block.Block;
@@ -11,15 +12,13 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
-public class BasicRuneBlock extends Block implements activatable {
+public class BasicRuneBlock extends Block implements FastenerBlock {
     public static final BooleanProperty POWERED;
     public static final IntProperty CENTER;
 
@@ -108,8 +107,13 @@ public class BasicRuneBlock extends Block implements activatable {
             world.setBlockState(pos, state.with(POWERED, false));
     }
 
-    public void onWrenched(World world, PlayerEntity player, BlockHitResult result) {
-        activate(world, result.getBlockPos(), player);
+    @Override
+    public boolean onFasten(PlayerEntity player, World world, BlockPos pos, Vec3d vec3d, Direction direction) {
+        if(!player.isSneaking()) {
+            activate(world, pos, player);
+            return true;
+        }
+        return false;
     }
 
     public void activate(World world, BlockPos pos, PlayerEntity player) {

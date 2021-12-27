@@ -19,6 +19,10 @@ repositories {
 		name = "Vazkii"
 		url = 'https://maven.blamejared.com'
 	}
+	maven {
+		name = "SocketWrench"
+		url "https://github.com/stuin/SocketWrench/raw/maven2"
+	}
 }
 
 dependencies {
@@ -36,6 +40,10 @@ dependencies {
 	//REI
 	modImplementation("me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}")
 	//modRuntime("me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}")
+
+	// SocketWrench
+	modImplementation "com.stuintech:SocketWrench:${project.socketwrench_version}"
+	include "com.stuintech:SocketWrench:${project.socketwrench_version}"
 }
 
 processResources {

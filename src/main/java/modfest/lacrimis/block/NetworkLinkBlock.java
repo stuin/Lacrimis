@@ -1,20 +1,22 @@
 package modfest.lacrimis.block;
 
+import com.stuintech.socketwrench.fasteners.FastenerBlock;
+import com.stuintech.socketwrench.socket.CancelFasteningException;
 import modfest.lacrimis.block.entity.NetworkLinkEntity;
-import modfest.lacrimis.block.rune.activatable;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
 import java.util.Arrays;
 
-public class NetworkLinkBlock extends BlockWithEntity implements DuctConnectBlock, activatable {
+public class NetworkLinkBlock extends BlockWithEntity implements DuctConnectBlock, FastenerBlock {
     private static final float[] BLANK = new float[] {1, 1, 1};
 
     public NetworkLinkBlock(Settings settings) {
@@ -30,13 +32,10 @@ public class NetworkLinkBlock extends BlockWithEntity implements DuctConnectBloc
         return BlockRenderType.MODEL;
     }
 
-    public void onWrenched(World world, PlayerEntity player, BlockHitResult result) {
-        activate(world, result.getBlockPos(), player);
-    }
-
-    public void activate(World world, BlockPos pos, PlayerEntity player) {
+    @Override
+    public boolean onFasten(PlayerEntity player, World world, BlockPos pos, Vec3d vec3d, Direction direction) throws CancelFasteningException {
         NetworkLinkEntity linkEntity = ((NetworkLinkEntity) world.getBlockEntity(pos));
-        if(linkEntity != null) {
+        if(linkEntity != null && !player.isSneaking()) {
             float[] color = BLANK.clone();
             boolean changed = false;
             int l = world.getTopY(Heightmap.Type.WORLD_SURFACE, pos.getX(), pos.getZ());
@@ -62,10 +61,10 @@ public class NetworkLinkBlock extends BlockWithEntity implements DuctConnectBloc
             }
 
             linkEntity.setState(changed && !Arrays.equals(color, BLANK), color, world);
+            return true;
         }
+        return false;
     }
-
-
 
     @Override
     public void onBroken(WorldAccess world, BlockPos pos, BlockState state) {

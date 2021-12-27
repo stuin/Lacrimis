@@ -1,5 +1,6 @@
 package modfest.lacrimis.block.rune;
 
+import com.stuintech.socketwrench.fasteners.FastenerBlock;
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.DuctConnectBlock;
 import modfest.lacrimis.init.ModBlocks;
@@ -20,17 +21,17 @@ import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
 import java.util.List;
 
-public abstract class CenterRuneBlock extends Block implements DuctConnectBlock, activatable {
+public abstract class CenterRuneBlock extends Block implements DuctConnectBlock, FastenerBlock {
     private static final Box TARGET_BOX = new Box(-0.5, -1, -0.5, 1.5, 1, 1.5);
     private static final Box LARGE_BOX = new Box(-1.5, -1, -1.5, 2.5, 1, 2.5);
 
@@ -137,8 +138,13 @@ public abstract class CenterRuneBlock extends Block implements DuctConnectBlock,
             return duct;
     }
 
-    public void onWrenched(World world, PlayerEntity player, BlockHitResult blockHitResult) {
-        activate(world, blockHitResult.getBlockPos(), player);
+    @Override
+    public boolean onFasten(PlayerEntity player, World world, BlockPos pos, Vec3d vec3d, Direction direction) {
+        if(!player.isSneaking()) {
+            activate(world, pos, player);
+            return true;
+        }
+        return false;
     }
 
     public void activate(World world, BlockPos pos, PlayerEntity player) {

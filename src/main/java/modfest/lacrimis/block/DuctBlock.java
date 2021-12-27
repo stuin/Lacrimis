@@ -1,6 +1,6 @@
 package modfest.lacrimis.block;
 
-import modfest.lacrimis.block.rune.activatable;
+import com.stuintech.socketwrench.fasteners.FastenerBlock;
 import modfest.lacrimis.init.ModItems;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,10 +11,10 @@ import net.minecraft.state.StateManager.Builder;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ItemScatterer;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Direction.Axis;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -24,7 +24,7 @@ import net.minecraft.world.WorldAccess;
 import java.util.EnumSet;
 import java.util.Map;
 
-public class DuctBlock extends Block implements activatable {
+public class DuctBlock extends Block implements FastenerBlock {
     public static final BooleanProperty DOWN = Properties.DOWN;
     public static final BooleanProperty UP = Properties.UP;
     public static final BooleanProperty NORTH = Properties.NORTH;
@@ -78,17 +78,16 @@ public class DuctBlock extends Block implements activatable {
         return this.connectToBlocks(this.getDefaultState(), ctx.getWorld(), ctx.getBlockPos());
     }
 
-    public void onWrenched(World world, PlayerEntity player, BlockHitResult result) {
-        activate(world, result.getBlockPos(), player);
-    }
-
-    public void activate(World world, BlockPos pos, PlayerEntity player) {
+    @Override
+    public boolean onFasten(PlayerEntity player, World world, BlockPos pos, Vec3d vec3d, Direction direction) {
         if(player.isSneaking()) {
             if(!player.isCreative())
                 ItemScatterer.spawn(world, pos, new SimpleInventory(new ItemStack(ModItems.duct)));
             onBreak(world, pos, world.getBlockState(pos), player);
             world.setBlockState(pos, Blocks.AIR.getDefaultState());
+            return true;
         }
+        return false;
     }
 
     @Override

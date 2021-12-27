@@ -22,9 +22,10 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.function.BooleanBiFunction;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -59,11 +60,7 @@ public class CrucibleBlock extends SoulTankBlock {
     }
 
     @Override
-    public void onWrenched(World world, PlayerEntity player, BlockHitResult result) {
-        activate(world, result.getBlockPos(), player);
-    }
-
-    public void activate(World world, BlockPos pos, PlayerEntity player) {
+    public boolean onFasten(PlayerEntity player, World world, BlockPos pos, Vec3d vec3d, Direction direction) {
         if(player.isSneaking()) {
             SoulTank tank = getTank(world, pos);
             if(tank != null) {
@@ -77,11 +74,10 @@ public class CrucibleBlock extends SoulTankBlock {
                 ItemScatterer.spawn(world, pos, new SimpleInventory(item));
                 onBreak(world, pos, world.getBlockState(pos), player);
                 world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                return true;
             }
         }
-        else {
-            super.activate(world, pos, player);
-        }
+        return super.onFasten(player, world, pos, vec3d, direction);
     }
 
     @Override
