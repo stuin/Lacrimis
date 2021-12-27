@@ -6,6 +6,7 @@ import modfest.lacrimis.util.DuctUtil;
 import modfest.lacrimis.util.TaintPacket;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -27,17 +28,18 @@ public class SoulSwapBlock extends SoulExtractionBlock {
         int tier = testCage(world, pos, flipped, null);
         int added = 0;
         if(value instanceof PlayerContainer) {
-            ItemStack stack = ((PlayerContainer) value).itemStack;
-            value = ((PlayerContainer) value).entity;
+            ServerPlayerEntity player = ((PlayerContainer) value).player;
+            ItemStack itemStack = ((PlayerContainer) value).itemStack;
+            value = player;
             added = 100;
 
-            if(value instanceof ServerPlayerEntity) {
-                ((PlayerEntity) value).setHealth(1.0F);
-                ((PlayerEntity) value).clearStatusEffects();
-                ((PlayerEntity) value).incrementStat(Stats.USED.getOrCreateStat(ModItems.soulTotem));
-                Criteria.USED_TOTEM.trigger((ServerPlayerEntity) value, stack);
-            }
-            stack.decrement(1);
+            //Use Soul totem
+            player.incrementStat(Stats.USED.getOrCreateStat(ModItems.soulTotem));
+            Criteria.USED_TOTEM.trigger(player, itemStack);
+            itemStack.decrement(1);
+
+            player.setHealth(1.0F);
+            player.clearStatusEffects();
         }
 
         //Locate destination soul shell
@@ -57,6 +59,6 @@ public class SoulSwapBlock extends SoulExtractionBlock {
         return false;
     }
 
-    public record PlayerContainer(Entity entity, ItemStack itemStack) {
+    public record PlayerContainer(ServerPlayerEntity player, ItemStack itemStack) {
     }
 }

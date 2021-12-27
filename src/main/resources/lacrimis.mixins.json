@@ -5,8 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "CryingObsidianMixin",
-    "EndSpikeMixin",
-    "LivingEntityMixin"
+    "EndSpikeMixin"
   ],
   "client": [
     "ClientNetworkMixin"

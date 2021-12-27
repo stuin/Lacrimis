@@ -1,5 +1,6 @@
 package modfest.lacrimis.block;
 
+import modfest.lacrimis.init.ModGameRules;
 import modfest.lacrimis.init.ModStatusEffects;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -20,6 +21,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -62,21 +64,23 @@ public class TaintBlock extends Block {
     }
 
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        int layers = state.get(LAYERS);
-        //Try converting downwards
-        int strength = convert(world, pos.down(), layers, false);
-        if(strength > 0)
-            setLayers(world, pos, layers - strength);
-        else {
-            //Try converting random direction
-            Direction dir = Direction.fromHorizontal(random.nextInt(4));
-            strength = convert(world, pos.offset(dir), layers, true);
+        if(world.getGameRules().getBoolean(ModGameRules.TAINT_SPREAD)) {
+            int layers = state.get(LAYERS);
+            //Try converting downwards
+            int strength = convert(world, pos.down(), layers, false);
             if(strength > 0)
                 setLayers(world, pos, layers - strength);
-            else if(layers == 8)
-                convert(world, pos.up(), layers, true);
-            else
-                setLayers(world, pos, layers - random.nextInt(4));
+            else {
+                //Try converting random direction
+                Direction dir = Direction.fromHorizontal(random.nextInt(4));
+                strength = convert(world, pos.offset(dir), layers, true);
+                if(strength > 0)
+                    setLayers(world, pos, layers - strength);
+                else if(layers == 8)
+                    convert(world, pos.up(), layers, true);
+                else
+                    setLayers(world, pos, layers - random.nextInt(4));
+            }
         }
     }
 
@@ -88,12 +92,14 @@ public class TaintBlock extends Block {
     @Override
     public void neighborUpdate(BlockState source, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
         BlockState state = world.getBlockState(pos.down());
-        if(state.isOf(this) && state.get(LAYERS) < 8) {
-            setLayers(world, pos, state.get(LAYERS) + source.get(LAYERS) - 8);
-            setLayers(world, pos.down(), state.get(LAYERS) + source.get(LAYERS));
-        } else if(state.isAir()) {
-            world.setBlockState(pos, Blocks.AIR.getDefaultState());
-            setLayers(world, pos.down(), source.get(LAYERS));
+        if(world.getGameRules().getBoolean(ModGameRules.TAINT_SPREAD)) {
+            if(state.isOf(this) && state.get(LAYERS) < 8) {
+                setLayers(world, pos, state.get(LAYERS) + source.get(LAYERS) - 8);
+                setLayers(world, pos.down(), state.get(LAYERS) + source.get(LAYERS));
+            } else if(state.isAir()) {
+                world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                setLayers(world, pos.down(), source.get(LAYERS));
+            }
         }
     }
 

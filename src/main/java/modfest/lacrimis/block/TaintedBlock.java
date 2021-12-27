@@ -1,5 +1,6 @@
 package modfest.lacrimis.block;
 
+import modfest.lacrimis.init.ModGameRules;
 import modfest.lacrimis.init.ModStatusEffects;
 import modfest.lacrimis.util.TaintPacket;
 import net.minecraft.block.Block;
@@ -21,7 +22,7 @@ public class TaintedBlock extends Block {
     }
 
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if(random.nextInt(2) == 0) {
+        if(random.nextInt(2) == 0 && world.getGameRules().getBoolean(ModGameRules.TAINT_SPREAD)) {
             Direction dir = Direction.random(random);
             int i = (int)(state.getHardness(world, pos) + 1) * (random.nextInt(3) + 1);
             if(TaintPacket.convert(world, pos.offset(dir), i, false) == 0 && random.nextInt(4) == 0)
