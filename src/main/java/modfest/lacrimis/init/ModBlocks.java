@@ -5,14 +5,13 @@ import modfest.lacrimis.block.*;
 import modfest.lacrimis.block.rune.*;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractBlock.Settings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.tag.Tag;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -59,13 +58,13 @@ public class ModBlocks {
     public static SpawnerBreakerBlock spawnerRune;
 
     //Block tags
-    public static Tag<Block> cage_materials;
-    public static Tag<Block> non_transportable;
-    public static Tag<Block> resistant;
-    public static Tag<Block> tainted;
-    public static Tag<Block> tier1;
-    public static Tag<Block> tier2;
-    public static Tag<Block> tier3;
+    public static TagKey<Block> cage_materials;
+    public static TagKey<Block> non_transportable;
+    public static TagKey<Block> resistant;
+    public static TagKey<Block> tainted;
+    public static TagKey<Block> tier1;
+    public static TagKey<Block> tier2;
+    public static TagKey<Block> tier3;
 
     public static void register() {
         crucible = register("crucible", new CrucibleBlock(Settings.copy(Blocks.CAULDRON).strength(2.0F, 1200.0F).nonOpaque()));
@@ -101,13 +100,13 @@ public class ModBlocks {
         spawnerRune = register("rune/spawner", new SpawnerBreakerBlock());
 
         //Block tags
-        cage_materials = TagRegistry.block(new Identifier(Lacrimis.MODID, "cage_materials"));
-        non_transportable = TagRegistry.block(new Identifier(Lacrimis.MODID, "non_transportable"));
-        resistant = TagRegistry.block(new Identifier(Lacrimis.MODID, "resistant"));
-        tainted = TagRegistry.block(new Identifier(Lacrimis.MODID, "tainted"));
-        tier1 = TagRegistry.block(new Identifier(Lacrimis.MODID, "tier1"));
-        tier2 = TagRegistry.block(new Identifier(Lacrimis.MODID, "tier2"));
-        tier3 = TagRegistry.block(new Identifier(Lacrimis.MODID, "tier3"));
+        cage_materials = TagKey.of(Registry.BLOCK_KEY, new Identifier(Lacrimis.MODID, "cage_materials"));
+        non_transportable = TagKey.of(Registry.BLOCK_KEY, new Identifier(Lacrimis.MODID, "non_transportable"));
+        resistant = TagKey.of(Registry.BLOCK_KEY, new Identifier(Lacrimis.MODID, "resistant"));
+        tainted = TagKey.of(Registry.BLOCK_KEY, new Identifier(Lacrimis.MODID, "tainted"));
+        tier1 = TagKey.of(Registry.BLOCK_KEY, new Identifier(Lacrimis.MODID, "tier1"));
+        tier2 = TagKey.of(Registry.BLOCK_KEY, new Identifier(Lacrimis.MODID, "tier2"));
+        tier3 = TagKey.of(Registry.BLOCK_KEY, new Identifier(Lacrimis.MODID, "tier3"));
 
         //Flammables
         FlammableBlockRegistry.getDefaultInstance().add(taintedDirt, 20, 5);

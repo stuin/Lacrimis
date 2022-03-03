@@ -34,8 +34,7 @@ public class BlockTeleportBlock extends CenterRuneBlock {
             BlockState sourceState = world.getBlockState(source);
             BlockState destState = world.getBlockState(dest);
 
-            if(ModBlocks.non_transportable.contains(sourceState.getBlock()) ||
-                ModBlocks.non_transportable.contains(destState.getBlock()))
+            if(sourceState.isIn(ModBlocks.non_transportable) || destState.isIn(ModBlocks.non_transportable))
                 return false;
 
             //Set destination block

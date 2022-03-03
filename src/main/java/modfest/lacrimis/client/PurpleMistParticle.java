@@ -14,9 +14,9 @@ public class PurpleMistParticle extends SpriteBillboardParticle {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
         float f = this.random.nextFloat();
 
-        this.colorRed = 0.168F + (0.375F - 0.168F) * f;
-        this.colorGreen = 0.004F + (0.02F - 0.004F) * f;
-        this.colorBlue = 0.47F + (0.667F - 0.47F) * f;
+        this.red = 0.168F + (0.375F - 0.168F) * f;
+        this.green = 0.004F + (0.02F - 0.004F) * f;
+        this.blue = 0.47F + (0.667F - 0.47F) * f;
 
         this.setBoundingBoxSpacing(0.02F, 0.02F);
         this.scale *= this.random.nextFloat() * 0.6F + 0.5F;

@@ -55,6 +55,10 @@
   "effect.lacrimis.wavering_soul": "Wavering Soul",
   "effect.lacrimis.tear_poison": "Tear Poison",
 
+  "gamerule.lacrimisSoulTotemAnySlot": "Use Soul Totem from any slot",
+  "gamerule.lacrimisVanillaTotemAnySlot": "Use Totem of Undying from any slot",
+  "gamerule.lacrimisTaintSpread": "Update Lacrimis Taint",
+
   "enchantment.lacrimis.warded": "Warded",
   "enchantment.lacrimis.warded.desc": "Nullifies the effects of Taint Poison",
 

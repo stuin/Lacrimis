@@ -12,9 +12,11 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.tag.Tag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
@@ -35,7 +37,7 @@ public class BasicRuneBlock extends Block implements FastenerBlock {
         if(tier == 1) {
             for(int y = 0; y < 2; y++) {
                 pos = pos.offset(flipped);
-                if(!ModBlocks.cage_materials.contains(world.getBlockState(pos).getBlock()))
+                if(!world.getBlockState(pos).isIn(ModBlocks.cage_materials))
                     return -1;
             }
         }

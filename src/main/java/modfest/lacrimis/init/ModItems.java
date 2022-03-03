@@ -6,12 +6,11 @@ import modfest.lacrimis.item.armor.CustomArmorMaterials;
 import modfest.lacrimis.item.armor.SoakedArmor;
 import modfest.lacrimis.item.tools.CustomToolMaterials;
 import modfest.lacrimis.item.tools.SoakedSwordItem;
-import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.tag.Tag;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -77,7 +76,7 @@ public class ModItems {
     public static BlockItem spawnerRune;
 
     //Item tags
-    public static Tag<Item> sludgeMaterials;
+    public static TagKey<Item> sludgeMaterials;
 
     public static void register() {
         crucible = register("crucible", ModBlocks.crucible);
@@ -130,7 +129,7 @@ public class ModItems {
         spawnerRune = registerRune("rune/spawner", ModBlocks.spawnerRune);
 
         //Item tags
-        sludgeMaterials = TagRegistry.item(new Identifier(Lacrimis.MODID, "sludge_materials"));
+        sludgeMaterials = TagKey.of(Registry.ITEM_KEY, new Identifier(Lacrimis.MODID, "sludge_materials"));
     }
 
     private static <T extends Item> T register(String name, T item) {
