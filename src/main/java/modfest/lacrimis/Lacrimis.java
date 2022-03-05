@@ -1,6 +1,10 @@
 package modfest.lacrimis;
 
+import modfest.lacrimis.block.ModBlocks;
+import modfest.lacrimis.crafting.ModCrafting;
+import modfest.lacrimis.entity.ModEntities;
 import modfest.lacrimis.init.*;
+import modfest.lacrimis.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
@@ -19,7 +23,7 @@ public class Lacrimis implements ModInitializer {
             .build();
     public static final ItemGroup RUNE_ITEM_GROUP = FabricItemGroupBuilder.create(
             new Identifier(MODID, "runes"))
-            .icon(() -> new ItemStack(ModBlocks.runeStone))
+            .icon(() -> new ItemStack(ModBlocks.rune1))
             .build();
 
     @Override

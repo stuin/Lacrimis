@@ -1,9 +1,8 @@
-package modfest.lacrimis.block;
+package modfest.lacrimis.block.entity;
 
 import com.stuintech.socketwrench.fasteners.FastenerBlock;
-import com.stuintech.socketwrench.socket.CancelFasteningException;
-import modfest.lacrimis.block.entity.SoulTankEntity;
-import modfest.lacrimis.init.ModItems;
+import modfest.lacrimis.block.DuctConnectBlock;
+import modfest.lacrimis.item.ModItems;
 import modfest.lacrimis.item.BottleOfTearsItem;
 import modfest.lacrimis.util.SoulTank;
 import modfest.lacrimis.util.TaintPacket;

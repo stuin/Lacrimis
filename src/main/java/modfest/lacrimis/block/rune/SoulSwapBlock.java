@@ -1,12 +1,10 @@
 package modfest.lacrimis.block.rune;
 
 import modfest.lacrimis.entity.SoulShellEntity;
-import modfest.lacrimis.init.ModItems;
+import modfest.lacrimis.item.ModItems;
 import modfest.lacrimis.util.DuctUtil;
 import modfest.lacrimis.util.TaintPacket;
 import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;

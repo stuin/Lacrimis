@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "lacrimis:infusion_shaped",
   "pattern": [
     "##",
     "##"
@@ -10,6 +10,7 @@
     }
   },
   "result": {
-    "item": "lacrimis:rune/stone"
-  }
+    "item": "lacrimis:runic_stone"
+  },
+  "tears": 5
 }

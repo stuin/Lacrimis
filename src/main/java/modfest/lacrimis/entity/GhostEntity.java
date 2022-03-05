@@ -1,6 +1,5 @@
 package modfest.lacrimis.entity;
 
-import modfest.lacrimis.init.ModEntities;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;

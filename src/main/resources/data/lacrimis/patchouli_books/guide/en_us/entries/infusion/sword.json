@@ -1,0 +1,17 @@
+{
+  "name": "Tear Soaked Sword",
+  "icon": "lacrimis:tear_soaked_sword",
+  "category": "lacrimis:infusion",
+  "advancement": "lacrimis:base/infusion_table",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "text",
+      "text": "The tears infusing this blade are not very damaging to the blade itself, but they still cause just as many problems as they solve. When using this blade, anything it strikes will be poisoned by it's taint, but so will the user. Anyone making use of this weapon should be sure that they handle taint better than their opponent does."
+    },
+    {
+      "type": "lacrimis:infusion",
+      "recipe": "lacrimis:infusion/tear_soaked_sword"
+    }
+  ]
+}

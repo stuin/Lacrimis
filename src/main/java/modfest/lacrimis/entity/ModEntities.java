@@ -1,10 +1,8 @@
-package modfest.lacrimis.init;
+package modfest.lacrimis.entity;
 
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.*;
-import modfest.lacrimis.entity.GhostEntity;
-import modfest.lacrimis.entity.SoulShellEntity;
-import modfest.lacrimis.entity.TaintedPearlEntity;
+import modfest.lacrimis.block.ModBlocks;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;

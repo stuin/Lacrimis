@@ -2,7 +2,7 @@ package modfest.lacrimis.util;
 
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.TaintBlock;
-import modfest.lacrimis.init.ModBlocks;
+import modfest.lacrimis.block.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;

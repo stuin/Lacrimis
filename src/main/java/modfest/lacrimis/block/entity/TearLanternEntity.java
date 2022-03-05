@@ -1,7 +1,7 @@
 package modfest.lacrimis.block.entity;
 
 import modfest.lacrimis.block.DrainedCryingObsidianBlock;
-import modfest.lacrimis.init.ModEntities;
+import modfest.lacrimis.entity.ModEntities;
 import modfest.lacrimis.init.ModParticles;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;

@@ -1,8 +1,8 @@
 package modfest.lacrimis.block.entity;
 
 import modfest.lacrimis.crafting.CombinerScreenHandler;
-import modfest.lacrimis.init.ModEntities;
-import modfest.lacrimis.init.ModItems;
+import modfest.lacrimis.entity.ModEntities;
+import modfest.lacrimis.item.ModItems;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.block.BlockState;

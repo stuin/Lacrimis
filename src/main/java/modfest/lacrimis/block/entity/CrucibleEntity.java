@@ -1,9 +1,13 @@
 package modfest.lacrimis.block.entity;
 
 import modfest.lacrimis.block.DrainedCryingObsidianBlock;
+import modfest.lacrimis.block.ModBlocks;
 import modfest.lacrimis.crafting.CrucibleRecipe;
+import modfest.lacrimis.crafting.ModCrafting;
+import modfest.lacrimis.entity.ModEntities;
 import modfest.lacrimis.init.*;
 import modfest.lacrimis.item.BottleOfTearsItem;
+import modfest.lacrimis.item.ModItems;
 import modfest.lacrimis.util.DuctUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

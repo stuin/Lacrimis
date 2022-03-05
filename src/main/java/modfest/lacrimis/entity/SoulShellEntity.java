@@ -1,8 +1,7 @@
 package modfest.lacrimis.entity;
 
 import com.google.common.collect.ImmutableList;
-import modfest.lacrimis.init.ModEntities;
-import modfest.lacrimis.init.ModItems;
+import modfest.lacrimis.item.ModItems;
 import net.minecraft.SharedConstants;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;

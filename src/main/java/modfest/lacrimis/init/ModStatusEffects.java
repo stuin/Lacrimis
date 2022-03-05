@@ -1,6 +1,7 @@
 package modfest.lacrimis.init;
 
 import modfest.lacrimis.Lacrimis;
+import modfest.lacrimis.item.ModItems;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;

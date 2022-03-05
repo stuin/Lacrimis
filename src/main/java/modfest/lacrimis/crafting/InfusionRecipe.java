@@ -1,7 +1,6 @@
 package modfest.lacrimis.crafting;
 
-import modfest.lacrimis.init.ModCrafting;
-import modfest.lacrimis.init.ModItems;
+import modfest.lacrimis.item.ModItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.item.ItemStack;

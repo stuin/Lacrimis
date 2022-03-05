@@ -1,7 +1,6 @@
-package modfest.lacrimis.init;
+package modfest.lacrimis.crafting;
 
 import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.crafting.*;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;

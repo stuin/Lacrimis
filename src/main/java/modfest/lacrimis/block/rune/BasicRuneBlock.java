@@ -1,7 +1,7 @@
 package modfest.lacrimis.block.rune;
 
 import com.stuintech.socketwrench.fasteners.FastenerBlock;
-import modfest.lacrimis.init.ModBlocks;
+import modfest.lacrimis.block.ModBlocks;
 import modfest.lacrimis.util.NeighborList;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -12,11 +12,9 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.tag.Tag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 

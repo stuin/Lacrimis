@@ -1,7 +1,7 @@
-package modfest.lacrimis.init;
+package modfest.lacrimis.item;
 
 import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.item.*;
+import modfest.lacrimis.block.ModBlocks;
 import modfest.lacrimis.item.armor.CustomArmorMaterials;
 import modfest.lacrimis.item.armor.SoakedArmor;
 import modfest.lacrimis.item.tools.CustomToolMaterials;
@@ -26,17 +26,26 @@ public class ModItems {
     public static BlockItem combiner;
     public static BlockItem taintOutput;
     public static BlockItem networkLink;
+    public static BlockItem drainedCryingObsidian;
+    public static BlockItem creativeTearsBlock;
+
+    public static BlockItem runicStone;
+    public static BlockItem runicBrick;
+    public static BlockItem runicGlass;
+    public static BlockItem runicLight;
+    public static BlockItem wardedStone;
+    public static BlockItem wardedBrick;
+    public static BlockItem wardedGlass;
+    public static BlockItem wardedLight;
+
+    public static BlockItem taint;
+    public static BlockItem taintedStone;
+    public static BlockItem taintedDirt;
     public static BlockItem duct;
     public static BlockItem gatedDuct;
     public static BlockItem oneWayDuct;
     public static BlockItem tearCollector;
     public static BlockItem tearLantern;
-    public static BlockItem drainedCryingObsidian;
-    public static BlockItem creativeTearsBlock;
-    public static BlockItem wardedStone;
-    public static BlockItem taint;
-    public static BlockItem taintedStone;
-    public static BlockItem taintedDirt;
 
     //Main items
     public static DiviningRodItem diviningRod;
@@ -58,7 +67,6 @@ public class ModItems {
     public static Item tearSoakedSword;
 
     //Rune cage blocks
-    public static BlockItem runeStone;
     public static BlockItem rune1;
     public static BlockItem rune2;
     public static BlockItem rune3;
@@ -81,13 +89,21 @@ public class ModItems {
     public static void register() {
         crucible = register("crucible", ModBlocks.crucible);
         infusionTable = register("infusion_table", ModBlocks.infusionTable);
-        runeStone = register("rune/stone", ModBlocks.runeStone);
         taintOutput = register("taint_output", ModBlocks.taintOutput);
         combiner = register("combiner", ModBlocks.combiner);
         networkLink = register("network_link", ModBlocks.networkLink);
-        creativeTearsBlock = register("creative_tears_block", ModBlocks.creativeTearsBlock);
-        wardedStone = register("warded", ModBlocks.wardedStone);
         drainedCryingObsidian = register("drained_crying_obsidian", ModBlocks.drainedCryingObsidian);
+        creativeTearsBlock = register("creative_tears_block", ModBlocks.creativeTearsBlock);
+
+        runicStone = register("runic_stone", ModBlocks.runicStone);
+        runicBrick = register("runic_brick", ModBlocks.runicBrick);
+        runicGlass = register("runic_glass", ModBlocks.runicGlass);
+        runicLight = register("runic_light", ModBlocks.runicLight);
+        wardedStone = register("warded_stone", ModBlocks.wardedStone);
+        wardedBrick = register("warded_brick", ModBlocks.wardedBrick);
+        wardedGlass = register("warded_glass", ModBlocks.wardedGlass);
+        wardedLight = register("warded_light", ModBlocks.wardedLight);
+
         taintedStone = register("tainted_stone", ModBlocks.taintedStone);
         taintedDirt = register("tainted_dirt", ModBlocks.taintedDirt);
         taint = register("taint", ModBlocks.taint);
@@ -95,8 +111,8 @@ public class ModItems {
         gatedDuct = register("gated_duct", ModBlocks.gatedDuct);
         oneWayDuct = register("one_way_duct", ModBlocks.oneWayDuct);
         tearCollector = register("tear_collector", ModBlocks.tearCollector);
-
         tearLantern = register("tear_lantern", ModBlocks.tearLantern);
+
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
         diviningRod = register("divining_rod", new DiviningRodItem(TOOL_SETTINGS));
         goldDiviningRod = register("gold_divining_rod", new DiviningRodItem(TOOL_SETTINGS));

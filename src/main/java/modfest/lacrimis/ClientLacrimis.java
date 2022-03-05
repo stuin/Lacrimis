@@ -3,7 +3,7 @@ package modfest.lacrimis;
 import modfest.lacrimis.client.init.ClientModCrafting;
 import modfest.lacrimis.client.init.ClientModNetworking;
 import modfest.lacrimis.client.init.ClientModRenderers;
-import modfest.lacrimis.init.ModBlocks;
+import modfest.lacrimis.block.ModBlocks;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

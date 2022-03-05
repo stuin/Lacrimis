@@ -3,7 +3,7 @@ package modfest.lacrimis.compat.patchiouli;
 import com.mojang.blaze3d.systems.RenderSystem;
 import modfest.lacrimis.crafting.InfusionRecipe;
 import modfest.lacrimis.crafting.ShapedInfusionRecipe;
-import modfest.lacrimis.init.ModCrafting;
+import modfest.lacrimis.crafting.ModCrafting;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;

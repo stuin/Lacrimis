@@ -37,7 +37,7 @@ import me.shedaniel.rei.api.common.entry.EntryStack;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import modfest.lacrimis.compat.rei.InfusionDisplay;
 import modfest.lacrimis.compat.rei.LacrimisPlugin;
-import modfest.lacrimis.init.ModBlocks;
+import modfest.lacrimis.block.ModBlocks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;

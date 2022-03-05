@@ -1,6 +1,6 @@
 package modfest.lacrimis.item;
 
-import modfest.lacrimis.init.ModBlocks;
+import modfest.lacrimis.block.ModBlocks;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;

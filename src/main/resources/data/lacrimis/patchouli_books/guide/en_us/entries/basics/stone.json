@@ -1,6 +1,6 @@
 {
-  "name": "Rune Stone",
-  "icon": "lacrimis:rune/stone",
+  "name": "Runic Stone",
+  "icon": "lacrimis:runic_stone",
   "category": "lacrimis:basics",
   "advancement": "lacrimis:base/tainted_sludge",
   "sortnum": 4,
@@ -11,8 +11,8 @@
     },
     {
       "type": "crafting",
-      "recipe": "lacrimis:crafting/rune_stone",
-      "text": "What can I make with $(l:infusion/infusion_basics)rune stone and iron$(/l)?"
+      "recipe": "lacrimis:crafting/runic_stone",
+      "text": "What can I make with $(l:infusion/infusion_basics)runic stone and iron$(/l)?"
     }
   ]
 }

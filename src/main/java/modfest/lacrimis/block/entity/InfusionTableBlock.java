@@ -1,8 +1,7 @@
-package modfest.lacrimis.block;
+package modfest.lacrimis.block.entity;
 
 import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.block.entity.InfusionTableEntity;
-import modfest.lacrimis.init.ModEntities;
+import modfest.lacrimis.entity.ModEntities;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;

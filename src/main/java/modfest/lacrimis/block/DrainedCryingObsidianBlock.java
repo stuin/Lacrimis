@@ -2,7 +2,6 @@ package modfest.lacrimis.block;
 
 import com.stuintech.socketwrench.fasteners.FastenerBlock;
 import com.stuintech.socketwrench.socket.CancelFasteningException;
-import modfest.lacrimis.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -15,7 +14,6 @@ import net.minecraft.state.StateManager.Builder;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;

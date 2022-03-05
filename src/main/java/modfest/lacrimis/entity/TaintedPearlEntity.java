@@ -1,7 +1,6 @@
 package modfest.lacrimis.entity;
 
-import modfest.lacrimis.init.ModEntities;
-import modfest.lacrimis.init.ModItems;
+import modfest.lacrimis.item.ModItems;
 import modfest.lacrimis.init.ModStatusEffects;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;

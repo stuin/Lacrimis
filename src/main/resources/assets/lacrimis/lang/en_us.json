@@ -2,26 +2,35 @@
   "block.lacrimis.infusion_table": "Infusion Table",
   "block.lacrimis.crucible": "Crucible",
   "block.lacrimis.combiner": "Soul Combiner",
-  "block.lacrimis.duct": "Tear Duct",
-  "block.lacrimis.gated_duct": "Gated Tear Duct",
-  "block.lacrimis.one_way_duct": "One Way Tear Duct",
   "block.lacrimis.taint_output": "Taint Output",
-  "block.lacrimis.tear_collector": "Tear Collector",
-  "block.lacrimis.tear_lantern": "Tear Lantern",
   "block.lacrimis.network_link": "Network Link",
   "block.lacrimis.drained_crying_obsidian": "Drained Crying Obsidian",
   "block.lacrimis.creative_tears_block": "Block of Eternal Sadness",
-  "block.lacrimis.warded": "Warded Stone",
+
+  "block.lacrimis.runic_stone": "Runic Stone",
+  "block.lacrimis.runic_brick": "Runic Bricks",
+  "block.lacrimis.runic_glass": "Runic Glass",
+  "block.lacrimis.runic_light": "Runic Light",
+  "block.lacrimis.warded_stone": "Warded Stone",
+  "block.lacrimis.warded_brick": "Warded Bricks",
+  "block.lacrimis.warded_glass": "Warded Glass",
+  "block.lacrimis.warded_light": "Warded Light",
+
   "block.lacrimis.tainted_stone": "Tainted Stone",
   "block.lacrimis.tainted_dirt": "Tainted Dirt",
   "block.lacrimis.taint": "Taint",
+  "block.lacrimis.duct": "Tear Duct",
+  "block.lacrimis.gated_duct": "Gated Tear Duct",
+  "block.lacrimis.one_way_duct": "One Way Tear Duct",
+  "block.lacrimis.tear_collector": "Tear Collector",
+  "block.lacrimis.tear_lantern": "Tear Lantern",
   
   "item.lacrimis.bottle_of_tears": "Bottle of Tears",
   "item.lacrimis.divining_rod": "Divining Rod",
   "item.lacrimis.gold_divining_rod": "Divining Rod",
   "item.lacrimis.tainted_pearl": "Tainted Pearl",
   "item.lacrimis.soul_shell": "Soul Shell",
-  "item.lacrimis.soul_totem": "Totem of the Soul",
+  "item.lacrimis.soul_totem": "Totem of Soul",
   "item.lacrimis.tear_ingot": "Tear Soaked Iron",
   "item.lacrimis.tainted_sludge": "Tainted Sludge",
   "item.lacrimis.solidified_tear": "Solidified Tear",
@@ -33,7 +42,6 @@
   "item.lacrimis.tear_soaked_boots": "Tear Soaked Boots",
   "item.lacrimis.tear_soaked_sword": "Tear Soaked Blade",
 
-  "block.lacrimis.rune.stone": "Rune Stone",
   "block.lacrimis.rune.tier1": "Tier I Rune",
   "block.lacrimis.rune.tier2": "Tier II Rune",
   "block.lacrimis.rune.tier3": "Tier III Rune",
@@ -55,7 +63,7 @@
   "effect.lacrimis.wavering_soul": "Wavering Soul",
   "effect.lacrimis.tear_poison": "Tear Poison",
 
-  "gamerule.lacrimisSoulTotemAnySlot": "Use Soul Totem from any slot",
+  "gamerule.lacrimisSoulTotemAnySlot": "Use Totem of Soul from any slot",
   "gamerule.lacrimisVanillaTotemAnySlot": "Use Totem of Undying from any slot",
   "gamerule.lacrimisTaintSpread": "Update Lacrimis Taint",
 
@@ -127,5 +135,5 @@
   "lacrimis.advancements.network_link.title": "The farthest a tear can fall",
   "lacrimis.advancements.network_link.description": "Create a Network Link",
   "lacrimis.advancements.soul_totem.title": "Out of body experience",
-  "lacrimis.advancements.soul_totem.description": "Use a Totem of the Soul to elude death"
+  "lacrimis.advancements.soul_totem.description": "Use a Totem of Soul to elude death"
 }

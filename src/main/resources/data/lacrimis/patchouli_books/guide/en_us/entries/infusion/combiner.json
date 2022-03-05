@@ -3,7 +3,7 @@
   "icon": "lacrimis:combiner",
   "category": "lacrimis:infusion",
   "advancement": "lacrimis:base/solidified_tear",
-  "sortnum": 7,
+  "sortnum": 8,
   "pages": [
     {
       "type": "text",

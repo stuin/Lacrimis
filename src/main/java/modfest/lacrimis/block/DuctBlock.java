@@ -1,7 +1,7 @@
 package modfest.lacrimis.block;
 
 import com.stuintech.socketwrench.fasteners.FastenerBlock;
-import modfest.lacrimis.init.ModItems;
+import modfest.lacrimis.item.ModItems;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;

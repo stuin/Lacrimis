@@ -3,7 +3,7 @@
   "icon": "lacrimis:taint_output",
   "category": "lacrimis:infusion",
   "advancement": "lacrimis:base/solidified_tear",
-  "sortnum": 5,
+  "sortnum": 6,
   "pages": [
     {
       "type": "text",

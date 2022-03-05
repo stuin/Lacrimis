@@ -1,15 +1,12 @@
-package modfest.lacrimis.init;
+package modfest.lacrimis.block;
 
 import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.block.*;
+import modfest.lacrimis.block.entity.*;
 import modfest.lacrimis.block.rune.*;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.Settings;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
@@ -25,22 +22,30 @@ public class ModBlocks {
     public static InfusionTableBlock infusionTable;
     public static CrucibleBlock crucible;
     public static CombinerBlock combiner;
+    public static TaintOutputBlock taintOutput;
+    public static NetworkLinkBlock networkLink;
+    public static DrainedCryingObsidianBlock drainedCryingObsidian;
+    public static CreativeTearsBlock creativeTearsBlock;
+
+    public static Block runicStone;
+    public static Block runicBrick;
+    public static GlassBlock runicGlass;
+    public static Block runicLight;
+    public static WardedBlock wardedStone;
+    public static WardedBlock wardedBrick;
+    public static WardedGlassBlock wardedGlass;
+    public static WardedBlock wardedLight;
+
+    public static TaintedBlock taintedStone;
+    public static TaintedBlock taintedDirt;
+    public static TaintBlock taint;
     public static DuctBlock duct;
     public static GatedDuctBlock gatedDuct;
     public static OneWayDuctBlock oneWayDuct;
     public static TearCollectorBlock tearCollector;
     public static TearLanternBlock tearLantern;
-    public static TaintOutputBlock taintOutput;
-    public static NetworkLinkBlock networkLink;
-    public static DrainedCryingObsidianBlock drainedCryingObsidian;
-    public static CreativeTearsBlock creativeTearsBlock;
-    public static WardedBlock wardedStone;
-    public static TaintedBlock taintedStone;
-    public static TaintedBlock taintedDirt;
-    public static TaintBlock taint;
 
     //Rune cage blocks
-    public static Block runeStone;
     public static Block flipRune;
     public static BasicRuneBlock rune1;
     public static BasicRuneBlock rune2;
@@ -69,20 +74,28 @@ public class ModBlocks {
     public static void register() {
         crucible = register("crucible", new CrucibleBlock(Settings.copy(Blocks.CAULDRON).strength(2.0F, 1200.0F).nonOpaque()));
         infusionTable = register("infusion_table", new InfusionTableBlock(Settings.copy(Blocks.STONECUTTER).nonOpaque()));
-        runeStone = register("rune/stone", new Block(runeSettings));
         taintOutput = register("taint_output", new TaintOutputBlock(Settings.copy(Blocks.DISPENSER)));
         combiner = register("combiner", new CombinerBlock(Settings.copy(Blocks.DISPENSER)));
         networkLink = register("network_link", new NetworkLinkBlock(Settings.copy(Blocks.BEACON)));
         drainedCryingObsidian = register("drained_crying_obsidian", new DrainedCryingObsidianBlock(Settings.copy(Blocks.CRYING_OBSIDIAN)));
         creativeTearsBlock = register("creative_tears_block", new CreativeTearsBlock(wardedSettings));
-        wardedStone = register("warded", new WardedBlock(wardedSettings));
+
+        runicStone = register("runic_stone", new Block(runeSettings));
+        runicBrick = register("runic_brick", new Block(runeSettings));
+        runicGlass = register("runic_glass", new GlassBlock(FabricBlockSettings.copy(runicStone).nonOpaque()));
+        runicLight = register("runic_light", new Block(FabricBlockSettings.copy(runicStone).luminance((state) -> 15)));
+        wardedStone = register("warded_stone", new WardedBlock(wardedSettings));
+        wardedBrick = register("warded_brick", new WardedBlock(wardedSettings));
+        wardedGlass = register("warded_glass", new WardedGlassBlock(FabricBlockSettings.copy(wardedStone).nonOpaque()));
+        wardedLight = register("warded_light", new WardedBlock(FabricBlockSettings.copy(wardedStone).luminance((state) -> 15)));
+
+        taint = register("taint", new TaintBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES)));
+        taintedStone = register("tainted_stone", new TaintedBlock(FabricBlockSettings.copy(Blocks.STONE)));
+        taintedDirt = register("tainted_dirt", new TaintedBlock(FabricBlockSettings.copy(Blocks.DIRT)));
         duct = register("duct", new DuctBlock(ductSettings));
         gatedDuct = register("gated_duct", new GatedDuctBlock(ductSettings));
         oneWayDuct = register("one_way_duct", new OneWayDuctBlock(ductSettings));
         tearCollector = register("tear_collector", new TearCollectorBlock(Settings.copy(Blocks.DISPENSER)));
-        taint = register("taint", new TaintBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES)));
-        taintedStone = register("tainted_stone", new TaintedBlock(FabricBlockSettings.copy(Blocks.STONE)));
-        taintedDirt = register("tainted_dirt", new TaintedBlock(FabricBlockSettings.copy(Blocks.DIRT)));
         tearLantern = register("tear_lantern", new TearLanternBlock(AbstractBlock.Settings.of(Material.METAL).requiresTool().strength(3.5F).sounds(BlockSoundGroup.LANTERN).luminance((state) -> 5).nonOpaque()));
 
         rune1 = register("rune/tier1", new BasicRuneBlock(1));

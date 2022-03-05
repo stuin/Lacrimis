@@ -1,6 +1,6 @@
 package modfest.lacrimis.block.rune;
 
-import modfest.lacrimis.init.ModBlocks;
+import modfest.lacrimis.block.ModBlocks;
 import modfest.lacrimis.util.DuctUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;

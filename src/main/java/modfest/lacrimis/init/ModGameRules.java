@@ -1,7 +1,8 @@
 package modfest.lacrimis.init;
 
-import modfest.lacrimis.block.NetworkLinkBlock;
+import modfest.lacrimis.block.entity.NetworkLinkBlock;
 import modfest.lacrimis.block.rune.SoulSwapBlock;
+import modfest.lacrimis.item.ModItems;
 import modfest.lacrimis.util.DuctUtil;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;

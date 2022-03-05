@@ -3,7 +3,7 @@ package modfest.lacrimis.block.rune;
 import com.stuintech.socketwrench.fasteners.FastenerBlock;
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.DuctConnectBlock;
-import modfest.lacrimis.init.ModBlocks;
+import modfest.lacrimis.block.ModBlocks;
 import modfest.lacrimis.util.DuctUtil;
 import modfest.lacrimis.util.NeighborList;
 import net.minecraft.block.Block;

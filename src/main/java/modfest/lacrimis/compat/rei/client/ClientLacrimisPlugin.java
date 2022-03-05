@@ -13,7 +13,7 @@ import modfest.lacrimis.compat.rei.LacrimisPlugin;
 import modfest.lacrimis.crafting.CrucibleRecipe;
 import modfest.lacrimis.crafting.ShapedInfusionRecipe;
 import modfest.lacrimis.crafting.ShapelessInfusionRecipe;
-import modfest.lacrimis.init.ModItems;
+import modfest.lacrimis.item.ModItems;
 
 public class ClientLacrimisPlugin implements REIClientPlugin {
     public ClientLacrimisPlugin() {

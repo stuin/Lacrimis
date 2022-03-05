@@ -1,7 +1,6 @@
 package modfest.lacrimis.crafting;
 
 import modfest.lacrimis.block.entity.InfusionTableEntity;
-import modfest.lacrimis.init.ModCrafting;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerEntity;

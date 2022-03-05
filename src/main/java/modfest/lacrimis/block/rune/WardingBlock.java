@@ -1,7 +1,8 @@
 package modfest.lacrimis.block.rune;
 
-import modfest.lacrimis.init.ModBlocks;
+import modfest.lacrimis.block.ModBlocks;
 import modfest.lacrimis.init.ModEnchantments;
+import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
@@ -10,19 +11,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.HashMap;
+
 public class WardingBlock extends CenterRuneBlock {
+    public static final HashMap<Block, Block> wardedMap = new HashMap<>();
+
     public WardingBlock() {
         super(800, 3);
     }
 
     @Override
     protected boolean onActivate(World world, BlockPos pos, BlockPos duct, Entity entity, PlayerEntity player) {
-        if(world.getBlockState(pos).getBlock() == ModBlocks.runeStone) {
-            world.setBlockState(pos, ModBlocks.wardedStone.getDefaultState());
-            return true;
-        }
-        if(world.getBlockState(pos).getBlock() == ModBlocks.wardedStone) {
-            world.setBlockState(pos, ModBlocks.runeStone.getDefaultState());
+        Block block = world.getBlockState(pos).getBlock();
+        if(wardedMap.containsKey(block)) {
+            world.setBlockState(pos, wardedMap.get(block).getDefaultState());
             return true;
         }
         if(entity instanceof PlayerEntity) {
@@ -42,5 +44,19 @@ public class WardingBlock extends CenterRuneBlock {
             }
         }
         return false;
+    }
+
+    static {
+        //Runic to warded
+        wardedMap.put(ModBlocks.runicStone, ModBlocks.wardedStone);
+        wardedMap.put(ModBlocks.runicBrick, ModBlocks.wardedBrick);
+        wardedMap.put(ModBlocks.runicGlass, ModBlocks.wardedGlass);
+        wardedMap.put(ModBlocks.runicLight, ModBlocks.wardedLight);
+
+        //Warded to Runic
+        wardedMap.put(ModBlocks.wardedStone, ModBlocks.runicStone);
+        wardedMap.put(ModBlocks.wardedBrick, ModBlocks.runicBrick);
+        wardedMap.put(ModBlocks.wardedGlass, ModBlocks.runicGlass);
+        wardedMap.put(ModBlocks.wardedLight, ModBlocks.runicLight);
     }
 }

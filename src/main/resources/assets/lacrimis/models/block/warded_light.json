@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "lacrimis:block/warded"
+    "all": "lacrimis:block/warded_light"
   }
 }

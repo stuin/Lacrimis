@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "lacrimis:rune/stone"
+          "name": "lacrimis:runic_glass"
         }
       ],
       "conditions": [

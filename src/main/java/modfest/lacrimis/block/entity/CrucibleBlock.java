@@ -1,9 +1,8 @@
-package modfest.lacrimis.block;
+package modfest.lacrimis.block.entity;
 
 import modfest.lacrimis.Lacrimis;
-import modfest.lacrimis.block.entity.CrucibleEntity;
-import modfest.lacrimis.init.ModEntities;
-import modfest.lacrimis.init.ModItems;
+import modfest.lacrimis.entity.ModEntities;
+import modfest.lacrimis.item.ModItems;
 import modfest.lacrimis.init.ModStatusEffects;
 import modfest.lacrimis.util.SoulTank;
 import net.minecraft.block.*;

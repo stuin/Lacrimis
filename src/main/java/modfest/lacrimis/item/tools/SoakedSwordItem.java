@@ -15,7 +15,7 @@ public class SoakedSwordItem extends SwordItem {
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         target.addStatusEffect(new StatusEffectInstance(ModStatusEffects.TEAR_POISON, 100, 3));
-        attacker.addStatusEffect(new StatusEffectInstance(ModStatusEffects.TEAR_POISON, 200, 3));
+        attacker.addStatusEffect(new StatusEffectInstance(ModStatusEffects.TEAR_POISON, 100, 3));
 
         return super.postHit(stack, target, attacker);
     }

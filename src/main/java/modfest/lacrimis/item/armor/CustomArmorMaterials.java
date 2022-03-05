@@ -1,6 +1,6 @@
 package modfest.lacrimis.item.armor;
 
-import modfest.lacrimis.init.ModItems;
+import modfest.lacrimis.item.ModItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.EquipmentSlot;

@@ -1,7 +1,6 @@
-package modfest.lacrimis.block;
+package modfest.lacrimis.block.entity;
 
-import modfest.lacrimis.block.entity.TearLanternEntity;
-import modfest.lacrimis.init.ModEntities;
+import modfest.lacrimis.entity.ModEntities;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LanternBlock;

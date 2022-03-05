@@ -1,7 +1,7 @@
 package modfest.lacrimis.item;
 
 import modfest.lacrimis.entity.SoulShellEntity;
-import modfest.lacrimis.init.ModEntities;
+import modfest.lacrimis.entity.ModEntities;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.item.Item;

@@ -1,7 +1,7 @@
-package modfest.lacrimis.block;
+package modfest.lacrimis.block.entity;
 
-import modfest.lacrimis.block.entity.CombinerEntity;
-import modfest.lacrimis.init.ModEntities;
+import modfest.lacrimis.block.DuctConnectBlock;
+import modfest.lacrimis.entity.ModEntities;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;

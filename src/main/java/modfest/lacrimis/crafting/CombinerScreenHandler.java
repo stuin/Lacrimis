@@ -2,8 +2,7 @@ package modfest.lacrimis.crafting;
 
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.CombinerEntity;
-import modfest.lacrimis.init.ModCrafting;
-import modfest.lacrimis.init.ModItems;
+import modfest.lacrimis.item.ModItems;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;

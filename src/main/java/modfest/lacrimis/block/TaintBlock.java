@@ -64,7 +64,7 @@ public class TaintBlock extends Block {
     }
 
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if(world.getGameRules().getBoolean(ModGameRules.TAINT_SPREAD)) {
+        if(random.nextInt(2) == 0 && world.getGameRules().getBoolean(ModGameRules.TAINT_SPREAD)) {
             int layers = state.get(LAYERS);
             //Try converting downwards
             int strength = convert(world, pos.down(), layers, false);

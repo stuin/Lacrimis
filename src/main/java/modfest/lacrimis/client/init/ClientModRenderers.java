@@ -6,7 +6,7 @@ import modfest.lacrimis.client.render.block.CrucibleEntityRenderer;
 import modfest.lacrimis.client.render.block.InfusionTableEntityRenderer;
 import modfest.lacrimis.client.render.block.NetworkLinkEntityRenderer;
 import modfest.lacrimis.client.render.entity.SoulShellRenderer;
-import modfest.lacrimis.init.ModEntities;
+import modfest.lacrimis.entity.ModEntities;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;

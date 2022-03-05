@@ -2,7 +2,7 @@
   "type": "lacrimis:infusion_shapeless",
   "ingredients": [
     {
-      "item": "lacrimis:rune/stone"
+      "item": "lacrimis:runic_stone"
     },
     {
       "item": "minecraft:sticky_piston"

@@ -5,7 +5,7 @@ import modfest.lacrimis.client.render.screen.CombinerScreen;
 import modfest.lacrimis.client.render.screen.InfusionScreen;
 import modfest.lacrimis.compat.patchiouli.PageCrucible;
 import modfest.lacrimis.compat.patchiouli.PageInfusion;
-import modfest.lacrimis.init.ModCrafting;
+import modfest.lacrimis.crafting.ModCrafting;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.minecraft.util.Identifier;
 import vazkii.patchouli.client.book.ClientBookRegistry;

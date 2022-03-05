@@ -3,7 +3,7 @@ package modfest.lacrimis.mixin;
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.block.entity.NetworkLinkEntity;
 import modfest.lacrimis.entity.TaintedPearlEntity;
-import modfest.lacrimis.init.ModEntities;
+import modfest.lacrimis.entity.ModEntities;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.MinecraftClient;

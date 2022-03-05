@@ -1,6 +1,6 @@
 package modfest.lacrimis.block.rune;
 
-import modfest.lacrimis.init.ModItems;
+import modfest.lacrimis.item.ModItems;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SpawnerBlock;
 import net.minecraft.entity.Entity;

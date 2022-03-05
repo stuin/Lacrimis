@@ -2,8 +2,8 @@ package modfest.lacrimis.block.entity;
 
 import modfest.lacrimis.crafting.InfusionRecipe;
 import modfest.lacrimis.crafting.InfusionScreenHandler;
-import modfest.lacrimis.init.ModCrafting;
-import modfest.lacrimis.init.ModEntities;
+import modfest.lacrimis.crafting.ModCrafting;
+import modfest.lacrimis.entity.ModEntities;
 import modfest.lacrimis.init.ModParticles;
 import modfest.lacrimis.util.DuctUtil;
 import modfest.lacrimis.util.SoulTank;
