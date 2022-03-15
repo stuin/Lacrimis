@@ -6,12 +6,9 @@ import modfest.lacrimis.item.ModItems;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.SidedInventory;
-import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
@@ -25,14 +22,17 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
 
-public class CombinerEntity extends BlockEntity implements ExtendedScreenHandlerFactory, SidedInventory {
-    public static final int SIZE = 2;
-    private final SimpleInventory inventory;
+import java.util.stream.IntStream;
+
+public class CombinerEntity extends SoulTankEntity implements ExtendedScreenHandlerFactory {
+    public static final int SIZE = 3;
+    public static final int CAPACITY = 100;
+    public static final int OUTPUT_STACK = 2;
+    public static final int[] INPUT_STACKS = {0, 1};
     public EntityType<?> type;
 
     public CombinerEntity(BlockPos pos, BlockState state) {
-        super(ModEntities.combiner, pos, state);
-        inventory = new SimpleInventory(SIZE);
+        super(ModEntities.combiner, pos, state, CAPACITY, SIZE);
         type = null;
     }
 
@@ -47,67 +47,40 @@ public class CombinerEntity extends BlockEntity implements ExtendedScreenHandler
         return new CombinerScreenHandler(syncId, inv, inventory, type, pos);
     }
 
+    public int[] getAvailableSlots(Direction side) {
+        if (side == Direction.DOWN)
+            return new int[]{OUTPUT_STACK};
+        return INPUT_STACKS;
+    }
+
+    @Override
+    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
+        if(this.isValid(slot, stack))
+            return (slot == 0 && stack.isOf(ModItems.brokenSpawner)) || (slot == 1 && stack.isOf(ModItems.taintedSludge));
+        return false;
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+        return true;
+    }
+
     @Override
     public void readNbt(NbtCompound tag) {
         super.readNbt(tag);
+
         if(!tag.getString("entity").equals("null"))
             type = Registry.ENTITY_TYPE.get(Identifier.tryParse(tag.getString("entity")));
-
-        this.inventory.clear();
-        this.inventory.readNbtList(tag.getList("Inventory", NbtType.COMPOUND));
     }
 
     @Override
     public void writeNbt(NbtCompound tag) {
         super.writeNbt(tag);
-        if(type != null) {
+
+        if(type != null)
             tag.putString("entity", Registry.ENTITY_TYPE.getId(type).toString());
-        }
-        else {
+        else
             tag.putString("entity", "null");
-        }
-
-        tag.put("Inventory", this.inventory.toNbtList());
-    }
-
-    @Override
-    public int size() {
-        return inventory.size();
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return inventory.isEmpty();
-    }
-
-    @Override
-    public ItemStack getStack(int slot) {
-        return inventory.getStack(slot);
-    }
-
-    @Override
-    public ItemStack removeStack(int slot, int amount) {
-        return inventory.removeStack(slot, amount);
-    }
-
-    @Override
-    public ItemStack removeStack(int slot) {
-        return inventory.removeStack(slot);
-    }
-
-    @Override
-    public void setStack(int slot, ItemStack stack) {
-        inventory.setStack(slot, stack);
-    }
-
-    @Override
-    public boolean canPlayerUse(PlayerEntity player) {
-        return inventory.canPlayerUse(player);
-    }
-
-    @Override
-    public void clear() {
-        inventory.clear();
     }
 
     @Override
@@ -117,22 +90,5 @@ public class CombinerEntity extends BlockEntity implements ExtendedScreenHandler
             s = Registry.ENTITY_TYPE.getId(type).toString();
         buf.writeBlockPos(pos);
         buf.writeString(s);
-    }
-
-    @Override
-    public int[] getAvailableSlots(Direction side) {
-        return new int[] { 0, 1 };
-    }
-
-    @Override
-    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
-        if(slot == 0 && stack.isOf(ModItems.brokenSpawner))
-            return true;
-        return slot == 1 && stack.isOf(ModItems.taintedSludge);
-    }
-
-    @Override
-    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
-        return false;
     }
 }

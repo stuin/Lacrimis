@@ -1,32 +1,36 @@
 package modfest.lacrimis.block.entity;
 
-import modfest.lacrimis.block.DuctConnectBlock;
+import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.entity.ModEntities;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
 import java.util.HashSet;
+import java.util.List;
 
-public class CombinerBlock extends BlockWithEntity implements DuctConnectBlock {
-    public static HashSet<EntityType<?>> blocked = new HashSet<>();
-
+public class CombinerBlock extends SoulTankBlock {
     public CombinerBlock(Settings settings) {
-        super(settings);
+        super(settings, false);
     }
 
     @Override
@@ -84,5 +88,13 @@ public class CombinerBlock extends BlockWithEntity implements DuctConnectBlock {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, BlockView world, List<Text> tooltip, TooltipContext options) {
+        super.appendTooltip(stack, world, tooltip, options);
+        if(stack.hasNbt())
+            tooltip.add(new TranslatableText(Lacrimis.MODID + ".tooltip.crucible",
+                    stack.getOrCreateNbt().getInt("TearLevel")).formatted(Formatting.GRAY));
     }
 }

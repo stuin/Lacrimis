@@ -1,10 +1,10 @@
 package modfest.lacrimis.block.entity;
 
+import modfest.lacrimis.crafting.InfusionInventory;
 import modfest.lacrimis.crafting.InfusionRecipe;
 import modfest.lacrimis.crafting.InfusionScreenHandler;
 import modfest.lacrimis.crafting.ModCrafting;
 import modfest.lacrimis.entity.ModEntities;
-import modfest.lacrimis.init.ModParticles;
 import modfest.lacrimis.util.DuctUtil;
 import modfest.lacrimis.util.SoulTank;
 import net.minecraft.block.BlockState;
@@ -18,6 +18,7 @@ import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
@@ -41,35 +42,17 @@ public class InfusionTableEntity extends SoulTankEntity implements NamedScreenHa
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, InfusionTableEntity blockEntity) {
-        blockEntity.runTick();
-    }
+        SoulTank tank = blockEntity.getTank();
+        ItemStack holding = blockEntity.holding;
+        InfusionInventory inventory = blockEntity.inventory;
+        ItemStack output = inventory.getStack(OUTPUT_STACK);
 
-    public void runTick() {
-        if(world == null)
-            return;
-        if (world.isClient && this.getTank().getTears() > 0 && random.nextInt(10) == 0) {
-            double a = random.nextDouble() * 4 * Math.PI;
-
-            double x = this.pos.getX() + 0.5 + 0.1 * Math.cos(a);
-            double z = this.pos.getZ() + 0.5 + 0.1 * Math.sin(a);
-            double y = this.pos.getY() + 0.75 + 0.05 * random.nextDouble();
-
-            double dx = 0.005 * Math.cos(a + 1.5 * Math.PI / 2);
-            double dz = 0.005 * Math.sin(a + 1.5 * Math.PI / 2);
-
-            this.world.addParticle(ModParticles.PURPLE_MIST, x, y, z, dx, 0.005, dz);
-        }
-
-        //Manage infusion crafting
-        SoulTank tank = getTank();
+        //Finish infusion crafting
         if(tank.getSpace() <= 0 && !holding.isEmpty()) {
-            //Completed
-            ItemStack output = inventory.getStack(OUTPUT_STACK);
-
             //Set output item
-            if (output.isEmpty())
+            if(output.isEmpty())
                 inventory.setStack(OUTPUT_STACK, holding.copy());
-            else if (holding.getItem() == output.getItem())
+            else if(holding.getItem() == output.getItem())
                 output.increment(holding.getCount());
 
             //Clear
@@ -81,24 +64,24 @@ public class InfusionTableEntity extends SoulTankEntity implements NamedScreenHa
 
         //Check for new recipe
         if(holding.isEmpty() && (inventory.properties.hasSignal() || !inventory.getStack(OUTPUT_STACK).isEmpty())) {
-            InfusionRecipe recipe = this.world.getRecipeManager().getFirstMatch(ModCrafting.INFUSION_RECIPE, inventory, this.world).orElse(null);
+            InfusionRecipe recipe = world.getRecipeManager().getFirstMatch(ModCrafting.INFUSION_RECIPE, inventory, world).orElse(null);
             if(recipe == null)
-                recipe = this.world.getRecipeManager().getFirstMatch(ModCrafting.CRUCIBLE_RECIPE, inventory, this.world).orElse(null);
+                recipe = world.getRecipeManager().getFirstMatch(ModCrafting.CRUCIBLE_RECIPE, inventory, world).orElse(null);
 
             CraftingRecipe vanillaRecipe = null;
             if(recipe == null)
-                vanillaRecipe = this.world.getRecipeManager().getFirstMatch(RecipeType.CRAFTING, inventory.setupCrafting(), this.world).orElse(null);
+                vanillaRecipe = world.getRecipeManager().getFirstMatch(RecipeType.CRAFTING, inventory.setupCrafting(), world).orElse(null);
 
             //Start crafting progress
-            if(recipe != null && canAcceptOutput(recipe.getOutput())) {
-                takeIngredients();
+            if(recipe != null && blockEntity.canAcceptOutput(recipe.getOutput())) {
+                blockEntity.takeIngredients(false);
                 tank.setLimit(recipe.getTears());
-                holding = recipe.getOutput().copy();
+                blockEntity.holding = recipe.getOutput().copy();
                 inventory.properties.setSignal(false);
-            } else if(vanillaRecipe != null && canAcceptOutput(vanillaRecipe.getOutput())) {
-                takeIngredients();
+            } else if(vanillaRecipe != null && blockEntity.canAcceptOutput(vanillaRecipe.getOutput())) {
+                blockEntity.takeIngredients(true);
                 tank.setLimit(5);
-                holding = vanillaRecipe.getOutput().copy();
+                blockEntity.holding = vanillaRecipe.getOutput().copy();
                 inventory.properties.setSignal(false);
             }
         }
@@ -111,9 +94,9 @@ public class InfusionTableEntity extends SoulTankEntity implements NamedScreenHa
             tank.addTears(DuctUtil.locateTears(world, pos, 5));
     }
 
-    public void takeIngredients() {
+    public void takeIngredients(boolean vanilla) {
         if(world != null) {
-            //DefaultedList<ItemStack> defaultedList = world.getRecipeManager().getRemainingStacks(ModCrafting.INFUSION_RECIPE, inventory, world);
+            DefaultedList<ItemStack> defaultedList = world.getRecipeManager().getRemainingStacks(ModCrafting.INFUSION_RECIPE, inventory, world);
 
             for(int i = 0; i < 9; ++i) {
                 ItemStack itemStack = inventory.getStack(i);

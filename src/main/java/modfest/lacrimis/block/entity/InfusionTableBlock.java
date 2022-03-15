@@ -2,6 +2,7 @@ package modfest.lacrimis.block.entity;
 
 import modfest.lacrimis.Lacrimis;
 import modfest.lacrimis.entity.ModEntities;
+import modfest.lacrimis.init.ModParticles;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -26,6 +27,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 import java.util.List;
+import java.util.Random;
 
 public class InfusionTableBlock extends SoulTankBlock {
 	protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
@@ -54,6 +56,22 @@ public class InfusionTableBlock extends SoulTankBlock {
 	@Override
 	public BlockRenderType getRenderType(BlockState state) {
 		return BlockRenderType.MODEL;
+	}
+
+	@Override
+	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+		if(world.isClient && getTank(world, pos).getTears() > 0 && random.nextInt(2) == 0) {
+			double a = random.nextDouble() * 4 * Math.PI;
+
+			double x = pos.getX() + 0.5 + 0.1 * Math.cos(a);
+			double z = pos.getZ() + 0.5 + 0.1 * Math.sin(a);
+			double y = pos.getY() + 0.75 + 0.05 * random.nextDouble();
+
+			double dx = 0.005 * Math.cos(a + 1.5 * Math.PI / 2);
+			double dz = 0.005 * Math.sin(a + 1.5 * Math.PI / 2);
+
+			world.addParticle(ModParticles.PURPLE_MIST, x, y, z, dx, 0.005, dz);
+		}
 	}
 
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {

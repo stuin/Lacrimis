@@ -3,12 +3,14 @@ package modfest.lacrimis.block.entity;
 import modfest.lacrimis.block.DrainedCryingObsidianBlock;
 import modfest.lacrimis.block.ModBlocks;
 import modfest.lacrimis.crafting.CrucibleRecipe;
+import modfest.lacrimis.crafting.InfusionInventory;
 import modfest.lacrimis.crafting.ModCrafting;
 import modfest.lacrimis.entity.ModEntities;
 import modfest.lacrimis.init.*;
 import modfest.lacrimis.item.BottleOfTearsItem;
 import modfest.lacrimis.item.ModItems;
 import modfest.lacrimis.util.DuctUtil;
+import modfest.lacrimis.util.SoulTank;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FacingBlock;
@@ -37,22 +39,18 @@ public class CrucibleEntity extends SoulTankEntity {
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, CrucibleEntity blockEntity) {
-        blockEntity.runTick();
-    }
-
-    public void runTick() {
-        if(world == null)
-            return;
+        InfusionInventory inventory = blockEntity.inventory;
+        SoulTank tank = blockEntity.getTank();
 
         //Catch tears from above
-        if (getRelativeLevel() < 1 && this.world.getTime() % 10 == 0) {
-            for (int dy = 1; dy < 5; dy++) {
-                BlockPos obsidianPos = this.pos.up(dy);
-                BlockState obsidianState = this.world.getBlockState(obsidianPos);
-                if (obsidianState.getBlock() == ModBlocks.tearLantern)
+        if(blockEntity.getRelativeLevel() < 1 && world.getTime() % 10 == 0) {
+            for(int dy = 1; dy < 5; dy++) {
+                BlockPos obsidianPos = pos.up(dy);
+                BlockState obsidianState = world.getBlockState(obsidianPos);
+                if(obsidianState.getBlock() == ModBlocks.tearLantern)
                     break;
-                if (obsidianState.getBlock() == ModBlocks.drainedCryingObsidian || obsidianState.getBlock() == Blocks.CRYING_OBSIDIAN) {
-                    this.getTank().addTears(1);
+                if(obsidianState.getBlock() == ModBlocks.drainedCryingObsidian || obsidianState.getBlock() == Blocks.CRYING_OBSIDIAN) {
+                    tank.addTears(1);
                     world.setBlockState(obsidianPos, DrainedCryingObsidianBlock.removeTearState(obsidianState, 1));
                     break;
                 }
@@ -63,52 +61,53 @@ public class CrucibleEntity extends SoulTankEntity {
             return;
 
         //Check for tear collector
-        if(collector != null && getTank().getSpace() > 10 && validCollector(collector))
-            getTank().addTears(DuctUtil.locateTears(world, pos.offset(collector, 2), 10));
+        Direction collector = blockEntity.collector;
+        if(collector != null && tank.getSpace() > 10 && blockEntity.validCollector(collector))
+            tank.addTears(DuctUtil.locateTears(world, pos.offset(collector, 2), 10));
         else
             collector = null;
 
         //Locate new tear collector
         if(collector == null)
             for (Direction direction : Direction.values())
-                if(validCollector(direction)) {
-                    collector = direction;
+                if(blockEntity.validCollector(direction)) {
+                    blockEntity.collector = direction;
                     break;
                 }
 
-        if (craftTime < CRAFT_COOLDOWN)
-            craftTime++;
+        if(blockEntity.craftTime < CRAFT_COOLDOWN)
+            blockEntity.craftTime++;
 
         //Start new crafting
-        if (craftTime >= CRAFT_COOLDOWN) {
-            for (ItemEntity entity : world.getNonSpectatingEntities(ItemEntity.class, ITEM_BOX.offset(pos))) {
+        if(blockEntity.craftTime >= CRAFT_COOLDOWN) {
+            for(ItemEntity entity : world.getNonSpectatingEntities(ItemEntity.class, ITEM_BOX.offset(pos))) {
                 inventory.setStack(0, entity.getStack());
 
                 Optional<CrucibleRecipe> optional = world.getServer()
                         .getRecipeManager()
                         .getFirstMatch(ModCrafting.CRUCIBLE_RECIPE, inventory, world);
-                if (optional.isPresent()) {
+                if(optional.isPresent()) {
                     CrucibleRecipe recipe = optional.get();
-                    if (recipe.matches(inventory, world)) {
+                    if(recipe.matches(inventory, world)) {
                         // Craft item
                         ItemStack remainder = inventory.getStack(0);
                         remainder.decrement(1);
                         entity.setStack(remainder);
                         ItemScatterer.spawn(world, pos.up(), new SimpleInventory(recipe.getOutput().copy()));
-                        ModNetworking.sendCrucibleParticlesPacket((ServerWorld) world, this);
-                        getTank().removeTears(recipe.getTears());
-                        craftTime = 0;
+                        ModNetworking.sendCrucibleParticlesPacket((ServerWorld) world, blockEntity);
+                        tank.removeTears(recipe.getTears());
+                        blockEntity.craftTime = 0;
                         break;
                     }
-                } else if(entity.getStack().getItem() == ModItems.bottleOfTears && getTank().getSpace() >= BottleOfTearsItem.capacity) {
+                } else if(entity.getStack().getItem() == ModItems.bottleOfTears && tank.getSpace() >= BottleOfTearsItem.capacity) {
                     // Craft item
                     ItemStack remainder = inventory.getStack(0);
                     remainder.decrement(1);
                     entity.setStack(remainder);
                     ItemScatterer.spawn(world, pos.up(), new SimpleInventory(new ItemStack(Items.GLASS_BOTTLE)));
-                    ModNetworking.sendCrucibleParticlesPacket((ServerWorld) world, this);
-                    getTank().addTears(BottleOfTearsItem.capacity);
-                    craftTime = 0;
+                    ModNetworking.sendCrucibleParticlesPacket((ServerWorld) world, blockEntity);
+                    tank.addTears(BottleOfTearsItem.capacity);
+                    blockEntity.craftTime = 0;
                 }
             }
         }
