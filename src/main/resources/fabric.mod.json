@@ -6,11 +6,11 @@
   "name": "Lacrimis",
   "description": "Extracting the magical powers of the soul.",
   "authors": [
+    "Stuin",
     "2xsaiko",
     "amo",
     "Chriss",
-    "Reoseah",
-    "stuin"
+    "Reoseah"
   ],
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/lacrimis",
@@ -22,14 +22,14 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "modfest.lacrimis.Lacrimis"
+      "com.stuintech.lacrimis.Lacrimis"
     ],
     "client": [
-      "modfest.lacrimis.ClientLacrimis"
+      "com.stuintech.lacrimis.ClientLacrimis"
     ],
     "rei": [
-      "modfest.lacrimis.compat.rei.LacrimisPlugin",
-      "modfest.lacrimis.compat.rei.client.ClientLacrimisPlugin"
+      "com.stuintech.lacrimis.compat.rei.LacrimisPlugin",
+      "com.stuintech.lacrimis.compat.rei.client.ClientLacrimisPlugin"
     ]
   },
 
