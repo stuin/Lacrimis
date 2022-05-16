@@ -18,8 +18,8 @@
   "rewards": {
     "recipes": [
       "lacrimis:crucible/tainted_sludge",
-      "lacrimis:crafting/rune_stone",
-      "lacrimis:infusion/rune_stone",
+      "lacrimis:crafting/runic_stone",
+      "lacrimis:infusion/runic_stone",
       "lacrimis:ores/gold_dust",
       "lacrimis:ores/iron_dust",
       "lacrimis:ores/silver_dust"

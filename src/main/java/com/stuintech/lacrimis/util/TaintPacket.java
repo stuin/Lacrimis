@@ -3,12 +3,17 @@ package com.stuintech.lacrimis.util;
 import com.stuintech.lacrimis.Lacrimis;
 import com.stuintech.lacrimis.block.TaintBlock;
 import com.stuintech.lacrimis.block.ModBlocks;
+import com.stuintech.lacrimis.init.ModNetworking;
+import com.stuintech.lacrimis.init.ModParticles;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class TaintPacket {
     private final int amount;
@@ -39,11 +44,19 @@ public class TaintPacket {
         }
     }
 
+    public static void spawnParticles(World world, BlockPos pos, int density) {
+        if(!world.isClient) {
+            ModNetworking.sendTaintParticlesPacket((ServerWorld) world, pos, density);
+        }
+    }
+
     public static void setLayers(World world, BlockPos pos, int layers) {
         if(layers <= 0)
             world.setBlockState(pos, Blocks.AIR.getDefaultState());
-        else
+        else {
             world.setBlockState(pos, ModBlocks.taint.getDefaultState().with(TaintBlock.LAYERS, Math.min(layers, 8)));
+            spawnParticles(world, pos, layers);
+        }
     }
 
     public static int convert(World world, BlockPos dest, int layers, boolean spread) {
@@ -73,11 +86,13 @@ public class TaintPacket {
                 return 0;
             else if(state.isIn(ModBlocks.resistant) && strength * 2 >= layers)
                 return 0;
-            else if(state.getMaterial() == Material.SOIL)
+            else if(state.getMaterial() == Material.SOIL) {
                 world.setBlockState(dest, ModBlocks.taintedDirt.getDefaultState());
-            else if(state.getMaterial() == Material.STONE || state.getMaterial() == Material.PISTON || state.getMaterial() == Material.METAL)
+                spawnParticles(world, dest.up(), layers);
+            } else if(state.getMaterial() == Material.STONE || state.getMaterial() == Material.PISTON || state.getMaterial() == Material.METAL) {
                 world.setBlockState(dest, ModBlocks.taintedStone.getDefaultState());
-            else
+                spawnParticles(world, dest.up(), layers);
+            } else
                 setLayers(world, dest, strength + 1);
             return Math.max(strength, 1);
         }

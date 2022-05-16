@@ -30,7 +30,7 @@
           ]
         ],
         "mapping": {
-          "0": "lacrimis:rune/stone",
+          "0": "lacrimis:runic_stone",
           "P": "lacrimis:rune/duct2[center=1]",
           "2": "lacrimis:rune/tier2[center=2]",
           "3": "lacrimis:rune/tier2[center=3]",
@@ -72,7 +72,7 @@
           "L": "minecraft:iron_bars[north=true,east=true]",
           "H": "minecraft:iron_bars[south=true,north=true]",
           "V": "minecraft:iron_bars[east=true,west=true]",
-          "S": "lacrimis:rune/stone",
+          "S": "lacrimis:runic_stone",
           "P": "lacrimis:rune/duct2[center=1]",
           "2": "lacrimis:rune/tier2[center=2]",
           "3": "lacrimis:rune/tier1[center=3]",

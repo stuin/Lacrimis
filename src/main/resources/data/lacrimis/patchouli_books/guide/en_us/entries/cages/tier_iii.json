@@ -31,7 +31,7 @@
           ]
         ],
         "mapping": {
-          "0": "lacrimis:rune/stone",
+          "0": "lacrimis:runic_stone",
           "P": "lacrimis:rune/duct2[center=1]",
           "2": "lacrimis:rune/tier2[center=2]",
           "3": "lacrimis:rune/tier2[center=3]",

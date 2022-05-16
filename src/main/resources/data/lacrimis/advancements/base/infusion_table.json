@@ -1,5 +1,5 @@
 {
-  "parent": "lacrimis:base/rune_stone",
+  "parent": "lacrimis:base/runic_stone",
   "display": {
     "icon": {
       "item": "lacrimis:infusion_table"
