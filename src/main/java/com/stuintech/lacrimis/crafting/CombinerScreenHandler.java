@@ -2,54 +2,50 @@ package com.stuintech.lacrimis.crafting;
 
 import com.stuintech.lacrimis.Lacrimis;
 import com.stuintech.lacrimis.block.entity.CombinerEntity;
-import com.stuintech.lacrimis.item.ModItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.InventoryChangedListener;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtList;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.packet.s2c.play.ScreenHandlerSlotUpdateS2CPacket;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeMatcher;
 import net.minecraft.recipe.book.RecipeBookCategory;
 import net.minecraft.screen.AbstractRecipeScreenHandler;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.slot.Slot;
-import net.minecraft.text.MutableText;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
-public class CombinerScreenHandler extends AbstractRecipeScreenHandler<InfusionInventory> implements InventoryChangedListener {
+import java.util.Optional;
+
+public class CombinerScreenHandler extends AbstractRecipeScreenHandler<CombinerInventory> implements InventoryChangedListener {
     private static final int OUTPUT_SLOT = 0;
-    private final InfusionInventory input;
-    private final World world;
-    private final BlockPos pos;
-    private EntityType<?> entityType;
+    private final CombinerInventory input;
+    private final ScreenHandlerContext context;
+    private final PlayerEntity player;
 
     public CombinerScreenHandler(int syncId, PlayerInventory player, PacketByteBuf buf) {
-        this(syncId, player, new InfusionInventory(CombinerEntity.CAPACITY, CombinerEntity.SIZE), null, buf.readBlockPos());
+        this(syncId, player, new CombinerInventory(CombinerEntity.CAPACITY, CombinerEntity.SIZE), ScreenHandlerContext.EMPTY);
         String s = buf.readString();
         if(!s.equals("null"))
-            entityType = Registry.ENTITY_TYPE.get(Identifier.tryParse(s));
+            input.entity = Registry.ENTITY_TYPE.get(Identifier.tryParse(s));
     }
 
-    public CombinerScreenHandler(int syncId, PlayerInventory player, InfusionInventory inventory, EntityType<?> type, BlockPos pos) {
+    public CombinerScreenHandler(int syncId, PlayerInventory player, CombinerInventory inventory, ScreenHandlerContext context) {
         super(ModCrafting.COMBINER_SCREEN_HANDLER, syncId);
-        this.world = player.player.world;
         this.input = inventory;
         this.input.addListener(this);
-        this.entityType = type;
-        this.pos = pos;
+        this.context = context;
+        this.player = player.player;
 
         this.addSlot(new Slot(inventory, 0, 27, 47));
         this.addSlot(new Slot(inventory, 1, 76, 47));
@@ -65,7 +61,6 @@ public class CombinerScreenHandler extends AbstractRecipeScreenHandler<InfusionI
         for(k = 0; k < 9; ++k) {
             this.addSlot(new Slot(player, k, 8 + k * 18, 142));
         }
-        updateResult();
     }
 
     @Override
@@ -78,8 +73,8 @@ public class CombinerScreenHandler extends AbstractRecipeScreenHandler<InfusionI
     }
 
     @Override
-    public boolean matches(Recipe<? super InfusionInventory> recipe) {
-        return recipe.matches(this.input, this.world);
+    public boolean matches(Recipe<? super CombinerInventory> recipe) {
+        return recipe.matches(this.input, this.player.world);
     }
 
     private void decrement(int i) {
@@ -88,46 +83,19 @@ public class CombinerScreenHandler extends AbstractRecipeScreenHandler<InfusionI
         input.setStack(i, itemStack);
     }
 
-    public void updateResult() {
-        if(entityType != null && input.getStack(1).getItem() == ModItems.taintedSludge &&
-                input.getStack(0).getItem() == ModItems.brokenSpawner && input.tank.getSpace() == 0) {
-            if(input.getStack(OUTPUT_SLOT).isEmpty()) {
-                //Initialize tags
-                NbtCompound[] tags = new NbtCompound[5];
-                for(int i = 0; i < tags.length; i++)
-                    tags[i] = new NbtCompound();
-
-                //Build tags
-                String id = EntityType.getId(entityType).toString();
-                tags[4].putString("id", id);
-                tags[3].put("Entity", tags[4]);
-                tags[3].putInt("Weight", 1);
-                NbtList list = new NbtList();
-                list.add(tags[3]);
-                tags[1].put("SpawnPotentials", list);
-                tags[2].putString("id", id);
-                tags[1].put("SpawnData", tags[2]);
-                tags[0].put("BlockEntityTag", tags[1]);
-
-                //Create spawner item
-                ItemStack stack = new ItemStack(Items.SPAWNER);
-                MutableText text = new TranslatableText(entityType.getTranslationKey());
-                text.append(new TranslatableText(Lacrimis.MODID + ".tooltip.spawner"));
-                stack.setNbt(tags[0]);
-                stack.setCustomName(text);
-
-                //Set output
-                decrement(0);
-                decrement(1);
-                entityType = null;
-                input.tank.setTears(0);
-                input.setStack(OUTPUT_SLOT, stack);
-
-                //Clear combinerEntity
-                BlockEntity blockEntity = world.getBlockEntity(pos);
-                if(blockEntity instanceof CombinerEntity)
-                    ((CombinerEntity) blockEntity).type = null;
+    protected static void updateResult(ScreenHandler handler, World world, PlayerEntity player, CombinerInventory inv) {
+        if (!world.isClient) {
+            ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity)player;
+            ItemStack itemStack = ItemStack.EMPTY;
+            Optional<CombinerRecipe> optional = world.getServer().getRecipeManager().getFirstMatch(ModCrafting.COMBINER_RECIPE, inv, world);
+            if (optional.isPresent()) {
+                CombinerRecipe recipe = optional.get();
+                itemStack = recipe.getOutput();
             }
+
+            inv.setStack(OUTPUT_SLOT, itemStack);
+            handler.setPreviousTrackedSlot(OUTPUT_SLOT, itemStack);
+            serverPlayerEntity.networkHandler.sendPacket(new ScreenHandlerSlotUpdateS2CPacket(handler.syncId, handler.nextRevision(), 0, itemStack));
         }
     }
 
@@ -138,9 +106,9 @@ public class CombinerScreenHandler extends AbstractRecipeScreenHandler<InfusionI
 
     @Override
     public void onContentChanged(Inventory inventory) {
-        super.onContentChanged(inventory);
-        if(inventory == input)
-            this.updateResult();
+        this.context.run((world, pos) -> {
+            updateResult(this, world, this.player, this.input);
+        });
     }
 
     @Override
@@ -188,8 +156,8 @@ public class CombinerScreenHandler extends AbstractRecipeScreenHandler<InfusionI
     }
 
     public Text getEntity() {
-        if(entityType != null) {
-            Text t = new TranslatableText(entityType.getTranslationKey());
+        if(input.entity != null) {
+            Text t = new TranslatableText(input.entity.getTranslationKey());
             return new TranslatableText(Lacrimis.MODID + ".gui.combiner.entity").append(t);
         }
         return new TranslatableText(Lacrimis.MODID + ".gui.combiner.none");
