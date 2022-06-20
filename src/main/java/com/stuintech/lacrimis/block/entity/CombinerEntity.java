@@ -1,10 +1,13 @@
 package com.stuintech.lacrimis.block.entity;
 
+import com.stuintech.lacrimis.Lacrimis;
+import com.stuintech.lacrimis.crafting.CombinerInventory;
 import com.stuintech.lacrimis.crafting.CombinerScreenHandler;
 import com.stuintech.lacrimis.entity.ModEntities;
 import com.stuintech.lacrimis.item.ModItems;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -12,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -26,11 +30,11 @@ public class CombinerEntity extends SoulTankEntity implements ExtendedScreenHand
     public static final int CAPACITY = 100;
     public static final int OUTPUT_STACK = 2;
     public static final int[] INPUT_STACKS = {0, 1};
-    public EntityType<?> type;
+    public final CombinerInventory combinerInventory;
 
     public CombinerEntity(BlockPos pos, BlockState state) {
         super(ModEntities.combiner, pos, state, CAPACITY, SIZE);
-        type = null;
+        combinerInventory = new CombinerInventory(this.inventory);
     }
 
     @Override
@@ -41,7 +45,15 @@ public class CombinerEntity extends SoulTankEntity implements ExtendedScreenHand
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
-        return new CombinerScreenHandler(syncId, inv, inventory, type, pos);
+        return new CombinerScreenHandler(syncId, inv, combinerInventory, ScreenHandlerContext.create(world, pos));
+    }
+
+    public EntityType<?> getEntity() {
+        return combinerInventory.getEntity();
+    }
+
+    public int getCharge() {
+        return combinerInventory.getCharge();
     }
 
     public int[] getAvailableSlots(Direction side) {
@@ -67,15 +79,15 @@ public class CombinerEntity extends SoulTankEntity implements ExtendedScreenHand
         super.readNbt(tag);
 
         if(!tag.getString("entity").equals("null"))
-            type = Registry.ENTITY_TYPE.get(Identifier.tryParse(tag.getString("entity")));
+            combinerInventory.entity = Registry.ENTITY_TYPE.get(Identifier.tryParse(tag.getString("entity")));
     }
 
     @Override
     public void writeNbt(NbtCompound tag) {
         super.writeNbt(tag);
 
-        if(type != null)
-            tag.putString("entity", Registry.ENTITY_TYPE.getId(type).toString());
+        if(combinerInventory.entity != null)
+            tag.putString("entity", Registry.ENTITY_TYPE.getId(combinerInventory.entity).toString());
         else
             tag.putString("entity", "null");
     }
@@ -83,9 +95,8 @@ public class CombinerEntity extends SoulTankEntity implements ExtendedScreenHand
     @Override
     public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
         String s = "null";
-        if(type != null)
-            s = Registry.ENTITY_TYPE.getId(type).toString();
-        buf.writeBlockPos(pos);
+        if(combinerInventory.entity != null)
+            s = Registry.ENTITY_TYPE.getId(combinerInventory.entity).toString();
         buf.writeString(s);
     }
 }

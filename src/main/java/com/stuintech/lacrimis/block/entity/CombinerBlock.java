@@ -1,11 +1,13 @@
 package com.stuintech.lacrimis.block.entity;
 
 import com.stuintech.lacrimis.Lacrimis;
+import com.stuintech.lacrimis.crafting.CombinerInventory;
 import com.stuintech.lacrimis.entity.ModEntities;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.player.PlayerEntity;
@@ -79,11 +81,17 @@ public class CombinerBlock extends SoulTankBlock {
     @Override
     public boolean insert(BlockPos pos, World world, Object value) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
-        if(value instanceof LivingEntity && !(((LivingEntity) value).getType().isIn(ModEntities.combiner_blocked) || ((LivingEntity) value).getType().getSpawnGroup().equals(SpawnGroup.MISC)) &&
-                blockEntity instanceof CombinerEntity && ((CombinerEntity) blockEntity).type == null) {
-            ((CombinerEntity) blockEntity).type = ((LivingEntity) value).getType();
-            ((LivingEntity) value).kill();
-            return true;
+        if(value instanceof LivingEntity) {
+            EntityType<?> type = ((LivingEntity) value).getType();
+            if(!(type.isIn(ModEntities.combiner_blocked) || type.getSpawnGroup().equals(SpawnGroup.MISC)) && blockEntity instanceof CombinerEntity) {
+                if(((CombinerEntity) blockEntity).getEntity() == null)
+                    ((CombinerEntity) blockEntity).combinerInventory.entity = type;
+                else if(((CombinerEntity) blockEntity).getEntity() == type && ((CombinerEntity) blockEntity).getCharge() < CombinerInventory.MAX)
+                    ((CombinerEntity) blockEntity).combinerInventory.charge++;
+
+                ((LivingEntity) value).kill();
+                return true;
+            }
         }
         return false;
     }

@@ -53,7 +53,7 @@ public class ModCrafting {
         Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(Lacrimis.MODID, "infusion_shaped"), SHAPED_INFUSION_SERIALIZER);
         Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(Lacrimis.MODID, "infusion_shapeless"), SHAPELESS_INFUSION_SERIALIZER);
         Registry.register(Registry.RECIPE_SERIALIZER, CRUCIBLE_ID, CRUCIBLE_SERIALIZER);
-        Registry.register(Registry.RECIPE_SERIALIZER, COMBINER_ID, CRUCIBLE_SERIALIZER);
+        Registry.register(Registry.RECIPE_SERIALIZER, COMBINER_ID, COMBINER_SERIALIZER);
         Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(Lacrimis.MODID, "combiner_spawner"), SPAWNER_COMBINER_SERIALIZER);
     }
 }

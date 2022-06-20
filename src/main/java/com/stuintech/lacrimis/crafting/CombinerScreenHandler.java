@@ -19,6 +19,7 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
@@ -32,6 +33,7 @@ public class CombinerScreenHandler extends AbstractRecipeScreenHandler<CombinerI
     private final CombinerInventory input;
     private final ScreenHandlerContext context;
     private final PlayerEntity player;
+    private boolean updating = false;
 
     public CombinerScreenHandler(int syncId, PlayerInventory player, PacketByteBuf buf) {
         this(syncId, player, new CombinerInventory(CombinerEntity.CAPACITY, CombinerEntity.SIZE), ScreenHandlerContext.EMPTY);
@@ -43,7 +45,7 @@ public class CombinerScreenHandler extends AbstractRecipeScreenHandler<CombinerI
     public CombinerScreenHandler(int syncId, PlayerInventory player, CombinerInventory inventory, ScreenHandlerContext context) {
         super(ModCrafting.COMBINER_SCREEN_HANDLER, syncId);
         this.input = inventory;
-        this.input.addListener(this);
+        this.input.inventory.addListener(this);
         this.context = context;
         this.player = player.player;
 
@@ -65,7 +67,7 @@ public class CombinerScreenHandler extends AbstractRecipeScreenHandler<CombinerI
 
     @Override
     public void populateRecipeFinder(RecipeMatcher finder) {
-        this.input.provideRecipeInputs(finder);
+        this.input.inventory.provideRecipeInputs(finder);
     }
 
     @Override
@@ -101,11 +103,12 @@ public class CombinerScreenHandler extends AbstractRecipeScreenHandler<CombinerI
 
     @Override
     public void onInventoryChanged(Inventory sender) {
-        onContentChanged(sender);
+        //onContentChanged(sender);
     }
 
     @Override
     public void onContentChanged(Inventory inventory) {
+        Lacrimis.LOGGER.warn("changed");
         this.context.run((world, pos) -> {
             updateResult(this, world, this.player, this.input);
         });
@@ -195,10 +198,10 @@ public class CombinerScreenHandler extends AbstractRecipeScreenHandler<CombinerI
     }
 
     public int getRequiredTears() {
-        return input.properties.get(InfusionInventory.CAPACITY);
+        return input.inventory.properties.get(InfusionInventory.CAPACITY);
     }
 
     public int getCurrentTears() {
-        return input.properties.get(InfusionInventory.TEARS);
+        return input.inventory.properties.get(InfusionInventory.TEARS);
     }
 }
