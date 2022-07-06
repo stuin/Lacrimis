@@ -57,6 +57,7 @@ public class InfusionTableEntity extends SoulTankEntity implements NamedScreenHa
 
             //Clear
             holding = ItemStack.EMPTY;
+            blockEntity.holding = holding;
             inventory.markDirty();
             tank.setTears(0);
             tank.setLimit(0);

@@ -109,7 +109,8 @@ public class TaintBlock extends Block {
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         super.onBreak(world, pos, state, player);
-        player.addStatusEffect(new StatusEffectInstance(ModStatusEffects.TEAR_POISON, 300, 2));
+        if(!player.isCreative())
+            player.addStatusEffect(new StatusEffectInstance(ModStatusEffects.TEAR_POISON, 300, 2));
     }
 
     public boolean canReplace(BlockState state, ItemPlacementContext context) {

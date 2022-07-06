@@ -21,8 +21,8 @@ public class SoakedArmor extends ArmorItem {
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
         // 1% chance to take durability every tick
-        if (EnchantmentHelper.getLevel(ModEnchantments.WARDED, stack) <= 0 && Math.random() > 0.99)
-            stack.damage(1, new Random(), null);
+        if (EnchantmentHelper.getLevel(ModEnchantments.WARDED, stack) <= 0 && world.random.nextDouble() > 0.99)
+            stack.damage(1, world.random, null);
     }
 
 }
