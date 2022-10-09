@@ -6,6 +6,7 @@ import com.stuintech.lacrimis.item.armor.CustomArmorMaterials;
 import com.stuintech.lacrimis.item.armor.SoakedArmor;
 import com.stuintech.lacrimis.item.tools.CustomToolMaterials;
 import com.stuintech.lacrimis.item.tools.SoakedSwordItem;
+import com.stuintech.socketwrench.SocketWrench;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.BlockItem;
@@ -18,6 +19,8 @@ public class ModItems {
     private static final Item.Settings SETTINGS = new Item.Settings().group(Lacrimis.ITEM_GROUP);
     private static final Item.Settings SMALL_SETTINGS = new Item.Settings().group(Lacrimis.ITEM_GROUP).maxCount(16);
     private static final Item.Settings TOOL_SETTINGS = new Item.Settings().group(Lacrimis.ITEM_GROUP).maxCount(1);
+    private static final Item.Settings ROD_SETTINGS = new Item.Settings().group(Lacrimis.ITEM_GROUP)
+            .maxCount(1).maxDamage(SocketWrench.DEFAULT_WRENCH_DURABILITY);
     private static final Item.Settings RUNE_SETTINGS = new Item.Settings().group(Lacrimis.RUNE_ITEM_GROUP);
 
     //Main blocks
@@ -114,8 +117,8 @@ public class ModItems {
         tearLantern = register("tear_lantern", ModBlocks.tearLantern);
 
         bottleOfTears = register("bottle_of_tears", new BottleOfTearsItem(SETTINGS));
-        diviningRod = register("divining_rod", new DiviningRodItem(TOOL_SETTINGS));
-        goldDiviningRod = register("gold_divining_rod", new DiviningRodItem(TOOL_SETTINGS));
+        diviningRod = register("divining_rod", new DiviningRodItem(ROD_SETTINGS));
+        goldDiviningRod = register("gold_divining_rod", new DiviningRodItem(ROD_SETTINGS));
         taintedSludge = register("tainted_sludge", new Item(SETTINGS));
         tearIngot = register("tear_ingot", new Item(SETTINGS));
         taintedPearl = register("tainted_pearl", new TaintedPearlItem(SMALL_SETTINGS));

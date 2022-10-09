@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.11-SNAPSHOT'
+	id 'fabric-loom' version '1.0-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -11,6 +11,7 @@ version = "${project.mod_version}+${project.minecraft_version}"
 group = project.maven_group
 
 repositories {
+	mavenLocal()
 	maven {
 		name = "Shedaniel"
 		url = "https://maven.shedaniel.me/"
