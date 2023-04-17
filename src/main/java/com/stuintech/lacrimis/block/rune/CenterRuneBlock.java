@@ -19,7 +19,6 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -94,7 +93,7 @@ public abstract class CenterRuneBlock extends Block implements DuctConnectBlock,
 
     protected int error(PlayerEntity player, String code) {
         if(player != null && !player.world.isClient) {
-            MutableText text = new TranslatableText(Lacrimis.MODID + ".error." + code);
+            MutableText text = Text.translatable("lacrimis.error." + code);
             Style style = text.getStyle();
             player.sendMessage(text.setStyle(style.withColor(Formatting.RED)), false);
         }
@@ -207,9 +206,9 @@ public abstract class CenterRuneBlock extends Block implements DuctConnectBlock,
     @Override
     public void appendTooltip(ItemStack stack, BlockView world, List<Text> tooltip, TooltipContext options) {
         super.appendTooltip(stack, world, tooltip, options);
-        tooltip.add(new TranslatableText(Lacrimis.MODID + ".tooltip.rune.tears",
+        tooltip.add(Text.translatable(Lacrimis.MODID + ".tooltip.rune.tears",
                 requiredTears).formatted(Formatting.GRAY));
-        tooltip.add(new TranslatableText(Lacrimis.MODID + ".tooltip.rune.tier" + requiredTier).formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable(Lacrimis.MODID + ".tooltip.rune.tier" + requiredTier).formatted(Formatting.GRAY));
     }
 
     @Override

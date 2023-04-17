@@ -14,7 +14,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
@@ -100,7 +99,7 @@ public class CombinerBlock extends SoulTankBlock {
     public void appendTooltip(ItemStack stack, BlockView world, List<Text> tooltip, TooltipContext options) {
         super.appendTooltip(stack, world, tooltip, options);
         if(stack.hasNbt())
-            tooltip.add(new TranslatableText(Lacrimis.MODID + ".tooltip.crucible",
+            tooltip.add(Text.translatable("lacrimis.tooltip.tears",
                     stack.getOrCreateNbt().getInt("TearLevel")).formatted(Formatting.GRAY));
     }
 }

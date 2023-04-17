@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
@@ -55,8 +54,8 @@ public class SoulTotemItem extends Item {
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
         if(stack.hasNbt())
-            tooltip.add(new TranslatableText("lacrimis.tooltip.bound").formatted(Formatting.GRAY));
+            tooltip.add(Text.translatable("lacrimis.tooltip.bound").formatted(Formatting.GRAY));
         else
-            tooltip.add(new TranslatableText("lacrimis.tooltip.unbound").formatted(Formatting.GRAY));
+            tooltip.add(Text.translatable("lacrimis.tooltip.unbound").formatted(Formatting.GRAY));
     }
 }

@@ -1,5 +1,6 @@
 package com.stuintech.lacrimis.block.entity;
 
+import com.stuintech.lacrimis.Lacrimis;
 import com.stuintech.lacrimis.item.BottleOfTearsItem;
 import com.stuintech.lacrimis.util.SoulTank;
 import com.stuintech.lacrimis.util.TaintPacket;
@@ -17,7 +18,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -63,7 +63,7 @@ public abstract class SoulTankBlock extends BlockWithEntity implements DuctConne
         if(player != null && !player.isSneaking()) {
             if(!world.isClient) {
                 int level = getTank(world, pos).getTears();
-                Text text = new LiteralText(level + " Tears");
+                Text text = Text.translatable(Lacrimis.MODID + ".tooltip.tears", level);
                 player.sendMessage(text, false);
             }
             return true;

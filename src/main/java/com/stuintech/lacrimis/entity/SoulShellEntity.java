@@ -81,13 +81,13 @@ public class SoulShellEntity extends LivingEntity {
 
     public void equipStack(EquipmentSlot slot, ItemStack stack) {
         if (slot == EquipmentSlot.MAINHAND) {
-            onEquipStack(stack);
+            onEquipStack(slot, main.get(selectedSlot), stack);
             main.set(selectedSlot, stack);
         } else if (slot == EquipmentSlot.OFFHAND) {
-            onEquipStack(stack);
+            onEquipStack(slot, offHand.get(0), stack);
             offHand.set(0, stack);
         } else if (slot.getType() == EquipmentSlot.Type.ARMOR) {
-            onEquipStack(stack);
+            onEquipStack(slot, armor.get(slot.getEntitySlotId()), stack);
             armor.set(slot.getEntitySlotId(), stack);
         }
     }

@@ -7,10 +7,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
-import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;
-import net.minecraft.client.render.entity.feature.ElytraFeatureRenderer;
-import net.minecraft.client.render.entity.feature.HeadFeatureRenderer;
-import net.minecraft.client.render.entity.feature.HeldItemFeatureRenderer;
+import net.minecraft.client.render.entity.feature.*;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.util.math.MatrixStack;
@@ -31,8 +28,8 @@ public class SoulShellRenderer extends LivingEntityRenderer<SoulShellEntity, Sou
         this.addFeature(new ArmorFeatureRenderer<>(this,
                 new BipedEntityModel<>(context.getPart(EntityModelLayers.PLAYER_SLIM_INNER_ARMOR)),
                 new BipedEntityModel<>(context.getPart(EntityModelLayers.PLAYER_SLIM_OUTER_ARMOR))));
-        this.addFeature(new HeldItemFeatureRenderer<>(this));
-        this.addFeature(new HeadFeatureRenderer<>(this, context.getModelLoader()));
+        this.addFeature(new HeldItemFeatureRenderer<>(this, context.getHeldItemRenderer()));
+        this.addFeature(new HeadFeatureRenderer<>(this, context.getModelLoader(), context.getHeldItemRenderer()));
         this.addFeature(new ElytraFeatureRenderer<>(this, context.getModelLoader()));
     }
 

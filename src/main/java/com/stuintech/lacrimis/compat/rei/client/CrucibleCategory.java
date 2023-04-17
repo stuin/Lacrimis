@@ -41,7 +41,6 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 
 import java.util.List;
 
@@ -60,7 +59,7 @@ public class CrucibleCategory implements DisplayCategory<CrucibleDisplay> {
 
     @Override
     public Text getTitle() {
-        return new TranslatableText("lacrimis.gui.crucible");
+        return Text.translatable("lacrimis.gui.crucible");
     }
     
     @Override
@@ -79,7 +78,8 @@ public class CrucibleCategory implements DisplayCategory<CrucibleDisplay> {
                 .entries(display.getInputEntries().get(0))
                 .markInput());
         widgets.add(Widgets.createLabel(new Point(startPoint.x + 35, startPoint.y + 20),
-                new TranslatableText("lacrimis.tooltip.crucible", tears)).noShadow().rightAligned().color(0xFF404040, 0xFFBBBBBB));
+                Text.translatable("lacrimis.tooltip.tears", tears))
+                .noShadow().rightAligned().color(0xFF404040, 0xFFBBBBBB));
         return widgets;
     }
     

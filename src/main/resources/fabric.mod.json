@@ -14,7 +14,7 @@
   ],
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/lacrimis",
-    "sources": "https://github.com/2xsaiko/lacrimis.git"
+    "sources": "https://github.com/stuin/lacrimis.git"
   },
 
   "icon": "assets/lacrimis/icon.png",
@@ -45,9 +45,9 @@
   },
 
   "depends": {
-    "fabricloader": ">=0.12.0",
+    "fabricloader": ">=0.14.0",
     "fabric": "*",
-    "minecraft": "~1.18",
-    "patchouli": ">=1.18-60-FABRIC"
+    "minecraft": "1.19.2",
+    "patchouli": ">=1.19.2-77-FABRIC"
   }
 }

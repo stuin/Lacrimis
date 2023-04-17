@@ -17,7 +17,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.function.BooleanBiFunction;
@@ -92,7 +91,7 @@ public class CrucibleBlock extends SoulTankBlock {
     @Override
     public void appendTooltip(ItemStack stack, BlockView world, List<Text> tooltip, TooltipContext options) {
         super.appendTooltip(stack, world, tooltip, options);
-        tooltip.add(new TranslatableText(Lacrimis.MODID + ".tooltip.crucible",
+        tooltip.add(Text.translatable(Lacrimis.MODID + ".tooltip.tears",
                 stack.getOrCreateNbt().getInt("TearLevel")).formatted(Formatting.GRAY));
     }
 

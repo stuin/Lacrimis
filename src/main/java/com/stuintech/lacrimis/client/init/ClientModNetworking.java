@@ -1,6 +1,5 @@
 package com.stuintech.lacrimis.client.init;
 
-import com.stuintech.lacrimis.Lacrimis;
 import com.stuintech.lacrimis.init.ModParticles;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -11,9 +10,8 @@ import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 import static com.stuintech.lacrimis.init.ModNetworking.CRUCIBLE_PARTICLES_ID;
 import static com.stuintech.lacrimis.init.ModNetworking.TAINT_PARTICLES_ID;

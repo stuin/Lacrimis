@@ -8,7 +8,7 @@ import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import vazkii.patchouli.client.book.page.abstr.PageDoubleRecipeRegistry;
@@ -32,7 +32,7 @@ public class PageInfusion extends PageDoubleRecipeRegistry<InfusionRecipe> {
             int iconY = recipeY + 2;
             DrawableHelper.drawTexture(ms, iconX, iconY, 0.0F, 64.0F, 11, 11, 128, 128);
             if (this.parent.isMouseInRelativeRange(mouseX, mouseY, iconX, iconY, 11, 11)) {
-                this.parent.setTooltip(new TranslatableText("patchouli.gui.lexicon.shapeless"));
+                this.parent.setTooltip(Text.translatable("patchouli.gui.lexicon.shapeless"));
             }
         }
 

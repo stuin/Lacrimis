@@ -19,9 +19,7 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
@@ -160,10 +158,10 @@ public class CombinerScreenHandler extends AbstractRecipeScreenHandler<CombinerI
 
     public Text getEntity() {
         if(input.entity != null) {
-            Text t = new TranslatableText(input.entity.getTranslationKey());
-            return new TranslatableText(Lacrimis.MODID + ".gui.combiner.entity").append(t);
+            Text t = Text.translatable(input.entity.getTranslationKey());
+            return Text.translatable(Lacrimis.MODID + ".gui.combiner.entity").append(t);
         }
-        return new TranslatableText(Lacrimis.MODID + ".gui.combiner.none");
+        return Text.translatable(Lacrimis.MODID + ".gui.combiner.none");
     }
 
     @Override

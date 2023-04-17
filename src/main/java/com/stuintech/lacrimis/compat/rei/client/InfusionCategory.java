@@ -42,7 +42,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 
 import java.util.List;
 
@@ -60,7 +59,7 @@ public class InfusionCategory implements DisplayCategory<InfusionDisplay> {
     
     @Override
     public Text getTitle() {
-        return new TranslatableText("lacrimis.gui.infusion");
+        return Text.translatable("lacrimis.gui.infusion");
     }
     
     @Override
@@ -83,7 +82,7 @@ public class InfusionCategory implements DisplayCategory<InfusionDisplay> {
         widgets.addAll(slots);
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 95, startPoint.y + 19)).entries(display.getOutputEntries().get(0)).disableBackground().markOutput());
         widgets.add(Widgets.createLabel(new Point(startPoint.x + 115, startPoint.y + 45),
-                new TranslatableText("lacrimis.tooltip.crucible", tears)).noShadow().rightAligned().color(0xFF404040, 0xFFBBBBBB));
+                Text.translatable("lacrimis.tooltip.tears", tears)).noShadow().rightAligned().color(0xFF404040, 0xFFBBBBBB));
         return widgets;
     }
 

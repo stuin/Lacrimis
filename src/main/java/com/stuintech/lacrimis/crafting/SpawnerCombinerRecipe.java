@@ -10,7 +10,7 @@ import net.minecraft.nbt.NbtList;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.text.MutableText;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
@@ -44,8 +44,8 @@ public class SpawnerCombinerRecipe extends CombinerRecipe {
 
         //Create spawner item
         ItemStack output = super.craft(inv);
-        MutableText text = new TranslatableText(getEntity().getTranslationKey());
-        text.append(new TranslatableText(Lacrimis.MODID + ".tooltip.spawner"));
+        MutableText text = Text.translatable(getEntity().getTranslationKey());
+        text.append(Text.translatable(Lacrimis.MODID + ".tooltip.spawner"));
         output.setNbt(tags[0]);
         output.setCustomName(text);
 

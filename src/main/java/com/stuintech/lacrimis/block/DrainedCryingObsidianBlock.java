@@ -1,5 +1,6 @@
 package com.stuintech.lacrimis.block;
 
+import com.stuintech.lacrimis.Lacrimis;
 import com.stuintech.socketwrench.fasteners.FastenerBlock;
 import com.stuintech.socketwrench.socket.CancelFasteningException;
 import net.minecraft.block.Block;
@@ -12,7 +13,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager.Builder;
 import net.minecraft.state.property.IntProperty;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -34,7 +34,7 @@ public class DrainedCryingObsidianBlock extends CryingObsidianBlock implements F
         if(player != null && !player.isSneaking()) {
             if(!world.isClient) {
                 int level = getTearsLevel(world.getBlockState(pos));
-                Text text = new LiteralText(level + " Tears");
+                Text text = Text.translatable(Lacrimis.MODID + ".tooltip.tears", level);
                 player.sendMessage(text, false);
             }
             return true;

@@ -5,6 +5,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 
@@ -96,6 +97,11 @@ public class InfusionInventory extends SimpleInventory {
 		@Override
 		public void onContentChanged(Inventory inventory) {
 
+		}
+
+		@Override
+		public ItemStack transferSlot(PlayerEntity player, int index) {
+			return null;
 		}
 	}
 }

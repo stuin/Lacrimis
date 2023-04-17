@@ -1,13 +1,11 @@
 package com.stuintech.lacrimis.block.entity;
 
-import com.stuintech.lacrimis.Lacrimis;
 import com.stuintech.lacrimis.crafting.CombinerInventory;
 import com.stuintech.lacrimis.crafting.CombinerScreenHandler;
 import com.stuintech.lacrimis.entity.ModEntities;
 import com.stuintech.lacrimis.item.ModItems;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -18,7 +16,6 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -39,7 +36,7 @@ public class CombinerEntity extends SoulTankEntity implements ExtendedScreenHand
 
     @Override
     public Text getDisplayName() {
-        return new TranslatableText("lacrimis.gui.combiner");
+        return Text.translatable("lacrimis.gui.combiner");
     }
 
     @Nullable

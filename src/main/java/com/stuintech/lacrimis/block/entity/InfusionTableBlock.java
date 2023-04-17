@@ -15,19 +15,18 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 import java.util.List;
-import java.util.Random;
 
 public class InfusionTableBlock extends SoulTankBlock {
 	protected static final VoxelShape SHAPE = createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
@@ -113,7 +112,7 @@ public class InfusionTableBlock extends SoulTankBlock {
 	public void appendTooltip(ItemStack stack, BlockView world, List<Text> tooltip, TooltipContext options) {
 		super.appendTooltip(stack, world, tooltip, options);
 		if(stack.hasNbt())
-			tooltip.add(new TranslatableText(Lacrimis.MODID + ".tooltip.crucible",
+			tooltip.add(Text.translatable(Lacrimis.MODID + ".tooltip.tears",
 				stack.getOrCreateNbt().getInt("TearLevel")).formatted(Formatting.GRAY));
 	}
 
