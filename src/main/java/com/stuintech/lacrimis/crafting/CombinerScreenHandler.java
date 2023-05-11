@@ -31,13 +31,13 @@ public class CombinerScreenHandler extends AbstractRecipeScreenHandler<CombinerI
     private final CombinerInventory input;
     private final ScreenHandlerContext context;
     private final PlayerEntity player;
-    private boolean updating = false;
 
     public CombinerScreenHandler(int syncId, PlayerInventory player, PacketByteBuf buf) {
         this(syncId, player, new CombinerInventory(CombinerEntity.CAPACITY, CombinerEntity.SIZE), ScreenHandlerContext.EMPTY);
         String s = buf.readString();
         if(!s.equals("null"))
             input.entity = Registry.ENTITY_TYPE.get(Identifier.tryParse(s));
+        input.charge = buf.readInt();
     }
 
     public CombinerScreenHandler(int syncId, PlayerInventory player, CombinerInventory inventory, ScreenHandlerContext context) {
@@ -61,6 +61,8 @@ public class CombinerScreenHandler extends AbstractRecipeScreenHandler<CombinerI
         for(k = 0; k < 9; ++k) {
             this.addSlot(new Slot(player, k, 8 + k * 18, 142));
         }
+
+        onContentChanged(inventory);
     }
 
     @Override
@@ -106,7 +108,6 @@ public class CombinerScreenHandler extends AbstractRecipeScreenHandler<CombinerI
 
     @Override
     public void onContentChanged(Inventory inventory) {
-        Lacrimis.LOGGER.warn("changed");
         this.context.run((world, pos) -> {
             updateResult(this, world, this.player, this.input);
         });
@@ -159,7 +160,7 @@ public class CombinerScreenHandler extends AbstractRecipeScreenHandler<CombinerI
     public Text getEntity() {
         if(input.entity != null) {
             Text t = Text.translatable(input.entity.getTranslationKey());
-            return Text.translatable(Lacrimis.MODID + ".gui.combiner.entity").append(t);
+            return Text.translatable(Lacrimis.MODID + ".gui.combiner.entity", "" + input.charge, t);
         }
         return Text.translatable(Lacrimis.MODID + ".gui.combiner.none");
     }

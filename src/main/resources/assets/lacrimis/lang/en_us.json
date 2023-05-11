@@ -63,8 +63,7 @@
   "effect.lacrimis.wavering_soul": "Wavering Soul",
   "effect.lacrimis.tear_poison": "Tear Poison",
 
-  "gamerule.lacrimisSoulTotemAnySlot": "Use Totem of Soul from any slot",
-  "gamerule.lacrimisVanillaTotemAnySlot": "Use Totem of Undying from any slot",
+  "gamerule.lacrimisTotemAnySlot": "Use Totems from any slot",
   "gamerule.lacrimisTaintSpread": "Update Lacrimis Taint",
 
   "enchantment.lacrimis.warded": "Warded",
@@ -82,8 +81,8 @@
   "lacrimis.gui.infusion": "Infusion Table",
   "lacrimis.gui.crucible": "Crucible",
   "lacrimis.gui.combiner": "Soul Combiner",
-  "lacrimis.gui.combiner.entity": "Soul: ",
-  "lacrimis.gui.combiner.none": "Soul: None",
+  "lacrimis.gui.combiner.entity": "%s %s Souls",
+  "lacrimis.gui.combiner.none": "0 Souls",
   "itemGroup.lacrimis.base": "Lacrimis",
   "itemGroup.lacrimis.runes": "Lacrimis Runes",
 

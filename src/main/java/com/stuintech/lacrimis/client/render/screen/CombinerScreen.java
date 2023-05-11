@@ -25,8 +25,7 @@ public class CombinerScreen extends HandledScreen<CombinerScreenHandler> {
         super.render(matrices, mouseX, mouseY, delta);
         RenderSystem.disableBlend();
 
-        Text text = handler.getEntity();
-        textRenderer.draw(matrices, text, x + titleX, y + titleY + 15, 4210752);
+        textRenderer.draw(matrices, handler.getEntity(), x + titleX, y + titleY + 15, 4210752);
         drawMouseoverTooltip(matrices, mouseX, mouseY);
     }
 

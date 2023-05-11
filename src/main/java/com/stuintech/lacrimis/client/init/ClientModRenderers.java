@@ -7,9 +7,9 @@ import com.stuintech.lacrimis.client.render.entity.SoulShellRenderer;
 import com.stuintech.lacrimis.client.ObsidianTearFlyingParticle;
 import com.stuintech.lacrimis.client.PurpleMistParticle;
 import com.stuintech.lacrimis.entity.ModEntities;
-import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 
 import static com.stuintech.lacrimis.init.ModParticles.OBSIDIAN_TEAR_FLYING;
@@ -21,9 +21,9 @@ public class ClientModRenderers {
         EntityRendererRegistry.register(ModEntities.soulShell, SoulShellRenderer::new);
         EntityRendererRegistry.register(ModEntities.taintedPearl, FlyingItemEntityRenderer::new);
 
-        BlockEntityRendererRegistry.register(ModEntities.crucible, CrucibleEntityRenderer::new);
-        BlockEntityRendererRegistry.register(ModEntities.infusionTable, InfusionTableEntityRenderer::new);
-        BlockEntityRendererRegistry.register(ModEntities.networkLink, NetworkLinkEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModEntities.crucible, CrucibleEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModEntities.infusionTable, InfusionTableEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModEntities.networkLink, NetworkLinkEntityRenderer::new);
 
         CrucibleEntityRenderer.onInit();
         InfusionTableEntityRenderer.onInit();

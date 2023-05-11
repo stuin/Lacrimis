@@ -26,14 +26,15 @@ public class SoulSwapBlock extends SoulExtractionBlock {
         int tier = testCage(world, pos, flipped, null);
         int added = 0;
         if(value instanceof PlayerContainer) {
-            ServerPlayerEntity player = ((PlayerContainer) value).player;
+            PlayerEntity player = ((PlayerContainer) value).player;
             ItemStack itemStack = ((PlayerContainer) value).itemStack;
             value = player;
             added = 100;
 
             //Use Soul totem
             player.incrementStat(Stats.USED.getOrCreateStat(ModItems.soulTotem));
-            Criteria.USED_TOTEM.trigger(player, itemStack);
+            if(player instanceof ServerPlayerEntity)
+                Criteria.USED_TOTEM.trigger((ServerPlayerEntity) player, itemStack);
             itemStack.decrement(1);
 
             player.setHealth(1.0F);
@@ -57,6 +58,6 @@ public class SoulSwapBlock extends SoulExtractionBlock {
         return false;
     }
 
-    public record PlayerContainer(ServerPlayerEntity player, ItemStack itemStack) {
+    public record PlayerContainer(PlayerEntity player, ItemStack itemStack) {
     }
 }

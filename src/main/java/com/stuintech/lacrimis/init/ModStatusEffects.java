@@ -2,6 +2,7 @@ package com.stuintech.lacrimis.init;
 
 import com.stuintech.lacrimis.Lacrimis;
 import com.stuintech.lacrimis.item.ModItems;
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -16,21 +17,10 @@ import net.minecraft.util.registry.Registry;
 public class ModStatusEffects extends DamageSource {
     public static final DamageSource TEAR_DAMAGE = new ModStatusEffects("tear_poison").setBypassesArmor().setUsesMagic();
 
-    public static StatusEffect WAVERING_SOUL;
     public static StatusEffect TEAR_POISON;
+    public static StatusEffect WAVERING_SOUL;
 
     public static void register() {
-        WAVERING_SOUL = register("wavering_soul", new StatusEffect(StatusEffectCategory.NEUTRAL, 13793020) {
-            @Override
-            public void onRemoved(LivingEntity entity, AttributeContainer attributes, int amplifier) {
-                if(entity.getHealth() <= 1) {
-                    entity.dropStack(new ItemStack(ModItems.solidifiedTear), entity.getHeight() / 2);
-                    entity.kill();
-                }
-                super.onRemoved(entity, attributes, amplifier);
-            }
-        });
-
         TEAR_POISON = register("tear_poison", new StatusEffect(StatusEffectCategory.HARMFUL, 10359895) {
             @Override
             public void applyUpdateEffect(LivingEntity entity, int amplifier) {
@@ -68,6 +58,16 @@ public class ModStatusEffects extends DamageSource {
                 return super.canApplyUpdateEffect(duration, amplifier);
             }
         });
+
+
+        WAVERING_SOUL = register("wavering_soul", new StatusEffect(StatusEffectCategory.NEUTRAL, 13793020) {});
+        ServerLivingEntityEvents.AFTER_DEATH.register(ModStatusEffects::afterDeath);
+    }
+
+    public static boolean afterDeath(LivingEntity entity, DamageSource damageSource) {
+        if(entity.hasStatusEffect(WAVERING_SOUL))
+            entity.dropStack(new ItemStack(ModItems.solidifiedTear), entity.getHeight() / 2);
+        return true;
     }
 
     private static <T extends StatusEffect> T register(String name, T StatusEffect) {

@@ -31,7 +31,6 @@ public class InfusionTableEntity extends SoulTankEntity implements NamedScreenHa
     public static final int SIZE = 10;
     public static final int OUTPUT_STACK = 9;
     public static final int[] INPUT_STACKS = IntStream.rangeClosed(0, 8).toArray();
-    private final Random random = new Random();
     
     public ItemStack holding = ItemStack.EMPTY;
 
@@ -42,27 +41,26 @@ public class InfusionTableEntity extends SoulTankEntity implements NamedScreenHa
 
     public static void tick(World world, BlockPos pos, BlockState state, InfusionTableEntity blockEntity) {
         SoulTank tank = blockEntity.getTank();
-        ItemStack holding = blockEntity.holding;
         InfusionInventory inventory = blockEntity.inventory;
         ItemStack output = inventory.getStack(OUTPUT_STACK);
 
         //Finish infusion crafting
-        if(tank.getSpace() <= 0 && !holding.isEmpty()) {
+        if(tank.getSpace() <= 0 && tank.getCapacity() > 0 && !blockEntity.holding.isEmpty()) {
             //Set output item
             if(output.isEmpty())
-                inventory.setStack(OUTPUT_STACK, holding.copy());
-            else if(holding.getItem() == output.getItem())
-                output.increment(holding.getCount());
+                inventory.setStack(OUTPUT_STACK, blockEntity.holding.copy());
+            else if(blockEntity.holding.getItem() == output.getItem())
+                output.increment(blockEntity.holding.getCount());
 
             //Clear
-            holding = ItemStack.EMPTY;
-            inventory.markDirty();
+            blockEntity.holding = ItemStack.EMPTY;
+            blockEntity.inventory.markDirty();
             tank.setTears(0);
             tank.setLimit(0);
         }
 
         //Check for new recipe
-        if(holding.isEmpty() && (inventory.properties.hasSignal() || !inventory.getStack(OUTPUT_STACK).isEmpty())) {
+        if(blockEntity.holding.isEmpty() && (inventory.properties.hasSignal() || !inventory.getStack(OUTPUT_STACK).isEmpty())) {
             InfusionRecipe recipe = world.getRecipeManager().getFirstMatch(ModCrafting.INFUSION_RECIPE, inventory, world).orElse(null);
             if(recipe == null)
                 recipe = world.getRecipeManager().getFirstMatch(ModCrafting.CRUCIBLE_RECIPE, inventory, world).orElse(null);

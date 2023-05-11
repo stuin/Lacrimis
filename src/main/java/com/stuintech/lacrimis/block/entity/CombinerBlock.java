@@ -83,10 +83,13 @@ public class CombinerBlock extends SoulTankBlock {
         if(value instanceof LivingEntity) {
             EntityType<?> type = ((LivingEntity) value).getType();
             if(!(type.isIn(ModEntities.combiner_blocked) || type.getSpawnGroup().equals(SpawnGroup.MISC)) && blockEntity instanceof CombinerEntity) {
-                if(((CombinerEntity) blockEntity).getEntity() == null)
+                if(((CombinerEntity) blockEntity).getEntity() == null) {
                     ((CombinerEntity) blockEntity).combinerInventory.entity = type;
-                else if(((CombinerEntity) blockEntity).getEntity() == type && ((CombinerEntity) blockEntity).getCharge() < CombinerInventory.MAX)
+                    ((CombinerEntity) blockEntity).combinerInventory.charge = 1;
+                } else if(((CombinerEntity) blockEntity).getEntity() == type && ((CombinerEntity) blockEntity).getCharge() < CombinerInventory.MAX)
                     ((CombinerEntity) blockEntity).combinerInventory.charge++;
+                else
+                    return false;
 
                 ((LivingEntity) value).kill();
                 return true;

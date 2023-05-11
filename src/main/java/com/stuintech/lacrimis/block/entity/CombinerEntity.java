@@ -77,6 +77,7 @@ public class CombinerEntity extends SoulTankEntity implements ExtendedScreenHand
 
         if(!tag.getString("entity").equals("null"))
             combinerInventory.entity = Registry.ENTITY_TYPE.get(Identifier.tryParse(tag.getString("entity")));
+        combinerInventory.charge = tag.getInt("charge");
     }
 
     @Override
@@ -87,6 +88,7 @@ public class CombinerEntity extends SoulTankEntity implements ExtendedScreenHand
             tag.putString("entity", Registry.ENTITY_TYPE.getId(combinerInventory.entity).toString());
         else
             tag.putString("entity", "null");
+        tag.putInt("charge", combinerInventory.charge);
     }
 
     @Override
@@ -95,5 +97,6 @@ public class CombinerEntity extends SoulTankEntity implements ExtendedScreenHand
         if(combinerInventory.entity != null)
             s = Registry.ENTITY_TYPE.getId(combinerInventory.entity).toString();
         buf.writeString(s);
+        buf.writeInt(combinerInventory.charge);
     }
 }
